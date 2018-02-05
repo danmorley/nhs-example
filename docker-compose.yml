@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  db:
+    image: "microsoft/mssql-server-linux:2017-latest"
+    environment:
+      SA_PASSWORD: "msSQL_password"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+  web:
+    environment:
+      HAY_DEBUG: "True"
+      DB_NAME: "${DB_NAME:-master}"
+      DB_HOST: "db"
+      DB_PORT: "1433"
+      DB_USER: "sa"
+      DB_PASSWORD: "msSQL_password"
+    build: .
+    command: bash -c "./oneYou2/bin/wait-for-it.sh db:1433 -- python3 ./oneYou2/manage.py migrate && python3 ./oneYou2/manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
