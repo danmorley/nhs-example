@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-docker exec -ti oneyousite_db_1 bash -c "/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'msSQL_password' -d one_you_site"
+docker exec -ti oneyou2_db_1 bash -c "/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'msSQL_password' -d one_you_site"

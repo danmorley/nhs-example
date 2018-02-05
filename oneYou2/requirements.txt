@@ -1,2 +1,4 @@
-Django>=1.11,<1.12
+Django==1.11.5
+django-pyodbc
+django-pyodbc-azure==1.11.0.0
 wagtail>=1.13,<1.14

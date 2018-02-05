@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-docker exec -ti oneyousite_web_1 bash -c "python ./oneYou2/manage.py shell"
+docker exec -ti oneyou2_web_1 bash -c "python manage.py shell"
