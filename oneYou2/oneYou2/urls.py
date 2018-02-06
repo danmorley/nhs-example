@@ -9,6 +9,7 @@ from wagtail.wagtailcore import urls as wagtail_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
 
 from .api import api_router
+from home import views
 
 from search import views as search_views
 
@@ -18,6 +19,7 @@ urlpatterns = [
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
 
+    url(r'^api/v2/releases', views.releases, name='releases'),
     url(r'^api/v2/', api_router.urls),
 
     url(r'^search/$', search_views.search, name='search'),
