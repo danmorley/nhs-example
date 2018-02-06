@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+docker exec -ti oneyou2_web_pre-prod_1 bash -c "python manage.py shell"
