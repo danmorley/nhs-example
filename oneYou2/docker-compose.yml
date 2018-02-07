@@ -18,7 +18,7 @@ services:
       DB_PASSWORD: "msSQL_password"
       SITE_ENV: 'Live'
     build: .
-    command: bash -c "./bin/wait-for-it.sh db:1433 -- python3 ./manage.py migrate && python3 ./home/scheduleCron.py && python3 ./manage.py runserver 0.0.0.0:8000"
+    command: bash -c "./bin/wait-for-it.sh db:1433 -- python3 ./manage.py migrate && python3 ./release/scheduleCron.py && python3 ./manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/code
     ports:

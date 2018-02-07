@@ -9,7 +9,7 @@ from wagtail.wagtailcore import urls as wagtail_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
 
 from .api import api_router
-from home import views
+from release import views
 
 from search import views as search_views
 
