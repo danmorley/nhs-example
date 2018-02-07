@@ -8,6 +8,7 @@ from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, Inl
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 
 from modelcluster.fields import ParentalKey
+from wagtail.wagtailsnippets.models import register_snippet
 
 
 class OneYou2Page(Page):
@@ -44,4 +45,35 @@ class ChangeHistory(Orderable):
     ]
 
 
+# StruckBlocks
 
+class SimpleMenuItem(blocks.StructBlock):
+    link_text = blocks.CharBlock(required=True)
+    link_external = blocks.URLBlock(label='External link', required=False)
+    link_page = blocks.PageChooserBlock(required=False)
+
+
+class MultiMenuItem(blocks.StructBlock):
+    label = blocks.CharBlock(required=True)
+    menu_items = blocks.StreamBlock([
+        ('simple_menu_item', SimpleMenuItem())
+    ], icon='arrow-left', label='Items')
+
+
+# Snippets
+
+@register_snippet
+class Menu(models.Model):
+    label = models.CharField(max_length=255)
+    menu_items = StreamField([
+        ('simple_menu_item', SimpleMenuItem()),
+        ('multi_menu_item', MultiMenuItem())
+    ])
+
+    panels = [
+        FieldPanel('label'),
+        StreamFieldPanel('menu_items')
+    ]
+
+    def __str__(self):
+        return self.label
