@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     'modelcluster',
     'taggit',
+    'wagtailsnippetscopy',
 
     'django.contrib.admin',
     'django.contrib.auth',

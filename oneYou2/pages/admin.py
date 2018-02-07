@@ -1,3 +1,11 @@
-from django.contrib import admin
+from wagtail.contrib.modeladmin.options import modeladmin_register, ModelAdmin
+from wagtailsnippetscopy.admin import SnippetCopyModelAdminMixin
 
-# Register your models here.
+from pages.models import Menu
+
+
+class MenuAdmin(SnippetCopyModelAdminMixin, ModelAdmin):
+    model = Menu
+
+
+modeladmin_register(MenuAdmin)
