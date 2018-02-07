@@ -8,7 +8,7 @@ services:
       ACCEPT_EULA: "Y"
     ports:
       - "1433:1433"
-  web_prod:
+  web-prod:
     environment:
       HAY_DEBUG: "True"
       DB_NAME: "${DB_NAME:-master}"
@@ -16,8 +16,9 @@ services:
       DB_PORT: "1433"
       DB_USER: "sa"
       DB_PASSWORD: "msSQL_password"
+      SITE_ENV: 'Live'
     build: .
-    command: bash -c "./bin/wait-for-it.sh db:1433 -- python3 ./manage.py migrate && python3 ./manage.py runserver 0.0.0.0:8000"
+    command: bash -c "./bin/wait-for-it.sh db:1433 -- python3 ./manage.py migrate && python3 ./home/scheduleCron.py && python3 ./manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/code
     ports:
@@ -25,7 +26,7 @@ services:
     depends_on:
       - db
 
-  web_pre-prod:
+  web-pre-prod:
     environment:
       HAY_DEBUG: "True"
       DB_NAME: "${UAT_DB_NAME:-master}"
@@ -33,6 +34,7 @@ services:
       DB_PORT: "1433"
       DB_USER: "sa"
       DB_PASSWORD: "msSQL_password"
+      SITE_ENV: 'Pre Release'
     build: .
     command: bash -c "./bin/wait-for-it.sh db:1433 -- python3 ./manage.py migrate && python3 ./manage.py runserver 0.0.0.0:8000"
     volumes:
