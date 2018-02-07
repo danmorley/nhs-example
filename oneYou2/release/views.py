@@ -16,7 +16,7 @@ def releases(request):
   print(request.body)
   data = json.loads(request.body)
   print(data)
-  releases = Release.objects.exclude(uuid__in=data['uuids'])
+  releases = Release.objects.exclude(uuid__in=data['uuids']).exclude(release_time__isnull=True)
   return HttpResponse(json.dumps(to_dict(releases)), content_type="application/json")
 
 
