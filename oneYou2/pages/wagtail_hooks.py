@@ -11,7 +11,7 @@ class MenuButtonHelper(ButtonHelper):
     def __init__(self, view, request):
         super().__init__(view, request)
 
-    def my_button(self, pk, classnames_add=None, classnames_exclude=None):
+    def copy_button(self, pk, classnames_add=None, classnames_exclude=None):
         if classnames_add is None:
             classnames_add = []
         if classnames_exclude is None:
@@ -30,7 +30,7 @@ class MenuButtonHelper(ButtonHelper):
         btns = ButtonHelper.get_buttons_for_obj(self, obj, exclude=None, classnames_add=None, classnames_exclude=None)
         pk = getattr(obj, self.opts.pk.attname)
         btns.insert(1,
-                    self.my_button(pk, ['button'], classnames_exclude)
+                    self.copy_button(pk, ['button'], classnames_exclude)
                     )
         return btns
 
