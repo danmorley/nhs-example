@@ -54,6 +54,10 @@ class OneYou2Page(Page):
 
         return super(OneYou2Page, self).save(*args, **kwargs)
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.uuid = str(uuid.uuid4())      
+
 
     def update_from_dict(self, obj_dict):
         self.title = obj_dict['title']
