@@ -12,6 +12,7 @@ from wagtail.wagtailsnippets.models import register_snippet
 
 from release.models import Release
 
+import uuid
 
 class OneYou2Page(Page):
     body = StreamField([
@@ -19,6 +20,7 @@ class OneYou2Page(Page):
         ('paragraph', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
     ])
+    uuid = models.CharField(max_length=255, unique=True)
     release = ParentalKey(
       Release,
       related_name='pages',
@@ -43,6 +45,12 @@ class OneYou2Page(Page):
     ])
 
     api_fields = ['body','path', 'depth', 'numchild']
+
+    def save(self, *args, **kwargs):
+        if self.uuid == None:
+            self.uuid = str(uuid.uuid4())
+
+        return super(OneYou2Page, self).save(*args, **kwargs)
 
     @classmethod
     def create_from_dict(cls, obj_dict):
