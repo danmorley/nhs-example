@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 from .models import to_dict, Release
 
 from django.shortcuts import render
-from django.forms.models import model_to_dict
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
