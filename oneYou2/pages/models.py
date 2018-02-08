@@ -44,7 +44,7 @@ class OneYou2Page(Page):
         ObjectList(Page.settings_panels, heading='Settings', classname='settings'),
     ])
 
-    api_fields = ['body','path', 'depth', 'numchild']
+    api_fields = ['body','path', 'depth', 'numchild', 'uuid']
 
     def save(self, *args, **kwargs):
         if self.uuid == None:
