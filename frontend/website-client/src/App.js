@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import 'normalize.css'
+import 'bootstrap-4-grid/css/grid.css';
+import './assets/styles/fonts.css';
+import './assets/styles/App.css'
 
 class App extends Component {
   constructor(props) {

@@ -5,9 +5,12 @@
 
 # testing
 /coverage
+/jest_0
 
 # production
 /build
+src/**/*.css
+/src/assets/build
 
 # misc
 .DS_Store
