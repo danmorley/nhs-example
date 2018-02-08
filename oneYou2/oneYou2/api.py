@@ -23,13 +23,11 @@ class DocumentDownloadUrlField(Field):
         return instance
 
     def to_representation(self, document):
-        name = document.specific_class._meta.app_label + '.' + document.specific_class.__name__
-        self.context['view'].seen_types[name] = document.specific_class
-        return name
+        return "x"
 
 
 class SiteSerializer(BaseSerializer):
-    x = DocumentDownloadUrlField(read_only=True)
+    hostname = DocumentDownloadUrlField(read_only=True)
 
 
 # There is no default sites endpoint
@@ -39,10 +37,10 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
         self.model = Site
         self.seen_types = OrderedDict()
 
-    #base_serializer_class = SiteSerializer
+    base_serializer_class = SiteSerializer
     filter_backends = [FieldsFilter, OrderingFilter, SearchFilter]
     body_fields = BaseAPIEndpoint.body_fields + ['hostname', 'port', 'site_name', 'root_page', 'is_default_site']
-    meta_fields = BaseAPIEndpoint.meta_fields
+    meta_fields = BaseAPIEndpoint.meta_fields + ['hostname']
     listing_default_fields = BaseAPIEndpoint.listing_default_fields + ['hostname', 'port', 'site_name', 'root_page',
                                                                        'is_default_site']
     nested_default_fields = BaseAPIEndpoint.nested_default_fields + ['hostname']
@@ -51,6 +49,8 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
 
     def get_queryset(self):
         return self.model.objects.all().order_by('id')
+
+
 
 
 # Create the router. "wagtailapi" is the URL namespace
