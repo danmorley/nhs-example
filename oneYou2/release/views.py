@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 
-from .models import to_dict, Release
+from .models import query_set_to_dict, Release
 
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -15,5 +15,5 @@ from datetime import datetime
 def releases(request):
   data = json.loads(request.body)
   releases = Release.objects.exclude(uuid__in=data['uuids']).exclude(release_time__isnull=True).filter(release_time__lte=datetime.now())
-  return HttpResponse(json.dumps(to_dict(releases)), content_type="application/json")
+  return HttpResponse(json.dumps(query_set_to_dict(releases)), content_type="application/json")
 

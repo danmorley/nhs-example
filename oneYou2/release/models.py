@@ -8,28 +8,29 @@ from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel
 from modelcluster.models import ClusterableModel
 from datetime import datetime
 
-# from pages.models import OneYou2Page
-
 import uuid
 
-def to_dict(querySet):
+def query_set_to_dict(querySet):
   queryDict = []
   for modelObject in querySet:
-    modelDict = model_to_dict(modelObject)
-    for key, value in list(modelDict.items()):
-      if value is None:
-        del modelDict[key]
-      elif type(value) == datetime:
-        modelDict[key] = value.timestamp()
+    modelDict = modelObject.dict()
     queryDict.append(modelDict)
   return queryDict
 
+def obj_to_dict(obj):
+  modelDict = model_to_dict(obj)
+  for key, value in list(modelDict.items()):
+    if value is None:
+      del modelDict[key]
+    elif type(value) == datetime:
+      modelDict[key] = value.timestamp()
+  return modelDict
+  
 
 class Release(ClusterableModel):
   release_name = models.CharField(max_length=255, unique=True)
   release_time = models.DateTimeField(blank=True, null=True)
   uuid = models.CharField(max_length=255, unique=True)
-  # need to set up links to pages once I have the page object
 
   panels = [
     FieldPanel('release_name', classname='release_name',),
@@ -42,3 +43,10 @@ class Release(ClusterableModel):
       self.uuid = str(uuid.uuid4())
 
     return super(Release, self).save(*args, **kwargs)
+
+  def dict(self):
+    self_dict = obj_to_dict(self)
+    self_dict['pages'] = []
+    for page in self.pages.all():
+      self_dict['pages'].append(page.id)
+    return self_dict
