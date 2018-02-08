@@ -9,14 +9,13 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
 import json
+from datetime import datetime
 
 @require_POST
 @csrf_exempt
 def releases(request):
-  print(request.body)
   data = json.loads(request.body)
-  print(data)
-  releases = Release.objects.exclude(uuid__in=data['uuids']).exclude(release_time__isnull=True)
+  releases = Release.objects.exclude(uuid__in=data['uuids']).exclude(release_time__isnull=True).filter(release_time__lte=datetime.now())
   return HttpResponse(json.dumps(to_dict(releases)), content_type="application/json")
 
 
