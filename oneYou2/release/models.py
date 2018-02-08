@@ -10,6 +10,19 @@ from modelcluster.models import ClusterableModel
 
 import uuid
 
+def to_dict(querySet):
+  queryDict = []
+  for modelObject in querySet:
+    modelDict = model_to_dict(modelObject)
+    for key, value in list(modelDict.items()):
+      if value is None:
+        del modelDict[key]
+      elif type(value) == datetime:
+        modelDict[key] = value.timestamp()
+    queryDict.append(modelDict)
+  return queryDict
+
+
 class Release(ClusterableModel):
   release_name = models.CharField(max_length=255, unique=True)
   release_time = models.DateTimeField(blank=True, null=True)

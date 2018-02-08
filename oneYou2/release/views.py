@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 
-from .models import Release
+from .models import to_dict, Release
 
 from django.shortcuts import render
 from django.forms.models import model_to_dict
@@ -17,17 +17,4 @@ def releases(request):
   data = json.loads(request.body)
   releases = Release.objects.exclude(uuid__in=data['uuids']).exclude(release_time__isnull=True).filter(release_time__lte=datetime.now())
   return HttpResponse(json.dumps(to_dict(releases)), content_type="application/json")
-
-
-
-
-def to_dict(querySet):
-  queryDict = []
-  for modelObject in querySet:
-    modelDict = model_to_dict(modelObject)
-    for key, value in list(modelDict.items()):
-      if value is None:
-        del modelDict[key]
-    queryDict.append(modelDict)
-  return queryDict
 
