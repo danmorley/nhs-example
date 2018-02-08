@@ -2,6 +2,7 @@ import requests
 import json
 
 from django.core.management.base import BaseCommand
+from datetime import datetime
 
 from release.models import Release
 
@@ -15,7 +16,8 @@ class Command(BaseCommand):
     url = 'http://web-pre-prod:8000/api/v2/releases/'
     response = requests.post(url, data = json.dumps(post_data))
     serialized_data = response.text
-    data = json.loads(serialized_data)
-    print(data)
+    new_releases = json.loads(serialized_data)
+    for release in new_releases:
+      Release(release_name=release['release_name'], release_time=datetime.fromtimestamp(release['release_time']), uuid=release['uuid']).save()
 
   
