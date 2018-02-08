@@ -8,6 +8,7 @@ from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, Inl
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 
 from modelcluster.fields import ParentalKey
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
 from release.models import Release
@@ -69,6 +70,16 @@ class MultiMenuItem(blocks.StructBlock):
     ], icon='arrow-left', label='Items')
 
 
+class SocialMediaFooterLink(blocks.StructBlock):
+    choices = (
+        ('twitter', "Twitter"),
+        ('facebook', "Facebook"),
+    )
+    label = blocks.CharBlock(required=True)
+    type = blocks.ChoiceBlock(choices=choices)
+    link = blocks.URLBlock(label='External link', required=False)
+
+
 # Snippets
 
 @register_snippet
@@ -86,3 +97,34 @@ class Menu(models.Model):
 
     def __str__(self):
         return self.label
+
+
+@register_snippet
+class Footer(models.Model):
+    label = models.CharField(max_length=255)
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    menu_items = StreamField([
+        ('simple_menu_item', SimpleMenuItem()),
+    ])
+
+    follow_us = StreamField([
+        ('social_media_link', SocialMediaFooterLink()),
+    ])
+
+    panels = [
+        FieldPanel('label'),
+        ImageChooserPanel('image'),
+        StreamFieldPanel('menu_items'),
+        StreamFieldPanel('follow_us')
+    ]
+
+    def __str__(self):
+        return self.label
+
