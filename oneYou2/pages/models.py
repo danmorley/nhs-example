@@ -10,6 +10,8 @@ from wagtail.wagtailimages.blocks import ImageChooserBlock
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailsnippets.models import register_snippet
 
+from release.models import Release
+
 
 class OneYou2Page(Page):
     body = StreamField([
@@ -17,6 +19,13 @@ class OneYou2Page(Page):
         ('paragraph', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
     ])
+    release = ParentalKey(
+      Release,
+      related_name='pages',
+      blank=True,
+      null=True,
+      default=None,
+      on_delete=models.SET_NULL)
 
     content_panels = Page.content_panels + [
         StreamFieldPanel('body'),
