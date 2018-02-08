@@ -42,6 +42,7 @@ class OneYou2Page(Page):
         ObjectList(Page.settings_panels, heading='Settings', classname='settings'),
     ])
 
+    api_fields = ['body','path', 'depth', 'numchild']
 
 class ChangeHistory(Orderable):
     page = ParentalKey(OneYou2Page, related_name='change_history')
