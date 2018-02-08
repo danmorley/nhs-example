@@ -44,6 +44,14 @@ class OneYou2Page(Page):
 
     api_fields = ['body','path', 'depth', 'numchild']
 
+    @classmethod
+    def create_from_dict(cls, obj_dict):
+        print(obj_dict)
+        return cls(title=obj_dict['title'], path=obj_dict['path'], depth=obj_dict['depth'], numchild=obj_dict['numchild'],
+            slug=obj_dict['meta']['slug'], seo_title=obj_dict['meta']['seo_title'], show_in_menus=obj_dict['meta']['show_in_menus'],
+            search_description=obj_dict['meta']['search_description'], first_published_at=obj_dict['meta']['first_published_at'])
+
+
 class ChangeHistory(Orderable):
     page = ParentalKey(OneYou2Page, related_name='change_history')
     date_of_change = DateField(blank=False, verbose_name='Date')
