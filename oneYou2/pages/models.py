@@ -1,3 +1,4 @@
+import json
 import uuid
 
 from django.db import models
@@ -64,6 +65,7 @@ class OneYou2Page(Page):
         self.show_in_menus = obj_dict['meta']['show_in_menus']
         self.search_description = obj_dict['meta']['search_description']
         self.first_published_at = obj_dict['meta']['first_published_at']
+        self.body = json.dumps(obj_dict['body'])
         return self
 
     @classmethod
@@ -71,7 +73,7 @@ class OneYou2Page(Page):
         return cls(title=obj_dict['title'], path=obj_dict['path'], depth=obj_dict['depth'], numchild=obj_dict['numchild'],
             slug=obj_dict['meta']['slug'], seo_title=obj_dict['meta']['seo_title'], show_in_menus=obj_dict['meta']['show_in_menus'],
             search_description=obj_dict['meta']['search_description'], first_published_at=obj_dict['meta']['first_published_at'], 
-            uuid=obj_dict['uuid'])
+            uuid=obj_dict['uuid'], body=json.dumps(obj_dict['body']))
 
 
 class ChangeHistory(Orderable):
