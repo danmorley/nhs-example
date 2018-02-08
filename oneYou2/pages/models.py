@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.db.models import DateField, TextField
 
@@ -6,13 +8,12 @@ from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, InlinePanel, ObjectList, TabbedInterface
 from wagtail.wagtailimages.blocks import ImageChooserBlock
+from wagtail.wagtailsnippets.models import register_snippet
 
 from modelcluster.fields import ParentalKey
-from wagtail.wagtailsnippets.models import register_snippet
 
 from release.models import Release
 
-import uuid
 
 class OneYou2Page(Page):
     body = StreamField([
@@ -52,12 +53,25 @@ class OneYou2Page(Page):
 
         return super(OneYou2Page, self).save(*args, **kwargs)
 
+
+    def update_from_dict(self, obj_dict):
+        self.title = obj_dict['title']
+        self.path = obj_dict['path']
+        self.depth = obj_dict['depth']
+        self.numchild = obj_dict['numchild']
+        self.slug = obj_dict['meta']['slug']
+        self.seo_title = obj_dict['meta']['seo_title']
+        self.show_in_menus = obj_dict['meta']['show_in_menus']
+        self.search_description = obj_dict['meta']['search_description']
+        self.first_published_at = obj_dict['meta']['first_published_at']
+        return self
+
     @classmethod
     def create_from_dict(cls, obj_dict):
-        print(obj_dict)
         return cls(title=obj_dict['title'], path=obj_dict['path'], depth=obj_dict['depth'], numchild=obj_dict['numchild'],
             slug=obj_dict['meta']['slug'], seo_title=obj_dict['meta']['seo_title'], show_in_menus=obj_dict['meta']['show_in_menus'],
-            search_description=obj_dict['meta']['search_description'], first_published_at=obj_dict['meta']['first_published_at'])
+            search_description=obj_dict['meta']['search_description'], first_published_at=obj_dict['meta']['first_published_at'], 
+            uuid=obj_dict['uuid'])
 
 
 class ChangeHistory(Orderable):
