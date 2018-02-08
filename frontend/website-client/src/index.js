@@ -4,5 +4,16 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+let site = {
+  name: 'One You',
+  siteMenu: [],
+};
+
+let page = {
+  name: 'Home Page',
+  content: []
+};
+
+
+ReactDOM.render(<App site={site} page={page}/>, document.getElementById('root'));
 registerServiceWorker();
