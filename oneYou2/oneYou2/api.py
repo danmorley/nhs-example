@@ -3,7 +3,7 @@ from collections import OrderedDict
 from wagtail.api.v2.endpoints import PagesAPIEndpoint
 from wagtail.api.v2.router import WagtailAPIRouter
 from wagtail.api.v2.serializers import BaseSerializer
-from wagtail.wagtailcore.models import Site
+from wagtail.wagtailcore.models import Site, Page
 from wagtail.wagtaildocs.models import get_document_model
 from wagtail.wagtailimages.api.v2.endpoints import ImagesAPIEndpoint
 from wagtail.wagtaildocs.api.v2.endpoints import DocumentsAPIEndpoint
@@ -22,12 +22,38 @@ class DocumentDownloadUrlField(Field):
     "download_url": "http://api.example.com/documents/1/my_document.pdf"
     """
     def get_attribute(self, instance):
-        menu_settings = SiteSettings.objects.get(site=instance)
         return instance
 
     def to_representation(self, document):
         menu_settings = SiteSettings.objects.get(site=document)
-        return menu_settings.menu.menu_items.stream_data
+        page_ids_slugs = {}
+        for d in Page.objects.values('id', 'slug'):
+            page_ids_slugs[d['id']] = d['slug']
+        json_menu = menu_settings.menu.menu_items.stream_data
+
+        import pprint; pprint.pprint(json_menu)
+
+        print(page_ids_slugs)
+
+        for menu_item in json_menu:
+            multimenu = menu_item['value'].get('menu_items')
+            if multimenu:
+                for multimenu_item in multimenu:
+                    page_id = multimenu_item['value'].get('link_page')
+                    if page_id:
+                        multimenu_item['value']['link_slug'] = page_ids_slugs[page_id]
+                    else:
+                        multimenu_item['value']['link_slug'] = None
+            else:
+                # simple_menu_item
+                page_id = menu_item['value'].get('link_page')
+                if page_id:
+                    menu_item['value']['link_slug'] = page_ids_slugs[page_id]
+                else:
+                    menu_item['value']['link_slug'] = None
+
+
+        return json_menu
 
 
 class SiteSerializer(BaseSerializer):
