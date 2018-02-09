@@ -11,6 +11,8 @@ from wagtail.api.v2.endpoints import BaseAPIEndpoint
 from wagtail.api.v2.filters import FieldsFilter, OrderingFilter, SearchFilter
 from rest_framework.fields import Field
 
+from home.models import SiteSettings
+
 
 class DocumentDownloadUrlField(Field):
     """
@@ -20,14 +22,16 @@ class DocumentDownloadUrlField(Field):
     "download_url": "http://api.example.com/documents/1/my_document.pdf"
     """
     def get_attribute(self, instance):
+        menu_settings = SiteSettings.objects.get(site=instance)
         return instance
 
     def to_representation(self, document):
-        return "x"
+        menu_settings = SiteSettings.objects.get(site=document)
+        return menu_settings.menu.menu_items.stream_data
 
 
 class SiteSerializer(BaseSerializer):
-    hostname = DocumentDownloadUrlField(read_only=True)
+    menu = DocumentDownloadUrlField(read_only=True)
 
 
 # There is no default sites endpoint
@@ -39,18 +43,17 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
 
     base_serializer_class = SiteSerializer
     filter_backends = [FieldsFilter, OrderingFilter, SearchFilter]
-    body_fields = BaseAPIEndpoint.body_fields + ['hostname', 'port', 'site_name', 'root_page', 'is_default_site']
+    body_fields = BaseAPIEndpoint.body_fields + ['hostname', 'port', 'site_name', 'root_page', 'is_default_site',
+                                                 'menu']
     meta_fields = BaseAPIEndpoint.meta_fields + ['hostname']
     listing_default_fields = BaseAPIEndpoint.listing_default_fields + ['hostname', 'port', 'site_name', 'root_page',
-                                                                       'is_default_site']
+                                                                       'is_default_site', 'menu']
     nested_default_fields = BaseAPIEndpoint.nested_default_fields + ['hostname']
     name = 'sites'
     model = get_document_model()
 
     def get_queryset(self):
         return self.model.objects.all().order_by('id')
-
-
 
 
 # Create the router. "wagtailapi" is the URL namespace
