@@ -39,7 +39,7 @@ class Release(ClusterableModel):
   ]
 
   def save(self, *args, **kwargs):
-    if self.uuid == None:
+    if not self.uuid or self.uuid is None:
       self.uuid = str(uuid.uuid4())
 
     return super(Release, self).save(*args, **kwargs)
