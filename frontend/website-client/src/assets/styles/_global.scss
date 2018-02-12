@@ -1,0 +1,19 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+
+  &:before {
+    box-sizing: border-box;
+  }
+
+  &:after {
+    box-sizing: border-box;
+  }
+}
+
+html {
+  font-family: sans-serif;
+  font-size: 16px;
+  line-height: normal;
+}
