@@ -51,3 +51,6 @@ class Release(ClusterableModel):
     for page in self.pages.all():
       self_dict['pages'].append(page.id)
     return self_dict
+
+  def __str__(self):
+    return self.release_name
