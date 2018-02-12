@@ -13,12 +13,16 @@ import GeneralTextShelf from './shelves/GeneralTextShelf';
 
 class Page extends Component {
   render() {
-    var shelves = this.props.content.page_content.map(function (shelf) {
+    if (!this.props.content) {
+        return (<div>Loading</div>);
+    }
+
+    var shelves = this.props.content.page_content.map((shelf, i) => {
       const ShelfClass = ShelfRegistry.shelves[shelf.type];
       if (ShelfClass) {
-        return (<ShelfClass content={shelf.value} />);
+        return (<ShelfClass key={i} content={shelf.value} />);
       } else {
-        return (<PlaceholderShelf shelfType={shelf.type} />);
+        return (<PlaceholderShelf key={i} shelfType={shelf.type} />);
       }
     });
 
