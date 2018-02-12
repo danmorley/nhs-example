@@ -26,13 +26,13 @@ class MenuField(Field):
         return instance
 
     def to_representation(self, document):
-        menu_settings = SiteSettings.objects.get(site=document)
+        settings = SiteSettings.objects.get(site=document)
         # TODO: You originally did one query for all pages, now you are doing one query for all pages and
         # then a query for each page, so queries is n+1, FIX IT!
         page_ids_slugs = {}
         for d in Page.objects.values('id', 'slug'):
             page_ids_slugs[d['id']] = d['slug']
-        json_menu = menu_settings.menu.menu_items.stream_data
+        json_menu = settings.menu.menu_items.stream_data
 
         for menu_item in json_menu:
             multimenu = menu_item['value'].get('menu_items')
@@ -45,6 +45,7 @@ class MenuField(Field):
                         multimenu_item['value']['link_path'] = page.url_path.replace('/home', '')
                     else:
                         multimenu_item['value']['link_slug'] = None
+                        multimenu_item['value']['link_path'] = None
             else:
                 # simple_menu_item
                 page_id = menu_item['value'].get('link_page')
@@ -55,6 +56,7 @@ class MenuField(Field):
                     menu_item['value']['link_path'] = page.url_path.replace('/home', '')
                 else:
                     menu_item['value']['link_slug'] = None
+                    menu_item['value']['link_path'] = None
 
         return json_menu
 
@@ -72,9 +74,44 @@ class RedirectField(Field):
         return redirects_dict
 
 
+class FooterField(Field):
+    def get_attribute(self, instance):
+        return instance
+
+    def to_representation(self, document):
+        # TODO: image paths
+        settings = SiteSettings.objects.get(site=document)
+        footer = settings.footer
+        footer_image = footer.image
+        footer_links = footer.menu_items.stream_data
+        footer_social_media = footer.follow_us.stream_data
+
+        pages_data = Page.objects.values('id', 'slug', 'url_path')
+
+        for menu_item in footer_links:
+            page_id = menu_item['value'].get('link_page')
+            if page_id:
+                page_meta = [x for x in pages_data if x['id'] == page_id][0]
+                menu_item['value']['link_slug'] = page_meta['slug']
+                menu_item['value']['link_path'] = page_meta['url_path'].replace('/home', '')
+            else:
+                menu_item['value']['link_slug'] = None
+                menu_item['value']['link_path'] = None
+
+        return {
+            "image": {
+                'title': footer_image.title,
+                'image': footer_image.file.path
+            },
+            "links": footer_links,
+            "social_media": footer_social_media
+        }
+
+
 class SiteSerializer(BaseSerializer):
     menu = MenuField(read_only=True)
     redirects = RedirectField(read_only=True)
+    footer = FooterField(read_only=True)
 
 
 # There is no default sites endpoint
@@ -87,10 +124,10 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
     base_serializer_class = SiteSerializer
     filter_backends = [FieldsFilter, OrderingFilter, SearchFilter]
     body_fields = BaseAPIEndpoint.body_fields + ['hostname', 'port', 'site_name', 'root_page', 'is_default_site',
-                                                 'menu', 'redirects']
+                                                 'menu', 'redirects', 'footer']
     meta_fields = BaseAPIEndpoint.meta_fields + ['hostname']
     listing_default_fields = BaseAPIEndpoint.listing_default_fields + ['hostname', 'port', 'site_name', 'root_page',
-                                                                       'is_default_site', 'menu', 'redirects']
+                                                                       'is_default_site', 'menu', 'redirects', 'footer']
     nested_default_fields = BaseAPIEndpoint.nested_default_fields + ['hostname']
     name = 'sites'
     model = get_document_model()

@@ -23,6 +23,13 @@ class SiteSettings(BaseSetting):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    footer = models.ForeignKey(
+        'pages.footer',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
 
     content_panels = Page.content_panels + [
         FieldPanel('title'),
