@@ -13,9 +13,6 @@ from wagtail.wagtailsnippets.models import register_snippet
 
 from modelcluster.fields import ParentalKey
 
-from release.models import Release
-
-
 class OneYou2Page(Page):
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
@@ -23,8 +20,8 @@ class OneYou2Page(Page):
         ('image', ImageChooserBlock()),
     ])
     uuid = models.CharField(max_length=255, unique=True)
-    release = ParentalKey(
-      Release,
+    release = models.ForeignKey(
+      'release.Release',
       related_name='pages',
       blank=True,
       null=True,
