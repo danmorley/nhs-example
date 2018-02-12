@@ -29,36 +29,39 @@ class MenuField(Field):
         settings = SiteSettings.objects.get(site=document)
         # TODO: You originally did one query for all pages, now you are doing one query for all pages and
         # then a query for each page, so queries is n+1, FIX IT!
-        page_ids_slugs = {}
-        for d in Page.objects.values('id', 'slug'):
-            page_ids_slugs[d['id']] = d['slug']
-        json_menu = settings.menu.menu_items.stream_data
+        if settings.menu:
+            page_ids_slugs = {}
+            for d in Page.objects.values('id', 'slug'):
+                page_ids_slugs[d['id']] = d['slug']
+            json_menu = settings.menu.menu_items.stream_data
 
-        for menu_item in json_menu:
-            multimenu = menu_item['value'].get('menu_items')
-            if multimenu:
-                for multimenu_item in multimenu:
-                    page_id = multimenu_item['value'].get('link_page')
+            for menu_item in json_menu:
+                multimenu = menu_item['value'].get('menu_items')
+                if multimenu:
+                    for multimenu_item in multimenu:
+                        page_id = multimenu_item['value'].get('link_page')
+                        if page_id:
+                            page = Page.objects.get(id=page_id)
+                            multimenu_item['value']['link_slug'] = page_ids_slugs[page_id]
+                            multimenu_item['value']['link_path'] = page.url_path.replace('/home', '')
+                        else:
+                            multimenu_item['value']['link_slug'] = None
+                            multimenu_item['value']['link_path'] = None
+                else:
+                    # simple_menu_item
+                    page_id = menu_item['value'].get('link_page')
+
                     if page_id:
                         page = Page.objects.get(id=page_id)
-                        multimenu_item['value']['link_slug'] = page_ids_slugs[page_id]
-                        multimenu_item['value']['link_path'] = page.url_path.replace('/home', '')
+                        menu_item['value']['link_slug'] = page_ids_slugs[page_id]
+                        menu_item['value']['link_path'] = page.url_path.replace('/home', '')
                     else:
-                        multimenu_item['value']['link_slug'] = None
-                        multimenu_item['value']['link_path'] = None
-            else:
-                # simple_menu_item
-                page_id = menu_item['value'].get('link_page')
+                        menu_item['value']['link_slug'] = None
+                        menu_item['value']['link_path'] = None
 
-                if page_id:
-                    page = Page.objects.get(id=page_id)
-                    menu_item['value']['link_slug'] = page_ids_slugs[page_id]
-                    menu_item['value']['link_path'] = page.url_path.replace('/home', '')
-                else:
-                    menu_item['value']['link_slug'] = None
-                    menu_item['value']['link_path'] = None
-
-        return json_menu
+            return json_menu
+        else:
+            return {}
 
 
 class RedirectField(Field):
@@ -82,30 +85,33 @@ class FooterField(Field):
         # TODO: image paths
         settings = SiteSettings.objects.get(site=document)
         footer = settings.footer
-        footer_image = footer.image
-        footer_links = footer.menu_items.stream_data
-        footer_social_media = footer.follow_us.stream_data
+        if footer:
+            footer_image = footer.image
+            footer_links = footer.menu_items.stream_data
+            footer_social_media = footer.follow_us.stream_data
 
-        pages_data = Page.objects.values('id', 'slug', 'url_path')
+            pages_data = Page.objects.values('id', 'slug', 'url_path')
 
-        for menu_item in footer_links:
-            page_id = menu_item['value'].get('link_page')
-            if page_id:
-                page_meta = [x for x in pages_data if x['id'] == page_id][0]
-                menu_item['value']['link_slug'] = page_meta['slug']
-                menu_item['value']['link_path'] = page_meta['url_path'].replace('/home', '')
-            else:
-                menu_item['value']['link_slug'] = None
-                menu_item['value']['link_path'] = None
+            for menu_item in footer_links:
+                page_id = menu_item['value'].get('link_page')
+                if page_id:
+                    page_meta = [x for x in pages_data if x['id'] == page_id][0]
+                    menu_item['value']['link_slug'] = page_meta['slug']
+                    menu_item['value']['link_path'] = page_meta['url_path'].replace('/home', '')
+                else:
+                    menu_item['value']['link_slug'] = None
+                    menu_item['value']['link_path'] = None
 
-        return {
-            "image": {
-                'title': footer_image.title,
-                'image': footer_image.file.path
-            },
-            "links": footer_links,
-            "social_media": footer_social_media
-        }
+            return {
+                "image": {
+                    'title': footer_image.title,
+                    'image': footer_image.file.path
+                },
+                "links": footer_links,
+                "social_media": footer_social_media
+            }
+        else:
+            return {}
 
 
 class SiteSerializer(BaseSerializer):
