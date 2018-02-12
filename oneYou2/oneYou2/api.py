@@ -26,14 +26,12 @@ class DocumentDownloadUrlField(Field):
 
     def to_representation(self, document):
         menu_settings = SiteSettings.objects.get(site=document)
+        # TODO: You originally did one query for all pages, now you are doing one query for all pages and
+        # then a query for each page, so queries is n+1, FIX IT!
         page_ids_slugs = {}
         for d in Page.objects.values('id', 'slug'):
             page_ids_slugs[d['id']] = d['slug']
         json_menu = menu_settings.menu.menu_items.stream_data
-
-        import pprint; pprint.pprint(json_menu)
-
-        print(page_ids_slugs)
 
         for menu_item in json_menu:
             multimenu = menu_item['value'].get('menu_items')
@@ -41,17 +39,21 @@ class DocumentDownloadUrlField(Field):
                 for multimenu_item in multimenu:
                     page_id = multimenu_item['value'].get('link_page')
                     if page_id:
+                        page = Page.objects.get(id=page_id)
                         multimenu_item['value']['link_slug'] = page_ids_slugs[page_id]
+                        multimenu_item['value']['link_path'] = page.url_path.replace('/home', '')
                     else:
                         multimenu_item['value']['link_slug'] = None
             else:
                 # simple_menu_item
                 page_id = menu_item['value'].get('link_page')
+
                 if page_id:
+                    page = Page.objects.get(id=page_id)
                     menu_item['value']['link_slug'] = page_ids_slugs[page_id]
+                    menu_item['value']['link_path'] = page.url_path.replace('/home', '')
                 else:
                     menu_item['value']['link_slug'] = None
-
 
         return json_menu
 
