@@ -7,8 +7,9 @@ from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel
 
 from modelcluster.models import ClusterableModel
 from datetime import datetime
-
 import uuid
+
+from .forms import ReleaseAdminForm
 
 def query_set_to_dict(querySet):
   queryDict = []
@@ -24,18 +25,18 @@ def obj_to_dict(obj):
       del modelDict[key]
     elif type(value) == datetime:
       modelDict[key] = value.timestamp()
-  return modelDict
-  
+  return modelDict  
 
 class Release(ClusterableModel):
   release_name = models.CharField(max_length=255, unique=True)
   release_time = models.DateTimeField(blank=True, null=True)
   uuid = models.CharField(max_length=255, unique=True)
 
+  base_form_class = ReleaseAdminForm
+
   panels = [
     FieldPanel('release_name', classname='release_name',),
     FieldPanel('release_time', classname='release_time',),
-    InlinePanel('pages', [FieldPanel('title')], label='Pages',),
   ]
 
   def save(self, *args, **kwargs):
