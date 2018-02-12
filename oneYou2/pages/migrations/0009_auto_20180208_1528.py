@@ -10,7 +10,7 @@ import modelcluster.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0006_oneyou2page_release'),
+        ('pages', '0008_oneyou2page_release'),
     ]
 
     operations = [

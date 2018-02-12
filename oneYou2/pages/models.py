@@ -9,6 +9,7 @@ from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, InlinePanel, ObjectList, TabbedInterface
 from wagtail.wagtailimages.blocks import ImageChooserBlock
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtailsnippetscopy.models import SnippetCopyMixin
