@@ -1,0 +1,51 @@
+{% extends "modeladmin/create.html" %}
+
+{% block extra_css %}
+  {% include "wagtailadmin/pages/_editor_css.html" %}
+  {{ view.media.css }}
+  <style>
+    .object.custom {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+
+    .object.custom>h2 {
+      position: initial;
+      padding-top: 14px;
+      margin-bottom: 20px;
+    }
+
+    .object.custom fieldset {
+      padding-top: 0px;
+      margin-left: 50px;
+    }
+
+    .select2-container {
+      margin-left: 50.34px;
+      width:;
+    }
+  </style>
+{% endblock %}
+
+{% block extra_js %}
+  {% include "wagtailadmin/pages/_editor_js.html" %}
+  {{ view.media.js }}
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+  
+  <script type="text/javascript" charset="utf-8">
+    (function($) {
+      function init(){
+        initDateTimeChooser("id_release_time", {"dayOfWeekStart": 0, "format": "Y-m-d H:i"});
+        $('#id_page_name').wrap('<div class="object custom"></div>');
+        $('#id_page_name').before('<h2><label>Pages to release</label></h2>');
+        $('#id_page_name').wrap('<fieldset><div class="field-content"></div></fieldset>');
+        $('#id_page_name').select2();
+      }
+
+      $(document).on('page:load', init);
+      $(init)
+    })(jQuery)
+  </script>
+{% endblock %}
