@@ -11,19 +11,25 @@ const Page = () => ({
         "first_published_at": "2017-02-06T10:17:42.457653Z",
         "parent": null
     },
-    "title": "One You Home Page",
+    "title": "One You About Page",
     "page_content": [
+        {
+            "type": "general_text_shelf",
+            "value": {
+                "text": "<h2>About One You 2</h2><p>This is some text on the general text shelf</p><ul><li>And a bullet point</li><li>and another bullet point</li><li>and yet another bullet point</li></ul><p>This sentence contains a link to the <a id=\"3\" linktype=\"page\">home page</a>.</p><p>And this sentence contains a link to the BBC news site <a href=\"http://bbc.co.uk/news\">here</a>.<br/></p>"
+            }
+        },
         {
             "type": "banner_shelf",
             "value": {
-                "caption": "<p>Welcome to One You ...<br/></p>",
+                "caption": "<p>Caption for Rise Above ...<br/></p>",
                 "image": 4,
                 "cta": {
                     "link_external": "",
                     "link_text": "View more",
                     "link_page": 3
                 },
-                "heading": "One You",
+                "heading": "Rise Above",
                 "background_image": 2
             }
         },

@@ -1,6 +1,8 @@
 const Site = () => ({
   name: 'One You 2',
-  redirects: [],
+  redirects: {
+    "/old-about": "/about",
+  },
   siteMenu: [
     {
       "type": "simple_menu_item",
