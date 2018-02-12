@@ -18,7 +18,9 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Welcome to {this.state.site.name}</h1>
-        <p>You are on page: {this.state.currentPage.title}</p>
+        <p>
+          You are on page: {this.state.currentPage.title}
+        </p>
         <hr />
         <Page content={this.state.currentPage} site={this.state.site} />
       </div>

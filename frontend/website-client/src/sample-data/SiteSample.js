@@ -37,6 +37,15 @@ const Site = () => ({
         ]
       },
       "id": "154117ea-f0c8-4fa0-baf6-c51edfb44ebc"
+    },
+    {
+      "type": "simple_menu_item",
+      "value": {
+        "link_text": "Another simple menu item",
+        "link_external": "",
+        "link_page": 3
+      },
+      "id": "cc4b39a3-cffb-4a28-8bff-753a46bc496e"
     }
   ]
 });
