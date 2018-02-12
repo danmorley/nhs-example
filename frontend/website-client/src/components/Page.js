@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import './assets/styles/Page.css'
 import ShelfRegistry from './ShelfRegistry'
-import SiteNav from './SiteNav'
+import SiteNav from './header-nav/SiteNav'
 
 // Wildcard imports are not supported by Babel without babel-wildcard plugin.
 // Create react app template app hides away Babel, plugin can not be added. You must import
@@ -26,7 +26,7 @@ class Page extends Component {
       <div className="page">
         <div className="page-header">
           <h1>The Page Header</h1>
-          <SiteNav items={this.props.site.siteMenu} />
+          <SiteNav navItems={this.props.site.siteMenu} />
         </div>
         <div className="page-content">
           <p>You are on page: {this.props.content.title}</p>
