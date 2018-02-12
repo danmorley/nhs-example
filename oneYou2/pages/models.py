@@ -30,6 +30,7 @@ class OneYou2Page(Page):
 
     content_panels = Page.content_panels + [
         StreamFieldPanel('body'),
+        FieldPanel('release'),
     ]
 
     info_content_panels = [
@@ -53,7 +54,7 @@ class OneYou2Page(Page):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.uuid = str(uuid.uuid4())      
+        self.uuid = str(uuid.uuid4())    
 
 
     def update_from_dict(self, obj_dict):
