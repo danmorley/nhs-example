@@ -12,9 +12,10 @@ from wagtail.api.v2.filters import FieldsFilter, OrderingFilter, SearchFilter
 from rest_framework.fields import Field
 
 from home.models import SiteSettings
+from wagtail.wagtailredirects.models import Redirect
 
 
-class DocumentDownloadUrlField(Field):
+class MenuField(Field):
     """
     Serializes the "download_url" field for documents.
 
@@ -58,8 +59,22 @@ class DocumentDownloadUrlField(Field):
         return json_menu
 
 
+class RedirectField(Field):
+    def get_attribute(self, instance):
+        return instance
+
+    def to_representation(self, document):
+        redirects = Redirect.get_for_site(site=document)
+        redirects_dict = {}
+        for redirect in redirects:
+            redirects_dict[redirect.old_path] = redirect.link.replace('http://localhost', '')
+
+        return redirects_dict
+
+
 class SiteSerializer(BaseSerializer):
-    menu = DocumentDownloadUrlField(read_only=True)
+    menu = MenuField(read_only=True)
+    redirects = RedirectField(read_only=True)
 
 
 # There is no default sites endpoint
@@ -72,10 +87,10 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
     base_serializer_class = SiteSerializer
     filter_backends = [FieldsFilter, OrderingFilter, SearchFilter]
     body_fields = BaseAPIEndpoint.body_fields + ['hostname', 'port', 'site_name', 'root_page', 'is_default_site',
-                                                 'menu']
+                                                 'menu', 'redirects']
     meta_fields = BaseAPIEndpoint.meta_fields + ['hostname']
     listing_default_fields = BaseAPIEndpoint.listing_default_fields + ['hostname', 'port', 'site_name', 'root_page',
-                                                                       'is_default_site', 'menu']
+                                                                       'is_default_site', 'menu', 'redirects']
     nested_default_fields = BaseAPIEndpoint.nested_default_fields + ['hostname']
     name = 'sites'
     model = get_document_model()
