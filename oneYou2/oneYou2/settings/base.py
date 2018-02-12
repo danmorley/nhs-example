@@ -42,9 +42,11 @@ INSTALLED_APPS = [
     'wagtail.wagtailadmin',
     'wagtail.wagtailcore',
     'wagtail.contrib.settings',
+    'wagtail.contrib.modeladmin',
 
     'modelcluster',
     'taggit',
+    'wagtailsnippetscopy',
 
     'django.contrib.admin',
     'django.contrib.auth',
