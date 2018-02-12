@@ -27,12 +27,10 @@ class MenuField(Field):
 
     def to_representation(self, document):
         settings = SiteSettings.objects.get(site=document)
-        # TODO: You originally did one query for all pages, now you are doing one query for all pages and
-        # then a query for each page, so queries is n+1, FIX IT!
         if settings.menu:
-            page_ids_slugs = {}
-            for d in Page.objects.values('id', 'slug'):
-                page_ids_slugs[d['id']] = d['slug']
+            pages_meta = {}
+            for d in Page.objects.values('id', 'slug', 'url_path'):
+                pages_meta[d['id']] = (d['slug'], d['url_path'])
             json_menu = settings.menu.menu_items.stream_data
 
             for menu_item in json_menu:
@@ -42,8 +40,8 @@ class MenuField(Field):
                         page_id = multimenu_item['value'].get('link_page')
                         if page_id:
                             page = Page.objects.get(id=page_id)
-                            multimenu_item['value']['link_slug'] = page_ids_slugs[page_id]
-                            multimenu_item['value']['link_path'] = page.url_path.replace('/home', '')
+                            multimenu_item['value']['link_slug'] = pages_meta[page_id][0]
+                            multimenu_item['value']['link_path'] = pages_meta[page_id][1].replace('/home', '')
                         else:
                             multimenu_item['value']['link_slug'] = None
                             multimenu_item['value']['link_path'] = None
@@ -53,7 +51,7 @@ class MenuField(Field):
 
                     if page_id:
                         page = Page.objects.get(id=page_id)
-                        menu_item['value']['link_slug'] = page_ids_slugs[page_id]
+                        menu_item['value']['link_slug'] = pages_meta[page_id]
                         menu_item['value']['link_path'] = page.url_path.replace('/home', '')
                     else:
                         menu_item['value']['link_slug'] = None
@@ -90,14 +88,15 @@ class FooterField(Field):
             footer_links = footer.menu_items.stream_data
             footer_social_media = footer.follow_us.stream_data
 
-            pages_data = Page.objects.values('id', 'slug', 'url_path')
+            pages_meta = {}
+            for d in Page.objects.values('id', 'slug', 'url_path'):
+                pages_meta[d['id']] = (d['slug'], d['url_path'])
 
             for menu_item in footer_links:
                 page_id = menu_item['value'].get('link_page')
                 if page_id:
-                    page_meta = [x for x in pages_data if x['id'] == page_id][0]
-                    menu_item['value']['link_slug'] = page_meta['slug']
-                    menu_item['value']['link_path'] = page_meta['url_path'].replace('/home', '')
+                    menu_item['value']['link_slug'] = pages_meta[page_id][0]
+                    menu_item['value']['link_path'] = pages_meta[page_id][1].replace('/home', '')
                 else:
                     menu_item['value']['link_slug'] = None
                     menu_item['value']['link_path'] = None
