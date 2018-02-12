@@ -10,6 +10,10 @@ from wagtail.wagtailimages.blocks import ImageChooserBlock
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
+from wagtailsnippetscopy.models import SnippetCopyMixin
+from wagtailsnippetscopy.registry import snippet_copy_registry
+
+
 
 
 class OneYou2Page(Page):
@@ -74,7 +78,7 @@ class SocialMediaFooterLink(blocks.StructBlock):
 # Snippets
 
 @register_snippet
-class Menu(models.Model):
+class Menu(SnippetCopyMixin, models.Model):
     label = models.CharField(max_length=255)
     menu_items = StreamField([
         ('simple_menu_item', SimpleMenuItem()),
@@ -88,6 +92,9 @@ class Menu(models.Model):
 
     def __str__(self):
         return self.label
+
+
+snippet_copy_registry.register(Menu, 'label')
 
 
 @register_snippet
