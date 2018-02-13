@@ -4,6 +4,8 @@ from wagtail.wagtailimages.api.v2.endpoints import ImagesAPIEndpoint
 from wagtail.wagtaildocs.api.v2.endpoints import DocumentsAPIEndpoint
 from wagtail.api.v2.endpoints import BaseAPIEndpoint
 
+from wagtail.wagtailcore.models import Page
+
 # Create the router. "wagtailapi" is the URL namespace
 api_router = WagtailAPIRouter('wagtailapi')
 
@@ -12,7 +14,14 @@ api_router = WagtailAPIRouter('wagtailapi')
 # is used in the URL of the endpoint
 # The second parameter is the endpoint class that handles the requests
 
+class OneYouPagesAPIEndpoint(PagesAPIEndpoint):
+  def get_object(self):
+    lookup_url_kwarg = self.lookup_url_kwarg or self.lookup_field
+    page_id = self.kwargs[lookup_url_kwarg]
 
-api_router.register_endpoint('pages', PagesAPIEndpoint)
+    base = Page.objects.get(id=page_id)
+    return base.specific
+
+api_router.register_endpoint('pages', OneYouPagesAPIEndpoint)
 api_router.register_endpoint('images', ImagesAPIEndpoint)
 api_router.register_endpoint('documents', DocumentsAPIEndpoint)
