@@ -15,9 +15,8 @@ from wagtail.wagtailsnippets.models import register_snippet
 from wagtailsnippetscopy.models import SnippetCopyMixin
 from wagtailsnippetscopy.registry import snippet_copy_registry
 
-
-
 from modelcluster.fields import ParentalKey
+
 
 class OneYou2Page(Page):
     body = StreamField([
@@ -166,6 +165,26 @@ class Footer(models.Model):
         ImageChooserPanel('image'),
         StreamFieldPanel('menu_items'),
         StreamFieldPanel('follow_us')
+    ]
+
+    def __str__(self):
+        return self.label
+
+
+@register_snippet
+class Header(models.Model):
+    label = models.CharField(max_length=255)
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    panels = [
+        FieldPanel('label'),
+        ImageChooserPanel('image'),
     ]
 
     def __str__(self):
