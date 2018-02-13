@@ -53,14 +53,12 @@ class OneYou2Page(Page):
     api_fields = ['body','path', 'depth', 'numchild', 'uuid']
 
     def save(self, *args, **kwargs):
-        if self.uuid == None:
-            self.uuid = str(uuid.uuid4())
-
         return super(OneYou2Page, self).save(*args, **kwargs)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.uuid = str(uuid.uuid4())    
+        if self.uuid is None:
+            self.uuid = str(uuid.uuid4())    
 
 
     def update_from_dict(self, obj_dict):
