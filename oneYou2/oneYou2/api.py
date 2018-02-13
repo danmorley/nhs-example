@@ -39,7 +39,6 @@ class MenuField(Field):
                     for multimenu_item in multimenu:
                         page_id = multimenu_item['value'].get('link_page')
                         if page_id:
-                            page = Page.objects.get(id=page_id)
                             multimenu_item['value']['link_slug'] = pages_meta[page_id][0]
                             multimenu_item['value']['link_path'] = pages_meta[page_id][1].replace('/home', '')
                         else:
@@ -48,11 +47,9 @@ class MenuField(Field):
                 else:
                     # simple_menu_item
                     page_id = menu_item['value'].get('link_page')
-
                     if page_id:
-                        page = Page.objects.get(id=page_id)
-                        menu_item['value']['link_slug'] = pages_meta[page_id]
-                        menu_item['value']['link_path'] = page.url_path.replace('/home', '')
+                        menu_item['value']['link_slug'] = pages_meta[page_id][0]
+                        menu_item['value']['link_path'] = pages_meta[page_id][1].replace('/home', '')
                     else:
                         menu_item['value']['link_slug'] = None
                         menu_item['value']['link_path'] = None
