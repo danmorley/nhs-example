@@ -30,7 +30,17 @@ class SiteSettings(BaseSetting):
         related_name='+'
     )
 
+    header = models.ForeignKey(
+        'pages.header',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
     content_panels = Page.content_panels + [
         FieldPanel('title'),
         SnippetChooserPanel('menu'),
+        SnippetChooserPanel('footer'),
+        SnippetChooserPanel('header'),
     ]

@@ -110,10 +110,29 @@ class FooterField(Field):
             return {}
 
 
+class HeaderField(Field):
+    def get_attribute(self, instance):
+        return instance
+
+    def to_representation(self, document):
+        settings = SiteSettings.objects.get(site=document)
+        header = settings.header
+        if header:
+            return {
+                "image": {
+                    "title": header.image.title,
+                    "image": header.image.file.path
+                }
+            }
+        else:
+            return {}
+
+
 class SiteSerializer(BaseSerializer):
     menu = MenuField(read_only=True)
     redirects = RedirectField(read_only=True)
     footer = FooterField(read_only=True)
+    header = HeaderField(read_only=True)
 
 
 # There is no default sites endpoint
@@ -126,10 +145,11 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
     base_serializer_class = SiteSerializer
     filter_backends = [FieldsFilter, OrderingFilter, SearchFilter]
     body_fields = BaseAPIEndpoint.body_fields + ['hostname', 'port', 'site_name', 'root_page', 'is_default_site',
-                                                 'menu', 'redirects', 'footer']
+                                                 'menu', 'header', 'footer', 'redirects']
     meta_fields = BaseAPIEndpoint.meta_fields + ['hostname']
     listing_default_fields = BaseAPIEndpoint.listing_default_fields + ['hostname', 'port', 'site_name', 'root_page',
-                                                                       'is_default_site', 'menu', 'redirects', 'footer']
+                                                                       'is_default_site', 'menu', 'header', 'footer',
+                                                                       'redirects']
     nested_default_fields = BaseAPIEndpoint.nested_default_fields + ['hostname']
     name = 'sites'
     model = get_document_model()
