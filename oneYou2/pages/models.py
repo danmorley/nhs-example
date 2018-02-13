@@ -1,3 +1,6 @@
+import json
+import uuid
+
 from django.db import models
 from django.db.models import DateField, TextField
 
@@ -6,14 +9,13 @@ from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, InlinePanel, ObjectList, TabbedInterface
 from wagtail.wagtailimages.blocks import ImageChooserBlock
-
-from modelcluster.fields import ParentalKey
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtailsnippetscopy.models import SnippetCopyMixin
 from wagtailsnippetscopy.registry import snippet_copy_registry
 
-from release.models import Release
+from modelcluster.fields import ParentalKey
 
 
 class OneYou2Page(Page):
@@ -22,8 +24,9 @@ class OneYou2Page(Page):
         ('paragraph', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
     ])
-    release = ParentalKey(
-      Release,
+    uuid = models.CharField(max_length=255, unique=True)
+    release = models.ForeignKey(
+      'release.Release',
       related_name='pages',
       blank=True,
       null=True,
@@ -32,6 +35,7 @@ class OneYou2Page(Page):
 
     content_panels = Page.content_panels + [
         StreamFieldPanel('body'),
+        FieldPanel('release'),
     ]
 
     info_content_panels = [
@@ -44,6 +48,39 @@ class OneYou2Page(Page):
         ObjectList(Page.promote_panels, heading='Promote'),
         ObjectList(Page.settings_panels, heading='Settings', classname='settings'),
     ])
+
+    api_fields = ['body','path', 'depth', 'numchild', 'uuid']
+
+    def save(self, *args, **kwargs):
+        if self.uuid == None:
+            self.uuid = str(uuid.uuid4())
+
+        return super(OneYou2Page, self).save(*args, **kwargs)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.uuid = str(uuid.uuid4())    
+
+
+    def update_from_dict(self, obj_dict):
+        self.title = obj_dict['title']
+        self.path = obj_dict['path']
+        self.depth = obj_dict['depth']
+        self.numchild = obj_dict['numchild']
+        self.slug = obj_dict['meta']['slug']
+        self.seo_title = obj_dict['meta']['seo_title']
+        self.show_in_menus = obj_dict['meta']['show_in_menus']
+        self.search_description = obj_dict['meta']['search_description']
+        self.first_published_at = obj_dict['meta']['first_published_at']
+        self.body = json.dumps(obj_dict['body'])
+        return self
+
+    @classmethod
+    def create_from_dict(cls, obj_dict):
+        return cls(title=obj_dict['title'], path=obj_dict['path'], depth=obj_dict['depth'], numchild=obj_dict['numchild'],
+            slug=obj_dict['meta']['slug'], seo_title=obj_dict['meta']['seo_title'], show_in_menus=obj_dict['meta']['show_in_menus'],
+            search_description=obj_dict['meta']['search_description'], first_published_at=obj_dict['meta']['first_published_at'], 
+            uuid=obj_dict['uuid'], body=json.dumps(obj_dict['body']))
 
 
 class ChangeHistory(Orderable):

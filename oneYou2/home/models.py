@@ -1,6 +1,5 @@
 from __future__ import absolute_import, unicode_literals
 
-
 from django.db import models
 
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
@@ -35,5 +34,3 @@ class SiteSettings(BaseSetting):
         FieldPanel('title'),
         SnippetChooserPanel('menu'),
     ]
-
-

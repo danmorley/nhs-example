@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-cd oneYou2/ && docker-compose build web_prod && docker-compose build web_pre-prod
+cd oneYou2/ && docker-compose build web-prod && docker-compose build web-pre-prod

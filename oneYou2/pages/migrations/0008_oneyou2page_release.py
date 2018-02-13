@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('release', '0003_release_uuid'),
-        ('pages', '0005_auto_20180207_1033'),
+        ('pages', '0007_auto_20180208_1235'),
     ]
 
     operations = [
