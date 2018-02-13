@@ -50,7 +50,7 @@ class OneYou2Page(Page):
         ObjectList(Page.settings_panels, heading='Settings', classname='settings'),
     ])
 
-    api_fields = ['body','path', 'depth', 'numchild', 'page_ref']
+    api_fields = ['body','path', 'depth', 'numchild', 'page_ref', 'live']
 
     def save(self, *args, **kwargs):
         if not self.page_ref or self.page_ref is None:
@@ -82,7 +82,7 @@ class OneYou2Page(Page):
         return cls(title=obj_dict['title'], path=obj_dict['path'], depth=obj_dict['depth'], numchild=obj_dict['numchild'],
             slug=obj_dict['meta']['slug'], seo_title=obj_dict['meta']['seo_title'], show_in_menus=obj_dict['meta']['show_in_menus'],
             search_description=obj_dict['meta']['search_description'], first_published_at=obj_dict['meta']['first_published_at'], 
-            page_ref=obj_dict['page_ref'], body=json.dumps(obj_dict['body']))
+            page_ref=obj_dict['page_ref'], body=json.dumps(obj_dict['body']), live=obj_dict['live'])
 
 
 class ChangeHistory(Orderable):
