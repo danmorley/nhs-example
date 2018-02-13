@@ -26,7 +26,10 @@ class MenuField(Field):
         return instance
 
     def to_representation(self, document):
-        settings = SiteSettings.objects.get(site=document)
+        try:
+            settings = SiteSettings.objects.get(site=document)
+        except SiteSettings.DoesNotExist:
+            return {}
         if settings.menu:
             pages_meta = {}
             for d in Page.objects.values('id', 'slug', 'url_path'):
@@ -78,7 +81,10 @@ class FooterField(Field):
 
     def to_representation(self, document):
         # TODO: image paths
-        settings = SiteSettings.objects.get(site=document)
+        try:
+            settings = SiteSettings.objects.get(site=document)
+        except SiteSettings.DoesNotExist:
+            return {}
         footer = settings.footer
         if footer:
             footer_image = footer.image
@@ -115,7 +121,10 @@ class HeaderField(Field):
         return instance
 
     def to_representation(self, document):
-        settings = SiteSettings.objects.get(site=document)
+        try:
+            settings = SiteSettings.objects.get(site=document)
+        except SiteSettings.DoesNotExist:
+            return {}
         header = settings.header
         if header:
             return {
