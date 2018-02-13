@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-docker exec -ti oneyou2_web_prod_1 bash -c "python manage.py migrate"
-docker exec -ti oneyou2_web_pre-prod_1 bash -c "python manage.py migrate"
+docker exec -ti oneyou2_web-prod_1 bash -c "python manage.py migrate"
+docker exec -ti oneyou2_web-pre-prod_1 bash -c "python manage.py migrate"

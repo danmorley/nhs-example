@@ -22,6 +22,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
+ALLOWED_HOSTS = ['web-pre-prod', 'localhost']
 
 # Application definition
 
@@ -29,6 +30,7 @@ INSTALLED_APPS = [
     'home',
     'search',
     'pages',
+    'release',
 
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
@@ -43,6 +45,8 @@ INSTALLED_APPS = [
     'wagtail.wagtailcore',
     'wagtail.contrib.settings',
     'wagtail.contrib.modeladmin',
+
+    'wagtail.api.v2',
 
     'modelcluster',
     'taggit',
@@ -147,6 +151,7 @@ MEDIA_URL = '/media/'
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "oneYou2"
+SITE_ENV = os.environ.get('SITE_ENV', 'db')
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash

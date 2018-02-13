@@ -27,6 +27,3 @@ class SiteSettings(BaseSetting):
         FieldPanel('title'),
         SnippetChooserPanel('menu'),
     ]
-
-
-
