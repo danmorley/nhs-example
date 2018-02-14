@@ -3,6 +3,7 @@ import uuid
 
 from django.db import models
 from django.db.models import DateField, TextField
+from django.forms.models import model_to_dict
 
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.models import Page, Orderable
@@ -39,6 +40,10 @@ class OneYou2Page(Page):
         null=True,
         on_delete=models.SET_NULL)
 
+    @property
+    def page_theme(self):
+        return self.theme.to_dict()
+
     content_panels = Page.content_panels + [
         StreamFieldPanel('body'),
         FieldPanel('release'),
@@ -56,7 +61,7 @@ class OneYou2Page(Page):
         ObjectList(Page.settings_panels, heading='Settings', classname='settings'),
     ])
 
-    api_fields = ['body','path', 'depth', 'numchild', 'page_ref', 'live']
+    api_fields = ['body','path', 'depth', 'numchild', 'page_ref', 'live', 'page_theme']
 
     def save(self, *args, **kwargs):
         if not self.page_ref or self.page_ref is None:
@@ -210,3 +215,6 @@ class Theme(models.Model):
 
     def __str__(self):
         return self.label
+
+    def to_dict(self):
+        return model_to_dict(self)
