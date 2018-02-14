@@ -4,7 +4,7 @@ from wagtail.contrib.modeladmin.options import (
     ModelAdmin, modeladmin_register)
 from django.utils.translation import ugettext as _
 
-from .models import Menu
+from .models import Menu, Theme
 
 
 class MenuButtonHelper(ButtonHelper):
@@ -49,4 +49,16 @@ class MenuAdmin(ModelAdmin):
     menu_order = 200  # will put in 3rd place (000 being 1st, 100 2nd)
 
 
+class ThemeAdmin(ModelAdmin):
+    model = Theme
+    menu_label = 'Theme'
+    menu_icon = 'code'
+    menu_order = 900
+    add_to_settings_menu = True  # or True to add your model to the Settings sub-menu
+    exclude_from_explorer = False # or True to exclude pages of this type from Wagtail's explorer view
+    list_display = ('label',)
+    list_filter = ('label',)
+    search_fields = ('label',)
+
+modeladmin_register(ThemeAdmin)
 modeladmin_register(MenuAdmin)
