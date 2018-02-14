@@ -137,11 +137,22 @@ class HeaderField(Field):
             return {}
 
 
+class PagesField(Field):
+    def get_attribute(self, instance):
+        return instance
+
+    def to_representation(self, document):
+        pages = Page.objects.in_site(site=document).values('id', 'url_path')
+
+        return {p['url_path'].replace('/home', ''): p['id'] for p in pages}
+
+
 class SiteSerializer(BaseSerializer):
     menu = MenuField(read_only=True)
     redirects = RedirectField(read_only=True)
     footer = FooterField(read_only=True)
     header = HeaderField(read_only=True)
+    pages = PagesField(read_only=True)
 
 
 # There is no default sites endpoint
@@ -154,11 +165,11 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
     base_serializer_class = SiteSerializer
     filter_backends = [FieldsFilter, OrderingFilter, SearchFilter]
     body_fields = BaseAPIEndpoint.body_fields + ['hostname', 'port', 'site_name', 'root_page', 'is_default_site',
-                                                 'menu', 'header', 'footer', 'redirects']
+                                                 'menu', 'header', 'footer', 'redirects', 'pages']
     meta_fields = BaseAPIEndpoint.meta_fields + ['hostname']
     listing_default_fields = BaseAPIEndpoint.listing_default_fields + ['hostname', 'port', 'site_name', 'root_page',
                                                                        'is_default_site', 'menu', 'header', 'footer',
-                                                                       'redirects']
+                                                                       'redirects', 'pages']
     nested_default_fields = BaseAPIEndpoint.nested_default_fields + ['hostname']
     name = 'sites'
     model = get_document_model()
@@ -174,7 +185,6 @@ api_router = WagtailAPIRouter('wagtailapi')
 # The first parameter is the name of the endpoint (eg. pages, images). This
 # is used in the URL of the endpoint
 # The second parameter is the endpoint class that handles the requests
-
 
 api_router.register_endpoint('pages', PagesAPIEndpoint)
 api_router.register_endpoint('images', ImagesAPIEndpoint)
