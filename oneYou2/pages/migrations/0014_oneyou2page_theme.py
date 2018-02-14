@@ -9,7 +9,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0012_theme'),
+        ('pages', '0013_theme'),
     ]
 
     operations = [
