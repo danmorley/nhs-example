@@ -1,9 +1,16 @@
 const Site = () => ({
-  name: 'One You 2',
-  redirects: {
-    "/old-about": "/about",
+  "name": "One You 2",
+  "redirects": {
+    "/old-about": "/about"
   },
-  siteMenu: [
+  "header": {
+    "title_html": "One <span class=\"marker\">You</span>",
+    "image": {
+      "title": "One You Logo",
+      "image": "http://"
+    }
+  },
+  "menu": [
     {
       "type": "simple_menu_item",
       "value": {
@@ -23,7 +30,9 @@ const Site = () => ({
             "value": {
               "link_text": "Smoke Less",
               "link_external": "",
-              "link_page": 3
+              "link_page": 3,
+              "link_slug": "home",
+              "link_path": "/home"
             },
             "id": "19f605dd-30cf-4117-b188-dd8ffd5e4719"
           },
@@ -49,7 +58,21 @@ const Site = () => ({
       },
       "id": "cc4b39a3-cffb-4a28-8bff-753a46bc496e"
     }
-  ]
+  ],
+  "footer": {
+    "image": {
+      "title": "PHE Logo",
+      "image": "http://"
+    },
+    "links": [],
+    "social_media": [
+      {
+        "label": "facebook",
+        "type": "facebook",
+        "link": "http://"
+      }
+    ]
+  }
 });
 
 export default Site;

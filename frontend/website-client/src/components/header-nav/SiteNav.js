@@ -3,8 +3,10 @@ import SimpleMenuItem from './SimpleMenuItem';
 import MultiMenuItem from './MultiMenuItem';
 
 class SiteNav extends Component {
-  
+
   render() {
+    if (!this.props.navItems) return null;
+
     let items = this.props.navItems.map(function (item) {
       if (item.type === 'simple_menu_item'){
         return (<SimpleMenuItem item={item} />);
@@ -13,10 +15,10 @@ class SiteNav extends Component {
         return (<MultiMenuItem item={item} />);
       }
       else {
-        return; 
+        return null;
       }
     });
-    
+
     return (
       <nav>
         <ul>

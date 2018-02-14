@@ -156,3 +156,10 @@ SITE_ENV = os.environ.get('SITE_ENV', 'db')
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = 'http://example.com'
+
+# Cross origin whitelist
+CORS_ORIGIN_REGEX_WHITELIST = (
+    r'^(https?://)?(\w+\.)?nhschoices\.net$',
+    r'^(https?://)?(\w+\.)?nhs\.uk$',
+    r'^(http://)?localhost:(\d+)$',
+    )

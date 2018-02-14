@@ -7,6 +7,7 @@ import Page from './components/Page';
 import homePage from './sample-data/HomePageSample';
 import aboutPage from './sample-data/AboutPageSample';
 import pageNotFound from './sample-data/PageNotFound';
+import ContentStore from './services/ContentStore';
 
 import {
   BrowserRouter as Router,
@@ -24,23 +25,22 @@ class App extends Component {
     };
   }
 
-  // Temporary function to simulate round trip to server for page content.
-  delay(t, v) {
-    return new Promise(function(resolve) {
-      setTimeout(resolve.bind(null, v), t)
-    });
-  }
-
   componentDidMount() {
     this.checkForRedirect();
-    let path = this.pageToRender();
-    console.log('Rendering page ' + path);
-    this.delay(1000).then(() => {
-      let page = pageNotFound();
-      if (path === '/home') page = homePage();
-      if (path === '/about') page = aboutPage();
+    let path = this.pagePathToRender();
+    console.log('Loading page for path ' + path);
+    this.loadPageForKey();
+  }
 
-      this.setState({ currentPage: page });
+  loadPageForKey(key) {
+    let contentStore = new ContentStore('http://localhost:9002/api/v2');
+    contentStore.getPage('2').then((page) => {
+      if (page.code === 0) {
+        this.setState({ currentPage: page.response });
+      } else {
+        console.log(page.error, page.info.statusCode, page.info.message);
+        this.setState({ currentPage: pageNotFound() });
+      }
     });
   }
 
@@ -49,7 +49,7 @@ class App extends Component {
     if (redirect) window.location.pathname = redirect;
   }
 
-  pageToRender() {
+  pagePathToRender() {
     let path = window.location.pathname;
     if (path === '/') return '/home';
     return path;
