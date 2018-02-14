@@ -28,7 +28,8 @@ class App extends Component {
   componentDidMount() {
     let path = this.checkForRedirect() || this.pagePathToRender();
     console.log('Loading page for path ' + path);
-    this.loadPageForKey('4');
+    let key = this.state.site.pages[path];
+    this.loadPageForKey(key);
   }
 
   loadPageForKey(key) {
@@ -60,7 +61,7 @@ class App extends Component {
 
   pagePathToRender() {
     let path = window.location.pathname;
-    if (path === '/') return '/home';
+    // if (path === '/') return '/home';
     return path;
   }
 
