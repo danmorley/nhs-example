@@ -7,6 +7,7 @@ import Page from './components/Page';
 import homePage from './sample-data/HomePageSample';
 import aboutPage from './sample-data/AboutPageSample';
 import pageNotFound from './sample-data/PageNotFound';
+import ContentStore from './services/ContentStore';
 
 import {
   BrowserRouter as Router,
@@ -24,32 +25,40 @@ class App extends Component {
     };
   }
 
-  // Temporary function to simulate round trip to server for page content.
-  delay(t, v) {
-    return new Promise(function(resolve) {
-      setTimeout(resolve.bind(null, v), t)
-    });
+  componentDidMount() {
+    let path = this.checkForRedirect() || this.pagePathToRender();
+    console.log('Loading page for path ' + path);
+    this.loadPageForKey('4');
   }
 
-  componentDidMount() {
-    this.checkForRedirect();
-    let path = this.pageToRender();
-    console.log('Rendering page ' + path);
-    this.delay(1000).then(() => {
-      let page = pageNotFound();
-      if (path === '/home') page = homePage();
-      if (path === '/about') page = aboutPage();
-
-      this.setState({ currentPage: page });
+  loadPageForKey(key) {
+    let contentStore = new ContentStore('http://localhost:9002/api/v2');
+    contentStore.getPage(key).then((page) => {
+      if (page.code === 0) {
+        this.setState({ currentPage: page.response });
+      } else {
+        console.log(page.error, page.info.statusCode, page.info.message);
+        this.setState({ currentPage: pageNotFound() });
+      }
     });
   }
 
   checkForRedirect() {
     let redirect = (this.state.site.redirects && this.state.site.redirects[window.location.pathname]);
-    if (redirect) window.location.pathname = redirect;
+    if (redirect) {
+      if (redirect.startsWith('http:') || redirect.startsWith('https:')) {
+        // Redirect to another site.
+        window.location.pathname = redirect;
+      } else {
+        // Redirect to a relative path without causing a page refresh.
+        window.history.replaceState('', '', redirect);
+      }
+    }
+
+    return redirect;
   }
 
-  pageToRender() {
+  pagePathToRender() {
     let path = window.location.pathname;
     if (path === '/') return '/home';
     return path;
@@ -62,7 +71,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Welcome to {this.state.site.name}</h1>
+        <h1>Welcome to {this.state.site.site_name}</h1>
         <p>You are on page: {this.state.currentPage && this.state.currentPage.title}</p>
         <p>Global root URL is: {global.rootUrl}</p>
         <hr />

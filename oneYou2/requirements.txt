@@ -4,3 +4,4 @@ django-pyodbc-azure==1.11.0.0
 wagtail>=1.13,<1.14
 python-crontab
 wagtailsnippetscopy==0.1.0
+django-cors-headers==2.1.0

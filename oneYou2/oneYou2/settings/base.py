@@ -44,9 +44,9 @@ INSTALLED_APPS = [
     'wagtail.wagtailadmin',
     'wagtail.wagtailcore',
     'wagtail.contrib.settings',
+    'wagtail.api.v2',
     'wagtail.contrib.modeladmin',
 
-    'wagtail.api.v2',
 
     'modelcluster',
     'taggit',
@@ -61,6 +61,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -68,7 +69,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-
     'wagtail.wagtailcore.middleware.SiteMiddleware',
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
 ]
@@ -156,3 +156,10 @@ SITE_ENV = os.environ.get('SITE_ENV', 'db')
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = 'http://example.com'
+
+# Cross origin whitelist
+CORS_ORIGIN_REGEX_WHITELIST = (
+    r'^(https?://)?(\w+\.)?nhschoices\.net$',
+    r'^(https?://)?(\w+\.)?nhs\.uk$',
+    r'^(http://)?localhost:(\d+)$',
+    )

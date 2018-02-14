@@ -17,7 +17,7 @@ class Page extends Component {
         return (<div>Loading</div>);
     }
 
-    var shelves = this.props.content.page_content.map((shelf, i) => {
+    var shelves = this.props.content.body.map((shelf, i) => {
       const ShelfClass = ShelfRegistry.shelves[shelf.type];
       if (ShelfClass) {
         return (<ShelfClass key={i} content={shelf.value} />);
@@ -30,7 +30,9 @@ class Page extends Component {
       <div className="page">
         <div className="page-header">
           <h1>The Page Header</h1>
-          <SiteNav navItems={this.props.site.siteMenu} />
+          <p>----</p>
+          <SiteNav navItems={this.props.site.menu} />
+          <p>----</p>
         </div>
         <div className="page-content">
           <p>You are on page: {this.props.content.title}</p>
