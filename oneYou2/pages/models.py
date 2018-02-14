@@ -86,6 +86,7 @@ class OneYou2Page(Page):
         self.search_description = obj_dict['meta']['search_description']
         self.first_published_at = obj_dict['meta']['first_published_at']
         self.body = json.dumps(obj_dict['body'])
+        self.theme_id = obj_dict['page_theme']['id']
         return self
 
     @classmethod
@@ -93,7 +94,7 @@ class OneYou2Page(Page):
         return cls(title=obj_dict['title'], path=obj_dict['path'], depth=obj_dict['depth'], numchild=obj_dict['numchild'],
             slug=obj_dict['meta']['slug'], seo_title=obj_dict['meta']['seo_title'], show_in_menus=obj_dict['meta']['show_in_menus'],
             search_description=obj_dict['meta']['search_description'], first_published_at=obj_dict['meta']['first_published_at'], 
-            page_ref=obj_dict['page_ref'], body=json.dumps(obj_dict['body']), live=obj_dict['live'])
+            page_ref=obj_dict['page_ref'], body=json.dumps(obj_dict['body']), live=obj_dict['live'], theme_id=obj_dict['page_theme']['id'])
 
 
 class ChangeHistory(Orderable):
