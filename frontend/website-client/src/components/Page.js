@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-// import './assets/styles/Page.css'
-import ShelfRegistry from './ShelfRegistry'
+import '../assets/styles/page.css'
+import ShelfRegistry from './shelves/ShelfRegistry'
 import SiteNav from './header-nav/SiteNav'
 import Footer from './Footer';
+import PageHeader from './page-header/PageHeader'
 
 // Wildcard imports are not supported by Babel without babel-wildcard plugin.
 // Create react app template app hides away Babel, plugin can not be added. You must import
@@ -13,6 +14,7 @@ import PlaceholderShelf from './shelves/PlaceholderShelf';
 import GeneralTextShelf from './shelves/GeneralTextShelf';
 
 class Page extends Component {
+
   render() {
     if (!this.props.content) {
         return (<div>Loading</div>);
@@ -31,13 +33,8 @@ class Page extends Component {
     });
 
     return (
-      <div className="page">
-        <div className="page-header">
-          <h1>The Page Header</h1>
-          <p>----</p>
-          <SiteNav navItems={menu} />
-          <p>----</p>
-        </div>
+      <div className="page-wrapper container">
+        <PageHeader navItems={this.props.site.siteMenu} />
         <div className="page-content">
           <p>You are on page: {title}</p>
           <div className="shelves">

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SimpleMenuItem from './SimpleMenuItem';
 import MultiMenuItem from './MultiMenuItem';
+import styles from './header-nav.css';
 
 class SiteNav extends Component {
 
@@ -20,8 +21,14 @@ class SiteNav extends Component {
     });
 
     return (
-      <nav>
-        <ul>
+      <nav class="header-nav">
+        <h2 class="header-nav__title">
+          MENU
+        </h2>
+        <ul class="header-nav__items">
+          <li class="header-nav__item">
+              <a href="#" class="header-nav__link header-nav__link--home">HOME</a>
+          </li>
           {items}
         </ul>
       </nav>
