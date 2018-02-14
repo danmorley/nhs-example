@@ -34,7 +34,7 @@
   <script type="text/javascript" charset="utf-8">
     (function($) {
       function setUpReleaseSelectorPopUp() {
-        var releasePicker = $('.object.model_choice_field');
+        var releasePicker = $('#id_release').closest('.object.model_choice_field');
         releasePicker.wrap('<div class="popup-cover"><div class="popup"></div></div>');
         var releasePopUp = releasePicker.parent();
         $('button[name="action-publish"]').clone().appendTo(releasePopUp);

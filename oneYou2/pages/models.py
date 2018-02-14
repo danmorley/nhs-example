@@ -3,6 +3,7 @@ import uuid
 
 from django.db import models
 from django.db.models import DateField, TextField
+from django.forms.models import model_to_dict
 
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.models import Page, Orderable
@@ -10,6 +11,7 @@ from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, InlinePanel, ObjectList, TabbedInterface
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtailsnippetscopy.models import SnippetCopyMixin
@@ -32,10 +34,20 @@ class OneYou2Page(Page):
       null=True,
       default=None,
       on_delete=models.SET_NULL)
+    theme = models.ForeignKey(
+        'pages.Theme',
+        related_name='pages',
+        null=True,
+        on_delete=models.SET_NULL)
+
+    @property
+    def page_theme(self):
+        return self.theme.to_dict()
 
     content_panels = Page.content_panels + [
         StreamFieldPanel('body'),
         FieldPanel('release'),
+        SnippetChooserPanel('theme'),
     ]
 
     info_content_panels = [
@@ -49,7 +61,7 @@ class OneYou2Page(Page):
         ObjectList(Page.settings_panels, heading='Settings', classname='settings'),
     ])
 
-    api_fields = ['body','path', 'depth', 'numchild', 'page_ref', 'live']
+    api_fields = ['body','path', 'depth', 'numchild', 'page_ref', 'live', 'page_theme']
 
     def save(self, *args, **kwargs):
         if not self.page_ref or self.page_ref is None:
@@ -74,6 +86,7 @@ class OneYou2Page(Page):
         self.search_description = obj_dict['meta']['search_description']
         self.first_published_at = obj_dict['meta']['first_published_at']
         self.body = json.dumps(obj_dict['body'])
+        self.theme_id = obj_dict['page_theme']['id']
         return self
 
     @classmethod
@@ -81,7 +94,7 @@ class OneYou2Page(Page):
         return cls(title=obj_dict['title'], path=obj_dict['path'], depth=obj_dict['depth'], numchild=obj_dict['numchild'],
             slug=obj_dict['meta']['slug'], seo_title=obj_dict['meta']['seo_title'], show_in_menus=obj_dict['meta']['show_in_menus'],
             search_description=obj_dict['meta']['search_description'], first_published_at=obj_dict['meta']['first_published_at'], 
-            page_ref=obj_dict['page_ref'], body=json.dumps(obj_dict['body']), live=obj_dict['live'])
+            page_ref=obj_dict['page_ref'], body=json.dumps(obj_dict['body']), live=obj_dict['live'], theme_id=obj_dict['page_theme']['id'])
 
 
 class ChangeHistory(Orderable):
@@ -191,3 +204,18 @@ class Header(models.Model):
     def __str__(self):
         return self.label
 
+@register_snippet
+class Theme(models.Model):
+    label = models.CharField(max_length=255)
+    class_name = models.CharField(max_length=255)
+
+    panels = [
+        FieldPanel('label'),
+        FieldPanel('class_name'),
+    ]
+
+    def __str__(self):
+        return self.label
+
+    def to_dict(self):
+        return model_to_dict(self)
