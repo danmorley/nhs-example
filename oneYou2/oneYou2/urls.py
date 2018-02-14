@@ -13,8 +13,12 @@ from release import views
 
 from search import views as search_views
 
+from pages import urls as pages_urls
+
 urlpatterns = [
     url(r'^django-admin/', include(admin.site.urls)),
+
+    url(r'^admin/custom/pages/', include(pages_urls, namespace="oneyou_pages")),
 
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),

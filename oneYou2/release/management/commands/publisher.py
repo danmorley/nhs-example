@@ -39,9 +39,14 @@ class Command(BaseCommand):
 
 
   def update_page(self, page_dict, parent_page):
-    existing_page = OneYou2Page.objects.get(uuid=page_dict['uuid'])
-    new_page = existing_page.update_from_dict(page_dict)
-    new_page.save_revision().publish()
+    existing_page = OneYou2Page.objects.get(page_ref=page_dict['page_ref'])
+    if page_dict['live']:
+      print('updating page content')
+      new_page = existing_page.update_from_dict(page_dict)
+      new_page.save_revision().publish()
+    else:
+      print('unpublishing page')
+      existing_page.unpublish()
 
 
   def create_page(self, page_dict, parent_page):
