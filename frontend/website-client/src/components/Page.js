@@ -17,7 +17,7 @@ class Page extends Component {
         return (<div>Loading</div>);
     }
 
-    var shelves = this.props.content.page_content.map((shelf, i) => {
+    var shelves = this.props.content.body.map((shelf, i) => {
       const ShelfClass = ShelfRegistry.shelves[shelf.type];
       if (ShelfClass) {
         return (<ShelfClass key={i} content={shelf.value} />);

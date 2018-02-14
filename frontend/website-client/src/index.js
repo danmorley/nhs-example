@@ -9,7 +9,7 @@ global.rootUrl = '';
 
 // Load site.json before mounting the React app.
 let contentStore = new ContentStore('http://localhost:9001/api/v2');
-let site = contentStore.getSite('2').then((site) => {
+let site = contentStore.getSite('3').then((site) => {
   if (site.code === 0) {
     ReactDOM.render(<App site={site && site.response}/>, document.getElementById('root'));
     registerServiceWorker();
