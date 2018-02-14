@@ -10,6 +10,7 @@ from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, InlinePanel, ObjectList, TabbedInterface
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtailsnippetscopy.models import SnippetCopyMixin
@@ -32,10 +33,16 @@ class OneYou2Page(Page):
       null=True,
       default=None,
       on_delete=models.SET_NULL)
+    theme = models.ForeignKey(
+        'pages.Theme',
+        related_name='pages',
+        null=True,
+        on_delete=models.SET_NULL)
 
     content_panels = Page.content_panels + [
         StreamFieldPanel('body'),
         FieldPanel('release'),
+        SnippetChooserPanel('theme'),
     ]
 
     info_content_panels = [
