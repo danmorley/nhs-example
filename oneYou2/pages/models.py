@@ -191,3 +191,15 @@ class Header(models.Model):
     def __str__(self):
         return self.label
 
+@register_snippet
+class Theme(models.Model):
+    label = models.CharField(max_length=255)
+    class_name = models.CharField(max_length=255)
+
+    panels = [
+        FieldPanel('label'),
+        FieldPanel('class_name'),
+    ]
+
+    def __str__(self):
+        return self.label
