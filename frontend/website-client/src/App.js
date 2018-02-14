@@ -26,15 +26,14 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.checkForRedirect();
-    let path = this.pagePathToRender();
+    let path = this.checkForRedirect() || this.pagePathToRender();
     console.log('Loading page for path ' + path);
-    this.loadPageForKey();
+    this.loadPageForKey('4');
   }
 
   loadPageForKey(key) {
     let contentStore = new ContentStore('http://localhost:9002/api/v2');
-    contentStore.getPage('2').then((page) => {
+    contentStore.getPage(key).then((page) => {
       if (page.code === 0) {
         this.setState({ currentPage: page.response });
       } else {
@@ -46,7 +45,17 @@ class App extends Component {
 
   checkForRedirect() {
     let redirect = (this.state.site.redirects && this.state.site.redirects[window.location.pathname]);
-    if (redirect) window.location.pathname = redirect;
+    if (redirect) {
+      if (redirect.startsWith('http:') || redirect.startsWith('https:')) {
+        // Redirect to another site.
+        window.location.pathname = redirect;
+      } else {
+        // Redirect to a relative path without causing a page refresh.
+        window.history.replaceState('', '', redirect);
+      }
+    }
+
+    return redirect;
   }
 
   pagePathToRender() {
@@ -62,7 +71,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Welcome to {this.state.site.name}</h1>
+        <h1>Welcome to {this.state.site.site_name}</h1>
         <p>You are on page: {this.state.currentPage && this.state.currentPage.title}</p>
         <p>Global root URL is: {global.rootUrl}</p>
         <hr />
