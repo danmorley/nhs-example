@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import './assets/styles/Page.css'
 import ShelfRegistry from './ShelfRegistry'
 import SiteNav from './header-nav/SiteNav'
+import Footer from './Footer';
 
 // Wildcard imports are not supported by Babel without babel-wildcard plugin.
 // Create react app template app hides away Babel, plugin can not be added. You must import
@@ -17,7 +18,10 @@ class Page extends Component {
         return (<div>Loading</div>);
     }
 
-    var shelves = this.props.content.body.map((shelf, i) => {
+    let { title, body } = this.props.content;
+    let { menu, footer } = this.props.site;
+
+    var shelves = body.map((shelf, i) => {
       const ShelfClass = ShelfRegistry.shelves[shelf.type];
       if (ShelfClass) {
         return (<ShelfClass key={i} content={shelf.value} />);
@@ -31,18 +35,16 @@ class Page extends Component {
         <div className="page-header">
           <h1>The Page Header</h1>
           <p>----</p>
-          <SiteNav navItems={this.props.site.menu} />
+          <SiteNav navItems={menu} />
           <p>----</p>
         </div>
         <div className="page-content">
-          <p>You are on page: {this.props.content.title}</p>
+          <p>You are on page: {title}</p>
           <div className="shelves">
             {shelves}
           </div>
         </div>
-        <div className="page-footer">
-          <p>The page footer</p>
-        </div>
+        <Footer className="page-footer" content={footer} site={this.props.site}/>
       </div>
     );
   }

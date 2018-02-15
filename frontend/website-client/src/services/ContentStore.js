@@ -1,5 +1,4 @@
 import request from 'request-promise-native';
-import { URL } from 'url';
 
 function ContentStore(apiEndpointUrl) {
   // Hard coded for dev.
