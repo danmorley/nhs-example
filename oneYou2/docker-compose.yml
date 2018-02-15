@@ -36,7 +36,7 @@ services:
       DB_PASSWORD: "msSQL_password"
       SITE_ENV: 'Pre Release'
     build: .
-    command: bash -c "./bin/wait-for-it.sh db:1433 -- python3 ./manage.py migrate && python3 ./manage.py runserver 0.0.0.0:8000"
+    command: bash -c "./bin/wait-for-it.sh db:1433 -- python3 ./manage.py migrate && python3 ./manage.py loaddata ./oneYou2/fixtures/fixture.json && python3 ./manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/code
     ports:
