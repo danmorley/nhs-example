@@ -4,8 +4,6 @@ import 'bootstrap-4-grid/css/grid.css';
 import './assets/styles/fonts.css';
 import './assets/styles/App.css';
 import Page from './components/Page';
-import homePage from './sample-data/HomePageSample';
-import aboutPage from './sample-data/AboutPageSample';
 import pageNotFound from './sample-data/PageNotFound';
 import ContentStore from './services/ContentStore';
 

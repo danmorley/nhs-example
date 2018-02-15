@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class SimpleMenuItem extends Component {
-  
-  render() {  
-    let href = this.props.item.link_page || this.props.item.link_external;
-    
+
+  render() {
+    let { link_path, link_external, link_text } = this.props.item.value;
     return (
       <li>
-        <a href={href}>
-          {this.props.item.value.link_text}
-        </a>
+        <Link to={link_path || link_external}>{link_text}</Link>
       </li>
     );
   }
