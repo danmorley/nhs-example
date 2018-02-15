@@ -7,26 +7,32 @@ recommended google material icon sizes
 .material-icons.md-48 { font-size: 48px; }
 */
 
-%chevron-left {
+%icon-chevron-left {
   font-family: "Material Icons";
   content: "\E5CB";
   display: block;
 }
 
-%chevron-right {
+%icon-chevron-right {
   font-family: "Material Icons";
-  content: "\E55C";
+  content: "\E5CC";
   display: block;
 }
 
-%chevron-down {
+%icon-chevron-down {
   font-family: "Material Icons";
   content: "\E5CF";
   display: block;
 }
 
-%chevron-up {
+%icon-chevron-up {
   font-family: "Material Icons";
   content: "\E5CE";
+  display: block;
+}
+
+%icon-hamburger {
+  font-family: "Material Icons";
+  content: "\E5D2";
   display: block;
 }

@@ -1,23 +1,29 @@
 @import '../../assets/styles/variables/variables';
 @import "../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
 
+.page-wrapper {    
+/*  background: #f0f8ff; /*temp background color */
+  max-width: 1400px;
 
-.page-wrapper {
-    
-    background: #f0f8ff; /*test background */
-    max-width: 1400px;
-    position: fixed;
-    left: 70%;
-    
-    @include media-breakpoint-up(sm) {
-      position: relative;
-      left: 0;
-    }
+  @include media-breakpoint-up(sm) {
+    position: relative;
+    left: auto;
+  }
 }
 
 .page-header{
   text-align: center;
   padding-top: 1em;
+  padding-bottom: 3em;
+  
+  .header-nav--open & {
+    position: relative;
+    left: 70%;
+    
+    @include media-breakpoint-up(sm) {
+      left: auto;
+    }
+  }
   
   @include media-breakpoint-up(sm) {
     text-align: left;
@@ -30,7 +36,6 @@
   font-family: $primary-brand-font;
   color: $text-primary;
   text-decoration: none;
-  
   white-space: nowrap;
 
   span{
@@ -39,5 +44,19 @@
     color: $text-secondary;
     line-height: 0.9em;    
     border-bottom: 0.15em solid  $text-primary;
+  }
+}
+
+.page-header__burger {
+  cursor: pointer;
+  position: absolute;;
+  left: 15px;
+  
+  @include media-breakpoint-up(sm) {
+    display: none;
+  }
+  
+  i{
+    font-size: 36px;
   }
 }

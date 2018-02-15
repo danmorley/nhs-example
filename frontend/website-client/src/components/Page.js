@@ -33,15 +33,17 @@ class Page extends Component {
     });
 
     return (
-      <div className="page-wrapper container">
+      <div className="page-wrapper">
         <PageHeader navItems={this.props.site.siteMenu} />
-        <div className="page-content">
-          <p>You are on page: {title}</p>
-          <div className="shelves">
-            {shelves}
+        <div className="page-content-wrapper">
+          <div className="page-content">
+            <p>You are on page: {this.props.content.title}</p>
+            <div className="shelves">
+              {shelves}
+            </div>
           </div>
+          <Footer className="page-footer" content={footer} site={this.props.site}/>
         </div>
-        <Footer className="page-footer" content={footer} site={this.props.site}/>
       </div>
     );
   }

@@ -21,13 +21,13 @@ class SiteNav extends Component {
     });
 
     return (
-      <nav class="header-nav">
-        <h2 class="header-nav__title">
+      <nav className="header-nav">
+        <h2 className="header-nav__title">
           MENU
         </h2>
-        <ul class="header-nav__items">
-          <li class="header-nav__item">
-              <a href="#" class="header-nav__link header-nav__link--home">HOME</a>
+        <ul className="header-nav__items">
+          <li className="header-nav__item">
+              <a href="#" className="header-nav__link header-nav__link--home">HOME</a>
           </li>
           {items}
         </ul>

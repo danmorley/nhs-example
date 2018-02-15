@@ -15,15 +15,20 @@ class MultiMenuItem extends Component {
     });
 
     return (
-      <li class="header-nav__item">
-        <h3 class="header-nav__secondary-title header-nav__secondary-title--closed">
+      <li className="header-nav__item">
+        <h3 className="header-nav__secondary-title"
+          onClick={this.handleClick.bind(this)}>
           {this.props.item.value.label}
         </h3>
-        <ul class="header-nav__secondary-nav">
+        <ul className="header-nav__secondary-nav">
           {children}
         </ul>
       </li>
     );
+  }
+  
+  handleClick(e) {
+    e.target.classList.toggle('header-nav__secondary-title--open');
   }
 }
 

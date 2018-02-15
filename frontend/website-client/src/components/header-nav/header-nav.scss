@@ -5,28 +5,33 @@ $pimary-item-padding: 0.6em;
 $secondary-item-padding: 0.4em;
 
 .header-nav {
+  font-family: $nav-font;
   background: $grey-brown-dark;
   padding: 1em;
-  padding-bottom: 3em;
-  font-family: $nav-font;
+  padding-bottom: 0;
   text-align: left;
   width: 66%;
-
-  
-  transition:all 0.5s;
-
+  transition:  left 0.3s, height 0.3s, transform 0.3s;
   position: fixed;
   top: 0;
-  right: 0;
   bottom: 0;
-  left: 0;
-  z-index: 0;
+  left: -70%;
+  z-index: 1;
+  
+  .header-nav--open & {
+    left: 0;
+  }
+
   
   @include media-breakpoint-up(sm) {
-    background: $white;
+    background: white;
     width: 100%;
-
     position: relative;
+    left: auto;
+    
+    .header-nav--open & {
+        position: relative;
+    }
   }
 }
 
@@ -66,9 +71,7 @@ $secondary-item-padding: 0.4em;
     &:first-child{
       margin-right: auto;
     };
-  
   }
-  
 }
 
 .header-nav__link {
@@ -92,65 +95,12 @@ $secondary-item-padding: 0.4em;
   }
 }
 
-.header-nav__secondary-title--closed {
-  
-    &:after{
-      @extend %chevron-left;
-      position: absolute;
-      right: 0;
-      top: 0;
-      font-size: 48px;
-      
-      @include media-breakpoint-up(sm) {
-        display: none;
-      }
-    }   
-}
-
-.header-nav__secondary-title--open {
-  
-    &:after{
-      @extend %chevron-down;
-      position: absolute;
-      right: 0;
-      top: 0;
-      font-size: 48px;
-      
-      @include media-breakpoint-up(sm) {
-        display: none;
-      }
-    }   
-}
-
-.header-nav__link--current{
+.header-nav__link--current {
   color: $sunflower-yellow;
 }
 
-.header-nav__secondary-title {
-  color: $white;
-  padding-top: $pimary-item-padding;
-  font-weight: normal;
-  position: relative;
-  
-    @include media-breakpoint-up(sm) {
-      color: $text-primary; 
-      font-size: $font-size-default;
-      padding-top: 0;
-    }
-}
-
-.header-nav__secondary-title--closed {
-  
-  &:before{    
-    font-size: 48px;
-    position: absolute;
-    right: 0;
-    top:0;
-  }
-}
-
 .header-nav__secondary-nav {
-  padding: $pimary-item-padding 0;
+  padding: 0;
   
   .header-nav__item {
     padding-left: 2em;
@@ -159,6 +109,63 @@ $secondary-item-padding: 0.4em;
   @include media-breakpoint-up(sm) {
     display: none;
     /* hiding for now... */
+  }
+}
+
+.header-nav__secondary-title {
+  color: $white;
+  font-weight: normal;
+  font-size: $font-size-default;
+  position: relative;
+  cursor: pointer;
+  
+  &:after {
+    @extend %icon-chevron-right;
+    position: absolute;
+    right: 0;
+    top: -50%;
+    font-size: 36px;
+    
+    @include media-breakpoint-up(sm) {
+      display: none;
+    }
+  }
+  
+  @include media-breakpoint-up(sm) {
+    color: $text-primary; 
+    padding-top: 0;
+    
+  }
+  
+  
+  & + .header-nav__secondary-nav{
+    transition: max-height 1s;  
+    overflow: hidden;
+    max-height: 0;
+  }
+}
+
+.header-nav__secondary-title--open {
+  & + .header-nav__secondary-nav{
+    transition: max-height 1s;  
+    overflow: hidden;
+    max-height: 200px;
+  }
+  
+    &:after{
+      @extend %icon-chevron-down;
+    }   
+}
+
+.page-content-wrapper {
+
+  .header-nav--open & {
+    position: relative;
+    left: 70%;  
+    
+    @include media-breakpoint-up(sm) {
+      left: auto;
+    }
   }
 }
 
