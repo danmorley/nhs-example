@@ -25,9 +25,11 @@ class Command(BaseCommand):
   def migrateUpdates(self, page_ids):
     for page_id in page_ids:
       page = self.load_page_data(page_id)
-      parent_page = Page.objects.get(id=page['meta']['parent']['id'])
+      parent_page = None
+      if page['meta']['parent']:
+        parent_page = Page.objects.get(id=page['meta']['parent']['id'])
       try:
-        self.update_page(page, parent_page)
+        self.update_page(page)
       except ObjectDoesNotExist as e:
         self.create_page(page, parent_page)
 
@@ -38,7 +40,7 @@ class Command(BaseCommand):
     return json.loads(page_response.text)
 
 
-  def update_page(self, page_dict, parent_page):
+  def update_page(self, page_dict):
     existing_page = OneYou2Page.objects.get(page_ref=page_dict['page_ref'])
     if page_dict['live']:
       print('updating page content')
@@ -51,7 +53,8 @@ class Command(BaseCommand):
 
   def create_page(self, page_dict, parent_page):
     new_page = OneYou2Page.create_from_dict(page_dict)
-    parent_page.add_child(instance=new_page)
+    if parent_page:
+      parent_page.add_child(instance=new_page)
     new_page.save_revision().publish()
 
 
