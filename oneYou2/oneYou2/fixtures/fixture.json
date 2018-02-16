@@ -1,13 +1,5 @@
 [
   {
-    "model": "pages.menu",
-    "pk": 1,
-    "fields": {
-      "label": "OneYou Menu",
-      "menu_items": "[{\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"Home\", \"link_external\": \"\", \"link_page\": 4}, \"id\": \"3b9c8471-f143-4d03-b27e-c2a6824da79a\"}, {\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"How are you? quiz\", \"link_external\": \"\", \"link_page\": 5}, \"id\": \"f33c25ac-44ec-4586-9169-ce97e551eb15\"}, {\"type\": \"multi_menu_item\", \"value\": {\"label\": \"Be healthier\", \"menu_items\": [{\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"Check your health\", \"link_external\": \"\", \"link_page\": 10}, \"id\": \"19cd89cc-e7dc-468d-a220-85077884ee8c\"}, {\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"Quit smoking\", \"link_external\": \"\", \"link_page\": 11}, \"id\": \"b4ac84d1-8580-4faf-a842-ff0af649137b\"}, {\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"Drink less\", \"link_external\": \"\", \"link_page\": 12}, \"id\": \"dd9419a6-561e-45a6-ba4b-bc7c24c16863\"}, {\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"Eat better\", \"link_external\": \"\", \"link_page\": 13}, \"id\": \"ed396895-0708-4bc4-871c-f7c7cf32e0dc\"}, {\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"Move more\", \"link_external\": \"\", \"link_page\": 14}, \"id\": \"75438bed-976b-4380-9231-3ae1f289ee4c\"}, {\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"Sleep better\", \"link_external\": \"\", \"link_page\": 1009}, \"id\": \"8247c8d4-e3f2-4e76-819b-733740e81efc\"}, {\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"Stress less\", \"link_external\": \"\", \"link_page\": 1010}, \"id\": \"b7ebb2e2-764e-4f8b-a9a6-1b63453fd846\"}]}, \"id\": \"05e07fe8-77a8-46e3-8a18-0eafc20124d9\"}, {\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"More topics\", \"link_external\": \"\", \"link_page\": 7}, \"id\": \"7fae65aa-cd7b-4e17-a0e3-fca1956810fd\"}, {\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"Offers\", \"link_external\": \"\", \"link_page\": 8}, \"id\": \"9fe59f9f-3be0-4c3d-b581-dcc70b92818f\"}, {\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"Apps\", \"link_external\": \"\", \"link_page\": 9}, \"id\": \"9a006ab3-b795-4d42-8dfc-ea13a671bedf\"}]"
-    }
-  },
-  {
     "model": "pages.footer",
     "pk": 1,
     "fields": {
@@ -809,6 +801,14 @@
       "body": "[{\"type\": \"heading\", \"value\": \"Privacy Policy\", \"id\": \"133ccdff-6942-48f6-9509-cea7fcb98325\"}]",
       "page_ref": "b56e46e3-3f2a-4044-91a4-5c603374aa05",
       "release": null
+    }
+  },
+  {
+    "model": "pages.menu",
+    "pk": 1,
+    "fields": {
+      "label": "OneYou Menu",
+      "menu_items": "[{\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"Home\", \"link_external\": \"\", \"link_page\": 4}, \"id\": \"3b9c8471-f143-4d03-b27e-c2a6824da79a\"}, {\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"How are you? quiz\", \"link_external\": \"\", \"link_page\": 5}, \"id\": \"f33c25ac-44ec-4586-9169-ce97e551eb15\"}, {\"type\": \"multi_menu_item\", \"value\": {\"label\": \"Be healthier\", \"menu_items\": [{\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"Check your health\", \"link_external\": \"\", \"link_page\": 10}, \"id\": \"19cd89cc-e7dc-468d-a220-85077884ee8c\"}, {\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"Quit smoking\", \"link_external\": \"\", \"link_page\": 11}, \"id\": \"b4ac84d1-8580-4faf-a842-ff0af649137b\"}, {\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"Drink less\", \"link_external\": \"\", \"link_page\": 12}, \"id\": \"dd9419a6-561e-45a6-ba4b-bc7c24c16863\"}, {\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"Eat better\", \"link_external\": \"\", \"link_page\": 13}, \"id\": \"ed396895-0708-4bc4-871c-f7c7cf32e0dc\"}, {\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"Move more\", \"link_external\": \"\", \"link_page\": 14}, \"id\": \"75438bed-976b-4380-9231-3ae1f289ee4c\"}, {\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"Sleep better\", \"link_external\": \"\", \"link_page\": 1009}, \"id\": \"8247c8d4-e3f2-4e76-819b-733740e81efc\"}, {\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"Stress less\", \"link_external\": \"\", \"link_page\": 1010}, \"id\": \"b7ebb2e2-764e-4f8b-a9a6-1b63453fd846\"}]}, \"id\": \"05e07fe8-77a8-46e3-8a18-0eafc20124d9\"}, {\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"More topics\", \"link_external\": \"\", \"link_page\": 7}, \"id\": \"7fae65aa-cd7b-4e17-a0e3-fca1956810fd\"}, {\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"Offers\", \"link_external\": \"\", \"link_page\": 8}, \"id\": \"9fe59f9f-3be0-4c3d-b581-dcc70b92818f\"}, {\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"Apps\", \"link_external\": \"\", \"link_page\": 9}, \"id\": \"9a006ab3-b795-4d42-8dfc-ea13a671bedf\"}]"
     }
   }
 ]
