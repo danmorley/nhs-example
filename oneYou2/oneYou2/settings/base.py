@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'search',
     'pages',
     'release',
+    'images',
 
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
@@ -164,6 +165,9 @@ CORS_ORIGIN_REGEX_WHITELIST = (
     r'^(https?://)?(\w+\.)?nhs\.uk$',
     r'^(http://)?localhost:(\d+)$',
     )
+
+WAGTAILIMAGES_IMAGE_MODEL = 'images.PHEImage'
+WAGTAIL_USAGE_COUNT_ENABLED = True
 
 DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
 AZURE_ACCOUNT_NAME = os.environ.get('AZURE_ACCOUNT_NAME')    # eg. 'campaignstorage'
