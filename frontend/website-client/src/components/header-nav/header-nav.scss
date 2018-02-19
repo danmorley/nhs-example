@@ -149,7 +149,7 @@ $secondary-item-padding: 0.4em;
   & + .header-nav__secondary-nav{
     transition: max-height 1s;  
     overflow: hidden;
-    max-height: 200px;
+    max-height: 300px;
   }
   
     &:after{

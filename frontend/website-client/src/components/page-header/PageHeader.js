@@ -7,6 +7,7 @@ class pageHeader extends Component {
   render() {
 
     let items = this.props.navItems;
+
     return (
       <div className="container page-header">
         <div className="row">

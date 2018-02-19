@@ -34,7 +34,7 @@ class Page extends Component {
 
     return (
       <div className="page-wrapper">
-        <PageHeader navItems={this.props.site.siteMenu} />
+        <PageHeader navItems={this.props.site.menu} />
         <div className="page-content-wrapper">
           <div className="page-content">
             <p>You are on page: {this.props.content.title}</p>
