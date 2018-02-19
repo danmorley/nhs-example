@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -163,3 +164,8 @@ CORS_ORIGIN_REGEX_WHITELIST = (
     r'^(https?://)?(\w+\.)?nhs\.uk$',
     r'^(http://)?localhost:(\d+)$',
     )
+
+DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+AZURE_ACCOUNT_NAME = os.environ.get('AZURE_ACCOUNT_NAME')    # eg. 'campaignstorage'
+AZURE_ACCOUNT_KEY = os.environ.get('AZURE_ACCOUNT_KEY')      # eg. '<secret key>'
+AZURE_CONTAINER = os.environ.get('AZURE_CONTAINER')          # eg. 'campaign-resource-centre'
