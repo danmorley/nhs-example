@@ -20,29 +20,31 @@ class Page extends Component {
         return (<div>Loading</div>);
     }
 
-    let { title, body } = this.props.content;
-    let { menu, footer } = this.props.site;
+    let { site, content } = this.props;
+    let { title, body } = content;
+    let { menu, footer } = site;
 
     var shelves = body.map((shelf, i) => {
       const ShelfClass = ShelfRegistry.shelves[shelf.type];
+      const shelfId = shelf.shelf_id || shelf.id;
       if (ShelfClass) {
-        return (<ShelfClass key={i} content={shelf.value} />);
+        return (<ShelfClass key={i} content={shelf.value} id={shelfId}/>);
       } else {
-        return (<PlaceholderShelf key={i} shelfType={shelf.type} />);
+        return (<PlaceholderShelf key={i} shelfType={shelf.type} id={shelfId}/>);
       }
     });
 
     return (
       <div className="page-wrapper">
-        <PageHeader navItems={this.props.site.menu} />
+        <PageHeader navItems={site.menu}/>
         <div className="page-content-wrapper">
           <div className="page-content">
-            <p>You are on page: {this.props.content.title}</p>
+            <p>You are on page: {content.title}</p>
             <div className="shelves">
               {shelves}
             </div>
           </div>
-          <Footer className="page-footer" content={footer} site={this.props.site}/>
+          <Footer className="page-footer" content={footer} site={site}/>
         </div>
       </div>
     );

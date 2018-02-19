@@ -6,7 +6,7 @@ class pageHeader extends Component {
 
   render() {
 
-    let items = this.props.navItems;
+    let { navItems, header } = this.props;
 
     return (
       <div className="container page-header">
@@ -20,13 +20,13 @@ class pageHeader extends Component {
             </a>
           </div>
           <div className ="col-sm-10">
-            <SiteNav navItems={items} />
+            <SiteNav navItems={navItems} />
           </div>
         </div>
       </div>
     );
   }
-  
+
   handleClick(event) {
     const box = document.querySelector('.page-wrapper');
     event.preventDefault()
