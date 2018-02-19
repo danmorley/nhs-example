@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import 'normalize.css'
-import 'bootstrap-4-grid/css/grid.css';
 import './assets/styles/fonts.css';
-import './assets/styles/App.css';
 import Page from './components/Page';
 import pageNotFound from './sample-data/PageNotFound';
 import ContentStore from './services/ContentStore';
+
 
 import {
   BrowserRouter as Router,

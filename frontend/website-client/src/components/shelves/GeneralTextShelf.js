@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import './assets/styles/Page.css'
-import ShelfRegistry from '../ShelfRegistry'
+import ShelfRegistry from './ShelfRegistry'
 
 /**
  *  General Text Shelf is a simple shelf that can be used to

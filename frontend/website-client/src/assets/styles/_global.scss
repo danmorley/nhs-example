@@ -16,4 +16,19 @@ html {
   font-family: sans-serif;
   font-size: 16px;
   line-height: normal;
+  color: $grey-brown-dark;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+body{
+  overflow-x: hidden;
+}
+
+button {
+  background: none;
+  border: none;
+  outline: none;
 }
