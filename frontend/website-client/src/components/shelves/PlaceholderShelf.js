@@ -7,7 +7,7 @@ class PlaceholderShelf extends Shelf {
   render() {
     return (
       <div className={this.shelfClasses()}>
-        <div class="col-sm-12 shelf__placeholder">
+        <div className="col-sm-12 shelf__placeholder">
           <h2 className="shelf__header">Placeholder Shelf</h2>
           <p>This is a temporary placeholder for a shelf of type: {this.props.shelfType}</p>
         </div>

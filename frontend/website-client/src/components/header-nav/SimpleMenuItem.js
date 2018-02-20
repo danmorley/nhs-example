@@ -8,7 +8,6 @@ class SimpleMenuItem extends Component {
     return (
       <li className ="header-nav__item">
         <Link to={link_path || link_external}  className ="header-nav__link">{link_text}</Link>
-          {this.props.item.value.link_text}
       </li>
     );
   }

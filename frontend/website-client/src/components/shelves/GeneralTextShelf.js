@@ -4,7 +4,7 @@ import ShelfRegistry from './ShelfRegistry';
 
 /**
  *  General Text Shelf is a simple shelf that can be used to
- *  display rich text.
+ *  display rich text, usually from a rich text field in Wagtail.
  *
  *  It expects the following properties:
  *  - content

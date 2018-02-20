@@ -4,14 +4,16 @@ import './assets/styles/fonts.css';
 import Page from './components/Page';
 import pageNotFound from './sample-data/PageNotFound';
 import ContentStore from './services/ContentStore';
-
+import createHistory from 'history/createBrowserHistory';
 
 import {
-  BrowserRouter as Router,
+  Router,
   Redirect,
   Route,
   Switch
 } from 'react-router-dom';
+
+const history = createHistory();
 
 class App extends Component {
   constructor(props) {
@@ -20,6 +22,23 @@ class App extends Component {
       site: props.site || {},
       currentPage: null,
     };
+  }
+
+  componentWillMount() {
+    // Detect when the user navigates to a new page.
+    //
+    // history.listen detects when the user navigates within the site and 
+    // returns a function to cancel the listener for use in the component
+    // unmount.
+    this.historyUnlisten = history.listen((location, action) => {
+      console.log('Loading page for path ' + location.pathname);
+      let key = this.state.site.pages[location.pathname];
+      this.loadPageForKey(key);
+    });
+  }
+
+  componentWillUnmount() {
+      this.historyUnlisten();
   }
 
   componentDidMount() {
@@ -69,18 +88,19 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Welcome to {this.state.site.site_name}</h1>
-        <p>You are on page: {this.state.currentPage && this.state.currentPage.title}</p>
-        <p>Global root URL is: {global.rootUrl}</p>
-        <hr />
 
-        <Router>
+        <Router history={history}>
           <Switch>
             <Route path='/'
               render={(props) => {return this.loadPage(props)}
             }/>
           </Switch>
         </Router>
+
+        <hr />
+        <p>Site name: {this.state.site.site_name}</p>
+        <p>Page title: {this.state.currentPage && this.state.currentPage.title}</p>
+        <p>Global root URL: {global.rootUrl}</p>
       </div>
     );
   }
