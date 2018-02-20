@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import SiteNav from '../header-nav/SiteNav';
+import Text from '../Text';
 import styles from './page-header.css';
 
-class pageHeader extends Component {
-
+class PageHeader extends Component {
   render() {
-
     let { navItems, header } = this.props;
 
     return (
@@ -16,7 +15,7 @@ class pageHeader extends Component {
                 <i className="material-icons">&#xE5D2;</i>
             </button>
             <a href="#" className="page-header__logo h1">
-              One <span>You</span>
+              <Text content={header.title || 'html::One <span>You</span>'} />
             </a>
           </div>
           <div className ="col-sm-10">
@@ -34,4 +33,4 @@ class pageHeader extends Component {
   }
 }
 
-export default pageHeader;
+export default PageHeader;
