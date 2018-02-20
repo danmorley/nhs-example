@@ -21,7 +21,7 @@ class Page extends Component {
     }
 
     let { site, content } = this.props;
-    let { title, body } = content;
+    let { title, body, page_theme } = content;
     let { menu, footer } = site;
 
     var shelves = body.map((shelf, i) => {
@@ -35,7 +35,7 @@ class Page extends Component {
     });
 
     return (
-      <div className="page-wrapper">
+      <div className={`page-wrapper ${page_theme && page_theme.class_name}`}>
         <PageHeader navItems={site.menu} header={site.header}/>
         <div className="page-content-wrapper">
           <div className="page-content">
