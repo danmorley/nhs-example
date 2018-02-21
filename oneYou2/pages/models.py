@@ -45,20 +45,20 @@ class SocialMediaFooterLink(blocks.StructBlock):
     link = blocks.URLBlock(label='External link', required=False)
 
 
-class SectionHeader(blocks.StructBlock):
-    header = blocks.CharBlock(required=True)
+class SectionHeading(blocks.StructBlock):
+    heading = blocks.CharBlock(required=True)
     shelf_id = blocks.CharBlock(required=False, label="ID", help_text="Not displayed in the front end")
 
 
 class BackwardsCompatibleContent(blocks.StructBlock):
-    header = blocks.CharBlock(required=True)
+    heading = blocks.CharBlock(required=True)
     body = blocks.TextBlock(required=True)
     image = ImageChooserBlock()
     shelf_id = blocks.CharBlock(required=False, label="ID")
 
 
 class FindOutMoreDropDown(blocks.StructBlock):
-    header = blocks.CharBlock(required=True)
+    heading = blocks.CharBlock(required=True)
     links = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items')
@@ -66,8 +66,8 @@ class FindOutMoreDropDown(blocks.StructBlock):
 
 
 class VideoTemplate(blocks.StructBlock):
-    header = blocks.CharBlock(required=True)
-    subheader = blocks.CharBlock(required=True)
+    heading = blocks.CharBlock(required=True)
+    subheading = blocks.CharBlock(required=True)
     body = blocks.TextBlock(required=True)
     video = blocks.CharBlock(required=True)
     shelf_id = blocks.CharBlock(required=False, label="ID")
@@ -85,7 +85,7 @@ class Carousel(blocks.StructBlock):
 
 class OneYou2Page(Page):
     body = StreamField([
-        ('section_heading', SectionHeader(classname="full title", icon='title')),
+        ('section_heading', SectionHeading(classname="full title", icon='title')),
         ('backwards_compatible_content', BackwardsCompatibleContent(label="Previous content", icon="folder-inverse")),
         ('find_out_more_dropdown', FindOutMoreDropDown(label="Link dropdown", icon="order-down")),
         ('video', VideoTemplate(icon="media")),
