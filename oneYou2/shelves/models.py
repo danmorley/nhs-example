@@ -1,3 +1,5 @@
+import json
+
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
@@ -59,7 +61,23 @@ class ShelfAbstract(models.Model):
 
 
   def to_dict(self):
-    return model_to_dict(self)
+    obj_dict = model_to_dict(self)
+    del obj_dict['content_type']
+    obj_dict['content_type_id'] = self.content_type.id
+    if 'shelfabstract_ptr' in obj_dict:
+      del obj_dict['shelfabstract_ptr']
+      obj_dict['shelfabstract_ptr_id'] = self.shelfabstract_ptr.id
+    return obj_dict
+
+  @classmethod
+  def from_dict(cls, obj_dict):
+    if isinstance(obj_dict, str):
+      obj_dict = json.loads(obj_dict.replace("'", "\""))
+    newObj = cls()
+    for key in obj_dict:
+      newObj.__setattr__(key, obj_dict[key])
+    return newObj
+
 
 
   def save(self, *args, **kwargs):
@@ -91,6 +109,15 @@ class ShelfAbstract(models.Model):
         return self
     else:
         return content_type.get_object_for_this_type(id=self.id)
+
+  @cached_property
+  def specific_class(self):
+    """
+    Return the class that this page would be if instantiated in its
+    most specific form
+    """
+    content_type = ContentType.objects.get_for_id(self.content_type_id)
+    return content_type.model_class()
 
 
 class ShelfRevision(models.Model):
@@ -124,6 +151,13 @@ class ShelfRevision(models.Model):
 
   def get_next(self):
     return self.get_next_by_created_at(shelf=self.shelf)
+
+  def as_shelf_object(self):
+    return self.shelf.specific_class.from_dict(self.content_json)
+
+  def publish(self):
+    shelf = self.as_shelf_object()
+    shelf.save()
 
   def __str__(self):
     return '"' + str(self.shelf) + '" at ' + str(self.created_at)

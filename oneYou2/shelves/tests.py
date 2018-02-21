@@ -1,6 +1,3 @@
-import uuid
-from datetime import datetime
-
 from django.contrib.contenttypes.models import ContentType
 
 from wagtail.tests.utils import WagtailPageTests
@@ -176,5 +173,35 @@ class ShelfRevisionModelTests(WagtailPageTests):
     nextRevision = initialRevision.get_next()
 
     self.assertEqual(secondRevision.id, nextRevision.id)
+
+    shelf.delete()
+
+
+  def test_publish_duplicates_revision_as_live_on_the_shelf(self):
+    shelf = ShelfAbstract(label='Test label')
+    shelf.save()
+
+    initialRevision = shelf.live_revision
+
+    shelf.label = 'Test label 2'
+    shelf.save()
+
+    secondRevision = shelf.live_revision
+
+    self.assertNotEqual(shelf.live_revision.id, initialRevision.id)
+    self.assertEqual(shelf.live_revision.id, secondRevision.id)
+    self.assertEqual(shelf.revisions.count(), 2)
+
+    initialRevision.publish()
+
+    shelf = ShelfAbstract.objects.get(label='Test label')
+
+    self.assertEqual(shelf.revisions.count(), 3)
+    self.assertNotEqual(shelf.live_revision.content_json, secondRevision.content_json)
+    self.assertEqual(initialRevision.as_shelf_object().label, shelf.live_revision.as_shelf_object().label)
+
+    shelf.delete()
+
+
 
 
