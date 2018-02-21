@@ -19,12 +19,77 @@ from wagtailsnippetscopy.registry import snippet_copy_registry
 
 from modelcluster.fields import ParentalKey
 
+# StruckBlocks/shelves
+
+
+class SimpleMenuItem(blocks.StructBlock):
+    link_text = blocks.CharBlock(required=True)
+    link_external = blocks.URLBlock(label='External link', required=False)
+    link_page = blocks.PageChooserBlock(required=False)
+
+
+class MultiMenuItem(blocks.StructBlock):
+    label = blocks.CharBlock(required=True)
+    menu_items = blocks.StreamBlock([
+        ('simple_menu_item', SimpleMenuItem())
+    ], icon='arrow-left', label='Items')
+
+
+class SocialMediaFooterLink(blocks.StructBlock):
+    choices = (
+        ('twitter', "Twitter"),
+        ('facebook', "Facebook"),
+    )
+    label = blocks.CharBlock(required=True)
+    type = blocks.ChoiceBlock(choices=choices)
+    link = blocks.URLBlock(label='External link', required=False)
+
+
+class SectionHeader(blocks.StructBlock):
+    header = blocks.CharBlock(required=True)
+    shelf_id = blocks.CharBlock(required=False, label="ID", help_text="Not displayed in the front end")
+
+
+class BackwardsCompatibleContent(blocks.StructBlock):
+    header = blocks.CharBlock(required=True)
+    body = blocks.TextBlock(required=True)
+    image = ImageChooserBlock()
+    shelf_id = blocks.CharBlock(required=False, label="ID")
+
+
+class FindOutMoreDropDown(blocks.StructBlock):
+    header = blocks.CharBlock(required=True)
+    links = blocks.StreamBlock([
+        ('simple_menu_item', SimpleMenuItem())
+    ], icon='arrow-left', label='Items')
+    shelf_id = blocks.CharBlock(required=False, label="ID")
+
+
+class VideoTemplate(blocks.StructBlock):
+    header = blocks.CharBlock(required=True)
+    subheader = blocks.CharBlock(required=True)
+    body = blocks.TextBlock(required=True)
+    video = blocks.CharBlock(required=True)
+    shelf_id = blocks.CharBlock(required=False, label="ID")
+
+
+class Carousel(blocks.StructBlock):
+    items = blocks.StreamBlock([
+        ('backwards_compatible_content', BackwardsCompatibleContent(label="Previous content", icon="folder-inverse")),
+        ('video', VideoTemplate(icon="media"))
+    ], icon='arrow-left', label='Items')
+    shelf_id = blocks.CharBlock(required=False, label="ID")
+
+
+# Pages
 
 class OneYou2Page(Page):
     body = StreamField([
-        ('heading', blocks.CharBlock(classname="full title")),
-        ('paragraph', blocks.RichTextBlock()),
-        ('image', ImageChooserBlock()),
+        ('section_heading', SectionHeader(classname="full title", icon='title')),
+        ('backwards_compatible_content', BackwardsCompatibleContent(label="Previous content", icon="folder-inverse")),
+        ('find_out_more_dropdown', FindOutMoreDropDown(label="Link dropdown", icon="order-down")),
+        ('video', VideoTemplate(icon="media")),
+        ('carousel', Carousel(icon="repeat")),
     ])
     page_ref = models.CharField(max_length=255, unique=True)
     release = models.ForeignKey(
@@ -74,7 +139,6 @@ class OneYou2Page(Page):
         if not self.page_ref or self.page_ref is None:
             self.page_ref = str(uuid.uuid4())
 
-
     def update_from_dict(self, obj_dict):
         self.title = obj_dict['title']
         self.path = obj_dict['path']
@@ -91,11 +155,22 @@ class OneYou2Page(Page):
 
     @classmethod
     def create_from_dict(cls, obj_dict):
-        return cls(title=obj_dict['title'], path=obj_dict['path'], depth=obj_dict['depth'], numchild=obj_dict['numchild'],
-            slug=obj_dict['meta']['slug'], seo_title=obj_dict['meta']['seo_title'], show_in_menus=obj_dict['meta']['show_in_menus'],
-            search_description=obj_dict['meta']['search_description'], first_published_at=obj_dict['meta']['first_published_at'], 
-            page_ref=obj_dict['page_ref'], body=json.dumps(obj_dict['body']), live=obj_dict['live'], theme_id=obj_dict['page_theme']['id'])
+        return cls(title=obj_dict['title'],
+                   path=obj_dict['path'],
+                   depth=obj_dict['depth'],
+                   numchild=obj_dict['numchild'],
+                   slug=obj_dict['meta']['slug'],
+                   seo_title=obj_dict['meta']['seo_title'],
+                   show_in_menus=obj_dict['meta']['show_in_menus'],
+                   search_description=obj_dict['meta']['search_description'],
+                   first_published_at=obj_dict['meta']['first_published_at'],
+                   page_ref=obj_dict['page_ref'],
+                   body=json.dumps(obj_dict['body']),
+                   live=obj_dict['live'],
+                   theme_id=obj_dict['page_theme']['id'])
 
+
+# Orderables
 
 class ChangeHistory(Orderable):
     page = ParentalKey(OneYou2Page, related_name='change_history')
@@ -106,31 +181,6 @@ class ChangeHistory(Orderable):
         FieldPanel('date_of_change', classname='col4'),
         FieldPanel('comment', classname='col8'),
     ]
-
-
-# StruckBlocks
-
-class SimpleMenuItem(blocks.StructBlock):
-    link_text = blocks.CharBlock(required=True)
-    link_external = blocks.URLBlock(label='External link', required=False)
-    link_page = blocks.PageChooserBlock(required=False)
-
-
-class MultiMenuItem(blocks.StructBlock):
-    label = blocks.CharBlock(required=True)
-    menu_items = blocks.StreamBlock([
-        ('simple_menu_item', SimpleMenuItem())
-    ], icon='arrow-left', label='Items')
-
-
-class SocialMediaFooterLink(blocks.StructBlock):
-    choices = (
-        ('twitter', "Twitter"),
-        ('facebook', "Facebook"),
-    )
-    label = blocks.CharBlock(required=True)
-    type = blocks.ChoiceBlock(choices=choices)
-    link = blocks.URLBlock(label='External link', required=False)
 
 
 # Snippets
