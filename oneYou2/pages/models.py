@@ -1,6 +1,7 @@
 import json
 import uuid
 
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import DateField, TextField
 from django.forms.models import model_to_dict
@@ -159,7 +160,7 @@ snippet_copy_registry.register(Menu, 'label')
 class Footer(models.Model):
     label = models.CharField(max_length=255)
     image = models.ForeignKey(
-        'wagtailimages.Image',
+        'images.PHEImage',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -189,7 +190,7 @@ class Footer(models.Model):
 class Header(models.Model):
     label = models.CharField(max_length=255)
     image = models.ForeignKey(
-        'wagtailimages.Image',
+        'images.PHEImage',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
