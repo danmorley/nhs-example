@@ -35,8 +35,8 @@ class ShelfAbstract(models.Model):
     'contenttypes.ContentType',
     verbose_name=_('content type'),
     related_name='shelves',
-    on_delete=models.SET(get_default_shelf_content_type)
-  )
+    on_delete=models.SET(get_default_shelf_content_type),
+    editable=False)
 
   is_creatable = False
 
@@ -169,8 +169,12 @@ class ShelfRevision(models.Model):
 
 class PromoShelf(ShelfAbstract):
   heading = models.CharField(max_length=255)
+  button_text = models.CharField(max_length=255)
+  button_link = models.CharField(max_length=255)
 
   content_panels = ShelfAbstract.content_panels + [
     FieldPanel('heading', classname='heading',),
+    FieldPanel('button_text', classname='button_text', ),
+    FieldPanel('button_link', classname='button_link', ),
   ]
 
