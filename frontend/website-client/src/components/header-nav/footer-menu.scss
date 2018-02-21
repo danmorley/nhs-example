@@ -29,14 +29,14 @@
   }
 }
 
-.page-footer__follow-title{
+.page-footer__follow-title {
   font-size: 1em;
   font-weight: normal;
   margin-bottom: 1em;  
 }
 
 
-.page-footer__social-links{
+.page-footer__social-links {
   display: inline-flex;
   justify-content: flex-end;
   
@@ -45,7 +45,7 @@
     margin-left:1em;
   }
   
-  a{
+  a {
     display: block;
     height: 30px;
     width: 30px;
@@ -55,7 +55,7 @@
 
 .page-footer__facebook {
   
-  &:after{
+  &:after {
     @extend %icon-facebook;
     position: absolute;
     right: 0;
@@ -67,7 +67,7 @@
 
 .page-footer__twitter {
   
-  &:after{
+  &:after {
     @extend %icon-twitter;
     position: absolute;
     right: 0;

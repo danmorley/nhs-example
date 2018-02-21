@@ -13,13 +13,14 @@ class Footer extends Component {
     }
 
     let { image, links, social_media } = content;
+    let tempImage = {image:logo, title:'PHE logo'};
 
     return (
       <div className={className}>
         <div className ="container">
           <div className = "row">
             <div className ="col">
-               <img src={logo} height="68" alt ="PHE logo" className="page-footer__phe-logo" />
+              <Image image={tempImage} height="68" className="page-footer__phe-logo" />
               <FooterMenu items={links} />
             </div>
             <div className ="col text-right">
