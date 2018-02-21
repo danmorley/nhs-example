@@ -2,7 +2,6 @@
 @import "../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
 
 .page-wrapper {    
-/*  background: #f0f8ff; /*temp background color */
   max-width: 1400px;
 
   @include media-breakpoint-up(sm) {
@@ -11,7 +10,7 @@
   }
 }
 
-.page-header{
+.page-header {
   text-align: center;
   padding-top: 1em;
   padding-bottom: 3em;
@@ -27,18 +26,17 @@
   
   @include media-breakpoint-up(sm) {
     text-align: left;
-    min-width: 1000px;
   }
 }
 
-.page-header__logo{
-  font-size: $heading-h1;
+.page-header__logo {
+  
   font-family: $primary-brand-font;
   color: $text-primary;
   text-decoration: none;
   white-space: nowrap;
 
-  span{
+  span {
     display: inline-block;
     font-family: $tertiary-brand-font;
     color: $text-secondary;
@@ -49,14 +47,24 @@
 
 .page-header__burger {
   cursor: pointer;
-  position: absolute;;
-  left: 15px;
-  
+  position: absolute;
+  left:15px;
+  height: 30px;
+  width: 30px;
+
+    
   @include media-breakpoint-up(sm) {
     display: none;
   }
   
-  i{
-    font-size: 36px;
-  }
+  i {
+    &:after {
+      @extend %icon-hamburger;
+      position: absolute;
+      right: 0;
+      top: 0;
+      color: black;
+      font-size: 30px;
+      }
+    }      
 }

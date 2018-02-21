@@ -1,0 +1,84 @@
+@import '../../assets/styles/variables/variables';
+@import "../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+.page-footer {
+  font-family: $nav-font;
+  background: $grey-brown-dark;
+  color: $white;
+  padding: 1.5rem 0;
+  
+  @include media-breakpoint-up(sm) {
+    font-size: 0.8rem;
+  }
+}
+
+.footer-nav__link {
+  color: $white;
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+  
+.footer-nav__item {
+  margin-bottom: 1rem;
+  
+  &:last-child{
+    margin-bottom:0
+  }
+}
+
+.page-footer__follow-title {
+  font-size: 1em;
+  font-weight: normal;
+  margin-bottom: 1em;  
+}
+
+
+.page-footer__social-links {
+  display: inline-flex;
+  justify-content: flex-end;
+  
+  li {
+    position: relative;
+    margin-left:1em;
+  }
+  
+  a {
+    display: block;
+    height: 30px;
+    width: 30px;
+  }
+}
+
+
+.page-footer__facebook {
+  
+  &:after {
+    @extend %icon-facebook;
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: $white;
+    font-size: 30px;
+  }
+}
+
+.page-footer__twitter {
+  
+  &:after {
+    @extend %icon-twitter;
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: $white;
+    font-size: 30px;
+  }
+}
+
+.page-footer__phe-logo {
+  margin-left: -18px;
+  margin-bottom: 1em;
+}
+

@@ -12,7 +12,7 @@ class PageHeader extends Component {
         <div className="row">
           <div className="col-sm-2">
             <button className="page-header__burger" onClick={this.handleClick.bind(this)}>
-                <i className="material-icons">&#xE5D2;</i>
+                <i className="font-icon"></i>
             </button>
             <a href="#" className="page-header__logo h1">
               <Text content={header.title || 'html::One <span>You</span>'} />

@@ -9,8 +9,8 @@ class SocialLinks extends Component {
     let items = links.map((item, i) => {
       if (item.type === 'social_media_link') {
         return (
-          <li key={i} className={item.value.type}>
-            <a href={item.value.link} target="_blank" tabIndex="-1" title="(opens in new window)" className="external"></a>
+          <li key={i}>
+            <a href={item.value.link} target="_blank" tabIndex="-1" title="(opens in new window)" className={"page-footer__"+item.value.type}></a>
           </li>
         );
       } else {
@@ -19,14 +19,11 @@ class SocialLinks extends Component {
     });
 
     return (
-      <div className="social-media" id="social">
-        <span className="follow-one-you hidden-sm hidden-md">
-          Follow <span dangerouslySetInnerHTML={{__html: site.site_name}} />
-        </span>
-        <span className="follow-us">
+      <div className ="page-footer__social-media" id="social">
+        <h5 className ="page-footer__follow-title">
           Follow us
-        </span>
-        <ul aria-label="Social networks">
+        </h5>
+        <ul className ="page-footer__social-links" aria-label="Social networks">
           {items}
         </ul>
       </div>

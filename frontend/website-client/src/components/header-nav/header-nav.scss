@@ -29,6 +29,8 @@ $secondary-item-padding: 0.4em;
     position: relative;
     left: auto;
     
+    font-size: 0.9em;
+    
     .header-nav--open & {
         position: relative;
     }
@@ -39,6 +41,13 @@ $secondary-item-padding: 0.4em;
   
   @include media-breakpoint-up(sm) {
     display: flex;
+  }
+  >  li:first-child  {
+    font-size: 1.2em;
+
+    .header-nav__link {
+      color: $sunflower-yellow;
+    }
   }
 }
 
@@ -65,16 +74,19 @@ $secondary-item-padding: 0.4em;
     border-bottom: 0;
   }
   
+  
   @include media-breakpoint-up(sm) {
     padding: 0 2em;
     
     &:first-child{
       margin-right: auto;
+      font-size: inherit;
     };
   }
 }
 
 .header-nav__link {
+  
   color: $white;
   text-decoration: none;
   
@@ -87,8 +99,8 @@ $secondary-item-padding: 0.4em;
   }
 }
 
-.header-nav__link--home{
-  color: $sunflower-yellow;  
+.header-nav__link--home {
+  color: $sunflower-yellow;
   
   @include media-breakpoint-up(sm) {
     display: none;
@@ -107,24 +119,27 @@ $secondary-item-padding: 0.4em;
   }
   
   @include media-breakpoint-up(sm) {
-    display: none;
-    /* hiding for now... */
+    position: absolute;
+    background: $white;
+
   }
 }
 
 .header-nav__secondary-title {
+  
+  font-size: font-default-mobile;
   color: $white;
   font-weight: normal;
-  font-size: $font-size-default;
   position: relative;
   cursor: pointer;
+  display: block;
   
   &:after {
     @extend %icon-chevron-right;
     position: absolute;
     right: 0;
-    top: -50%;
-    font-size: 36px;
+    top: 0;
+    font-size: 16px;
     
     @include media-breakpoint-up(sm) {
       display: none;
@@ -138,21 +153,21 @@ $secondary-item-padding: 0.4em;
   }
   
   
-  & + .header-nav__secondary-nav{
-    transition: max-height 1s;  
+  & + .header-nav__secondary-nav {
+    transition: max-height 0.5s;  
     overflow: hidden;
     max-height: 0;
   }
 }
 
 .header-nav__secondary-title--open {
-  & + .header-nav__secondary-nav{
-    transition: max-height 1s;  
+  & + .header-nav__secondary-nav {
+    transition: max-height 0.5s;  
     overflow: hidden;
     max-height: 300px;
   }
   
-    &:after{
+    &:after {
       @extend %icon-chevron-down;
     }   
 }
@@ -161,7 +176,7 @@ $secondary-item-padding: 0.4em;
 
   .header-nav--open & {
     position: relative;
-    left: 70%;  
+    left: 66%;  
     
     @include media-breakpoint-up(sm) {
       left: auto;
