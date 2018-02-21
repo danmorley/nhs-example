@@ -7,7 +7,7 @@ class MultiMenuItem extends Component {
     let children = this.props.item.value.menu_items.map(function (item) {
       if (item.type === 'simple_menu_item'){
         return (
-          <SimpleMenuItem item={item} key={item.id} />
+          <SimpleMenuItem item={item} key={item.id} menuType ="header" />
         );
       } else {
         return null;
@@ -16,10 +16,10 @@ class MultiMenuItem extends Component {
 
     return (
       <li className="header-nav__item">
-        <h3 className="header-nav__secondary-title"
+        <span className="header-nav__secondary-title"
           onClick={this.handleClick.bind(this)}>
           {this.props.item.value.label}
-        </h3>
+        </span>
         <ul className="header-nav__secondary-nav">
           {children}
         </ul>

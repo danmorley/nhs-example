@@ -14,16 +14,45 @@
 
 html {
   font-family: sans-serif;
-  font-size: 16px;
   line-height: normal;
   color: $grey-brown-dark;
+    
+  font-size: $font-default-mobile;
+  
+  @include media-breakpoint-up(sm) {
+    font-size: $font-default-desktop;
+  }
+}
+
+h1 {
+  font-size: $h1;
+}
+
+.h1{
+  font-size: $h1 !important;;
+}
+
+h2{
+  font-size: $h2;
+}
+
+.h2{
+  font-size: $h2 !important;
+}
+
+h3{
+  font-size: $h3;
+}
+
+.h3{
+  font-size: $h3 !important;
 }
 
 ol, ul {
   list-style: none;
 }
 
-body{
+body {
   overflow-x: hidden;
 }
 
@@ -32,3 +61,4 @@ button {
   border: none;
   outline: none;
 }
+

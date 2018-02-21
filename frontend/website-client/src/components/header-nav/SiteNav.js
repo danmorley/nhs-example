@@ -10,7 +10,7 @@ class SiteNav extends Component {
 
     let items = this.props.navItems.map((item, i) => {
       if (item.type === 'simple_menu_item'){
-        return (<SimpleMenuItem key={i} item={item} />);
+        return (<SimpleMenuItem key={i} item={item} menuType ="header" />);
       }
       else if (item.type === 'multi_menu_item'){
         return (<MultiMenuItem key={i} item={item} />);
@@ -26,9 +26,6 @@ class SiteNav extends Component {
           MENU
         </h2>
         <ul className="header-nav__items">
-          <li className="header-nav__item">
-              <a href="#" className="header-nav__link header-nav__link--home">HOME</a>
-          </li>
           {items}
         </ul>
       </nav>

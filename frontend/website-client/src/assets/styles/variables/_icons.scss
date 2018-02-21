@@ -7,32 +7,59 @@ recommended google material icon sizes
 .material-icons.md-48 { font-size: 48px; }
 */
 
+.font-icon:after {
+  display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
 %icon-chevron-left {
-  font-family: "Material Icons";
-  content: "\E5CB";
+  font-family: "Flaticon";
+  content: "\f103";
   display: block;
 }
 
 %icon-chevron-right {
-  font-family: "Material Icons";
-  content: "\E5CC";
+  font-family: "Flaticon";
+  content: "\f100";
   display: block;
 }
 
 %icon-chevron-down {
-  font-family: "Material Icons";
-  content: "\E5CF";
+  font-family: "Flaticon";
+content: "\f104";
   display: block;
 }
 
 %icon-chevron-up {
-  font-family: "Material Icons";
-  content: "\E5CE";
+  font-family: "Flaticon";
+  content: "\f101";
   display: block;
 }
 
 %icon-hamburger {
-  font-family: "Material Icons";
-  content: "\E5D2";
+  font-family: "Flaticon";
+  content: "\f102";
+  display: block;
+}
+
+%icon-facebook {
+  font-family: "Flaticon";
+  content: "\f106";
+  display: block;
+}
+
+%icon-twitter {
+  font-family: "Flaticon";
+  content: "\f105";
   display: block;
 }

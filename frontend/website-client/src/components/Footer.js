@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FooterMenu from './header-nav/FooterMenu';
 import Image from './Image.js';
 import SocialLinks from './header-nav/SocialLinks';
+import logo from '../assets/images/public-health-england-logo.png';
 
 class Footer extends Component {
   render() {
@@ -15,9 +16,17 @@ class Footer extends Component {
 
     return (
       <div className={className}>
-        <FooterMenu items={links} />
-        <Image image={image} />
-        <SocialLinks links={social_media} site={site} />
+        <div className ="container">
+          <div className = "row">
+            <div className ="col">
+               <img src={logo} height="68" alt ="PHE logo" className="page-footer__phe-logo" />
+              <FooterMenu items={links} />
+            </div>
+            <div className ="col text-right">
+              <SocialLinks links={social_media} site={site} />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
