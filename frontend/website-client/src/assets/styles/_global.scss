@@ -57,8 +57,25 @@ body {
 }
 
 button {
-  background: none;
   border: none;
   outline: none;
 }
 
+.button {
+  padding: 1em;  
+  font-weight: bold;
+  border-radius: 18px;
+  box-shadow: 0 5px 4px 0 rgba(0,0,0,0.27);
+  text-transform: uppercase;
+  cursor: pointer;  
+  
+  &:active {
+    transform: translateY(4px);
+    box-shadow: 0 3px 4px 0 rgba(0,0,0,0.27);
+  }
+}
+
+.button--default {
+  background-color: $sunflower-yellow;
+  color: $grey-brown;
+}
