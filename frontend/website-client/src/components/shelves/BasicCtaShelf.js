@@ -7,8 +7,8 @@ import ShelfRegistry from './ShelfRegistry';
 import sampleBgImage from './healthcheckup.png'; // Tell Webpack this JS file uses this image
 
 /**
- *  Promo Shelf is a simple shelf that can be used to display content
- *  from the promo_shelf type Wagtail streamfield.
+ *  Basic CTA Shelf is a simple shelf that can be used to display content
+ *  from the basic_cta_shelf type Wagtail streamfield.
  *
  *  It expects the following properties:
  *  - content
@@ -21,7 +21,7 @@ import sampleBgImage from './healthcheckup.png'; // Tell Webpack this JS file us
  *    shelf_id: "learn-more-shelf"
  *  }
  */
-class PromoShelf extends Component {
+class BasicCtaShelf extends Component {
   render() {
     let { content } = this.props;
     let metaLayout = content.meta_layout || 'image_on_right';
@@ -56,13 +56,13 @@ class PromoShelf extends Component {
 
     if (metaLayout === 'image_on_left') {
       return (
-        <Shelf id={content.shelf_id || this.props.id} style={shelfStyle} >
+        <Shelf id={content.shelf_id || this.props.id} style={shelfStyle} classNamePrefix="promo">
           {imagePanel}{textPanel}
         </Shelf>
       );
     } else {
       return (
-        <Shelf id={content.shelf_id || this.props.id} style={shelfStyle} >
+        <Shelf id={content.shelf_id || this.props.id} style={shelfStyle} classNamePrefix="promo" variant={content.meta_variant}>
           {textPanel}{imagePanel}
         </Shelf>
       );
@@ -70,6 +70,7 @@ class PromoShelf extends Component {
   }
 }
 
-ShelfRegistry.register(PromoShelf, 'promo_shelf');
+ShelfRegistry.register(BasicCtaShelf, 'basic_cta_shelf');
+ShelfRegistry.register(BasicCtaShelf, 'promo_shelf');
 
-export default PromoShelf;
+export default BasicCtaShelf;

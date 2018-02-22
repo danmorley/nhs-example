@@ -12,7 +12,7 @@ import PageHeader from './page-header/PageHeader'
 // import * as Shelves from './shelves'
 import PlaceholderShelf from './shelves/PlaceholderShelf';
 import GeneralTextShelf from './shelves/GeneralTextShelf';
-import PromoShelf from './shelves/PromoShelf';
+import BasicCtaShelf from './shelves/BasicCtaShelf';
 
 class Page extends Component {
 
@@ -24,6 +24,7 @@ class Page extends Component {
     let { site, content } = this.props;
     let { title, body, page_theme } = content;
     let { menu, footer } = site;
+    let pageTheme = (page_theme && page_theme.class_name) || 'oneyou';
 
     // Add a test promo shelf to all pages.
     body.push({
@@ -82,7 +83,7 @@ class Page extends Component {
     });
 
     return (
-      <div className={`page-wrapper ${page_theme && page_theme.class_name}`}>
+      <div className={`page-wrapper ${pageTheme}`}>
         <PageHeader navItems={site.menu} header={site.header}/>
         <div className="page-content-wrapper">
           <div className="page-content">
