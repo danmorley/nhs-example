@@ -5,18 +5,24 @@ import React, { Component } from 'react';
  *  raw HTML text.
  *
  *  It expects the following properties:
+ *  - tagName
  *  - content
  *
  *  The content should be prefixed with 'html::' for the text
  *  to be treated as raw HTML.
+ *
+ *  Example usage:
+ *
+ *  <Text tagName="h3" content={content.title} />
  */
 class Text extends Component {
   render() {
     let content = this.props.content || '';
+    let Tag = this.props.tagName || 'p';
     if (content.startsWith('html::')) {
-      return (<p dangerouslySetInnerHTML={{__html: content.substring(6)}} />);
+      return (<Tag dangerouslySetInnerHTML={{__html: content.substring(6)}} />);
     } else {
-      return (<p>{content}</p>);
+      return (<Tag>{content}</Tag>);
     }
   }
 }
