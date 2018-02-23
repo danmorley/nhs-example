@@ -1,15 +1,6 @@
 @import '../../assets/styles/variables/variables';
 @import "../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
 
-.page-wrapper {    
-  max-width: 1400px;
-
-  @include media-breakpoint-up(sm) {
-    position: relative;
-    left: auto;
-  }
-}
-
 .page-header {
   text-align: center;
   padding-top: 1em;

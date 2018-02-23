@@ -7,7 +7,7 @@ class Shelf extends Component {
 
   shelfClasses() {
     let classNamePrefix = this.props.classNamePrefix || 'basic';
-    return this.props.variant ? `row shelf ${classNamePrefix}-shelf ${this.props.variant}-shelf` : `row shelf ${classNamePrefix}-shelf`;
+    return this.props.variant ? `shelf ${classNamePrefix}-shelf ${this.props.variant}-shelf` : `shelf ${classNamePrefix}-shelf`;
   }
 
   render() {

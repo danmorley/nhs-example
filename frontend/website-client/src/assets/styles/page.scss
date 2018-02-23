@@ -22,7 +22,13 @@
   align-self: center;
 }
 
-.align-center {
+.col-vertical-center {
   align-items: center;
   display: flex;
+}
+
+.md-content-right {
+  @include media-breakpoint-up(md) {
+    text-align: right;
+  }
 }
