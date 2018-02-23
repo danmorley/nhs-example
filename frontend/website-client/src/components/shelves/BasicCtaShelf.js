@@ -27,15 +27,13 @@ import sampleBgImage from './healthcheckup.png'; // Tell Webpack this JS file us
 class BasicCtaShelf extends Component {
   render() {
     let { content, classNamePrefix } = this.props;
-    let metaLayout = content.meta_layout || 'image_on_right';
+    let metaLayout = content.meta_layout || '';
 
     let backgroundImageShelfStyle = {
       backgroundImage: 'url(' + sampleBgImage + ')',
     };
 
     let backgroundColourShelfStyle = {
-      backgroundColor: 'blue',
-      padding: '2em'
     };
 
     let textPanel = [
@@ -68,9 +66,14 @@ class BasicCtaShelf extends Component {
     if (metaLayout === 'image_on_left') {
       return (
         <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix}>
-          <div className="container" style={shelfStyle}>
+          <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
-              {imagePanel}{textPanel}
+              <div className="shelf__col col">
+                {imagePanel}
+              </div>
+              <div className="shelf__col col">
+                {textPanel}
+              </div>
             </div>
           </div>
         </Shelf>
@@ -78,7 +81,7 @@ class BasicCtaShelf extends Component {
     } else if  (metaLayout === 'image_on_right') {
       return (
         <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
-          <div className="container" style={shelfStyle}>
+          <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
               <div className="shelf__col col">
                 {textPanel}
@@ -93,9 +96,9 @@ class BasicCtaShelf extends Component {
     } else if  (metaLayout === 'cta_on_right') {
       return (
         <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
-          <div className="container" style={shelfStyle}>
+          <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
-              <div className="shelf__col col align-center">
+              <div className="shelf__col col col-vertical-center">
                 {textOnlyPanel}
               </div>
               <div className="shelf__col col md-content-right">
@@ -106,13 +109,26 @@ class BasicCtaShelf extends Component {
         </Shelf>
       );
     }
-    else { //full_wwidth
+    else if (metaLayout === 'full_width') {
       return (
         <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
-          <div className="container-fluid" style={shelfStyle}>  
+          <div className="shelf__container container-fluid" style={shelfStyle}>  
             <div className="row">
               <div className="shelf__col col-10 col-sm-8">
                 {mainBannerPannel}
+              </div>
+            </div>
+          </div>
+        </Shelf>
+      );
+    }
+    else {
+      return (
+        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
+          <div className="shelf__container container" style={shelfStyle}>  
+            <div className="row">
+              <div className="shelf__col col-12 col-vertical-center">
+                {textOnlyPanel}
               </div>
             </div>
           </div>
@@ -124,5 +140,7 @@ class BasicCtaShelf extends Component {
 
 ShelfRegistry.register('basic_cta_shelf', BasicCtaShelf, 'basic-cta');
 ShelfRegistry.register('promo_shelf', BasicCtaShelf, 'promo');
+ShelfRegistry.register('page_heading', BasicCtaShelf, 'promo');
+ShelfRegistry.register('sub_page_heading', BasicCtaShelf, 'promo');
 
 export default BasicCtaShelf;
