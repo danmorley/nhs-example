@@ -38,13 +38,11 @@ class BasicCtaShelf extends Component {
       padding: '2em'
     };
 
-    let textPanel = (
-      <div className="col">
-        <Text tagName="h2" content={content.heading} />
-        <Text content={content.body} />
-        <CtaLink link={content.cta_button_link}>{content.cta_button_label}</CtaLink>
-      </div>
-    );
+    let textPanel = [
+      (<Text tagName="h2" content={content.heading} />),
+      (<Text content={content.body} />),
+      (<CtaLink link={content.cta_button_link}>{content.cta_button_label}</CtaLink>)
+    ];
     
     let textOnlyPanel = [
       (<Text tagName="h2" content={content.heading} />),
@@ -58,9 +56,7 @@ class BasicCtaShelf extends Component {
     let shelfStyle = (content.background_image) ? backgroundImageShelfStyle : backgroundColourShelfStyle;
 
     let imagePanel = (
-      <div className="col">
-        <img alt="roger"/>
-      </div>
+      <img alt="roger"/>
     );
     
     let mainBannerPannel = [
@@ -84,10 +80,10 @@ class BasicCtaShelf extends Component {
         <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
           <div className="container" style={shelfStyle}>
             <div className="row">
-              <div className="col">
+              <div className="shelf__col col">
                 {textPanel}
               </div>
-              <div className="col">
+              <div className="shelf__col col">
                 {imagePanel}
               </div>
             </div>
@@ -99,10 +95,10 @@ class BasicCtaShelf extends Component {
         <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
           <div className="container" style={shelfStyle}>
             <div className="row">
-              <div className="col align-center">
+              <div className="shelf__col col align-center">
                 {textOnlyPanel}
               </div>
-              <div className="col push-right">
+              <div className="shelf__col col md-content-right">
                 {ctaPanel}
               </div>
             </div>
@@ -114,8 +110,10 @@ class BasicCtaShelf extends Component {
       return (
         <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
           <div className="container-fluid" style={shelfStyle}>  
-            <div className="col-10 col-sm-8">
-              {mainBannerPannel}
+            <div className="row">
+              <div className="shelf__col col-10 col-sm-8">
+                {mainBannerPannel}
+              </div>
             </div>
           </div>
         </Shelf>

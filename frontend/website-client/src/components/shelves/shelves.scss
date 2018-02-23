@@ -16,11 +16,16 @@
   padding: 1em 0;
 }
 
+.shelf__col {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
 .promo-shelf {
   .container, .container-fluid {
     background-size: cover;
     background-position: 50%;
-    padding: 2em;  
+    padding: 1em;  
   }
 }
 

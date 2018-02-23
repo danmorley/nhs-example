@@ -75,9 +75,9 @@ button {
   text-transform: uppercase;
   cursor: pointer; 
   white-space: nowrap;   
-    
+  
   &:active {
-    transform: translateY(4px);
+    transform: translateY(1px);
     box-shadow: 0 3px 4px 0 rgba(0,0,0,0.27);
   }
 }
@@ -91,5 +91,10 @@ a.button-cta {
   .button-cta {
     background-color: $sunflower-yellow;
     color: $grey-brown;
+    
+    &:hover {
+      background-color: $grey-brown;
+      color: $white;
+    }
   }
 }
