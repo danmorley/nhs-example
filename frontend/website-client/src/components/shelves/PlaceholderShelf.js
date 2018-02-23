@@ -6,7 +6,7 @@ import styles from './shelves.css';
 class PlaceholderShelf extends Component {
   render() {
     return (
-      <Shelf id={this.props.id}>
+      <Shelf id={this.props.id} classNamePrefix="placeholder">
         <div className="col-sm-12 shelf__placeholder">
           <h2 className="shelf__header">Placeholder Shelf</h2>
           <button className="button button--default">Have a Go</button>
@@ -17,6 +17,6 @@ class PlaceholderShelf extends Component {
   }
 }
 
-ShelfRegistry.register(PlaceholderShelf, 'placeholder_shelf');
+ShelfRegistry.register('placeholder_shelf', PlaceholderShelf);
 
 export default PlaceholderShelf;

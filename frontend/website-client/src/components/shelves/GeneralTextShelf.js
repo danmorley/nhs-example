@@ -25,6 +25,6 @@ class GeneralTextShelf extends Shelf {
   }
 }
 
-ShelfRegistry.register(GeneralTextShelf, 'general_text_shelf');
+ShelfRegistry.register('general_text_shelf', GeneralTextShelf);
 
 export default GeneralTextShelf;

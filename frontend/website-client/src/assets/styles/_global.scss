@@ -24,6 +24,10 @@ html {
   }
 }
 
+body {
+  overflow-x: hidden;
+}
+
 h1 {
   font-size: $h1;
 }
@@ -52,30 +56,40 @@ ol, ul {
   list-style: none;
 }
 
-body {
-  overflow-x: hidden;
+p {
+  margin-bottom: 1rem;
 }
+
 
 button {
   border: none;
   outline: none;
+  background: none;
 }
 
-.button {
+.button-cta {
   padding: 1em;  
   font-weight: bold;
   border-radius: 18px;
   box-shadow: 0 5px 4px 0 rgba(0,0,0,0.27);
   text-transform: uppercase;
-  cursor: pointer;  
-  
+  cursor: pointer; 
+  white-space: nowrap;   
+    
   &:active {
     transform: translateY(4px);
     box-shadow: 0 3px 4px 0 rgba(0,0,0,0.27);
   }
 }
 
-.button--default {
-  background-color: $sunflower-yellow;
-  color: $grey-brown;
+a.button-cta {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.oneyou { //theme
+  .button-cta {
+    background-color: $sunflower-yellow;
+    color: $grey-brown;
+  }
 }

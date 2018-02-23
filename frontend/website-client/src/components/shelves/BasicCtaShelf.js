@@ -3,6 +3,9 @@ import Shelf from './Shelf';
 import Text from '../Text';
 import CtaLink from '../CtaLink';
 import ShelfRegistry from './ShelfRegistry';
+import styles from './shelves.css';
+
+
 
 import sampleBgImage from './healthcheckup.png'; // Tell Webpack this JS file uses this image
 
@@ -23,14 +26,11 @@ import sampleBgImage from './healthcheckup.png'; // Tell Webpack this JS file us
  */
 class BasicCtaShelf extends Component {
   render() {
-    let { content } = this.props;
+    let { content, classNamePrefix } = this.props;
     let metaLayout = content.meta_layout || 'image_on_right';
 
     let backgroundImageShelfStyle = {
       backgroundImage: 'url(' + sampleBgImage + ')',
-      backgroundSize: 'cover',
-      backgroundPositionX: '50%',
-      padding: '2em'
     };
 
     let backgroundColourShelfStyle = {
@@ -39,38 +39,92 @@ class BasicCtaShelf extends Component {
     };
 
     let textPanel = (
-      <div className="col-sm-6">
+      <div className="col">
         <Text tagName="h2" content={content.heading} />
         <Text content={content.body} />
         <CtaLink link={content.cta_button_link}>{content.cta_button_label}</CtaLink>
       </div>
     );
-
+    
+    let textOnlyPanel = [
+      (<Text tagName="h2" content={content.heading} />),
+      (<Text content={content.body} />)
+    ];
+    
+    let ctaPanel = [
+      (<CtaLink link={content.cta_button_link}>{content.cta_button_label}</CtaLink>)
+    ];
+    
     let shelfStyle = (content.background_image) ? backgroundImageShelfStyle : backgroundColourShelfStyle;
 
     let imagePanel = (
-      <div className="col-sm-6">
+      <div className="col">
         <img alt="roger"/>
       </div>
     );
+    
+    let mainBannerPannel = [
+      (<Text tagName="h2" content={content.heading} />),
+      (<Text content={content.body} />),
+      (<CtaLink link={content.cta_button_link}>{content.cta_button_label}</CtaLink>)
+    ];
 
     if (metaLayout === 'image_on_left') {
       return (
-        <Shelf id={content.shelf_id || this.props.id} style={shelfStyle} classNamePrefix="promo">
-          {imagePanel}{textPanel}
+        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix}>
+          <div className="container" style={shelfStyle}>
+            <div className="row">
+              {imagePanel}{textPanel}
+            </div>
+          </div>
         </Shelf>
       );
-    } else {
+    } else if  (metaLayout === 'image_on_right') {
       return (
-        <Shelf id={content.shelf_id || this.props.id} style={shelfStyle} classNamePrefix="promo" variant={content.meta_variant}>
-          {textPanel}{imagePanel}
+        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
+          <div className="container" style={shelfStyle}>
+            <div className="row">
+              <div className="col">
+                {textPanel}
+              </div>
+              <div className="col">
+                {imagePanel}
+              </div>
+            </div>
+          </div>
+        </Shelf>
+      );
+    } else if  (metaLayout === 'cta_on_right') {
+      return (
+        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
+          <div className="container" style={shelfStyle}>
+            <div className="row">
+              <div className="col align-center">
+                {textOnlyPanel}
+              </div>
+              <div className="col push-right">
+                {ctaPanel}
+              </div>
+            </div>
+          </div>
+        </Shelf>
+      );
+    }
+    else { //full_wwidth
+      return (
+        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
+          <div className="container-fluid" style={shelfStyle}>  
+            <div className="col-10 col-sm-8">
+              {mainBannerPannel}
+            </div>
+          </div>
         </Shelf>
       );
     }
   }
 }
 
-ShelfRegistry.register(BasicCtaShelf, 'basic_cta_shelf');
-ShelfRegistry.register(BasicCtaShelf, 'promo_shelf');
+ShelfRegistry.register('basic_cta_shelf', BasicCtaShelf, 'basic-cta');
+ShelfRegistry.register('promo_shelf', BasicCtaShelf, 'promo');
 
 export default BasicCtaShelf;

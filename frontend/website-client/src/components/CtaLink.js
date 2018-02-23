@@ -18,12 +18,12 @@ class CtaLink extends Component {
     if (this.isExternal(link)) {
       // External link - use normal <a> tag.
       return (
-        <a href={link}><Text tagName="span" content={this.props.children} /></a>
+        <a href={link} className="button-cta"><Text tagName="span" content={this.props.children} /></a>
       );
     } else {
       // Internal link - use react router to prevent page refresh.
       return (
-        <Link to={link}><Text tagName="span" content={this.children} /></Link>
+        <Link to={link} className="button-cta"><Text tagName="span" content={this.children} /></Link>
       );
     }
   }

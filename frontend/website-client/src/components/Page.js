@@ -36,7 +36,8 @@ class Page extends Component {
         cta_button_label: 'Download',
         cta_button_link: 'http://www.somewebsite.co.uk',
         background_image: 'http://aaa.bbb.ccc/gb.png',
-        meta_layout: 'image_on_left'
+        meta_layout: 'full_width',
+        meta_variant: 'main-banner'
       }
     });
 
@@ -44,10 +45,25 @@ class Page extends Component {
       id: 'abc',
       type: 'promo_shelf',
       value: {
-        heading: 'html::Active <span class="marker">10</span> App',
-        cta_button_label: 'Download',
+        heading: 'html::How are <span class="marker">you</span>? Quiz',
+        cta_button_label: 'Have a go',
         cta_button_link: 'http://www.somewebsite.co.uk',
-        background_image: 'http://aaa.bbb.ccc/gb.png'
+        background_image: 'http://aaa.bbb.ccc/gb.png',
+        meta_layout: 'cta_on_right',
+        meta_variant: 'how-are-you'
+      }
+    });
+    
+    body.push({
+      id: 'abc',
+      type: 'promo_shelf',
+      value: {
+        heading: 'html::Tell us what <span class="marker">you</span> Think',
+        cta_button_label: 'Send a message',
+        cta_button_link: 'http://www.somewebsite.co.uk',
+        background_image: 'http://aaa.bbb.ccc/gb.png',
+        meta_layout: 'cta_on_right',
+        meta_variant: 'how-are-you'
       }
     });
 
@@ -63,7 +79,7 @@ class Page extends Component {
 
     body.push({
       id: 'abcde',
-      type: 'promo_shelf',
+      type: 'basic_cta_shelf',
       value: {
         heading: 'html::Active <span class="marker">10</span> App',
         cta_button_label: 'Download',
@@ -73,12 +89,14 @@ class Page extends Component {
     });
 
     var shelves = body.map((shelf, i) => {
-      const ShelfClass = ShelfRegistry.shelves[shelf.type];
+      const shelfInfo = ShelfRegistry.shelves[shelf.type]; 
+      const ShelfClass = shelfInfo && shelfInfo.class;
+      const shelfClassNamePrefix = shelfInfo && shelfInfo.classNamePrefix;
       const shelfId = shelf.shelf_id || shelf.id;
       if (ShelfClass) {
-        return (<ShelfClass key={i} content={shelf.value} id={shelfId}/>);
+        return (<ShelfClass key={i} content={shelf.value} id={shelfId} classNamePrefix={shelfClassNamePrefix}/>);
       } else {
-        return (<PlaceholderShelf key={i} shelfType={shelf.type} id={shelfId}/>);
+        return (<PlaceholderShelf key={i} shelfType={shelf.type} id={shelfId} classNamePrefix={shelfClassNamePrefix}/>);
       }
     });
 
@@ -88,9 +106,7 @@ class Page extends Component {
         <div className="page-content-wrapper">
           <div className="page-content">
             <p>You are on page: {content.title}</p>
-            <div className="shelves">
-              {shelves}
-            </div>
+            {shelves}
           </div>
           <Footer className="page-footer" content={footer} site={site}/>
         </div>

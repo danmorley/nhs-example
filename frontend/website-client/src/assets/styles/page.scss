@@ -16,3 +16,13 @@
   text-align: left;
 }
 
+.push-right {
+  display: flex;
+  justify-content: flex-end;
+  align-self: center;
+}
+
+.align-center {
+  align-items: center;
+  display: flex;
+}

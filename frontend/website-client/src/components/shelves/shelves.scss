@@ -11,3 +11,55 @@
   padding: 12px;
   text-align: center;
 }
+
+.shelf-section {
+  padding: 1em 0;
+}
+
+.promo-shelf {
+  .container, .container-fluid {
+    background-size: cover;
+    background-position: 50%;
+    padding: 2em;  
+  }
+}
+
+.oneyou { //theme
+  .promo-shelf {
+    h2 {
+      color: $white;
+      text-transform: uppercase;
+      white-space: nowrap;
+      font-family: $primary-brand-font;
+    }
+    
+    p {
+      color: $white;
+    }
+    
+    h2 + p {
+      margin-top: 0.5em;
+    }
+    
+    .marker {
+      font-family: $tertiary-brand-font;
+      color: $sunflower-yellow;
+    }
+  }
+  
+  
+  //variants
+  .main-banner-shelf {
+    p {
+      font-weight: bold;
+    }
+  }
+  
+  .how-are-you-shelf {
+    .marker {  
+      display: inline-block;
+      line-height: 0.9em;    
+      border-bottom: 0.15em solid $white;
+    }
+  }
+}
