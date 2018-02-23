@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'normalize.css'
 import './assets/styles/fonts.css';
 import Page from './components/Page';
+import ShelfSamplesPage from './components/pages/ShelfSamplesPage';
 import pageNotFound from './sample-data/PageNotFound';
 import ContentStore from './services/ContentStore';
 import createHistory from 'history/createBrowserHistory';
@@ -27,7 +28,7 @@ class App extends Component {
   componentWillMount() {
     // Detect when the user navigates to a new page.
     //
-    // history.listen detects when the user navigates within the site and 
+    // history.listen detects when the user navigates within the site and
     // returns a function to cancel the listener for use in the component
     // unmount.
     this.historyUnlisten = history.listen((location, action) => {
@@ -48,6 +49,12 @@ class App extends Component {
     this.loadPageForKey(key);
   }
 
+  /**
+   *  Called on first render, or whenever the browser location changes.
+   *
+   *  Fetches the page content and sets it to the current page to cause
+   *  a re-render of the new page.
+   */
   loadPageForKey(key) {
     let contentStore = new ContentStore('http://localhost:9002/api/v2');
     contentStore.getPage(key).then((page) => {
@@ -91,6 +98,9 @@ class App extends Component {
 
         <Router history={history}>
           <Switch>
+            <Route path='/shelf-samples'
+              render={() => <ShelfSamplesPage site={this.state.site} />
+            }/>
             <Route path='/'
               render={(props) => {return this.loadPage(props)}
             }/>
