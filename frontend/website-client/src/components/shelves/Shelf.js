@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Shelf extends Component {
   shelfId() {
-    return 'shelf-' + this.props.id;
+    return this.props.id ? 'shelf-' + this.props.id : null;
   }
 
   shelfClasses() {
@@ -16,7 +16,7 @@ class Shelf extends Component {
         <div id={this.shelfId()} className={this.shelfClasses()} style={this.props.style}>
           {this.props.children}
         </div>
-      </section>        
+      </section>
     );
   }
 }

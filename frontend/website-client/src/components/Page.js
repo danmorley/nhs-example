@@ -13,6 +13,7 @@ import PageHeader from './page-header/PageHeader'
 import PlaceholderShelf from './shelves/PlaceholderShelf';
 import GeneralTextShelf from './shelves/GeneralTextShelf';
 import BasicCtaShelf from './shelves/BasicCtaShelf';
+import GuidanceShelf from './shelves/GuidanceShelf';
 
 class Page extends Component {
 
