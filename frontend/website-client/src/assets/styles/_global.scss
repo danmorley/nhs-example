@@ -2,6 +2,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  min-height: 0;
+  min-width: 0;
 
   &:before {
     box-sizing: border-box;
@@ -16,9 +18,9 @@ html {
   font-family: sans-serif;
   line-height: normal;
   color: $grey-brown-dark;
-    
+
   font-size: $font-default-mobile;
-  
+
   @include media-breakpoint-up(sm) {
     font-size: $font-default-desktop;
   }
@@ -63,14 +65,14 @@ button {
 }
 
 .button-cta {
-  padding: 1em;  
+  padding: 1em;
   font-weight: bold;
   border-radius: 18px;
   box-shadow: 0 5px 4px 0 rgba(0,0,0,0.27);
   text-transform: uppercase;
-  cursor: pointer; 
-  white-space: nowrap;   
-  
+  cursor: pointer;
+  white-space: nowrap;
+
   &:active {
     transform: translateY(1px);
     box-shadow: 0 3px 4px 0 rgba(0,0,0,0.27);
@@ -86,7 +88,7 @@ a.button-cta {
   .button-cta {
     background-color: $sunflower-yellow;
     color: $grey-brown;
-    
+
     &:hover {
       background-color: $grey-brown;
       color: $white;

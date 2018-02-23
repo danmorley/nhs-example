@@ -1,8 +1,23 @@
-@import '../../assets/styles/variables/variables';
+@import "../../assets/styles/variables/variables";
 @import "../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
 
 $shelf-padding-standard: 1em;
 $shelf-padding-extra: 2em;
+
+.slick-arrow:before {
+  color: green !important;
+}
+
+.slide1 {
+    background-color: red;
+    padding: 20px;
+
+    h3 {
+      background-color: green;
+    }
+}
 
 .shelf__header {
   color: $teal-blue;
