@@ -3,8 +3,8 @@ class ShelfRegistry  {
   // registerInput method
   static shelves = {}
 
-  static register(shelf, type) {
-    ShelfRegistry.shelves[type] = shelf
+  static register(type, shelf, classNamePrefix) {
+    ShelfRegistry.shelves[type] = {class:shelf, classNamePrefix:classNamePrefix}
   }
 }
 
