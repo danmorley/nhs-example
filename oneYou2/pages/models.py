@@ -11,6 +11,7 @@ from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, InlinePanel, ObjectList, TabbedInterface
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 from wagtail.wagtailsnippets.models import register_snippet
@@ -19,12 +20,16 @@ from wagtailsnippetscopy.registry import snippet_copy_registry
 
 from modelcluster.fields import ParentalKey
 
+from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppShelfChooserBlock
+
 
 class OneYou2Page(Page):
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
         ('paragraph', blocks.RichTextBlock()),
-        ('image', ImageChooserBlock()),
+        ('promoshelf', PromoShelfChooserBlock(target_model="shelves.PromoShelf", icon="image")),
+        ('bannershelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
+        ('appshelf', AppShelfChooserBlock(target_model="shelves.AppShelf", icon="image")),
     ])
     page_ref = models.CharField(max_length=255, unique=True)
     release = models.ForeignKey(
@@ -134,6 +139,7 @@ class SocialMediaFooterLink(blocks.StructBlock):
 
 
 # Snippets
+# TODO: Move these to shelves
 
 @register_snippet
 class Menu(SnippetCopyMixin, models.Model):
