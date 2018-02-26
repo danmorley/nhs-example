@@ -139,6 +139,16 @@ const sampleShelves = {
         background_image: 'http://aaa.bbb.ccc/gb.png',
         meta_variant: 'extra-height'
       }
+    },
+    {
+      id: 'video-shelf-1',
+      type: 'video_shelf',
+      value: {
+        heading: 'Walk the walk, talk the talk',
+        body: 'Share walking stories and your progress with others online',
+        cta_link_label: 'Find out more',
+        cta_link: 'http://www.somewebsite.co.uk'
+      }
     }
   ]
 };
