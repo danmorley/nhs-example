@@ -1,15 +1,14 @@
-
-//font-size
-
-$font-size-default: 16px;
-
-//headings
-$heading-h1: 2.5rem;
-$heading-h2: 2.2rem;
-
 //fonts
 $primary-brand-font: 'OneYouSansBold', Helvetica, Liberation Sans, Arial, sans-serif;
 $secondary-brand-font: 'OneYouSansRegular', Helvetica, Liberation Sans, Arial, sans-serif;
 $tertiary-brand-font: 'OneYouScriptBold', Helvetica, Liberation Sans, Arial, sans-serif;
 
 $nav-font: Helvetica, Liberation Sans, Arial, sans-serif;
+
+$font-default-mobile: 14px;
+$font-default-desktop: 20px;
+
+//headings
+$h1: 2em;
+$h2: 1.5em;
+$h3: 1em;

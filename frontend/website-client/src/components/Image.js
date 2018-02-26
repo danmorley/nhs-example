@@ -7,7 +7,7 @@ class Image extends Component {
     if (!image) return null;
 
     return (
-      <div>{ image && (<img src={image.image} alt={image.title} />) }</div>
+      <div>{ image && (<img src={image.image} alt={image.title} {...this.props} />) }</div>
     );
   }
 }

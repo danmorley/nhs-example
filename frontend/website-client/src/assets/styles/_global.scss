@@ -2,6 +2,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  min-height: 0;
+  min-width: 0;
 
   &:before {
     box-sizing: border-box;
@@ -14,21 +16,82 @@
 
 html {
   font-family: sans-serif;
-  font-size: 16px;
   line-height: normal;
   color: $grey-brown-dark;
+
+  font-size: $font-default-mobile;
+
+  @include media-breakpoint-up(sm) {
+    font-size: $font-default-desktop;
+  }
+}
+
+body {
+  overflow-x: hidden;
+}
+
+h1 {
+  font-size: $h1;
+}
+
+.h1 {
+  font-size: $h1 !important;
+}
+
+h2 {
+  font-size: $h2;
+}
+
+.h2 {
+  font-size: $h2 !important;
+}
+
+h3 {
+  font-size: $h3;
+}
+
+.h3 {
+  font-size: $h3 !important;
 }
 
 ol, ul {
   list-style: none;
 }
 
-body{
-  overflow-x: hidden;
-}
-
 button {
-  background: none;
   border: none;
   outline: none;
+  background: none;
+}
+
+.button-cta {
+  padding: 1em;
+  font-weight: bold;
+  border-radius: 18px;
+  box-shadow: 0 5px 4px 0 rgba(0,0,0,0.27);
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 4px 0 rgba(0,0,0,0.27);
+  }
+}
+
+a.button-cta {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.oneyou { //theme
+  .button-cta {
+    background-color: $sunflower-yellow;
+    color: $grey-brown;
+
+    &:hover {
+      background-color: $grey-brown;
+      color: $white;
+    }
+  }
 }

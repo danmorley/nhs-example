@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-// import './assets/styles/Page.css'
-import ShelfRegistry from './ShelfRegistry'
+import Shelf from './Shelf';
+import ShelfRegistry from './ShelfRegistry';
 
 /**
  *  General Text Shelf is a simple shelf that can be used to
- *  display rich text.
+ *  display rich text, usually from a rich text field in Wagtail.
  *
  *  It expects the following properties:
  *  - content
@@ -14,10 +14,10 @@ import ShelfRegistry from './ShelfRegistry'
  *    text: "<p>Some <b>HTML</b> text to print.</p>"
  *  }
  */
-class GeneralTextShelf extends Component {
+class GeneralTextShelf extends Shelf {
   render() {
     return (
-      <div className="shelf">
+      <div className={this.shelfClasses()}>
         <p>General Text Shelf</p>
         <p dangerouslySetInnerHTML={{__html: this.props.content.text}} />
       </div>
@@ -25,6 +25,6 @@ class GeneralTextShelf extends Component {
   }
 }
 
-ShelfRegistry.register(GeneralTextShelf, 'general_text_shelf');
+ShelfRegistry.register('general_text_shelf', GeneralTextShelf);
 
 export default GeneralTextShelf;

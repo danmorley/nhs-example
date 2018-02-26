@@ -2,16 +2,19 @@ import React, { Component } from 'react';
 import 'normalize.css'
 import './assets/styles/fonts.css';
 import Page from './components/Page';
+import ShelfSamplesPage from './components/pages/ShelfSamplesPage';
 import pageNotFound from './sample-data/PageNotFound';
 import ContentStore from './services/ContentStore';
-
+import createHistory from 'history/createBrowserHistory';
 
 import {
-  BrowserRouter as Router,
+  Router,
   Redirect,
   Route,
   Switch
 } from 'react-router-dom';
+
+const history = createHistory();
 
 class App extends Component {
   constructor(props) {
@@ -22,6 +25,23 @@ class App extends Component {
     };
   }
 
+  componentWillMount() {
+    // Detect when the user navigates to a new page.
+    //
+    // history.listen detects when the user navigates within the site and
+    // returns a function to cancel the listener for use in the component
+    // unmount.
+    this.historyUnlisten = history.listen((location, action) => {
+      console.log('Loading page for path ' + location.pathname);
+      let key = this.state.site.pages[location.pathname];
+      this.loadPageForKey(key);
+    });
+  }
+
+  componentWillUnmount() {
+      this.historyUnlisten();
+  }
+
   componentDidMount() {
     let path = this.checkForRedirect() || this.pagePathToRender();
     console.log('Loading page for path ' + path);
@@ -29,6 +49,12 @@ class App extends Component {
     this.loadPageForKey(key);
   }
 
+  /**
+   *  Called on first render, or whenever the browser location changes.
+   *
+   *  Fetches the page content and sets it to the current page to cause
+   *  a re-render of the new page.
+   */
   loadPageForKey(key) {
     let contentStore = new ContentStore('http://localhost:9002/api/v2');
     contentStore.getPage(key).then((page) => {
@@ -69,18 +95,22 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Welcome to {this.state.site.site_name}</h1>
-        <p>You are on page: {this.state.currentPage && this.state.currentPage.title}</p>
-        <p>Global root URL is: {global.rootUrl}</p>
-        <hr />
 
-        <Router>
+        <Router history={history}>
           <Switch>
+            <Route path='/shelf-samples'
+              render={() => <ShelfSamplesPage site={this.state.site} />
+            }/>
             <Route path='/'
               render={(props) => {return this.loadPage(props)}
             }/>
           </Switch>
         </Router>
+
+        <hr />
+        <p>Site name: {this.state.site.site_name}</p>
+        <p>Page title: {this.state.currentPage && this.state.currentPage.title}</p>
+        <p>Global root URL: {global.rootUrl}</p>
       </div>
     );
   }

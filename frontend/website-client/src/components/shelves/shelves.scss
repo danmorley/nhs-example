@@ -1,6 +1,150 @@
-@import '../../assets/styles/variables/variables';
+@import "../../assets/styles/variables/variables";
+@import "../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
 
-.shelf__header{
+$shelf-padding-standard: 1em;
+$shelf-padding-extra: 2em;
+
+.slick-arrow:before {
+  color: green !important;
+}
+
+.slide1 {
+    background-color: red;
+    padding: 20px;
+
+    h3 {
+      background-color: green;
+    }
+}
+
+.shelf__header {
   color: $teal-blue;
-  font-size: $heading-h2;
+  font-size: $h2;
+}
+
+.shelf__placeholder {
+  background-color: #e4e4e4;
+  border: 1px solid #c8c8c8;
+  padding: 12px;
+  text-align: center;
+}
+
+.shelf-section {
+  padding: 2em 0;
+}
+
+.shelf__col {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.promo-shelf {
+  .container, .container-fluid {
+    background-size: cover;
+    background-position: 50%;
+    padding: 1em;
+  }
+}
+
+.oneyou { //theme
+
+  .shelf-section {
+
+    &:nth-child(odd) {
+      background: $light-grey;
+    }
+  }
+
+  .promo-shelf {
+    h2 {
+      color: $white;
+      text-transform: uppercase;
+      white-space: nowrap;
+      font-family: $primary-brand-font;
+
+      .text-light {
+        font-family: $secondary-brand-font;
+        font-weight: normal;
+      }
+    }
+
+    p {
+      color: $white;
+    }
+
+    .marker {
+      font-family: $tertiary-brand-font;
+      color: $sunflower-yellow;
+    }
+
+    .shelf__container {
+      background-color: $teal-blue;
+    }
+  }
+
+  .shelf__col {
+
+    h2 + p {
+        margin-top: 0.5em;
+        margin-bottom: 1em;
+      }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+//variants
+.main-banner-shelf {
+
+  .shelf__container{
+    padding-top: $shelf-padding-extra;
+    padding-bottom: $shelf-padding-extra;
+  }
+
+  p {
+    line-height: 1.4em;
+  }
+}
+
+.how-are-you-shelf {
+
+  .marker {
+    display: inline-block;
+    line-height: 0.9em;
+    border-bottom: 0.15em solid $white;
+  }
+}
+
+.extra-height-shelf {
+
+  .shelf__container {
+    padding-top: $shelf-padding-extra;
+    padding-bottom: $shelf-padding-extra;
+
+    @include media-breakpoint-up(sm) {
+      padding-top: $shelf-padding-standard;
+      padding-bottom:  $shelf-padding-standard;
+    }
+  }
+}
+
+.guidance-shelf {
+  background-color: #a2ffa9;
+  border: 1px solid #c8c8c8;
+  margin: 0px 40px;
+  padding: 12px;
+  text-align: center;
+
+  h2 {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  p {
+    width: 100%;
+    text-align: center;
+  }
 }

@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import ShelfRegistry from './ShelfRegistry';
+import Shelf from './Shelf';
 import styles from './shelves.css';
 
 class PlaceholderShelf extends Component {
   render() {
     return (
-      <div className="shelf">
-        <h2 className="shelf__header">Placeholder Shelf</h2>
-        <p>This is a temporary placeholder for a shelf of type: {this.props.shelfType}</p>
-      </div>
+      <Shelf id={this.props.id} classNamePrefix="placeholder">
+        <div className="col-sm-12 shelf__placeholder">
+          <h2 className="shelf__header">Placeholder Shelf</h2>
+          <p>This is a temporary placeholder for a shelf of type: {this.props.shelfType}</p>
+        </div>
+      </Shelf>
     );
   }
 }
 
-ShelfRegistry.register(PlaceholderShelf, 'placeholder_shelf');
+ShelfRegistry.register('placeholder_shelf', PlaceholderShelf);
 
 export default PlaceholderShelf;
