@@ -31,7 +31,7 @@ class Page extends Component {
     let pageTheme = (page_theme && page_theme.class_name) || 'oneyou';
 
     var shelves = body.map((shelf, i) => {
-      const shelfInfo = CmsComponentRegistry.shelves[shelf.type];
+      const shelfInfo = CmsComponentRegistry.components[shelf.type];
       const ShelfClass = shelfInfo && shelfInfo.class;
       const shelfClassNamePrefix = shelfInfo && shelfInfo.classNamePrefix;
       const shelfId = shelf.shelf_id || shelf.id;

@@ -42,7 +42,7 @@ class CarouselShelf extends Component {
     };
 
     var slides = content.items.map((shelf, i) => {
-      const shelfInfo = CmsComponentRegistry.shelves[shelf.type];
+      const shelfInfo = CmsComponentRegistry.components[shelf.type];
       const ShelfClass = shelfInfo && shelfInfo.class;
       const shelfClassNamePrefix = shelfInfo && shelfInfo.classNamePrefix;
       const shelfId = shelf.shelf_id || shelf.id;

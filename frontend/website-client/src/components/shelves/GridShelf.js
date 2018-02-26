@@ -23,7 +23,7 @@ class GridShelf extends Component {
     let metaLayout = content.meta_layout || '';
 
     var panels = content.items.map((panel, i) => {
-      const panelInfo = CmsComponentRegistry.shelves[panel.type];
+      const panelInfo = CmsComponentRegistry.components[panel.type];
       const PanelClass = panelInfo && panelInfo.class;
       const panelClassNamePrefix = panelInfo && panelInfo.classNamePrefix;
       const panelId = panel.panel_id || panel.id;
