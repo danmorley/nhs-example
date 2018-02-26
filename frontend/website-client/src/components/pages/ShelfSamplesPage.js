@@ -149,15 +149,6 @@ const sampleShelves = {
         cta_link_label: 'Find out more',
         cta_link: 'http://www.somewebsite.co.uk'
       }
-    },
-    {
-      id: 'abcde',
-      type: 'promo_shelf',
-      value: {
-        heading: 'html::<span class="text-light">Over 40?</span><br />Check Your Health',
-        background_image: 'http://aaa.bbb.ccc/gb.png',
-        meta_variant: 'extra-height'
-      }
     }
   ]
 };
