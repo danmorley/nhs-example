@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Shelf from './Shelf';
 import Text from '../Text';
 import CtaLink from '../CtaLink';
-import ShelfRegistry from './ShelfRegistry';
+import CmsComponentRegistry from '../CmsComponentRegistry';
 import styles from './shelves.css';
 // import { Carousel } from 'react-responsive-carousel';
 // import Carousel from 'nuka-carousel';
@@ -42,7 +42,7 @@ class CarouselShelf extends Component {
     };
 
     var slides = content.items.map((shelf, i) => {
-      const shelfInfo = ShelfRegistry.shelves[shelf.type];
+      const shelfInfo = CmsComponentRegistry.shelves[shelf.type];
       const ShelfClass = shelfInfo && shelfInfo.class;
       const shelfClassNamePrefix = shelfInfo && shelfInfo.classNamePrefix;
       const shelfId = shelf.shelf_id || shelf.id;
@@ -69,6 +69,6 @@ class CarouselShelf extends Component {
 
 // ReactDOM.render(<CarouselShelf />, document.querySelector('.carousel-shelf'));
 
-ShelfRegistry.register('carousel_shelf', CarouselShelf, 'carousel');
+CmsComponentRegistry.register('carousel_shelf', CarouselShelf, 'carousel');
 
 export default CarouselShelf;

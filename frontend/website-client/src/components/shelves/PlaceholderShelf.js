@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ShelfRegistry from './ShelfRegistry';
+import CmsComponentRegistry from '../CmsComponentRegistry';
 import Shelf from './Shelf';
 import styles from './shelves.css';
 
@@ -16,6 +16,6 @@ class PlaceholderShelf extends Component {
   }
 }
 
-ShelfRegistry.register('placeholder_shelf', PlaceholderShelf);
+CmsComponentRegistry.register('placeholder_shelf', PlaceholderShelf);
 
 export default PlaceholderShelf;

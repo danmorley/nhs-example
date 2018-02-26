@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import Shelf from './Shelf';
+import Shelf from '../shelves/Shelf';
 import Text from '../Text';
 import CtaLink from '../CtaLink';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-import styles from './video-shelf.css';
-import sampleBgImage from './healthcheckup.png'; // Tell Webpack this JS file uses this image
+import styles from './video-teaser.css';
+
+import sampleBgImage from '../shelves/healthcheckup.png'; // Tell Webpack this JS file uses this image
 import testImage from '../../assets/images/Trump2.jpg';
 
 /**
@@ -13,7 +14,7 @@ import testImage from '../../assets/images/Trump2.jpg';
  *
  *  }
  */
-class VideoShelf extends Component {
+class VideoTeaser extends Component {
   render() {
     let { content, classNamePrefix } = this.props;
     let metaLayout = content.meta_layout || '';
@@ -29,13 +30,11 @@ class VideoShelf extends Component {
     let backgroundColourShelfStyle = {
     };
 
-    let videoPanel = (
+    return (
       <div className="video-teaser">
-
         <div className="video-teaser__image" style = {backgroundTeaserImage}>
           {/* // needs alt text */}
         </div>
-
         <div className="video-teaser__info">
           <div className="video-teaser__heading">
             <Text tagName="h3" content={content.heading} />
@@ -47,32 +46,9 @@ class VideoShelf extends Component {
         </div>
       </div>
     );
-
-    let textPanel = [
-      (<Text tagName="h2" content={content.heading} />),
-      (<Text content={content.body} />),
-      (<CtaLink link={content.cta_link}>{content.cta_link_label}</CtaLink>)
-    ];
-
-    let shelfStyle = (content.background_image) ? backgroundImageShelfStyle : backgroundColourShelfStyle;
-
-    return (
-      <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix}>
-        <div className="shelf__container container" style={shelfStyle}>
-          <div className="row">
-            <div className="shelf__col col-sm-12 col-md-6">
-              {videoPanel}
-            </div>
-            <div className="shelf__col col-sm-12 col-md-6">
-              {videoPanel}
-            </div>
-          </div>
-        </div>
-      </Shelf>
-    );
   }
 }
 
-CmsComponentRegistry.register('video_shelf', VideoShelf, 'video');
+CmsComponentRegistry.register('video_teaser', VideoTeaser, 'video');
 
-export default VideoShelf;
+export default VideoTeaser;

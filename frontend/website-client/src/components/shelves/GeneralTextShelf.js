@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Shelf from './Shelf';
-import ShelfRegistry from './ShelfRegistry';
+import CmsComponentRegistry from '../CmsComponentRegistry';
 
 /**
  *  General Text Shelf is a simple shelf that can be used to
@@ -25,6 +25,6 @@ class GeneralTextShelf extends Shelf {
   }
 }
 
-ShelfRegistry.register('general_text_shelf', GeneralTextShelf);
+CmsComponentRegistry.register('general_text_shelf', GeneralTextShelf);
 
 export default GeneralTextShelf;

@@ -13,7 +13,7 @@ class Shelf extends Component {
 
   render() {
     return (
-      <section class="shelf-section">
+      <section className="shelf-section">
         <div id={this.shelfId()} className={this.shelfClasses()} style={this.props.style}>
           {this.props.children}
         </div>

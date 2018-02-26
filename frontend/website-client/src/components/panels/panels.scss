@@ -1,0 +1,18 @@
+@import "../../assets/styles/variables/variables";
+@import "../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+.panel__placeholder {
+  background-color: #e4e4e4;
+  border: 1px solid #c8c8c8;
+  padding: 12px;
+  text-align: center;
+  min-height: 200px;
+}
+
+.panel-section {
+  padding: 0;
+
+  &:nth-child(odd) {
+    background: $light-grey;
+  }
+}

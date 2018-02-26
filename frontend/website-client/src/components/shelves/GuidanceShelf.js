@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Shelf from './Shelf';
-import ShelfRegistry from './ShelfRegistry';
+import CmsComponentRegistry from '../CmsComponentRegistry';
 
 /**
  *  Guidance Shelf is a simple shelf that can be used to
@@ -26,6 +26,6 @@ class GuidanceShelf extends Component {
   }
 }
 
-ShelfRegistry.register('guidance_shelf', GuidanceShelf, 'guidance');
+CmsComponentRegistry.register('guidance_shelf', GuidanceShelf, 'guidance');
 
 export default GuidanceShelf;
