@@ -141,7 +141,7 @@ const sampleShelves = {
       }
     },
     {
-      id: 'abc',
+      id: 'video-shelf-1',
       type: 'video_shelf',
       value: {
         heading: 'Walk the walk, talk the talk',
