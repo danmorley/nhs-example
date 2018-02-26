@@ -12,7 +12,7 @@ const Page = () => ({
         "parent": null
     },
     "title": "No such page",
-    "page_content": [
+    "body": [
         {
             "type": "general_text_shelf",
             "value": {
