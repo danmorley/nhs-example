@@ -3,9 +3,7 @@ import Shelf from './Shelf';
 import Text from '../Text';
 import CtaLink from '../CtaLink';
 import ShelfRegistry from './ShelfRegistry';
-import styles from './shelves.css';
-
-
+import styles from './promo-shelf.css';
 
 import sampleBgImage from './healthcheckup.png'; // Tell Webpack this JS file uses this image
 
@@ -39,7 +37,7 @@ class BasicCtaShelf extends Component {
     let textPanel = [
       (<Text tagName="h2" content={content.heading} />),
       (<Text content={content.body} />),
-      (<CtaLink link={content.cta_button_link}>{content.cta_button_label}</CtaLink>)
+      (<CtaLink linkType="button" link={content.cta_button_link}>{content.cta_button_label}</CtaLink>)
     ];
     
     let textOnlyPanel = [
@@ -48,7 +46,7 @@ class BasicCtaShelf extends Component {
     ];
     
     let ctaPanel = [
-      (<CtaLink link={content.cta_button_link}>{content.cta_button_label}</CtaLink>)
+      (<CtaLink linkType="button" link={content.cta_button_link}>{content.cta_button_label}</CtaLink>)
     ];
     
     let shelfStyle = (content.background_image) ? backgroundImageShelfStyle : backgroundColourShelfStyle;
@@ -60,7 +58,7 @@ class BasicCtaShelf extends Component {
     let mainBannerPannel = [
       (<Text tagName="h2" content={content.heading} />),
       (<Text content={content.body} />),
-      (<CtaLink link={content.cta_button_link}>{content.cta_button_label}</CtaLink>)
+      (<CtaLink linkType="button" link={content.cta_button_link}>{content.cta_button_label}</CtaLink>)
     ];
 
     if (metaLayout === 'image_on_left') {

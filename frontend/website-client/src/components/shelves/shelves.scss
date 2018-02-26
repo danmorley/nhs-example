@@ -33,102 +33,23 @@ $shelf-padding-extra: 2em;
 
 .shelf-section {
   padding: 2em 0;
+  
+  &:nth-child(odd) {
+    background: $light-grey;
+  }
 }
 
 .shelf__col {
   padding-top: 0.5em;
   padding-bottom: 0.5em;
-}
-
-.promo-shelf {
-  .container, .container-fluid {
-    background-size: cover;
-    background-position: 50%;
-    padding: 1em;
-  }
-}
-
-.oneyou { //theme
-
-  .shelf-section {
-
-    &:nth-child(odd) {
-      background: $light-grey;
+  
+  h2 + p {
+      margin-top: 0.5em;
+      margin-bottom: 1em;
     }
-  }
-
-  .promo-shelf {
-    h2 {
-      color: $white;
-      text-transform: uppercase;
-      white-space: nowrap;
-      font-family: $primary-brand-font;
-
-      .text-light {
-        font-family: $secondary-brand-font;
-        font-weight: normal;
-      }
-    }
-
-    p {
-      color: $white;
-    }
-
-    .marker {
-      font-family: $tertiary-brand-font;
-      color: $sunflower-yellow;
-    }
-
-    .shelf__container {
-      background-color: $teal-blue;
-    }
-  }
-
-  .shelf__col {
-
-    h2 + p {
-        margin-top: 0.5em;
-        margin-bottom: 1em;
-      }
-
-    p:last-child {
-      margin-bottom: 0;
-    }
-  }
-}
-
-//variants
-.main-banner-shelf {
-
-  .shelf__container{
-    padding-top: $shelf-padding-extra;
-    padding-bottom: $shelf-padding-extra;
-  }
-
-  p {
-    line-height: 1.4em;
-  }
-}
-
-.how-are-you-shelf {
-
-  .marker {
-    display: inline-block;
-    line-height: 0.9em;
-    border-bottom: 0.15em solid $white;
-  }
-}
-
-.extra-height-shelf {
-
-  .shelf__container {
-    padding-top: $shelf-padding-extra;
-    padding-bottom: $shelf-padding-extra;
-
-    @include media-breakpoint-up(sm) {
-      padding-top: $shelf-padding-standard;
-      padding-bottom:  $shelf-padding-standard;
-    }
+    
+  p:last-child {
+    margin-bottom: 0;
   }
 }
 
