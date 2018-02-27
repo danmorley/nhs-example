@@ -104,14 +104,16 @@ class FooterField(Field):
                     menu_item['value']['link_slug'] = None
                     menu_item['value']['link_path'] = None
 
-            return {
-                "image": {
-                    'title': footer_image.title,
-                    'image': footer_image.file.path
-                },
+            footer_data = {
                 "links": footer_links,
                 "social_media": footer_social_media
             }
+            if footer_image:
+                footer_data['image'] = {
+                    'title': footer_image.title,
+                    'image': footer_image.file.url
+                }
+            return footer_data
         else:
             return {}
 
@@ -127,14 +129,14 @@ class HeaderField(Field):
             return {}
         header = settings.header
         if header:
-            return {
-                "image": {
-                    "title": header.image.title,
-                    "image": header.image.file.path
+            if header.image:
+                return {
+                    "image": {
+                        "title": header.image.title,
+                        "image": header.image.file.url
+                    }
                 }
-            }
-        else:
-            return {}
+        return {}
 
 
 class PagesField(Field):
