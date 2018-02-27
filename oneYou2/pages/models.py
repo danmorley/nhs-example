@@ -77,7 +77,8 @@ class VideoTemplate(blocks.StructBlock):
 class Carousel(blocks.StructBlock):
     items = blocks.StreamBlock([
         ('backwards_compatible_content', BackwardsCompatibleContent(label="Previous content", icon="folder-inverse")),
-        ('video', VideoTemplate(icon="media"))
+        ('video', VideoTemplate(icon="media")),
+
     ], icon='arrow-left', label='Items')
     shelf_id = blocks.CharBlock(required=False, label="ID")
 

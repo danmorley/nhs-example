@@ -60,7 +60,10 @@ class ShelfAbstract(models.Model):
                 self.content_type = ContentType.objects.get_for_model(self)
 
     def __str__(self):
-        return self.shelf_id
+        if self.shelf_id:
+            return self.shelf_id
+        else:
+            return str(self.id)
 
     def to_dict(self):
         obj_dict = model_to_dict(self)
@@ -171,13 +174,20 @@ class ShelfRevision(models.Model):
 @register_snippet
 class PromoShelf(ShelfAbstract):
     heading = models.CharField(max_length=255)
-    button_text = models.CharField(max_length=255)
-    button_link = models.CharField(max_length=255)
+    cta_text = models.CharField(max_length=255)
+    cta_link = models.CharField(max_length=255, null=True, blank=True)
+    cta_page = ParentalKey('wagtailcore.Page',
+                           on_delete=models.SET_NULL,
+                           related_name='promo_shelf_links',
+                           null=True,
+                           blank=True)
 
-    content_panels = ShelfAbstract.content_panels + [
+    panels = ShelfAbstract.content_panels + [
+        FieldPanel('shelf_id'),
         FieldPanel('heading', classname='heading', ),
-        FieldPanel('button_text', classname='button_text', ),
-        FieldPanel('button_link', classname='button_link', ),
+        FieldPanel('cta_text', classname='button_text', ),
+        FieldPanel('cta_link', classname='button_link', ),
+        PageChooserPanel('cta_page'),
     ]
 
 
@@ -196,7 +206,7 @@ class BannerShelf(ShelfAbstract):
     cta_link = models.CharField(max_length=255, null=True, blank=True)
     cta_page = ParentalKey('wagtailcore.Page',
                            on_delete=models.SET_NULL,
-                           related_name='related_links',
+                           related_name='banner_shelf_links',
                            null=True,
                            blank=True)
 
@@ -225,4 +235,13 @@ class AppShelf(ShelfAbstract):
         related_name='+'
     )
     android_link = models.CharField(max_length=255)
-    iphone_line = models.CharField(max_length=255)
+    iphone_link = models.CharField(max_length=255)
+
+    panels = [
+        FieldPanel('shelf_id'),
+        FieldPanel('heading'),
+        FieldPanel('body'),
+        ImageChooserPanel('image'),
+        FieldPanel('android_link'),
+        FieldPanel('iphone_link'),
+    ]
