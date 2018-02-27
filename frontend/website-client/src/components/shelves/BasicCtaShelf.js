@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import Shelf from './Shelf';
 import Text from '../Text';
 import CtaLink from '../CtaLink';
-import ShelfRegistry from './ShelfRegistry';
-import styles from './shelves.css';
-
-
+import CmsComponentRegistry from '../CmsComponentRegistry';
+import styles from './promo-shelf.css';
 
 import sampleBgImage from './healthcheckup.png'; // Tell Webpack this JS file uses this image
 
@@ -37,30 +35,30 @@ class BasicCtaShelf extends Component {
     };
 
     let textPanel = [
-      (<Text tagName="h2" content={content.heading} />),
-      (<Text content={content.body} />),
-      (<CtaLink link={content.cta_button_link}>{content.cta_button_label}</CtaLink>)
+      (<Text key="1" tagName="h2" content={content.heading} />),
+      (<Text key="2" content={content.body} />),
+      (<CtaLink key="3" linkType="button" link={content.cta_button_link}>{content.cta_button_label}</CtaLink>)
     ];
-    
+
     let textOnlyPanel = [
-      (<Text tagName="h2" content={content.heading} />),
-      (<Text content={content.body} />)
+      (<Text key="1" tagName="h2" content={content.heading} />),
+      (<Text key="2" content={content.body} />)
     ];
-    
+
     let ctaPanel = [
-      (<CtaLink link={content.cta_button_link}>{content.cta_button_label}</CtaLink>)
+      (<CtaLink key="1" linkType="button" link={content.cta_button_link}>{content.cta_button_label}</CtaLink>)
     ];
-    
+
     let shelfStyle = (content.background_image) ? backgroundImageShelfStyle : backgroundColourShelfStyle;
 
     let imagePanel = (
       <img alt="roger"/>
     );
-    
+
     let mainBannerPannel = [
-      (<Text tagName="h2" content={content.heading} />),
-      (<Text content={content.body} />),
-      (<CtaLink link={content.cta_button_link}>{content.cta_button_label}</CtaLink>)
+      (<Text key="1" tagName="h2" content={content.heading} />),
+      (<Text key="2" content={content.body} />),
+      (<CtaLink key="3" linkType="button" link={content.cta_button_link}>{content.cta_button_label}</CtaLink>)
     ];
 
     if (metaLayout === 'image_on_left') {
@@ -112,7 +110,7 @@ class BasicCtaShelf extends Component {
     else if (metaLayout === 'full_width') {
       return (
         <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
-          <div className="shelf__container container-fluid" style={shelfStyle}>  
+          <div className="shelf__container container-fluid" style={shelfStyle}>
             <div className="row">
               <div className="shelf__col col-10 col-sm-8">
                 {mainBannerPannel}
@@ -125,7 +123,7 @@ class BasicCtaShelf extends Component {
     else {
       return (
         <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
-          <div className="shelf__container container" style={shelfStyle}>  
+          <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
               <div className="shelf__col col-12 col-vertical-center">
                 {textOnlyPanel}
@@ -138,9 +136,9 @@ class BasicCtaShelf extends Component {
   }
 }
 
-ShelfRegistry.register('basic_cta_shelf', BasicCtaShelf, 'basic-cta');
-ShelfRegistry.register('promo_shelf', BasicCtaShelf, 'promo');
-ShelfRegistry.register('page_heading', BasicCtaShelf, 'promo');
-ShelfRegistry.register('sub_page_heading', BasicCtaShelf, 'promo');
+CmsComponentRegistry.register('basic_cta_shelf', BasicCtaShelf, 'basic-cta-shelf');
+CmsComponentRegistry.register('promo_shelf', BasicCtaShelf, 'promo-shelf');
+CmsComponentRegistry.register('page_heading', BasicCtaShelf, 'promo-shelf');
+CmsComponentRegistry.register('sub_page_heading', BasicCtaShelf, 'promo-shelf');
 
 export default BasicCtaShelf;

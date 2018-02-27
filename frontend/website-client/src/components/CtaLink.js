@@ -12,18 +12,23 @@ class CtaLink extends Component {
   }
 
   render() {
-    let { link, active } = this.props;
+    let linkClass;
+    let { link, active, linkType } = this.props;
     if (active !== undefined && !active) return null;
     if (!link) return null;
+    if (linkType === "button") {
+      linkClass = "button-cta";
+    }
+
     if (this.isExternal(link)) {
       // External link - use normal <a> tag.
       return (
-        <a href={link} className="button-cta"><Text tagName="span" content={this.props.children} /></a>
+        <a className= {linkClass} href={link}><Text tagName="span" content={this.props.children} /></a>
       );
     } else {
       // Internal link - use react router to prevent page refresh.
       return (
-        <Link to={link} className="button-cta"><Text tagName="span" content={this.children} /></Link>
+        <Link className= {linkClass} to={link}><Text tagName="span" content={this.children} /></Link>
       );
     }
   }

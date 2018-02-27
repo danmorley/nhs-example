@@ -1,0 +1,52 @@
+@import '../../assets/styles/variables/variables';
+@import "../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+
+.oneyou2-teaser {
+  display: flex;
+  flex-direction: column;
+}
+
+.oneyou2-teaser__heading {
+  padding: 1em;
+  width: 100%;
+}
+
+.oneyou2-teaser__image {
+  width: 100%;
+  background-repeat: none;
+  background-size: cover;
+  background-position: center;
+  min-height: 200px;
+}
+
+.oneyou2-teaser__text {
+  padding: 1em;
+  width: 100%;
+
+  p {
+    margin-bottom: 1em;
+  }
+
+  a {
+    margin-top: auto;
+  }
+}
+
+// theming
+.oneyou {
+
+  .oneyou2-teaser__heading {
+    background-color: $white;
+    color: $grey-brown-dark;
+  }
+
+  .oneyou2-teaser__text {
+    color: $grey-brown-dark;
+
+    a {
+      color: $teal-blue;
+      font-weight: bold;
+    }
+  }
+}

@@ -14,7 +14,7 @@ class PageHeader extends Component {
             <button className="page-header__burger" onClick={this.handleClick.bind(this)}>
                 <i className="font-icon"></i>
             </button>
-            <a href="#" className="page-header__logo h1">
+            <a className="page-header__logo h1">
               <Text content={header.title || 'html::One <span>You</span>'} />
             </a>
           </div>
