@@ -26,6 +26,6 @@ class GuidanceShelf extends Component {
   }
 }
 
-CmsComponentRegistry.register('guidance_shelf', GuidanceShelf, 'guidance');
+CmsComponentRegistry.register('guidance_shelf', GuidanceShelf, 'guidance-shelf');
 
 export default GuidanceShelf;

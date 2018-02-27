@@ -63,6 +63,6 @@ class CarouselShelf extends Component {
 
 // ReactDOM.render(<CarouselShelf />, document.querySelector('.carousel-shelf'));
 
-CmsComponentRegistry.register('carousel_shelf', CarouselShelf, 'carousel');
+CmsComponentRegistry.register('carousel_shelf', CarouselShelf, 'carousel-shelf');
 
 export default CarouselShelf;

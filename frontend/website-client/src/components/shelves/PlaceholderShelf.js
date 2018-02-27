@@ -8,7 +8,7 @@ class PlaceholderShelf extends Component {
     return (
       <Shelf id={this.props.id} classNamePrefix="placeholder">
         <div className="col-sm-12 shelf__placeholder">
-          <h2 className="shelf__header">Placeholder Shelf</h2>
+          <h2 className="placeholder__header">Placeholder Shelf</h2>
           <p>This is a temporary placeholder for a shelf of type: {this.props.shelfType}</p>
         </div>
       </Shelf>
@@ -16,6 +16,6 @@ class PlaceholderShelf extends Component {
   }
 }
 
-CmsComponentRegistry.register('placeholder_shelf', PlaceholderShelf);
+CmsComponentRegistry.register('placeholder_shelf', PlaceholderShelf, 'placeholder-shelf');
 
 export default PlaceholderShelf;

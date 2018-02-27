@@ -32,6 +32,6 @@ class GeneralTextShelf extends Component {
   }
 }
 
-CmsComponentRegistry.register('general_text_shelf', GeneralTextShelf, 'general-text');
+CmsComponentRegistry.register('general_text_shelf', GeneralTextShelf, 'general-text-shelf');
 
 export default GeneralTextShelf;

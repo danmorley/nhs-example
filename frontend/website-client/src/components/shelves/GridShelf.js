@@ -52,6 +52,6 @@ class GridShelf extends Component {
   }
 }
 
-CmsComponentRegistry.register('grid_shelf', GridShelf, 'basic-grid');
+CmsComponentRegistry.register('grid_shelf', GridShelf, 'basic-grid-shelf');
 
 export default GridShelf;

@@ -136,9 +136,9 @@ class BasicCtaShelf extends Component {
   }
 }
 
-CmsComponentRegistry.register('basic_cta_shelf', BasicCtaShelf, 'basic-cta');
-CmsComponentRegistry.register('promo_shelf', BasicCtaShelf, 'promo');
-CmsComponentRegistry.register('page_heading', BasicCtaShelf, 'promo');
-CmsComponentRegistry.register('sub_page_heading', BasicCtaShelf, 'promo');
+CmsComponentRegistry.register('basic_cta_shelf', BasicCtaShelf, 'basic-cta-shelf');
+CmsComponentRegistry.register('promo_shelf', BasicCtaShelf, 'promo-shelf');
+CmsComponentRegistry.register('page_heading', BasicCtaShelf, 'promo-shelf');
+CmsComponentRegistry.register('sub_page_heading', BasicCtaShelf, 'promo-shelf');
 
 export default BasicCtaShelf;
