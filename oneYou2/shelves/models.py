@@ -7,8 +7,10 @@ from django.forms.models import model_to_dict
 from django.utils import timezone
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
+from modelcluster.fields import ParentalKey
 
-from wagtail.wagtailadmin.edit_handlers import FieldPanel
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, PageChooserPanel
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
 
@@ -21,9 +23,6 @@ def get_default_shelf_content_type():
 
 
 class ShelfAbstract(models.Model):
-    label = models.CharField(max_length=255,
-                             help_text=_("A name to use in the CMS"))
-
     live_revision = models.ForeignKey('ShelfRevision',
                                       related_name='+',
                                       verbose_name='live revision',
@@ -35,7 +34,7 @@ class ShelfAbstract(models.Model):
     shelf_id = models.CharField(max_length=255,
                                 blank=True,
                                 null=True,
-                                verbose_name="label")
+                                verbose_name="ID")
 
     content_type = models.ForeignKey(
         'contenttypes.ContentType',
@@ -61,11 +60,12 @@ class ShelfAbstract(models.Model):
                 self.content_type = ContentType.objects.get_for_model(self)
 
     def __str__(self):
-        return self.label
+        return self.shelf_id
 
     def to_dict(self):
         obj_dict = model_to_dict(self)
-        del obj_dict['content_type']
+        if 'content_type' in obj_dict:
+            del obj_dict['content_type']
         obj_dict['content_type_id'] = self.content_type.id
         if 'shelfabstract_ptr' in obj_dict:
             del obj_dict['shelfabstract_ptr']
@@ -185,15 +185,32 @@ class PromoShelf(ShelfAbstract):
 class BannerShelf(ShelfAbstract):
     heading = models.CharField(max_length=255)
     body = models.TextField(blank=True, null=True)
-    image = models.ForeignKey(
-        'wagtailimages.Image',
+    background_image = models.ForeignKey(
+        'images.PHEImage',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    button_text = models.CharField(max_length=255)
-    button_link = models.CharField(max_length=255)
+    cta_text = models.CharField(max_length=255)
+    cta_link = models.CharField(max_length=255, null=True, blank=True)
+    cta_page = ParentalKey('wagtailcore.Page',
+                           on_delete=models.SET_NULL,
+                           related_name='related_links',
+                           null=True,
+                           blank=True)
+
+    api_fields = ['heading', 'body', 'image', 'cta_text', 'cta_link', 'cta_page']
+
+    panels = [
+        FieldPanel('shelf_id'),
+        FieldPanel('heading'),
+        FieldPanel('body'),
+        ImageChooserPanel('background_image'),
+        FieldPanel('cta_text'),
+        FieldPanel('cta_link'),
+        PageChooserPanel('cta_page'),
+    ]
 
 
 @register_snippet
@@ -201,7 +218,7 @@ class AppShelf(ShelfAbstract):
     heading = models.CharField(max_length=255)
     body = models.TextField(blank=True, null=True)
     image = models.ForeignKey(
-        'wagtailimages.Image',
+        'images.PHEImage',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
