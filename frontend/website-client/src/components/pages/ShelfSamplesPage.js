@@ -61,6 +61,16 @@ const sampleShelves = {
               cta_link_label: 'Find out more',
               cta_link: 'http://www.somewebsite.co.uk'
             }
+          },
+          {
+            id: 'oneyou2-teaser-1',
+            type: 'oneyou2_teaser',
+            value: {
+              heading: 'Be Active With a Disability',
+              body: 'There are so many ways to move - whatever your situation. Get ideas on the EDFS website',
+              cta_link_label: 'http://www.edfs.co.uk',
+              cta_link: 'http://www.edfs.co.uk'
+            }
           }
         ],
         meta_variant: 'blue_background'
