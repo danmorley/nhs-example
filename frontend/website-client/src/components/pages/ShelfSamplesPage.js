@@ -9,6 +9,42 @@ const sampleShelves = {
   title: 'Shelf Samples',
   body: [
     {
+      id: 'carousel-1',
+      type: 'carousel_shelf',
+      value: {
+        heading: 'Sample Carousel Shelf',
+        items: [
+          {
+            id: 'carousel-promo-shelf-1',
+            type: 'promo_shelf',
+            value: {
+              heading: 'html::Active <span class="marker">10</span> App',
+              body: 'Did you know that a brisk 10 minute walk counts as exercise?\nGet started with our free app',
+              cta_button_label: 'Download',
+              cta_button_link: 'http://www.somewebsite.co.uk',
+              background_image: 'http://aaa.bbb.ccc/gb.png',
+              meta_layout: 'full_width',
+              meta_variant: 'main-banner'
+            }
+          },
+          {
+            id: 'carousel-promo-shelf-2',
+            type: 'promo_shelf',
+            value: {
+              heading: 'html::Active <span class="marker">10</span> App',
+              body: 'Did you know that a brisk 10 minute walk counts as exercise?\nGet started with our free app',
+              cta_button_label: 'Download',
+              cta_button_link: 'http://www.somewebsite.co.uk',
+              background_image: 'http://aaa.bbb.ccc/gb.png',
+              meta_layout: 'full_width',
+              meta_variant: 'main-banner'
+            }
+          }
+        ],
+        meta_variant: 'blue_background'
+      }
+    },
+    {
       type: 'guidance_shelf',
       value: {
         heading: 'Grid Shelf',
@@ -82,43 +118,7 @@ const sampleShelves = {
         heading: 'Carousel Shelf',
         body: 'Layout <b>not given</b>, variant <b>not given</b>'
       }
-    },
-    {
-      id: 'carousel-1',
-      type: 'carousel_shelf',
-      value: {
-        heading: 'Sample Carousel Shelf',
-        items: [
-          {
-            id: 'carousel-promo-shelf-1',
-            type: 'promo_shelf',
-            value: {
-              heading: 'html::Active <span class="marker">10</span> App',
-              body: 'Did you know that a brisk 10 minute walk counts as exercise?\nGet started with our free app',
-              cta_button_label: 'Download',
-              cta_button_link: 'http://www.somewebsite.co.uk',
-              background_image: 'http://aaa.bbb.ccc/gb.png',
-              meta_layout: 'full_width',
-              meta_variant: 'main-banner'
-            }
-          },
-          {
-            id: 'carousel-promo-shelf-2',
-            type: 'promo_shelf',
-            value: {
-              heading: 'html::Active <span class="marker">10</span> App',
-              body: 'Did you know that a brisk 10 minute walk counts as exercise?\nGet started with our free app',
-              cta_button_label: 'Download',
-              cta_button_link: 'http://www.somewebsite.co.uk',
-              background_image: 'http://aaa.bbb.ccc/gb.png',
-              meta_layout: 'full_width',
-              meta_variant: 'main-banner'
-            }
-          }
-        ],
-        meta_variant: 'blue_background'
-      }
-    },
+    },  
     {
       type: 'guidance_shelf',
       value: {

@@ -111,8 +111,8 @@ class BasicCtaShelf extends Component {
       return (
         <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
           <div className="shelf__container container-fluid" style={shelfStyle}>
-            <div className="row">
-              <div className="shelf__col col-10 col-sm-8">
+            <div className="row justify-content-around">
+              <div className="shelf__col col-sm-10">
                 {mainBannerPannel}
               </div>
             </div>

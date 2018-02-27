@@ -7,6 +7,8 @@ import PlaceholderShelf from './PlaceholderShelf';
 import GeneralTextShelf from './GeneralTextShelf';
 import BasicCtaShelf from './BasicCtaShelf';
 
+import styles from './carousel.css';
+
 /**
  *  Carousel Shelf is used to display a list of slides in a carousel widget.
  *
@@ -49,9 +51,9 @@ class CarouselShelf extends Component {
 
     return (
       <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix}>
-        <div className="container">
+        <div className="container-fluid">
           <div className="row">
-            <Slider {...settings}>
+            <Slider className ="carousel carousel-full" {...settings}>
               {slides}
             </Slider>
           </div>

@@ -1,0 +1,101 @@
+@import '../../assets/styles/variables/variables';
+@import "../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+// generic styles
+
+.carousel-shelf * {
+  min-height: 0;
+  min-width: 0;
+}
+
+.carousel {
+  
+  .shelf-section {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  
+  .shelf__container {
+    padding-top: 2em;
+    padding-bottom: 2.5em;
+  }
+}
+
+.slick-dots {
+  position: absolute;
+  bottom: 0.5em;
+  
+  @include media-breakpoint-up(sm) {
+    bottom: 1em;
+  }
+}
+
+.slick-dots li {
+  margin: 0 3px;
+
+  @include media-breakpoint-up(sm) {
+    margin: 0 10px;
+  }
+}
+
+.slick-dots li button::before {
+  font-size: 11px;
+  color: $white;
+  opacity: 1;
+  
+  @include media-breakpoint-up(sm) {
+    font-size: 24px;
+  }
+}
+
+.slick-dots li.slick-active button:before {
+  color: $sunflower-yellow;
+  opacity: 1;
+}
+
+.slick-next {
+  
+  @include media-breakpoint-up(sm) {
+    right: 2%;
+    z-index: 1;
+    height: 40px;
+    width: 40px;
+  }
+}
+
+.slick-prev {
+  
+  @include media-breakpoint-up(sm) {
+    left: 2%;
+    z-index: 1;
+    height: 40px;
+    width: 40px;
+  }
+}
+
+// specific styles
+.carousel-full {
+  
+  .slick-next:before {
+      @extend %icon-chevron-right;
+  }
+  
+  .slick-prev:before {
+      @extend %icon-chevron-left;
+  }
+  
+  .slick-prev:before,
+  .slick-next:before {
+      color: $white !important;
+      opacity: 1;
+      
+      @include media-breakpoint-up(sm) {
+        font-size: 40px;
+      }
+  }
+  
+  .slick-next:hover:before,
+  .slick-prev:hover:before {
+    color: $sunflower-yellow !important;
+  }
+}
