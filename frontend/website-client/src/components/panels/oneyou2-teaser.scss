@@ -8,8 +8,10 @@
 }
 
 .oneyou2-teaser__heading {
-  padding: 1em;
-  width: 100%;
+  text-transform: uppercase;
+  font-weight: normal;
+  font-family: $secondary-brand-font;
+  margin-bottom: 0.5em;
 }
 
 .oneyou2-teaser__image {
@@ -17,27 +19,21 @@
   background-repeat: none;
   background-size: cover;
   background-position: center;
-  min-height: 200px;
+  min-height: 160px;
+  
+  @include media-breakpoint-up(sm) {
+    min-height: 180px;
+  }
 }
 
 .oneyou2-teaser__text {
-  padding: 1em;
-  width: 100%;
-
-  p {
-    margin-bottom: 1em;
-  }
-
-  a {
-    margin-top: auto;
-  }
+  padding: 1em 0 0;
 }
 
 // theming
 .oneyou {
 
   .oneyou2-teaser__heading {
-    background-color: $white;
     color: $grey-brown-dark;
   }
 

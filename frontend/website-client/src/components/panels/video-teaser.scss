@@ -12,7 +12,7 @@
   background-size: cover;
   background-position: center;
   min-height: 176px;
-
+  
   @include media-breakpoint-up(sm) {
     min-height: 263px;
   }
