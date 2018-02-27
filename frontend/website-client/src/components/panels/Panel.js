@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './panels.css';
+import PropTypes from 'prop-types';
 
 class Panel extends Component {
   panelId() {
@@ -7,8 +8,8 @@ class Panel extends Component {
   }
 
   panelClasses() {
-    let classNamePrefix = this.props.classNamePrefix || 'basic';
-    return this.props.variant ? `panel ${classNamePrefix}-panel ${this.props.variant}-panel` : `panel ${classNamePrefix}-panel`;
+    let classNamePrefix = this.props.classNamePrefix;
+    return this.props.variant ? `panel ${classNamePrefix} ${classNamePrefix}--${this.props.variant}` : `panel ${classNamePrefix}`;
   }
 
   render() {
@@ -19,5 +20,11 @@ class Panel extends Component {
     );
   }
 }
+
+Panel.propTypes = {
+  classNamePrefix: PropTypes.string.isRequired,
+  variant: PropTypes.string,
+  style: PropTypes.object
+};
 
 export default Panel;

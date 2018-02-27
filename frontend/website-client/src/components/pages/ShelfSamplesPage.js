@@ -28,7 +28,8 @@ const sampleShelves = {
               heading: 'Walk the walk, talk the talk',
               body: 'Share walking stories and your progress with others online',
               cta_link_label: 'Find out more',
-              cta_link: 'http://www.somewebsite.co.uk'
+              cta_link: 'http://www.somewebsite.co.uk',
+              meta_variant: 'yellow'
             }
           },
           {

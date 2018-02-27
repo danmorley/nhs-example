@@ -20,9 +20,9 @@ class Text extends Component {
     let content = this.props.content || '';
     let Tag = this.props.tagName || 'p';
     if (content.startsWith('html::')) {
-      return (<Tag dangerouslySetInnerHTML={{__html: content.substring(6)}} />);
+      return (<Tag dangerouslySetInnerHTML={{__html: content.substring(6)}} {...this.props}/>);
     } else {
-      return (<Tag>{content}</Tag>);
+      return (<Tag {...this.props}>{content}</Tag>);
     }
   }
 }
