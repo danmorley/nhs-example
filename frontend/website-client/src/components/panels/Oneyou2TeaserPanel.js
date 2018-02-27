@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Text from '../Text';
 import CtaLink from '../CtaLink';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-import styles from './video-teaser.css';
+import styles from './oneyou2-teaser.css';
 import Panel from './Panel';
 import PropTypes from 'prop-types';
 
@@ -15,7 +15,7 @@ import testImage from '../../assets/images/Trump2.jpg';
  *
  *  }
  */
-class VideoTeaserPanel extends Component {
+class Oneyou2TeaserPanel extends Component {
   render() {
     let { content, classNamePrefix } = this.props;
 
@@ -25,28 +25,26 @@ class VideoTeaserPanel extends Component {
 
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
+        <div className={`${classNamePrefix}__heading`}>
+          <Text tagName="h3" content={content.heading} />
+        </div>
         <div className={`${classNamePrefix}__image`} style={backgroundTeaserImage}>
           {/* // needs alt text */}
         </div>
-        <div className={`${classNamePrefix}__info`}>
-          <div className={`${classNamePrefix}__heading`}>
-            <Text tagName="h3" content={content.heading} />
-          </div>
-          <div className={`${classNamePrefix}__text`}>
-            <Text content={content.body} className={`${classNamePrefix}__body`}/>
-            <CtaLink link={content.cta_link}>{content.cta_link_label}</CtaLink>
-          </div>
+        <div className={`${classNamePrefix}__text`}>
+          <Text content={content.body} className={`${classNamePrefix}__body`}/>
+          <CtaLink link={content.cta_link}>{content.cta_link_label}</CtaLink>
         </div>
       </Panel>
     );
   }
 }
 
-VideoTeaserPanel.propTypes = {
+Oneyou2TeaserPanel.propTypes = {
   content: PropTypes.object.isRequired,
   classNamePrefix: PropTypes.string.isRequired
 };
 
-CmsComponentRegistry.register('video_teaser', VideoTeaserPanel, 'video-teaser');
+CmsComponentRegistry.register('oneyou2_teaser', Oneyou2TeaserPanel, 'oneyou2-teaser');
 
-export default VideoTeaserPanel;
+export default Oneyou2TeaserPanel;
