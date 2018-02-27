@@ -29,9 +29,7 @@ class VideoTeaserPanel extends Component {
           {/* // needs alt text */}
         </div>
         <div className={`${classNamePrefix}__info`}>
-          <div className={`${classNamePrefix}__heading`}>
-            <Text tagName="h3" content={content.heading} />
-          </div>
+          <Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />
           <div className={`${classNamePrefix}__text`}>
             <Text content={content.body} className={`${classNamePrefix}__body`}/>
             <CtaLink link={content.cta_link}>{content.cta_link_label}</CtaLink>

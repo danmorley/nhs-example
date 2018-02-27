@@ -25,9 +25,7 @@ class Oneyou2TeaserPanel extends Component {
 
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
-        <div className={`${classNamePrefix}__heading`}>
-          <Text tagName="h3" content={content.heading} />
-        </div>
+        <Text tagName="h3" content={content.heading} className={`${classNamePrefix}__heading`} />
         <div className={`${classNamePrefix}__image`} style={backgroundTeaserImage}>
           {/* // needs alt text */}
         </div>
