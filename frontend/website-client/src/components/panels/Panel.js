@@ -13,11 +13,9 @@ class Panel extends Component {
 
   render() {
     return (
-      <section class="panel-section">
-        <div id={this.panelId()} className={this.panelClasses()} style={this.props.style}>
-          {this.props.children}
-        </div>
-      </section>
+      <div id={this.panelId()} className={this.panelClasses()} style={this.props.style}>
+        {this.props.children}
+      </div>
     );
   }
 }

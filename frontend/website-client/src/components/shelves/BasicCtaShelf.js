@@ -35,18 +35,18 @@ class BasicCtaShelf extends Component {
     };
 
     let textPanel = [
-      (<Text tagName="h2" content={content.heading} />),
-      (<Text content={content.body} />),
-      (<CtaLink linkType="button" link={content.cta_button_link}>{content.cta_button_label}</CtaLink>)
+      (<Text key="1" tagName="h2" content={content.heading} />),
+      (<Text key="2" content={content.body} />),
+      (<CtaLink key="3" linkType="button" link={content.cta_button_link}>{content.cta_button_label}</CtaLink>)
     ];
 
     let textOnlyPanel = [
-      (<Text tagName="h2" content={content.heading} />),
-      (<Text content={content.body} />)
+      (<Text key="1" tagName="h2" content={content.heading} />),
+      (<Text key="2" content={content.body} />)
     ];
 
     let ctaPanel = [
-      (<CtaLink linkType="button" link={content.cta_button_link}>{content.cta_button_label}</CtaLink>)
+      (<CtaLink key="1" linkType="button" link={content.cta_button_link}>{content.cta_button_label}</CtaLink>)
     ];
 
     let shelfStyle = (content.background_image) ? backgroundImageShelfStyle : backgroundColourShelfStyle;
@@ -56,9 +56,9 @@ class BasicCtaShelf extends Component {
     );
 
     let mainBannerPannel = [
-      (<Text tagName="h2" content={content.heading} />),
-      (<Text content={content.body} />),
-      (<CtaLink linkType="button" link={content.cta_button_link}>{content.cta_button_label}</CtaLink>)
+      (<Text key="1" tagName="h2" content={content.heading} />),
+      (<Text key="2" content={content.body} />),
+      (<CtaLink key="3" linkType="button" link={content.cta_button_link}>{content.cta_button_label}</CtaLink>)
     ];
 
     if (metaLayout === 'image_on_left') {

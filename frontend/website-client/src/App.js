@@ -9,7 +9,6 @@ import createHistory from 'history/createBrowserHistory';
 
 import {
   Router,
-  Redirect,
   Route,
   Switch
 } from 'react-router-dom';

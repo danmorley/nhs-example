@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class SocialLinks extends Component {
 
@@ -30,5 +31,10 @@ class SocialLinks extends Component {
     );
   }
 }
+
+SocialLinks.propTypes = {
+  links: PropTypes.array,
+  site: PropTypes.object
+};
 
 export default SocialLinks;

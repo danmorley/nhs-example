@@ -14,17 +14,24 @@ import CmsComponentRegistry from '../CmsComponentRegistry';
  *    text: "<p>Some <b>HTML</b> text to print.</p>"
  *  }
  */
-class GeneralTextShelf extends Shelf {
+class GeneralTextShelf extends Component {
   render() {
+    let { content, classNamePrefix } = this.props;
+
     return (
-      <div className={this.shelfClasses()}>
-        <p>General Text Shelf</p>
-        <p dangerouslySetInnerHTML={{__html: this.props.content.text}} />
-      </div>
+      <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
+        <div className="shelf__container container">
+          <div className="row">
+            <div className="shelf__col col-12 col-vertical-center">
+              <p dangerouslySetInnerHTML={{__html: content.text}} />
+            </div>
+          </div>
+        </div>
+      </Shelf>
     );
   }
 }
 
-CmsComponentRegistry.register('general_text_shelf', GeneralTextShelf);
+CmsComponentRegistry.register('general_text_shelf', GeneralTextShelf, 'general-text');
 
 export default GeneralTextShelf;

@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import Shelf from '../shelves/Shelf';
-import Text from '../Text';
-import CtaLink from '../CtaLink';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-import styles from './shelves.css';
 
 import sampleBgImage from './healthcheckup.png'; // Tell Webpack this JS file uses this image
-import testImage from '../../assets/images/Trump2.jpg';
+// import testImage from '../../assets/images/Trump2.jpg';
 
 import PlaceholderPanel from '../panels/PlaceholderPanel';
 import VideoTeaser from '../panels/VideoTeaser';
@@ -20,7 +17,7 @@ import VideoTeaser from '../panels/VideoTeaser';
 class GridShelf extends Component {
   render() {
     let { content, classNamePrefix } = this.props;
-    let metaLayout = content.meta_layout || '';
+    // let metaLayout = content.meta_layout || '';
 
     var panels = content.items.map((panel, i) => {
       const panelInfo = CmsComponentRegistry.components[panel.type];
@@ -28,9 +25,9 @@ class GridShelf extends Component {
       const panelClassNamePrefix = panelInfo && panelInfo.classNamePrefix;
       const panelId = panel.panel_id || panel.id;
       if (PanelClass) {
-        return (<div className="shelf__col col-sm-12 col-md-6"><PanelClass key={i} content={panel.value} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
+        return (<div key={i} className="shelf__col col-sm-12 col-md-6"><PanelClass content={panel.value} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
       } else {
-        return (<div className="shelf__col col-sm-12 col-md-6"><PlaceholderPanel key={i} panelType={panel.type} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
+        return (<div key={i} className="shelf__col col-sm-12 col-md-6"><PlaceholderPanel panelType={panel.type} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
       }
     });
 

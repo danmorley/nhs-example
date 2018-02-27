@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../assets/styles/page.css';
 import CmsComponentRegistry from './CmsComponentRegistry';
-import SiteNav from './header-nav/SiteNav';
 import Footer from './Footer';
 import PageHeader from './page-header/PageHeader';
 
@@ -44,7 +43,7 @@ class Page extends Component {
 
     return (
       <div className={`page-wrapper ${pageTheme}`}>
-        <PageHeader navItems={site.menu} header={site.header}/>
+        <PageHeader navItems={menu} header={site.header}/>
         <div className="page-content-wrapper">
           <div className="page-content">
             <p>You are on page: {content.title}</p>

@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import Shelf from './Shelf';
-import Text from '../Text';
-import CtaLink from '../CtaLink';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-import styles from './shelves.css';
-// import { Carousel } from 'react-responsive-carousel';
-// import Carousel from 'nuka-carousel';
 import Slider from 'react-slick';
 
 import PlaceholderShelf from './PlaceholderShelf';
@@ -47,9 +41,9 @@ class CarouselShelf extends Component {
       const shelfClassNamePrefix = shelfInfo && shelfInfo.classNamePrefix;
       const shelfId = shelf.shelf_id || shelf.id;
       if (ShelfClass) {
-        return (<div><ShelfClass key={i} content={shelf.value} id={shelfId} classNamePrefix={shelfClassNamePrefix}/></div>);
+        return (<div key={i}><ShelfClass content={shelf.value} id={shelfId} classNamePrefix={shelfClassNamePrefix}/></div>);
       } else {
-        return (<div><PlaceholderShelf key={i} shelfType={shelf.type} id={shelfId} classNamePrefix={shelfClassNamePrefix}/></div>);
+        return (<div key={i}><PlaceholderShelf shelfType={shelf.type} id={shelfId} classNamePrefix={shelfClassNamePrefix}/></div>);
       }
     });
 
