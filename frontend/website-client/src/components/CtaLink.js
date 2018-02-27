@@ -16,10 +16,10 @@ class CtaLink extends Component {
     let { link, active, linkType } = this.props;
     if (active !== undefined && !active) return null;
     if (!link) return null;
-    if (linkType ==="button"){
+    if (linkType === "button") {
       linkClass = "button-cta";
     }
-    
+
     if (this.isExternal(link)) {
       // External link - use normal <a> tag.
       return (

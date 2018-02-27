@@ -9,7 +9,6 @@ import createHistory from 'history/createBrowserHistory';
 
 import {
   Router,
-  Redirect,
   Route,
   Switch
 } from 'react-router-dom';
@@ -26,15 +25,31 @@ class App extends Component {
   }
 
   componentWillMount() {
+    let path = this.checkForRedirect() || this.pagePathToRender();
+    console.log('First time load of page for path ' + path);
+    if (!this.isAppPage(path)) {
+      console.log('Loading cms page', path);
+      let key = this.state.site.pages[path];
+      this.loadPageForKey(key);
+    } else {
+      console.log('Loading app page', path);
+    }
+
     // Detect when the user navigates to a new page.
     //
     // history.listen detects when the user navigates within the site and
     // returns a function to cancel the listener for use in the component
     // unmount.
     this.historyUnlisten = history.listen((location, action) => {
-      console.log('Loading page for path ' + location.pathname);
-      let key = this.state.site.pages[location.pathname];
-      this.loadPageForKey(key);
+      console.log('Internal load of page for path ' + location.pathname);
+      // this.loadPageForKey(key);
+      if (!this.isAppPage(location.pathname)) {
+        console.log('Loading cms page', location.pathname);
+        let key = this.state.site.pages[location.pathname];
+        this.loadPageForKey(key);
+      } else {
+        console.log('Loading app page', location.pathname);
+      }
     });
   }
 
@@ -43,10 +58,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    let path = this.checkForRedirect() || this.pagePathToRender();
-    console.log('Loading page for path ' + path);
-    let key = this.state.site.pages[path];
-    this.loadPageForKey(key);
   }
 
   /**
@@ -56,15 +67,21 @@ class App extends Component {
    *  a re-render of the new page.
    */
   loadPageForKey(key) {
-    let contentStore = new ContentStore('http://localhost:9002/api/v2');
-    contentStore.getPage(key).then((page) => {
-      if (page.code === 0) {
-        this.setState({ currentPage: page.response });
-      } else {
-        console.log(page.error, page.info.statusCode, page.info.message);
-        this.setState({ currentPage: pageNotFound() });
-      }
-    });
+    console.log('Loading page for key', key);
+    if (key !== undefined) {
+      let contentStore = new ContentStore('http://localhost:9002/api/v2');
+      contentStore.getPage(key).then((page) => {
+        if (page.code === 0) {
+          this.setState({ currentPage: page.response });
+        } else {
+          console.log(page.error, page.info.statusCode, page.info.message);
+          this.setState({ currentPage: pageNotFound() });
+        }
+      });
+    } else {
+      console.log('No such page in site');
+      this.setState({ currentPage: pageNotFound() });
+    }
   }
 
   checkForRedirect() {
@@ -90,6 +107,10 @@ class App extends Component {
 
   loadPage(props) {
     return (<Page content={this.state.currentPage} site={this.state.site} />);
+  }
+
+  isAppPage(path) {
+    return path === '/shelf-samples';
   }
 
   render() {

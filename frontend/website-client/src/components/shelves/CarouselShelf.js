@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import Shelf from './Shelf';
-import Text from '../Text';
-import CtaLink from '../CtaLink';
-import ShelfRegistry from './ShelfRegistry';
-import styles from './shelves.css';
-// import { Carousel } from 'react-responsive-carousel';
-// import Carousel from 'nuka-carousel';
+import CmsComponentRegistry from '../CmsComponentRegistry';
 import Slider from 'react-slick';
 
 import PlaceholderShelf from './PlaceholderShelf';
@@ -42,14 +36,14 @@ class CarouselShelf extends Component {
     };
 
     var slides = content.items.map((shelf, i) => {
-      const shelfInfo = ShelfRegistry.shelves[shelf.type];
+      const shelfInfo = CmsComponentRegistry.components[shelf.type];
       const ShelfClass = shelfInfo && shelfInfo.class;
       const shelfClassNamePrefix = shelfInfo && shelfInfo.classNamePrefix;
       const shelfId = shelf.shelf_id || shelf.id;
       if (ShelfClass) {
-        return (<div><ShelfClass key={i} content={shelf.value} id={shelfId} classNamePrefix={shelfClassNamePrefix}/></div>);
+        return (<div key={i}><ShelfClass content={shelf.value} id={shelfId} classNamePrefix={shelfClassNamePrefix}/></div>);
       } else {
-        return (<div><PlaceholderShelf key={i} shelfType={shelf.type} id={shelfId} classNamePrefix={shelfClassNamePrefix}/></div>);
+        return (<div key={i}><PlaceholderShelf shelfType={shelf.type} id={shelfId} classNamePrefix={shelfClassNamePrefix}/></div>);
       }
     });
 
@@ -69,6 +63,6 @@ class CarouselShelf extends Component {
 
 // ReactDOM.render(<CarouselShelf />, document.querySelector('.carousel-shelf'));
 
-ShelfRegistry.register('carousel_shelf', CarouselShelf, 'carousel');
+CmsComponentRegistry.register('carousel_shelf', CarouselShelf, 'carousel-shelf');
 
 export default CarouselShelf;

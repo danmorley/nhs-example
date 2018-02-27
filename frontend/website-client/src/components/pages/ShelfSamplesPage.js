@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import Page from '../Page';
 import withOwnContent from './withOwnContent';
 
@@ -9,6 +8,64 @@ import withOwnContent from './withOwnContent';
 const sampleShelves = {
   title: 'Shelf Samples',
   body: [
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Grid Shelf',
+        body: 'Layout <b>not given</b>, variant <b>not given</b>'
+      }
+    },
+    {
+      id: 'grid-shelf-1',
+      type: 'grid_shelf',
+      value: {
+        heading: 'Sample Grid Shelf',
+        items: [
+          {
+            id: 'video-teaser-1',
+            type: 'video_teaser',
+            value: {
+              heading: 'Walk the walk, talk the talk',
+              body: 'Share walking stories and your progress with others online',
+              cta_link_label: 'Find out more',
+              cta_link: 'http://www.somewebsite.co.uk',
+              meta_variant: 'yellow'
+            }
+          },
+          {
+            id: 'video-teaser-2',
+            type: 'video_teaser',
+            value: {
+              heading: 'Walk the walk, talk the talk',
+              body: 'Share walking stories and your progress with others online',
+              cta_link_label: 'Find out more',
+              cta_link: 'http://www.somewebsite.co.uk'
+            }
+          },
+          {
+            id: 'video-teaser-3',
+            type: 'video_teser',
+            value: {
+              heading: 'Walk the walk, talk the talk',
+              body: 'Share walking stories and your progress with others online',
+              cta_link_label: 'Find out more',
+              cta_link: 'http://www.somewebsite.co.uk'
+            }
+          },
+          {
+            id: 'video-teaser-4',
+            type: 'video_teaser',
+            value: {
+              heading: 'Walk the walk, talk the talk',
+              body: 'Share walking stories and your progress with others online',
+              cta_link_label: 'Find out more',
+              cta_link: 'http://www.somewebsite.co.uk'
+            }
+          }
+        ],
+        meta_variant: 'blue_background'
+      }
+    },
     {
       type: 'guidance_shelf',
       value: {
