@@ -47,7 +47,7 @@ class SocialMediaFooterLink(blocks.StructBlock):
 class PageHeading(blocks.StructBlock):
     heading = blocks.CharBlock(required=True)
     body = blocks.TextBlock(required=True)
-    image = BlobImageChooserBlock()
+    background_image = BlobImageChooserBlock()
     shelf_id = blocks.CharBlock(required=False, label="ID", help_text="Not displayed in the front end")
 
 

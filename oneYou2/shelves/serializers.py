@@ -32,7 +32,7 @@ class PromoShelfSerializer(HyperlinkedModelSerializer):
         }
         if cta_page:
             representation['cta']['link_page'] = cta_page.get('id')
-        
+
         representation['shelf_id'] = slugify(representation['shelf_id'])
         return representation
 
