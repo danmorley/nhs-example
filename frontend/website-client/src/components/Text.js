@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 /**
  *  Text is a simple field that will output escaped text or
@@ -17,14 +18,24 @@ import React, { Component } from 'react';
  */
 class Text extends Component {
   render() {
-    let content = this.props.content || '';
-    let Tag = this.props.tagName || 'p';
+    let { content, tagName, ...rest } = this.props;
+    if (!content) return null;
+    let Tag = tagName;
     if (content.startsWith('html::')) {
-      return (<Tag dangerouslySetInnerHTML={{__html: content.substring(6)}} {...this.props}/>);
+      return (<Tag dangerouslySetInnerHTML={{__html: content.substring(6)}} {...rest}/>);
     } else {
-      return (<Tag {...this.props}>{content}</Tag>);
+      return (<Tag {...rest}>{content}</Tag>);
     }
   }
+}
+
+Text.defaultProps = {
+  tagName: 'p'
+};
+
+Text.propTypes = {
+  content: PropTypes.string.isRequired,
+  tagName: PropTypes.string
 }
 
 export default Text;

@@ -13,7 +13,7 @@ class Footer extends Component {
     }
 
     let { image, links, social_media } = content;
-    let tempImage = {image:logo, title:'PHE logo'};
+    let tempImage = { link: logo, title: 'PHE logo' };
 
     return (
       <div className={className}>

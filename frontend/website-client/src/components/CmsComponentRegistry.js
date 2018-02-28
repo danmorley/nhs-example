@@ -3,8 +3,13 @@ class CmsComponentRegistry  {
   // registerInput method
   static components = {}
 
-  static register(type, component, classNamePrefix) {
-    CmsComponentRegistry.components[type] = {class:component, classNamePrefix:classNamePrefix}
+  static register(type, component, classNamePrefix, variant, layout) {
+    CmsComponentRegistry.components[type] = {
+      class:component,
+      classNamePrefix:classNamePrefix,
+      variant: variant,
+      layout: layout
+    }
   }
 }
 

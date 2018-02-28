@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import Text from '../Text';
-import CtaLink from '../CtaLink';
+import CtaLink from '../shared/CtaLink';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import styles from './video-teaser.css';
 import Panel from './Panel';
 import PropTypes from 'prop-types';
+import ImageUtils from './ImageUtils';
 
 // import sampleBgImage from '../shelves/healthcheckup.png'; // Tell Webpack this JS file uses this image
 import testImage from '../../assets/images/Trump2.jpg';
@@ -16,12 +17,19 @@ import testImage from '../../assets/images/Trump2.jpg';
  *  }
  */
 class VideoTeaserPanel extends Component {
+  // backgroundImageUrl(image, defaultImage) {
+  //   return (image && image.link) || defaultImage.link;
+  // }
+  //
+  // backgroundImageStyle(image, defaultImage) {
+  //   return {
+  //     backgroundImage: 'url(' + ImageUtils.backgroundImageUrl(image, ImageUtils.placeholderImage) + ')'
+  //   }
+  // }
+
   render() {
     let { content, classNamePrefix } = this.props;
-
-    let backgroundTeaserImage = {
-      backgroundImage: 'url(' + testImage + ')',
-    };
+    let backgroundTeaserImage = ImageUtils.backgroundImageStyle(content.image, ImageUtils.placeholderImage());
 
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
@@ -32,7 +40,7 @@ class VideoTeaserPanel extends Component {
           <Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />
           <div className={`${classNamePrefix}__text`}>
             <Text content={content.body} className={`${classNamePrefix}__body`}/>
-            <CtaLink link={content.cta_link}>{content.cta_link_label}</CtaLink>
+            <CtaLink cta={content.cta} />
           </div>
         </div>
       </Panel>
