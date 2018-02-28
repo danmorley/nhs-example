@@ -65,6 +65,13 @@ class Release(ClusterableModel):
   def __str__(self):
     return self.release_name
 
+  def add_revision(self, new_revision):
+    for revision in self.revisions.all():
+      if revision.revision.page_id == new_revision.page_id:
+        revision.delete()
+    relation = ReleasePage(release=self, revision=new_revision)
+    relation.save()
+
 
 class ReleasePage(models.Model):
   release = models.ForeignKey(

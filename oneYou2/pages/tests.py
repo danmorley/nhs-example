@@ -144,14 +144,14 @@ class OneYou2PageModelTests(WagtailPageTests):
 
     initial_revision_in_release = False
     second_revision_in_release = False
-    for revision in release.pages.all():
-      if revision.id == initial_revision.id:
+    for revision in release.revisions.all():
+      if revision.revision.id == initial_revision.id:
         initial_revision_in_release = True
-      if revision.id == second_revision.id:
+      if revision.revision.id == second_revision.id:
         second_revision_in_release = True
 
-    self.assertFalse(initial_revision_in_release)
     self.assertTrue(second_revision_in_release)
+    self.assertFalse(initial_revision_in_release)
 
 
 class ThemeModelTests(WagtailPageTests):

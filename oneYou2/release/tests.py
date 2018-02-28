@@ -79,4 +79,4 @@ class ReleaseModelTests(WagtailPageTests):
     count_of_pages = OneYou2Page.objects.count()
 
     self.assertEqual(count_of_pages, release.revisions.count())
-    self.assertEqual(page.get_latest_revision().id, release.revisions.first().id)
+    self.assertEqual(page.get_latest_revision().id, release.revisions.first().revision.id)

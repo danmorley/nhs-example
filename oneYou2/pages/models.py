@@ -1,7 +1,6 @@
 import json
 import uuid
 
-from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import DateField, TextField
 from django.forms.models import model_to_dict
@@ -94,12 +93,12 @@ class OneYou2Page(Page):
     ])
     page_ref = models.CharField(max_length=255, unique=True)
     release = models.ForeignKey(
-      'release.Release',
-      related_name='pages',
-      blank=True,
-      null=True,
-      default=None,
-      on_delete=models.SET_NULL)
+        'release.Release',
+        related_name='pages',
+        blank=True,
+        null=True,
+        default=None,
+        on_delete=models.SET_NULL)
     theme = models.ForeignKey(
         'pages.Theme',
         related_name='pages',
@@ -127,16 +126,26 @@ class OneYou2Page(Page):
         ObjectList(Page.settings_panels, heading='Settings', classname='settings'),
     ])
 
-    api_fields = ['body','path', 'depth', 'numchild', 'page_ref', 'live', 'page_theme']
+    api_fields = ['body', 'path', 'depth', 'numchild', 'page_ref', 'live', 'page_theme']
 
     def save(self, *args, **kwargs):
         if not self.page_ref or self.page_ref is None:
             self.page_ref = str(uuid.uuid4())
 
-        return super(OneYou2Page, self).save(*args, **kwargs)
+        assigned_release = self.release
+
+        if self.release:
+            self.release = None
+
+        super(OneYou2Page, self).save(*args, **kwargs)
+
+        if assigned_release:
+            assigned_release.add_revision(self.get_latest_revision())
+
+        return self
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super(OneYou2Page, self).__init__(*args, **kwargs)
         if not self.page_ref or self.page_ref is None:
             self.page_ref = str(uuid.uuid4())
 
