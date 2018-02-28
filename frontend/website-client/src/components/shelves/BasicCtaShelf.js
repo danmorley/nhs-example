@@ -97,7 +97,7 @@ class BasicCtaShelf extends Component {
               <div className="shelf__col col col-vertical-center">
                 {this.renderCta(content.cta)}
               </div>
-              <div className="shelf__col col md-content-right">
+              <div className="shelf__col col col-vertical-center md-content-right">
                 {this.renderHeadingBody(content, headingTagName)}
               </div>
             </div>
@@ -112,7 +112,7 @@ class BasicCtaShelf extends Component {
               <div className="shelf__col col col-vertical-center">
                 {this.renderHeadingBody(content, headingTagName)}
               </div>
-              <div className="shelf__col col md-content-right">
+              <div className="shelf__col col col-vertical-center md-content-right">
                 {this.renderCta(content.cta)}
               </div>
             </div>
@@ -132,6 +132,33 @@ class BasicCtaShelf extends Component {
           </div>
         </Shelf>
       );
+    } else if (metaLayout === 'page_header') {
+      return (
+        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+          <div className="shelf__container container-fluid" style={shelfStyle}>
+            <div className="row justify-content-around">
+              <div className="shelf__col col-10 col-sm-8">
+                {this.renderHeadingBody(content, headingTagName)}
+                {this.renderCta(content.cta)}
+              </div>
+              <div className="shelf__col col-2 col-sm-2">
+              </div>
+            </div>
+          </div>
+        </Shelf>
+      );
+    } else if (metaLayout === 'section_heading') {
+        return (
+          <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+            <div className="shelf__container container" style={shelfStyle}>
+              <div className="row">
+                <div className="col shelf__col">
+                  {this.renderHeadingBody(content, headingTagName)}
+                </div>
+              </div>
+            </div>
+          </Shelf>
+        );
     } else {
       // Default layout: ???
       return (
@@ -179,13 +206,13 @@ CmsComponentRegistry.register('app_shelf', BasicCtaShelf, 'app-shelf', 'app');
 //
 // Layouts: full_width
 // Variants: home-page, sub-page
-CmsComponentRegistry.register('page_heading_shelf', BasicCtaShelf, 'page-heading-shelf', 'home-page', 'full_width');
+CmsComponentRegistry.register('page_heading_shelf', BasicCtaShelf, 'page-heading-shelf', 'home-page', 'page_header');
 
 //
 // Section Heading Shelf
 //
 // Layouts: full_width
 // Variants: none
-CmsComponentRegistry.register('section_heading_shelf', BasicCtaShelf, 'section-heading-shelf', 'section-heading', 'full_width');
+CmsComponentRegistry.register('section_heading_shelf', BasicCtaShelf, 'section-heading-shelf');
 
 export default BasicCtaShelf;

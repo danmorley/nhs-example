@@ -9,6 +9,13 @@ const sampleShelves = {
   title: 'Shelf Samples',
   body: [
     {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Carousel Shelf',
+        body: 'Layout <b>not given</b>, variant <b>not given</b>'
+      }
+    },  
+    {
       id: 'carousel-1',
       type: 'carousel_shelf',
       value: {
@@ -95,7 +102,7 @@ const sampleShelves = {
           },
           {
             id: 'video-teaser-3',
-            type: 'video_teser',
+            type: 'video_teaser',
             value: {
               heading: 'Walk the walk, talk the talk',
               body: 'Share walking stories and your progress with others online',
@@ -162,10 +169,19 @@ const sampleShelves = {
     {
       type: 'guidance_shelf',
       value: {
-        heading: 'Carousel Shelf',
+        heading: 'Section Heading Shelf',
         body: 'Layout <b>not given</b>, variant <b>not given</b>'
       }
     },  
+    {
+       id: 'weeww',
+       type: 'section_heading_shelf',
+       value: {
+           heading: 'This is a section heading',
+           shelf_id: 'test-section-heading-1',
+           meta_layout: 'section_heading',
+       }
+    },
     {
       type: 'guidance_shelf',
       value: {
@@ -180,7 +196,7 @@ const sampleShelves = {
         heading: 'Move More',
         body: 'Moving is good for your body and mind. Try these easy ways to move more each day.',
         background_image: 'http://aaa.bbb.ccc/gb.png',
-        meta_layout: 'full_width',
+        meta_layout: 'page_header',
         meta_variant: 'home-page'
       }
     },
@@ -198,7 +214,7 @@ const sampleShelves = {
         heading: 'Move More',
         body: 'Moving is good for your body and mind. Try these easy ways to move more each day.',
         background_image: 'http://aaa.bbb.ccc/gb.png',
-        meta_layout: 'full_width',
+        meta_layout: 'page_header',
         meta_variant: 'sub-page'
       }
     },

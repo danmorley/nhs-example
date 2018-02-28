@@ -8,8 +8,10 @@
 }
 
 .oneyou1-teaser__heading {
-  padding: 1em;
-  width: 100%;
+  text-transform: uppercase;
+  font-weight: normal;
+  font-family: $secondary-brand-font;
+  margin-bottom: 0.5em;
 }
 
 .oneyou1-teaser__image {
@@ -25,29 +27,21 @@
 }
 
 .oneyou1-teaser__text {
-  padding: 1em;
-  width: 100%;
-
-  p {
-    margin-bottom: 1em;
-  }
-
-  a {
-    margin-top: auto;
-  }
+  padding: 1em 0 0;
 }
 
 // theming
 .oneyou {
 
   .oneyou1-teaser__heading {
-    background-color: $white;
     color: $grey-brown-dark;
   }
 
   .oneyou1-teaser__text {
     color: $grey-brown-dark;
-
+  }
+  
+  .oneyou1-teaser__cta-list {
     a {
       color: $teal-blue;
       font-weight: bold;

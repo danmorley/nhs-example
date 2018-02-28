@@ -31,6 +31,24 @@ $shelf-padding-extra: 2em;
   }
 }
 
+.page-heading-shelf {
+  
+  .container, .container-fluid {
+    padding-top: 2em;
+    padding-bottom: 1.5em;
+  }
+  
+  h1 {
+      margin: 0 0 0.5em 0;
+  }
+  
+  p {
+    @include media-breakpoint-up(sm) {
+      line-height: 1.5em
+    }
+  }
+}
+
 //theming
 .oneyou { //theme
 
