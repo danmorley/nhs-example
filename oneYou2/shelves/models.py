@@ -190,6 +190,14 @@ class PromoShelf(ShelfAbstract):
         PageChooserPanel('cta_page'),
     ]
 
+    @property
+    def meta_layout(self):
+        return "cta_on_right"
+
+    @property
+    def meta_variant(self):
+        return "how-are-you"
+
 
 @register_snippet
 class BannerShelf(ShelfAbstract):
@@ -209,6 +217,14 @@ class BannerShelf(ShelfAbstract):
                            related_name='banner_shelf_links',
                            null=True,
                            blank=True)
+
+    @property
+    def meta_layout(self):
+        return "full_width"
+
+    @property
+    def meta_variant(self):
+        return "main-banner"
 
     api_fields = ['heading', 'body', 'image', 'cta_text', 'cta_link', 'cta_page']
 

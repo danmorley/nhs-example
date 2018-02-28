@@ -36,7 +36,7 @@ class PromoShelfSerializer(HyperlinkedModelSerializer):
 
     class Meta:
         model = PromoShelf
-        fields = ['heading', 'cta_text', 'cta_link', 'cta_page', 'shelf_id']
+        fields = ['heading', 'cta_text', 'cta_link', 'cta_page', 'shelf_id', 'meta_layout', 'meta_variant']
 
 
 class BannerShelfSerializer(HyperlinkedModelSerializer):
@@ -59,11 +59,13 @@ class BannerShelfSerializer(HyperlinkedModelSerializer):
 
     class Meta:
         model = BannerShelf
-        fields = ['heading', 'body', 'background_image', 'cta_text', 'cta_link', 'cta_page', 'shelf_id']
+        fields = ['heading', 'body', 'background_image', 'cta_text', 'cta_link', 'cta_page', 'shelf_id',
+                  'meta_layout', 'meta_variant']
 
 
 class AppShelfSerializer(HyperlinkedModelSerializer):
+    image = ImageSerializer()
 
     class Meta:
         model = AppShelf
-        fields = ['heading', 'body', 'image', 'android_link', 'iphone_link']
+        fields = ['heading', 'body', 'image', 'android_link', 'iphone_link', 'shelf_id']
