@@ -29,8 +29,10 @@ class PromoShelfSerializer(HyperlinkedModelSerializer):
         representation['cta'] = {
             'link_text': cta_text,
             'link_external': cta_link,
-            'link_page': cta_page['id'],
         }
+        if cta_page:
+            representation['cta']['link_page'] = cta_page.get('id')
+        
         representation['shelf_id'] = slugify(representation['shelf_id'])
         return representation
 
@@ -52,8 +54,10 @@ class BannerShelfSerializer(HyperlinkedModelSerializer):
         representation['cta'] = {
             'link_text': cta_text,
             'link_external': cta_link,
-            'link_page': cta_page['id'],
         }
+        if cta_page:
+            representation['cta']['link_page'] = cta_page.get('id')
+
         representation['shelf_id'] = slugify(representation['shelf_id'])
         return representation
 
