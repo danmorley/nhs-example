@@ -4,22 +4,22 @@
 $shelf-padding-standard: 1em;
 $shelf-padding-extra: 2em;
 
-.promo-shelf {
-  
+.promo-shelf, .page-heading-shelf, .banner-shelf {
+
   .container, .container-fluid {
     background-size: cover;
     background-position: 50%;
-    padding: 1em;  
+    padding: 1em;
   }
 }
 
-.promo-shelf {
-  
-  h2 {
+.promo-shelf, .page-heading-shelf, .banner-shelf {
+
+  h1, h2 {
     text-transform: uppercase;
     white-space: nowrap;
     font-family: $primary-brand-font;
-    
+
     .text-light {
       font-family: $secondary-brand-font;
       font-weight: normal;
@@ -33,20 +33,20 @@ $shelf-padding-extra: 2em;
 
 //theming
 .oneyou { //theme
-  
-  .promo-shelf {
-    h2 {
+
+  .promo-shelf, .page-heading-shelf, .banner-shelf {
+    h1, h2 {
       color: $white;
     }
-    
+
     p {
       color: $white;
     }
-    
+
     .marker {
       color: $sunflower-yellow;
     }
-    
+
     .shelf__container {
       background-color: $teal-blue;
     }
@@ -57,32 +57,32 @@ $shelf-padding-extra: 2em;
 .promo-shelf {
 
   &.main-banner-shelf {
-    
-    .shelf__container { 
+
+    .shelf__container {
       padding-top: $shelf-padding-extra;
       padding-bottom: $shelf-padding-extra;
     }
-    
+
     p {
       line-height: 1.4em;
     }
   }
-  
+
   &.how-are-you-shelf {
-    
-    .marker {  
+
+    .marker {
       display: inline-block;
-      line-height: 0.9em;    
+      line-height: 0.9em;
       border-bottom: 0.15em solid $white;
     }
   }
-  
+
   &.extra-height-shelf {
 
     .shelf__container {
       padding-top: $shelf-padding-extra;
       padding-bottom: $shelf-padding-extra;
-    
+
       @include media-breakpoint-up(sm) {
         padding-top: $shelf-padding-standard;
         padding-bottom:  $shelf-padding-standard;

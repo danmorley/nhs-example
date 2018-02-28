@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Shelf from './Shelf';
 import Text from '../Text';
-import CtaLink from '../CtaLink';
+import Image from '../Image';
+import CtaLink from '../shared/CtaLink';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import styles from './promo-shelf.css';
 
@@ -23,9 +24,28 @@ import sampleBgImage from './healthcheckup.png'; // Tell Webpack this JS file us
  *  }
  */
 class BasicCtaShelf extends Component {
+
+  renderImage(image) {
+    // return (<img alt="roger"/>);
+    return (<Image image={image} />);
+  }
+
+  renderHeadingBody(content, headingTagName) {
+    return [
+      (<Text key="1" tagName={headingTagName} content={content.heading} />),
+      (<Text key="2" content={content.body} />)
+    ];
+  }
+
+  renderCta(cta) {
+    if (!cta) return null;
+    return (<CtaLink variant="button" cta={cta} />);
+  }
+
   render() {
-    let { content, classNamePrefix } = this.props;
-    let metaLayout = content.meta_layout || '';
+    let { content, classNamePrefix, variant, layout } = this.props;
+    let metaVariant = content.meta_variant || variant;
+    let metaLayout = content.meta_layout || layout;
 
     let backgroundImageShelfStyle = {
       backgroundImage: 'url(' + sampleBgImage + ')',
@@ -34,99 +54,93 @@ class BasicCtaShelf extends Component {
     let backgroundColourShelfStyle = {
     };
 
-    let textPanel = [
-      (<Text key="1" tagName="h2" content={content.heading} />),
-      (<Text key="2" content={content.body} />),
-      (<CtaLink key="3" linkType="button" link={content.cta_button_link}>{content.cta_button_label}</CtaLink>)
-    ];
-
-    let textOnlyPanel = [
-      (<Text key="1" tagName="h2" content={content.heading} />),
-      (<Text key="2" content={content.body} />)
-    ];
-
-    let ctaPanel = [
-      (<CtaLink key="1" linkType="button" link={content.cta_button_link}>{content.cta_button_label}</CtaLink>)
-    ];
-
     let shelfStyle = (content.background_image) ? backgroundImageShelfStyle : backgroundColourShelfStyle;
-
-    let imagePanel = (
-      <img alt="roger"/>
-    );
-
-    let mainBannerPannel = [
-      (<Text key="1" tagName="h2" content={content.heading} />),
-      (<Text key="2" content={content.body} />),
-      (<CtaLink key="3" linkType="button" link={content.cta_button_link}>{content.cta_button_label}</CtaLink>)
-    ];
+    let headingTagName = (classNamePrefix === 'page-heading-shelf') ? 'h1' : 'h2';
 
     if (metaLayout === 'image_on_left') {
       return (
-        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix}>
+        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={metaVariant}>
           <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
               <div className="shelf__col col">
-                {imagePanel}
+                {this.renderImage(content.image)}
               </div>
               <div className="shelf__col col">
-                {textPanel}
+              {this.renderHeadingBody(content, headingTagName)}
+              {this.renderCta(content.cta)}
               </div>
             </div>
           </div>
         </Shelf>
       );
-    } else if  (metaLayout === 'image_on_right') {
+    } else if (metaLayout === 'image_on_right') {
       return (
-        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
+        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={metaVariant}>
           <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
               <div className="shelf__col col">
-                {textPanel}
+                {this.renderHeadingBody(content, headingTagName)}
+                {this.renderCta(content.cta)}
               </div>
               <div className="shelf__col col">
-                {imagePanel}
+                {this.renderImage(content.image)}
               </div>
             </div>
           </div>
         </Shelf>
       );
-    } else if  (metaLayout === 'cta_on_right') {
+    } else if (metaLayout === 'cta_on_left') {
       return (
-        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
+        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={metaVariant}>
           <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
               <div className="shelf__col col col-vertical-center">
-                {textOnlyPanel}
+                {this.renderCta(content.cta)}
               </div>
               <div className="shelf__col col md-content-right">
-                {ctaPanel}
+                {this.renderHeadingBody(content, headingTagName)}
               </div>
             </div>
           </div>
         </Shelf>
       );
-    }
-    else if (metaLayout === 'full_width') {
+    } else if (metaLayout === 'cta_on_right') {
       return (
-        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
+        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+          <div className="shelf__container container" style={shelfStyle}>
+            <div className="row">
+              <div className="shelf__col col col-vertical-center">
+                {this.renderHeadingBody(content, headingTagName)}
+              </div>
+              <div className="shelf__col col md-content-right">
+                {this.renderCta(content.cta)}
+              </div>
+            </div>
+          </div>
+        </Shelf>
+      );
+    } else if (metaLayout === 'full_width') {
+      return (
+        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={metaVariant}>
           <div className="shelf__container container-fluid" style={shelfStyle}>
             <div className="row justify-content-around">
               <div className="shelf__col col-sm-10">
-                {mainBannerPannel}
+                {this.renderHeadingBody(content, headingTagName)}
+                {this.renderCta(content.cta)}
               </div>
             </div>
           </div>
         </Shelf>
       );
-    }
-    else {
+    } else {
+      // Default layout: ???
       return (
-        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
+        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={metaVariant}>
           <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
               <div className="shelf__col col-12 col-vertical-center">
-                {textOnlyPanel}
+                {this.renderHeadingBody(content, headingTagName)}
+                {this.renderCta(content.cta)}
               </div>
             </div>
           </div>
@@ -136,9 +150,42 @@ class BasicCtaShelf extends Component {
   }
 }
 
+// Basic CTA Shelf
+//
+// Layouts: image_on_left, image_on_right, full_width
+// Variants:
 CmsComponentRegistry.register('basic_cta_shelf', BasicCtaShelf, 'basic-cta-shelf');
-CmsComponentRegistry.register('promo_shelf', BasicCtaShelf, 'promo-shelf');
-CmsComponentRegistry.register('page_heading', BasicCtaShelf, 'promo-shelf');
-CmsComponentRegistry.register('sub_page_heading', BasicCtaShelf, 'promo-shelf');
+
+// Banner Shelf
+//
+// Layouts: cta_on_right, cta_on_left
+// Variants: banner
+CmsComponentRegistry.register('banner_shelf', BasicCtaShelf, 'banner-shelf', 'banner');
+
+// Promo Shelf
+//
+// Layouts: cta_on_right, cta_on_left
+// Variants: promo
+CmsComponentRegistry.register('promo_shelf', BasicCtaShelf, 'promo-shelf', 'promo');
+
+// App Shelf
+//
+// Layouts: app
+// Variants: none
+CmsComponentRegistry.register('app_shelf', BasicCtaShelf, 'app-shelf', 'app');
+
+//
+// Page Heading Shelf - used as the page heading on sub-pages, but also on the home page
+//
+// Layouts: full_width
+// Variants: home-page, sub-page
+CmsComponentRegistry.register('page_heading_shelf', BasicCtaShelf, 'page-heading-shelf', 'home-page', 'full_width');
+
+//
+// Section Heading Shelf
+//
+// Layouts: full_width
+// Variants: none
+CmsComponentRegistry.register('section_heading_shelf', BasicCtaShelf, 'section-heading-shelf', 'section-heading', 'full_width');
 
 export default BasicCtaShelf;

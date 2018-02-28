@@ -32,9 +32,11 @@ class Page extends Component {
       const shelfInfo = CmsComponentRegistry.components[shelf.type];
       const ShelfClass = shelfInfo && shelfInfo.class;
       const shelfClassNamePrefix = shelfInfo && shelfInfo.classNamePrefix;
+      const shelfVariant = shelfInfo && shelfInfo.variant;
+      const shelfLayout = shelfInfo && shelfInfo.layout;
       const shelfId = shelf.shelf_id || shelf.id;
       if (ShelfClass) {
-        return (<ShelfClass key={i} content={shelf.value} id={shelfId} classNamePrefix={shelfClassNamePrefix}/>);
+        return (<ShelfClass key={i} content={shelf.value} id={shelfId} classNamePrefix={shelfClassNamePrefix} variant={shelfVariant} layout={shelfLayout}/>);
       } else {
         return (<PlaceholderShelf key={i} shelfType={shelf.type} id={shelfId} classNamePrefix={shelfClassNamePrefix}/>);
       }
