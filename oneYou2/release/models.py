@@ -54,3 +54,18 @@ class Release(ClusterableModel):
 
   def __str__(self):
     return self.release_name
+
+
+class ReleasePage(models.Model):
+  release = models.ForeignKey(
+    'release.Release',
+    related_name='revisions',
+    blank=False,
+    null=False,
+    on_delete=models.CASCADE)
+  revision = models.ForeignKey(
+    'wagtailcore.PageRevision',
+    related_name='release',
+    blank=False,
+    null=False,
+    on_delete=models.CASCADE)
