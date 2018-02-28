@@ -20,11 +20,11 @@ class CtaLink extends Component {
 
   render() {
     let { cta, variant } = this.props;
-    if (!cta || (!cta.page && !cta.link_external)) return null;
+    if (!cta || (!cta.link_page && !cta.link_external)) return null;
     let linkClass = (variant === 'button') ? 'button-cta' : null;
 
     // Convert page id to path if given.
-    let href = (cta.page) ? '/page/' + cta.page : cta.link_external;
+    let href = (cta.link_page) ? '/page/' + cta.link_page : cta.link_external;
 
     // Render the link.
     if (this.isExternal(href)) {
