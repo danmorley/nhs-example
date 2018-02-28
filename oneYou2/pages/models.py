@@ -1,10 +1,10 @@
 import json
 import uuid
 
-from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import DateField, TextField
 from django.forms.models import model_to_dict
+from django.template.loader import render_to_string
 
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.models import Page, Orderable
@@ -13,15 +13,13 @@ from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, Inl
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
-
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtailsnippetscopy.models import SnippetCopyMixin
 from wagtailsnippetscopy.registry import snippet_copy_registry
 
 from modelcluster.fields import ParentalKey
 
-# StruckBlocks/shelves
-
+from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppShelfChooserBlock, BlobImageChooserBlock
 
 class SimpleMenuItem(blocks.StructBlock):
     link_text = blocks.CharBlock(required=True)
@@ -46,15 +44,44 @@ class SocialMediaFooterLink(blocks.StructBlock):
     link = blocks.URLBlock(label='External link', required=False)
 
 
+class PageHeading(blocks.StructBlock):
+    heading = blocks.CharBlock(required=True)
+    body = blocks.TextBlock(required=True)
+    image = BlobImageChooserBlock()
+    shelf_id = blocks.CharBlock(required=False, label="ID", help_text="Not displayed in the front end")
+
+
 class SectionHeading(blocks.StructBlock):
     heading = blocks.CharBlock(required=True)
     shelf_id = blocks.CharBlock(required=False, label="ID", help_text="Not displayed in the front end")
 
 
-class BackwardsCompatibleContent(blocks.StructBlock):
+class SimplePageHeading(SectionHeading):
+    """This is a page heading with only text."""
+    pass
+
+
+class CTABlock(blocks.StructBlock):
+    def get_api_representation(self, value, context=None):
+        # recursively call get_api_representation on children and return as a plain dict
+        result = dict([
+            (name, self.child_blocks[name].get_api_representation(val, context=context))
+            for name, val in value.items()
+        ])
+        cta_links = []
+        for link in result['cta']:
+            cta_links.append(link['value'])
+        result['cta'] = cta_links
+        return result
+
+
+class BackwardsCompatibleContent(CTABlock):
     heading = blocks.CharBlock(required=True)
     body = blocks.TextBlock(required=True)
     image = ImageChooserBlock()
+    cta =blocks.StreamBlock([
+        ('simple_menu_item', SimpleMenuItem())
+    ], icon='arrow-left', label='Items', required=False, verbose_name="cta")
     shelf_id = blocks.CharBlock(required=False, label="ID")
 
 
@@ -68,16 +95,29 @@ class FindOutMoreDropDown(blocks.StructBlock):
 
 class VideoTemplate(blocks.StructBlock):
     heading = blocks.CharBlock(required=True)
-    subheading = blocks.CharBlock(required=True)
     body = blocks.TextBlock(required=True)
     video = blocks.CharBlock(required=True)
     shelf_id = blocks.CharBlock(required=False, label="ID")
 
 
 class Carousel(blocks.StructBlock):
+    heading = blocks.CharBlock()
     items = blocks.StreamBlock([
-        ('backwards_compatible_content', BackwardsCompatibleContent(label="Previous content", icon="folder-inverse")),
-        ('video', VideoTemplate(icon="media"))
+        ('oneyou1_teaser', BackwardsCompatibleContent(label="Previous content", icon="folder-inverse")),
+        ('video_teaser', VideoTemplate(icon="media")),
+        ('promo_shelf', PromoShelfChooserBlock(target_model="shelves.PromoShelf", icon="image")),
+        ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
+        ('app_shelf', AppShelfChooserBlock(target_model="shelves.AppShelf", icon="image")),
+    ], icon='arrow-left', label='Items')
+    shelf_id = blocks.CharBlock(required=False, label="ID")
+
+
+class Grid(blocks.StructBlock):
+    heading = blocks.CharBlock()
+    rows_to_show = blocks.IntegerBlock(default=0)
+    items = blocks.StreamBlock([
+        ('oneyou1_teaser', BackwardsCompatibleContent(label="Previous content", icon="folder-inverse")),
+        ('video_teaser', VideoTemplate(icon="media")),
     ], icon='arrow-left', label='Items')
     shelf_id = blocks.CharBlock(required=False, label="ID")
 
@@ -86,11 +126,17 @@ class Carousel(blocks.StructBlock):
 
 class OneYou2Page(Page):
     body = StreamField([
-        ('section_heading', SectionHeading(classname="full title", icon='title')),
-        ('backwards_compatible_content', BackwardsCompatibleContent(label="Previous content", icon="folder-inverse")),
+        ('page_heading_shelf', PageHeading(icon='title')),
+        ('simple_page_heading_shelf', SimplePageHeading(icon='title')),
+        ('section_heading_shelf', SectionHeading(classname="full title", icon='title')),
+        ('carousel_shelf', Carousel(icon="repeat")),
+        ('promo_shelf', PromoShelfChooserBlock(target_model="shelves.PromoShelf", icon="image")),
+        ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
+        ('app_shelf', AppShelfChooserBlock(target_model="shelves.AppShelf", icon="image")),
+        ('grid_shelf', Grid(icon="form")),
+        ('oneyou1_teaser', BackwardsCompatibleContent(label="Previous content", icon="folder-inverse")),
+        ('video_teaser', VideoTemplate(icon="media")),
         ('find_out_more_dropdown', FindOutMoreDropDown(label="Link dropdown", icon="order-down")),
-        ('video', VideoTemplate(icon="media")),
-        ('carousel', Carousel(icon="repeat")),
     ])
     page_ref = models.CharField(max_length=255, unique=True)
     release = models.ForeignKey(
@@ -185,6 +231,7 @@ class ChangeHistory(Orderable):
 
 
 # Snippets
+# TODO: Move these to shelves
 
 @register_snippet
 class Menu(SnippetCopyMixin, models.Model):

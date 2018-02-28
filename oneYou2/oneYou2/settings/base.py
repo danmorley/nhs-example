@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'search',
     'pages',
     'release',
+    'shelves',
     'images',
 
     'wagtail.wagtailforms',
