@@ -29,7 +29,8 @@
 }
 
 .md-content-right {
+  
   @include media-breakpoint-up(md) {
-    text-align: right;
+    justify-content: flex-end;
   }
 }

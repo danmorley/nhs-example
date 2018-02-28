@@ -44,6 +44,7 @@ class GridShelf extends Component {
     return (
       <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix}>
         <div className="shelf__container container" style={shelfStyle}>
+          <h2 className="shelf__header">{content.heading}</h2>
           <div className="row">
             {panels}
           </div>
