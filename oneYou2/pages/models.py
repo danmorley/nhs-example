@@ -85,9 +85,9 @@ class BackwardsCompatibleContent(CTABlock):
     shelf_id = blocks.CharBlock(required=False, label="ID")
 
 
-class FindOutMoreDropDown(blocks.StructBlock):
+class FindOutMoreDropDown(CTABlock):
     heading = blocks.CharBlock(required=True)
-    links = blocks.StreamBlock([
+    cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items')
     shelf_id = blocks.CharBlock(required=False, label="ID")
@@ -103,7 +103,7 @@ class VideoTemplate(blocks.StructBlock):
 class Carousel(blocks.StructBlock):
     heading = blocks.CharBlock()
     items = blocks.StreamBlock([
-        ('oneyou1_teaser', BackwardsCompatibleContent(label="Previous content", icon="folder-inverse")),
+        ('oneyou1_teaser', BackwardsCompatibleContent(label="OneYou1 teaser", icon="folder-inverse")),
         ('video_teaser', VideoTemplate(icon="media")),
         ('promo_shelf', PromoShelfChooserBlock(target_model="shelves.PromoShelf", icon="image")),
         ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
@@ -116,7 +116,7 @@ class Grid(blocks.StructBlock):
     heading = blocks.CharBlock()
     rows_to_show = blocks.IntegerBlock(default=0)
     items = blocks.StreamBlock([
-        ('oneyou1_teaser', BackwardsCompatibleContent(label="Previous content", icon="folder-inverse")),
+        ('oneyou1_teaser', BackwardsCompatibleContent(label="OneYou1 teaser", icon="folder-inverse")),
         ('video_teaser', VideoTemplate(icon="media")),
     ], icon='arrow-left', label='Items')
     shelf_id = blocks.CharBlock(required=False, label="ID")
@@ -134,7 +134,7 @@ class OneYou2Page(Page):
         ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
         ('app_shelf', AppShelfChooserBlock(target_model="shelves.AppShelf", icon="image")),
         ('grid_shelf', Grid(icon="form")),
-        ('oneyou1_teaser', BackwardsCompatibleContent(label="Previous content", icon="folder-inverse")),
+        ('oneyou1_teaser', BackwardsCompatibleContent(label="OneYou1 teaser", icon="folder-inverse")),
         ('video_teaser', VideoTemplate(icon="media")),
         ('find_out_more_dropdown', FindOutMoreDropDown(label="Link dropdown", icon="order-down")),
     ])
