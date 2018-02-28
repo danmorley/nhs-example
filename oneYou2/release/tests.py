@@ -2,6 +2,9 @@ import uuid
 from datetime import datetime
 
 from wagtail.tests.utils import WagtailPageTests
+from wagtail.wagtailcore.models import Page
+
+from pages.models import OneYou2Page, Theme
 
 from release.models import Release
 
@@ -54,3 +57,26 @@ class ReleaseModelTests(WagtailPageTests):
     release_dict = release.dict()
     self.assertIs(release_dict['release_name'], test_name)
     self.assertFalse('release_time' in release_dict)
+
+
+  def test_on_create_release_is_linked_to_all_current_pages(self):
+    """
+    when a new release is created it should be linked to the latest revisions of all live pages.
+    """
+    theme = Theme(label='Theme name', class_name='theme-class')
+    theme.save()
+
+    root_page = Page.get_root_nodes()[0]
+
+    page = OneYou2Page(title="Test page", path='1111', depth=0, theme=theme)
+    root_page.add_child(instance=page)
+    page.save_revision().publish()
+    page.save()
+
+    release = Release(release_name="Test name")
+    release.save()
+
+    count_of_pages = OneYou2Page.objects.count()
+
+    self.assertEqual(count_of_pages, release.pages.count())
+    self.assertEqual(page.get_latest_revision().id, release.revisions.first().id)

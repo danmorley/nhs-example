@@ -1,6 +1,9 @@
 from wagtail.tests.utils import WagtailPageTests
+from wagtail.wagtailcore.models import Page
 
 from pages.models import OneYou2Page, Theme
+
+from release.models import Release
 
 class OneYou2PageModelTests(WagtailPageTests):
 
@@ -115,6 +118,40 @@ class OneYou2PageModelTests(WagtailPageTests):
     loadedPage = OneYou2Page.objects.get(title="Test page")
 
     self.assertIsNot(loadedPage.page_ref, original_page_ref)
+
+
+  def test_publishing_page_to_release_links_new_revision_to_release(self):
+    theme = Theme(label='Theme name', class_name='theme-class')
+    theme.save()
+
+    root_page = Page.get_root_nodes()[0]
+
+    page = OneYou2Page(title="Test page", path='1111', depth=0, theme=theme)
+    root_page.add_child(instance=page)
+    page.save_revision().publish()
+    page.save()
+
+    initial_revision = page.get_latest_revision()
+
+    release = Release(release_name='Test Release')
+    release.save()
+
+    page.release = release
+    page.save_revision().publish()
+    page.save()
+
+    second_revision = page.get_latest_revision()
+
+    initial_revision_in_release = False
+    second_revision_in_release = False
+    for revision in release.pages.all():
+      if revision.id == initial_revision.id:
+        initial_revision_in_release = True
+      if revision.id == second_revision.id:
+        second_revision_in_release = True
+
+    self.assertFalse(initial_revision_in_release)
+    self.assertTrue(second_revision_in_release)
 
 
 class ThemeModelTests(WagtailPageTests):
