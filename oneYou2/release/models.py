@@ -10,6 +10,8 @@ from datetime import datetime
 import uuid
 
 from .forms import ReleaseAdminForm
+from pages.models import OneYou2Page
+
 
 def query_set_to_dict(querySet):
   queryDict = []
@@ -17,6 +19,7 @@ def query_set_to_dict(querySet):
     modelDict = modelObject.dict()
     queryDict.append(modelDict)
   return queryDict
+
 
 def obj_to_dict(obj):
   modelDict = model_to_dict(obj)
@@ -26,6 +29,7 @@ def obj_to_dict(obj):
     elif type(value) == datetime:
       modelDict[key] = value.timestamp()
   return modelDict  
+
 
 class Release(ClusterableModel):
   release_name = models.CharField(max_length=255, unique=True)
@@ -43,7 +47,13 @@ class Release(ClusterableModel):
     if not self.uuid or self.uuid is None:
       self.uuid = str(uuid.uuid4())
 
-    return super(Release, self).save(*args, **kwargs)
+    super(Release, self).save(*args, **kwargs)
+
+    live_pages = OneYou2Page.objects.live()
+    for page in live_pages:
+      relation = ReleasePage(release=self, revision=page.get_latest_revision())
+      relation.save()
+    return self
 
   def dict(self):
     self_dict = obj_to_dict(self)
