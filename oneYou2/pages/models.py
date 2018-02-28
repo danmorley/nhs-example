@@ -103,8 +103,8 @@ class VideoTemplate(blocks.StructBlock):
 class Carousel(blocks.StructBlock):
     heading = blocks.CharBlock()
     items = blocks.StreamBlock([
-        ('backwards_compatible_content', BackwardsCompatibleContent(label="Previous content", icon="folder-inverse")),
-        ('video', VideoTemplate(icon="media")),
+        ('oneyou1_teaser', BackwardsCompatibleContent(label="Previous content", icon="folder-inverse")),
+        ('video_teaser', VideoTemplate(icon="media")),
         ('promo_shelf', PromoShelfChooserBlock(target_model="shelves.PromoShelf", icon="image")),
         ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
         ('app_shelf', AppShelfChooserBlock(target_model="shelves.AppShelf", icon="image")),
@@ -116,8 +116,8 @@ class Grid(blocks.StructBlock):
     heading = blocks.CharBlock()
     rows_to_show = blocks.IntegerBlock(default=0)
     items = blocks.StreamBlock([
-        ('backwards_compatible_content', BackwardsCompatibleContent(label="Previous content", icon="folder-inverse")),
-        ('video', VideoTemplate(icon="media")),
+        ('oneyou1_teaser', BackwardsCompatibleContent(label="Previous content", icon="folder-inverse")),
+        ('video_teaser', VideoTemplate(icon="media")),
     ], icon='arrow-left', label='Items')
     shelf_id = blocks.CharBlock(required=False, label="ID")
 
