@@ -72,3 +72,51 @@ class ReleaseModelTests(WagtailPageTests):
 
     self.assertEqual(count_of_pages, release.revisions.count())
     self.assertEqual(page.get_latest_revision().id, release.revisions.first().revision.id)
+
+  def test_release_doesnt_lock_content_if_no_release_time_set(self):
+    """
+    when a release is requested with no release date, it should not save the content into json.
+    """
+    create_test_page()
+
+    release_name = "Unset release"
+
+    create_test_release(release_name)
+
+    loaded_release = Release.objects.get(release_name=release_name)
+
+    self.assertIsNone(loaded_release.content)
+
+
+  def test_release_doesnt_lock_content_before_its_release_time(self):
+
+    """
+    when a release is requested before its release date, it should not save the content into json.
+    """
+    create_test_page()
+
+    release_name = "Future release"
+    release_date = datetime.now() + timedelta(days=1)
+
+    create_test_release(release_name, release_date)
+
+    loaded_release = Release.objects.get(release_name=release_name)
+
+    self.assertIsNone(loaded_release.content)
+
+
+  def test_release_locks_content_after_its_release_time(self):
+
+    """
+    when a release is requested after its release date, it should save the content into json.
+    """
+    create_test_page()
+
+    release_name = "Past release"
+    release_date = datetime.now() + timedelta(days=-1)
+
+    create_test_release(release_name, release_date)
+
+    loaded_release = Release.objects.get(release_name=release_name)
+
+    self.assertIsNotNone(loaded_release.content)
