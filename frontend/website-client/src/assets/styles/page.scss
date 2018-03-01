@@ -17,6 +17,10 @@
   text-align: left;
 }
 
+.text-color--secondary {
+  color: $text-secondary;
+}
+
 .push-right {
   display: flex;
   justify-content: flex-end;

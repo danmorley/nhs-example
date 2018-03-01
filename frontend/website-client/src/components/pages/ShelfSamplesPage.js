@@ -120,14 +120,30 @@ const sampleShelves = {
               heading: 'Walk the walk, talk the talk',
               body: 'Share walking stories and your progress with others online',
               image: {
-                title: 'IMage name',
-                link: 'https://blob store url'
+                title: 'IMage name'
               },
               video: '123456',
               cta: {
                 link_text: 'Find out more',
                 link_external: 'http://www.edfs.co.uk'
               }
+            }
+          },
+          {
+            id: 'app-teaser-1',
+            type: 'app_teaser',
+            value: {
+              heading: 'html::Download the  <strong><span class="text-color--secondary">Wellmind</span> App</strong>',
+              body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
+              image: {
+                title: 'Image name'
+              },
+              cta_appstore: {
+                link_external: 'http://www.edfs.co.uk'
+              },
+              cta_googleplay: {
+                link_external: 'https://play.google.com/store/apps/details?id=com.bluestepsolutions.wellmind&hl=en_GB'
+              },
             }
           },
           {

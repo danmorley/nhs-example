@@ -82,6 +82,16 @@ a.button-cta {
   display: inline-block;
 }
 
+a.button-appstore {
+  display: inline-block;
+  background-image: url('../images/app-store.png');
+}
+
+a.button-googleplay {
+  display: inline-block;
+  background-image: url('../images/google-play.png');
+}
+
 .oneyou { //theme
   .button-cta {
     background-color: $sunflower-yellow;
