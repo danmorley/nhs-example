@@ -1,11 +1,12 @@
 import uuid
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from wagtail.tests.utils import WagtailPageTests
-from wagtail.wagtailcore.models import Page
 
+from pages.factories import create_test_page, create_test_theme
 from pages.models import OneYou2Page, Theme
 
+from release.factories import create_test_release
 from release.models import Release
 
 class ReleaseModelTests(WagtailPageTests):
@@ -43,7 +44,7 @@ class ReleaseModelTests(WagtailPageTests):
     """
     test_name = "Test release"
     test_date = datetime.now()
-    release = Release(release_name=test_name, release_time=test_date)
+    release = create_test_release(test_name, test_date)
     release_dict = release.dict()
     self.assertIs(release_dict['release_name'], test_name)
     self.assertEqual(release_dict['release_time'], test_date.timestamp())
@@ -53,7 +54,7 @@ class ReleaseModelTests(WagtailPageTests):
     to_dict method should return a dictionary representing the object
     """
     test_name = "Test release"
-    release = Release(release_name=test_name)
+    release = create_test_release(test_name)
     release_dict = release.dict()
     self.assertIs(release_dict['release_name'], test_name)
     self.assertFalse('release_time' in release_dict)
@@ -63,18 +64,9 @@ class ReleaseModelTests(WagtailPageTests):
     """
     when a new release is created it should be linked to the latest revisions of all live pages.
     """
-    theme = Theme(label='Theme name', class_name='theme-class')
-    theme.save()
+    page = create_test_page()
 
-    root_page = Page.get_root_nodes()[0]
-
-    page = OneYou2Page(title="Test page", path='1111', depth=0, theme=theme)
-    root_page.add_child(instance=page)
-    page.save_revision().publish()
-    page.save()
-
-    release = Release(release_name="Test name")
-    release.save()
+    release = create_test_release()
 
     count_of_pages = OneYou2Page.objects.count()
 
