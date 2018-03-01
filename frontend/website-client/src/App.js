@@ -69,8 +69,7 @@ class App extends Component {
   loadPageForKey(key) {
     console.log('Loading page for key', key);
     if (key !== undefined) {
-      let contentStore = new ContentStore('http://localhost:9002/api/v2');
-      contentStore.getPage(key).then((page) => {
+      global.contentStore.getPage(key).then((page) => {
         if (page.code === 0) {
           this.setState({ currentPage: page.response });
         } else {
