@@ -1,9 +1,10 @@
 from wagtail.tests.utils import WagtailPageTests
-from wagtail.wagtailcore.models import Page
 
+from pages.factories import create_test_page, create_test_theme
 from pages.models import OneYou2Page, Theme
 
-from release.models import Release
+from release.factories import create_test_release
+
 
 class OneYou2PageModelTests(WagtailPageTests):
 
@@ -22,7 +23,7 @@ class OneYou2PageModelTests(WagtailPageTests):
     """
     test_label = "Test theme"
     test_class_name = "test-class"
-    theme = Theme(label=test_label, class_name=test_class_name)
+    theme = create_test_theme(test_label, test_class_name)
     page = OneYou2Page(theme=theme)
     self.assertIs(page.theme.label, test_label)
     self.assertIs(page.page_theme['label'], test_label)
@@ -87,8 +88,7 @@ class OneYou2PageModelTests(WagtailPageTests):
 
 
   def test_save_doesnt_update_page_ref_if_exists(self):
-    theme = Theme(label='Theme name', class_name='theme-class')
-    theme.save()
+    theme = create_test_theme()
 
     page = OneYou2Page(title="Test page", path='1111', depth=0, theme=theme)
     original_page_ref = page.page_ref
@@ -104,8 +104,7 @@ class OneYou2PageModelTests(WagtailPageTests):
 
 
   def test_save_creates_page_ref_if_doesnt_exists(self):
-    theme = Theme(label='Theme name', class_name='theme-class')
-    theme.save()
+    theme = create_test_theme()
 
     page = OneYou2Page(title="Test page", path='1111', depth=0, theme=theme)
     page.page_ref = ''
@@ -121,20 +120,11 @@ class OneYou2PageModelTests(WagtailPageTests):
 
 
   def test_publishing_page_to_release_links_new_revision_to_release(self):
-    theme = Theme(label='Theme name', class_name='theme-class')
-    theme.save()
-
-    root_page = Page.get_root_nodes()[0]
-
-    page = OneYou2Page(title="Test page", path='1111', depth=0, theme=theme)
-    root_page.add_child(instance=page)
-    page.save_revision().publish()
-    page.save()
+    page = create_test_page()
 
     initial_revision = page.get_latest_revision()
 
-    release = Release(release_name='Test Release')
-    release.save()
+    release = create_test_release()
 
     page.release = release
     page.save_revision().publish()
