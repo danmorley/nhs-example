@@ -21,8 +21,22 @@ class CtaLink extends Component {
   render() {
     let { cta, variant } = this.props;
     if (!cta || (!cta.link_page && !cta.link_external)) return null;
-    let linkClass = (variant === 'button') ? 'button-cta' : null;
-
+    // let linkClass = (variant === 'button') ? 'button-cta' : null;
+    var linkClass;
+    
+    if (variant === 'button') {
+      linkClass = 'button-cta'
+    } 
+    else if (variant === 'appstore') {
+      linkClass = 'button-appstore'
+    } 
+    else if (variant === 'googleplay') {
+      linkClass = 'button-googleplay'
+    } 
+    else {
+      linkClass = null;
+    }
+      
     // Convert page id to path if given.
     let href = (cta.link_page) ? '/page/' + cta.link_page : cta.link_external;
 

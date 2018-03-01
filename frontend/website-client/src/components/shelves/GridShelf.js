@@ -8,6 +8,7 @@ import sampleBgImage from './healthcheckup.png'; // Tell Webpack this JS file us
 import PlaceholderPanel from '../panels/PlaceholderPanel';
 import VideoTeaserPanel from '../panels/VideoTeaserPanel';
 import Oneyou1TeaserPanel from '../panels/Oneyou1TeaserPanel';
+import AppTeaserPanel from '../panels/AppTeaserPanel';
 
 /**
  *  Grid Shelf is a simple shelf that can be used to display other

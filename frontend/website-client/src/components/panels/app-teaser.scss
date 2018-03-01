@@ -1,0 +1,52 @@
+@import '../../assets/styles/variables/variables';
+@import "../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+.app-teaser {
+  display: flex;
+  box-shadow: 0 5px 5px 0 rgba(0,0,0,0.27);
+  background-color: #f0eff4;
+}
+
+.app-teaser__heading {
+  font-family: $secondary-brand-font;
+  font-weight: normal;
+  text-transform: uppercase;
+  margin-bottom: 0.5em;
+}
+
+.app-teaser__image {
+  width: 35%;
+  background-repeat: none;
+  background-size: cover;
+  background-position: center;
+  min-height: 176px;
+  
+  @include media-breakpoint-up(sm) {
+    min-height: 263px;
+  }
+}
+
+.app-teaser__info {
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+  padding: 1.2em 1em 1em; 
+  
+  p {
+    margin-bottom: 1em;
+  }
+}
+
+a.button-appstore {
+  width: fill-available;
+  height: 40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+a.button-googleplay {
+  width: fill-available;
+  height: 40px;
+  background-size: contain;
+  background-repeat: no-repeat; 
+}
