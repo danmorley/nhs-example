@@ -9,7 +9,10 @@ def create_test_theme(label="Test theme", class_name="test-class"):
   return theme
 
 
-def create_test_page(title='Test page', path="1111", depth=0, theme=create_test_theme()):
+def create_test_page(title='Test page', path="1111", depth=0, theme=None):
+  if not theme:
+    theme = create_test_theme()
+    
   root_page = Page.get_root_nodes()[0]
 
   page = OneYou2Page(title=title, path=path, depth=depth, theme=theme)
