@@ -7,9 +7,6 @@ import Panel from './Panel';
 import PropTypes from 'prop-types';
 import ImageUtils from './ImageUtils';
 
-// import sampleBgImage from '../shelves/healthcheckup.png'; // Tell Webpack this JS file uses this image
-import myImage from '../../assets/images/app-screen.jpg';
-
 /**
  *
  *  content: {
