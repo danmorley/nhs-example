@@ -140,7 +140,10 @@ class OneYou2Page(Page):
         super(OneYou2Page, self).save(*args, **kwargs)
 
         if assigned_release:
-            assigned_release.add_revision(self.get_latest_revision())
+            if self.live:
+                assigned_release.add_revision(self.get_latest_revision())
+            else:
+                assigned_release.remove_page(self.id)
 
         return self
 

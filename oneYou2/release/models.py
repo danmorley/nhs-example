@@ -72,6 +72,11 @@ class Release(ClusterableModel):
     relation = ReleasePage(release=self, revision=new_revision)
     relation.save()
 
+  def remove_page(self, page_id):
+    for revision in self.revisions.all():
+      if revision.revision.page_id == page_id:
+        revision.delete()
+
 
 class ReleasePage(models.Model):
   release = models.ForeignKey(
