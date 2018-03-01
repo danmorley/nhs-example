@@ -144,6 +144,40 @@ class OneYou2PageModelTests(WagtailPageTests):
     self.assertFalse(initial_revision_in_release)
 
 
+  def test_unpublishing_a_page_removes_the_revision_for_that_page_from_the_release(self):
+    page = create_test_page()
+
+    release = create_test_release()
+
+    page_count = OneYou2Page.objects.count()
+    live_page_count = OneYou2Page.objects.live().count()
+    self.assertEquals(page_count, release.revisions.count())
+    self.assertEquals(live_page_count, release.revisions.count())
+
+    revision_in_release = False
+    for revision in release.revisions.all():
+      if revision.revision.id == page.get_latest_revision().id:
+        revision_in_release = True
+
+    self.assertTrue(revision_in_release)
+
+    page.release = release
+    page.unpublish()
+
+    page_count = OneYou2Page.objects.count()
+    live_page_count = OneYou2Page.objects.live().count()
+
+    self.assertNotEquals(page_count, release.revisions.count())
+    self.assertEquals(live_page_count, release.revisions.count())
+
+    revision_in_release = False
+    for revision in release.revisions.all():
+      if revision.revision.id == page.get_latest_revision().id:
+        revision_in_release = True
+
+    self.assertFalse(revision_in_release)
+
+
 class ThemeModelTests(WagtailPageTests):
 
   def test_to_dict(self):
