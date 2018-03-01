@@ -89,7 +89,7 @@ const sampleShelves = {
             value: {
               heading: 'Walk the walk, talk the talk',
               body: 'Share walking stories and your progress with others online',
-              video: '12345',
+              video: '',
               image: {
                 title: 'IMage name',
                 link: 'https://blob store url'
@@ -188,7 +188,7 @@ const sampleShelves = {
         heading: 'Section Heading Shelf',
         body: 'Layout <b>not given</b>, variant <b>not given</b>'
       }
-    },  
+    },
     {
        id: 'weeww',
        type: 'section_heading_shelf',

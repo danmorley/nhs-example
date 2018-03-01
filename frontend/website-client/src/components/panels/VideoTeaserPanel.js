@@ -6,6 +6,7 @@ import styles from './video-teaser.css';
 import Panel from './Panel';
 import PropTypes from 'prop-types';
 import ImageUtils from './ImageUtils';
+import BrightcoveVideo from '../BrightcoveVideo';
 
 // import sampleBgImage from '../shelves/healthcheckup.png'; // Tell Webpack this JS file uses this image
 import testImage from '../../assets/images/Trump2.jpg';
@@ -17,15 +18,10 @@ import testImage from '../../assets/images/Trump2.jpg';
  *  }
  */
 class VideoTeaserPanel extends Component {
-  // backgroundImageUrl(image, defaultImage) {
-  //   return (image && image.link) || defaultImage.link;
-  // }
-  //
-  // backgroundImageStyle(image, defaultImage) {
-  //   return {
-  //     backgroundImage: 'url(' + ImageUtils.backgroundImageUrl(image, ImageUtils.placeholderImage) + ')'
-  //   }
-  // }
+  renderVideo(video) {
+    if (!video) return null;
+    return (<BrightcoveVideo video={video} />);
+  }
 
   render() {
     let { content, classNamePrefix } = this.props;
@@ -34,7 +30,7 @@ class VideoTeaserPanel extends Component {
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
         <div className={`${classNamePrefix}__image`} style={backgroundTeaserImage}>
-          {/* // needs alt text */}
+          {this.renderVideo(content.video)}
         </div>
         <div className={`${classNamePrefix}__info`}>
           <Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />
