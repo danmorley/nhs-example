@@ -1,26 +1,33 @@
 import request from 'request-promise-native';
 
-function ContentStore(apiEndpointUrl) {
-  // Hard coded for dev.
-  // if (!apiEndpointUrl) apiEndpointUrl = 'http://localhost:9000/api/v2';
-  apiEndpointUrl = 'http://localhost:9000/api/v2';
-  this.apiEndpointUrl = apiEndpointUrl;
+function ContentStore(contentStoreEndpoint, site, release) {
+  this.contentStoreEndpoint = contentStoreEndpoint;
+  this.site = site;
+  this.release = release;
 }
 
-ContentStore.prototype.getSite = async function(key) {
-  return await _getSite(this.apiEndpointUrl, key);
+ContentStore.prototype.getSite = async function() {
+  return await _getSite(this.contentStoreEndpoint, this.site, this.release);
 };
 
-ContentStore.prototype.getPage = async function(key) {
-  return await _getPage(this.apiEndpointUrl, key);
-  // const contentStoreUrl = _dbUrlForCredentials(this.credentials);
-  // return primitives.getDocument(contentStoreUrl, type, key);
+ContentStore.prototype.getPage = async function(pageId) {
+  return await _getPage(this.contentStoreEndpoint, this.site, this.release, pageId);
 };
 
-
-async function _getSite(apiEndpointUrl, key) {
+/**
+ *  Get site json for the given website and release.
+ *
+ *  <contentStoreEndpoint>/sites/<site>/<release>
+ *
+ *  Examples:
+ *
+ *  https://oneyou-cms.service.nhs.uk/api/v2/sites/oneyou/current
+ *  https://oneyou-cms.service.nhs.uk/api/v2/sites/oneyou/47872384982394723987
+ */
+async function _getSite(contentStoreEndpoint, site, release) {
   console.debug('_getSite: Entry');
-  let siteUrl = apiEndpointUrl + '/sites/' + key;
+  let siteUrl = contentStoreEndpoint + '/sites/' + site;
+  // let siteUrl = `${contentStoreEndpoint}/sites/${site}/${release}`;
   let options = {
     url: siteUrl,
     json: true
@@ -38,9 +45,20 @@ async function _getSite(apiEndpointUrl, key) {
   }
 }
 
-async function _getPage(apiEndpointUrl, key) {
+/**
+ *  Get json content for a page in the given website and release.
+ *
+ *  <contentStoreEndpoint>/sites/<site>/<release>/pages/<pageId>
+ *
+ *  Examples:
+ *
+ *  https://oneyou-cms.service.nhs.uk/api/v2/sites/oneyou/current/pages/4
+ *  https://oneyou-cms.service.nhs.uk/api/v2/sites/oneyou/47872384982394723987/pages/4
+ */
+async function _getPage(contentStoreEndpoint, site, release, pageId) {
   console.debug('_getPage: Entry');
-  let pageUrl = apiEndpointUrl + '/pages/' + key;
+  let pageUrl = contentStoreEndpoint + '/pages/' + pageId;
+  // let pageUrl = `${contentStoreEndpoint}/sites/${site}/${release}/pages/${pageId}`;
   let options = {
     url: pageUrl,
     json: true
