@@ -2,6 +2,7 @@ from __future__ import absolute_import, unicode_literals
 
 from django.db import models
 from django.forms.models import model_to_dict
+from django.utils import timezone
 
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel
 
@@ -35,6 +36,7 @@ class Release(ClusterableModel):
   release_name = models.CharField(max_length=255, unique=True)
   release_time = models.DateTimeField(blank=True, null=True)
   uuid = models.CharField(max_length=255, unique=True)
+  content = models.TextField(null=True)
 
   base_form_class = ReleaseAdminForm
 
@@ -43,16 +45,34 @@ class Release(ClusterableModel):
     FieldPanel('release_time', classname='release_time',),
   ]
 
+  def __init__(self, *args, **kwargs):
+    super(Release, self).__init__(*args, **kwargs)
+    if not self.id is None:
+      if (self.release_time is not None) and self.release_time < timezone.now():
+        pages = []
+
+        for revision in self.revisions.all():
+          pages.append(revision.revision.content_json)
+
+        self.content = str(pages)
+
+        self.save()
+
+
   def save(self, *args, **kwargs):
+    is_new_entry = self.id is None
+
     if not self.uuid or self.uuid is None:
       self.uuid = str(uuid.uuid4())
 
     super(Release, self).save(*args, **kwargs)
 
-    live_pages = OneYou2Page.objects.live()
-    for page in live_pages:
-      relation = ReleasePage(release=self, revision=page.get_latest_revision())
-      relation.save()
+    if is_new_entry:
+      live_pages = OneYou2Page.objects.live()
+      for page in live_pages:
+        relation = ReleasePage(release=self, revision=page.get_latest_revision())
+        relation.save()
+
     return self
 
   def dict(self):
