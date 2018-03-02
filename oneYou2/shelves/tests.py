@@ -3,21 +3,25 @@ from django.contrib.contenttypes.models import ContentType
 from wagtail.tests.utils import WagtailPageTests
 
 from oneYou2.test_helpers import assertIsTrue, assertIsFalse
+
+from shelves.factories import create_test_abstract_shelf, create_test_promo_shelf, create_test_revision
 from shelves.models import ShelfAbstract, ShelfRevision, PromoShelf
 
 class ShelfAbstractModelTests(WagtailPageTests):
 
   def test_initialising_an_instance_assigns_the_content_type(self):
-    shelf = ShelfAbstract(label='Test label')
+    shelf = create_test_abstract_shelf()
 
     expectedContentType = ContentType.objects.get_for_model(shelf)
 
     self.assertEqual(shelf.content_type, expectedContentType)
 
+    shelf.delete()
+
 
   def test_initialising_a_sub_class_instance_assigns_the_correct_content_type(self):
-    abstractShelf = ShelfAbstract(label='Abstract Test label')
-    shelf = PromoShelf(label="Test shelf", heading="The heading of the shelf")
+    abstractShelf = create_test_abstract_shelf('Abstract test id')
+    shelf = create_test_promo_shelf()
 
     expectedContentType = ContentType.objects.get_for_model(shelf)
     notExpectedContentType = ContentType.objects.get_for_model(abstractShelf)
@@ -25,15 +29,18 @@ class ShelfAbstractModelTests(WagtailPageTests):
     self.assertEqual(shelf.content_type, expectedContentType)
     self.assertNotEqual(shelf.content_type, notExpectedContentType)
 
+    shelf.delete()
+    abstractShelf.delete()
+
 
   def test_saving_a_shelf_abstract_creates_a_new_revision(self):
-    shelf = ShelfAbstract(label="Test shelf")
+    shelf = ShelfAbstract(shelf_id="Test shelf")
 
     self.assertEqual(shelf.revisions.count(), 0)
 
     shelf.save()
 
-    loadedShelf = ShelfAbstract.objects.get(label="Test shelf")
+    loadedShelf = ShelfAbstract.objects.get(shelf_id="Test shelf")
 
     self.assertEqual(loadedShelf.revisions.count(), 1)
 
@@ -41,7 +48,7 @@ class ShelfAbstractModelTests(WagtailPageTests):
 
 
   def test_child_class_saving_also_creates_new_revision(self):
-    shelf = PromoShelf(label="Test shelf", heading="The heading of the shelf")
+    shelf = PromoShelf(shelf_id="Test shelf", heading="The heading of the shelf")
 
     self.assertEqual(shelf.revisions.count(), 0)
 
@@ -55,13 +62,11 @@ class ShelfAbstractModelTests(WagtailPageTests):
 
 
   def test_saving_associates_new_revision_to_live_revision(self):
-    shelf = ShelfAbstract(label="Test shelf")
+    shelf = ShelfAbstract(shelf_id="Test shelf")
 
     self.assertIsNone(shelf.live_revision)
 
     shelf.save()
-
-    loadedShelf = ShelfAbstract.objects.get(label="Test shelf")
 
     self.assertIsNotNone(shelf.live_revision)
 
@@ -69,16 +74,14 @@ class ShelfAbstractModelTests(WagtailPageTests):
 
 
   def test_specific_returns_the_instance_in_the_correct_class_type(self):
-    shelf = ShelfAbstract(label='Test label')
-    shelf.save()
+    shelf = create_test_abstract_shelf()
 
     expectedContentType = ContentType.objects.get_for_model(shelf.specific)
     self.assertEqual(shelf.content_type, expectedContentType)
 
     shelf.delete()
 
-    shelf = PromoShelf(label="Test shelf", heading="The heading of the shelf 1")
-    shelf.save()
+    shelf = create_test_promo_shelf()
 
     expectedContentType = ContentType.objects.get_for_model(shelf.specific)
     self.assertEqual(shelf.content_type, expectedContentType)
@@ -86,18 +89,19 @@ class ShelfAbstractModelTests(WagtailPageTests):
     shelf.delete()
 
   def test_to_dict_returns_the_object_as_a_dictionary(self):
-    shelf = ShelfAbstract(label='Test label')
+    shelf = create_test_abstract_shelf()
 
     shelf_dict = shelf.to_dict()
 
-    self.assertEqual(shelf_dict['label'], shelf.label)
+    self.assertEqual(shelf_dict['shelf_id'], shelf.shelf_id)
+
+    shelf.delete()
 
 
 class ShelfRevisionModelTests(WagtailPageTests):
 
   def test_saving_adds_a_created_at_time(self):
-    shelf = ShelfAbstract(label='Test label')
-    shelf.save()
+    shelf = create_test_abstract_shelf()
 
     revision = ShelfRevision(shelf_id = shelf.id, content_json = shelf.to_dict())
 
@@ -111,14 +115,11 @@ class ShelfRevisionModelTests(WagtailPageTests):
 
 
   def test_is_latest_revision_returns_correct_value(self):
-    shelf = ShelfAbstract(label='Test label')
-    shelf.save()
+    shelf = create_test_abstract_shelf()
 
     initialRevision = shelf.live_revision
 
-    secondRevision = ShelfRevision(shelf_id = shelf.id, content_json = shelf.to_dict())
-
-    secondRevision.save()
+    secondRevision = create_test_revision(shelf)
 
     assertIsFalse(self, initialRevision.is_latest_revision())
 
@@ -128,8 +129,7 @@ class ShelfRevisionModelTests(WagtailPageTests):
 
 
   def test_is_latest_revision_returns_true_for_unsaved_revisions(self):
-    shelf = ShelfAbstract(label='Test label')
-    shelf.save()
+    shelf = create_test_abstract_shelf()
 
     revision = ShelfRevision(shelf_id = shelf.id, content_json = shelf.to_dict())
 
@@ -140,14 +140,11 @@ class ShelfRevisionModelTests(WagtailPageTests):
 
 
   def test_get_previous_returns_the_previous_revision(self):
-    shelf = ShelfAbstract(label='Test label')
-    shelf.save()
+    shelf = create_test_abstract_shelf()
 
     initialRevision = shelf.live_revision
 
-    secondRevision = ShelfRevision(shelf_id = shelf.id, content_json = shelf.to_dict())
-
-    secondRevision.save()
+    secondRevision = create_test_revision(shelf)
 
     assertIsTrue(self, secondRevision.is_latest_revision())
 
@@ -159,14 +156,11 @@ class ShelfRevisionModelTests(WagtailPageTests):
 
 
   def test_get_next_returns_the_next_revision(self):
-    shelf = ShelfAbstract(label='Test label')
-    shelf.save()
+    shelf = create_test_abstract_shelf()
 
     initialRevision = shelf.live_revision
 
-    secondRevision = ShelfRevision(shelf_id=shelf.id, content_json=shelf.to_dict())
-
-    secondRevision.save()
+    secondRevision = create_test_revision(shelf)
 
     assertIsFalse(self, initialRevision.is_latest_revision())
 
@@ -178,12 +172,11 @@ class ShelfRevisionModelTests(WagtailPageTests):
 
 
   def test_publish_duplicates_revision_as_live_on_the_shelf(self):
-    shelf = ShelfAbstract(label='Test label')
-    shelf.save()
+    shelf = create_test_abstract_shelf('Test label')
 
     initialRevision = shelf.live_revision
 
-    shelf.label = 'Test label 2'
+    shelf.shelf_id = 'Test label 2'
     shelf.save()
 
     secondRevision = shelf.live_revision
@@ -194,11 +187,11 @@ class ShelfRevisionModelTests(WagtailPageTests):
 
     initialRevision.publish()
 
-    shelf = ShelfAbstract.objects.get(label='Test label')
+    shelf = ShelfAbstract.objects.get(shelf_id='Test label')
 
     self.assertEqual(shelf.revisions.count(), 3)
     self.assertNotEqual(shelf.live_revision.content_json, secondRevision.content_json)
-    self.assertEqual(initialRevision.as_shelf_object().label, shelf.live_revision.as_shelf_object().label)
+    self.assertEqual(initialRevision.as_shelf_object().shelf_id, shelf.live_revision.as_shelf_object().shelf_id)
 
     shelf.delete()
 

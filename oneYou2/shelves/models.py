@@ -50,7 +50,7 @@ class ShelfAbstract(models.Model):
     settings_panels = []
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super(ShelfAbstract, self).__init__(*args, **kwargs)
         if not self.id:
             # this model is being newly created
             # rather than retrieved from the db;
@@ -85,11 +85,11 @@ class ShelfAbstract(models.Model):
         return newObj
 
     def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
+        super(ShelfAbstract, self).save(*args, **kwargs)
         revision = ShelfRevision(shelf_id=self.id, content_json=self.to_dict())
         revision.save()
         self.live_revision = revision
-        super().save()
+        super(ShelfAbstract, self).save()
 
     @cached_property
     def specific(self):
@@ -140,7 +140,7 @@ class ShelfRevision(models.Model):
         if self.created_at is None:
             self.created_at = timezone.now()
 
-        super().save(*args, **kwargs)
+        super(ShelfRevision, self).save(*args, **kwargs)
 
     def is_latest_revision(self):
         if self.id is None:
