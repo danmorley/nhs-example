@@ -16,3 +16,15 @@
     background: $light-grey;
   }
 }
+
+.panel__button-list {
+  display: flex;
+  
+  li {
+    flex-grow: 1;
+    
+    &:first-child {
+      margin-right:1em;
+    }
+  }
+}

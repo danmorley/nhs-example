@@ -12,9 +12,14 @@ class PHEImage(AbstractImage):
       search_string = '{"type": "image", "value": ' + str(self.id)
       return OneYou2Page.objects.filter(body__contains=search_string)      
 
-    admin_form_fields = Image.admin_form_fields + (
-        
-    )
+    admin_form_fields = Image.admin_form_fields + ()
+
+    @property
+    def link(self):
+        if self.file:
+            return self.file.url
+        else:
+            return ""
 
 
 class PHERendition(AbstractRendition):

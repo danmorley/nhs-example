@@ -6,19 +6,6 @@
 $shelf-padding-standard: 1em;
 $shelf-padding-extra: 2em;
 
-.slick-arrow:before {
-  color: green !important;
-}
-
-.slide1 {
-    background-color: red;
-    padding: 20px;
-
-    h3 {
-      background-color: green;
-    }
-}
-
 .shelf__header {
   color: $teal-blue;
   font-size: $h2;
@@ -42,19 +29,46 @@ $shelf-padding-extra: 2em;
 .shelf__col {
   padding-top: 0.5em;
   padding-bottom: 0.5em;
-
+  
+  h1 + p,
   h2 + p {
-      margin-top: 0.5em;
-      margin-bottom: 1em;
-    }
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+  }
 
   p:last-child {
     margin-bottom: 0;
   }
 }
 
+.shelf__header {
+  font-family: $secondary-brand-font;
+  font-weight: normal;
+  margin-bottom: 0.2em;
+  
+  @include media-breakpoint-up(sm) {
+    margin-bottom: 0.5em;
+  }
+}
+
+.section-heading-shelf h2 {
+    font-family: $secondary-brand-font;
+    font-weight: normal;
+}
+
+//theme
+.oneyou {
+  
+  .shelf {
+    
+    h2 {
+    color: $teal-blue;
+    }
+  }
+}
+
 .guidance-shelf {
-  background-color: #a2ffa9;
+  background-color: #fcf4ba;
   border: 1px solid #c8c8c8;
   margin: 0px 40px;
   padding: 12px;
@@ -63,14 +77,10 @@ $shelf-padding-extra: 2em;
   h2 {
     width: 100%;
     margin-bottom: 16px;
+    color: #302f25 !important;
   }
   p {
     width: 100%;
     text-align: center;
   }
-}
-
-.carousel-shelf * {
-  min-height: 0;
-  min-width: 0;
 }

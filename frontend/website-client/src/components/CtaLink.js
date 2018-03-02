@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Text from './Text';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 /**
  *  Link component that will render a react router <Link> tag for internal
@@ -33,5 +34,11 @@ class CtaLink extends Component {
     }
   }
 }
+
+CtaLink.propTypes = {
+  link: PropTypes.string.isRequired,
+  active: PropTypes.boolean,
+  linkType: PropTypes.string.isRequired
+};
 
 export default CtaLink;
