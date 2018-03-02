@@ -78,7 +78,7 @@ class CTABlock(blocks.StructBlock):
 class BackwardsCompatibleContent(CTABlock):
     heading = blocks.CharBlock(required=True)
     body = blocks.TextBlock(required=True)
-    image = ImageChooserBlock()
+    image = BlobImageChooserBlock()
     cta =blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False, verbose_name="cta")
@@ -96,6 +96,7 @@ class FindOutMoreDropDown(CTABlock):
 class VideoTemplate(blocks.StructBlock):
     heading = blocks.CharBlock(required=True)
     body = blocks.TextBlock(required=True)
+    image = BlobImageChooserBlock(help_text="Click this image plays the video")
     video = blocks.CharBlock(required=True)
     shelf_id = blocks.CharBlock(required=False, label="ID")
 
