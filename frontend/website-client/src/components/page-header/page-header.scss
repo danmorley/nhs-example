@@ -4,7 +4,6 @@
 .page-header {
   text-align: center;
   padding-top: 1em;
-  padding-bottom: 3em;
   
   .header-nav--open & {
     position: relative;
@@ -16,8 +15,22 @@
   }
   
   @include media-breakpoint-up(sm) {
+    padding-top: 0;
     text-align: left;
   }
+}
+
+.page-header__row {
+  justify-content: center;
+
+  @include media-breakpoint-up(sm) {
+    display: flex;
+    justify-content: left;
+  }
+}
+
+.page-header__info {
+  align-self: flex-start;
 }
 
 .page-header__logo {
@@ -26,6 +39,11 @@
   color: $text-primary;
   text-decoration: none;
   white-space: nowrap;
+  display: inline-block;
+  
+  @include media-breakpoint-up(sm) {
+    padding-top: 1rem;
+  }
 
   span {
     display: inline-block;
