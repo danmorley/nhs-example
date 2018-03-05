@@ -1,8 +1,12 @@
-from wagtail.tests.utils import WagtailPageTests
+from oneYou2.tests.utils import OneYouTests
 
+from pages.factories import create_test_page, create_test_theme
 from pages.models import OneYou2Page, Theme
 
-class OneYou2PageModelTests(WagtailPageTests):
+from release.factories import create_test_release
+
+
+class OneYou2PageModelTests(OneYouTests):
 
   def test_initialisation_generates_ref(self):
     """
@@ -19,7 +23,7 @@ class OneYou2PageModelTests(WagtailPageTests):
     """
     test_label = "Test theme"
     test_class_name = "test-class"
-    theme = Theme(label=test_label, class_name=test_class_name)
+    theme = create_test_theme(test_label, test_class_name)
     page = OneYou2Page(theme=theme)
     self.assertIs(page.theme.label, test_label)
     self.assertIs(page.page_theme['label'], test_label)
@@ -84,8 +88,7 @@ class OneYou2PageModelTests(WagtailPageTests):
 
 
   def test_save_doesnt_update_page_ref_if_exists(self):
-    theme = Theme(label='Theme name', class_name='theme-class')
-    theme.save()
+    theme = create_test_theme()
 
     page = OneYou2Page(title="Test page", path='1111', depth=0, theme=theme)
     original_page_ref = page.page_ref
@@ -101,8 +104,7 @@ class OneYou2PageModelTests(WagtailPageTests):
 
 
   def test_save_creates_page_ref_if_doesnt_exists(self):
-    theme = Theme(label='Theme name', class_name='theme-class')
-    theme.save()
+    theme = create_test_theme()
 
     page = OneYou2Page(title="Test page", path='1111', depth=0, theme=theme)
     page.page_ref = ''
@@ -117,7 +119,66 @@ class OneYou2PageModelTests(WagtailPageTests):
     self.assertIsNot(loadedPage.page_ref, original_page_ref)
 
 
-class ThemeModelTests(WagtailPageTests):
+  def test_publishing_page_to_release_links_new_revision_to_release(self):
+    page = create_test_page()
+
+    initial_revision = page.get_latest_revision()
+
+    release = create_test_release()
+
+    page.release = release
+    page.save_revision().publish()
+    page.save()
+
+    second_revision = page.get_latest_revision()
+
+    initial_revision_in_release = False
+    second_revision_in_release = False
+    for revision in release.revisions.all():
+      if revision.revision.id == initial_revision.id:
+        initial_revision_in_release = True
+      if revision.revision.id == second_revision.id:
+        second_revision_in_release = True
+
+    self.assertTrue(second_revision_in_release)
+    self.assertIsFalse(initial_revision_in_release)
+
+
+  def test_unpublishing_a_page_removes_the_revision_for_that_page_from_the_release(self):
+    page = create_test_page()
+
+    release = create_test_release()
+
+    page_count = OneYou2Page.objects.count()
+    live_page_count = OneYou2Page.objects.live().count()
+    self.assertEquals(page_count, release.revisions.count())
+    self.assertEquals(live_page_count, release.revisions.count())
+
+    revision_in_release = False
+    for revision in release.revisions.all():
+      if revision.revision.id == page.get_latest_revision().id:
+        revision_in_release = True
+
+    self.assertTrue(revision_in_release)
+
+    page.release = release
+    page.unpublish()
+
+    page_count = OneYou2Page.objects.count()
+    live_page_count = OneYou2Page.objects.live().count()
+
+    self.assertNotEquals(page_count, release.revisions.count())
+    self.assertEquals(live_page_count, release.revisions.count())
+
+    revision_in_release = False
+    for revision in release.revisions.all():
+      if revision.revision.id == page.get_latest_revision().id:
+        revision_in_release = True
+
+    self.assertIsFalse(revision_in_release)
+
+
+class ThemeModelTests(OneYouTests):
 
   def test_to_dict(self):
     """

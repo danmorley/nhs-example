@@ -21,31 +21,10 @@ services:
       AZURE_ACCOUNT_KEY: ${AZURE_ACCOUNT_KEY}
       AZURE_CONTAINER: ${AZURE_CONTAINER}
     build: .
-    command: bash -c "./bin/wait-for-it.sh db:1433 -- python3 ./manage.py migrate && python3 ./manage.py runserver 0.0.0.0:8000"
-    volumes:
-      - .:/code
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db
-
-  web-pre-prod:
-    environment:
-      HAY_DEBUG: "True"
-      DB_NAME: "${UAT_DB_NAME:-master}"
-      DB_HOST: "db"
-      DB_PORT: "1433"
-      DB_USER: "sa"
-      DB_PASSWORD: "msSQL_password"
-      SITE_ENV: 'Pre Release'
-      AZURE_ACCOUNT_NAME: ${AZURE_ACCOUNT_NAME}
-      AZURE_ACCOUNT_KEY: ${AZURE_ACCOUNT_KEY}
-      AZURE_CONTAINER: ${AZURE_CONTAINER}
-    build: .
     command: bash -c "./bin/wait-for-it.sh db:1433 -- python3 ./manage.py migrate && python3 ./manage.py loaddata ./oneYou2/fixtures/fixture.json && python3 ./manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/code
     ports:
-      - "9000:8000"
+      - "8000:8000"
     depends_on:
       - db
