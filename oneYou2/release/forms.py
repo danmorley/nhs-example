@@ -12,8 +12,8 @@ class ReleaseAdminForm(ModelForm):
     pages = OneYou2Page.objects.all()
     initial_selection = []
     if self.instance:
-      for page in self.instance.pages.all():
-        initial_selection.append(str(page.id))
+      for relation in self.instance.revisions.all():
+        initial_selection.append(str(relation.revision.page.id))
     for page in pages:
       pages_for_selector.append((str(page.id), page.title))
     self.fields['page_name'] = forms.MultipleChoiceField(choices=pages_for_selector, required=False, initial=initial_selection)
