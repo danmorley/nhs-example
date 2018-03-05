@@ -2,3 +2,4 @@
 .idea/
 media/
 .DS_Store
+.coverage
