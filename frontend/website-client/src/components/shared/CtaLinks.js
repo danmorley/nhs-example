@@ -32,8 +32,8 @@ class CtaLinks extends Component {
 }
 
 CtaLinks.propTypes = {
-  cta: PropTypes.object.isRequired,
-  variant: PropTypes.string.isRequired,
+  cta: PropTypes.oneOfType([PropTypes.object,PropTypes.array]),
+  variant: PropTypes.string,
 };
 
 export default CtaLinks;

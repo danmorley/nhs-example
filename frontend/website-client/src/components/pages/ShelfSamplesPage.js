@@ -14,7 +14,7 @@ const sampleShelves = {
         heading: 'Carousel Shelf',
         body: 'Layout <b>not given</b>, variant <b>not given</b>'
       }
-    },  
+    },
     {
       id: 'carousel-1',
       type: 'carousel_shelf',
@@ -55,7 +55,7 @@ const sampleShelves = {
       type: 'guidance_shelf',
       value: {
         heading: 'Grid Shelf',
-        body: 'Layout <b>not given</b>, variant <b>not given</b>'
+        body: '<p>Layout <b>not given</b>, variant <b>not given</b></p><p>Contains examples of VideoTeaserPanel, Oneyou1TeaserPanel and AppTeaserPanel</p>'
       }
     },
     {
@@ -69,13 +69,13 @@ const sampleShelves = {
             id: 'video-teaser-1',
             type: 'video_teaser',
             value: {
-              heading: 'Walk the walk, talk the talk',
+              heading: 'Walk the walk, talk the talk 2',
               body: 'Share walking stories and your progress with others online',
               image: {
                 title: 'IMage name',
                 link: 'https://blob store url'
               },
-              video: '12345',
+              video: '5520584848001',
               cta: {
                 link_text: 'Find out more',
                 link_external: 'http://www.somewebsite.co.uk'
@@ -89,7 +89,7 @@ const sampleShelves = {
             value: {
               heading: 'Walk the walk, talk the talk',
               body: 'Share walking stories and your progress with others online',
-              video: '',
+              video: '5669668082001',
               image: {
                 title: 'IMage name',
                 link: 'https://blob store url'
@@ -106,7 +106,7 @@ const sampleShelves = {
             value: {
               heading: 'Walk the walk, talk the talk',
               body: 'Share walking stories and your progress with others online',
-              video: '384294381290482903',
+              video: '',
               cta: {
                 link_text: 'Find out more',
                 link_external: 'http://www.somewebsite.co.uk'
