@@ -33,6 +33,12 @@ def obj_to_dict(obj):
 
 
 class Release(ClusterableModel):
+  base_release = models.ForeignKey(
+    'release.Release',
+    related_name='base',
+    blank=True,
+    null=True,
+    on_delete=models.SET_NULL)
   release_name = models.CharField(max_length=255, unique=True)
   release_time = models.DateTimeField(blank=True, null=True)
   uuid = models.CharField(max_length=255, unique=True)
@@ -68,10 +74,15 @@ class Release(ClusterableModel):
     super(Release, self).save(*args, **kwargs)
 
     if is_new_entry:
-      live_pages = OneYou2Page.objects.live()
-      for page in live_pages:
-        relation = ReleasePage(release=self, revision=page.get_latest_revision())
-        relation.save()
+      if self.base_release:
+        for page in self.base_release.revisions.all():
+          relation = ReleasePage(release=self, revision=page.revision)
+          relation.save()
+      else:
+        live_pages = OneYou2Page.objects.live()
+        for page in live_pages:
+          relation = ReleasePage(release=self, revision=page.get_latest_revision())
+          relation.save()
 
     return self
 
