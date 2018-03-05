@@ -63,7 +63,7 @@ class Release(ClusterableModel):
 
         self.content = str(pages)
 
-        self.save()
+        # self.save()
 
 
   def save(self, *args, **kwargs):

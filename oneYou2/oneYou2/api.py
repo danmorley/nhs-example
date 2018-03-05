@@ -16,6 +16,8 @@ from wagtail.wagtailredirects.models import Redirect
 from wagtail.wagtailcore.models import Page
 
 from home.models import SiteSettings
+from release.utils import get_latest_release
+from release.exceptions import NoReleasesFound
 
 
 class MenuField(Field):
@@ -194,7 +196,13 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
     def detail_view(self, request, pk, release_id=None):
         instance = self.get_object()
         # TODO: Currently no site data is associated with a release, so this doesn't really do anything
-        setattr(instance, 'release_id', release_id)
+        if not release_id or release_id == "current":
+            current_release = get_latest_release()
+            if not current_release:
+                raise NoReleasesFound("The current site has no live releases")
+            setattr(instance, 'release_id', current_release.uuid)
+        else:
+            setattr(instance, 'release_id', release_id)
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
 
