@@ -4,6 +4,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 // import site from './sample-data/SiteSample';
 import ContentStore from './services/ContentStore';
+import invert from 'lodash.invert';
 
 global.rootUrl = '';
 
@@ -28,6 +29,7 @@ global.contentStore = new ContentStore(dataContentStoreEndpoint, dataSite, dataR
 // Load site.json before mounting the React app.
 global.contentStore.getSite().then((site) => {
   if (site.code === 0) {
+    global.pages = invert(site.response.pages);
     ReactDOM.render(<App site={site && site.response}/>, rootElem);
     registerServiceWorker();
   } else {

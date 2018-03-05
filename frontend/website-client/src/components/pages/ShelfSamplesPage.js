@@ -163,7 +163,7 @@ const sampleShelves = {
                 },
                 {
                   link_text: 'Link 2 text',
-                  page: 3
+                  link_page: 6
                 },
                 {
                   link_text: 'Link 3 text',
