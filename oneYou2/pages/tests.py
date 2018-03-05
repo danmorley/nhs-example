@@ -1,4 +1,4 @@
-from wagtail.tests.utils import WagtailPageTests
+from oneYou2.tests.utils import OneYouTests
 
 from pages.factories import create_test_page, create_test_theme
 from pages.models import OneYou2Page, Theme
@@ -6,7 +6,7 @@ from pages.models import OneYou2Page, Theme
 from release.factories import create_test_release
 
 
-class OneYou2PageModelTests(WagtailPageTests):
+class OneYou2PageModelTests(OneYouTests):
 
   def test_initialisation_generates_ref(self):
     """
@@ -141,7 +141,7 @@ class OneYou2PageModelTests(WagtailPageTests):
         second_revision_in_release = True
 
     self.assertTrue(second_revision_in_release)
-    self.assertFalse(initial_revision_in_release)
+    self.assertIsFalse(initial_revision_in_release)
 
 
   def test_unpublishing_a_page_removes_the_revision_for_that_page_from_the_release(self):
@@ -175,10 +175,10 @@ class OneYou2PageModelTests(WagtailPageTests):
       if revision.revision.id == page.get_latest_revision().id:
         revision_in_release = True
 
-    self.assertFalse(revision_in_release)
+    self.assertIsFalse(revision_in_release)
 
 
-class ThemeModelTests(WagtailPageTests):
+class ThemeModelTests(OneYouTests):
 
   def test_to_dict(self):
     """

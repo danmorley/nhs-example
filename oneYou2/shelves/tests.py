@@ -1,13 +1,11 @@
 from django.contrib.contenttypes.models import ContentType
 
-from wagtail.tests.utils import WagtailPageTests
-
-from oneYou2.test_helpers import assertIsTrue, assertIsFalse
+from oneYou2.tests.utils import OneYouTests
 
 from shelves.factories import create_test_abstract_shelf, create_test_promo_shelf, create_test_revision
 from shelves.models import ShelfAbstract, ShelfRevision, PromoShelf
 
-class ShelfAbstractModelTests(WagtailPageTests):
+class ShelfAbstractModelTests(OneYouTests):
 
   def test_initialising_an_instance_assigns_the_content_type(self):
     shelf = create_test_abstract_shelf()
@@ -98,7 +96,7 @@ class ShelfAbstractModelTests(WagtailPageTests):
     shelf.delete()
 
 
-class ShelfRevisionModelTests(WagtailPageTests):
+class ShelfRevisionModelTests(OneYouTests):
 
   def test_saving_adds_a_created_at_time(self):
     shelf = create_test_abstract_shelf()
@@ -121,9 +119,9 @@ class ShelfRevisionModelTests(WagtailPageTests):
 
     secondRevision = create_test_revision(shelf)
 
-    assertIsFalse(self, initialRevision.is_latest_revision())
+    self.assertIsFalse(initialRevision.is_latest_revision())
 
-    assertIsTrue(self, secondRevision.is_latest_revision())
+    self.assertIsTrue(secondRevision.is_latest_revision())
 
     shelf.delete()
 
@@ -134,7 +132,7 @@ class ShelfRevisionModelTests(WagtailPageTests):
     revision = ShelfRevision(shelf_id = shelf.id, content_json = shelf.to_dict())
 
     self.assertIsNone(revision.id)
-    assertIsTrue(self, revision.is_latest_revision())
+    self.assertIsTrue(revision.is_latest_revision())
 
     shelf.delete()
 
@@ -146,7 +144,7 @@ class ShelfRevisionModelTests(WagtailPageTests):
 
     secondRevision = create_test_revision(shelf)
 
-    assertIsTrue(self, secondRevision.is_latest_revision())
+    self.assertIsTrue(secondRevision.is_latest_revision())
 
     previousRevision = secondRevision.get_previous()
 
@@ -162,7 +160,7 @@ class ShelfRevisionModelTests(WagtailPageTests):
 
     secondRevision = create_test_revision(shelf)
 
-    assertIsFalse(self, initialRevision.is_latest_revision())
+    self.assertIsFalse(initialRevision.is_latest_revision())
 
     nextRevision = initialRevision.get_next()
 

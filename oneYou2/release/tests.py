@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime, timedelta
 
-from wagtail.tests.utils import WagtailPageTests
+from oneYou2.tests.utils import OneYouTests
 
 from pages.factories import create_test_page, create_test_theme
 from pages.models import OneYou2Page, Theme
@@ -9,7 +9,9 @@ from pages.models import OneYou2Page, Theme
 from release.factories import create_test_release
 from release.models import Release
 
-class ReleaseModelTests(WagtailPageTests):
+
+
+class ReleaseModelTests(OneYouTests):
 
   def test_save_doesnt_update_page_ref_if_exists(self):
     release = Release(release_name="Test release")
@@ -57,7 +59,7 @@ class ReleaseModelTests(WagtailPageTests):
     release = create_test_release(test_name)
     release_dict = release.dict()
     self.assertIs(release_dict['release_name'], test_name)
-    self.assertFalse('release_time' in release_dict)
+    self.assertIsFalse('release_time' in release_dict)
 
 
   def test_on_create_release_is_linked_to_all_current_pages(self):
