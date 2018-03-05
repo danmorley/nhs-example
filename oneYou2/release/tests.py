@@ -122,3 +122,25 @@ class ReleaseModelTests(OneYouTests):
     loaded_release = Release.objects.get(release_name=release_name)
 
     self.assertIsNotNone(loaded_release.content)
+
+  def test_release_initialised_from_a_base_release_gets_revisions_from_base(self):
+    """
+    when a release is initialised from an existing release as a base it gets linked to the same pages the base release
+    is linked to at that point.
+    """
+    page = create_test_page()
+
+    release_name = "Base release"
+
+    base_release = create_test_release(release_name)
+
+    page.save_revision().publish()
+
+    self.assertEquals(base_release.revisions. count(), 1)
+
+    new_release = create_test_release(base_release=base_release)
+
+    self.assertEquals(new_release.revisions.count(), 1)
+    self.assertEquals(base_release.revisions.first().revision.id, new_release.revisions.first().revision.id)
+
+
