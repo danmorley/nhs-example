@@ -47,6 +47,7 @@ class Release(ClusterableModel):
   base_form_class = ReleaseAdminForm
 
   panels = [
+    FieldPanel('base_release', classname='base_release', ),
     FieldPanel('release_name', classname='release_name',),
     FieldPanel('release_time', classname='release_time',),
   ]
