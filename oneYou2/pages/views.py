@@ -7,6 +7,7 @@ from wagtail.wagtailadmin import messages
 from wagtail.wagtailadmin.views.pages import get_valid_next_url_from_request
 from wagtail.wagtailcore.models import Page, UserPagePermissionsProxy
 
+
 def unpublish(request, page_id):
   page = get_object_or_404(Page, id=page_id).specific
 

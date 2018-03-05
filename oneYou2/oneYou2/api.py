@@ -1,5 +1,8 @@
 from collections import OrderedDict
 
+from django.conf.urls import url
+from rest_framework.response import Response
+from rest_framework.fields import Field, CharField
 from wagtail.api.v2.endpoints import PagesAPIEndpoint
 from wagtail.api.v2.router import WagtailAPIRouter
 from wagtail.api.v2.serializers import BaseSerializer
@@ -9,10 +12,10 @@ from wagtail.wagtailimages.api.v2.endpoints import ImagesAPIEndpoint
 from wagtail.wagtaildocs.api.v2.endpoints import DocumentsAPIEndpoint
 from wagtail.api.v2.endpoints import BaseAPIEndpoint
 from wagtail.api.v2.filters import FieldsFilter, OrderingFilter, SearchFilter
-from rest_framework.fields import Field
+from wagtail.wagtailredirects.models import Redirect
+from wagtail.wagtailcore.models import Page
 
 from home.models import SiteSettings
-from wagtail.wagtailredirects.models import Redirect
 
 
 class MenuField(Field):
@@ -149,12 +152,21 @@ class PagesField(Field):
         return {p['url_path'].replace('/home', ''): p['id'] for p in pages}
 
 
+class ReleaseField(Field):
+    def get_attribute(self, instance):
+        return instance
+
+    def to_representation(self, document):
+        return document.release
+
+
 class SiteSerializer(BaseSerializer):
     menu = MenuField(read_only=True)
     redirects = RedirectField(read_only=True)
     footer = FooterField(read_only=True)
     header = HeaderField(read_only=True)
     pages = PagesField(read_only=True)
+    release_id = CharField(read_only=True)
 
 
 # There is no default sites endpoint
@@ -167,11 +179,11 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
     base_serializer_class = SiteSerializer
     filter_backends = [FieldsFilter, OrderingFilter, SearchFilter]
     body_fields = BaseAPIEndpoint.body_fields + ['hostname', 'port', 'site_name', 'root_page', 'is_default_site',
-                                                 'menu', 'header', 'footer', 'redirects', 'pages']
+                                                 'menu', 'header', 'footer', 'redirects', 'pages', 'release_id']
     meta_fields = BaseAPIEndpoint.meta_fields + ['hostname']
     listing_default_fields = BaseAPIEndpoint.listing_default_fields + ['hostname', 'port', 'site_name', 'root_page',
                                                                        'is_default_site', 'menu', 'header', 'footer',
-                                                                       'redirects', 'pages']
+                                                                       'redirects', 'pages', 'release_id']
     nested_default_fields = BaseAPIEndpoint.nested_default_fields + ['hostname']
     name = 'sites'
     model = get_document_model()
@@ -179,16 +191,24 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
     def get_queryset(self):
         return self.model.objects.all().order_by('id')
 
+    def detail_view(self, request, pk, release_id=None):
+        instance = self.get_object()
+        # TODO: Currently no site data is associated with a release, so this doesn't really do anything
+        setattr(instance, 'release_id', release_id)
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
 
-from wagtail.wagtailcore.models import Page
+    @classmethod
+    def get_urlpatterns(cls):
+        """
+        This returns a list of URL patterns for the endpoint
+        """
+        return [
+            url(r'^$', cls.as_view({'get': 'listing_view'}), name='listing'),
+            url(r'^(?P<pk>\d+)/$', cls.as_view({'get': 'detail_view'}), name='detail'),
+            url(r'^(?P<pk>\d+)/(?P<release_id>[\w\-]+)/$', cls.as_view({'get': 'detail_view'}), name='detail'),
+        ]
 
-# Create the router. "wagtailapi" is the URL namespace
-api_router = WagtailAPIRouter('wagtailapi')
-
-# Add the three endpoints using the "register_endpoint" method.
-# The first parameter is the name of the endpoint (eg. pages, images). This
-# is used in the URL of the endpoint
-# The second parameter is the endpoint class that handles the requests
 
 class OneYouPagesAPIEndpoint(PagesAPIEndpoint):
   def get_object(self):
@@ -197,6 +217,15 @@ class OneYouPagesAPIEndpoint(PagesAPIEndpoint):
 
     base = Page.objects.get(id=page_id)
     return base.specific
+
+# Create the router. "wagtailapi" is the URL namespace
+api_router = WagtailAPIRouter('wagtailapi')
+
+# Add the four endpoints using the "register_endpoint" method.
+# The first parameter is the name of the endpoint (eg. pages, images). This
+# is used in the URL of the endpoint
+# The second parameter is the endpoint class that handles the requests
+
 
 api_router.register_endpoint('pages', OneYouPagesAPIEndpoint)
 api_router.register_endpoint('images', ImagesAPIEndpoint)
