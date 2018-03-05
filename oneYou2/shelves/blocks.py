@@ -20,6 +20,7 @@ class AppShelfChooserBlock(SnippetChooserBlock):
     def get_api_representation(self, value, context=None):
         return AppShelfSerializer(context=context).to_representation(value)
 
+
 class BlobImageChooserBlock(ImageChooserBlock):
     def get_api_representation(self, value, context=None):
         return ImageSerializer(context=context).to_representation(value)
