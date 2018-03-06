@@ -1,0 +1,64 @@
+@import '../../assets/styles/variables/variables';
+@import "../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+.information-panel {
+  display: flex;
+}
+
+.information-panel__image {
+  width: 35%;
+  min-height: 176px;
+
+  @include media-breakpoint-up(sm) {
+    min-height: 263px;
+  }
+}
+
+.information-panel__info {
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+}
+
+.information-panel__heading {
+  padding: 1em;
+}
+
+.information-panel__text {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  height: 100%;
+
+  p {
+    margin-bottom: 1em;
+  }
+
+  a {
+    margin-top: auto;
+  }
+}
+
+// theming
+.oneyou {
+
+  .information-panel__info {
+      background: none;
+  }
+
+  .information-panel__heading {
+    color: $teal-blue;
+    font-weight: normal;
+    font-family: $secondary-brand-font;
+    margin-bottom: 0.5em;
+  }
+
+  .information-panel__text {
+    color: $black;
+
+    a {
+      color: $sunflower-yellow;
+      font-weight: bold;
+    }
+  }
+}
