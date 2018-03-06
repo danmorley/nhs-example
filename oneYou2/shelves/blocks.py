@@ -1,7 +1,7 @@
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
 
-from shelves.serializers import PromoShelfSerializer, BannerShelfSerializer, AppShelfSerializer
+from shelves.serializers import PromoShelfSerializer, BannerShelfSerializer, AppTeaserSerializer
 
 from shelves.serializers import ImageSerializer
 
@@ -16,9 +16,9 @@ class BannerShelfChooserBlock(SnippetChooserBlock):
         return BannerShelfSerializer(context=context).to_representation(value)
 
 
-class AppShelfChooserBlock(SnippetChooserBlock):
+class AppTeaserChooserBlock(SnippetChooserBlock):
     def get_api_representation(self, value, context=None):
-        return AppShelfSerializer(context=context).to_representation(value)
+        return AppTeaserSerializer(context=context).to_representation(value)
 
 
 class BlobImageChooserBlock(ImageChooserBlock):

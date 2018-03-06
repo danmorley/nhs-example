@@ -19,7 +19,7 @@ from wagtailsnippetscopy.registry import snippet_copy_registry
 
 from modelcluster.fields import ParentalKey
 
-from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppShelfChooserBlock, BlobImageChooserBlock
+from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppTeaserChooserBlock, BlobImageChooserBlock
 
 class SimpleMenuItem(blocks.StructBlock):
     link_text = blocks.CharBlock(required=True)
@@ -108,7 +108,7 @@ class Carousel(blocks.StructBlock):
         ('video_teaser', VideoTemplate(icon="media")),
         ('promo_shelf', PromoShelfChooserBlock(target_model="shelves.PromoShelf", icon="image")),
         ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
-        ('app_shelf', AppShelfChooserBlock(target_model="shelves.AppShelf", icon="image")),
+        ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
     ], icon='arrow-left', label='Items')
     shelf_id = blocks.CharBlock(required=False, label="ID")
 
@@ -133,7 +133,7 @@ class OneYou2Page(Page):
         ('carousel_shelf', Carousel(icon="repeat")),
         ('promo_shelf', PromoShelfChooserBlock(target_model="shelves.PromoShelf", icon="image")),
         ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
-        ('app_shelf', AppShelfChooserBlock(target_model="shelves.AppShelf", icon="image")),
+        ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
         ('grid_shelf', Grid(icon="form")),
         ('oneyou1_teaser', BackwardsCompatibleContent(label="OneYou1 teaser", icon="folder-inverse")),
         ('video_teaser', VideoTemplate(icon="media")),
@@ -315,6 +315,7 @@ class Header(models.Model):
 
     def __str__(self):
         return self.label
+
 
 @register_snippet
 class Theme(models.Model):

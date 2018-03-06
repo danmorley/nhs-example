@@ -1,7 +1,7 @@
 from wagtail.contrib.modeladmin.options import (
     ModelAdmin, ModelAdminGroup, modeladmin_register)
 
-from .models import PromoShelf, BannerShelf, AppShelf
+from .models import PromoShelf, BannerShelf, AppTeaser
 
 
 class PromoshelfAdmin(ModelAdmin):
@@ -29,7 +29,7 @@ class BannershelfAdmin(ModelAdmin):
 
 
 class AppshelfAdmin(ModelAdmin):
-    model = AppShelf
+    model = AppTeaser
     menu_label = 'App shelves'
     menu_icon = 'form'
     menu_order = 200
