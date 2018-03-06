@@ -98,6 +98,19 @@ class VideoTemplate(blocks.StructBlock):
     body = blocks.TextBlock(required=True)
     image = BlobImageChooserBlock(help_text="Click this image plays the video")
     video = blocks.CharBlock(required=True)
+    cta = blocks.StreamBlock([
+        ('simple_menu_item', SimpleMenuItem())
+    ], icon='arrow-left', label='Items', required=False)
+    shelf_id = blocks.CharBlock(required=False, label="ID")
+
+
+class ImageTeaserTemplate(blocks.StructBlock):
+    heading = blocks.CharBlock(required=True)
+    body = blocks.TextBlock(required=True)
+    image = BlobImageChooserBlock()
+    cta = blocks.StreamBlock([
+        ('simple_menu_item', SimpleMenuItem())
+    ], icon='arrow-left', label='Items', required=False)
     shelf_id = blocks.CharBlock(required=False, label="ID")
 
 
@@ -106,6 +119,7 @@ class Carousel(blocks.StructBlock):
     items = blocks.StreamBlock([
         ('oneyou1_teaser', BackwardsCompatibleContent(label="OneYou1 teaser", icon="folder-inverse")),
         ('video_teaser', VideoTemplate(icon="media")),
+        ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
         ('promo_shelf', PromoShelfChooserBlock(target_model="shelves.PromoShelf", icon="image")),
         ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
         ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
@@ -119,6 +133,7 @@ class Grid(blocks.StructBlock):
     items = blocks.StreamBlock([
         ('oneyou1_teaser', BackwardsCompatibleContent(label="OneYou1 teaser", icon="folder-inverse")),
         ('video_teaser', VideoTemplate(icon="media")),
+        ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
     ], icon='arrow-left', label='Items')
     shelf_id = blocks.CharBlock(required=False, label="ID")
 
@@ -137,6 +152,7 @@ class OneYou2Page(Page):
         ('grid_shelf', Grid(icon="form")),
         ('oneyou1_teaser', BackwardsCompatibleContent(label="OneYou1 teaser", icon="folder-inverse")),
         ('video_teaser', VideoTemplate(icon="media")),
+        ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
         ('find_out_more_dropdown', FindOutMoreDropDown(label="Link dropdown", icon="order-down")),
     ])
     page_ref = models.CharField(max_length=255, unique=True)
