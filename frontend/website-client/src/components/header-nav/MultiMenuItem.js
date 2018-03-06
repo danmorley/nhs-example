@@ -16,14 +16,16 @@ class MultiMenuItem extends Component {
     });
 
     return ( 
-      <li className={classNamePrefix+"-nav__item"}>
-        <span className={classNamePrefix+"-nav__secondary-title"}
-          onClick={this.handleClick.bind(this)}>
-          {item.value.label}
-        </span>
-        <ul className={classNamePrefix+"-nav__secondary-nav"}>
-          {children}
-        </ul>
+      <li className={classNamePrefix+"-nav__item "+classNamePrefix+"-nav-multi__item"}>
+        <div className= {this.props.classNamePrefix+"-nav__separator"}>
+          <span className={classNamePrefix+"-nav__secondary-title"}
+            onClick={this.handleClick.bind(this)}>
+            {item.value.label}
+          </span>
+          <ul className={classNamePrefix+"-nav__secondary-nav"}>
+            {children}
+          </ul>
+        </div>
       </li>
     );
   }

@@ -40,6 +40,7 @@ $shelf-padding-extra: 2em;
   
   h1 {
       margin: 0 0 0.5em 0;
+      font-weight: normal;
   }
   
   p {
@@ -83,15 +84,6 @@ $shelf-padding-extra: 2em;
 
     p {
       line-height: 1.4em;
-    }
-  }
-
-  &.how-are-you-shelf {
-
-    .marker {
-      display: inline-block;
-      line-height: 0.9em;
-      border-bottom: 0.15em solid $white;
     }
   }
 

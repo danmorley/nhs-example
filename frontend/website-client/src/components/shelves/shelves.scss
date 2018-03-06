@@ -58,11 +58,18 @@ $shelf-padding-extra: 2em;
 
 //theme
 .oneyou {
-
-  .shelf {
-
+  
+  .shelf {    
     h2 {
     color: $teal-blue;
+    }
+  }
+  
+  h1, h2 {
+    .marker {
+      display: inline-block;
+      line-height: 0.9em;
+      border-bottom: 0.15em solid $white;
     }
   }
 }
