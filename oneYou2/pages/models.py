@@ -100,7 +100,7 @@ class VideoTemplate(blocks.StructBlock):
     video = blocks.CharBlock(required=True)
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
-    ], icon='arrow-left', label='Items')
+    ], icon='arrow-left', label='Items', required=False)
     shelf_id = blocks.CharBlock(required=False, label="ID")
 
 
@@ -110,7 +110,7 @@ class ImageTeaserTemplate(blocks.StructBlock):
     image = BlobImageChooserBlock()
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
-    ], icon='arrow-left', label='Items')
+    ], icon='arrow-left', label='Items', required=False)
     shelf_id = blocks.CharBlock(required=False, label="ID")
 
 
