@@ -20,7 +20,7 @@ global.rootUrl = '';
  *  data-content-store-endpoint: "https://oneyou-cms.service.nhs.uk/api/v2"
  */
 let rootElem = document.getElementById('root');
-let dataContentStoreEndpoint = rootElem.getAttribute('data-content-store-endpoint') || 'http://localhost:9000/api/v2';
+let dataContentStoreEndpoint = rootElem.getAttribute('data-content-store-endpoint') || 'http://localhost:8000/api/v2';
 let dataSite = rootElem.getAttribute('data-site') || '2';       // NOTE: Change '2' to 'oneyou';
 let dataRelease = rootElem.getAttribute('data-release') || 'current';
 global.contentStore = new ContentStore(dataContentStoreEndpoint, dataSite, dataRelease);
