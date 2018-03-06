@@ -2,7 +2,7 @@ from django.utils.text import slugify
 
 from rest_framework import serializers
 from rest_framework.serializers import HyperlinkedModelSerializer
-from shelves.models import PromoShelf, BannerShelf, AppShelf
+from shelves.models import PromoShelf, BannerShelf, AppTeaser
 
 
 class ImageSerializer(serializers.Serializer):
@@ -67,9 +67,25 @@ class BannerShelfSerializer(HyperlinkedModelSerializer):
                   'meta_layout', 'meta_variant']
 
 
-class AppShelfSerializer(HyperlinkedModelSerializer):
+class AppTeaserSerializer(HyperlinkedModelSerializer):
     image = ImageSerializer()
 
+    def to_representation(self, obj):
+        representation = super().to_representation(obj)
+        cta_appstore = representation.pop('cta_appstore')
+        cta_googleplay = representation.pop('cta_googleplay')
+        if cta_appstore:
+            representation['cta_appstore'] = {
+            'link_text': "",
+            'link_external': cta_appstore,
+        }
+        if cta_googleplay:
+            representation['cta_googleplay'] = {
+                'link_text': "",
+                'link_external': cta_googleplay,
+            }
+        return representation
+
     class Meta:
-        model = AppShelf
-        fields = ['heading', 'body', 'image', 'android_link', 'iphone_link', 'shelf_id']
+        model = AppTeaser
+        fields = ['heading', 'body', 'image', 'cta_googleplay', 'cta_appstore', 'shelf_id']
