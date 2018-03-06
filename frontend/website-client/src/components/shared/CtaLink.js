@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
  *  cta: {
  *    link_text: 'Some link text',
  *    link_external: 'http://',
- *    page: 5,
+ *    link_page: 5,
  *  }
  */
 class CtaLink extends Component {
@@ -18,27 +18,31 @@ class CtaLink extends Component {
     return link && (link.startsWith('http://') || link.startsWith('https://'));
   }
 
+  pathForPage(pageId) {
+    return global.pages[pageId];
+  }
+
   render() {
     let { cta, variant } = this.props;
     if (!cta || (!cta.link_page && !cta.link_external)) return null;
     // let linkClass = (variant === 'button') ? 'button-cta' : null;
     var linkClass;
-    
+
     if (variant === 'button') {
       linkClass = 'button-cta'
-    } 
+    }
     else if (variant === 'appstore') {
       linkClass = 'button-appstore'
-    } 
+    }
     else if (variant === 'googleplay') {
       linkClass = 'button-googleplay'
-    } 
+    }
     else {
       linkClass = null;
     }
-      
+
     // Convert page id to path if given.
-    let href = (cta.link_page) ? '/page/' + cta.link_page : cta.link_external;
+    let href = (cta.link_page) ? this.pathForPage(cta.link_page) : cta.link_external;
 
     // Render the link.
     if (this.isExternal(href)) {

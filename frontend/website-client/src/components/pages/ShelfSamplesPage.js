@@ -163,19 +163,25 @@ const sampleShelves = {
                 },
                 {
                   link_text: 'Link 2 text',
-                  page: 3
+                  link_page: 6
+                },
+                {
+                  link_text: 'Link 3 text',
+                  link_external: 'http://www.edfs.co.uk'
                 }
               ]
             }
           },
           {
             id: 'oneyou2-teaser-2',
-            type: 'oneyou2_teaser',
+            type: 'oneyou1_teaser',
             value: {
               heading: 'Be Active With a Disability',
               body: 'There are so many ways to move - whatever your situation. Get ideas on the EDFS website',
-              cta_link_label: 'http://www.edfs.co.uk',
-              cta_link: 'http://www.edfs.co.uk',
+              cta: {
+                link_text: 'Link 1 text',
+                link_external: 'http://www.edfs.co.uk'
+              },
             }
           }
         ],

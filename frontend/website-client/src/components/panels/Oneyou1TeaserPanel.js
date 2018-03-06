@@ -7,6 +7,7 @@ import Panel from './Panel';
 import CtaList from '../shared/CtaList';
 import ImageUtils from './ImageUtils';
 import PropTypes from 'prop-types';
+import Collapsible from 'react-collapsible';
 
 // import sampleBgImage from '../shelves/healthcheckup.png'; // Tell Webpack this JS file uses this image
 // import testImage from '../../assets/images/Trump2.jpg';
@@ -30,8 +31,19 @@ class Oneyou1TeaserPanel extends Component {
         </div>
         <div className={`${classNamePrefix}__text`}>
           <Text content={content.body} className={`${classNamePrefix}__body`}/>
-          <CtaLinks cta={content.cta} />
+          <CtaLink link={content.cta} />
         </div>
+        { (content.cta instanceof Array) ? (
+          <div className={`${classNamePrefix}__cta-list`}>
+            <Collapsible trigger={<h4>{content.cta_heading || 'Find out more'}</h4>} transitionTime={200}>
+              <CtaList items={content.cta} />
+            </Collapsible>
+          </div>
+        ) : (
+          <div className={`${classNamePrefix}__cta-item`}>
+            <CtaLink cta={content.cta} />
+          </div>
+        )}
       </Panel>
     );
   }
