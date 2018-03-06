@@ -21,6 +21,11 @@ from modelcluster.fields import ParentalKey
 
 from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppShelfChooserBlock, BlobImageChooserBlock
 
+GRID_LAYOUT_CHOICES = (
+    ('full_width', 'Full Width'),
+    ('2_col_1_on_mobile', 'Responsive (1 column on mobile, 2 on desktop)'),
+)
+
 class SimpleMenuItem(blocks.StructBlock):
     link_text = blocks.CharBlock(required=True)
     link_external = blocks.URLBlock(label='External link', required=False)
@@ -120,6 +125,7 @@ class Grid(blocks.StructBlock):
         ('oneyou1_teaser', BackwardsCompatibleContent(label="OneYou1 teaser", icon="folder-inverse")),
         ('video_teaser', VideoTemplate(icon="media")),
     ], icon='arrow-left', label='Items')
+    meta_layout = blocks.ChoiceBlock(choices=GRID_LAYOUT_CHOICES, label="Layout")
     shelf_id = blocks.CharBlock(required=False, label="ID")
 
 
