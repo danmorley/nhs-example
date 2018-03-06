@@ -72,8 +72,7 @@ const sampleShelves = {
               heading: 'Walk the walk, talk the talk 2',
               body: 'Share walking stories and your progress with others online',
               image: {
-                title: 'IMage name',
-                link: 'https://blob store url'
+                title: 'Image name',
               },
               video: '5520584848001',
               cta: {
@@ -91,7 +90,7 @@ const sampleShelves = {
               body: 'Share walking stories and your progress with others online',
               video: '5669668082001',
               image: {
-                title: 'IMage name',
+                title: 'Valid image with broken URL',
                 link: 'https://blob store url'
               },
               cta: {
@@ -182,6 +181,21 @@ const sampleShelves = {
                 link_text: 'Link 1 text',
                 link_external: 'http://www.edfs.co.uk'
               },
+            }
+          },
+          {
+            id: 'image-teaser-1',
+            type: 'image_teaser',
+            value: {
+              heading: 'Walk the walk, talk the talk',
+              body: '<p>Share walking stories and your progress with others online</p><p>This is an Image Teaser panel.</p>',
+              image: {
+                title: 'Image name'
+              },
+              cta: {
+                link_text: 'Find out more',
+                link_external: 'http://www.edfs.co.uk'
+              }
             }
           }
         ],

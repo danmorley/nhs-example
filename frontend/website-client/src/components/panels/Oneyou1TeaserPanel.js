@@ -6,6 +6,7 @@ import styles from './oneyou1-teaser.css';
 import Panel from './Panel';
 import CtaList from '../shared/CtaList';
 import ImageUtils from './ImageUtils';
+import CtaUtils from '../shared/CtaUtils';
 import PropTypes from 'prop-types';
 import Collapsible from 'react-collapsible';
 
@@ -30,18 +31,17 @@ class Oneyou1TeaserPanel extends Component {
           {/* // needs alt text */}
         </div>
         <div className={`${classNamePrefix}__text`}>
-          <Text content={content.body} className={`${classNamePrefix}__body`}/>
-          <CtaLink link={content.cta} />
+          <Text content={content.body} className={`${classNamePrefix}__body`} format="html"/>
         </div>
-        { (content.cta instanceof Array) ? (
+        { (CtaUtils.isSingleCta(content.cta)) ? (
+          <div className={`${classNamePrefix}__cta-item`}>
+            <CtaLink cta={content.cta} />
+          </div>
+        ) : (
           <div className={`${classNamePrefix}__cta-list`}>
             <Collapsible trigger={<h4>{content.cta_heading || 'Find out more'}</h4>} transitionTime={200}>
               <CtaList items={content.cta} />
             </Collapsible>
-          </div>
-        ) : (
-          <div className={`${classNamePrefix}__cta-item`}>
-            <CtaLink cta={content.cta} />
           </div>
         )}
       </Panel>

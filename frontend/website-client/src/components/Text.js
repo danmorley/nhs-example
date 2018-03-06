@@ -18,10 +18,12 @@ import PropTypes from 'prop-types';
  */
 class Text extends Component {
   render() {
-    let { content, tagName, ...rest } = this.props;
+    let { content, tagName, format, ...rest } = this.props;
     if (!content) return null;
     let Tag = tagName;
-    if (content.startsWith('html::')) {
+    let isHtml = (format === 'html' || content.startsWith('html::'));
+    
+    if (isHtml) {
       return (<Tag dangerouslySetInnerHTML={{__html: content.substring(6)}} {...rest}/>);
     } else {
       return (<Tag {...rest}>{content}</Tag>);
@@ -35,7 +37,8 @@ Text.defaultProps = {
 
 Text.propTypes = {
   content: PropTypes.string,
-  tagName: PropTypes.string
+  tagName: PropTypes.string,
+  format: PropTypes.string
 }
 
 export default Text;
