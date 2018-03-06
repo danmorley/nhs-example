@@ -34,7 +34,7 @@ Text.defaultProps = {
 };
 
 Text.propTypes = {
-  content: PropTypes.string.isRequired,
+  content: PropTypes.string,
   tagName: PropTypes.string
 }
 

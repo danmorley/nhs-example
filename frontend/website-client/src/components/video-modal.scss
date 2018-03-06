@@ -1,0 +1,20 @@
+@import '../assets/styles/variables/variables';
+@import "../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+$shelf-padding-standard: 1em;
+$shelf-padding-extra: 2em;
+
+.pure-modal {
+  width: 90% !important;
+  background-color: red;
+}
+
+.video-js {
+  width: 90%;
+  height: 400px;
+}
+
+.video-teaser__image {
+  height: 220px;
+  overflow: hidden;
+}

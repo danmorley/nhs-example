@@ -27,7 +27,7 @@ class CtaList extends Component {
 
 CtaList.propTypes = {
   items: PropTypes.array.isRequired,
-  variant: PropTypes.string.isRequired
+  variant: PropTypes.string
 };
 
 export default CtaList;

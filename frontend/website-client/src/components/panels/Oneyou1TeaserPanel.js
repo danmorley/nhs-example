@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Text from '../Text';
-import CtaLink from '../shared/CtaLink';
+import CtaLinks from '../shared/CtaLinks';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import styles from './oneyou1-teaser.css';
 import Panel from './Panel';
@@ -30,10 +30,7 @@ class Oneyou1TeaserPanel extends Component {
         </div>
         <div className={`${classNamePrefix}__text`}>
           <Text content={content.body} className={`${classNamePrefix}__body`}/>
-          <CtaLink link={content.cta} />
-        </div>
-        <div className={`${classNamePrefix}__cta-list`}>
-          <CtaList heading="Find out more" items={content.cta} />
+          <CtaLinks cta={content.cta} />
         </div>
       </Panel>
     );
