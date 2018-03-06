@@ -35,7 +35,7 @@ class Oneyou1TeaserPanel extends Component {
         </div>
         { (content.cta instanceof Array) ? (
           <div className={`${classNamePrefix}__cta-list`}>
-            <Collapsible trigger={<h4>Find out more</h4>} transitionTime={200}>
+            <Collapsible trigger={<h4>{content.cta_heading || 'Find out more'}</h4>} transitionTime={200}>
               <CtaList items={content.cta} />
             </Collapsible>
           </div>
