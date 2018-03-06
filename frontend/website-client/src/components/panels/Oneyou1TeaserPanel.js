@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Text from '../Text';
-import CtaLinks from '../shared/CtaLinks';
+import CtaLink from '../shared/CtaLink';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import styles from './oneyou1-teaser.css';
 import Panel from './Panel';
