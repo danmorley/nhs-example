@@ -98,6 +98,9 @@ class VideoTemplate(blocks.StructBlock):
     body = blocks.TextBlock(required=True)
     image = BlobImageChooserBlock(help_text="Click this image plays the video")
     video = blocks.CharBlock(required=True)
+    cta = blocks.StreamBlock([
+        ('simple_menu_item', SimpleMenuItem())
+    ], icon='arrow-left', label='Items')
     shelf_id = blocks.CharBlock(required=False, label="ID")
 
 
