@@ -1,16 +1,15 @@
 import json
 import uuid
 
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models import DateField, TextField
 from django.forms.models import model_to_dict
-from django.template.loader import render_to_string
 
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, InlinePanel, ObjectList, TabbedInterface
-from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
