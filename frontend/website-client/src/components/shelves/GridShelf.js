@@ -7,6 +7,7 @@ import sampleBgImage from './healthcheckup.png'; // Tell Webpack this JS file us
 
 import PlaceholderPanel from '../panels/PlaceholderPanel';
 import VideoTeaserPanel from '../panels/VideoTeaserPanel';
+import ImageTeaserPanel from '../panels/ImageTeaserPanel';
 import Oneyou1TeaserPanel from '../panels/Oneyou1TeaserPanel';
 import AppTeaserPanel from '../panels/AppTeaserPanel';
 

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import Text from '../Text';
-import CtaLink from '../shared/CtaLinks';
+import CtaLink from '../shared/CtaLink';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-import styles from './app-teaser.css';
+import styles from './image-teaser.css';
 import Panel from './Panel';
 import PropTypes from 'prop-types';
 import ImageUtils from './ImageUtils';
+import Image from '../Image';
 
 /**
  *
@@ -13,38 +14,20 @@ import ImageUtils from './ImageUtils';
  *
  *  }
  */
-class AppTeaserPanel extends Component {
-  // backgroundImageUrl(image, defaultImage) {
-  //   return (image && image.link) || defaultImage.link;
-  // }
-  //
-  // backgroundImageStyle(image, defaultImage) {
-  //   return {
-  //     backgroundImage: 'url(' + ImageUtils.backgroundImageUrl(image, ImageUtils.placeholderImage) + ')'
-  //   }
-  // }
-
+class ImageTeaserPanel extends Component {
   render() {
     let { content, classNamePrefix } = this.props;
-    let backgroundTeaserImage = ImageUtils.backgroundImageStyle(content.image, ImageUtils.placeholderBackgroundImage());
+    let backgroundTeaserImage = ImageUtils.backgroundImageStyle(content.image, ImageUtils.placeholderImage());
 
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
         <div className={`${classNamePrefix}__image`} style={backgroundTeaserImage}>
-          {/* // needs alt text */}
         </div>
         <div className={`${classNamePrefix}__info`}>
           <Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />
           <div className={`${classNamePrefix}__text`}>
             <Text content={content.body} className={`${classNamePrefix}__body`} format="html"/>
-            <ul className="panel__button-list">
-              <li>
-                <CtaLink cta={content.cta_appstore} variant="appstore"/>
-              </li>
-              <li>
-                <CtaLink cta={content.cta_googleplay} variant="googleplay"/>
-              </li>
-            </ul>
+            <CtaLink cta={content.cta} />
           </div>
         </div>
       </Panel>
@@ -52,11 +35,11 @@ class AppTeaserPanel extends Component {
   }
 }
 
-AppTeaserPanel.propTypes = {
+ImageTeaserPanel.propTypes = {
   content: PropTypes.object.isRequired,
   classNamePrefix: PropTypes.string.isRequired
 };
 
-CmsComponentRegistry.register('app_teaser', AppTeaserPanel, 'app-teaser');
+CmsComponentRegistry.register('image_teaser', ImageTeaserPanel, 'image-teaser');
 
-export default AppTeaserPanel;
+export default ImageTeaserPanel;
