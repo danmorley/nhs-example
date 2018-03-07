@@ -1,16 +1,19 @@
 from __future__ import absolute_import, unicode_literals
 
+import json
+import uuid
+
+from datetime import datetime
+from modelcluster.models import ClusterableModel
+
 from django.db import models
 from django.forms.models import model_to_dict
 from django.utils import timezone
 
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel
 
-from modelcluster.models import ClusterableModel
-from datetime import datetime
-import uuid
-
 from .forms import ReleaseAdminForm
+
 from pages.models import OneYou2Page
 
 
@@ -42,7 +45,6 @@ class Release(ClusterableModel):
   release_name = models.CharField(max_length=255, unique=True)
   release_time = models.DateTimeField(blank=True, null=True)
   uuid = models.CharField(max_length=255, unique=True)
-  content = models.TextField(null=True)
 
   base_form_class = ReleaseAdminForm
 
@@ -54,16 +56,14 @@ class Release(ClusterableModel):
 
   def __init__(self, *args, **kwargs):
     super(Release, self).__init__(*args, **kwargs)
-    if not self.id is None:
+    if self.id and self.content.count() == 0:
       if (self.release_time is not None) and self.release_time < timezone.now():
         pages = []
 
         for revision in self.revisions.all():
           pages.append(revision.revision.content_json)
 
-        self.content = str(pages)
-
-        self.save()
+        ReleaseContent(release=self, content=json.dumps(pages)).save()
 
 
   def save(self, *args, **kwargs):
@@ -123,3 +123,15 @@ class ReleasePage(models.Model):
     blank=False,
     null=False,
     on_delete=models.CASCADE)
+
+
+class ReleaseContent(models.Model):
+  release = models.ForeignKey(
+    'release.Release',
+    related_name='content',
+    blank=False,
+    null=False,
+    on_delete=models.CASCADE)
+  content = models.TextField(null=True)
+
+
