@@ -4,17 +4,37 @@
 $shelf-padding-standard: 1em;
 $shelf-padding-extra: 2em;
 
-.pure-modal {
-  width: 90% !important;
-  background-color: red;
+
+.pure-modal-backdrop {
+  
+  .pure-modal .panel-heading .close {
+    top: 15px;
+    right: 15px;
+    line-height: 25px;
+    color: #000;
+    background-color: #fff;
+    opacity: 1;
+  } 
+      
+  .pure-modal {
+    width: 100%;
+  }
+  
+  .panel-body {
+    padding-right: 30px;  
+    background: #000;
+  }
+  
+  .pure-modal .panel-default {
+    padding: 1em;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .video-js {
+    height: 400px;
+    width: 100%;
+  }
 }
 
-.video-js {
-  width: 90%;
-  height: 400px;
-}
-
-.video-teaser__image {
-  height: 220px;
-  overflow: hidden;
-}

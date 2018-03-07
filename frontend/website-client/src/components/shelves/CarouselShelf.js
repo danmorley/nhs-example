@@ -52,7 +52,7 @@ class CarouselShelf extends Component {
     return (
       <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix}>
         <div className="container-fluid">
-          <div className="row">
+          <div className="row carousel__row">
             <Slider className ="carousel carousel-full" {...settings}>
               {slides}
             </Slider>

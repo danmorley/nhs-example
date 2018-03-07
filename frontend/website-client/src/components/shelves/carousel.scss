@@ -30,6 +30,11 @@
   }
 }
 
+.carousel__row {
+  position: relative;
+  z-index: 0;
+}
+
 .slick-dots li {
   margin: 0 3px;
 
@@ -97,5 +102,18 @@
   .slick-next:hover:before,
   .slick-prev:hover:before {
     color: $sunflower-yellow !important;
+  }
+  
+  .container {
+    
+    @include media-breakpoint-up(sm) {
+      padding-left: 2.5em;
+      padding-right: 2.5em; 
+    }  
+    
+    @include media-breakpoint-up(xl) {
+      padding-left: 1em;
+      padding-right: 1em; 
+    } 
   }
 }
