@@ -14,7 +14,7 @@ class CtaList extends Component {
     if (!items) return null;
 
     let ctaItems = items.map((item, i) => {
-      return (<li key={i}><CtaLink cta={item} variant={variant} /></li>);
+      return (<li className="cta-list__item" key={i}><CtaLink cta={item} variant={variant} /></li>);
     });
 
     return (
