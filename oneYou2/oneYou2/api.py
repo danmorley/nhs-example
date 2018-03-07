@@ -193,7 +193,7 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
     def get_queryset(self):
         return self.model.objects.all().order_by('id')
 
-    def detail_view(self, request, pk, release_id=None):
+    def detail_view(self, request, pk=None,  release_id=None):
         instance = self.get_object()
         # TODO: Currently no site data is associated with a release, so this doesn't really do anything
         if not release_id or release_id == "current":
@@ -214,6 +214,8 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
         return [
             url(r'^$', cls.as_view({'get': 'listing_view'}), name='listing'),
             url(r'^(?P<pk>\d+)/$', cls.as_view({'get': 'detail_view'}), name='detail'),
+            url(r'^(?P<pk>\d+)/(?P<release_id>[\w\-]+)/$', cls.as_view({'get': 'detail_view'}), name='detail'),
+            url(r'^(?P<pk>\d+)/(?P<release_id>[\w\-]+)/$', cls.as_view({'get': 'detail_view'}), name='detail'),
             url(r'^(?P<pk>\d+)/(?P<release_id>[\w\-]+)/$', cls.as_view({'get': 'detail_view'}), name='detail'),
         ]
 
