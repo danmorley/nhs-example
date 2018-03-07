@@ -3,12 +3,14 @@ import uuid
 
 from datetime import datetime, timedelta
 
+from django.utils import timezone
+
 from oneYou2.tests.utils import OneYouTests
 
 from pages.factories import create_test_page, create_test_theme
 from pages.models import OneYou2Page, Theme
 
-from release.factories import create_test_release, create_test_release_content
+from release.factories import create_test_release, create_test_release_content, create_test_release_page
 from release.models import Release
 
 
@@ -143,6 +145,33 @@ class ReleaseModelTests(OneYouTests):
 
     self.assertEquals(new_release.revisions.count(), 1)
     self.assertEquals(base_release.revisions.first().revision.id, new_release.revisions.first().revision.id)
+
+  def test_is_released_returns_false_if_now_date_set(self):
+    """
+    the is released function should return false if the release date hasn't been set.
+    """
+    release = create_test_release()
+
+    self.assertIsFalse(release.is_released())
+
+  def test_is_released_returns_false_if_date_is_in_the_future(self):
+    """
+    the is released function should return false if the release date is in the future.
+    """
+    release = create_test_release()
+    release.release_time = timezone.now() + timedelta(days=1)
+
+    self.assertIsFalse(release.is_released())
+
+  def test_is_released_returns_true_if_date_is_in_the_past(self):
+    """
+    the is released function should return true if the release date is in the past.
+    """
+    release = create_test_release()
+    release.release_time = timezone.now() + timedelta(days=-1)
+
+    self.assertIsTrue(release.is_released())
+
 
 class ReleaseContentModelTests(OneYouTests):
   def test_release_content_can_return_a_requested_page(self):

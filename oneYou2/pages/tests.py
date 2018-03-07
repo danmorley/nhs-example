@@ -192,10 +192,10 @@ class OneYou2PageModelTests(OneYouTests):
                           + str(shelf.id) + ', "id": "14dd05e9-1d75-4831-a969-01f5c2c82b55"}]'
     page = create_test_page()
     page.body = page._meta.fields[24].to_python(body_content_string)
-    print(page)
+
     page.save_revision()
     body_dict = json.loads(json.loads(page.get_latest_revision().content_json)['body'])
-    print(body_dict)
+
     self.assertEqual(len(body_dict), 2)
     self.assertIsTrue('content' in body_dict[1])
     self.assertIsTrue('shelf_id' in body_dict[1]['content'])
