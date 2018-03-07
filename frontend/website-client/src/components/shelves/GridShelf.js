@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Shelf from '../shelves/Shelf';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-
 import sampleBgImage from './healthcheckup.png'; // Tell Webpack this JS file uses this image
 // import testImage from '../../assets/images/Trump2.jpg';
 

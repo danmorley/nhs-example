@@ -47,7 +47,6 @@ class Page extends Component {
         <PageHeader navItems={menu} header={site.header}/>
         <div className="page-content-wrapper">
           <div className="page-content">
-            <p style={{marginTop: "30px"}}>You are on page: {content.title}</p>
             {shelves}
           </div>
           <Footer className="page-footer" content={footer} site={site}/>
