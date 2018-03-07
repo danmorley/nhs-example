@@ -1,4 +1,6 @@
+import json
 import uuid
+
 from datetime import datetime, timedelta
 
 from oneYou2.tests.utils import OneYouTests
@@ -6,9 +8,8 @@ from oneYou2.tests.utils import OneYouTests
 from pages.factories import create_test_page, create_test_theme
 from pages.models import OneYou2Page, Theme
 
-from release.factories import create_test_release
+from release.factories import create_test_release, create_test_release_content
 from release.models import Release
-
 
 
 class ReleaseModelTests(OneYouTests):
@@ -142,5 +143,21 @@ class ReleaseModelTests(OneYouTests):
 
     self.assertEquals(new_release.revisions.count(), 1)
     self.assertEquals(base_release.revisions.first().revision.id, new_release.revisions.first().revision.id)
+
+class ReleaseContentModelTests(OneYouTests):
+  def test_release_content_can_return_a_requested_page(self):
+    """
+    When a specific page is requested from the locked content it should be retrievable.
+    """
+    page = create_test_page(title="First Page")
+    self.assertIsNotNone(page.get_latest_revision())
+
+    release = create_test_release()
+
+    release_content = create_test_release_content(release, json.dumps(release.generate_fixed_content()))
+    loaded_page_content = release_content.get_content(str(page.id))
+
+    self.assertEqual(page.title, loaded_page_content['title'])
+
 
 
