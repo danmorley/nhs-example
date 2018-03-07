@@ -22,9 +22,12 @@ class MultiMenuItem extends Component {
             onClick={this.handleClick.bind(this)}>
             {item.value.label}
           </span>
-          <ul className={classNamePrefix+"-nav__secondary-nav"}>
-            {children}
-          </ul>
+          
+          <div className={classNamePrefix+"-nav__secondary-nav"}>
+            <ul className={"container "+classNamePrefix+"-nav__secondary-nav-inner"}>
+              {children}
+            </ul>
+          </div>
         </div>
       </li>
     );

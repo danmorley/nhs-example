@@ -11,6 +11,11 @@ $shelf-padding-extra: 2em;
   font-size: $h2;
 }
 
+.shelf__container > .container {
+  padding-bottom: 0;
+  padding-top: 0
+}
+
 .shelf__placeholder {
   background-color: #e4e4e4;
   border: 1px solid #c8c8c8;
@@ -20,10 +25,6 @@ $shelf-padding-extra: 2em;
 
 .shelf-section {
   padding: 2em 0;
-
-  &:nth-child(odd) {
-    background: $light-grey;
-  }
 }
 
 .shelf__col {

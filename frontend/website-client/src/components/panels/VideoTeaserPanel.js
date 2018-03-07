@@ -32,12 +32,13 @@ import Image from '../Image';
 class VideoTeaserPanel extends Component {
   render() {
     let { content, classNamePrefix } = this.props;
-    let teaserImage = ImageUtils.imageOrDefault(content.image, ImageUtils.placeholderImage());
+    let backgroundTeaserImage = ImageUtils.backgroundImageStyle(content.image, ImageUtils.placeholderImage());
 
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
-        <div className={`${classNamePrefix}__image`}>
-          <VideoModal video={content.video}><Image image={teaserImage} /></VideoModal>
+        <div className={`${classNamePrefix}__image`} style={backgroundTeaserImage}>
+          <VideoModal video={content.video}>
+          </VideoModal>
         </div>
         <div className={`${classNamePrefix}__info`}>
           <Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />
