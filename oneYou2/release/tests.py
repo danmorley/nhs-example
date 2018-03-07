@@ -184,9 +184,32 @@ class ReleaseContentModelTests(OneYouTests):
     release = create_test_release()
 
     release_content = create_test_release_content(release, json.dumps(release.generate_fixed_content()))
-    loaded_page_content = release_content.get_content(str(page.id))
+    loaded_page_content = release_content.get_content_for(str(page.id))
 
     self.assertEqual(page.title, loaded_page_content['title'])
 
+  def test_release_content_returns_none_if_the_requested_page_not_in_release(self):
+    """
+    When a page is requested that isn't included in a release a None object should be returned.
+    """
+    release = create_test_release()
+
+    release_content = create_test_release_content(release, json.dumps(release.generate_fixed_content()))
+    loaded_page_content = release_content.get_content_for('0')
+
+    self.assertIsNone(loaded_page_content)
+
+
+class ReleasePageModelTests(OneYouTests):
+  def test_a_release_page_object_returns_associated_release(self):
+    release = create_test_release()
+
+    page = create_test_page()
+    revision = page.get_latest_revision()
+
+    release_page = create_test_release_page(release, revision)
+
+    self.assertEqual(type(revision), type(release_page.revision))
+    self.assertEqual(type(release), type(release_page.release))
 
 
