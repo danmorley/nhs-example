@@ -240,7 +240,7 @@ class BannerShelf(ShelfAbstract):
 
 
 @register_snippet
-class AppShelf(ShelfAbstract):
+class AppTeaser(ShelfAbstract):
     heading = models.CharField(max_length=255)
     body = models.TextField(blank=True, null=True)
     image = models.ForeignKey(
@@ -250,14 +250,14 @@ class AppShelf(ShelfAbstract):
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    android_link = models.CharField(max_length=255)
-    iphone_link = models.CharField(max_length=255)
+    cta_googleplay = models.CharField(max_length=255)
+    cta_appstore = models.CharField(max_length=255)
 
     panels = [
         FieldPanel('shelf_id'),
         FieldPanel('heading'),
         FieldPanel('body'),
         ImageChooserPanel('image'),
-        FieldPanel('android_link'),
-        FieldPanel('iphone_link'),
+        FieldPanel('cta_googleplay'),
+        FieldPanel('cta_appstore'),
     ]

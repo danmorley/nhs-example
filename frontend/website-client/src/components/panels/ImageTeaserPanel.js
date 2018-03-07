@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
 import Text from '../Text';
-import CtaLink from '../shared/CtaLink';
+import CtaLinks from '../shared/CtaLinks';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-import styles from './video-teaser.css';
+import styles from './image-teaser.css';
 import Panel from './Panel';
 import PropTypes from 'prop-types';
 import ImageUtils from './ImageUtils';
-import BrightcoveVideo from '../BrightcoveVideo';
-import VideoModal from '../VideoModal';
 import Image from '../Image';
 
 /**
- *  Video Teaser panel component, that provides 'teaser' details for a video_teaser
- *  that will open and play in a popup modal window when the user clicks the static
- *  teaser.
+ *  Image Teaser panel component displaying a teaser panel in the form of a heading
+ *  body, image and call to action buttons.
+ *
+ *  Note the the cta key may be either a single cta object or a list of cta objects.
  *
  *  content: {
  *    heading: 'Walk the walk, talk the talk',
  *    body: 'Share walking stories and your progress with others online',
- *    video: '5669668082001',
  *    image: {
  *      title: 'Image name',
  *      link: 'https://blob store url'
@@ -29,21 +27,20 @@ import Image from '../Image';
  *    }
  *  }
  */
-class VideoTeaserPanel extends Component {
+class ImageTeaserPanel extends Component {
   render() {
     let { content, classNamePrefix } = this.props;
-    let teaserImage = ImageUtils.imageOrDefault(content.image, ImageUtils.placeholderImage());
+    let backgroundTeaserImage = ImageUtils.backgroundImageStyle(content.image, ImageUtils.placeholderImage());
 
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
-        <div className={`${classNamePrefix}__image`}>
-          <VideoModal video={content.video}><Image image={teaserImage} /></VideoModal>
+        <div className={`${classNamePrefix}__image`} style={backgroundTeaserImage}>
         </div>
         <div className={`${classNamePrefix}__info`}>
           <Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />
           <div className={`${classNamePrefix}__text`}>
             <Text content={content.body} className={`${classNamePrefix}__body`} format="html"/>
-            <CtaLink cta={content.cta} />
+            <CtaLinks cta={content.cta} />
           </div>
         </div>
       </Panel>
@@ -51,11 +48,11 @@ class VideoTeaserPanel extends Component {
   }
 }
 
-VideoTeaserPanel.propTypes = {
+ImageTeaserPanel.propTypes = {
   content: PropTypes.object.isRequired,
   classNamePrefix: PropTypes.string.isRequired
 };
 
-CmsComponentRegistry.register('video_teaser', VideoTeaserPanel, 'video-teaser');
+CmsComponentRegistry.register('image_teaser', ImageTeaserPanel, 'image-teaser');
 
-export default VideoTeaserPanel;
+export default ImageTeaserPanel;

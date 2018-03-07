@@ -29,7 +29,7 @@ $shelf-padding-extra: 2em;
 .shelf__col {
   padding-top: 0.5em;
   padding-bottom: 0.5em;
-  
+
   h1 + p,
   h2 + p {
     margin-top: 0.5em;
@@ -45,7 +45,7 @@ $shelf-padding-extra: 2em;
   font-family: $secondary-brand-font;
   font-weight: normal;
   margin-bottom: 0.2em;
-  
+
   @include media-breakpoint-up(sm) {
     margin-bottom: 0.5em;
   }
@@ -59,10 +59,17 @@ $shelf-padding-extra: 2em;
 //theme
 .oneyou {
   
-  .shelf {
-    
+  .shelf {    
     h2 {
     color: $teal-blue;
+    }
+  }
+  
+  h1, h2 {
+    .marker {
+      display: inline-block;
+      line-height: 0.9em;
+      border-bottom: 0.15em solid $white;
     }
   }
 }
@@ -82,5 +89,6 @@ $shelf-padding-extra: 2em;
   p {
     width: 100%;
     text-align: center;
+    line-height: 1.4em;
   }
 }

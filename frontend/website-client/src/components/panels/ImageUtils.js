@@ -16,13 +16,17 @@ class ImageUtils {
    return { link: testBackgroundImage, title: 'Placeholder background image' };
  }
 
- static backgroundImageUrl(image, defaultImage) {
-   return (image && image.link) || defaultImage.link;
+ static imageUrl(image, defaultImage) {
+   return ImageUtils.imageOrDefault(image, defaultImage).link;
+ }
+
+ static imageOrDefault(image, defaultImage) {
+   return (image && image.link) ? image : defaultImage;
  }
 
  static backgroundImageStyle(image, defaultImage) {
    return {
-     backgroundImage: 'url(' + ImageUtils.backgroundImageUrl(image, defaultImage) + ')'
+     backgroundImage: 'url(' + ImageUtils.imageUrl(image, defaultImage) + ')'
    };
  }
 }

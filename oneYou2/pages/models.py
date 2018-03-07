@@ -19,7 +19,12 @@ from wagtailsnippetscopy.registry import snippet_copy_registry
 
 from modelcluster.fields import ParentalKey
 
-from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppShelfChooserBlock, BlobImageChooserBlock
+from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppTeaserChooserBlock, BlobImageChooserBlock
+
+GRID_LAYOUT_CHOICES = (
+    ('full_width', 'Full Width'),
+    ('2_col_1_on_mobile', 'Responsive (1 column on mobile, 2 on desktop)'),
+)
 
 class SimpleMenuItem(blocks.StructBlock):
     link_text = blocks.CharBlock(required=True)
@@ -98,6 +103,19 @@ class VideoTemplate(blocks.StructBlock):
     body = blocks.TextBlock(required=True)
     image = BlobImageChooserBlock(help_text="Click this image plays the video")
     video = blocks.CharBlock(required=True)
+    cta = blocks.StreamBlock([
+        ('simple_menu_item', SimpleMenuItem())
+    ], icon='arrow-left', label='Items', required=False)
+    shelf_id = blocks.CharBlock(required=False, label="ID")
+
+
+class ImageTeaserTemplate(blocks.StructBlock):
+    heading = blocks.CharBlock(required=True)
+    body = blocks.TextBlock(required=True)
+    image = BlobImageChooserBlock()
+    cta = blocks.StreamBlock([
+        ('simple_menu_item', SimpleMenuItem())
+    ], icon='arrow-left', label='Items', required=False)
     shelf_id = blocks.CharBlock(required=False, label="ID")
 
 
@@ -106,9 +124,10 @@ class Carousel(blocks.StructBlock):
     items = blocks.StreamBlock([
         ('oneyou1_teaser', BackwardsCompatibleContent(label="OneYou1 teaser", icon="folder-inverse")),
         ('video_teaser', VideoTemplate(icon="media")),
+        ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
         ('promo_shelf', PromoShelfChooserBlock(target_model="shelves.PromoShelf", icon="image")),
         ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
-        ('app_shelf', AppShelfChooserBlock(target_model="shelves.AppShelf", icon="image")),
+        ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
     ], icon='arrow-left', label='Items')
     shelf_id = blocks.CharBlock(required=False, label="ID")
 
@@ -122,6 +141,7 @@ class Grid(blocks.StructBlock):
         ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
         ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image"))
     ], icon='arrow-left', label='Items')
+    meta_layout = blocks.ChoiceBlock(choices=GRID_LAYOUT_CHOICES, label="Layout")
     shelf_id = blocks.CharBlock(required=False, label="ID")
 
 
@@ -314,6 +334,7 @@ class Header(models.Model):
 
     def __str__(self):
         return self.label
+
 
 @register_snippet
 class Theme(models.Model):

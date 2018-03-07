@@ -14,7 +14,7 @@ const sampleShelves = {
         heading: 'Carousel Shelf',
         body: 'Layout <b>not given</b>, variant <b>not given</b>'
       }
-    },  
+    },
     {
       id: 'carousel-1',
       type: 'carousel_shelf',
@@ -55,27 +55,26 @@ const sampleShelves = {
       type: 'guidance_shelf',
       value: {
         heading: 'Grid Shelf',
-        body: 'Layout <b>not given</b>, variant <b>not given</b>'
+        body: '<p>Layout <b>not given</b>, variant <b>not given</b></p><p>Contains examples of VideoTeaserPanel, Oneyou1TeaserPanel and AppTeaserPanel</p>'
       }
     },
     {
       id: 'grid-shelf-1',
       type: 'grid_shelf',
       value: {
-        heading: 'Sample Grid Shelf',
+        heading: 'Responsive Grid Shelf',
         rows_to_show: 1,
         items: [
           {
             id: 'video-teaser-1',
             type: 'video_teaser',
             value: {
-              heading: 'Walk the walk, talk the talk',
+              heading: 'Walk the walk, talk the talk 2',
               body: 'Share walking stories and your progress with others online',
               image: {
-                title: 'IMage name',
-                link: 'https://blob store url'
+                title: 'Image name',
               },
-              video: '12345',
+              video: '5520584848001',
               cta: {
                 link_text: 'Find out more',
                 link_external: 'http://www.somewebsite.co.uk'
@@ -89,9 +88,9 @@ const sampleShelves = {
             value: {
               heading: 'Walk the walk, talk the talk',
               body: 'Share walking stories and your progress with others online',
-              video: '',
+              video: '5669668082001',
               image: {
-                title: 'IMage name',
+                title: 'Valid image with broken URL',
                 link: 'https://blob store url'
               },
               cta: {
@@ -106,7 +105,7 @@ const sampleShelves = {
             value: {
               heading: 'Walk the walk, talk the talk',
               body: 'Share walking stories and your progress with others online',
-              video: '384294381290482903',
+              video: '',
               cta: {
                 link_text: 'Find out more',
                 link_external: 'http://www.somewebsite.co.uk'
@@ -163,24 +162,114 @@ const sampleShelves = {
                 },
                 {
                   link_text: 'Link 2 text',
-                  page: 3
+                  link_page: 6
+                },
+                {
+                  link_text: 'Link 3 text',
+                  link_external: 'http://www.edfs.co.uk'
                 }
               ]
             }
           },
           {
             id: 'oneyou2-teaser-2',
-            type: 'oneyou2_teaser',
+            type: 'oneyou1_teaser',
             value: {
               heading: 'Be Active With a Disability',
               body: 'There are so many ways to move - whatever your situation. Get ideas on the EDFS website',
-              cta_link_label: 'http://www.edfs.co.uk',
-              cta_link: 'http://www.edfs.co.uk',
+              cta: {
+                link_text: 'Link 1 text',
+                link_external: 'http://www.edfs.co.uk'
+              },
+            }
+          },
+          {
+            id: 'image-teaser-1',
+            type: 'image_teaser',
+            value: {
+              heading: 'Walk the walk, talk the talk',
+              body: '<p>Share walking stories and your progress with others online</p><p>This is an Image Teaser panel.</p>',
+              image: {
+                title: 'Image name'
+              },
+              cta: {
+                link_text: 'Find out more',
+                link_external: 'http://www.edfs.co.uk'
+              }
             }
           }
         ],
         meta_variant: 'blue_background'
       }
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Full Width Grid Shelf',
+        body: 'Layout <b>full_width</b>, variant <b>not given</b>'
+      }
+    },
+    {
+      id: 'grid-shelf-2',
+      type: 'grid_shelf',
+      value: {
+        heading: 'Full Width Grid Shelf',
+        rows_to_show: 1,
+        meta_layout: 'full_width',
+        items: [
+          {
+            id: 'information-panel-1a',
+            type: 'information_panel',
+            value: {
+              heading: 'html::There\'s Only One <b>You</b>',
+              body: 'Your health is important. It\'s not about doing the right thing - it\'s about making changes that fit your life to help feel your best. One You is all about finding that balance, and inspiring you with easy ways to help you feel great, every day.',
+              image: {
+                title: 'Image name',
+              },
+              video: '5520584848001',
+              cta: {
+                link_text: 'Find out more',
+                link_external: 'http://www.somewebsite.co.uk'
+              },
+              meta_variant: 'yellow'
+            }
+          },
+          {
+            id: 'video-teaser-1a',
+            type: 'video_teaser',
+            value: {
+              heading: 'Walk the walk, talk the talk 2',
+              body: 'Share walking stories and your progress with others online',
+              image: {
+                title: 'Image name',
+              },
+              video: '5520584848001',
+              cta: {
+                link_text: 'Find out more',
+                link_external: 'http://www.somewebsite.co.uk'
+              },
+              meta_variant: 'yellow'
+            }
+          },
+          {
+            id: 'app-teaser-1a',
+            type: 'app_teaser',
+            value: {
+              heading: 'html::Download the  <strong><span class="text-color--secondary">Wellmind</span> App</strong>',
+              body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
+              image: {
+                title: 'Image name'
+              },
+              cta_appstore: {
+                link_external: 'http://www.edfs.co.uk'
+              },
+              cta_googleplay: {
+                link_external: 'https://play.google.com/store/apps/details?id=com.bluestepsolutions.wellmind&hl=en_GB'
+              },
+            }
+          }
+        ]
+      },
     },
     {
       type: 'guidance_shelf',

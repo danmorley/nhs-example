@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='AppShelf',
+            name='AppTeaser',
             fields=[
                 ('shelfabstract_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='shelves.ShelfAbstract')),
                 ('heading', models.CharField(max_length=255)),

@@ -8,17 +8,17 @@ class PageHeader extends Component {
     let { navItems, header } = this.props;
 
     return (
-      <div className="container page-header">
-        <div className="row">
-          <div className="col-sm-2">
-            <button className="page-header__burger" onClick={this.handleClick.bind(this)}>
-                <i className="font-icon"></i>
-            </button>
-            <a className="page-header__logo h1">
-              <Text content={header.title || 'html::One <span>You</span>'} />
-            </a>
-          </div>
-          <div className ="col-sm-10">
+      <div className="container-fluid page-header">
+        <div className="container">
+          <div className="page-header__row">
+            <div className="page-header__info">
+              <button className="page-header__burger" onClick={this.handleClick.bind(this)}>
+                  <i className="font-icon"></i>
+              </button>
+              <a className="page-header__logo h1">
+                <Text content={header.title || 'html::One <span>You</span>'} />
+              </a>
+            </div>
             <SiteNav navItems={navItems} />
           </div>
         </div>

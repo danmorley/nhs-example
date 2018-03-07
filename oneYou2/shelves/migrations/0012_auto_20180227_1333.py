@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RenameField(
-            model_name='appshelf',
+            model_name='appteaser',
             old_name='iphone_line',
             new_name='iphone_link',
         ),

@@ -1,38 +1,30 @@
 @import '../../assets/styles/variables/variables';
 @import "../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
 
-
-.video-teaser {
+.information-panel {
   display: flex;
 }
 
-.video-teaser__image {
+.information-panel__image {
   width: 35%;
-  background-repeat: none;
-  background-size: cover;
-  background-position: center;
   min-height: 176px;
 
   @include media-breakpoint-up(sm) {
     min-height: 263px;
   }
-
-  img {
-    width: 100%;
-  }
 }
 
-.video-teaser__info {
+.information-panel__info {
   display: flex;
   flex-direction: column;
   width: 65%;
 }
 
-.video-teaser__heading {
+.information-panel__heading {
   padding: 1em;
 }
 
-.video-teaser__text {
+.information-panel__text {
   display: flex;
   flex-direction: column;
   padding: 1em;
@@ -50,17 +42,19 @@
 // theming
 .oneyou {
 
-  .video-teaser__info {
-      background: $teal-blue;
+  .information-panel__info {
+      background: none;
   }
 
-  .video-teaser__heading {
-    background-color: $teal-dark;
-    color: $white;
+  .information-panel__heading {
+    color: $teal-blue;
+    font-weight: normal;
+    font-family: $secondary-brand-font;
+    margin-bottom: 0.5em;
   }
 
-  .video-teaser__text {
-    color: $white;
+  .information-panel__text {
+    color: $black;
 
     a {
       color: $sunflower-yellow;

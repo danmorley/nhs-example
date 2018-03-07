@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Shelf from '../shelves/Shelf';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 
@@ -7,19 +8,25 @@ import sampleBgImage from './healthcheckup.png'; // Tell Webpack this JS file us
 
 import PlaceholderPanel from '../panels/PlaceholderPanel';
 import VideoTeaserPanel from '../panels/VideoTeaserPanel';
+import ImageTeaserPanel from '../panels/ImageTeaserPanel';
 import Oneyou1TeaserPanel from '../panels/Oneyou1TeaserPanel';
 import AppTeaserPanel from '../panels/AppTeaserPanel';
+import InformationPanel from '../panels/InformationPanel';
 
 /**
  *  Grid Shelf is a simple shelf that can be used to display other
  *  components in a grid.
  *
- *  It expects the following properties:
+ *  It expects the following Layouts:
+ *
+ *  responsive_2_col
+ *  full_width
  */
 class GridShelf extends Component {
   render() {
-    let { content, classNamePrefix } = this.props;
-    // let metaLayout = content.meta_layout || '';
+    let { content, classNamePrefix, layout, variant } = this.props;
+    let metaLayout = content.meta_layout || layout;
+    let panelClass = (metaLayout === 'full_width') ? 'shelf__col col-sm-12' : 'shelf__col col-sm-12 col-md-6';
 
     var panels = content.items.map((panel, i) => {
       const panelInfo = CmsComponentRegistry.components[panel.type];
@@ -27,9 +34,9 @@ class GridShelf extends Component {
       const panelClassNamePrefix = panelInfo && panelInfo.classNamePrefix;
       const panelId = panel.panel_id || panel.id;
       if (PanelClass) {
-        return (<div key={i} className="shelf__col col-sm-12 col-md-6"><PanelClass content={panel.value} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
+        return (<div key={i} className={panelClass}><PanelClass content={panel.value} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
       } else {
-        return (<div key={i} className="shelf__col col-sm-12 col-md-6"><PlaceholderPanel panelType={panel.type} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
+        return (<div key={i} className={panelClass}><PlaceholderPanel panelType={panel.type} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
       }
     });
 
@@ -55,6 +62,13 @@ class GridShelf extends Component {
   }
 }
 
-CmsComponentRegistry.register('grid_shelf', GridShelf, 'basic-grid-shelf');
+GridShelf.propTypes = {
+  content: PropTypes.object.isRequired,
+  classNamePrefix: PropTypes.string.isRequired,
+  layout: PropTypes.string,
+  variant: PropTypes.string
+};
+
+CmsComponentRegistry.register('grid_shelf', GridShelf, 'basic-grid-shelf', null, 'responsive_2_col');
 
 export default GridShelf;

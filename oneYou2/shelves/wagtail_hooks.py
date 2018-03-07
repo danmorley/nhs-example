@@ -1,7 +1,7 @@
 from wagtail.contrib.modeladmin.options import (
     ModelAdmin, ModelAdminGroup, modeladmin_register)
 
-from .models import PromoShelf, BannerShelf, AppShelf
+from .models import PromoShelf, BannerShelf, AppTeaser
 
 
 class PromoshelfAdmin(ModelAdmin):
