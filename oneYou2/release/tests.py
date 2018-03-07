@@ -87,7 +87,7 @@ class ReleaseModelTests(OneYouTests):
 
     loaded_release = Release.objects.get(release_name=release_name)
 
-    self.assertIsNone(loaded_release.content)
+    self.assertEqual(loaded_release.content.count(), 0)
 
 
   def test_release_doesnt_lock_content_before_its_release_time(self):
@@ -104,7 +104,7 @@ class ReleaseModelTests(OneYouTests):
 
     loaded_release = Release.objects.get(release_name=release_name)
 
-    self.assertIsNone(loaded_release.content)
+    self.assertEqual(loaded_release.content.count(), 0)
 
 
   def test_release_locks_content_after_its_release_time(self):
@@ -121,7 +121,7 @@ class ReleaseModelTests(OneYouTests):
 
     loaded_release = Release.objects.get(release_name=release_name)
 
-    self.assertIsNotNone(loaded_release.content)
+    self.assertEqual(loaded_release.content.count(), 1)
 
   def test_release_initialised_from_a_base_release_gets_revisions_from_base(self):
     """
