@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'release',
     'shelves',
     'images',
+    'frontendHandler',
 
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
@@ -175,3 +176,5 @@ DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
 AZURE_ACCOUNT_NAME = os.environ.get('AZURE_ACCOUNT_NAME')    # eg. 'campaignstorage'
 AZURE_ACCOUNT_KEY = os.environ.get('AZURE_ACCOUNT_KEY')      # eg. '<secret key>'
 AZURE_CONTAINER = os.environ.get('AZURE_CONTAINER')          # eg. 'campaign-resource-centre'
+
+ENV = os.environ.get('ENV', 'dev')
