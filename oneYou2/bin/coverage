@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-docker exec -ti oneyou2_web-prod_1 bash -c "coverage run --source='.' --omit='*/migrations/*.py','*/settings/*.py','*/apps.py' manage.py test" >/dev/null
+docker exec -ti oneyou2_web-prod_1 bash -c "coverage run --source='.' --omit='*/migrations/*.py','*/settings/*.py','*/apps.py','release/scheduleCron.py','*/wsgi.py' manage.py test" >/dev/null
 
 docker exec -ti oneyou2_web-prod_1 bash -c "coverage report"
 

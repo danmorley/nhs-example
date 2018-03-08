@@ -7,7 +7,7 @@ from pages.models import OneYou2Page
 
 class ReleaseAdminForm(ModelForm):
   def __init__(self, *args, **kwargs):
-    super().__init__(*args, **kwargs)
+    super(ReleaseAdminForm, self).__init__(*args, **kwargs)
     pages_for_selector = []
     pages = OneYou2Page.objects.all()
     initial_selection = []

@@ -1,16 +1,19 @@
 from __future__ import absolute_import, unicode_literals
 
+import json
+import uuid
+
+from datetime import datetime
+from modelcluster.models import ClusterableModel
+
 from django.db import models
 from django.forms.models import model_to_dict
 from django.utils import timezone
 
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel
 
-from modelcluster.models import ClusterableModel
-from datetime import datetime
-import uuid
-
 from .forms import ReleaseAdminForm
+
 from pages.models import OneYou2Page
 
 
@@ -42,7 +45,7 @@ class Release(ClusterableModel):
   release_name = models.CharField(max_length=255, unique=True)
   release_time = models.DateTimeField(blank=True, null=True)
   uuid = models.CharField(max_length=255, unique=True)
-  content = models.TextField(null=True)
+  frontend_id = models.CharField(max_length=255)
 
   base_form_class = ReleaseAdminForm
 
@@ -54,16 +57,11 @@ class Release(ClusterableModel):
 
   def __init__(self, *args, **kwargs):
     super(Release, self).__init__(*args, **kwargs)
-    if not self.id is None:
-      if (self.release_time is not None) and self.release_time < timezone.now():
-        pages = []
-
-        for revision in self.revisions.all():
-          pages.append(revision.revision.content_json)
-
-        self.content = str(pages)
-
-        self.save()
+    if self.id and self.content.count() == 0:
+      if self.is_released():
+        ReleaseContent(release=self, content=json.dumps(self.generate_fixed_content())).save()
+    if not self.id:
+      self.frontend_id = self.get_current_frontend_id()
 
 
   def save(self, *args, **kwargs):
@@ -97,6 +95,9 @@ class Release(ClusterableModel):
   def __str__(self):
     return self.release_name
 
+  def is_released(self):
+    return (self.release_time is not None) and self.release_time < timezone.now()
+
   def add_revision(self, new_revision):
     for revision in self.revisions.all():
       if revision.revision.page_id == new_revision.page_id:
@@ -108,6 +109,28 @@ class Release(ClusterableModel):
     for revision in self.revisions.all():
       if revision.revision.page_id == page_id:
         revision.delete()
+
+  def generate_fixed_content(self):
+    pages = {}
+
+    for revision in self.revisions.all():
+      pages[str(revision.revision.page_id)] = revision.revision.content_json
+
+    return pages
+
+  def get_content_for(self, key):
+    page_content = None
+    if self.is_released():
+      page_content = self.content.first().get_content_for(str(key))
+    else:
+      for revision in self.revisions.all():
+        if revision.revision.page_id == key:
+          page_content = json.loads(revision.revision.content_json)
+    return page_content
+
+  def get_current_frontend_id(self):
+    # temporary return statement, process for loading release id from the blob store needs to be defined.
+    return 1
 
 
 class ReleasePage(models.Model):
@@ -123,3 +146,23 @@ class ReleasePage(models.Model):
     blank=False,
     null=False,
     on_delete=models.CASCADE)
+
+
+class ReleaseContent(models.Model):
+  release = models.ForeignKey(
+    'release.Release',
+    related_name='content',
+    blank=False,
+    null=False,
+    on_delete=models.CASCADE)
+  content = models.TextField(null=True)
+
+  def get_content_for(self, key):
+    content_dict = json.loads(self.content)
+    try:
+      page_content = json.loads(content_dict[key])
+    except KeyError:
+      page_content = None
+    return page_content
+
+
