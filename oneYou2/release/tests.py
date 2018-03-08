@@ -324,6 +324,54 @@ class ReleaseModelTests(OneYouTests):
     self.assertIsTrue(initial_revision_in_release)
     self.assertIsTrue(second_revision_in_release)
 
+  def test_release_loads_none_object_if_the_requested_page_isnt_in_release(self):
+    """
+    When content is requested for a release that isn't included in the release a None object should be returned.
+    """
+    release = create_test_release()
+
+    release_page_content = release.get_content_for(0)
+
+    self.assertIsNone(release_page_content)
+
+  def test_release_loads_content_from_tables_if_not_yet_released(self):
+    """
+    When content is requested for a release before it is released it should load the content from the related tables
+    not from locked content. Tested by checking that before it is released it returns any content, because before its
+    released there is not locked content to load from.
+    """
+    page = create_test_page()
+    revision = page.get_latest_revision()
+
+    release = create_test_release()
+
+    release_page_content = release.get_content_for(page.id)
+
+    self.assertIsNotNone(release_page_content)
+    self.assertEqual(release_page_content['title'], json.loads(revision.content_json)['title'])
+
+  def test_release_loads_content_from_locked_content_if_released(self):
+    """
+    When content is requested for a release after it is released it should load the content from the locked content
+    not from the releated tables.
+    """
+    initial_title = "Test page"
+    page = create_test_page(initial_title)
+    revision = page.get_latest_revision()
+
+    release = create_test_release()
+
+    second_title = "Altered page"
+    page.title = second_title
+    revision.content_json = page.to_json()
+    revision.save()
+
+    release_page_content = release.get_content_for(page.id)
+
+    self.assertIsNotNone(release_page_content)
+    self.assertNotEqual(json.loads(revision.content_json)['title'], initial_title)
+    self.assertEqual(release_page_content['title'], initial_title)
+
 
 class ReleaseContentModelTests(OneYouTests):
   def test_release_content_can_return_a_requested_page(self):
