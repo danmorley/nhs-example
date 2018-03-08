@@ -45,7 +45,7 @@ class Release(ClusterableModel):
   release_name = models.CharField(max_length=255, unique=True)
   release_time = models.DateTimeField(blank=True, null=True)
   uuid = models.CharField(max_length=255, unique=True)
-  frontend_id = models.CharField(max_length=255, unique=True)
+  frontend_id = models.CharField(max_length=255)
 
   base_form_class = ReleaseAdminForm
 

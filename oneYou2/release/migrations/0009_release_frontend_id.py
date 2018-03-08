@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='release',
             name='frontend_id',
-            field=models.CharField(default=1, max_length=255, unique=True),
+            field=models.CharField(default=1, max_length=255),
             preserve_default=False,
         ),
     ]
