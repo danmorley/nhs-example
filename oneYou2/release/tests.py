@@ -172,6 +172,158 @@ class ReleaseModelTests(OneYouTests):
 
     self.assertIsTrue(release.is_released())
 
+  def test_remove_page_removes_the_linked_revision_of_the_page_from_the_release(self):
+    """
+    the remove page function should remove any linked revisions of that page from the release.
+    """
+    page1 = create_test_page(title="Page 1")
+    page2 = create_test_page(title="Page 2", path='1112')
+
+    release = create_test_release()
+
+    page1_in_release = False
+    page2_in_release = False
+
+    for revision in release.revisions.all():
+      if revision.revision.page_id == page1.id:
+        page1_in_release = True
+      if revision.revision.page_id == page2.id:
+        page2_in_release = True
+
+    self.assertIsTrue(page1_in_release)
+    self.assertIsTrue(page2_in_release)
+
+    release.remove_page(page2.id)
+
+    page1_in_release = False
+    page2_in_release = False
+
+    for revision in release.revisions.all():
+      if revision.revision.page_id == page1.id:
+        page1_in_release = True
+      if revision.revision.page_id == page2.id:
+        page2_in_release = True
+
+    self.assertIsTrue(page1_in_release)
+    self.assertIsFalse(page2_in_release)
+
+  def test_remove_page_does_nothing_if_the_page_is_not_in_the_release(self):
+    """
+    the remove page function should not remove anything if the page is not in the release.
+    """
+    page1 = create_test_page(title="Page 1")
+    page2 = create_test_page(title="Page 2", path='1112')
+
+    release = create_test_release()
+
+    page3 = create_test_page(title="Page 3", path='1113')
+
+    page1_in_release = False
+    page2_in_release = False
+    page3_in_release = False
+
+    for revision in release.revisions.all():
+      if revision.revision.page_id == page1.id:
+        page1_in_release = True
+      if revision.revision.page_id == page2.id:
+        page2_in_release = True
+      if revision.revision.page_id == page3.id:
+        page3_in_release = True
+
+    self.assertIsTrue(page1_in_release)
+    self.assertIsTrue(page2_in_release)
+    self.assertIsFalse(page3_in_release)
+
+    release.remove_page(page3.id)
+
+    page1_in_release = False
+    page2_in_release = False
+    page3_in_release = False
+
+    for revision in release.revisions.all():
+      if revision.revision.page_id == page1.id:
+        page1_in_release = True
+      if revision.revision.page_id == page2.id:
+        page2_in_release = True
+      if revision.revision.page_id == page3.id:
+        page3_in_release = True
+
+    self.assertIsTrue(page1_in_release)
+    self.assertIsTrue(page2_in_release)
+    self.assertIsFalse(page3_in_release)
+
+  def test_add_revision_replaces_the_linked_revision_of_a_page_with_the_new_revision(self):
+    """
+    when a revision is added to a release it replaces the existing revision linked to the release.
+    """
+    page = create_test_page()
+    initial_revision = page.get_latest_revision()
+
+    self.assertIsNotNone(initial_revision)
+
+    release = create_test_release()
+
+    initial_revision_in_release = False
+    for revision in release.revisions.all():
+      if revision.revision.id == initial_revision.id:
+        initial_revision_in_release = True
+
+    self.assertIsTrue(initial_revision_in_release)
+
+    page.save_revision().publish()
+    second_revision = page.get_latest_revision()
+
+    self.assertNotEqual(initial_revision.id, second_revision.id)
+
+    release.add_revision(second_revision)
+
+    initial_revision_in_release = False
+    second_revision_in_release = False
+    for revision in release.revisions.all():
+      if revision.revision.id == initial_revision.id:
+        initial_revision_in_release = True
+      if revision.revision.id == second_revision.id:
+        second_revision_in_release = True
+
+    self.assertIsFalse(initial_revision_in_release)
+    self.assertIsTrue(second_revision_in_release)
+
+  def test_add_revision_creates_a_new_link_if_the_page_not_already_in_the_release(self):
+    """
+    when a revision is added to a release it creates a new link if the page not already linked to the release.
+    """
+    page = create_test_page()
+    initial_revision = page.get_latest_revision()
+
+    self.assertIsNotNone(initial_revision)
+
+    release = create_test_release()
+
+    initial_revision_in_release = False
+    for revision in release.revisions.all():
+      if revision.revision.id == initial_revision.id:
+        initial_revision_in_release = True
+
+    self.assertIsTrue(initial_revision_in_release)
+    self.assertEqual(release.revisions.count(), 1)
+
+    page2 = create_test_page(title='Page 2', path='1112')
+    second_revision = page2.get_latest_revision()
+
+    release.add_revision(second_revision)
+
+    initial_revision_in_release = False
+    second_revision_in_release = False
+    for revision in release.revisions.all():
+      if revision.revision.id == initial_revision.id:
+        initial_revision_in_release = True
+      if revision.revision.id == second_revision.id:
+        second_revision_in_release = True
+
+    self.assertEqual(release.revisions.count(), 2)
+    self.assertIsTrue(initial_revision_in_release)
+    self.assertIsTrue(second_revision_in_release)
+
 
 class ReleaseContentModelTests(OneYouTests):
   def test_release_content_can_return_a_requested_page(self):
@@ -211,5 +363,6 @@ class ReleasePageModelTests(OneYouTests):
 
     self.assertEqual(type(revision), type(release_page.revision))
     self.assertEqual(type(release), type(release_page.release))
+
 
 
