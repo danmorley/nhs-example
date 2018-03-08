@@ -45,6 +45,7 @@ class Release(ClusterableModel):
   release_name = models.CharField(max_length=255, unique=True)
   release_time = models.DateTimeField(blank=True, null=True)
   uuid = models.CharField(max_length=255, unique=True)
+  frontend_id = models.CharField(max_length=255, unique=True)
 
   base_form_class = ReleaseAdminForm
 
@@ -58,8 +59,9 @@ class Release(ClusterableModel):
     super(Release, self).__init__(*args, **kwargs)
     if self.id and self.content.count() == 0:
       if self.is_released():
-
         ReleaseContent(release=self, content=json.dumps(self.generate_fixed_content())).save()
+    if not self.id:
+      self.frontend_id = self.get_current_frontend_id()
 
 
   def save(self, *args, **kwargs):
@@ -125,6 +127,10 @@ class Release(ClusterableModel):
         if revision.revision.page_id == key:
           page_content = json.loads(revision.revision.content_json)
     return page_content
+
+  def get_current_frontend_id(self):
+    # temporary return statement, process for loading release id from the blob store needs to be defined.
+    return 1
 
 
 class ReleasePage(models.Model):
