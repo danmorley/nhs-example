@@ -1,6 +1,8 @@
 from collections import OrderedDict
 
 from django.conf.urls import url
+from rest_framework.exceptions import NotFound
+from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.fields import Field, CharField
 from wagtail.api.v2.endpoints import PagesAPIEndpoint
@@ -16,7 +18,7 @@ from wagtail.wagtailredirects.models import Redirect
 from wagtail.wagtailcore.models import Page
 
 from home.models import SiteSettings
-from release.utils import get_latest_release
+from release.utils import get_latest_release, get_release_object
 from release.exceptions import NoReleasesFound
 
 
@@ -177,6 +179,7 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
         super(BaseAPIEndpoint, self).__init__(*args, **kwargs)
         self.model = Site
         self.seen_types = OrderedDict()
+        print(args, kwargs)
 
     base_serializer_class = SiteSerializer
     filter_backends = [FieldsFilter, OrderingFilter, SearchFilter]
@@ -193,16 +196,40 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
     def get_queryset(self):
         return self.model.objects.all().order_by('id')
 
-    def detail_view(self, request, pk=None,  release_id=None):
+    def dispatch(self, request, *args, **kwargs):
+        """
+        `.dispatch()` is pretty much the same as Django's regular dispatch,
+        but with extra hooks for startup, finalize, and exception handling.
+
+        This is overridden to allow it to look up the site by pk or uid (set in sitesettings)
+        If you try and do this anywhere else it won't work.
+        """
+        pk = kwargs.pop('pk')
+        try:
+            int(pk)
+        except ValueError:
+            site_settings_obj = get_object_or_404(SiteSettings.objects.all(), **{"uid": pk})
+            pk = str(site_settings_obj.site.pk)
+        kwargs['pk'] = pk
+        self.response = super(BaseAPIEndpoint, self).dispatch(request, *args, **kwargs)
+        return self.response
+
+    def detail_view(self, request, pk, release_uuid=None):
         instance = self.get_object()
         # TODO: Currently no site data is associated with a release, so this doesn't really do anything
-        if not release_id or release_id == "current":
+        if not release_uuid or release_uuid == "current":
             current_release = get_latest_release()
             if not current_release:
                 raise NoReleasesFound("The current site has no live releases")
             setattr(instance, 'release_id', current_release.uuid)
         else:
-            setattr(instance, 'release_id', release_id)
+            # Request is asking for a specific release
+            # TODO: If this release is not current maybe it should be protected
+            release_object = get_release_object(release_uuid)
+            if not release_object:
+                raise NotFound()
+
+            setattr(instance, 'release_id', release_uuid)
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
 
@@ -214,9 +241,7 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
         return [
             url(r'^$', cls.as_view({'get': 'listing_view'}), name='listing'),
             url(r'^(?P<pk>\d+)/$', cls.as_view({'get': 'detail_view'}), name='detail'),
-            url(r'^(?P<pk>\d+)/(?P<release_id>[\w\-]+)/$', cls.as_view({'get': 'detail_view'}), name='detail'),
-            url(r'^(?P<pk>\d+)/(?P<release_id>[\w\-]+)/$', cls.as_view({'get': 'detail_view'}), name='detail'),
-            url(r'^(?P<pk>\d+)/(?P<release_id>[\w\-]+)/$', cls.as_view({'get': 'detail_view'}), name='detail'),
+            url(r'^(?P<pk>[\w\-]+)/(?P<release_uuid>[\w\-]+)/$', cls.as_view({'get': 'detail_view'}), name='detail'),
         ]
 
 

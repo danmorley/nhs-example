@@ -15,6 +15,8 @@ class HomePage(Page):
 @register_setting
 class SiteSettings(BaseSetting):
     title = models.CharField(max_length=255)
+    uid = models.SlugField(unique=True, verbose_name="Site name", help_text="An id which can be used to lookup the site"
+                                                                            " in the API")
     menu = models.ForeignKey(
         'pages.Menu',
         null=True,
@@ -40,6 +42,7 @@ class SiteSettings(BaseSetting):
 
     content_panels = Page.content_panels + [
         FieldPanel('title'),
+        FieldPanel('uid'),
         SnippetChooserPanel('menu'),
         SnippetChooserPanel('footer'),
         SnippetChooserPanel('header'),

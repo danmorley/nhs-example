@@ -9,3 +9,10 @@ def get_latest_release():
     released = Release.objects.order_by('-release_time').filter(release_time__lte=datetime.now())
     latest_release = released.first()
     return latest_release
+
+
+def get_release_object(uuid):
+    """Helper function to get a specific release by uuid"""
+    release = Release.objects.filter(uuid=uuid).first()
+    return release
+
