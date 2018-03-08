@@ -193,6 +193,14 @@ class ShelfRevisionModelTests(OneYouTests):
 
     shelf.delete()
 
+  def test_serializable_data_function_returns_a_dictionary_of_the_shelf(self):
+    shelf = create_test_abstract_shelf()
+
+    serialized_shelf = shelf.serializable_data()
+
+    self.assertIsTrue('live_revision' in serialized_shelf)
+    self.assertIsTrue('shelf_id' in serialized_shelf)
+    self.assertIsTrue('content_type' in serialized_shelf)
 
 
 

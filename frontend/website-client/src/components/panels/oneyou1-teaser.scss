@@ -1,7 +1,6 @@
 @import '../../assets/styles/variables/variables';
 @import "../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
 
-
 .oneyou1-teaser {
   display: flex;
   flex-direction: column;
@@ -30,6 +29,62 @@
   padding: 1em 0 0;
 }
 
+.oneyou1-teaser .cta-list { 
+  padding: 0.5em 1em;
+}
+
+.oneyou1-teaser__cta-list a {
+  color: $white;
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }  
+}
+
+.oneyou1-teaser .cta-list__item {
+  padding: 0.5em;
+  border-bottom: 1px solid $white;
+  
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.oneyou1-teaser__cta-list .Collapsible__trigger {
+  box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.4);
+  display: block;
+  padding: 0.8em;
+  position: relative;
+  margin-top: 0.6rem;  
+  
+  &.is-closed {
+    
+    &:before {
+      @extend %icon-chevron-right;
+      position: absolute;
+      right: 0.5em;
+      font-weight: bold;
+      font-size: 1.2em;        
+    }
+  }
+  
+  &.is-open {
+    
+    &:before {
+      @extend %icon-chevron-down;
+      position: absolute;
+      right: 0.5em;
+      font-weight: bold;
+      font-size: 1.2em
+    }
+  }
+  
+  h4 {
+    font-weight: normal;
+  }
+}
+
 // theming
 .oneyou {
 
@@ -41,10 +96,20 @@
     color: $grey-brown-dark;
   }
   
-  .oneyou1-teaser__cta-list {
+  .oneyou1-teaser {
+    .cta-list {
+      background-color: $teal-blue;
+    }
+  }
+  .oneyou1-teaser__cta-item {
     a {
       color: $teal-blue;
-      font-weight: bold;
+    }
+  }
+  
+  .oneyou1-teaser__cta-list {
+    a {
+      color: $white;
     }
   }
 }

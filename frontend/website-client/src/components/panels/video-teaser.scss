@@ -12,14 +12,29 @@
   background-size: cover;
   background-position: center;
   min-height: 176px;
-
+  cursor: pointer;
+  position: relative;  
+  
   @include media-breakpoint-up(sm) {
     min-height: 263px;
   }
-
-  img {
+  
+  &:after {
+    @extend %icon-play;
+    position: absolute;
+    text-align: center;
+    pointer-events: none;
     width: 100%;
+    top: 40%;
+    font-size: 2.5em;
+    z-index: 1;
+    color: white;
   }
+}
+
+.video-teaser__image > div {
+  height: 100%;
+  width: 100%;
 }
 
 .video-teaser__info {

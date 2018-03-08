@@ -8,6 +8,7 @@
 .information-panel__image {
   width: 35%;
   min-height: 176px;
+  background-repeat: none;
 
   @include media-breakpoint-up(sm) {
     min-height: 263px;

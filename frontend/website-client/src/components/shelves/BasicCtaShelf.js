@@ -123,10 +123,12 @@ class BasicCtaShelf extends Component {
       return (
         <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={metaVariant}>
           <div className="shelf__container container-fluid" style={shelfStyle}>
-            <div className="row justify-content-around">
-              <div className="shelf__col col-sm-10">
-                {this.renderHeadingBody(content, headingTagName)}
-                {this.renderCta(content.cta)}
+            <div className="container">
+              <div className="row">
+                <div className="shelf__col col-sm-10">
+                  {this.renderHeadingBody(content, headingTagName)}
+                  {this.renderCta(content.cta)}
+                </div>
               </div>
             </div>
           </div>
@@ -136,12 +138,12 @@ class BasicCtaShelf extends Component {
       return (
         <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={metaVariant}>
           <div className="shelf__container container-fluid" style={shelfStyle}>
-            <div className="row justify-content-around">
-              <div className="shelf__col col-10 col-sm-8">
-                {this.renderHeadingBody(content, headingTagName)}
-                {this.renderCta(content.cta)}
-              </div>
-              <div className="shelf__col col-2 col-sm-2">
+            <div className="container">
+              <div className="row">
+                <div className="shelf__col col-10 col-sm-8">
+                  {this.renderHeadingBody(content, headingTagName)}
+                  {this.renderCta(content.cta)}
+                </div>
               </div>
             </div>
           </div>

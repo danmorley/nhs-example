@@ -21,6 +21,9 @@ from home.models import SiteSettings
 from release.utils import get_latest_release, get_release_object
 from release.exceptions import NoReleasesFound
 
+# Create the router. "wagtailapi" is the URL namespace
+api_router = WagtailAPIRouter('wagtailapi')
+
 
 class MenuField(Field):
     """
@@ -245,6 +248,7 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
         ]
 
 
+
 class OneYouPagesAPIEndpoint(PagesAPIEndpoint):
   def get_object(self):
     lookup_url_kwarg = self.lookup_url_kwarg or self.lookup_field
@@ -252,6 +256,7 @@ class OneYouPagesAPIEndpoint(PagesAPIEndpoint):
 
     base = Page.objects.get(id=page_id)
     return base.specific
+
 
 # Create the router. "wagtailapi" is the URL namespace
 api_router = WagtailAPIRouter('wagtailapi')

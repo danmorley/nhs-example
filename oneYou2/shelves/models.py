@@ -12,6 +12,7 @@ from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, PageChooserPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
+from modelcluster.models import get_serializable_data_for_fields
 
 
 def get_default_shelf_content_type():
@@ -121,6 +122,9 @@ class ShelfAbstract(models.Model):
         """
         content_type = ContentType.objects.get_for_id(self.content_type_id)
         return content_type.model_class()
+
+    def serializable_data(self):
+        return get_serializable_data_for_fields(self)
 
 
 class ShelfRevision(models.Model):
