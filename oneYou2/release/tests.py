@@ -30,7 +30,6 @@ class ReleaseModelTests(OneYouTests):
 
     self.assertEqual(loadedRelease.uuid, original_uuid)
 
-
   def test_save_creates_page_ref_if_doesnt_exists(self):
     release = Release(release_name="Test release")
     
@@ -41,7 +40,6 @@ class ReleaseModelTests(OneYouTests):
     loadedRelease = Release.objects.get(release_name="Test release")
 
     self.assertIsNot(loadedRelease.uuid, None)
-
 
   def test_to_dict(self):
     """
@@ -63,7 +61,6 @@ class ReleaseModelTests(OneYouTests):
     release_dict = release.dict()
     self.assertIs(release_dict['release_name'], test_name)
     self.assertIsFalse('release_time' in release_dict)
-
 
   def test_on_create_release_is_linked_to_all_current_pages(self):
     """
@@ -92,7 +89,6 @@ class ReleaseModelTests(OneYouTests):
 
     self.assertEqual(loaded_release.content.count(), 0)
 
-
   def test_release_doesnt_lock_content_before_its_release_time(self):
 
     """
@@ -108,7 +104,6 @@ class ReleaseModelTests(OneYouTests):
     loaded_release = Release.objects.get(release_name=release_name)
 
     self.assertEqual(loaded_release.content.count(), 0)
-
 
   def test_release_locks_content_after_its_release_time(self):
 
@@ -343,7 +338,8 @@ class ReleaseModelTests(OneYouTests):
     page = create_test_page()
     revision = page.get_latest_revision()
 
-    release = create_test_release()
+    release_time = timezone.now() + timedelta(days=1)
+    release = create_test_release(release_date=release_time)
 
     release_page_content = release.get_content_for(page.id)
 
@@ -359,14 +355,17 @@ class ReleaseModelTests(OneYouTests):
     page = create_test_page(initial_title)
     revision = page.get_latest_revision()
 
-    release = create_test_release()
+    release_time = timezone.now() + timedelta(days=-1)
+    release = create_test_release(release_date=release_time)
+
+    loaded_release = Release.objects.get(id=release.id)
 
     second_title = "Altered page"
     page.title = second_title
     revision.content_json = page.to_json()
     revision.save()
 
-    release_page_content = release.get_content_for(page.id)
+    release_page_content = loaded_release.get_content_for(page.id)
 
     self.assertIsNotNone(release_page_content)
     self.assertNotEqual(json.loads(revision.content_json)['title'], initial_title)

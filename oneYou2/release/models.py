@@ -116,6 +116,16 @@ class Release(ClusterableModel):
 
     return pages
 
+  def get_content_for(self, key):
+    page_content = None
+    if self.is_released():
+      page_content = self.content.first().get_content_for(str(key))
+    else:
+      for revision in self.revisions.all():
+        if revision.revision.page_id == key:
+          page_content = json.loads(revision.revision.content_json)
+    return page_content
+
 
 class ReleasePage(models.Model):
   release = models.ForeignKey(
