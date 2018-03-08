@@ -139,6 +139,7 @@ class Grid(blocks.StructBlock):
         ('oneyou1_teaser', BackwardsCompatibleContent(label="OneYou1 teaser", icon="folder-inverse")),
         ('video_teaser', VideoTemplate(icon="media")),
         ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
+        ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image"))
     ], icon='arrow-left', label='Items')
     meta_layout = blocks.ChoiceBlock(choices=GRID_LAYOUT_CHOICES, label="Layout")
     shelf_id = blocks.CharBlock(required=False, label="ID")
@@ -154,11 +155,7 @@ class OneYou2Page(Page):
         ('carousel_shelf', Carousel(icon="repeat")),
         ('promo_shelf', PromoShelfChooserBlock(target_model="shelves.PromoShelf", icon="image")),
         ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
-        ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
         ('grid_shelf', Grid(icon="form")),
-        ('oneyou1_teaser', BackwardsCompatibleContent(label="OneYou1 teaser", icon="folder-inverse")),
-        ('video_teaser', VideoTemplate(icon="media")),
-        ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
         ('find_out_more_dropdown', FindOutMoreDropDown(label="Link dropdown", icon="order-down")),
     ])
     page_ref = models.CharField(max_length=255, unique=True)

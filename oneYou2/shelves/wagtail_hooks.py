@@ -30,7 +30,7 @@ class BannershelfAdmin(ModelAdmin):
 
 class AppshelfAdmin(ModelAdmin):
     model = AppTeaser
-    menu_label = 'App shelves'
+    menu_label = 'App teasers'
     menu_icon = 'form'
     menu_order = 200
     add_to_settings_menu = False  # or True to add your model to the Settings sub-menu
@@ -41,7 +41,7 @@ class AppshelfAdmin(ModelAdmin):
 
 
 class ShelfAdminGroup(ModelAdminGroup):
-    menu_label = 'Shelves'
+    menu_label = 'Shared'
     menu_icon = 'folder-open-inverse'  # change as required
     menu_order = 200  # will put in 3rd place (000 being 1st, 100 2nd)
     items = (PromoshelfAdmin, BannershelfAdmin, AppshelfAdmin)
