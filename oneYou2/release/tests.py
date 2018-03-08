@@ -17,7 +17,7 @@ from release.models import Release
 class ReleaseModelTests(OneYouTests):
 
   def test_save_doesnt_update_page_ref_if_exists(self):
-    release = Release(release_name="Test release")
+    release = Release(release_name="Test release", site_id=2)
     original_uuid = str(uuid.uuid4())
     release.uuid = original_uuid
 
@@ -31,7 +31,7 @@ class ReleaseModelTests(OneYouTests):
     self.assertEqual(loadedRelease.uuid, original_uuid)
 
   def test_save_creates_page_ref_if_doesnt_exists(self):
-    release = Release(release_name="Test release")
+    release = Release(release_name="Test release", site_id=2)
     
     self.assertIs(release.uuid, '')
 
