@@ -14,6 +14,8 @@ from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel
 
 from .forms import ReleaseAdminForm
 
+from frontendHandler.models import FrontendVersion
+
 from pages.models import OneYou2Page
 
 
@@ -42,6 +44,12 @@ class Release(ClusterableModel):
     blank=True,
     null=True,
     on_delete=models.SET_NULL)
+  site = models.ForeignKey(
+    'wagtailcore.Site',
+    related_name='releases',
+    blank=False,
+    null=False,
+    on_delete=models.CASCADE)
   release_name = models.CharField(max_length=255, unique=True)
   release_time = models.DateTimeField(blank=True, null=True)
   uuid = models.CharField(max_length=255, unique=True)
@@ -50,6 +58,7 @@ class Release(ClusterableModel):
   base_form_class = ReleaseAdminForm
 
   panels = [
+    FieldPanel('site', classname='site',),
     FieldPanel('base_release', classname='base_release', ),
     FieldPanel('release_name', classname='release_name',),
     FieldPanel('release_time', classname='release_time',),
@@ -129,8 +138,7 @@ class Release(ClusterableModel):
     return page_content
 
   def get_current_frontend_id(self):
-    # temporary return statement, process for loading release id from the blob store needs to be defined.
-    return 1
+    return FrontendVersion.get_current_version()
 
 
 class ReleasePage(models.Model):
