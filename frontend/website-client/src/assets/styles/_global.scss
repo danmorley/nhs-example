@@ -30,15 +30,24 @@ body {
 
 h1 {
   font-size: $h1;
+  
+  @include media-breakpoint-up(sm) {
+    font-size: calc(1.25 * #{$h1});
+  }
+}
+
+h2 {
+  font-size: $h2;
+  
+  @include media-breakpoint-up(sm) {
+    font-size: calc(1.2 * #{$h2});
+  }
 }
 
 .h1 {
   font-size: $h1 !important;
 }
 
-h2 {
-  font-size: $h2;
-}
 
 .h2 {
   font-size: $h2 !important;
