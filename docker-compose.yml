@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+
+  hay:
+    build: .
+    environment:
+      HAY_DEBUG: "False"
+      DB_NAME: ${DB_NAME}
+      DB_HOST: ${DB_HOST}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "8000:8000"
+
+  initializer:
+    build: .
+    environment:
+      DB_NAME: ${DB_NAME}
+      DB_HOST: ${DB_HOST}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+    command: bash ./initialize.sh
