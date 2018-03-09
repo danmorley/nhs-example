@@ -9,6 +9,10 @@ services:
       DB_USER: ${DB_USER}
       DB_NAME: ${DB_NAME}
       DB_PASSWORD: ${DB_PASSWORD}
+      AZURE_ACCOUNT_NAME: ${AZURE_ACCOUNT_NAME}
+      AZURE_ACCOUNT_KEY: ${AZURE_ACCOUNT_KEY}
+      AZURE_CONTAINER: ${AZURE_CONTAINER}
+      AZURE_FILE_SHARE: ${AZURE_FILE_SHARE}
     labels:
       io.rancher.container.pull_image: always
       traefik.enable: true
