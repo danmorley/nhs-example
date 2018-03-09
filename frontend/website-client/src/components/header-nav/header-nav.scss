@@ -87,7 +87,7 @@ $secondary-item-padding: 0.4em;
   }
   
   @include media-breakpoint-up(md) {
-    padding: 2em  0 0.5em;
+    padding: 2em 0 1em;
     
     &:first-child{
       margin-right: auto;
@@ -104,8 +104,13 @@ $secondary-item-padding: 0.4em;
 .header-nav__separator {  
   
   @include media-breakpoint-up(md) {
-    padding: 0.5em 1em;
+    padding: 0.3em 1em 0.5em;
     border-left: 2px solid $text-primary; 
+    
+    .header-nav__secondary-title,
+   > .header-nav__link {
+       top: 0.5em;
+   }
     
     &:hover {
       background: $grey-brown-dark;
