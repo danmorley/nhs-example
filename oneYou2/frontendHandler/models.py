@@ -1,4 +1,3 @@
-from azure.storage.blob import BlobService
 from azure.storage.file import FileService
 
 from django.db import models
@@ -12,6 +11,6 @@ class FrontendVersion():
 
   @classmethod
   def get_current_version(cls):
-    blob_service = BlobService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
+    file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
 
-    return blob_service.get_blob_to_text(settings.AZURE_CONTAINER, '/' + settings.ENV + '/code/current_release.txt')
+    return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, settings.ENV, 'current_release.txt')
