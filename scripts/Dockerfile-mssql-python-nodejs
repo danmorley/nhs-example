@@ -1,0 +1,20 @@
+FROM python:3
+
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONIOENCODING utf-8
+ENV ACCEPT_EULA Y
+
+RUN apt-get update \
+    && apt-get install -y apt-transport-https ca-certificates \
+    && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+    && curl https://packages.microsoft.com/config/debian/8/prod.list > /etc/apt/sources.list.d/mssql-release.list \
+    && curl -sL https://deb.nodesource.com/setup_6.x |  bash - \
+    && apt-get install -y msodbcsql unixodbc-dev locales nodejs gnupg2
+
+
+ # Set the locale
+ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+     locale-gen
+ ENV LANG en_US.UTF-8
+ ENV LANGUAGE en_US:en
+ ENV LC_ALL en_US.UTF-8
