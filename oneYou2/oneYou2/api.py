@@ -157,14 +157,6 @@ class PagesField(Field):
         return {p['url_path'].replace('/home', ''): p['id'] for p in pages}
 
 
-class ReleaseField(Field):
-    def get_attribute(self, instance):
-        return instance
-
-    def to_representation(self, document):
-        return document.release
-
-
 class SiteSerializer(BaseSerializer):
     menu = MenuField(read_only=True)
     redirects = RedirectField(read_only=True)
