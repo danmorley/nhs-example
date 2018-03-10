@@ -1,6 +1,7 @@
 from collections import OrderedDict
 
 from django.conf.urls import url
+from django.urls import reverse
 from rest_framework.exceptions import NotFound
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
@@ -20,9 +21,6 @@ from wagtail.wagtailcore.models import Page
 from home.models import SiteSettings
 from release.utils import get_latest_release, get_release_object
 from release.exceptions import NoReleasesFound
-
-# Create the router. "wagtailapi" is the URL namespace
-api_router = WagtailAPIRouter('wagtailapi')
 
 
 class MenuField(Field):
@@ -214,6 +212,7 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
             site_settings_obj = get_object_or_404(SiteSettings.objects.all(), **{"uid": pk})
             pk = str(site_settings_obj.site.pk)
         kwargs['pk'] = pk
+        print(kwargs)
         self.response = super(BaseAPIEndpoint, self).dispatch(request, *args, **kwargs)
         return self.response
 
@@ -237,6 +236,15 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
         return Response(serializer.data)
 
     @classmethod
+    def get_object_detail_urlpath(cls, model, pk, namespace=''):
+        if namespace:
+            url_name = namespace + ':detail'
+        else:
+            url_name = 'detail'
+
+        return reverse(url_name, args=(pk, ))
+
+    @classmethod
     def get_urlpatterns(cls):
         """
         This returns a list of URL patterns for the endpoint
@@ -248,15 +256,83 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
         ]
 
 
+class ReleaseAPIEndpoint(PagesAPIEndpoint):
+    def dispatch(self, request, *args, **kwargs):
+        """
+        `.dispatch()` is pretty much the same as Django's regular dispatch,
+        but with extra hooks for startup, finalize, and exception handling.
 
-class OneYouPagesAPIEndpoint(PagesAPIEndpoint):
+        This is overridden to allow it to look up the site by pk or uid (set in sitesettings)
+        If you try and do this anywhere else it won't work.
+        """
+        site_uid = kwargs.pop('site_uid')
+        try:
+            int(site_uid)
+        except ValueError:
+            site_settings_obj = get_object_or_404(SiteSettings.objects.all(), **{"uid": site_uid})
+            site_uid = str(site_settings_obj.site.pk)
+        kwargs['site_uid'] = site_uid
+        self.response = super(BaseAPIEndpoint, self).dispatch(request, *args, **kwargs)
+        return self.response
+
+    def get_object(self):
+        lookup_url_kwarg = self.lookup_url_kwarg or self.lookup_field
+        page_id = self.kwargs[lookup_url_kwarg]
+
+        base = Page.objects.get(id=page_id)
+        return base.specific
+
+    def get_serializer(self, *args, **kwargs):
+        """
+        Return the serializer instance that should be used for validating and
+        deserializing input, and for serializing output.
+        """
+        serializer_class = self.get_serializer_class()
+        print("SERIALIZER CLASS", serializer_class)
+
+        kwargs['context'] = self.get_serializer_context()
+        print(args, kwargs)
+        return serializer_class(*args, **kwargs)
+
+    def listing_view(self, request, site_uid, release_uuid):
+        queryset = self.get_queryset()
+        self.check_query_parameters(queryset)
+        queryset = self.filter_queryset(queryset)
+        queryset = self.paginate_queryset(queryset)
+        serializer = self.get_serializer(queryset, many=True)
+        return self.get_paginated_response(serializer.data)
+
+    def detail_view(self, request, pk, site_uid, release_uuid):
+        #TODO: There is no relationship between release and site
+        print(release_uuid)
+        release = get_release_object(release_uuid)
+        if not release:
+            print(get_latest_release().uuid)
+            raise NotFound()
+        page_content = release.get_content_for(pk)
+        print("PAGE CONTENT: ")
+        print(page_content)
+        print(release)
+        return Response(page_content)
+
+    @classmethod
+    def get_urlpatterns(cls):
+        """
+        This returns a list of URL patterns for the endpoint
+        """
+        return [
+            url(r'^$', cls.as_view({'get': 'listing_view'}), name='listing'),
+            url(r'^(?P<pk>\d+)/$', cls.as_view({'get': 'detail_view'}), name='detail'),
+        ]
+
+
+class AltPagesEndpoint(PagesAPIEndpoint):
   def get_object(self):
     lookup_url_kwarg = self.lookup_url_kwarg or self.lookup_field
     page_id = self.kwargs[lookup_url_kwarg]
 
     base = Page.objects.get(id=page_id)
     return base.specific
-
 
 # Create the router. "wagtailapi" is the URL namespace
 api_router = WagtailAPIRouter('wagtailapi')
@@ -267,7 +343,8 @@ api_router = WagtailAPIRouter('wagtailapi')
 # The second parameter is the endpoint class that handles the requests
 
 
-api_router.register_endpoint('pages', OneYouPagesAPIEndpoint)
+api_router.register_endpoint('release_pages', AltPagesEndpoint)
+
+api_router.register_endpoint('sites/(?P<site_uid>[\w\-]+)/(?P<release_uuid>[\w\-]+)/pages', ReleaseAPIEndpoint)
 api_router.register_endpoint('images', ImagesAPIEndpoint)
 api_router.register_endpoint('documents', DocumentsAPIEndpoint)
-api_router.register_endpoint('sites', SitesAPIEndpoint)

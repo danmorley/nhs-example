@@ -1,5 +1,7 @@
 from __future__ import unicode_literals
 
+from collections import OrderedDict
+
 from .models import query_set_to_dict, Release
 
 from django.shortcuts import render
