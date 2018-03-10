@@ -94,6 +94,7 @@
     "fields": {
       "site": 2,
       "title": "OneYou",
+      "uid": "oneyou",
       "menu": 1,
       "footer": 1,
       "header": 1
