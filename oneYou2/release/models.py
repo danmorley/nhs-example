@@ -16,6 +16,7 @@ from wagtail.api.v2.serializers import PageSerializer
 
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel
 
+from oneYou2.panels import ReadOnlyPanel
 from .forms import ReleaseAdminForm
 
 from pages.models import OneYou2Page
@@ -70,6 +71,7 @@ class Release(ClusterableModel):
     panels = [
         FieldPanel('base_release', classname='base_release', ),
         FieldPanel('release_name', classname='release_name', ),
+        ReadOnlyPanel('uuid', classname='uuid', ),
         FieldPanel('release_time', classname='release_time', ),
     ]
 
@@ -84,7 +86,7 @@ class Release(ClusterableModel):
                 rc.save()
                 pages = self.generate_fixed_content()
                 rc.content=json.dumps(pages)
-                rc.save()
+
 
         if not self.id:
             self.frontend_id = self.get_current_frontend_id()
