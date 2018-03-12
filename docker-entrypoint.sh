@@ -5,7 +5,7 @@ set -e
 if [[ $# -eq 0 ]]; then
 
   # Change to project directory
-  cd oneyou2/
+  cd oneYou2/
 
   # Check and wait for migrations to complete
   until python3 manage.py checkmigrations
@@ -15,8 +15,8 @@ if [[ $# -eq 0 ]]; then
   done
 
   #Run Gunicorn
-  exec gunicorn oneyou.wsgi:application \
-      --name oneyou \
+  exec gunicorn oneYou2.wsgi:application \
+      --name oneyou-cms \
       --bind 0.0.0.0:8000 \
       --workers 3 \
       --log-level=info \

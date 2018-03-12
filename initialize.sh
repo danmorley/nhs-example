@@ -3,7 +3,7 @@ set -euo pipefail
 
 
 # Change to project directory
-cd oneyou/
+cd oneYou2/
 
 # Run migrations
 echo "Running migrations"

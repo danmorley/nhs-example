@@ -8,3 +8,4 @@ django-cors-headers==2.1.0
 django-storages
 azure==1.0.0
 coverage==4.5.1
+gunicorn==19.6.0
