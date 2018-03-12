@@ -159,6 +159,18 @@ class PagesField(Field):
         return {p['url_path'].replace('/home', ''): p['id'] for p in pages}
 
 
+class SiteUIDField(Field):
+    def get_attribute(self, instance):
+        return instance
+
+    def to_representation(self, document):
+        try:
+            settings = SiteSettings.objects.get(site=document)
+        except SiteSettings.DoesNotExist:
+            return ""
+        return settings.uid
+
+
 class SiteSerializer(BaseSerializer):
     menu = MenuField(read_only=True)
     redirects = RedirectField(read_only=True)
@@ -166,6 +178,7 @@ class SiteSerializer(BaseSerializer):
     header = HeaderField(read_only=True)
     pages = PagesField(read_only=True)
     release_id = CharField(read_only=True)
+    site_uid = SiteUIDField(read_only=True)
 
 
 # There is no default sites endpoint
@@ -178,11 +191,12 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
     base_serializer_class = SiteSerializer
     filter_backends = [FieldsFilter, OrderingFilter, SearchFilter]
     body_fields = BaseAPIEndpoint.body_fields + ['hostname', 'port', 'site_name', 'root_page', 'is_default_site',
-                                                 'menu', 'header', 'footer', 'redirects', 'pages', 'release_id']
-    meta_fields = BaseAPIEndpoint.meta_fields + ['hostname', 'release_id']
+                                                 'menu', 'header', 'footer', 'redirects', 'pages', 'release_id',
+                                                 'site_uid']
+    meta_fields = BaseAPIEndpoint.meta_fields + ['hostname', 'release_id', 'site_uid']
     listing_default_fields = BaseAPIEndpoint.listing_default_fields + ['hostname', 'port', 'site_name', 'root_page',
                                                                        'is_default_site', 'menu', 'header', 'footer',
-                                                                       'redirects', 'pages', 'release_id']
+                                                                       'redirects', 'pages', 'release_id', 'site_uid']
     nested_default_fields = BaseAPIEndpoint.nested_default_fields + ['hostname']
     name = 'sites'
     model = get_document_model()
