@@ -220,7 +220,6 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
                 site_settings_obj = get_object_or_404(SiteSettings.objects.all(), **{"uid": pk})
                 pk = str(site_settings_obj.site.pk)
             kwargs['pk'] = pk
-        print("here", kwargs)
         self.response = super(BaseAPIEndpoint, self).dispatch(request, *args, **kwargs)
         return self.response
 
@@ -280,7 +279,6 @@ class ReleasePagesAPIEndpoint(PagesAPIEndpoint):
         This is overridden to allow it to look up the site by pk or uid (set in sitesettings)
         If you try and do this anywhere else it won't work.
         """
-        print("Inside release")
         site_uid = kwargs.get('site_uid')
         if site_uid:
             try:
@@ -289,7 +287,6 @@ class ReleasePagesAPIEndpoint(PagesAPIEndpoint):
                 site_settings_obj = get_object_or_404(SiteSettings.objects.all(), **{"uid": site_uid})
                 site_uid = str(site_settings_obj.site.pk)
             kwargs['site_uid'] = site_uid
-        print(args, kwargs)
         self.response = super(BaseAPIEndpoint, self).dispatch(request, *args, **kwargs)
         return self.response
 
@@ -298,7 +295,6 @@ class ReleasePagesAPIEndpoint(PagesAPIEndpoint):
         overides = {field.name: field.serializer
                     for field in cls.get_body_fields(model) + cls.get_meta_fields(model)
                     if field.serializer is not None}
-        print(overides)
         return overides
 
     def get_object(self):
@@ -368,14 +364,12 @@ class OneYouAPIRouter(WagtailAPIRouter):
         ]
 
         for name, class_ in self._endpoints.items():
-            print(name, class_)
             pattern = url(
                 r'^{}/'.format(name),
                 include(class_.get_urlpatterns(), namespace=name)
             )
             urlpatterns.append(pattern)
 
-        print(urlpatterns)
         decorate_urlpatterns(urlpatterns, self.wrap_view)
 
         return urlpatterns

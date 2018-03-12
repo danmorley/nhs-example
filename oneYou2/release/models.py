@@ -78,18 +78,13 @@ class Release(ClusterableModel):
     def __init__(self, *args, **kwargs):
         super(Release, self).__init__(*args, **kwargs)
 
-
         if self.id and self.content.count() == 0:
             if self.is_released():
                 rc = ReleaseContent(release=self)
                 rc.save()
-                print("saved content")
                 pages = self.generate_fixed_content()
-                print(pages)
                 rc.content = json.dumps(pages)
                 rc.save()
-                print("populated content")
-
 
         if not self.id:
             self.frontend_id = self.get_current_frontend_id()
@@ -215,7 +210,6 @@ class ReleaseContent(models.Model):
     content = models.TextField(null=True)
 
     def get_content_for(self, key):
-        print(self.content)
         content_dict = json.loads(self.content)
         try:
             page_content = content_dict[key]
