@@ -1,14 +1,16 @@
 from collections import OrderedDict
 
-from django.conf.urls import url
+from django.conf.urls import include, url
 from django.urls import reverse
 from rest_framework.exceptions import NotFound
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.fields import Field, CharField
+from rest_framework.utils.serializer_helpers import ReturnList
 from wagtail.api.v2.endpoints import PagesAPIEndpoint
 from wagtail.api.v2.router import WagtailAPIRouter
 from wagtail.api.v2.serializers import BaseSerializer
+from wagtail.utils.urlpatterns import decorate_urlpatterns
 from wagtail.wagtailcore.models import Site, Page
 from wagtail.wagtaildocs.models import get_document_model
 from wagtail.wagtailimages.api.v2.endpoints import ImagesAPIEndpoint
@@ -172,13 +174,12 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
         super(BaseAPIEndpoint, self).__init__(*args, **kwargs)
         self.model = Site
         self.seen_types = OrderedDict()
-        print(args, kwargs)
 
     base_serializer_class = SiteSerializer
     filter_backends = [FieldsFilter, OrderingFilter, SearchFilter]
     body_fields = BaseAPIEndpoint.body_fields + ['hostname', 'port', 'site_name', 'root_page', 'is_default_site',
                                                  'menu', 'header', 'footer', 'redirects', 'pages', 'release_id']
-    meta_fields = BaseAPIEndpoint.meta_fields + ['hostname']
+    meta_fields = BaseAPIEndpoint.meta_fields + ['hostname', 'release_id']
     listing_default_fields = BaseAPIEndpoint.listing_default_fields + ['hostname', 'port', 'site_name', 'root_page',
                                                                        'is_default_site', 'menu', 'header', 'footer',
                                                                        'redirects', 'pages', 'release_id']
@@ -197,14 +198,15 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
         This is overridden to allow it to look up the site by pk or uid (set in sitesettings)
         If you try and do this anywhere else it won't work.
         """
-        pk = kwargs.pop('pk')
-        try:
-            int(pk)
-        except ValueError:
-            site_settings_obj = get_object_or_404(SiteSettings.objects.all(), **{"uid": pk})
-            pk = str(site_settings_obj.site.pk)
-        kwargs['pk'] = pk
-        print(kwargs)
+        pk = kwargs.get('pk')
+        if pk:
+            try:
+                int(pk)
+            except ValueError:
+                site_settings_obj = get_object_or_404(SiteSettings.objects.all(), **{"uid": pk})
+                pk = str(site_settings_obj.site.pk)
+            kwargs['pk'] = pk
+        print("here", kwargs)
         self.response = super(BaseAPIEndpoint, self).dispatch(request, *args, **kwargs)
         return self.response
 
@@ -236,19 +238,8 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
 
         return reverse(url_name, args=(pk, ))
 
-    @classmethod
-    def get_urlpatterns(cls):
-        """
-        This returns a list of URL patterns for the endpoint
-        """
-        return [
-            url(r'^$', cls.as_view({'get': 'listing_view'}), name='listing'),
-            url(r'^(?P<pk>\d+)/$', cls.as_view({'get': 'detail_view'}), name='detail'),
-            url(r'^(?P<pk>[\w\-]+)/(?P<release_uuid>[\w\-]+)/$', cls.as_view({'get': 'detail_view'}), name='detail'),
-        ]
 
-
-class ReleaseAPIEndpoint(PagesAPIEndpoint):
+class ReleasePagesAPIEndpoint(PagesAPIEndpoint):
     def dispatch(self, request, *args, **kwargs):
         """
         `.dispatch()` is pretty much the same as Django's regular dispatch,
@@ -257,20 +248,30 @@ class ReleaseAPIEndpoint(PagesAPIEndpoint):
         This is overridden to allow it to look up the site by pk or uid (set in sitesettings)
         If you try and do this anywhere else it won't work.
         """
-        site_uid = kwargs.pop('site_uid')
-        try:
-            int(site_uid)
-        except ValueError:
-            site_settings_obj = get_object_or_404(SiteSettings.objects.all(), **{"uid": site_uid})
-            site_uid = str(site_settings_obj.site.pk)
-        kwargs['site_uid'] = site_uid
+        print("Inside release")
+        site_uid = kwargs.get('site_uid')
+        if site_uid:
+            try:
+                int(site_uid)
+            except ValueError:
+                site_settings_obj = get_object_or_404(SiteSettings.objects.all(), **{"uid": site_uid})
+                site_uid = str(site_settings_obj.site.pk)
+            kwargs['site_uid'] = site_uid
+        print(args, kwargs)
         self.response = super(BaseAPIEndpoint, self).dispatch(request, *args, **kwargs)
         return self.response
+
+    @classmethod
+    def get_field_serializer_overrides(cls, model):
+        overides = {field.name: field.serializer
+                    for field in cls.get_body_fields(model) + cls.get_meta_fields(model)
+                    if field.serializer is not None}
+        print(overides)
+        return overides
 
     def get_object(self):
         lookup_url_kwarg = self.lookup_url_kwarg or self.lookup_field
         page_id = self.kwargs[lookup_url_kwarg]
-
         base = Page.objects.get(id=page_id)
         return base.specific
 
@@ -280,54 +281,76 @@ class ReleaseAPIEndpoint(PagesAPIEndpoint):
         deserializing input, and for serializing output.
         """
         serializer_class = self.get_serializer_class()
-        print("SERIALIZER CLASS", serializer_class)
-
         kwargs['context'] = self.get_serializer_context()
-        print(args, kwargs)
         return serializer_class(*args, **kwargs)
 
-    def listing_view(self, request, site_uid, release_uuid):
-        queryset = self.get_queryset()
-        self.check_query_parameters(queryset)
-        queryset = self.filter_queryset(queryset)
-        queryset = self.paginate_queryset(queryset)
-        serializer = self.get_serializer(queryset, many=True)
-        return self.get_paginated_response(serializer.data)
-
     def detail_view(self, request, pk, site_uid, release_uuid):
-        #TODO: There is no relationship between release and site
-        print(release_uuid)
         release = get_release_object(release_uuid)
         if not release:
-            print(get_latest_release().uuid)
             raise NotFound()
         page_content = release.get_content_for(pk)
-        print("PAGE CONTENT: ")
-        print(page_content)
-        print(release)
         return Response(page_content)
 
-    @classmethod
-    def get_urlpatterns(cls):
-        """
-        This returns a list of URL patterns for the endpoint
-        """
-        return [
-            url(r'^$', cls.as_view({'get': 'listing_view'}), name='listing'),
-            url(r'^(?P<pk>\d+)/$', cls.as_view({'get': 'detail_view'}), name='detail'),
-        ]
+    def listing_view(self, request, site_uid, release_uuid):
+        release = get_release_object(release_uuid)
+        pages = []
+        if not release:
+            raise NotFound()
+        for revision in release.revisions.all():
+            pages.append(release.get_content_for(revision.revision.page.id))
+        return Response({"meta": {"total_count": len(pages)}, "items": pages})
 
 
 class AltPagesEndpoint(PagesAPIEndpoint):
   def get_object(self):
     lookup_url_kwarg = self.lookup_url_kwarg or self.lookup_field
     page_id = self.kwargs[lookup_url_kwarg]
-
     base = Page.objects.get(id=page_id)
     return base.specific
 
+
+class OneYouAPIRouter(WagtailAPIRouter):
+    """This is the default WagtailAPI router with some of our own endpoints pre-registered"""
+
+    def get_urlpatterns(self):
+        urlpatterns = [
+            url(r'^sites/$',
+                view=SitesAPIEndpoint.as_view({'get': 'listing_view'}),
+                name='site_listings'),
+
+            url(r'^sites/(?P<pk>[\w\-]+)/$',
+                view=SitesAPIEndpoint.as_view({'get': 'detail_view'}),
+                name='site_detail'),
+
+            url(r'^sites/(?P<pk>[\w\-]+)/(?P<release_uuid>[\w\-]+)/$',
+                view=SitesAPIEndpoint.as_view({'get': 'detail_view'}),
+                name='site_release_detail'),
+
+            url(r'^sites/(?P<site_uid>[\w\-]+)/(?P<release_uuid>[\w\-]+)/pages/$',
+                view=ReleasePagesAPIEndpoint.as_view({'get': 'listing_view'}),
+                name='s'),
+
+            url(r'^sites/(?P<site_uid>[\w\-]+)/(?P<release_uuid>[\w\-]+)/pages/(?P<pk>\d+)/$',
+                view=ReleasePagesAPIEndpoint.as_view({'get': 'detail_view'}),
+                name='detail'),
+        ]
+
+        for name, class_ in self._endpoints.items():
+            print(name, class_)
+            pattern = url(
+                r'^{}/'.format(name),
+                include(class_.get_urlpatterns(), namespace=name)
+            )
+            urlpatterns.append(pattern)
+
+        print(urlpatterns)
+        decorate_urlpatterns(urlpatterns, self.wrap_view)
+
+        return urlpatterns
+
+
 # Create the router. "wagtailapi" is the URL namespace
-api_router = WagtailAPIRouter('wagtailapi')
+api_router = OneYouAPIRouter('wagtailapi')
 
 # Add the four endpoints using the "register_endpoint" method.
 # The first parameter is the name of the endpoint (eg. pages, images). This
@@ -335,8 +358,8 @@ api_router = WagtailAPIRouter('wagtailapi')
 # The second parameter is the endpoint class that handles the requests
 
 
+# This is for internal use only
 api_router.register_endpoint('release_pages', AltPagesEndpoint)
 
-api_router.register_endpoint('sites/(?P<site_uid>[\w\-]+)/(?P<release_uuid>[\w\-]+)/pages', ReleaseAPIEndpoint)
 api_router.register_endpoint('images', ImagesAPIEndpoint)
 api_router.register_endpoint('documents', DocumentsAPIEndpoint)

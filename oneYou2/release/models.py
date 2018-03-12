@@ -77,15 +77,18 @@ class Release(ClusterableModel):
 
     def __init__(self, *args, **kwargs):
         super(Release, self).__init__(*args, **kwargs)
-        #print("init -- id: ", self.id, ", count: ", self.content.count())
-        print("is_released: ", self.is_released())
+
 
         if self.id and self.content.count() == 0:
             if self.is_released():
                 rc = ReleaseContent(release=self)
                 rc.save()
+                print("saved content")
                 pages = self.generate_fixed_content()
-                rc.content=json.dumps(pages)
+                print(pages)
+                rc.content = json.dumps(pages)
+                rc.save()
+                print("populated content")
 
 
         if not self.id:
@@ -212,6 +215,7 @@ class ReleaseContent(models.Model):
     content = models.TextField(null=True)
 
     def get_content_for(self, key):
+        print(self.content)
         content_dict = json.loads(self.content)
         try:
             page_content = content_dict[key]
