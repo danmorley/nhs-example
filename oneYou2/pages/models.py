@@ -113,7 +113,7 @@ class SocialMediaFooterLink(blocks.StructBlock):
 
 class PageHeading(blocks.StructBlock):
     heading = blocks.CharBlock(required=True)
-    body = blocks.TextBlock(required=True)
+    body = blocks.RichTextBlock(required=True)
     background_image = BlobImageChooserBlock()
     shelf_id = blocks.CharBlock(required=False, label="ID", help_text="Not displayed in the front end")
 
@@ -144,7 +144,7 @@ class CTABlock(blocks.StructBlock):
 
 class BackwardsCompatibleContent(CTABlock):
     heading = blocks.CharBlock(required=True)
-    body = blocks.TextBlock(required=True)
+    body = blocks.RichTextBlock(required=True)
     image = BlobImageChooserBlock()
     cta =blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
@@ -162,7 +162,7 @@ class FindOutMoreDropDown(CTABlock):
 
 class VideoTemplate(blocks.StructBlock):
     heading = blocks.CharBlock(required=True)
-    body = blocks.TextBlock(required=True)
+    body = blocks.RichTextBlock(required=True)
     image = BlobImageChooserBlock(help_text="Click this image plays the video")
     video = blocks.CharBlock(required=True)
     cta = blocks.StreamBlock([
@@ -173,7 +173,7 @@ class VideoTemplate(blocks.StructBlock):
 
 class ImageTeaserTemplate(blocks.StructBlock):
     heading = blocks.CharBlock(required=True)
-    body = blocks.TextBlock(required=True)
+    body = blocks.RichTextBlock(required=True)
     image = BlobImageChooserBlock()
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
