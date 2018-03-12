@@ -195,7 +195,20 @@ const sampleShelves = {
               cta: {
                 link_text: 'Find out more',
                 link_external: 'http://www.edfs.co.uk'
-              }
+              },
+              meta_variant: 'dark-bg'
+            }
+          },
+          {
+            id: 'image-teaser-2',
+            type: 'image_teaser',
+            value: {
+              heading: 'Smoking and you',
+              body: '<p>Share walking stories and your progress with others online</p><p>This is a learn more  panel.</p>',
+              image: {
+                title: 'Image name'
+              },
+              meta_variant: 'light-bg'
             }
           }
         ],
@@ -264,8 +277,7 @@ const sampleShelves = {
               cta: {
                 link_text: 'Find out more',
                 link_external: 'http://www.somewebsite.co.uk'
-              },
-              meta_variant: 'yellow'
+              }
             }
           }
         ]
@@ -395,6 +407,19 @@ const sampleShelves = {
       value: {
         heading: 'Promo Shelf (Jira Promo Shelf ON2-10)',
         body: 'Layout <b>cta_on_right</b>, variant <b>promo</b>'
+      }
+    },
+    {
+      id: 'promo-shelf-3',
+      type: 'promo_shelf',
+      value: {
+        heading: 'html::Tell us what <span class="marker">you</span> Think',
+        cta: {
+          link_text: 'Send a message',
+          link_external: 'http://www.edfs.co.uk'
+        },
+        meta_layout: 'cta_on_right',
+        meta_variant: 'promo'
       }
     },
     {
