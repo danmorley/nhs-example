@@ -1,7 +1,13 @@
+import operator
+
 from django.db import models
+from django.db.models import Q
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
+from functools import reduce
+
+from wagtail.wagtailcore.models import PageRevision
 from wagtail.wagtailimages.models import Image, AbstractImage, AbstractRendition
 
 from pages.models import OneYou2Page
@@ -9,8 +15,11 @@ from pages.models import OneYou2Page
 
 class PHEImage(AbstractImage):
     def get_usage(self):
-      search_string = '{"type": "image", "value": ' + str(self.id)
-      return OneYou2Page.objects.filter(body__contains=search_string)      
+        search_strings = ['"type": "image", "value": ' + str(self.id), 'image": ' + str(self.id), 'image\\": ' + str(self.id)]
+        query = reduce(operator.or_, (Q(content_json__contains=string) for string in search_strings))
+        page_ids = PageRevision.objects.filter(query).values('page_id')
+        pages = OneYou2Page.objects.filter(id__in=page_ids).order_by('id')
+        return pages
 
     admin_form_fields = Image.admin_form_fields + ()
 
