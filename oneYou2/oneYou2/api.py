@@ -229,6 +229,24 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
 
+    def listing_view(self, request):
+        queryset = self.get_queryset()
+        self.check_query_parameters(queryset)
+        queryset = self.filter_queryset(queryset)
+        queryset = self.paginate_queryset(queryset)
+        # TODO: this is pretty inefficent
+        # Show all the latest releases
+        for instance in queryset:
+            current_release = get_latest_release()
+            if not current_release:
+                setattr(instance, 'release_id', "")
+            else:
+                setattr(instance, 'release_id', current_release.uuid)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return self.get_paginated_response(serializer.data)
+
+
     @classmethod
     def get_object_detail_urlpath(cls, model, pk, namespace=''):
         if namespace:
