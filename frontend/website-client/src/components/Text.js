@@ -21,9 +21,10 @@ class Text extends Component {
     let { content, tagName, format, ...rest } = this.props;
     if (!content) return null;
     let Tag = tagName;
-    let isHtml = (format === 'html' || content.startsWith('html::'));
-    
-    if (isHtml) {
+
+    if (format === 'html') {
+      return (<Tag dangerouslySetInnerHTML={{__html: content}} {...rest}/>);
+    } else if (content.startsWith('html::')) {
       return (<Tag dangerouslySetInnerHTML={{__html: content.substring(6)}} {...rest}/>);
     } else {
       return (<Tag {...rest}>{content}</Tag>);

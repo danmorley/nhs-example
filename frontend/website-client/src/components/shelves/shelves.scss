@@ -6,11 +6,6 @@
 $shelf-padding-standard: 1em;
 $shelf-padding-extra: 2em;
 
-.shelf__header {
-  color: $teal-blue;
-  font-size: $h2;
-}
-
 .shelf__container > .container {
   padding-bottom: 0;
   padding-top: 0
@@ -24,7 +19,15 @@ $shelf-padding-extra: 2em;
 }
 
 .shelf-section {
-  padding: 2em 0;
+  padding: 0.5em 0;
+  
+  @include media-breakpoint-up(sm) {
+    padding: 1em 0;
+  }
+  
+  &:first-child {
+    padding-top: 0;
+  }
 }
 
 .shelf__col {
@@ -52,11 +55,38 @@ $shelf-padding-extra: 2em;
   }
 }
 
+.section-heading-shelf,
+.basic-grid-shelf {
+  
+   > .container {
+    @include media-breakpoint-up(sm) {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}
+
+.shelf__container > .container {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .section-heading-shelf h2 {
     font-family: $secondary-brand-font;
     font-weight: normal;
 }
 
+.shelf-full_to_half_width {
+  
+  @include media-breakpoint-only(lg) {
+    padding-top: 0;
+  }
+
+  .container.full-to-half-width {
+    padding-top: 0;
+    padding-bottom:0;
+  }
+}
 //theme
 .oneyou {
   

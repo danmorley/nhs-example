@@ -6,10 +6,26 @@ $tertiary-brand-font: 'OneYouScriptBold', Helvetica, Liberation Sans, Arial, san
 $nav-font: Helvetica, Liberation Sans, Arial, sans-serif;
 $default-font: Helvetica, Liberation Sans, Arial, sans-serif;
 
-$font-default-mobile: 14px;
+$font-default-mobile: 16px;
 $font-default-desktop: 20px;
 
 //headings
-$h1: 2em;
-$h2: 1.5em;
+$h1: 1.6em;
+$h2: 1.25em;
 $h3: 1.15em;
+
+@mixin heading-h1() {
+  font-size: $h1;
+  
+  @include media-breakpoint-up(sm) {
+    font-size: calc(1.25 * #{$h1});
+  }
+}
+
+@mixin heading-h2() {
+  font-size: $h2;
+  
+  @include media-breakpoint-up(sm) {
+    font-size: calc(1.2 * #{$h2});
+  }
+}

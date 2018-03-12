@@ -134,7 +134,25 @@ class BasicCtaShelf extends Component {
           </div>
         </Shelf>
       );
-    } else if (metaLayout === 'page_header') {
+    } else if (metaLayout === 'full_to_half_width') {
+      return (
+        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={metaVariant} layout={metaLayout}>
+          <div className="container full-to-half-width">
+            <div className="shelf__container container" style={shelfStyle}>
+              <div className="row">
+                <div className="shelf__col col col-vertical-center">
+                  {this.renderHeadingBody(content, headingTagName)}
+                </div>
+                <div className="shelf__col col col-vertical-center md-content-right">
+                  {this.renderCta(content.cta)}
+                </div>
+              </div>
+            </div>
+          </div>
+        </Shelf>
+      );
+    }
+     else if (metaLayout === 'page_header') {
       return (
         <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={metaVariant}>
           <div className="shelf__container container-fluid" style={shelfStyle}>

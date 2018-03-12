@@ -218,23 +218,6 @@ const sampleShelves = {
         meta_layout: 'full_width',
         items: [
           {
-            id: 'information-panel-1a',
-            type: 'information_panel',
-            value: {
-              heading: 'html::There\'s Only One <b>You</b>',
-              body: 'Your health is important. It\'s not about doing the right thing - it\'s about making changes that fit your life to help feel your best. One You is all about finding that balance, and inspiring you with easy ways to help you feel great, every day.',
-              image: {
-                title: 'Image name',
-              },
-              video: '5520584848001',
-              cta: {
-                link_text: 'Find out more',
-                link_external: 'http://www.somewebsite.co.uk'
-              },
-              meta_variant: 'yellow'
-            }
-          },
-          {
             id: 'video-teaser-1a',
             type: 'video_teaser',
             value: {
@@ -267,9 +250,38 @@ const sampleShelves = {
                 link_external: 'https://play.google.com/store/apps/details?id=com.bluestepsolutions.wellmind&hl=en_GB'
               },
             }
+          },
+          {
+            id: 'information-panel-1a',
+            type: 'information_panel',
+            value: {
+              heading: 'html::There\'s Only <em>One</em>  <span class="marker">You</span>',
+              body: 'Your health is important. It\'s not about doing the right thing - it\'s about making changes that fit your life to help feel your best. One You is all about finding that balance, and inspiring you with easy ways to help you feel great, every day.',
+              image: {
+                title: 'Image name',
+              },
+              video: '5520584848001',
+              cta: {
+                link_text: 'Find out more',
+                link_external: 'http://www.somewebsite.co.uk'
+              },
+              meta_variant: 'yellow'
+            }
           }
         ]
       },
+    },
+    {
+      id: 'promo-shelf-2',
+      type: 'promo_shelf',
+      value: {
+        heading: 'html::How are <span class="marker">you</span>? Quiz',
+        cta: {
+          link_text: 'Have a go',
+          link_external: 'http://www.edfs.co.uk'
+        },
+        meta_layout: 'full_to_half_width'
+      }
     },
     {
       type: 'guidance_shelf',

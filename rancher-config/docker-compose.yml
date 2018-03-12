@@ -1,0 +1,55 @@
+version: '2'
+
+services:
+
+  django:
+    image: phedct/oneyou-cms:$DOCKER_IMAGE_TAG
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_USER: ${DB_USER}
+      DB_NAME: ${DB_NAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      AZURE_ACCOUNT_NAME: ${AZURE_ACCOUNT_NAME}
+      AZURE_ACCOUNT_KEY: ${AZURE_ACCOUNT_KEY}
+      AZURE_CONTAINER: ${AZURE_CONTAINER}
+      AZURE_FILE_SHARE: ${AZURE_FILE_SHARE}
+    labels:
+      io.rancher.container.pull_image: always
+      traefik.enable: true
+      traefik.frontend.rule: $TRAEFIK_RULE
+      traefik.backend: ${RANCHER_STACK_NAME}-django
+      traefik.port: 8000
+    logging:
+      driver: splunk
+      options:
+        splunk-url: ${SPLUNK_HEC_URL}
+        splunk-token: ${SPLUNK_HEC_TOKEN}
+        splunk-insecureskipverify: "true"
+        splunk-sourcetype: django
+        splunk-source: oneyou-cms-django
+        splunk-verify-connection: "false"
+        tag: "{{`{{.ImageName}} {{.Name}} {{.FullID}}`}}"
+        splunk-format: raw
+
+  initializer:
+    image: phedct/oneyou-cms:$DOCKER_IMAGE_TAG
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+    command: bash ./initialize.sh
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.container.start_once: true
+    logging:
+      driver: splunk
+      options:
+        splunk-url: $SPLUNK_HEC_URL
+        splunk-token: $SPLUNK_HEC_TOKEN
+        splunk-insecureskipverify: "true"
+        splunk-sourcetype: django
+        splunk-source: oneyou-cms-initializer
+        splunk-verify-connection: "false"
+        tag: "{{`imagename={{.ImageName}} containername={{.Name}} containerid={{.FullID}}`}}"
+        splunk-format: raw

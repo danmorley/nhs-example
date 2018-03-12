@@ -10,6 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, PageChooserPanel
+from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 from modelcluster.models import get_serializable_data_for_fields
@@ -206,7 +207,7 @@ class PromoShelf(ShelfAbstract):
 @register_snippet
 class BannerShelf(ShelfAbstract):
     heading = models.CharField(max_length=255)
-    body = models.TextField(blank=True, null=True)
+    body = RichTextField(blank=True, null=True)
     background_image = models.ForeignKey(
         'images.PHEImage',
         null=True,
@@ -246,7 +247,7 @@ class BannerShelf(ShelfAbstract):
 @register_snippet
 class AppTeaser(ShelfAbstract):
     heading = models.CharField(max_length=255)
-    body = models.TextField(blank=True, null=True)
+    body = RichTextField(blank=True, null=True)
     image = models.ForeignKey(
         'images.PHEImage',
         null=True,
