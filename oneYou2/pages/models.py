@@ -175,7 +175,7 @@ class ImageTeaserTemplate(blocks.StructBlock):
     heading = blocks.CharBlock(required=True)
     body = blocks.RichTextBlock(required=True)
     image = BlobImageChooserBlock()
-    variant = blocks.ChoiceBlock(choices=[('light-bg', 'Light Background'), ('dark-bg', 'Dark Background')])
+    meta_variant = blocks.ChoiceBlock(choices=[('light-bg', 'Light Background'), ('dark-bg', 'Dark Background')], label='Variant')
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False)
