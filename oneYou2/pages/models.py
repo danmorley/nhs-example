@@ -185,10 +185,7 @@ class ImageTeaserTemplate(blocks.StructBlock):
 class Carousel(blocks.StructBlock):
     heading = blocks.CharBlock()
     items = blocks.StreamBlock([
-        ('oneyou1_teaser', BackwardsCompatibleContent(label="OneYou1 teaser", icon="folder-inverse")),
         ('video_teaser', VideoTemplate(icon="media")),
-        ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
-        ('promo_shelf', PromoShelfChooserBlock(target_model="shelves.PromoShelf", icon="image")),
         ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
         ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
     ], icon='arrow-left', label='Items')
