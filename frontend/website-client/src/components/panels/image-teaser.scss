@@ -6,8 +6,10 @@
 }
 
 .image-teaser__image {
-  width: 35%;
-  min-height: 176px;
+  min-height: 120px;
+  background-repeat: none;
+  background-size: cover;
+  background-position: center;
 
   @include media-breakpoint-up(sm) {
     min-height: 263px;
@@ -17,7 +19,6 @@
 .image-teaser__info {
   display: flex;
   flex-direction: column;
-  width: 65%;
 }
 
 .image-teaser__heading {
@@ -36,27 +37,87 @@
 
   a {
     margin-top: auto;
+    font-weight: bold;
+  }
+}
+
+
+// variants
+.image-teaser--light-bg {
+  
+  .image-teaser__info {
+    width: 50%;
+  }
+  
+  .image-teaser__image {
+    width: 50%;
+  }
+  
+  .image-teaser__heading {
+    
+    @include media-breakpoint-down(sm) {
+      font-size: 1em;
+    }
+  }
+  
+  .image-teaser__text {
+    
+    @include media-breakpoint-down(sm) {
+      padding-top: 0.5em;
+    }
+  }
+  
+  .image-teaser__body {
+    font-size: 0.9em;
+    
+    @include media-breakpoint-up(sm) {
+      font-size: 1em;
+    }
+  }
+}
+
+.image-teaser--dark-bg {
+  
+  .image-teaser__info {
+    width: 65%;
+  }
+  
+  .image-teaser__image {
+    width: 35%;
   }
 }
 
 // theming
 .oneyou {
-
-  .image-teaser__info {
-      background: $teal-blue;
+  
+  .image-teaser--light-bg {
+    
+    .image-teaser__heading {
+      text-transform: uppercase;
+      font-family: $secondary-brand-font;
+      font-weight: normal;
+      padding-top: 0;
+      padding-bottom: 0;
+    }    
   }
+  
+  .image-teaser--dark-bg {
+    
+    .image-teaser__info {
+        background: $teal-blue;
+    }
 
-  .image-teaser__heading {
-    background-color: $teal-dark;
-    color: $white;
-  }
+    .image-teaser__heading {
+      background-color: $teal-dark;
+      color: $white;
+    }
 
-  .image-teaser__text {
-    color: $white;
+    .image-teaser__text {
+      color: $white;
 
-    a {
-      color: $sunflower-yellow;
-      font-weight: bold;
+      a {
+        color: $sunflower-yellow;
+      }
     }
   }
 }

@@ -27,6 +27,12 @@ $shelf-padding-extra: 2em;
   
   &:first-child {
     padding-top: 0;
+    
+    @include media-breakpoint-down(sm) {
+      p {
+        font-weight: bold;
+      }
+    }
   }
 }
 

@@ -67,13 +67,25 @@ $shelf-padding-extra: 2em;
   h2 {
     @include heading-h1();
   }
+  
+  @include media-breakpoint-up(md) {
+  
+    p {
+      line-height: 1.8
+    }
+  }
 }
 
 .page-heading-shelf {
   
   .container, .container-fluid {
-    padding-top: 2em;
-    padding-bottom: 1.5em;
+    padding-top: 1.4em;
+    padding-bottom: 0.6em;
+    
+    @include media-breakpoint-up(md) {
+      padding-top: 2em;
+      padding-bottom: 1.8em;
+    }
   }
   
    > .container-fluid > .container {
@@ -84,6 +96,10 @@ $shelf-padding-extra: 2em;
   h1 {
       margin: 0 0 0.5em 0;
       font-weight: normal;
+      
+      @include media-breakpoint-up(sm) {
+        margin-bottom: 0.2em;
+      }
   }
   
   p {
