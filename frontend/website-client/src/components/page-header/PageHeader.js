@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SiteNav from '../header-nav/SiteNav';
 import Text from '../Text';
+import { Link } from 'react-router-dom';
 import styles from './page-header.css';
 
 class PageHeader extends Component {
@@ -15,9 +16,9 @@ class PageHeader extends Component {
               <button className="page-header__burger" onClick={this.handleClick.bind(this)}>
                   <i className="font-icon"></i>
               </button>
-              <a className="page-header__logo">
+              <Link to="/" className="page-header__logo">
                 <Text content={header.title || 'html::One <span>You</span>'} />
-              </a>
+              </Link>
             </div>
             <SiteNav navItems={navItems} />
           </div>
