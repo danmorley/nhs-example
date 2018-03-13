@@ -104,4 +104,9 @@ db.sqlite3
 /.vscode
 /oneyou/assets
 /oneyou/staticfiles
+
+#IDE files
 .idea/*
+
+#local media files
+media/
