@@ -31,7 +31,7 @@ class Oneyou1TeaserPanel extends Component {
           {/* // needs alt text */}
         </div>
         <div className={`${classNamePrefix}__text`}>
-          <Text content={content.body} className={`${classNamePrefix}__body`} format="html"/>
+          <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
         </div>
         { (CtaUtils.isSingleCta(content.cta)) ? (
           <div className={`${classNamePrefix}__cta-item`}>

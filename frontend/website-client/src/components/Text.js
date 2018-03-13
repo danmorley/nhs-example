@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import CmsRichTextFormatter from './CmsRichTextFormatter';
 
 /**
  *  Text is a simple field that will output escaped text or
@@ -22,11 +23,20 @@ class Text extends Component {
     if (!content) return null;
     let Tag = tagName;
 
-    if (format === 'html') {
+    if (format === 'richtext') {
+      // Convert Wagtail internal links and images to real URLs.
+      return CmsRichTextFormatter.format(content);
+
+    } else if (format === 'html') {
+      // Treat as straight HTML that doesn't require escaping.
       return (<Tag dangerouslySetInnerHTML={{__html: content}} {...rest}/>);
+
     } else if (content.startsWith('html::')) {
+      // Treat as straight HTML that doesn't require escaping.
       return (<Tag dangerouslySetInnerHTML={{__html: content.substring(6)}} {...rest}/>);
+
     } else {
+      // Treat as plain text and escape in normal way.
       return (<Tag {...rest}>{content}</Tag>);
     }
   }

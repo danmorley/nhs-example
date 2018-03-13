@@ -36,7 +36,7 @@ class AppTeaserPanel extends Component {
         <div className={`${classNamePrefix}__info`}>
           <Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />
           <div className={`${classNamePrefix}__text`}>
-            <Text content={content.body} className={`${classNamePrefix}__body`} format="html"/>
+            <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
             <ul className="panel__button-list">
               <li>
                 <CtaLink cta={content.cta_appstore} variant="appstore"/>
