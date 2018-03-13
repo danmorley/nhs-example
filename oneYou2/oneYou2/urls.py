@@ -26,8 +26,7 @@ urlpatterns = [
 
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
-    
-    url(r'^api/v2/releases', views.releases, name='releases'),
+
     url(r'^api/v2/', api_router.urls),
 
     url(r'^search/$', search_views.search, name='search'),

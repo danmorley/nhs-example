@@ -164,7 +164,6 @@ class Release(ClusterableModel):
     def generate_fixed_content(self):
         from oneYou2.api import api_router
         pages = {}
-
         for revision in self.revisions.all():
             class Request(object):
                 def __init__(self):
@@ -175,8 +174,6 @@ class Release(ClusterableModel):
             response = serializer(page_obj,
                                   context={'request': Request(), 'view': DummyView(), 'router': api_router})
             pages[str(revision.revision.page_id)] = response.data
-
-
         return pages
 
     def get_content_for(self, key):
@@ -191,11 +188,6 @@ class Release(ClusterableModel):
 
     def get_current_frontend_id(self):
         return FrontendVersion.get_current_version()
-
-
-    @classmethod
-    def get_current_release(cls, site_id):
-        return cls.objects.filter(site_id=site_id).filter(release_time__isnull=False).order_by('release_time').first()
 
 
 class ReleasePage(models.Model):

@@ -227,7 +227,7 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
         instance = self.get_object()
         # TODO: Currently no site data is associated with a release, so this doesn't really do anything
         if not release_uuid or release_uuid == "current":
-            current_release = get_latest_release()
+            current_release = get_latest_release(instance.pk)
             if not current_release:
                 raise NoReleasesFound("The current site has no live releases")
             setattr(instance, 'release_id', current_release.uuid)
@@ -250,7 +250,7 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
         # TODO: this is pretty inefficent
         # Show all the latest releases
         for instance in queryset:
-            current_release = get_latest_release()
+            current_release = get_latest_release(site_id=instance.pk)
             if not current_release:
                 setattr(instance, 'release_id', "")
             else:
