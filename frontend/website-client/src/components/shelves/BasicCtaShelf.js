@@ -215,12 +215,6 @@ CmsComponentRegistry.register('banner_shelf', BasicCtaShelf, 'banner-shelf', 'ba
 // Variants: promo
 CmsComponentRegistry.register('promo_shelf', BasicCtaShelf, 'promo-shelf', 'promo');
 
-// App Shelf
-//
-// Layouts: app
-// Variants: none
-CmsComponentRegistry.register('app_shelf', BasicCtaShelf, 'app-shelf', 'app');
-
 //
 // Page Heading Shelf - used as the page heading on sub-pages, but also on the home page
 //
