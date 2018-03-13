@@ -4,15 +4,14 @@ from collections import OrderedDict
 
 from .models import query_set_to_dict, Release
 
-from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
 
 import json
 from datetime import datetime
 
-# @require_POST
+from frontendHandler.models import FrontendVersion
+
 @csrf_exempt
 def releases(request):
   if request.method == 'POST':
@@ -22,3 +21,11 @@ def releases(request):
 
   releases = Release.objects.filter(release_time__lte=datetime.now())
   return HttpResponse(json.dumps(query_set_to_dict(releases)), content_type="application/json")
+
+
+def release_frontend(request):
+  release_id = request.GET.get('id')
+  if release_id:
+    return HttpResponse(FrontendVersion.get_html_for_version(Release.objects.get(uuid=release_id).frontend_id))
+  else:
+    return HttpResponse(FrontendVersion.get_html_for_version(Release.get_current_release().frontend_id))

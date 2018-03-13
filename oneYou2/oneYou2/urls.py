@@ -22,6 +22,7 @@ urlpatterns = [
 
     url(r'^admin/custom/pages/', include(pages_urls, namespace="oneyou_pages")),
 
+    url(r'^one-you/', views.release_frontend, name='release_frontend'),
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
 

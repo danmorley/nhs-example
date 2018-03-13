@@ -193,6 +193,10 @@ class Release(ClusterableModel):
         return FrontendVersion.get_current_version()
 
 
+  @classmethod
+  def get_current_release(cls):
+    return cls.objects.filter(release_time__isnull=False).order_by('release_time').first()
+
 
 class ReleasePage(models.Model):
     release = models.ForeignKey(
