@@ -1,0 +1,2 @@
+class NoReleasesFound(Exception):
+    pass
