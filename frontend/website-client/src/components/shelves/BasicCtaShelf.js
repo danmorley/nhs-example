@@ -33,7 +33,7 @@ class BasicCtaShelf extends Component {
   renderHeadingBody(content, headingTagName) {
     return [
       (<Text key="1" tagName={headingTagName} content={content.heading} />),
-      (<Text key="2" content={content.body} format="html"/>)
+      (<Text key="2" content={content.body} format="richtext"/>)
     ];
   }
 

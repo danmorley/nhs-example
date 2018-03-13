@@ -29,7 +29,7 @@ class InformationPanel extends Component {
         <div className={`${classNamePrefix}__info`}>
           <Text tagName="h2" content={content.heading}  className={`${classNamePrefix}__heading`} />
           <div className={`${classNamePrefix}__text`}>
-            <Text content={content.body} className={`${classNamePrefix}__body`} format="html"/>
+            <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
           </div>
         </div>
         <div className={`${classNamePrefix}__image`} style={backgroundImage}>

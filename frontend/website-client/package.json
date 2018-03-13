@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "bootstrap-4-grid": "^2.3.0",
+    "html-react-parser": "^0.4.2",
     "lodash.invert": "^4.3.0",
     "node-sass-chokidar": "0.0.3",
     "normalize.css": "^7.0.0",
