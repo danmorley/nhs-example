@@ -15,6 +15,7 @@ import BasicCtaShelf from './shelves/BasicCtaShelf';
 import GuidanceShelf from './shelves/GuidanceShelf';
 import CarouselShelf from './shelves/CarouselShelf';
 import GridShelf from './shelves/GridShelf';
+import HeadingBodyShelf from './shelves/HeadingBodyShelf';
 
 class Page extends Component {
 

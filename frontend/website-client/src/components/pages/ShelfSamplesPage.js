@@ -303,12 +303,27 @@ const sampleShelves = {
       }
     },
     {
-       id: 'weeww',
+       id: 'section-heading-shelf-1',
        type: 'section_heading_shelf',
        value: {
            heading: 'This is a section heading',
            shelf_id: 'test-section-heading-1',
-           meta_layout: 'section_heading',
+       }
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Section Heading Shelf (with body text)',
+        body: 'Layout <b>not given</b>, variant <b>not given</b>'
+      }
+    },
+    {
+       id: 'section-heading-shelf-2',
+       type: 'section_heading_shelf',
+       value: {
+           heading: 'This is a section heading',
+           body: 'Lorem ipsum dolor sit amet, <b>consectetur adipiscing</b> elit, sed do eiusmod tempor incididunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.',
+           shelf_id: 'test-section-heading-2',
        }
     },
     {

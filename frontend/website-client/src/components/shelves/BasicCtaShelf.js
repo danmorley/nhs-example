@@ -224,15 +224,8 @@ CmsComponentRegistry.register('app_shelf', BasicCtaShelf, 'app-shelf', 'app');
 //
 // Page Heading Shelf - used as the page heading on sub-pages, but also on the home page
 //
-// Layouts: full_width
+// Layouts: page_header
 // Variants: home-page, sub-page
 CmsComponentRegistry.register('page_heading_shelf', BasicCtaShelf, 'page-heading-shelf', 'home-page', 'page_header');
-
-//
-// Section Heading Shelf
-//
-// Layouts: full_width
-// Variants: none
-CmsComponentRegistry.register('section_heading_shelf', BasicCtaShelf, 'section-heading-shelf');
 
 export default BasicCtaShelf;
