@@ -67,10 +67,17 @@ class Release(ClusterableModel):
     release_time = models.DateTimeField(blank=True, null=True)
     uuid = models.CharField(max_length=255, unique=True)
     frontend_id = models.CharField(max_length=255)
+    site = models.ForeignKey(
+        'wagtailcore.Site',
+        related_name='releases',
+        blank=False,
+        null=False,
+        on_delete=models.CASCADE)
 
     base_form_class = ReleaseAdminForm
 
     panels = [
+        FieldPanel('site', classname='site', ),
         FieldPanel('base_release', classname='base_release', ),
         FieldPanel('release_name', classname='release_name', ),
         ReadOnlyPanel('uuid', classname='uuid', ),
