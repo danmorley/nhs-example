@@ -182,8 +182,19 @@ class Release(ClusterableModel):
             page_content = self.content.first().get_content_for(str(key))
         else:
             for revision in self.revisions.all():
-                if revision.revision.page_id == key:
-                    page_content = json.loads(revision.revision.content_json)
+                if str(revision.revision.page_id) == str(key):
+                    from oneYou2.api import api_router
+                    class Request(object):
+                        def __init__(self):
+                            self.site = revision.revision.page.get_site()
+
+                    page_obj = revision.revision.as_page_object()
+                    serializer = self.get_serializer_class()
+                    response = serializer(page_obj,
+                                          context={'request': Request(),
+                                                   'view': DummyView(), 'router': api_router})
+                    page_content = response.data
+
         return page_content
 
     def get_current_frontend_id(self):
