@@ -12,14 +12,12 @@ from home.models import SiteSettings
 
 
 def release_html(request, site_name):
-  print('hit html end point')
   site_id = SiteSettings.objects.get(uid=site_name).site.id
   release_id = request.GET.get('id')
   if release_id:
     release = Release.objects.get(uuid=release_id)
   else:
     release = get_latest_release(site_id)
-  print(release)
 
   index = FrontendVersion.get_html_for_version(release.frontend_id)
   substituted_index = index.replace("/static/css/", "/version/css/" + release.frontend_id + "/?file_name=")
@@ -31,18 +29,14 @@ def release_html(request, site_name):
 
 
 def release_js(request, version_id):
-  print('hit js end point')
   file_name = request.GET.get('file_name')
-  print(file_name)
   return HttpResponse(FrontendVersion.get_js_for_version(version_id, file_name))
 
 
 def release_css(request, version_id):
-  print('hit css end point')
   file_name = request.GET.get('file_name')
   return HttpResponse(FrontendVersion.get_css_for_version(version_id, file_name), 'text/css')
 
 
 def web_statics(request, path):
-  print('hitting statics end point', path)
   return serve(request, path, document_root='./web/static/')
