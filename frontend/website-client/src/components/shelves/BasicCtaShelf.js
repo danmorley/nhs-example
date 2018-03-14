@@ -43,7 +43,7 @@ class BasicCtaShelf extends Component {
   }
 
   render() {
-    let { content, classNamePrefix, variant, layout } = this.props;
+    let { id, content, classNamePrefix, variant, layout } = this.props;
     let metaVariant = content.meta_variant || variant;
     let metaLayout = content.meta_layout || layout;
 
@@ -59,7 +59,7 @@ class BasicCtaShelf extends Component {
 
     if (metaLayout === 'image_on_left') {
       return (
-        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
           <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
               <div className="shelf__col col">
@@ -75,7 +75,7 @@ class BasicCtaShelf extends Component {
       );
     } else if (metaLayout === 'image_on_right') {
       return (
-        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
           <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
               <div className="shelf__col col">
@@ -91,7 +91,7 @@ class BasicCtaShelf extends Component {
       );
     } else if (metaLayout === 'cta_on_left') {
       return (
-        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
           <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
               <div className="shelf__col col col-vertical-center">
@@ -106,7 +106,7 @@ class BasicCtaShelf extends Component {
       );
     } else if (metaLayout === 'cta_on_right') {
       return (
-        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
           <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
               <div className="shelf__col col col-vertical-center">
@@ -121,7 +121,7 @@ class BasicCtaShelf extends Component {
       );
     } else if (metaLayout === 'full_width') {
       return (
-        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
           <div className="shelf__container container-fluid" style={shelfStyle}>
             <div className="container">
               <div className="row">
@@ -136,7 +136,7 @@ class BasicCtaShelf extends Component {
       );
     } else if (metaLayout === 'full_to_half_width') {
       return (
-        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={metaVariant} layout={metaLayout}>
+        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} layout={metaLayout}>
           <div className="container full-to-half-width">
             <div className="shelf__container container" style={shelfStyle}>
               <div className="row">
@@ -154,7 +154,7 @@ class BasicCtaShelf extends Component {
     }
      else if (metaLayout === 'page_header') {
       return (
-        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
           <div className="shelf__container container-fluid" style={shelfStyle}>
             <div className="container">
               <div className="row">
@@ -169,7 +169,7 @@ class BasicCtaShelf extends Component {
       );
     } else if (metaLayout === 'section_heading') {
         return (
-          <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+          <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
             <div className="shelf__container container" style={shelfStyle}>
               <div className="row">
                 <div className="col shelf__col">
@@ -182,7 +182,7 @@ class BasicCtaShelf extends Component {
     } else {
       // Default layout: ???
       return (
-        <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
           <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
               <div className="shelf__col col-12 col-vertical-center">

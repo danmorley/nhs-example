@@ -23,7 +23,7 @@ import InformationPanel from '../panels/InformationPanel';
  */
 class GridShelf extends Component {
   render() {
-    let { content, classNamePrefix, layout, variant } = this.props;
+    let { id, content, classNamePrefix, layout, variant } = this.props;
     let metaLayout = content.meta_layout || layout;
     let panelClass = (metaLayout === 'full_width') ? 'shelf__col col-sm-12' : 'shelf__col col-sm-12 col-md-6';
 
@@ -31,7 +31,7 @@ class GridShelf extends Component {
       const panelInfo = CmsComponentRegistry.components[panel.type];
       const PanelClass = panelInfo && panelInfo.class;
       const panelClassNamePrefix = panelInfo && panelInfo.classNamePrefix;
-      const panelId = panel.panel_id || panel.id;
+      const panelId = panel.value.field_id || panel.id;
       if (PanelClass) {
         return (<div key={i} className={panelClass}><PanelClass content={panel.value} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
       } else {
@@ -49,7 +49,7 @@ class GridShelf extends Component {
     let shelfStyle = (content.background_image) ? backgroundImageShelfStyle : backgroundColourShelfStyle;
 
     return (
-      <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix}>
+      <Shelf id={id} classNamePrefix={classNamePrefix}>
         <div className="shelf__container container" style={shelfStyle}>
           <h2 className="shelf__header">{content.heading}</h2>
           <div className="row">

@@ -13,18 +13,20 @@ import queryString from 'query-string';
  *  - styles (to be confirmed)
  *
  *  content: {
- *    text: "<p>Some <b>HTML</b> text to print.</p>"
+ *    heading: "The heading",
+ *    body: "<p>Some <b>HTML</b> text to print.</p>"
  *  }
  */
 class GuidanceShelf extends Component {
   render() {
+    let { id, content, classNamePrefix } = this.props;
     let params = queryString.parse(window.location.search);
     if (params.clean && params.clean === 'true') return null;
-    
+
     return (
-      <Shelf id={this.props.id} classNamePrefix={this.props.classNamePrefix}>
-        <h2>{this.props.content.heading}</h2>
-        <p dangerouslySetInnerHTML={{__html: this.props.content.body}} />
+      <Shelf id={id} classNamePrefix={classNamePrefix}>
+        <h2>{content.heading}</h2>
+        <p dangerouslySetInnerHTML={{__html: content.body}} />
       </Shelf>
     );
   }

@@ -16,10 +16,10 @@ import CmsComponentRegistry from '../CmsComponentRegistry';
  */
 class GeneralTextShelf extends Component {
   render() {
-    let { content, classNamePrefix } = this.props;
+    let { id, content, classNamePrefix } = this.props;
 
     return (
-      <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
+      <Shelf id={id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
         <div className="shelf__container container">
           <div className="row">
             <div className="shelf__col col-12 col-vertical-center">

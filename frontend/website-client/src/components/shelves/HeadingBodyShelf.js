@@ -22,12 +22,12 @@ import styles from './promo-shelf.css';
  */
 class HeadingBodyShelf extends Component {
   render() {
-    let { content, classNamePrefix, variant, layout } = this.props;
+    let { id, content, classNamePrefix, variant, layout } = this.props;
     let metaVariant = content.meta_variant || variant;
     let metaLayout = content.meta_layout || layout;
 
     return (
-      <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+      <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
         <div className="shelf__container container">
           <div className="row">
             <div className="col shelf__col">
