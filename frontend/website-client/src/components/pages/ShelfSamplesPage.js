@@ -7,6 +7,7 @@ import withOwnContent from './withOwnContent';
  */
 const sampleShelves = {
   title: 'Shelf Samples',
+  page_styles: '#panel-video-teaser-4 h3 { color: orange; }',
   body: [
     {
       type: 'guidance_shelf',
