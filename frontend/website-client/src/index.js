@@ -6,7 +6,6 @@ import registerServiceWorker from './registerServiceWorker';
 import ContentStore from './services/ContentStore';
 import invert from 'lodash.invert';
 
-global.rootUrl = '';
 
 /**
  *  Script to 'load' the website into the 'root' element.
@@ -21,6 +20,7 @@ global.rootUrl = '';
  *  data-content-store-endpoint: "https://oneyou-cms.service.nhs.uk/api/v2"
  */
 let rootElem = document.getElementById('root');
+global.rootUrl = rootElem.getAttribute('data-site') ? '/' + rootElem.getAttribute('data-site') : '/oneyou';
 let dataContentStoreEndpoint = rootElem.getAttribute('data-content-store-endpoint') || 'http://localhost:8000/api/v2';
 let dataSite = rootElem.getAttribute('data-site') || 'oneyou';
 let dataRelease = rootElem.getAttribute('data-release') || 'current';

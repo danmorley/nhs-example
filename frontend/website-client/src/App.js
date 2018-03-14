@@ -44,11 +44,13 @@ class App extends Component {
       console.log('Internal load of page for path ' + location.pathname);
       // this.loadPageForKey(key);
       if (!this.isAppPage(location.pathname)) {
-        console.log('Loading cms page', location.pathname);
-        let key = this.state.site.pages[location.pathname];
+        path = location.pathname.replace(global.rootUrl, '')
+        console.log('Loading cms page', path);
+        let key = this.state.site.pages[path];
         this.loadPageForKey(key);
       } else {
-        console.log('Loading app page', location.pathname);
+        path = location.pathname.replace(global.rootUrl, '')
+        console.log('Loading app page', path);
       }
     });
   }
@@ -100,11 +102,13 @@ class App extends Component {
 
   pagePathToRender() {
     let path = window.location.pathname;
+    path = path.replace(global.rootUrl, '')
     // if (path === '/') return '/home';
     return path;
   }
 
   loadPage(props) {
+    console.log(this.state)
     return (<Page content={this.state.currentPage} site={this.state.site} />);
   }
 
@@ -121,7 +125,7 @@ class App extends Component {
             <Route path='/shelf-samples'
               render={() => <ShelfSamplesPage site={this.state.site} />
             }/>
-            <Route path='/'
+            <Route path={global.rootUrl + '/'}
               render={(props) => {return this.loadPage(props)}
             }/>
           </Switch>

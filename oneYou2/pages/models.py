@@ -26,6 +26,8 @@ from modelcluster.fields import ParentalKey
 from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppTeaserChooserBlock, BlobImageChooserBlock
 from shelves.models import ShelfAbstract
 
+from home.models import SiteSettings
+
 GRID_LAYOUT_CHOICES = (
     ('full_width', 'Full Width'),
     ('2_col_1_on_mobile', 'Responsive (1 column on mobile, 2 on desktop)'),
@@ -236,6 +238,11 @@ class OneYou2Page(Page):
     @property
     def page_theme(self):
         return self.theme.to_dict()
+
+    @property
+    def link_url(self):
+        site_name = SiteSettings.objects.get(site_id=self.get_site().id).uid
+        return '/' + site_name + self.url_path
 
     content_panels = Page.content_panels + [
         StreamFieldPanel('body'),
