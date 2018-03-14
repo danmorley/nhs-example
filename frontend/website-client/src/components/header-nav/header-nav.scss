@@ -63,6 +63,7 @@ $secondary-item-padding: 0.4em;
   text-transform: uppercase;
   font-family: $primary-brand-font;
   font-size: 1.6em;
+  font-weight: normal;
   
   @include media-breakpoint-up(md) {
     display: none;
