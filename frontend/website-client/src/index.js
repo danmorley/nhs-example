@@ -22,13 +22,14 @@ global.rootUrl = '';
  */
 let rootElem = document.getElementById('root');
 let dataContentStoreEndpoint = rootElem.getAttribute('data-content-store-endpoint') || 'http://localhost:8000/api/v2';
-let dataSite = rootElem.getAttribute('data-site') || '2';       // NOTE: Change '2' to 'oneyou';
+let dataSite = rootElem.getAttribute('data-site') || 'oneyou';
 let dataRelease = rootElem.getAttribute('data-release') || 'current';
 global.contentStore = new ContentStore(dataContentStoreEndpoint, dataSite, dataRelease);
 
 // Load site.json before mounting the React app.
 global.contentStore.getSite().then((site) => {
   if (site.code === 0) {
+    global.contentStore.release = site.response.meta.release_id; // Set release to the actual release guid
     global.pages = invert(site.response.pages);
     ReactDOM.render(<App site={site && site.response}/>, rootElem);
     registerServiceWorker();
