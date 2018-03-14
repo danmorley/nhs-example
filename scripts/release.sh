@@ -49,7 +49,7 @@ trap 'clean $LINENO' ERR
 update master
 
 #Bump version up
-version=$(npm version --prefix frontend/hay-ui  "$1" --no-git-tag-version)
+version=$(npm version --prefix frontend/website-client  "$1" --no-git-tag-version)
 echo "Bumped version to $version"
 
 # commit version number increment
