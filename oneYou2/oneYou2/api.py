@@ -24,6 +24,8 @@ from home.models import SiteSettings
 from release.utils import get_latest_release, get_release_object
 from release.exceptions import NoReleasesFound
 
+from pages.models import OneYou2Page
+
 
 class MenuField(Field):
     """
@@ -42,8 +44,8 @@ class MenuField(Field):
             return {}
         if settings.menu:
             pages_meta = {}
-            for d in Page.objects.values('id', 'slug', 'url_path'):
-                pages_meta[d['id']] = (d['slug'], d['url_path'])
+            for d in OneYou2Page.objects.all():
+                pages_meta[d.id] = (d.slug, d.link_url)
             json_menu = settings.menu.menu_items.stream_data
 
             for menu_item in json_menu:
