@@ -45,6 +45,8 @@ class FrontendVersion:
 
     unique_id = str(uuid.uuid4())
 
+    file_service.create_directory(settings.AZURE_FILE_SHARE, settings.ENV, fail_on_exist=False)
+
     version_directory = settings.ENV + "/" + unique_id
 
     file_service.create_directory(settings.AZURE_FILE_SHARE, version_directory)
