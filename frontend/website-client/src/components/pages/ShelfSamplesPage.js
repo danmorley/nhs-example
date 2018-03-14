@@ -26,7 +26,7 @@ const sampleShelves = {
             type: 'promo_shelf',
             value: {
               heading: 'html::Active <span class="marker">10</span> App',
-              body: 'Did you know that a brisk 10 minute walk counts as exercise?\nGet started with our free app',
+              body: '<p>Did you know that a brisk 10 minute walk counts as exercise?\nGet started with our free app</p>',
               cta_button_label: 'Download',
               cta_button_link: 'http://www.somewebsite.co.uk',
               background_image: 'http://aaa.bbb.ccc/gb.png',
@@ -39,7 +39,7 @@ const sampleShelves = {
             type: 'promo_shelf',
             value: {
               heading: 'html::Active <span class="marker">10</span> App',
-              body: 'Did you know that a brisk 10 minute walk counts as exercise?\nGet started with our free app',
+              body: '<p>Did you know that a brisk 10 minute walk counts as exercise?\nGet started with our free app</p>',
               cta_button_label: 'Download',
               cta_button_link: 'http://www.somewebsite.co.uk',
               background_image: 'http://aaa.bbb.ccc/gb.png',
@@ -70,7 +70,7 @@ const sampleShelves = {
             type: 'video_teaser',
             value: {
               heading: 'Walk the walk, talk the talk 2',
-              body: 'Share walking stories and your progress with others online',
+              body: '<p>Share walking stories and your progress with others online</p>',
               image: {
                 title: 'Image name',
               },
@@ -87,7 +87,7 @@ const sampleShelves = {
             type: 'video_teaser',
             value: {
               heading: 'Walk the walk, talk the talk',
-              body: 'Share walking stories and your progress with others online',
+              body: '<p>Share walking stories and your progress with others online</p>',
               video: '5669668082001',
               image: {
                 title: 'Valid image with broken URL',
@@ -104,7 +104,7 @@ const sampleShelves = {
             type: 'video_teaser',
             value: {
               heading: 'Walk the walk, talk the talk',
-              body: 'Share walking stories and your progress with others online',
+              body: '<p>Share walking stories and your progress with others online</p>',
               video: '',
               cta: {
                 link_text: 'Find out more',
@@ -117,7 +117,7 @@ const sampleShelves = {
             type: 'video_teaser',
             value: {
               heading: 'Walk the walk, talk the talk',
-              body: 'Share walking stories and your progress with others online',
+              body: '<p>Share walking stories and your progress with others online</p>',
               image: {
                 title: 'IMage name'
               },
@@ -133,7 +133,7 @@ const sampleShelves = {
             type: 'app_teaser',
             value: {
               heading: 'html::Download the  <strong><span class="text-color--secondary">Wellmind</span> App</strong>',
-              body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
+              body: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</p>',
               image: {
                 title: 'Image name'
               },
@@ -150,7 +150,7 @@ const sampleShelves = {
             type: 'oneyou1_teaser',
             value: {
               heading: 'Be Active With a Disability',
-              body: 'There are so many ways to move - whatever your situation. Get ideas on the EDFS website',
+              body: '<p>There are so many ways to move - whatever your situation. Get ideas on the EDFS website</p>',
               image: {
                 title: '',
                 link: ''
@@ -176,7 +176,7 @@ const sampleShelves = {
             type: 'oneyou1_teaser',
             value: {
               heading: 'Be Active With a Disability',
-              body: 'There are so many ways to move - whatever your situation. Get ideas on the EDFS website',
+              body: '<p>There are so many ways to move - whatever your situation. Get ideas on the EDFS website</p>',
               cta: {
                 link_text: 'Link 1 text',
                 link_external: 'http://www.edfs.co.uk'
@@ -219,7 +219,7 @@ const sampleShelves = {
       type: 'guidance_shelf',
       value: {
         heading: 'Full Width Grid Shelf',
-        body: 'Layout <b>full_width</b>, variant <b>not given</b>'
+        body: '<p>Layout <b>full_width</b>, variant <b>not given</b></p>'
       }
     },
     {
@@ -235,7 +235,7 @@ const sampleShelves = {
             type: 'video_teaser',
             value: {
               heading: 'Walk the walk, talk the talk 2',
-              body: 'Share walking stories and your progress with others online',
+              body: '<p>Share walking stories and your progress with others online</p>',
               image: {
                 title: 'Image name',
               },
@@ -252,7 +252,7 @@ const sampleShelves = {
             type: 'app_teaser',
             value: {
               heading: 'html::Download the  <strong><span class="text-color--secondary">Wellmind</span> App</strong>',
-              body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
+              body: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</p>',
               image: {
                 title: 'Image name'
               },
@@ -269,7 +269,7 @@ const sampleShelves = {
             type: 'information_panel',
             value: {
               heading: 'html::There\'s Only <em>One</em>  <span class="marker">You</span>',
-              body: 'Your health is important. It\'s not about doing the right thing - it\'s about making changes that fit your life to help feel your best. One You is all about finding that balance, and inspiring you with easy ways to help you feel great, every day.',
+              body: '<p>Your health is important. It\'s not about doing the right thing - it\'s about making changes that fit your life to help feel your best. One You is all about finding that balance, and inspiring you with easy ways to help you feel great, every day.</p>',
               image: {
                 title: 'Image name',
               },
@@ -322,7 +322,7 @@ const sampleShelves = {
        type: 'section_heading_shelf',
        value: {
            heading: 'This is a section heading',
-           body: 'Lorem ipsum dolor sit amet, <b>consectetur adipiscing</b> elit, sed do eiusmod tempor incididunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.',
+           body: '<p>Lorem ipsum dolor sit amet, <b>consectetur adipiscing</b> elit, sed do eiusmod tempor incididunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>',
            shelf_id: 'test-section-heading-2',
        }
     },
@@ -338,7 +338,7 @@ const sampleShelves = {
       type: 'page_heading_shelf',
       value: {
         heading: 'Move More',
-        body: 'Moving is good for your body and mind. Try these easy ways to move more each day.',
+        body: '<p>Moving is good for your body and mind. Try these easy ways to move more each day.</p>',
         background_image: 'http://aaa.bbb.ccc/gb.png',
         meta_layout: 'page_header',
         meta_variant: 'home-page'
@@ -356,7 +356,7 @@ const sampleShelves = {
       type: 'page_heading_shelf',
       value: {
         heading: 'Move More',
-        body: 'Moving is good for your body and mind. Try these easy ways to move more each day.',
+        body: '<p>Moving is good for your body and mind. Try these easy ways to move more each day.</p>',
         background_image: 'http://aaa.bbb.ccc/gb.png',
         meta_layout: 'page_header',
         meta_variant: 'sub-page'
@@ -374,7 +374,7 @@ const sampleShelves = {
       type: 'banner_shelf',
       value: {
         heading: 'html::Active <span class="marker">10</span> App',
-        body: 'Did you know that a brisk 10 minute walk counts as exercise?\nGet started with our free app',
+        body: '<p>Did you know that a brisk 10 minute walk counts as exercise?\nGet started with our free app</p>',
         cta: {
           link_text: 'Download',
           link_external: 'http://www.edfs.co.uk'
@@ -388,7 +388,7 @@ const sampleShelves = {
       type: 'guidance_shelf',
       value: {
         heading: 'Promo Shelf (Jira Promo Shelf ON2-10)',
-        body: 'Layout <b>cta_on_right</b>, variant <b>promo</b>'
+        body: '<p>Layout <b>cta_on_right</b>, variant <b>promo</b></p>'
       }
     },
     {
@@ -421,7 +421,7 @@ const sampleShelves = {
       type: 'guidance_shelf',
       value: {
         heading: 'Promo Shelf (Jira Promo Shelf ON2-10)',
-        body: 'Layout <b>cta_on_right</b>, variant <b>promo</b>'
+        body: '<p>Layout <b>cta_on_right</b>, variant <b>promo</b></p>'
       }
     },
     {
