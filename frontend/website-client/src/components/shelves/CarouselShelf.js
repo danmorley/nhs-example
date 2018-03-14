@@ -20,7 +20,7 @@ import styles from './carousel.css';
  *    heading: "Learn More",
  *    body: "Some body text",
  *    background_image: "url to image",
- *    shelf_id: "learn-more-shelf"
+ *    field_id: "learn-more-shelf"
  *  }
  */
 class CarouselShelf extends Component {
@@ -41,7 +41,7 @@ class CarouselShelf extends Component {
       const shelfInfo = CmsComponentRegistry.components[shelf.type];
       const ShelfClass = shelfInfo && shelfInfo.class;
       const shelfClassNamePrefix = shelfInfo && shelfInfo.classNamePrefix;
-      const shelfId = shelf.value.shelf_id || shelf.id;
+      const shelfId = shelf.value.field_id || shelf.id;
       if (ShelfClass) {
         return (<div key={i}><ShelfClass content={shelf.value} id={shelfId} classNamePrefix={shelfClassNamePrefix}/></div>);
       } else {
