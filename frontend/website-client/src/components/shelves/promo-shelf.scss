@@ -15,6 +15,13 @@ $shelf-padding-extra: 2em;
 }
 
 .promo-shelf > .container {
+
+  @include media-breakpoint-up(sm) {
+    &:not(.full-to-half-width) {
+      padding-left: 25px;
+      padding-right: 25px;
+    }
+  }
   
   @include media-breakpoint-up(lg) {  
       &:not(.full-to-half-width) {
@@ -29,14 +36,19 @@ $shelf-padding-extra: 2em;
   padding-left: 0;
   padding-right: 0;
   
+  @include media-breakpoint-up(sm) {  
+    > .container {
+      padding-left: 25px;
+      padding-right: 25px;
+    }
+  }
+  
   @include media-breakpoint-up(lg) {  
     display: flex;
     
     > .container {
       width: 52%;
       margin-left: initial;
-      padding-left: 25px;
-      padding-right: 25px;
     }
   }
   
@@ -53,6 +65,7 @@ $shelf-padding-extra: 2em;
     text-transform: uppercase;
     white-space: nowrap;
     font-family: $primary-brand-font;
+    font-weight: normal;
 
     .text-light {
       font-family: $secondary-brand-font;
