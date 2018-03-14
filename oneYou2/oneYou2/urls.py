@@ -42,7 +42,7 @@ urlpatterns = [
     # url(r'^(?P<path>main.js/)$', serve, {'document_root': './web/'}),
     # url(r'^(service-worker.js/)$', serve, {'document_root': './web/'}),
     url(r'^static/(?P<path>.*)$', views.web_statics),
-    url(r'^(?P<site_name>[\w-]+)', views.release_html, name='release_html'),
+    url(r'^(?P<site_name>[\w-]+)/', views.release_html, name='release_html'),
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's page serving mechanism. This should be the last pattern in
     # the list:

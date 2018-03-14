@@ -13,7 +13,7 @@ services:
       initializing_timeout: 120000
       interval: 20000
       strategy: recreate
-      request_line: GET "/admin/"  "HTTP/1.1"
+      request_line: GET "/admin"  "HTTP/1.1"
       reinitializing_timeout: 120000
 
 
