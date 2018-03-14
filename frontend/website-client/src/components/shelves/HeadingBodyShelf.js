@@ -17,7 +17,7 @@ import styles from './promo-shelf.css';
  *  content: {
  *    heading: "Learn More",
  *    body: "Some body text",
- *    shelf_id: "sample-shelf-1"
+ *    field_id: "sample-shelf-1"
  *  }
  */
 class HeadingBodyShelf extends Component {

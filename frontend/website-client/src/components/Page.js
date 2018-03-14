@@ -3,6 +3,7 @@ import '../assets/styles/page.css';
 import CmsComponentRegistry from './CmsComponentRegistry';
 import Footer from './Footer';
 import PageHeader from './page-header/PageHeader';
+import PageStyles from './PageStyles';
 
 // Wildcard imports are not supported by Babel without babel-wildcard plugin.
 // Create react app template app hides away Babel, plugin can not be added. You must import
@@ -25,7 +26,7 @@ class Page extends Component {
     }
 
     let { site, content } = this.props;
-    let { title, body, page_theme } = content;
+    let { title, body, page_theme, page_styles } = content;
     let { menu, footer } = site;
     let pageTheme = (page_theme && page_theme.class_name) || 'oneyou';
 
@@ -45,6 +46,7 @@ class Page extends Component {
 
     return (
       <div className={`page-wrapper ${pageTheme}`}>
+        <PageStyles content={page_styles} />
         <PageHeader navItems={menu} header={site.header}/>
         <div className="page-content-wrapper">
           <div className="page-content">

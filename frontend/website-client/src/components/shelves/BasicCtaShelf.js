@@ -20,7 +20,7 @@ import sampleBgImage from './healthcheckup.png'; // Tell Webpack this JS file us
  *    heading: "Learn More",
  *    body: "Some body text",
  *    background_image: "url to image",
- *    shelf_id: "learn-more-shelf"
+ *    field_id: "learn-more-shelf"
  *  }
  */
 class BasicCtaShelf extends Component {

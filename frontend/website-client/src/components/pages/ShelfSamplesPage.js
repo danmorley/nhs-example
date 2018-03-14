@@ -7,6 +7,7 @@ import withOwnContent from './withOwnContent';
  */
 const sampleShelves = {
   title: 'Shelf Samples',
+  page_styles: '#panel-video-teaser-4 h3 { color: orange; }',
   body: [
     {
       type: 'guidance_shelf',
@@ -307,7 +308,7 @@ const sampleShelves = {
        type: 'section_heading_shelf',
        value: {
            heading: 'This is a section heading',
-           shelf_id: 'test-section-heading-1',
+           field_id: 'test-section-heading-1',
        }
     },
     {
@@ -323,7 +324,7 @@ const sampleShelves = {
        value: {
            heading: 'This is a section heading',
            body: '<p>Lorem ipsum dolor sit amet, <b>consectetur adipiscing</b> elit, sed do eiusmod tempor incididunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>',
-           shelf_id: 'test-section-heading-2',
+           field_id: 'test-section-heading-2',
        }
     },
     {
