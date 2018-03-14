@@ -35,7 +35,7 @@ class Page extends Component {
       const shelfClassNamePrefix = shelfInfo && shelfInfo.classNamePrefix;
       const shelfVariant = shelfInfo && shelfInfo.variant;
       const shelfLayout = shelfInfo && shelfInfo.layout;
-      const shelfId = shelf.shelf_id || shelf.id;
+      const shelfId = shelf.value.field_id || shelf.id;
       if (ShelfClass) {
         return (<ShelfClass key={i} content={shelf.value} id={shelfId} classNamePrefix={shelfClassNamePrefix} variant={shelfVariant} layout={shelfLayout}/>);
       } else {

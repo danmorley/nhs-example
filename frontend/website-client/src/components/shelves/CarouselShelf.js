@@ -25,7 +25,7 @@ import styles from './carousel.css';
  */
 class CarouselShelf extends Component {
   render() {
-    let { content, classNamePrefix } = this.props;
+    let { id, content, classNamePrefix } = this.props;
     let settings = {
       dots: true,
       infinite: true,
@@ -41,7 +41,7 @@ class CarouselShelf extends Component {
       const shelfInfo = CmsComponentRegistry.components[shelf.type];
       const ShelfClass = shelfInfo && shelfInfo.class;
       const shelfClassNamePrefix = shelfInfo && shelfInfo.classNamePrefix;
-      const shelfId = shelf.shelf_id || shelf.id;
+      const shelfId = shelf.value.shelf_id || shelf.id;
       if (ShelfClass) {
         return (<div key={i}><ShelfClass content={shelf.value} id={shelfId} classNamePrefix={shelfClassNamePrefix}/></div>);
       } else {
@@ -50,7 +50,7 @@ class CarouselShelf extends Component {
     });
 
     return (
-      <Shelf id={content.shelf_id || this.props.id} classNamePrefix={classNamePrefix}>
+      <Shelf id={id} classNamePrefix={classNamePrefix}>
         <div className="container-fluid">
           <div className="row carousel__row">
             <Slider className ="carousel carousel-full" {...settings}>

@@ -5,11 +5,13 @@ import styles from './shelves.css';
 
 class PlaceholderShelf extends Component {
   render() {
+    let { id, shelfType } = this.props;
+
     return (
-      <Shelf id={this.props.id} classNamePrefix="placeholder">
+      <Shelf id={id} classNamePrefix="placeholder">
         <div className="col-sm-12 shelf__placeholder">
           <h2 className="placeholder__header">Placeholder Shelf</h2>
-          <p>This is a temporary placeholder for a shelf of type: {this.props.shelfType}</p>
+          <p>This is a temporary placeholder for a shelf of type: {shelfType}</p>
         </div>
       </Shelf>
     );
