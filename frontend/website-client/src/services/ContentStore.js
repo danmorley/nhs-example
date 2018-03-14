@@ -26,7 +26,7 @@ ContentStore.prototype.getPage = async function(pageId) {
  */
 async function _getSite(contentStoreEndpoint, site, release) {
   console.debug('_getSite: Entry');
-  let siteUrl = contentStoreEndpoint + '/sites/' + site;
+  let siteUrl = contentStoreEndpoint + '/sites/' + site +'/';
   // let siteUrl = `${contentStoreEndpoint}/sites/${site}/${release}`;
   let options = {
     url: siteUrl,

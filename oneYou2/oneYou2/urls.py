@@ -3,6 +3,7 @@ from __future__ import absolute_import, unicode_literals
 from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.views.static import serve
 
 from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtailcore import urls as wagtail_urls
@@ -33,7 +34,15 @@ urlpatterns = [
 
     url('^sitemap\.xml$', sitemap),
 
-    url(r'^(?P<site_name>[\w-]+)/', views.release_frontend, name='release_frontend'),
+    url('^service-worker\.js$', serve, {'path': 'service-worker.js', 'document_root': './web/'}),
+    url('^index\.html$', serve, {'path': 'index.html', 'document_root': './web/'}),
+
+    url('^version/css/(?P<version_id>[\w-]+)/$', views.release_css, name='release_css'),
+    url('^version/js/(?P<version_id>[\w-]+)/$', views.release_js, name='release_js'),
+    # url(r'^(?P<path>main.js/)$', serve, {'document_root': './web/'}),
+    # url(r'^(service-worker.js/)$', serve, {'document_root': './web/'}),
+    url(r'^static/(?P<path>.*)$', views.web_statics),
+    url(r'^(?P<site_name>[\w-]+)', views.release_html, name='release_html'),
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's page serving mechanism. This should be the last pattern in
     # the list:

@@ -25,10 +25,27 @@ class FrontendVersion:
     return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, settings.ENV + '/' + uuid, 'index.html')
 
   @classmethod
+  def get_js_for_version(cls, version_id, file_name):
+    file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
+
+    directory_name = settings.ENV + '/' + version_id + '/static/js'
+    print(directory_name)
+    print(file_name)
+    return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, directory_name, file_name)
+
+  @classmethod
+  def get_css_for_version(cls, version_id, file_name):
+    file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
+
+    directory_name = settings.ENV + '/' + version_id + '/static/css'
+    return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, directory_name, file_name)
+
+  @classmethod
   def deploy_version(cls):
     file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
 
     unique_id = str(uuid.uuid4())
+    print(unique_id)
 
     version_directory = settings.ENV + "/" + unique_id
 
