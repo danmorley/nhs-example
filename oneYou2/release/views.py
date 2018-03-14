@@ -39,4 +39,4 @@ def release_css(request, version_id):
 
 
 def web_statics(request, path):
-  return serve(request, path, document_root='./web/static/')
+  return serve(request, path, document_root='./static/')
