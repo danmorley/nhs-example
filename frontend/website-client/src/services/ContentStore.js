@@ -26,8 +26,8 @@ ContentStore.prototype.getPage = async function(pageId) {
  */
 async function _getSite(contentStoreEndpoint, site, release) {
   console.debug('_getSite: Entry');
-  let siteUrl = contentStoreEndpoint + '/sites/' + site +'/';
-  // let siteUrl = `${contentStoreEndpoint}/sites/${site}/${release}`;
+  // let siteUrl = contentStoreEndpoint + '/sites/' + site + '/';
+  let siteUrl = `${contentStoreEndpoint}/sites/${site}/${release}/`;
   let options = {
     url: siteUrl,
     json: true
@@ -57,15 +57,15 @@ async function _getSite(contentStoreEndpoint, site, release) {
  */
 async function _getPage(contentStoreEndpoint, site, release, pageId) {
   console.debug('_getPage: Entry');
-  let pageUrl = contentStoreEndpoint + '/pages/' + pageId;
-  // let pageUrl = `${contentStoreEndpoint}/sites/${site}/${release}/pages/${pageId}`;
+  // let pageUrl = contentStoreEndpoint + '/pages/' + pageId;
+  let pageUrl = `${contentStoreEndpoint}/sites/${site}/${release}/pages/${pageId}/`;
   let options = {
     url: pageUrl,
     json: true
   }
 
   try {
-    console.debug('_getPage: A1');
+    console.debug('_getPage: A1', pageUrl);
     const response = await request(options);
     console.debug('_getPage: A2');
     return { code: 0, response: response };
