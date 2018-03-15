@@ -46,4 +46,8 @@ def release_css(request, version_id):
 
 
 def web_statics(request, path):
-  return serve(request, path, document_root='./static/')
+  if "wagtailadmin" in path:
+    return serve(request, path, document_root='./static/')
+  else:
+    return serve(request, path, document_root='./web/static/')
+  
