@@ -10,7 +10,7 @@ class PromoshelfAdmin(ModelAdmin):
     menu_icon = 'form'
     menu_order = 200
     add_to_settings_menu = False  # or True to add your model to the Settings sub-menu
-    exclude_from_explorer = False # or True to exclude pages of this type from Wagtail's explorer view
+    exclude_from_explorer = False  # or True to exclude pages of this type from Wagtail's explorer view
     list_display = ('shelf_id',)
     list_filter = ('shelf_id',)
     search_fields = ('shelf_id',)
@@ -22,7 +22,7 @@ class BannershelfAdmin(ModelAdmin):
     menu_icon = 'form'
     menu_order = 200
     add_to_settings_menu = False  # or True to add your model to the Settings sub-menu
-    exclude_from_explorer = False # or True to exclude pages of this type from Wagtail's explorer view
+    exclude_from_explorer = False  # or True to exclude pages of this type from Wagtail's explorer view
     list_display = ('shelf_id',)
     list_filter = ('shelf_id',)
     search_fields = ('shelf_id',)
@@ -34,7 +34,7 @@ class AppshelfAdmin(ModelAdmin):
     menu_icon = 'form'
     menu_order = 200
     add_to_settings_menu = False  # or True to add your model to the Settings sub-menu
-    exclude_from_explorer = False # or True to exclude pages of this type from Wagtail's explorer view
+    exclude_from_explorer = False  # or True to exclude pages of this type from Wagtail's explorer view
     list_display = ('shelf_id',)
     list_filter = ('shelf_id',)
     search_fields = ('shelf_id',)
@@ -48,4 +48,3 @@ class ShelfAdminGroup(ModelAdminGroup):
 
 
 modeladmin_register(ShelfAdminGroup)
-

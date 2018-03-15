@@ -76,9 +76,9 @@ class AppTeaserSerializer(HyperlinkedModelSerializer):
         cta_googleplay = representation.pop('cta_googleplay')
         if cta_appstore:
             representation['cta_appstore'] = {
-            'link_text': "",
-            'link_external': cta_appstore,
-        }
+                'link_text': "",
+                'link_external': cta_appstore,
+            }
         if cta_googleplay:
             representation['cta_googleplay'] = {
                 'link_text': "",

@@ -1,5 +1,6 @@
 from wagtail.tests.utils import WagtailPageTests
 
+
 class OneYouTests(WagtailPageTests):
 
     def assertIsTrue(self, value):

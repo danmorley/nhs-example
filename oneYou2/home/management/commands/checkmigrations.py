@@ -5,17 +5,16 @@ from django.db import connections, DEFAULT_DB_ALIAS
 
 
 class Command(BaseCommand):
-    '''
+    """
     Check if any migrations need to be run
-    '''
+    """
 
     help = 'Exit with non-zero code if migrations need to be run'
 
     def handle(self, *args, **kwargs):
-        '''
+        """
         Actual command procesing goes here
-        '''
-
+        """
 
         def is_database_synchronized(database):
             # Perform initial database connection as found in django's `migrate` command

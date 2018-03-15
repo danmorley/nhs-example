@@ -1,4 +1,3 @@
-from collections import OrderedDict
 from datetime import datetime
 
 from release.models import Release
@@ -16,4 +15,3 @@ def get_release_object(uuid):
     """Helper function to get a specific release by uuid"""
     release = Release.objects.filter(uuid=uuid).first()
     return release
-

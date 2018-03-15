@@ -1,4 +1,4 @@
-from wagtail.wagtailcore.models import Page, Site
+from wagtail.wagtailcore.models import Site
 
 from .models import OneYou2Page, Theme
 

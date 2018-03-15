@@ -11,10 +11,9 @@ from modelcluster.models import ClusterableModel
 from django.db import models
 from django.forms.models import model_to_dict
 from django.utils import timezone
-from wagtail.api.v2.endpoints import BaseAPIEndpoint
 from wagtail.api.v2.serializers import PageSerializer
 
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel
+from wagtail.wagtailadmin.edit_handlers import FieldPanel
 
 from oneYou2.panels import ReadOnlyPanel
 from .forms import ReleaseAdminForm
@@ -184,6 +183,7 @@ class Release(ClusterableModel):
             for revision in self.revisions.all():
                 if str(revision.revision.page_id) == str(key):
                     from oneYou2.api import api_router
+
                     class Request(object):
                         def __init__(self):
                             self.site = revision.revision.page.get_site()

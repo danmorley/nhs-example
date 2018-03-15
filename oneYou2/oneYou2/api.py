@@ -6,7 +6,6 @@ from rest_framework.exceptions import NotFound
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.fields import Field, CharField
-from rest_framework.utils.serializer_helpers import ReturnList
 from wagtail.api.v2.endpoints import PagesAPIEndpoint
 from wagtail.api.v2.router import WagtailAPIRouter
 from wagtail.api.v2.serializers import BaseSerializer
@@ -18,7 +17,6 @@ from wagtail.wagtaildocs.api.v2.endpoints import DocumentsAPIEndpoint
 from wagtail.api.v2.endpoints import BaseAPIEndpoint
 from wagtail.api.v2.filters import FieldsFilter, OrderingFilter, SearchFilter
 from wagtail.wagtailredirects.models import Redirect
-from wagtail.wagtailcore.models import Page
 
 from home.models import SiteSettings
 from release.utils import get_latest_release, get_release_object
@@ -261,7 +259,6 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
         serializer = self.get_serializer(queryset, many=True)
         return self.get_paginated_response(serializer.data)
 
-
     @classmethod
     def get_object_detail_urlpath(cls, model, pk, namespace=''):
         if namespace:
@@ -332,11 +329,11 @@ class ReleasePagesAPIEndpoint(PagesAPIEndpoint):
 
 
 class AltPagesEndpoint(PagesAPIEndpoint):
-  def get_object(self):
-    lookup_url_kwarg = self.lookup_url_kwarg or self.lookup_field
-    page_id = self.kwargs[lookup_url_kwarg]
-    base = Page.objects.get(id=page_id)
-    return base.specific
+    def get_object(self):
+        lookup_url_kwarg = self.lookup_url_kwarg or self.lookup_field
+        page_id = self.kwargs[lookup_url_kwarg]
+        base = Page.objects.get(id=page_id)
+        return base.specific
 
 
 class OneYouAPIRouter(WagtailAPIRouter):

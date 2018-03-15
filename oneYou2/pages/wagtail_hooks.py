@@ -55,10 +55,11 @@ class ThemeAdmin(ModelAdmin):
     menu_icon = 'code'
     menu_order = 900
     add_to_settings_menu = True  # or True to add your model to the Settings sub-menu
-    exclude_from_explorer = False # or True to exclude pages of this type from Wagtail's explorer view
+    exclude_from_explorer = False  # or True to exclude pages of this type from Wagtail's explorer view
     list_display = ('label',)
     list_filter = ('label',)
     search_fields = ('label',)
+
 
 modeladmin_register(ThemeAdmin)
 modeladmin_register(MenuAdmin)

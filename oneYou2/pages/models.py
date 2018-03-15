@@ -122,7 +122,7 @@ class PageHeading(blocks.StructBlock):
 
 class SectionHeading(blocks.StructBlock):
     heading = blocks.CharBlock(required=True)
-    shelf_id = blocks.CharBlock(required=False, label="ID", help_text="Not displayed in the front end" )
+    shelf_id = blocks.CharBlock(required=False, label="ID", help_text="Not displayed in the front end")
     body = blocks.RichTextBlock(required=False)
 
 
@@ -149,7 +149,7 @@ class BackwardsCompatibleContent(CTABlock):
     heading = blocks.CharBlock(required=True)
     body = blocks.RichTextBlock(required=True)
     image = BlobImageChooserBlock()
-    cta =blocks.StreamBlock([
+    cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False, verbose_name="cta")
     shelf_id = blocks.CharBlock(required=False, label="ID")
@@ -178,7 +178,11 @@ class ImageTeaserTemplate(blocks.StructBlock):
     heading = blocks.CharBlock(required=True)
     body = blocks.RichTextBlock(required=True)
     image = BlobImageChooserBlock()
-    meta_variant = blocks.ChoiceBlock(choices=[('light-bg', 'Light Background'), ('dark-bg', 'Dark Background')], label='Variant')
+    meta_variant = blocks.ChoiceBlock(choices=[
+        ('light-bg', 'Light Background'),
+        ('dark-bg', 'Dark Background')
+    ],
+        label='Variant')
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False)

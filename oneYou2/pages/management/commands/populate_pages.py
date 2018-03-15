@@ -47,6 +47,3 @@ class Command(BaseCommand):
             self.excluded_models, self.excluded_apps = parse_apps_and_model_labels(options['exclude'])
             self.format = options['format']
             management.call_command('loaddata', fixture_labels[0], **options)
-
-
-

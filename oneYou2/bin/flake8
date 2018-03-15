@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+docker exec -ti oneyou2_web-prod_1 bash -c "flake8 /code/oneYou2"
