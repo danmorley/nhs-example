@@ -122,7 +122,7 @@ class PageHeading(blocks.StructBlock):
 
 class SectionHeading(blocks.StructBlock):
     heading = blocks.CharBlock(required=True)
-    shelf_id = blocks.CharBlock(required=False, label="ID", help_text="Not displayed in the front end")
+    shelf_id = blocks.CharBlock(required=False, label="ID", help_text="Not displayed in the front end" )
     body = blocks.RichTextBlock(required=False)
 
 
