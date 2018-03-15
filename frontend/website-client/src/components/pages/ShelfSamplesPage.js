@@ -64,7 +64,7 @@ const sampleShelves = {
       type: 'grid_shelf',
       value: {
         heading: 'Responsive Grid Shelf',
-        rows_to_show: 1,
+        rows_to_show: 2,
         items: [
           {
             id: 'video-teaser-1',

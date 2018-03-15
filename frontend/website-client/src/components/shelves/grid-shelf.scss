@@ -1,0 +1,10 @@
+@import '../../assets/styles/variables/variables';
+@import "../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+.basic-grid-shelf .grid-container {
+  transition-property: max-height;
+  transition-duration: 1s;
+  transition-delay: 0s;
+  transition-timing-function: linear;
+  overflow: hidden;
+}
