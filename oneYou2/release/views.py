@@ -11,6 +11,13 @@ from frontendHandler.models import FrontendVersion
 from home.models import SiteSettings
 
 
+def get_protocol(domain_name):
+  if "service" in domain_name:
+    return 'https://'
+  else:
+    return 'http://'
+
+
 def release_html(request, site_name):
   site_id = SiteSettings.objects.get(uid=site_name).site.id
   release_id = request.GET.get('id')
@@ -22,7 +29,7 @@ def release_html(request, site_name):
   index = FrontendVersion.get_html_for_version(release.frontend_id)
   substituted_index = index.replace("/static/css/", "/version/css/" + release.frontend_id + "/?file_name=")
   substituted_index = substituted_index.replace("/static/js/", "/version/js/" + release.frontend_id + "/?file_name=")
-  substituted_index = substituted_index.replace("%apiurl%", request.__dict__['META']['wsgi.url_scheme'] + "://"
+  substituted_index = substituted_index.replace("%apiurl%", get_protocol(request.__dict__['META']['HTTP_HOST'])
                                                 + request.__dict__['META']['HTTP_HOST'] + "/api/v2")
   substituted_index = substituted_index.replace("%releaseid%", release.uuid)
   return HttpResponse(substituted_index)
@@ -39,4 +46,8 @@ def release_css(request, version_id):
 
 
 def web_statics(request, path):
-  return serve(request, path, document_root='./static/')
+  if "wagtailadmin" in path:
+    return serve(request, path, document_root='./static/')
+  else:
+    return serve(request, path, document_root='./web/static/')
+  
