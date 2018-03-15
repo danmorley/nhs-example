@@ -64,8 +64,8 @@ class GridShelf extends Component {
     }, 1200);
   }
 
-  recordChildHeight(elem, index) {
-    if (index === 1 && elem) this.childPanelHeight = elem.clientHeight;
+  recordChildHeight(elem, index, rowsToShow) {
+    if (index === 1 && elem) this.childPanelHeight = elem.clientHeight * rowsToShow;
   }
 
   setGridContainerElem(elem) {
@@ -76,7 +76,8 @@ class GridShelf extends Component {
     if (elem) this.gridContainerHeight = elem.clientHeight;
   }
 
-  panelWrapperHeight() {
+  panelWrapperHeight(rowsToShow) {
+    if (rowsToShow === 0) return 'auto';
     return this.state.isGridExpanded ? `${this.gridContainerHeight}px` : `${this.childPanelHeight}px`;
   }
 
@@ -84,6 +85,7 @@ class GridShelf extends Component {
     let { id, content, classNamePrefix, layout, variant } = this.props;
     let metaLayout = content.meta_layout || layout;
     let panelClass = (metaLayout === 'full_width') ? 'shelf__col col-sm-12' : 'shelf__col col-sm-12 col-md-6';
+    const rowsToShow = content.rows_to_show || 0;
 
     var panels = content.items.map((panel, i) => {
       const panelInfo = CmsComponentRegistry.components[panel.type];
@@ -91,7 +93,7 @@ class GridShelf extends Component {
       const panelClassNamePrefix = panelInfo && panelInfo.classNamePrefix;
       const panelId = panel.value.field_id || panel.id;
       if (PanelClass) {
-        return (<div key={i} ref={(elem) => this.recordChildHeight(elem, i)} className={panelClass}><PanelClass content={panel.value} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
+        return (<div key={i} ref={(elem) => this.recordChildHeight(elem, i, rowsToShow)} className={panelClass}><PanelClass content={panel.value} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
       } else {
         return (<div key={i} className={panelClass}><PlaceholderPanel panelType={panel.type} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
       }
@@ -101,19 +103,21 @@ class GridShelf extends Component {
       <Shelf id={id} classNamePrefix={classNamePrefix}>
         <div className="shelf__container container">
           <h2 className="shelf__header">{content.heading}</h2>
-          <div ref={(elem) => this.setGridContainerElem(elem)} className="row grid-container" style={{ maxHeight: this.panelWrapperHeight() }}>
+          <div ref={(elem) => this.setGridContainerElem(elem)} className="row grid-container" style={{ maxHeight: this.panelWrapperHeight(rowsToShow) }}>
             <div ref={(elem) => this.recordGridContainerHeight(elem)} className="row">
               {panels}
             </div>
           </div>
         </div>
-        <div className="row" style={{justifyContent: 'center'}}>
-          {this.state.isGridExpanded ? (
-            <a onClick={this.doContract}>See less</a>
-          ) : (
-            <a onClick={this.doExpand}>See more</a>
-          )}
-        </div>
+        {rowsToShow > 0 &&
+          <div className="row" style={{justifyContent: 'center'}}>
+            {this.state.isGridExpanded ? (
+              <a onClick={this.doContract}>See less</a>
+            ) : (
+              <a onClick={this.doExpand}>See more</a>
+            )}
+          </div>
+        }
       </Shelf>
     );
   }
