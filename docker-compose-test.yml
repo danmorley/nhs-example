@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+
+  oneyou-cms-test:
+    build:
+      context: .
+      dockerfile: ./TestDockerFile
+    environment:
+      DB_NAME: ${DB_NAME}
+      DB_HOST: ${DB_HOST}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      AZURE_ACCOUNT_NAME: ${AZURE_ACCOUNT_NAME}
+      AZURE_ACCOUNT_KEY: ${AZURE_ACCOUNT_KEY}
+      AZURE_CONTAINER: ${AZURE_CONTAINER}
+      AZURE_FILE_SHARE: ${AZURE_FILE_SHARE}
+    ports:
+      - "8001:8001"
+    command: bash -c "flake8 --config=./oneYou2/.flake8"
+
+

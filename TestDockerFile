@@ -1,0 +1,5 @@
+FROM phedct/oneyou-cms:mssql-python-nodejs
+
+WORKDIR /code
+ADD . /code
+RUN pip install -r oneYou2/requirements.txt
