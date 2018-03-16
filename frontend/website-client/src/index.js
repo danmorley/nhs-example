@@ -5,7 +5,7 @@ import registerServiceWorker from './registerServiceWorker';
 // import site from './sample-data/SiteSample';
 import ContentStore from './services/ContentStore';
 import invert from 'lodash.invert';
-
+import queryString from 'query-string';
 
 /**
  *  Script to 'load' the website into the 'root' element.
@@ -24,6 +24,11 @@ global.rootUrl = rootElem.getAttribute('data-site') ? '/' + rootElem.getAttribut
 let dataContentStoreEndpoint = rootElem.getAttribute('data-content-store-endpoint') || 'http://localhost:8000/api/v2';
 let dataSite = rootElem.getAttribute('data-site') || 'oneyou';
 let dataRelease = rootElem.getAttribute('data-release') || 'current';
+
+// Ensure query param release id is used if given.
+let params = queryString.parse(window.location.search);
+if (params.id ) dataRelease = params.id;
+
 global.contentStore = new ContentStore(dataContentStoreEndpoint, dataSite, dataRelease);
 
 // Load site.json before mounting the React app.
