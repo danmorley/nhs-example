@@ -122,7 +122,7 @@ class App extends Component {
 
         <Router history={history}>
           <Switch>
-            <Route path='/shelf-samples'
+            <Route path={global.rootUrl + '/shelf-samples'}
               render={() => <ShelfSamplesPage site={this.state.site} />
             }/>
             <Route path={global.rootUrl + '/'}
