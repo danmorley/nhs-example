@@ -1,6 +1,6 @@
 {
   "name": "website-client",
-  "version": "0.2.2",
+  "version": "0.2.4",
   "private": true,
   "dependencies": {
     "bootstrap-4-grid": "^2.3.0",
@@ -17,6 +17,7 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.0",
     "react-slick": "^0.18.1",
+    "react-swipeable": "^4.2.0",
     "request-promise-native": "^1.0.5",
     "slick-carousel": "^1.8.1"
   },
