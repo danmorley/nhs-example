@@ -5,202 +5,190 @@ from oneYou2.tests.utils import OneYouTests
 from shelves.factories import create_test_abstract_shelf, create_test_promo_shelf, create_test_revision
 from shelves.models import ShelfAbstract, ShelfRevision, PromoShelf
 
+
 class ShelfAbstractModelTests(OneYouTests):
 
-  def test_initialising_an_instance_assigns_the_content_type(self):
-    shelf = create_test_abstract_shelf()
+    def test_initialising_an_instance_assigns_the_content_type(self):
+        shelf = create_test_abstract_shelf()
 
-    expectedContentType = ContentType.objects.get_for_model(shelf)
+        expectedContentType = ContentType.objects.get_for_model(shelf)
 
-    self.assertEqual(shelf.content_type, expectedContentType)
+        self.assertEqual(shelf.content_type, expectedContentType)
 
-    shelf.delete()
+        shelf.delete()
 
+    def test_initialising_a_sub_class_instance_assigns_the_correct_content_type(self):
+        abstractShelf = create_test_abstract_shelf('Abstract test id')
+        shelf = create_test_promo_shelf()
 
-  def test_initialising_a_sub_class_instance_assigns_the_correct_content_type(self):
-    abstractShelf = create_test_abstract_shelf('Abstract test id')
-    shelf = create_test_promo_shelf()
+        expectedContentType = ContentType.objects.get_for_model(shelf)
+        notExpectedContentType = ContentType.objects.get_for_model(abstractShelf)
 
-    expectedContentType = ContentType.objects.get_for_model(shelf)
-    notExpectedContentType = ContentType.objects.get_for_model(abstractShelf)
+        self.assertEqual(shelf.content_type, expectedContentType)
+        self.assertNotEqual(shelf.content_type, notExpectedContentType)
 
-    self.assertEqual(shelf.content_type, expectedContentType)
-    self.assertNotEqual(shelf.content_type, notExpectedContentType)
+        shelf.delete()
+        abstractShelf.delete()
 
-    shelf.delete()
-    abstractShelf.delete()
+    def test_saving_a_shelf_abstract_creates_a_new_revision(self):
+        shelf = ShelfAbstract(shelf_id="Test shelf")
 
+        self.assertEqual(shelf.revisions.count(), 0)
 
-  def test_saving_a_shelf_abstract_creates_a_new_revision(self):
-    shelf = ShelfAbstract(shelf_id="Test shelf")
+        shelf.save()
 
-    self.assertEqual(shelf.revisions.count(), 0)
+        loadedShelf = ShelfAbstract.objects.get(shelf_id="Test shelf")
 
-    shelf.save()
+        self.assertEqual(loadedShelf.revisions.count(), 1)
 
-    loadedShelf = ShelfAbstract.objects.get(shelf_id="Test shelf")
+        shelf.delete()
 
-    self.assertEqual(loadedShelf.revisions.count(), 1)
+    def test_child_class_saving_also_creates_new_revision(self):
+        shelf = PromoShelf(shelf_id="Test shelf", heading="The heading of the shelf")
 
-    shelf.delete()
+        self.assertEqual(shelf.revisions.count(), 0)
 
+        shelf.save()
 
-  def test_child_class_saving_also_creates_new_revision(self):
-    shelf = PromoShelf(shelf_id="Test shelf", heading="The heading of the shelf")
+        loadedShelf = PromoShelf.objects.get(heading="The heading of the shelf")
 
-    self.assertEqual(shelf.revisions.count(), 0)
+        self.assertEqual(loadedShelf.revisions.count(), 1)
 
-    shelf.save()
+        shelf.delete()
 
-    loadedShelf = PromoShelf.objects.get(heading="The heading of the shelf")
+    def test_saving_associates_new_revision_to_live_revision(self):
+        shelf = ShelfAbstract(shelf_id="Test shelf")
 
-    self.assertEqual(loadedShelf.revisions.count(), 1)
+        self.assertIsNone(shelf.live_revision)
 
-    shelf.delete()
+        shelf.save()
 
+        self.assertIsNotNone(shelf.live_revision)
 
-  def test_saving_associates_new_revision_to_live_revision(self):
-    shelf = ShelfAbstract(shelf_id="Test shelf")
+        shelf.delete()
 
-    self.assertIsNone(shelf.live_revision)
+    def test_specific_returns_the_instance_in_the_correct_class_type(self):
+        shelf = create_test_abstract_shelf()
 
-    shelf.save()
+        expectedContentType = ContentType.objects.get_for_model(shelf.specific)
+        self.assertEqual(shelf.content_type, expectedContentType)
 
-    self.assertIsNotNone(shelf.live_revision)
+        shelf.delete()
 
-    shelf.delete()
+        shelf = create_test_promo_shelf()
 
+        expectedContentType = ContentType.objects.get_for_model(shelf.specific)
+        self.assertEqual(shelf.content_type, expectedContentType)
 
-  def test_specific_returns_the_instance_in_the_correct_class_type(self):
-    shelf = create_test_abstract_shelf()
+        shelf.delete()
 
-    expectedContentType = ContentType.objects.get_for_model(shelf.specific)
-    self.assertEqual(shelf.content_type, expectedContentType)
+    def test_to_dict_returns_the_object_as_a_dictionary(self):
+        shelf = create_test_abstract_shelf()
 
-    shelf.delete()
+        shelf_dict = shelf.to_dict()
 
-    shelf = create_test_promo_shelf()
+        self.assertEqual(shelf_dict['shelf_id'], shelf.shelf_id)
 
-    expectedContentType = ContentType.objects.get_for_model(shelf.specific)
-    self.assertEqual(shelf.content_type, expectedContentType)
-
-    shelf.delete()
-
-  def test_to_dict_returns_the_object_as_a_dictionary(self):
-    shelf = create_test_abstract_shelf()
-
-    shelf_dict = shelf.to_dict()
-
-    self.assertEqual(shelf_dict['shelf_id'], shelf.shelf_id)
-
-    shelf.delete()
+        shelf.delete()
 
 
 class ShelfRevisionModelTests(OneYouTests):
 
-  def test_saving_adds_a_created_at_time(self):
-    shelf = create_test_abstract_shelf()
+    def test_saving_adds_a_created_at_time(self):
+        shelf = create_test_abstract_shelf()
 
-    revision = ShelfRevision(shelf_id = shelf.id, content_json = shelf.to_dict())
+        revision = ShelfRevision(shelf_id=shelf.id, content_json=shelf.to_dict())
 
-    self.assertIsNone(revision.created_at)
+        self.assertIsNone(revision.created_at)
 
-    revision.save()
+        revision.save()
 
-    self.assertIsNotNone(revision.created_at)
+        self.assertIsNotNone(revision.created_at)
 
-    shelf.delete()
+        shelf.delete()
 
+    def test_is_latest_revision_returns_correct_value(self):
+        shelf = create_test_abstract_shelf()
 
-  def test_is_latest_revision_returns_correct_value(self):
-    shelf = create_test_abstract_shelf()
+        initialRevision = shelf.live_revision
 
-    initialRevision = shelf.live_revision
+        secondRevision = create_test_revision(shelf)
 
-    secondRevision = create_test_revision(shelf)
+        self.assertIsFalse(initialRevision.is_latest_revision())
 
-    self.assertIsFalse(initialRevision.is_latest_revision())
+        self.assertIsTrue(secondRevision.is_latest_revision())
 
-    self.assertIsTrue(secondRevision.is_latest_revision())
+        shelf.delete()
 
-    shelf.delete()
+    def test_is_latest_revision_returns_true_for_unsaved_revisions(self):
+        shelf = create_test_abstract_shelf()
 
+        revision = ShelfRevision(shelf_id=shelf.id, content_json=shelf.to_dict())
 
-  def test_is_latest_revision_returns_true_for_unsaved_revisions(self):
-    shelf = create_test_abstract_shelf()
+        self.assertIsNone(revision.id)
+        self.assertIsTrue(revision.is_latest_revision())
 
-    revision = ShelfRevision(shelf_id = shelf.id, content_json = shelf.to_dict())
+        shelf.delete()
 
-    self.assertIsNone(revision.id)
-    self.assertIsTrue(revision.is_latest_revision())
+    def test_get_previous_returns_the_previous_revision(self):
+        shelf = create_test_abstract_shelf()
 
-    shelf.delete()
+        initialRevision = shelf.live_revision
 
+        secondRevision = create_test_revision(shelf)
 
-  def test_get_previous_returns_the_previous_revision(self):
-    shelf = create_test_abstract_shelf()
+        self.assertIsTrue(secondRevision.is_latest_revision())
 
-    initialRevision = shelf.live_revision
+        previousRevision = secondRevision.get_previous()
 
-    secondRevision = create_test_revision(shelf)
+        self.assertEqual(initialRevision.id, previousRevision.id)
 
-    self.assertIsTrue(secondRevision.is_latest_revision())
+        shelf.delete()
 
-    previousRevision = secondRevision.get_previous()
+    def test_get_next_returns_the_next_revision(self):
+        shelf = create_test_abstract_shelf()
 
-    self.assertEqual(initialRevision.id, previousRevision.id)
+        initialRevision = shelf.live_revision
 
-    shelf.delete()
+        secondRevision = create_test_revision(shelf)
 
+        self.assertIsFalse(initialRevision.is_latest_revision())
 
-  def test_get_next_returns_the_next_revision(self):
-    shelf = create_test_abstract_shelf()
+        nextRevision = initialRevision.get_next()
 
-    initialRevision = shelf.live_revision
+        self.assertEqual(secondRevision.id, nextRevision.id)
 
-    secondRevision = create_test_revision(shelf)
+        shelf.delete()
 
-    self.assertIsFalse(initialRevision.is_latest_revision())
+    def test_publish_duplicates_revision_as_live_on_the_shelf(self):
+        shelf = create_test_abstract_shelf('Test label')
 
-    nextRevision = initialRevision.get_next()
+        initialRevision = shelf.live_revision
 
-    self.assertEqual(secondRevision.id, nextRevision.id)
+        shelf.shelf_id = 'Test label 2'
+        shelf.save()
 
-    shelf.delete()
+        secondRevision = shelf.live_revision
 
+        self.assertNotEqual(shelf.live_revision.id, initialRevision.id)
+        self.assertEqual(shelf.live_revision.id, secondRevision.id)
+        self.assertEqual(shelf.revisions.count(), 2)
 
-  def test_publish_duplicates_revision_as_live_on_the_shelf(self):
-    shelf = create_test_abstract_shelf('Test label')
+        initialRevision.publish()
 
-    initialRevision = shelf.live_revision
+        shelf = ShelfAbstract.objects.get(shelf_id='Test label')
 
-    shelf.shelf_id = 'Test label 2'
-    shelf.save()
+        self.assertEqual(shelf.revisions.count(), 3)
+        self.assertNotEqual(shelf.live_revision.content_json, secondRevision.content_json)
+        self.assertEqual(initialRevision.as_shelf_object().shelf_id, shelf.live_revision.as_shelf_object().shelf_id)
 
-    secondRevision = shelf.live_revision
+        shelf.delete()
 
-    self.assertNotEqual(shelf.live_revision.id, initialRevision.id)
-    self.assertEqual(shelf.live_revision.id, secondRevision.id)
-    self.assertEqual(shelf.revisions.count(), 2)
+    def test_serializable_data_function_returns_a_dictionary_of_the_shelf(self):
+        shelf = create_test_abstract_shelf()
 
-    initialRevision.publish()
+        serialized_shelf = shelf.serializable_data()
 
-    shelf = ShelfAbstract.objects.get(shelf_id='Test label')
-
-    self.assertEqual(shelf.revisions.count(), 3)
-    self.assertNotEqual(shelf.live_revision.content_json, secondRevision.content_json)
-    self.assertEqual(initialRevision.as_shelf_object().shelf_id, shelf.live_revision.as_shelf_object().shelf_id)
-
-    shelf.delete()
-
-  def test_serializable_data_function_returns_a_dictionary_of_the_shelf(self):
-    shelf = create_test_abstract_shelf()
-
-    serialized_shelf = shelf.serializable_data()
-
-    self.assertIsTrue('live_revision' in serialized_shelf)
-    self.assertIsTrue('shelf_id' in serialized_shelf)
-    self.assertIsTrue('content_type' in serialized_shelf)
-
-
-
+        self.assertIsTrue('live_revision' in serialized_shelf)
+        self.assertIsTrue('shelf_id' in serialized_shelf)
+        self.assertIsTrue('content_type' in serialized_shelf)

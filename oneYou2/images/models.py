@@ -15,7 +15,9 @@ from pages.models import OneYou2Page
 
 class PHEImage(AbstractImage):
     def get_usage(self):
-        search_strings = ['"type": "image", "value": ' + str(self.id), 'image": ' + str(self.id), 'image\\": ' + str(self.id)]
+        search_strings = ['"type": "image", "value": ' + str(self.id),
+                          'image": ' + str(self.id),
+                          'image\\": ' + str(self.id)]
         query = reduce(operator.or_, (Q(content_json__contains=string) for string in search_strings))
         page_ids = PageRevision.objects.filter(query).values('page_id')
         pages = OneYou2Page.objects.filter(id__in=page_ids).order_by('id')
