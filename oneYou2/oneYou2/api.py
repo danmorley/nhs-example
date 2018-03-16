@@ -104,8 +104,8 @@ class FooterField(Field):
             footer_social_media = footer.follow_us.stream_data
 
             pages_meta = {}
-            for d in Page.objects.values('id', 'slug', 'url_path'):
-                pages_meta[d['id']] = (d['slug'], d['url_path'])
+            for d in OneYou2Page.objects.all():
+                pages_meta[d.id] = (d.slug, d.link_url)
 
             for menu_item in footer_links:
                 page_id = menu_item['value'].get('link_page')
