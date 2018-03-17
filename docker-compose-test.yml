@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  db-test:
+  db:
     image: "microsoft/mssql-server-linux:2017-latest"
     environment:
       SA_PASSWORD: "msSQL_password"
@@ -25,6 +25,6 @@ services:
       AZURE_FILE_SHARE: ${AZURE_FILE_SHARE}
     ports:
       - "8001:8001"
-    command: bash -c "flake8 && ./bin/wait-for-it.sh db:1433 -- && pwd && ./manage.py test"
+    command: bash -c "flake8 && ./bin/wait-for-it.sh db:1433 -- && coverage run manage.py test && coverage report --fail-under=70"
 
 
