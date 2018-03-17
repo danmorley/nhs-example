@@ -8,6 +8,8 @@ services:
       ACCEPT_EULA: "Y"
     ports:
       - "1434:1434"
+    logging:
+      driver: "none"
 
   oneyou-cms-test:
     build:
