@@ -50,4 +50,3 @@ def web_statics(request, path):
         return serve(request, path, document_root='./static/')
     else:
         return serve(request, path, document_root='./web/static/')
-
