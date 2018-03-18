@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Shelf from '../shelves/Shelf';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import styles from './grid-shelf.css';
+import ShowMorePanel from '../shared/ShowMorePanel';
 
 import sampleBgImage from './healthcheckup.png'; // Tell Webpack this JS file uses this image
 // import testImage from '../../assets/images/Trump2.jpg';
@@ -24,68 +25,68 @@ import InformationPanel from '../panels/InformationPanel';
  *  full_width
  */
 class GridShelf extends Component {
-  constructor (props) {
-    super(props);
-    this.state = { isGridExpanded: false };
-    this.doExpand = this.doExpand.bind(this);
-    this.doContract = this.doContract.bind(this);
-    this.storageKey = `${this.props.id}_panelExpanded`;
-  }
-
-  componentDidMount() {
-    // Load expanded state from session storage.
-    const isGridExpanded = sessionStorage.getItem(this.storageKey) === 'Y';
-    this.setState({ isGridExpanded: isGridExpanded });
-  }
-
-  componentWillUnmount() {
-    // Save expanded state to session storage.
-    sessionStorage.setItem(this.storageKey, this.state.isGridExpanded ? 'Y' : 'N');
-  }
-
-  doExpand() {
-    this.gridContainerElem.style.transitionDuration = '1s';
-    this.gridContainerElem.style.maxHeight = `${this.gridContainerHeight}px`;
-    // this.gridContainerElem.style.maxHeight = this.panelWrapperHeight(); // Using this delays transition start until after timeout.
-
-    // Allow time for the transition to complete before setting the state and re-rendering.
-    setTimeout(() => {
-      this.setState({ isGridExpanded: true });
-    }, 1200);
-  }
-
-  doContract() {
-    this.gridContainerElem.style.maxHeight = `${this.childPanelHeight}px`;
-    // this.gridContainerElem.style.maxHeight = this.panelWrapperHeight(); // Using this delays transition start until after timeout.
-
-    // Allow time for the transition to complete before setting the state and re-rendering.
-    setTimeout(() => {
-      this.setState({ isGridExpanded: false });
-    }, 1200);
-  }
-
+  // constructor (props) {
+  //   super(props);
+  //   this.state = { isGridExpanded: false };
+  //   this.doExpand = this.doExpand.bind(this);
+  //   this.doContract = this.doContract.bind(this);
+  //   this.storageKey = `${this.props.id}_panelExpanded`;
+  // }
+  //
+  // componentDidMount() {
+  //   // Load expanded state from session storage.
+  //   const isGridExpanded = sessionStorage.getItem(this.storageKey) === 'Y';
+  //   this.setState({ isGridExpanded: isGridExpanded });
+  // }
+  //
+  // componentWillUnmount() {
+  //   // Save expanded state to session storage.
+  //   sessionStorage.setItem(this.storageKey, this.state.isGridExpanded ? 'Y' : 'N');
+  // }
+  //
+  // doExpand() {
+  //   this.gridContainerElem.style.transitionDuration = '1s';
+  //   this.gridContainerElem.style.maxHeight = `${this.gridContentHeight}px`;
+  //   // this.gridContainerElem.style.maxHeight = this.panelWrapperHeight(); // Using this delays transition start until after timeout.
+  //
+  //   // Allow time for the transition to complete before setting the state and re-rendering.
+  //   setTimeout(() => {
+  //     this.setState({ isGridExpanded: true });
+  //   }, 1200);
+  // }
+  //
+  // doContract() {
+  //   this.gridContainerElem.style.maxHeight = `${this.childPanelHeight}px`;
+  //   // this.gridContainerElem.style.maxHeight = this.panelWrapperHeight(); // Using this delays transition start until after timeout.
+  //
+  //   // Allow time for the transition to complete before setting the state and re-rendering.
+  //   setTimeout(() => {
+  //     this.setState({ isGridExpanded: false });
+  //   }, 1200);
+  // }
+  //
   recordChildHeight(elem, index, rowsToShow) {
-    if (index === 1 && elem) this.childPanelHeight = elem.clientHeight * rowsToShow;
+    if (index === 0 && elem) this.childPanelHeight = elem.clientHeight * rowsToShow;
+    console.log('child height is', this.childPanelHeight);
   }
-
-  setGridContainerElem(elem) {
-    this.gridContainerElem = elem;
-  }
-
-  recordGridContainerHeight(elem) {
-    if (elem) this.gridContainerHeight = elem.clientHeight;
-  }
-
-  panelWrapperHeight(rowsToShow) {
-    if (rowsToShow === 0) return 'auto';
-    return this.state.isGridExpanded ? `${this.gridContainerHeight}px` : `${this.childPanelHeight}px`;
-  }
+  //
+  // setGridContainerElem(elem) {
+  //   this.gridContainerElem = elem;
+  // }
+  //
+  // setGridContentHeight(elem) {
+  //   if (elem) this.gridContentHeight = elem.clientHeight;
+  // }
+  //
+  // panelWrapperHeight(rowsToShow) {
+  //   if (rowsToShow === 0) return 'auto';
+  //   return this.state.isGridExpanded ? `${this.gridContainerHeight}px` : `${this.childPanelHeight}px`;
+  // }
 
   render() {
     let { id, content, classNamePrefix, layout, variant } = this.props;
     let metaLayout = content.meta_layout || layout;
     let panelClass = (metaLayout === 'full_width') ? 'shelf__col col-sm-12' : 'shelf__col col-sm-12 col-md-6';
-    const rowsToShow = content.rows_to_show || 0;
 
     var panels = content.items.map((panel, i) => {
       const panelInfo = CmsComponentRegistry.components[panel.type];
@@ -93,31 +94,23 @@ class GridShelf extends Component {
       const panelClassNamePrefix = panelInfo && panelInfo.classNamePrefix;
       const panelId = panel.value.field_id || panel.id;
       if (PanelClass) {
-        return (<div key={i} ref={(elem) => this.recordChildHeight(elem, i, rowsToShow)} className={panelClass}><PanelClass content={panel.value} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
+        // return (<div key={i} ref={props.inputRef} className={panelClass}><PanelClass content={panel.value} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
+        // return (<div key={i} ref={(elem) => this.recordChildHeight(elem, i, content.rows_to_show)} className={panelClass}><PanelClass content={panel.value} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
+        return (<div key={i} className={panelClass}><PanelClass content={panel.value} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
       } else {
         return (<div key={i} className={panelClass}><PlaceholderPanel panelType={panel.type} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
       }
     });
 
+    // const shouldShowMoreLessButton = content.rows_to_show > 0 && this.gridContainerElem && this.gridContainerElem.clientHeight < this.gridContentHeight;
+
+    console.log('before return - child height is', this.childPanelHeight);
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix}>
         <div className="shelf__container container">
           <h2 className="shelf__header">{content.heading}</h2>
-          <div ref={(elem) => this.setGridContainerElem(elem)} className="row grid-container" style={{ maxHeight: this.panelWrapperHeight(rowsToShow) }}>
-            <div ref={(elem) => this.recordGridContainerHeight(elem)} className="row">
-              {panels}
-            </div>
-          </div>
+          <ShowMorePanel rowsToShow={content.rows_to_show} panels={panels} />
         </div>
-        {rowsToShow > 0 &&
-          <div className="row" style={{justifyContent: 'center'}}>
-            {this.state.isGridExpanded ? (
-              <a onClick={this.doContract}>See less</a>
-            ) : (
-              <a onClick={this.doExpand}>See more</a>
-            )}
-          </div>
-        }
       </Shelf>
     );
   }
