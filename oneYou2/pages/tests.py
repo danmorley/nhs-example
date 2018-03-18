@@ -1,4 +1,5 @@
 import json
+from unittest.mock import patch
 
 from oneYou2.tests.utils import OneYouTests
 
@@ -117,7 +118,8 @@ class OneYou2PageModelTests(OneYouTests):
 
         self.assertIsNot(loadedPage.page_ref, original_page_ref)
 
-    def test_publishing_page_to_release_links_new_revision_to_release(self):
+    @patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
+    def test_publishing_page_to_release_links_new_revision_to_release(self, mock_file_service):
         page = create_test_page()
 
         initial_revision = page.get_latest_revision()
@@ -141,7 +143,8 @@ class OneYou2PageModelTests(OneYouTests):
         self.assertTrue(second_revision_in_release)
         self.assertIsFalse(initial_revision_in_release)
 
-    def test_unpublishing_a_page_removes_the_revision_for_that_page_from_the_release(self):
+    @patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
+    def test_unpublishing_a_page_removes_the_revision_for_that_page_from_the_release(self, mock_file_service):
         page = create_test_page()
 
         release = create_test_release()

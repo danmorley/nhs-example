@@ -21,10 +21,10 @@ services:
       DB_USER: "sa"
       DB_PORT: "1434"
       DB_PASSWORD: "msSQL_password"
-      AZURE_ACCOUNT_NAME: ${AZURE_ACCOUNT_NAME}
-      AZURE_ACCOUNT_KEY: ${AZURE_ACCOUNT_KEY}
-      AZURE_CONTAINER: ${AZURE_CONTAINER}
-      AZURE_FILE_SHARE: ${AZURE_FILE_SHARE}
+      AZURE_ACCOUNT_NAME: "test"
+      AZURE_ACCOUNT_KEY: "test"
+      AZURE_CONTAINER: "test"
+      AZURE_FILE_SHARE: "test"
     ports:
       - "8001:8001"
     command: bash -c "flake8 && ./bin/wait-for-it.sh db:1433 -- && coverage run manage.py test && coverage report --fail-under=70"

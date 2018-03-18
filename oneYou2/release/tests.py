@@ -2,6 +2,7 @@ import json
 import uuid
 
 from datetime import datetime, timedelta
+from unittest.mock import patch
 
 from django.utils import timezone
 
@@ -14,9 +15,10 @@ from release.factories import create_test_release, create_test_release_content, 
 from release.models import Release
 
 
+@patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
 class ReleaseModelTests(OneYouTests):
 
-    def test_save_doesnt_update_page_ref_if_exists(self):
+    def test_save_doesnt_update_page_ref_if_exists(self, mock_file_service):
         release = Release(release_name="Test release", site_id=2)
         original_uuid = str(uuid.uuid4())
         release.uuid = original_uuid
@@ -30,7 +32,7 @@ class ReleaseModelTests(OneYouTests):
 
         self.assertEqual(loadedRelease.uuid, original_uuid)
 
-    def test_save_creates_page_ref_if_doesnt_exists(self):
+    def test_save_creates_page_ref_if_doesnt_exists(self, mock_file_service):
         release = Release(release_name="Test release", site_id=2)
 
         self.assertIs(release.uuid, '')
@@ -41,7 +43,7 @@ class ReleaseModelTests(OneYouTests):
 
         self.assertIsNot(loadedRelease.uuid, None)
 
-    def test_to_dict(self):
+    def test_to_dict(self, mock_file_service):
         """
         to_dict method should return a dictionary representing the object
         """
@@ -52,7 +54,7 @@ class ReleaseModelTests(OneYouTests):
         self.assertIs(release_dict['release_name'], test_name)
         self.assertEqual(release_dict['release_time'], test_date.timestamp())
 
-    def test_to_dict_removes_empty_fields(self):
+    def test_to_dict_removes_empty_fields(self, mock_file_service):
         """
         to_dict method should return a dictionary representing the object
         """
@@ -62,7 +64,7 @@ class ReleaseModelTests(OneYouTests):
         self.assertIs(release_dict['release_name'], test_name)
         self.assertIsFalse('release_time' in release_dict)
 
-    def test_on_create_release_is_linked_to_all_current_pages(self):
+    def test_on_create_release_is_linked_to_all_current_pages(self, mock_file_service):
         """
         when a new release is created it should be linked to the latest revisions of all live pages.
         """
@@ -75,7 +77,7 @@ class ReleaseModelTests(OneYouTests):
         self.assertEqual(count_of_pages, release.revisions.count())
         self.assertEqual(page.get_latest_revision().id, release.revisions.first().revision.id)
 
-    def test_release_doesnt_lock_content_if_no_release_time_set(self):
+    def test_release_doesnt_lock_content_if_no_release_time_set(self, mock_file_service):
         """
         when a release is requested with no release date, it should not save the content into json.
         """
@@ -89,7 +91,7 @@ class ReleaseModelTests(OneYouTests):
 
         self.assertEqual(loaded_release.content.count(), 0)
 
-    def test_release_doesnt_lock_content_before_its_release_time(self):
+    def test_release_doesnt_lock_content_before_its_release_time(self, mock_file_service):
 
         """
         when a release is requested before its release date, it should not save the content into json.
@@ -105,7 +107,7 @@ class ReleaseModelTests(OneYouTests):
 
         self.assertEqual(loaded_release.content.count(), 0)
 
-    def test_release_locks_content_after_its_release_time(self):
+    def test_release_locks_content_after_its_release_time(self, mock_file_service):
 
         """
         when a release is requested after its release date, it should save the content into json.
@@ -121,7 +123,7 @@ class ReleaseModelTests(OneYouTests):
 
         self.assertEqual(loaded_release.content.count(), 1)
 
-    def test_release_initialised_from_a_base_release_gets_revisions_from_base(self):
+    def test_release_initialised_from_a_base_release_gets_revisions_from_base(self, mock_file_service):
         """
         when a release is initialised from an existing release as a base it gets linked to the same pages the base
         release is linked to at that point.
@@ -141,7 +143,7 @@ class ReleaseModelTests(OneYouTests):
         self.assertEquals(new_release.revisions.count(), 1)
         self.assertEquals(base_release.revisions.first().revision.id, new_release.revisions.first().revision.id)
 
-    def test_is_released_returns_false_if_now_date_set(self):
+    def test_is_released_returns_false_if_now_date_set(self, mock_file_service):
         """
         the is released function should return false if the release date hasn't been set.
         """
@@ -149,7 +151,7 @@ class ReleaseModelTests(OneYouTests):
 
         self.assertIsFalse(release.is_released())
 
-    def test_is_released_returns_false_if_date_is_in_the_future(self):
+    def test_is_released_returns_false_if_date_is_in_the_future(self, mock_file_service):
         """
         the is released function should return false if the release date is in the future.
         """
@@ -158,7 +160,7 @@ class ReleaseModelTests(OneYouTests):
 
         self.assertIsFalse(release.is_released())
 
-    def test_is_released_returns_true_if_date_is_in_the_past(self):
+    def test_is_released_returns_true_if_date_is_in_the_past(self, mock_file_service):
         """
         the is released function should return true if the release date is in the past.
         """
@@ -167,7 +169,7 @@ class ReleaseModelTests(OneYouTests):
 
         self.assertIsTrue(release.is_released())
 
-    def test_remove_page_removes_the_linked_revision_of_the_page_from_the_release(self):
+    def test_remove_page_removes_the_linked_revision_of_the_page_from_the_release(self, mock_file_service):
         """
         the remove page function should remove any linked revisions of that page from the release.
         """
@@ -202,7 +204,7 @@ class ReleaseModelTests(OneYouTests):
         self.assertIsTrue(page1_in_release)
         self.assertIsFalse(page2_in_release)
 
-    def test_remove_page_does_nothing_if_the_page_is_not_in_the_release(self):
+    def test_remove_page_does_nothing_if_the_page_is_not_in_the_release(self, mock_file_service):
         """
         the remove page function should not remove anything if the page is not in the release.
         """
@@ -247,7 +249,7 @@ class ReleaseModelTests(OneYouTests):
         self.assertIsTrue(page2_in_release)
         self.assertIsFalse(page3_in_release)
 
-    def test_add_revision_replaces_the_linked_revision_of_a_page_with_the_new_revision(self):
+    def test_add_revision_replaces_the_linked_revision_of_a_page_with_the_new_revision(self, mock_file_service):
         """
         when a revision is added to a release it replaces the existing revision linked to the release.
         """
@@ -283,7 +285,7 @@ class ReleaseModelTests(OneYouTests):
         self.assertIsFalse(initial_revision_in_release)
         self.assertIsTrue(second_revision_in_release)
 
-    def test_add_revision_creates_a_new_link_if_the_page_not_already_in_the_release(self):
+    def test_add_revision_creates_a_new_link_if_the_page_not_already_in_the_release(self, mock_file_service):
         """
         when a revision is added to a release it creates a new link if the page not already linked to the release.
         """
@@ -319,7 +321,7 @@ class ReleaseModelTests(OneYouTests):
         self.assertIsTrue(initial_revision_in_release)
         self.assertIsTrue(second_revision_in_release)
 
-    def test_release_loads_none_object_if_the_requested_page_isnt_in_release(self):
+    def test_release_loads_none_object_if_the_requested_page_isnt_in_release(self, mock_file_service):
         """
         When content is requested for a release that isn't included in the release a None object should be returned.
         """
@@ -329,7 +331,7 @@ class ReleaseModelTests(OneYouTests):
 
         self.assertIsNone(release_page_content)
 
-    def test_release_loads_content_from_tables_if_not_yet_released(self):
+    def test_release_loads_content_from_tables_if_not_yet_released(self, mock_file_service):
         """
         When content is requested for a release before it is released it should load the content from the related tables
         not from locked content. Tested by checking that before it is released it returns any content, because before
@@ -346,7 +348,7 @@ class ReleaseModelTests(OneYouTests):
         self.assertIsNotNone(release_page_content)
         self.assertEqual(release_page_content['title'], json.loads(revision.content_json)['title'])
 
-    def test_release_loads_content_from_locked_content_if_released(self):
+    def test_release_loads_content_from_locked_content_if_released(self, mock_file_service):
         """
         When content is requested for a release after it is released it should load the content from the locked content
         not from the releated tables.
@@ -372,8 +374,9 @@ class ReleaseModelTests(OneYouTests):
         self.assertEqual(release_page_content['title'], initial_title)
 
 
+@patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
 class ReleaseContentModelTests(OneYouTests):
-    def test_release_content_can_return_a_requested_page(self):
+    def test_release_content_can_return_a_requested_page(self, mock_file_service):
         """
         When a specific page is requested from the locked content it should be retrievable.
         """
@@ -387,7 +390,7 @@ class ReleaseContentModelTests(OneYouTests):
 
         self.assertEqual(page.title, loaded_page_content['title'])
 
-    def test_release_content_returns_none_if_the_requested_page_not_in_release(self):
+    def test_release_content_returns_none_if_the_requested_page_not_in_release(self, mock_file_service):
         """
         When a page is requested that isn't included in a release a None object should be returned.
         """
@@ -399,8 +402,9 @@ class ReleaseContentModelTests(OneYouTests):
         self.assertIsNone(loaded_page_content)
 
 
+@patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
 class ReleasePageModelTests(OneYouTests):
-    def test_a_release_page_object_returns_associated_release(self):
+    def test_a_release_page_object_returns_associated_release(self, mock_file_service):
         release = create_test_release()
 
         page = create_test_page()
