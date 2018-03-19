@@ -33,19 +33,31 @@ class Oneyou1TeaserPanel extends Component {
         <div className={`${classNamePrefix}__text`}>
           <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
         </div>
-        { (CtaUtils.isSingleCta(content.cta)) ? (
-          <div className={`${classNamePrefix}__cta-item`}>
-            <CtaLink cta={content.cta} />
-          </div>
-        ) : (
-          <div className={`${classNamePrefix}__cta-list`}>
-            <Collapsible trigger={<h4>{content.cta_heading || 'Find out more'}</h4>} transitionTime={200}>
-              <CtaList items={content.cta} />
-            </Collapsible>
-          </div>
-        )}
+        {this.renderCta()}
       </Panel>
     );
+  }
+
+  renderCta() {
+    let { content, classNamePrefix } = this.props;
+
+    if (!CtaUtils.isCta(content.cta)) return null;
+
+    if (CtaUtils.isSingleCta(content.cta)) {
+      return (
+        <div className={`${classNamePrefix}__cta-item`}>
+          <CtaLink cta={content.cta} />
+        </div>
+      );
+    } else {
+      return (
+        <div className={`${classNamePrefix}__cta-list`}>
+          <Collapsible trigger={<h4>{content.cta_heading || 'Find out more'}</h4>} transitionTime={200}>
+            <CtaList items={content.cta} />
+          </Collapsible>
+        </div>
+      );
+    }
   }
 }
 
