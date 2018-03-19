@@ -1,22 +1,32 @@
 version: '2'
 
 services:
+  db:
+    image: "microsoft/mssql-server-linux:2017-latest"
+    environment:
+      SA_PASSWORD: "msSQL_password"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1434:1434"
+    logging:
+      driver: "none"
 
   oneyou-cms-test:
     build:
       context: .
       dockerfile: ./TestDockerFile
     environment:
-      DB_NAME: ${DB_NAME}
-      DB_HOST: ${DB_HOST}
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
-      AZURE_ACCOUNT_NAME: ${AZURE_ACCOUNT_NAME}
-      AZURE_ACCOUNT_KEY: ${AZURE_ACCOUNT_KEY}
-      AZURE_CONTAINER: ${AZURE_CONTAINER}
-      AZURE_FILE_SHARE: ${AZURE_FILE_SHARE}
+      DB_NAME: "master"
+      DB_HOST: "db"
+      DB_USER: "sa"
+      DB_PORT: "1434"
+      DB_PASSWORD: "msSQL_password"
+      AZURE_ACCOUNT_NAME: "test"
+      AZURE_ACCOUNT_KEY: "test"
+      AZURE_CONTAINER: "test"
+      AZURE_FILE_SHARE: "test"
     ports:
       - "8001:8001"
-    command: bash -c "flake8 --config=./oneYou2/.flake8"
+    command: bash -c "flake8 && ./bin/wait-for-it.sh db:1433 -- && coverage run manage.py test && coverage report --fail-under=70"
 
 
