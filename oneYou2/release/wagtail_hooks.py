@@ -59,4 +59,3 @@ class ReleaseAdmin(ModelAdmin):
 
 # Now you just need to register your customised ModelAdmin class with Wagtail
 modeladmin_register(ReleaseAdmin)
-
