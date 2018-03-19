@@ -38,6 +38,26 @@ SHARED_CONTENT_TYPES = ['promo_shelf', 'banner_shelf', 'app_shelf']
 logger = logging.getLogger('wagtail.core')
 
 
+def replace_embeds_with_links(field):
+    from images.models import PHEImage
+    start = 0
+    while start >= 0:
+        print(field)
+        start = field.find('<embed')
+        finish = field.find('/>', start) + 2
+        if not start < 0:
+            initial_string = field[start:finish]
+            embed_string = initial_string.replace('<embed', '<img')
+            id_start = embed_string.find('id="') + 4
+            id_end = embed_string.find('"', id_start)
+            id = embed_string[id_start:id_end]
+            image = PHEImage.objects.get(id=id)
+            embed_string = embed_string.replace(id, image.link)
+            embed_string = embed_string.replace('id', 'src')
+            field = field.replace(initial_string, embed_string)
+    return field
+
+
 def get_field_value(field, model):
     if field.remote_field is None:
         value = field.pre_save(model, add=model.pk is None)
@@ -55,9 +75,16 @@ def get_field_value(field, model):
             return value
         else:
             if field.verbose_name is 'body':
+                print(10, field)
                 field_dict = json.loads(field.value_to_string(model))
+                print('field_dict', field_dict)
                 final_content = []
                 for shelf in field_dict:
+                    print(shelf)
+                    if type(shelf['value']) is dict:
+                        for key in shelf['value']:
+                            if type(shelf['value'][key]) is str:
+                                shelf['value'][key] = replace_embeds_with_links(shelf['value'][key])
                     if shelf['type'] in SHARED_CONTENT_TYPES:
                         shelf['content'] = ShelfAbstract.objects.get(id=shelf['value']).specific.serializable_data()
                         final_content.append(shelf)
