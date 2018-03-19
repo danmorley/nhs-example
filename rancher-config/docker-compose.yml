@@ -13,6 +13,7 @@ services:
       AZURE_ACCOUNT_KEY: ${AZURE_ACCOUNT_KEY}
       AZURE_CONTAINER: ${AZURE_CONTAINER}
       AZURE_FILE_SHARE: ${AZURE_FILE_SHARE}
+      CMS_ENV: ${CMS_ENV}
     labels:
       io.rancher.container.pull_image: always
       traefik.enable: true
@@ -42,6 +43,7 @@ services:
       AZURE_ACCOUNT_KEY: ${AZURE_ACCOUNT_KEY}
       AZURE_CONTAINER: ${AZURE_CONTAINER}
       AZURE_FILE_SHARE: ${AZURE_FILE_SHARE}
+      CMS_ENV: ${CMS_ENV}
     command: bash ./initialize.sh
     labels:
       io.rancher.container.pull_image: always

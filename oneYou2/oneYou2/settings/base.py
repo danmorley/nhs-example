@@ -178,4 +178,4 @@ AZURE_ACCOUNT_KEY = os.environ.get('AZURE_ACCOUNT_KEY')      # eg. '<secret key>
 AZURE_CONTAINER = os.environ.get('AZURE_CONTAINER')          # eg. 'campaign-resource-centre'
 AZURE_FILE_SHARE = os.environ.get('AZURE_FILE_SHARE')
 
-ENV = os.environ.get('ENV', 'dev')
+ENV = os.environ.get('CMS_ENV', 'dev')
