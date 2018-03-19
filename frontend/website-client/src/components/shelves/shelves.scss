@@ -82,6 +82,10 @@ $shelf-padding-extra: 2em;
     font-weight: normal;
 }
 
+.section-heading-shelf p {
+  margin-bottom: 1em;
+}
+
 .shelf-full_to_half_width {
   
   @include media-breakpoint-only(lg) {

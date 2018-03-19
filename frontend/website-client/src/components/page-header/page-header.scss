@@ -62,6 +62,11 @@
     line-height: 0.9em;    
     border-bottom: 0.15em solid  $text-primary;
   }
+  
+  &:hover, &:focus {
+    background-color: inherit;
+    color: inherit;
+  }
 }
 
 .page-header__burger {

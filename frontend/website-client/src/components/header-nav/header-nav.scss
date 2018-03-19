@@ -152,6 +152,10 @@ $secondary-item-padding: 0.4em;
         border-bottom-color: $white;
       }
     }
+    
+    &:focus {
+      background-color: inherit;
+    }
   }
 }
 
@@ -176,10 +180,18 @@ $secondary-item-padding: 0.4em;
     color: $sunflower-yellow;
   }
   
+  &:focus {
+    background-color: inherit;
+  }
+  
   @include media-breakpoint-up(md) {
     display: inline-block;
     color: $text-primary;
     padding-bottom: 0.3em;
+    
+      &:focus {
+        color: inherit;
+      }
   }
 }
 
@@ -293,6 +305,11 @@ $secondary-item-padding: 0.4em;
   
   &:hover {
     color: $sunflower-yellow;
+  }
+  
+  &:focus {
+    background-color: inherit;
+    color: inherit;
   }
   
   &:after {

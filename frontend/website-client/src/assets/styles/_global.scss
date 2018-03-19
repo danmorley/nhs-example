@@ -100,6 +100,40 @@ a.button-googleplay {
   background-image: url('../images/google-play.png');
 }
 
+.shelf-section ul {
+  list-style-type: disc;
+  margin: 1em 0;
+  padding-left: 40px; 
+  
+  li {
+    margin-left: 0;
+  }
+}
+
+.shelf-section ol {
+  list-style-type: decimal;
+  margin: 1em 0;
+  padding-left: 40px;
+  
+  li {
+    margin-left: 0;
+  }
+}
+
+a {
+  color: $teal-blue;
+  
+  &:hover {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  &:focus {
+    background-color: $teal-blue;
+    color: $white;
+  }
+}
+
 .oneyou { //theme
   .button-cta {
     background-color: $sunflower-yellow;

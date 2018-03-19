@@ -40,6 +40,8 @@ $arrow-distance: 4%;
 .slick-dots {
   position: absolute;
   bottom: 0.5em;
+  margin: 0 !important;
+  padding: 0 !important;
   
   @include media-breakpoint-up(sm) {
     bottom: 1em;
