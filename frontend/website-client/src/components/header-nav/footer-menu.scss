@@ -19,6 +19,11 @@
   &:hover {
     text-decoration: underline;
   }
+  
+  &:focus {
+    background-color: inherit;
+    color: inherit;
+  }
 }
   
 .footer-nav__item {

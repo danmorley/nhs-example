@@ -17,14 +17,20 @@
   }
 }
 
-.panel__button-list {
-  display: flex;
-  
-  li {
-    flex-grow: 1;
+.shelf-section {
+
+  .panel__button-list {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
     
-    &:first-child {
-      margin-right:1em;
+    li {
+      flex-grow: 1;
+      
+      &:first-child {
+        margin-right:1em;
+      }
     }
   }
 }
