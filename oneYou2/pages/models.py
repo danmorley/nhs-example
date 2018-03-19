@@ -91,13 +91,13 @@ def get_serializable_data_for_fields(model):
 
 
 class SimpleMenuItem(blocks.StructBlock):
-    link_text = blocks.CharBlock(required=True)
+    link_text = blocks.CharBlock(required=False)
     link_external = blocks.URLBlock(label='External link', required=False)
     link_page = blocks.PageChooserBlock(required=False)
 
 
 class MultiMenuItem(blocks.StructBlock):
-    label = blocks.CharBlock(required=True)
+    label = blocks.CharBlock(required=False)
     menu_items = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items')
@@ -108,20 +108,20 @@ class SocialMediaFooterLink(blocks.StructBlock):
         ('twitter', "Twitter"),
         ('facebook', "Facebook"),
     )
-    label = blocks.CharBlock(required=True)
+    label = blocks.CharBlock(required=False)
     type = blocks.ChoiceBlock(choices=choices)
     link = blocks.URLBlock(label='External link', required=False)
 
 
 class PageHeading(blocks.StructBlock):
-    heading = blocks.CharBlock(required=True)
-    body = blocks.RichTextBlock(required=True)
-    background_image = BlobImageChooserBlock()
+    heading = blocks.CharBlock(required=False)
+    body = blocks.RichTextBlock(required=False)
+    background_image = BlobImageChooserBlock(required=False)
     shelf_id = blocks.CharBlock(required=False, label="ID", help_text="Not displayed in the front end")
 
 
 class SectionHeading(blocks.StructBlock):
-    heading = blocks.CharBlock(required=True)
+    heading = blocks.CharBlock(required=False)
     shelf_id = blocks.CharBlock(required=False, label="ID", help_text="Not displayed in the front end")
     body = blocks.RichTextBlock(required=False)
 
@@ -146,8 +146,8 @@ class CTABlock(blocks.StructBlock):
 
 
 class BackwardsCompatibleContent(CTABlock):
-    heading = blocks.CharBlock(required=True)
-    body = blocks.RichTextBlock(required=True)
+    heading = blocks.CharBlock(required=False)
+    body = blocks.RichTextBlock(required=False)
     image = BlobImageChooserBlock()
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
@@ -156,7 +156,7 @@ class BackwardsCompatibleContent(CTABlock):
 
 
 class FindOutMoreDropDown(CTABlock):
-    heading = blocks.CharBlock(required=True)
+    heading = blocks.CharBlock(required=False)
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items')
@@ -164,10 +164,10 @@ class FindOutMoreDropDown(CTABlock):
 
 
 class VideoTemplate(blocks.StructBlock):
-    heading = blocks.CharBlock(required=True)
-    body = blocks.RichTextBlock(required=True)
+    heading = blocks.CharBlock(required=False)
+    body = blocks.RichTextBlock(required=False)
     image = BlobImageChooserBlock(help_text="Click this image plays the video")
-    video = blocks.CharBlock(required=True)
+    video = blocks.CharBlock(required=False)
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False)
@@ -175,8 +175,8 @@ class VideoTemplate(blocks.StructBlock):
 
 
 class ImageTeaserTemplate(blocks.StructBlock):
-    heading = blocks.CharBlock(required=True)
-    body = blocks.RichTextBlock(required=True)
+    heading = blocks.CharBlock(required=False)
+    body = blocks.RichTextBlock(required=False)
     image = BlobImageChooserBlock()
     meta_variant = blocks.ChoiceBlock(choices=[
         ('light-bg', 'Light Background'),
@@ -190,17 +190,17 @@ class ImageTeaserTemplate(blocks.StructBlock):
 
 
 class Carousel(blocks.StructBlock):
-    heading = blocks.CharBlock()
+    heading = blocks.CharBlock(required=False)
     items = blocks.StreamBlock([
         ('video_teaser', VideoTemplate(icon="media")),
         ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
         ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
-    ], icon='arrow-left', label='Items')
+    ], icon='arrow-left', label='Items', required=False)
     shelf_id = blocks.CharBlock(required=False, label="ID")
 
 
 class Grid(blocks.StructBlock):
-    heading = blocks.CharBlock()
+    heading = blocks.CharBlock(required=False)
     rows_to_show = blocks.IntegerBlock(default=0)
     items = blocks.StreamBlock([
         ('oneyou1_teaser', BackwardsCompatibleContent(label="OneYou1 teaser", icon="folder-inverse")),

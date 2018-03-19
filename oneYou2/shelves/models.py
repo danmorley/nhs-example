@@ -178,8 +178,8 @@ class ShelfRevision(models.Model):
 
 @register_snippet
 class PromoShelf(ShelfAbstract):
-    heading = models.CharField(max_length=255)
-    cta_text = models.CharField(max_length=255)
+    heading = models.CharField(max_length=255, null=True, blank=True)
+    cta_text = models.CharField(max_length=255, null=True, blank=True)
     cta_link = models.CharField(max_length=255, null=True, blank=True)
     cta_page = ParentalKey('wagtailcore.Page',
                            on_delete=models.SET_NULL,
@@ -206,7 +206,7 @@ class PromoShelf(ShelfAbstract):
 
 @register_snippet
 class BannerShelf(ShelfAbstract):
-    heading = models.CharField(max_length=255)
+    heading = models.CharField(max_length=255, null=True, blank=True)
     body = RichTextField(blank=True, null=True)
     background_image = models.ForeignKey(
         'images.PHEImage',
@@ -215,7 +215,7 @@ class BannerShelf(ShelfAbstract):
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    cta_text = models.CharField(max_length=255)
+    cta_text = models.CharField(max_length=255, null=True, blank=True)
     cta_link = models.CharField(max_length=255, null=True, blank=True)
     cta_page = ParentalKey('wagtailcore.Page',
                            on_delete=models.SET_NULL,
@@ -246,7 +246,7 @@ class BannerShelf(ShelfAbstract):
 
 @register_snippet
 class AppTeaser(ShelfAbstract):
-    heading = models.CharField(max_length=255)
+    heading = models.CharField(max_length=255, null=True, blank=True)
     body = RichTextField(blank=True, null=True)
     image = models.ForeignKey(
         'images.PHEImage',
@@ -255,8 +255,8 @@ class AppTeaser(ShelfAbstract):
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    cta_googleplay = models.CharField(max_length=255)
-    cta_appstore = models.CharField(max_length=255)
+    cta_googleplay = models.CharField(max_length=255, null=True, blank=True)
+    cta_appstore = models.CharField(max_length=255, null=True, blank=True)
 
     panels = [
         FieldPanel('shelf_id'),
