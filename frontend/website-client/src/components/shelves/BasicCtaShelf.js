@@ -5,8 +5,7 @@ import Image from '../Image';
 import CtaLink from '../shared/CtaLink';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import styles from './promo-shelf.css';
-
-import sampleBgImage from './healthcheckup.png'; // Tell Webpack this JS file uses this image
+import ImageUtils from '../panels/ImageUtils';
 
 /**
  *  Basic CTA Shelf is a simple shelf that can be used to display content
@@ -47,14 +46,12 @@ class BasicCtaShelf extends Component {
     let metaVariant = content.meta_variant || variant;
     let metaLayout = content.meta_layout || layout;
 
-    let backgroundImageShelfStyle = {
-      backgroundImage: 'url(' + sampleBgImage + ')',
-    };
+    let backgroundColourShelfStyle = {};
 
-    let backgroundColourShelfStyle = {
-    };
+    let shelfStyle = (content.background_image) ?
+      ImageUtils.backgroundImageStyle(content.background_image, ImageUtils.placeholderBackgroundImage()) :
+      backgroundColourShelfStyle;
 
-    let shelfStyle = (content.background_image) ? backgroundImageShelfStyle : backgroundColourShelfStyle;
     let headingTagName = (classNamePrefix === 'page-heading-shelf') ? 'h1' : 'h2';
 
     if (metaLayout === 'image_on_left') {
