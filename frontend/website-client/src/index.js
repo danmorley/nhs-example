@@ -28,6 +28,7 @@ let dataRelease = rootElem.getAttribute('data-release') || 'current';
 // Ensure query param release id is used if given.
 let params = queryString.parse(window.location.search);
 if (params.id ) dataRelease = params.id;
+if (params.cms ) dataContentStoreEndpoint = params.cms;
 
 global.contentStore = new ContentStore(dataContentStoreEndpoint, dataSite, dataRelease);
 
