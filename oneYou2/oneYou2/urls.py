@@ -3,6 +3,7 @@ from __future__ import absolute_import, unicode_literals
 from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.views.generic import TemplateView
 from django.views.static import serve
 
 from wagtail.wagtailadmin import urls as wagtailadmin_urls
@@ -27,6 +28,8 @@ urlpatterns = [
 
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
+
+    url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt'), name='robots'),
 
     url(r'^api/v2/', api_router.urls),
 
