@@ -6,12 +6,9 @@
   transition-duration: 1s;
   transition-delay: 0s;
   transition-timing-function: linear;
-  overflow: hidden;
 }
-.show-more-content {
-  transition-property: max-height;
-  transition-duration: 1s;
-  transition-delay: 0s;
-  transition-timing-function: linear;
-  overflow: hidden;
+.show-more-content > .shelf__col {
+  &.hidden {
+    display: none;
+  }
 }

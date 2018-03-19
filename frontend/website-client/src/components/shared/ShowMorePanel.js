@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from './show-more-panel.css';
 import { CSSTransitionGroup } from 'react-transition-group';
+import classNames from 'classnames';
+
 /**
  *  Show More Panel.
  *
@@ -156,6 +158,18 @@ class ShowMorePanel extends Component {
 
   }
 
+  renderChildren() {
+    return React.Children.map(this.props.panels, (child, i) => {
+      if (i < this.state.childrenToView) return child;
+
+      // Return a hidden child.
+      const classes = child.props.className;
+      return React.cloneElement(child, {
+        className: classNames(classes, 'hidden')
+      });
+    })
+  }
+
   render() {
     let { rowsToShow, childRowHeight, panels } = this.props;
 
@@ -163,12 +177,7 @@ class ShowMorePanel extends Component {
     const container =
       <div key="1" ref={(elem) => this.setContainerElem (elem)} className="show-more-panel">
         <div ref={elem => this.setContentElem(elem)} className="row show-more-content">
-          <CSSTransitionGroup
-            transitionName="example"
-            transitionEnterTimeout={500}
-            transitionLeaveTimeout={300}>
-            {panels.slice(0, this.childrenToView(this.state.isExpanded))}
-          </CSSTransitionGroup>
+          {this.renderChildren()}
         </div>
       </div>
     ;
