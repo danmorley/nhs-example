@@ -11,6 +11,9 @@ from modelcluster.models import ClusterableModel
 from django.db import models
 from django.forms.models import model_to_dict
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
+from django.core.exceptions import ValidationError
+
 from wagtail.api.v2.serializers import PageSerializer
 
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
@@ -35,6 +38,11 @@ class DummyView(GenericViewSet):
         # is added to this mapping. This is used by the Admin API which appends a
         # summary of the used types to the response.
         self.seen_types = OrderedDict()
+
+
+def validate_in_future(date_time):
+    if date_time < timezone.now():
+        raise ValidationError(_('Release date has already passed. Please choose one in the future.'))
 
 
 def query_set_to_dict(querySet):
@@ -63,7 +71,7 @@ class Release(ClusterableModel):
         null=True,
         on_delete=models.SET_NULL)
     release_name = models.CharField(max_length=255, unique=True)
-    release_time = models.DateTimeField(blank=True, null=True)
+    release_time = models.DateTimeField(blank=True, null=True, validators=[validate_in_future])
     uuid = models.CharField(max_length=255, unique=True)
     frontend_id = models.CharField(max_length=255)
     site = models.ForeignKey(
@@ -196,6 +204,7 @@ class Release(ClusterableModel):
                     page_content = response.data
 
         return page_content
+
 
     def get_current_frontend_id(self):
         return FrontendVersion.get_current_version()
