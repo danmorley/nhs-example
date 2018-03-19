@@ -1,0 +1,19 @@
+@import '../../assets/styles/variables/variables';
+@import "../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+.show-more-panel {
+  transition-property: max-height;
+  transition-duration: 1s;
+  transition-delay: 0s;
+  transition-timing-function: linear;
+}
+.show-more-content > .shelf__col {
+  &.hidden {
+    display: none;
+  }
+}
+
+.debug-info {
+  font-size: 0.8em;
+  color: #999999;
+}
