@@ -10,15 +10,15 @@ class PageHeader extends Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
-  
+
   setBurgerElem(elem) {
     this.burgerElem = elem;
   }
-  
+
   swipedLeft(e, absX) {
     PageHeader.toggleMenu(e);
   }
-  
+
   render() {
     let { navItems, header } = this.props;
 
@@ -30,11 +30,11 @@ class PageHeader extends Component {
               <button ref={(elem) => this.setBurgerElem(elem)} className="page-header__burger" onClick={this.handleClick}>
                   <i className="font-icon"></i>
               </button>
-              <Link to="/" className="page-header__logo">
+              <Link to={global.rootUrl} className="page-header__logo">
                 <Text content={header.title || 'html::One <span>You</span>'} />
               </Link>
             </div>
-            <Swipeable 
+            <Swipeable
                innerRef={(el) => this.swipeableElem = el}
                onSwipedLeft={this.swipedLeft}
              >
@@ -49,11 +49,11 @@ class PageHeader extends Component {
   handleClick(event) {
     PageHeader.toggleMenu(event);
   }
-  
+
   static toggleMenu(event) {
     const box = document.querySelector('.page-wrapper');
     event.preventDefault()
-    box.classList.toggle('header-nav--open');    
+    box.classList.toggle('header-nav--open');
   }
 }
 

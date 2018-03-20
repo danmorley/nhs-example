@@ -5,9 +5,12 @@ import withOwnContent from './withOwnContent';
  *  Shelf Sample Page uses the withOwnContent higher order component to return a page
  *  but using local static content.
  */
-const sampleShelves = {
+const sampleShelvesPage = {
   title: 'Shelf Samples',
   page_styles: '#panel-video-teaser-4 h3 { color: orange; }',
+  meta: {
+    search_description: ''
+  },
   body: [
     {
       type: 'guidance_shelf',
@@ -470,4 +473,4 @@ const sampleShelves = {
   ]
 };
 
-export default withOwnContent(Page, sampleShelves);
+export default withOwnContent(Page, sampleShelvesPage);

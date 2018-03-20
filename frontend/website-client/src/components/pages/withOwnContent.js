@@ -10,7 +10,7 @@ function withOwnContent(WrappedComponent, ownContent) {
     }
 
     render() {
-      return <WrappedComponent content={this.state.content} {...this.props} />;
+      return <WrappedComponent page={this.state.content} {...this.props} />;
     }
   };
 }
