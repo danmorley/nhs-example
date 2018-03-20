@@ -48,8 +48,8 @@ class BasicCtaShelf extends Component {
 
     let backgroundColourShelfStyle = {};
 
-    let shelfStyle = (content.background_image) ?
-      ImageUtils.backgroundImageStyle(content.background_image, ImageUtils.placeholderBackgroundImage()) :
+    let shelfStyle = (ImageUtils.isValid(content.background_image)) ?
+      ImageUtils.backgroundImageStyle(content.background_image) :
       backgroundColourShelfStyle;
 
     let headingTagName = (classNamePrefix === 'page-heading-shelf') ? 'h1' : 'h2';
