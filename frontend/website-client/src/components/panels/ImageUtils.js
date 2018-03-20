@@ -8,27 +8,33 @@ import testBackgroundImage from '../../assets/images/app-screen.jpg';
 *  }
 */
 class ImageUtils {
- static placeholderImage() {
-   return { link: testImage, title: 'Placeholder image' };
- }
+  
+  static isValid(image) {
+    return image && image.link && image.link.length > 0;
+  }
 
- static placeholderBackgroundImage() {
-   return { link: testBackgroundImage, title: 'Placeholder background image' };
- }
+  static placeholderImage() {
+    return { link: testImage, title: 'Placeholder image' };
+  }
 
- static imageUrl(image, defaultImage) {
-   return ImageUtils.imageOrDefault(image, defaultImage).link;
- }
+  static placeholderBackgroundImage() {
+    return { link: testBackgroundImage, title: 'Placeholder background image' };
+  }
 
- static imageOrDefault(image, defaultImage) {
-   return (image && image.link) ? image : defaultImage;
- }
+  static imageUrl(image, defaultImage) {
+    image = ImageUtils.imageOrDefault(image, defaultImage); 
+    return image ? image.link : '';
+  }
 
- static backgroundImageStyle(image, defaultImage) {
-   return {
-     backgroundImage: 'url(' + ImageUtils.imageUrl(image, defaultImage) + ')'
-   };
- }
+  static imageOrDefault(image, defaultImage) {
+    return (image && image.link) ? image : defaultImage;
+  }
+
+  static backgroundImageStyle(image, defaultImage) {
+    return {
+      backgroundImage: 'url(' + ImageUtils.imageUrl(image, defaultImage) + ')'
+    };
+  }
 }
 
 export default ImageUtils;
