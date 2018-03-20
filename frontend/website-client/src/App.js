@@ -108,8 +108,8 @@ class App extends Component {
   }
 
   loadPage(props) {
-    console.log(this.state)
-    return (<Page content={this.state.currentPage} site={this.state.site} />);
+    // console.log(this.state);
+    return (<Page page={this.state.currentPage} site={this.state.site} />);
   }
 
   isAppPage(path) {
