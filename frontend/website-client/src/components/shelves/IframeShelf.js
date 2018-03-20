@@ -11,10 +11,14 @@ import CmsComponentRegistry from '../CmsComponentRegistry';
  *  - styles (to be confirmed)
  *
  *  content: {
+ *    heading: 'Optional heading',
  *    src: 'https://link.to.content/',
  *    frameborder: '0',
  *    scrolling: 'no',
- *    field_id: 'hay-container'
+ *    field_id: 'hay-container',
+ *    height: '400px',
+ *    width: '400px',
+ *    sandbox: 'allow-same-origin'
  *  }
  */
 class IframeShelf extends Component {
