@@ -192,3 +192,14 @@ class ShelfRevisionModelTests(OneYouTests):
         self.assertIsTrue('live_revision' in serialized_shelf)
         self.assertIsTrue('shelf_id' in serialized_shelf)
         self.assertIsTrue('content_type' in serialized_shelf)
+
+
+class ShelfFactoriesTests(OneYouTests):
+    def test_create_test_revision_creates_a_new_shelf_if_not_provided_one(self):
+        initial_count_of_shelves = ShelfAbstract.objects.count()
+
+        create_test_revision()
+
+        after_count_of_shelves = ShelfAbstract.objects.count()
+
+        self.assertEqual(after_count_of_shelves, initial_count_of_shelves + 1)
