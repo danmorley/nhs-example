@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../assets/styles/page.css';
 import CmsComponentRegistry from './CmsComponentRegistry';
+import CookieBanner from './cookie-banner/CookieBanner';
 import Footer from './Footer';
 import PageHeader from './page-header/PageHeader';
 import PageStyles from './PageStyles';
@@ -28,6 +29,7 @@ class Page extends Component {
     return (
       <div className={`page-wrapper ${theme}`}>
         <PageStyles content={pageStyles} />
+          <CookieBanner />
         <PageHeader navItems={menu} header={header}/>
         <div className="page-content-wrapper">
           <div className="page-content">
@@ -98,6 +100,8 @@ class Page extends Component {
             <div className="sk-cube2 sk-cube"></div>
             <div className="sk-cube4 sk-cube"></div>
             <div className="sk-cube3 sk-cube"></div>
+          )
+          
           </div>
         </div>
       );

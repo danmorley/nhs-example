@@ -25,7 +25,7 @@ class Text extends Component {
 
     if (format === 'richtext') {
       // Convert Wagtail internal links and images to real URLs.
-      return CmsRichTextFormatter.format(content);
+      return <Tag {...rest}>{CmsRichTextFormatter.format(content)}</Tag>;
 
     } else if (format === 'html') {
       // Treat as straight HTML that doesn't require escaping.
@@ -43,7 +43,7 @@ class Text extends Component {
 }
 
 Text.defaultProps = {
-  tagName: 'p'
+  tagName: 'div'
 };
 
 Text.propTypes = {
