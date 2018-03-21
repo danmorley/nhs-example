@@ -68,7 +68,9 @@ async function _getPage(contentStoreEndpoint, site, release, pageId) {
     console.debug('_getPage: A1', pageUrl);
     const response = await request(options);
     console.debug('_getPage: A2');
-    return { code: 0, response: response };
+    return response ? 
+      { code: 0, response: response } :
+      { code: -1, error: 'Error getting page data', info: { statusCode: '-1', message: 'Page might need to be published' } };
   }
   catch (error) {
     console.debug('_getPage: A3 - error');

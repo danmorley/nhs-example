@@ -126,11 +126,11 @@ $shelf-padding-extra: 2em;
 .oneyou { //theme
 
   .promo-shelf, .page-heading-shelf, .banner-shelf {
-    h1, h2 {
+    h1, h2, h3, h4, h5 {
       color: $white;
     }
 
-    p {
+    p, ul, ol, a {
       color: $white;
     }
 

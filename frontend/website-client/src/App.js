@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import 'normalize.css'
+import 'normalize.css';
 import './assets/styles/fonts.css';
 import Page from './components/Page';
 import ShelfSamplesPage from './components/pages/ShelfSamplesPage';
-import pageNotFound from './sample-data/PageNotFound';
+import notFoundPage from './data/notFoundPage';
 import ContentStore from './services/ContentStore';
 import createHistory from 'history/createBrowserHistory';
 
@@ -40,16 +40,17 @@ class App extends Component {
     // history.listen detects when the user navigates within the site and
     // returns a function to cancel the listener for use in the component
     // unmount.
+    const that = this;
     this.historyUnlisten = history.listen((location, action) => {
       console.log('Internal load of page for path ' + location.pathname);
-      // this.loadPageForKey(key);
-      if (!this.isAppPage(location.pathname)) {
-        path = location.pathname.replace(global.rootUrl, '')
+      let path = this.pagePathToRender(location.pathname);
+      if (!this.isAppPage(path)) {
+        path = path.replace(global.rootUrl, '')
         console.log('Loading cms page', path);
         let key = this.state.site.pages[path];
         this.loadPageForKey(key);
       } else {
-        path = location.pathname.replace(global.rootUrl, '')
+        path = path.replace(global.rootUrl, '')
         console.log('Loading app page', path);
       }
     });
@@ -57,9 +58,6 @@ class App extends Component {
 
   componentWillUnmount() {
       this.historyUnlisten();
-  }
-
-  componentDidMount() {
   }
 
   /**
@@ -70,18 +68,19 @@ class App extends Component {
    */
   loadPageForKey(key) {
     console.log('Loading page for key', key);
+
     if (key !== undefined) {
       global.contentStore.getPage(key).then((page) => {
         if (page.code === 0) {
           this.setState({ currentPage: page.response });
         } else {
           console.log(page.error, page.info.statusCode, page.info.message);
-          this.setState({ currentPage: pageNotFound() });
+          this.setState({ currentPage: notFoundPage() });
         }
       });
     } else {
       console.log('No such page in site');
-      this.setState({ currentPage: pageNotFound() });
+      this.setState({ currentPage: notFoundPage() });
     }
   }
 
@@ -100,20 +99,20 @@ class App extends Component {
     return redirect;
   }
 
+  // Take path from window location and ensure it has a trailing slash.
   pagePathToRender() {
-    let path = window.location.pathname;
-    path = path.replace(global.rootUrl, '')
-    // if (path === '/') return '/home';
-    return path;
+    let path = window.location.pathname.replace(global.rootUrl, '');
+    return path.slice(-1) === '/' ? path : path + '/';
   }
 
   loadPage(props) {
-    console.log(this.state)
-    return (<Page content={this.state.currentPage} site={this.state.site} />);
+    // console.log(this.state);
+    return (<Page page={this.state.currentPage} site={this.state.site} />);
   }
 
   isAppPage(path) {
-    return path === '/shelf-samples';
+    return path === '/shelf-samples/';
+    // return path.match(/\/shelf-samples[\/]?/);
   }
 
   render() {
