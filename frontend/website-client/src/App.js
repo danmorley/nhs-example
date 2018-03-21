@@ -43,14 +43,14 @@ class App extends Component {
     const that = this;
     this.historyUnlisten = history.listen((location, action) => {
       console.log('Internal load of page for path ' + location.pathname);
-      // this.loadPageForKey(key);
-      if (!this.isAppPage(location.pathname)) {
-        path = location.pathname.replace(global.rootUrl, '')
+      let path = this.pagePathToRender(location.pathname);
+      if (!this.isAppPage(path)) {
+        path = path.replace(global.rootUrl, '')
         console.log('Loading cms page', path);
         let key = this.state.site.pages[path];
         this.loadPageForKey(key);
       } else {
-        path = location.pathname.replace(global.rootUrl, '')
+        path = path.replace(global.rootUrl, '')
         console.log('Loading app page', path);
       }
     });
@@ -58,9 +58,6 @@ class App extends Component {
 
   componentWillUnmount() {
       this.historyUnlisten();
-  }
-
-  componentDidMount() {
   }
 
   /**
@@ -75,17 +72,14 @@ class App extends Component {
     if (key !== undefined) {
       global.contentStore.getPage(key).then((page) => {
         if (page.code === 0) {
-          console.log('1 Setting page state to', page);
           this.setState({ currentPage: page.response });
         } else {
           console.log(page.error, page.info.statusCode, page.info.message);
-          console.log('2 Setting page state to', notFoundPage);
           this.setState({ currentPage: notFoundPage() });
         }
       });
     } else {
       console.log('No such page in site');
-      console.log('3 Setting page state to', notFoundPage());
       this.setState({ currentPage: notFoundPage() });
     }
   }
