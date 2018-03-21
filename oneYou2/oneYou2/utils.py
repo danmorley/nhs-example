@@ -1,5 +1,3 @@
-import json
-
 
 def get_release_version():
     try:
