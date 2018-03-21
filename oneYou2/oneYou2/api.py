@@ -230,7 +230,6 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
         # TODO: Currently no site data is associated with a release, so this doesn't really do anything
         if not release_uuid or release_uuid == "current":
             current_release = get_latest_release(instance.pk)
-            print("IP Address for debug-toolbar: " + request.META['REMOTE_ADDR'])
             if not current_release:
                 raise NoReleasesFound("The current site has no live releases")
             setattr(instance, 'release_id', current_release.uuid)
