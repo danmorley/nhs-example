@@ -3,6 +3,7 @@ from __future__ import absolute_import, unicode_literals
 from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django.views.static import serve
 
@@ -12,6 +13,7 @@ from wagtail.wagtaildocs import urls as wagtaildocs_urls
 
 from wagtail.contrib.wagtailsitemaps.views import sitemap
 
+from oneYou2.utils import get_release_version
 from .api import api_router
 from release import views
 
@@ -42,6 +44,7 @@ urlpatterns = [
 
     url('^version/css/(?P<version_id>[\w-]+)/$', views.release_css, name='release_css'),
     url('^version/js/(?P<version_id>[\w-]+)/$', views.release_js, name='release_js'),
+    url(r'^version/$', lambda request: HttpResponse(get_release_version()), name='cms_version'),
     # url(r'^(?P<path>main.js/)$', serve, {'document_root': './web/'}),
     # url(r'^(service-worker.js/)$', serve, {'document_root': './web/'}),
     url(r'^static/(?P<path>.*)$', views.web_statics),
