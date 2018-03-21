@@ -13,6 +13,7 @@ from pages.models import OneYou2Page
 
 from release.factories import create_test_release, create_test_release_content, create_test_release_page
 from release.models import Release
+from release.utils import get_release_object, get_latest_release
 
 
 @patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
@@ -414,3 +415,40 @@ class ReleasePageModelTests(OneYouTests):
 
         self.assertEqual(type(revision), type(release_page.revision))
         self.assertEqual(type(release), type(release_page.release))
+
+
+@patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
+class ReleaseUtilsTests(OneYouTests):
+    def test_get_release_object_returns_the_correct_release(self, mock_file_service):
+        release = create_test_release()
+
+        release_uuid = release.uuid
+
+        loaded_release = get_release_object(release_uuid)
+
+        self.assertEqual(release.id, loaded_release.id)
+        self.assertEqual(release.release_name, loaded_release.release_name)
+
+    def test_get_latest_release_returns_the_newest_published_release(self, mock_file_service):
+        """
+        A published release is one whose release_time is in the past.
+        """
+        release1_name = "Old release"
+        release1_date = datetime.now() + timedelta(days=-10)
+        release1 = create_test_release(release_name=release1_name, release_date=release1_date)
+
+        release2_name = "Current release"
+        release2_date = datetime.now() + timedelta(days=-1)
+        release2 = create_test_release(release_name=release2_name, release_date=release2_date)
+
+        release3_name = "Future release"
+        release3_date = datetime.now() + timedelta(days=+10)
+        release3 = create_test_release(release_name=release3_name, release_date=release3_date)
+
+        current_release = get_latest_release(release1.site_id)
+
+        self.assertIsTrue(release1.is_released())
+        self.assertIsTrue(release2.is_released())
+        self.assertIsFalsee(release3.is_released())
+
+        self.assertEqual(current_release.id, release2.id)
