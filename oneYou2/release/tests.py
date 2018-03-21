@@ -4,7 +4,10 @@ import uuid
 from datetime import datetime, timedelta
 from unittest.mock import patch
 
+from django.http import HttpRequest
 from django.utils import timezone
+
+from home.models import SiteSettings
 
 from oneYou2.test.utils import OneYouTests
 
@@ -14,6 +17,12 @@ from pages.models import OneYou2Page
 from release.factories import create_test_release, create_test_release_content, create_test_release_page
 from release.models import Release
 from release.utils import get_release_object, get_latest_release
+from release.views import release_html
+
+
+index_file = '<head><link href="/static/css/main.da59b65b.css" rel="stylesheet"></head><body>' \
+             '<div id="root" data-content-store-endpoint="%apiurl%" data-site="oneyou" data-release="%releaseid%"></div>' \
+             '<script type="text/javascript" src="/static/js/main.c6e8367e.js"></script></body>'
 
 
 @patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
@@ -434,21 +443,47 @@ class ReleaseUtilsTests(OneYouTests):
         A published release is one whose release_time is in the past.
         """
         release1_name = "Old release"
-        release1_date = datetime.now() + timedelta(days=-10)
+        release1_date = timezone.now() + timedelta(days=-10)
         release1 = create_test_release(release_name=release1_name, release_date=release1_date)
 
         release2_name = "Current release"
-        release2_date = datetime.now() + timedelta(days=-1)
+        release2_date = timezone.now() + timedelta(days=-1)
         release2 = create_test_release(release_name=release2_name, release_date=release2_date)
 
         release3_name = "Future release"
-        release3_date = datetime.now() + timedelta(days=+10)
+        release3_date = timezone.now() + timedelta(days=+10)
         release3 = create_test_release(release_name=release3_name, release_date=release3_date)
 
         current_release = get_latest_release(release1.site_id)
 
         self.assertIsTrue(release1.is_released())
         self.assertIsTrue(release2.is_released())
-        self.assertIsFalsee(release3.is_released())
+        self.assertIsFalse(release3.is_released())
 
         self.assertEqual(current_release.id, release2.id)
+
+
+@patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
+@patch('frontendHandler.models.FrontendVersion.get_html_for_version', return_value=index_file)
+class ReleaseViewsTests(OneYouTests):
+    def test_release_html_endpoint_returns_an_index_with_substituted_values(self, mock_file_service, mock_index_file):
+        release_date = timezone.now() + timedelta(days=-1)
+        release = create_test_release(release_date=release_date)
+        site_name = 'oneyou'
+        SiteSettings(site_id=release.site_id, uid=site_name).save()
+        http_host = 'phe.nhs.uk'
+        request = HttpRequest()
+        request.META['HTTP_HOST'] = http_host
+
+
+        response = release_html(request, site_name)
+        response_content_string = response.content.decode("utf-8")
+
+        self.assertIsFalse("/static/css/" in response_content_string)
+        self.assertIsTrue("/version/css/" in response_content_string)
+        self.assertIsFalse("/static/js/" in response_content_string)
+        self.assertIsTrue("/version/js/" in response_content_string)
+        self.assertIsFalse("%apiurl%" in response_content_string)
+        self.assertIsTrue("http://phe.nhs.uk/api/v2" in response_content_string)
+        self.assertIsFalse("%releaseid%" in response_content_string)
+        self.assertIsTrue(release.uuid in response_content_string)
