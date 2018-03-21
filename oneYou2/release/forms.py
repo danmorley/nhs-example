@@ -20,17 +20,4 @@ class ReleaseAdminForm(ModelForm):
 
     def clean(self):
         cleaned_data = super(ReleaseAdminForm, self).clean()
-
         return cleaned_data
-
-    def save(self, commit=True):
-        release = super(ReleaseAdminForm, self).save(commit=False)
-
-        if commit:
-            release.save()
-            for page_id in self.cleaned_data['page_name']:
-                page = OneYou2Page.objects.get(id=page_id)
-                page.release_id = release.id
-                page.save()
-
-        return release

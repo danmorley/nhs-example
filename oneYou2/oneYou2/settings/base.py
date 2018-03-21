@@ -63,10 +63,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'storages',
     'django.contrib.sitemaps',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -76,6 +78,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'wagtail.wagtailcore.middleware.SiteMiddleware',
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
+
 ]
 
 ROOT_URLCONF = 'oneYou2.urls'
@@ -179,3 +182,5 @@ AZURE_CONTAINER = os.environ.get('AZURE_CONTAINER')          # eg. 'campaign-res
 AZURE_FILE_SHARE = os.environ.get('AZURE_FILE_SHARE')
 
 ENV = os.environ.get('CMS_ENV', 'dev')
+
+# INTERNAL_IPS = ('127.0.0.1', 'localhost', '172.18.0.1')

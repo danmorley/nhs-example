@@ -27,6 +27,11 @@ from pages.models import OneYou2Page
 
 from rest_framework.viewsets import GenericViewSet
 
+CONTENT_STATUS = (
+    (0, "PENDING"),
+    (1, "FROZEN"),
+)
+
 
 class DummyView(GenericViewSet):
 
@@ -74,6 +79,7 @@ class Release(ClusterableModel):
     release_time = models.DateTimeField(blank=True, null=True, validators=[validate_in_future])
     uuid = models.CharField(max_length=255, unique=True)
     frontend_id = models.CharField(max_length=255)
+    content_status = models.IntegerField(choices=CONTENT_STATUS)
     site = models.ForeignKey(
         'wagtailcore.Site',
         related_name='releases',
@@ -88,22 +94,16 @@ class Release(ClusterableModel):
         FieldPanel('base_release', classname='base_release', ),
         FieldPanel('release_name', classname='release_name', ),
         ReadOnlyPanel('uuid', classname='uuid', ),
+        ReadOnlyPanel('content_status', classname='release_status'),
         FieldPanel('release_time', classname='release_time', ),
     ]
 
     def __init__(self, *args, **kwargs):
         super(Release, self).__init__(*args, **kwargs)
 
-        if self.id and self.content.count() == 0:
-            if self.is_released():
-                rc = ReleaseContent(release=self)
-                rc.save()
-                pages = self.generate_fixed_content()
-                rc.content = json.dumps(pages)
-                rc.save()
-
         if not self.id:
             self.frontend_id = self.get_current_frontend_id()
+            self.content_status = 0
 
     def save(self, *args, **kwargs):
         is_new_entry = self.id is None
@@ -136,7 +136,7 @@ class Release(ClusterableModel):
     def __str__(self):
         return self.release_name
 
-    def is_released(self):
+    def release_date_has_passed(self):
         return (self.release_time is not None) and self.release_time < timezone.now()
 
     def add_revision(self, new_revision):
@@ -185,7 +185,7 @@ class Release(ClusterableModel):
 
     def get_content_for(self, key):
         page_content = None
-        if self.is_released():
+        if self.release_date_has_passed():
             page_content = self.content.first().get_content_for(str(key))
         else:
             for revision in self.revisions.all():
@@ -204,7 +204,6 @@ class Release(ClusterableModel):
                     page_content = response.data
 
         return page_content
-
 
     def get_current_frontend_id(self):
         return FrontendVersion.get_current_version()
@@ -236,8 +235,4 @@ class ReleaseContent(models.Model):
 
     def get_content_for(self, key):
         content_dict = json.loads(self.content)
-        try:
-            page_content = content_dict[key]
-        except KeyError:
-            page_content = None
-        return page_content
+        return content_dict[key]
