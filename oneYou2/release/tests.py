@@ -6,7 +6,7 @@ from unittest.mock import patch
 
 from django.utils import timezone
 
-from oneYou2.tests.utils import OneYouTests
+from oneYou2.test.utils import OneYouTests
 
 from pages.factories import create_test_page
 from pages.models import OneYou2Page

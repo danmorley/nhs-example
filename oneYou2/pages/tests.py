@@ -3,11 +3,10 @@ from unittest.mock import patch
 
 from wagtail.wagtailcore.blocks.stream_block import StreamValue
 from wagtail.wagtailcore.blocks.struct_block import StructValue
-from wagtail.wagtailcore.rich_text import RichText
 
 from images.models import PHEImage
 
-from oneYou2.tests.utils import OneYouTests
+from oneYou2.test.utils import OneYouTests
 
 from pages.factories import create_test_page, create_test_theme
 from pages.models import OneYou2Page, Theme, SectionHeading

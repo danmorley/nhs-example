@@ -1,6 +1,6 @@
 from django.contrib.contenttypes.models import ContentType
 
-from oneYou2.tests.utils import OneYouTests
+from oneYou2.test.utils import OneYouTests
 
 from shelves.factories import create_test_abstract_shelf, create_test_promo_shelf, create_test_revision
 from shelves.models import ShelfAbstract, ShelfRevision, PromoShelf
