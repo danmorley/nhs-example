@@ -19,4 +19,3 @@ class CTABlock(blocks.StructBlock):
 class IDBlock(blocks.CharBlock):
     def get_api_representation(self, value, context=None):
         return slugify(value)
-
