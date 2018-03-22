@@ -87,6 +87,7 @@ class ShelfAbstract(models.Model):
         return newObj
 
     def save(self, *args, **kwargs):
+        self.live_revision = None
         super(ShelfAbstract, self).save(*args, **kwargs)
         revision = ShelfRevision(shelf_id=self.id, content_json=self.to_dict())
         revision.save()

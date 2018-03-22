@@ -134,6 +134,22 @@ a {
   }
 }
 
+.link-list {
+  display: flex;
+  
+  li {
+    margin-left: 1em;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+.link-list--centered {
+  align-items: center;
+}
+
 .oneyou { //theme
   .button-cta {
     background-color: $sunflower-yellow;
