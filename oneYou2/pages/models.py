@@ -129,8 +129,13 @@ class ImageTeaserTemplate(blocks.StructBlock):
 
 class IFrameShelf(blocks.StructBlock):
     heading = blocks.CharBlock(required=False)
-    body = blocks.CharBlock(required=False)
-    source_url = blocks.CharBlock(required=True)
+    src = blocks.CharBlock(required=True, label="Source URl")
+    frame_border = blocks.IntegerBlock(default=0, required=False)
+    scrolling = blocks.CharBlock(required=False)
+    width = blocks.IntegerBlock(default=100, required=False)
+    height = blocks.IntegerBlock(default=100, required=False)
+    sandbox = blocks.CharBlock(required=False)
+    shelf_id = blocks.CharBlock(required=False, label="ID")
 
 
 class Carousel(blocks.StructBlock):
