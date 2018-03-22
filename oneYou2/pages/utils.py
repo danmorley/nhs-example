@@ -84,4 +84,3 @@ def get_serializable_data_for_fields(model):
             obj[field.name] = get_field_value(field, model)
 
     return obj
-

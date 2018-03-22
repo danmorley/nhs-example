@@ -9,7 +9,7 @@ from images.models import PHEImage
 from oneYou2.test.utils import OneYouTests
 
 from pages.factories import create_test_page, create_test_theme
-from pages.models import OneYou2Page, Theme, SectionHeading
+from pages.models import OneYou2Page, Theme
 from pages.utils import get_serializable_data_for_fields, replace_embeds_with_links
 
 from release.factories import create_test_release
