@@ -1,0 +1,60 @@
+@import '../../assets/styles/variables/variables';
+@import "../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+.cookie-banner {
+  background-color: $grey-brown;
+  max-height: 400px;
+  
+  .container {
+    padding-top: 1.5em;
+    padding-bottom: 1.5em; 
+  }
+  
+  .link-list a {
+    color: $sunflower-yellow;
+  }
+  
+  font-size: 0.875em;
+  
+  @include media-breakpoint-up(md) {
+    font-size: 1em;
+  }
+
+  .button-cta {
+    @include media-breakpoint-down(sm) {
+      padding: 0.5em;
+    }  
+    
+    &:hover {
+      background-color: $teal-blue;
+    }
+  }
+  
+  &.closed {
+    max-height: 0;
+    transition: max-height 0.5s ease-in-out;
+    overflow: hidden;
+  }
+}
+
+.cookie-banner__body {
+  color: $white;
+  margin-bottom: 1em;
+  
+  a {
+    color: $sunflower-yellow;
+  }
+}
+
+.cookie-banner__link {
+  color: $sunflower-yellow;
+}
+
+.cookie-banner__phe-logo {
+  margin-bottom: 0.5em;
+  height: 44px;
+  
+  @include media-breakpoint-up(sm) {
+    height: 66px;
+  }
+}
