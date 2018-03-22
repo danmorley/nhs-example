@@ -218,7 +218,7 @@ class ThemeModelTests(OneYouTests):
         self.assertIs(theme_dict['class_name'], test_class_name)
 
 
-class PagesUtilsTest(OneYouTests):
+class PagesUtilsTests(OneYouTests):
     def test_get_serializable_data_for_fields_correctly_serialises_the_page(self):
         page = create_test_page()
         field = OneYou2Page._meta.get_field('body')
@@ -239,4 +239,3 @@ class PagesUtilsTest(OneYouTests):
         self.assertNotEquals(rich_text_source, processed_content)
         self.assertIsFalse('<embed' in processed_content)
         self.assertIsTrue('<img' in processed_content)
-
