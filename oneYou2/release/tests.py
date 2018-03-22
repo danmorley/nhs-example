@@ -24,6 +24,8 @@ index_file = '<head><link href="/static/css/main.da59b65b.css" rel="stylesheet">
              '<div id="root" data-content-store-endpoint="%apiurl%" data-site="oneyou" data-release="%releaseid%">' \
              '</div><script type="text/javascript" src="/static/js/main.c6e8367e.js"></script></body>'
 
+from release.utils import populate_release_if_required
+
 
 @patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
 class ReleaseModelTests(OneYouTests):
@@ -99,7 +101,7 @@ class ReleaseModelTests(OneYouTests):
 
         loaded_release = Release.objects.get(release_name=release_name)
 
-        self.assertEqual(loaded_release.content.count(), 0)
+        self.assertEqual(loaded_release.content_status, 0)
 
     def test_release_doesnt_lock_content_before_its_release_time(self, mock_file_service):
 
@@ -115,7 +117,7 @@ class ReleaseModelTests(OneYouTests):
 
         loaded_release = Release.objects.get(release_name=release_name)
 
-        self.assertEqual(loaded_release.content.count(), 0)
+        self.assertEqual(loaded_release.content_status, 0)
 
     def test_release_locks_content_after_its_release_time(self, mock_file_service):
 
@@ -125,13 +127,15 @@ class ReleaseModelTests(OneYouTests):
         create_test_page()
 
         release_name = "Past release"
-        release_date = datetime.now() + timedelta(days=-1)
+        release_date = timezone.now() + timedelta(days=-1)
 
-        create_test_release(release_name, release_date)
+        release = create_test_release(release_name, release_date)
+        populate_release_if_required(release)
 
         loaded_release = Release.objects.get(release_name=release_name)
 
         self.assertEqual(loaded_release.content.count(), 1)
+        self.assertEqual(loaded_release.content_status, 1)
 
     def test_release_initialised_from_a_base_release_gets_revisions_from_base(self, mock_file_service):
         """
@@ -159,7 +163,7 @@ class ReleaseModelTests(OneYouTests):
         """
         release = create_test_release()
 
-        self.assertIsFalse(release.is_released())
+        self.assertIsFalse(release.release_date_has_passed())
 
     def test_is_released_returns_false_if_date_is_in_the_future(self, mock_file_service):
         """
@@ -168,7 +172,7 @@ class ReleaseModelTests(OneYouTests):
         release = create_test_release()
         release.release_time = timezone.now() + timedelta(days=1)
 
-        self.assertIsFalse(release.is_released())
+        self.assertIsFalse(release.release_date_has_passed())
 
     def test_is_released_returns_true_if_date_is_in_the_past(self, mock_file_service):
         """
@@ -177,7 +181,7 @@ class ReleaseModelTests(OneYouTests):
         release = create_test_release()
         release.release_time = timezone.now() + timedelta(days=-1)
 
-        self.assertIsTrue(release.is_released())
+        self.assertIsTrue(release.release_date_has_passed())
 
     def test_remove_page_removes_the_linked_revision_of_the_page_from_the_release(self, mock_file_service):
         """
@@ -369,6 +373,7 @@ class ReleaseModelTests(OneYouTests):
 
         release_time = timezone.now() + timedelta(days=-1)
         release = create_test_release(release_date=release_time)
+        populate_release_if_required(release)
 
         loaded_release = Release.objects.get(id=release.id)
 
@@ -379,6 +384,7 @@ class ReleaseModelTests(OneYouTests):
 
         release_page_content = loaded_release.get_content_for(page.id)
 
+        self.assertIsNotNone(release.content_status, 1)
         self.assertIsNotNone(release_page_content)
         self.assertNotEqual(json.loads(revision.content_json)['title'], initial_title)
         self.assertEqual(release_page_content['title'], initial_title)
@@ -407,9 +413,8 @@ class ReleaseContentModelTests(OneYouTests):
         release = create_test_release()
 
         release_content = create_test_release_content(release, json.dumps(release.generate_fixed_content()))
-        loaded_page_content = release_content.get_content_for('0')
 
-        self.assertIsNone(loaded_page_content)
+        self.assertRaises(KeyError, release_content.get_content_for, '0')
 
 
 @patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')

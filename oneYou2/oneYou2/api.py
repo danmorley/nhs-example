@@ -24,6 +24,8 @@ from release.exceptions import NoReleasesFound
 
 from pages.models import OneYou2Page
 
+from release.utils import populate_release_if_required
+
 
 class MenuField(Field):
     """
@@ -235,7 +237,6 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
             setattr(instance, 'release_id', current_release.uuid)
         else:
             # Request is asking for a specific release
-            # TODO: If this release is not current maybe it should be protected
             release_object = get_release_object(release_uuid)
             if not release_object:
                 raise NotFound()
@@ -317,7 +318,11 @@ class ReleasePagesAPIEndpoint(PagesAPIEndpoint):
         release = get_release_object(release_uuid)
         if not release:
             raise NotFound()
-        page_content = release.get_content_for(pk)
+        populate_release_if_required(release)
+        try:
+            page_content = release.get_content_for(pk)
+        except KeyError:
+            raise NotFound("Page not found in this release")
         return Response(page_content)
 
     def listing_view(self, request, site_uid, release_uuid):
