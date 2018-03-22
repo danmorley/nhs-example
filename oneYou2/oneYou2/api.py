@@ -156,7 +156,9 @@ class PagesField(Field):
     def to_representation(self, document):
         pages = Page.objects.in_site(site=document).values('id', 'url_path')
 
-        return {p['url_path'].replace('/home', ''): p['id'] for p in pages}
+        return {
+            p['url_path'].replace('/home', ''): p['id'] for p in pages
+        }
 
 
 class SiteUIDField(Field):

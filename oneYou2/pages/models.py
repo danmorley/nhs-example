@@ -19,6 +19,7 @@ from wagtailsnippetscopy.registry import snippet_copy_registry
 from modelcluster.models import get_all_child_relations, get_all_child_m2m_relations
 from modelcluster.fields import ParentalKey
 
+from .blocks import IDBlock, CTABlock
 from .utils import get_serializable_data_for_fields
 
 from home.models import SiteSettings
@@ -61,32 +62,18 @@ class PageHeading(blocks.StructBlock):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     background_image = BlobImageChooserBlock(required=False)
-    shelf_id = blocks.CharBlock(required=False, label="ID", help_text="Not displayed in the front end")
+    shelf_id = IDBlock(required=False, label="ID", help_text="Not displayed in the front end")
 
 
 class SectionHeading(blocks.StructBlock):
     heading = blocks.CharBlock(required=False)
-    shelf_id = blocks.CharBlock(required=False, label="ID", help_text="Not displayed in the front end")
+    shelf_id = IDBlock(required=False, label="ID", help_text="Not displayed in the front end")
     body = blocks.RichTextBlock(required=False)
 
 
 class SimplePageHeading(SectionHeading):
     """This is a page heading with only text."""
     pass
-
-
-class CTABlock(blocks.StructBlock):
-    def get_api_representation(self, value, context=None):
-        # recursively call get_api_representation on children and return as a plain dict
-        result = dict([
-            (name, self.child_blocks[name].get_api_representation(val, context=context))
-            for name, val in value.items()
-        ])
-        cta_links = []
-        for link in result['cta']:
-            cta_links.append(link['value'])
-        result['cta'] = cta_links
-        return result
 
 
 class BackwardsCompatibleContent(CTABlock):
@@ -96,7 +83,7 @@ class BackwardsCompatibleContent(CTABlock):
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False, verbose_name="cta")
-    shelf_id = blocks.CharBlock(required=False, label="ID")
+    shelf_id = IDBlock(required=False, label="ID")
 
 
 class FindOutMoreDropDown(CTABlock):
@@ -104,7 +91,7 @@ class FindOutMoreDropDown(CTABlock):
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items')
-    shelf_id = blocks.CharBlock(required=False, label="ID")
+    shelf_id = IDBlock(required=False, label="ID")
 
 
 class VideoTemplate(blocks.StructBlock):
@@ -115,7 +102,7 @@ class VideoTemplate(blocks.StructBlock):
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False)
-    shelf_id = blocks.CharBlock(required=False, label="ID")
+    shelf_id = IDBlock(required=False, label="ID")
 
 
 class ImageTeaserTemplate(blocks.StructBlock):
@@ -130,7 +117,7 @@ class ImageTeaserTemplate(blocks.StructBlock):
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False)
-    shelf_id = blocks.CharBlock(required=False, label="ID")
+    shelf_id = IDBlock(required=False, label="ID")
 
 
 class Carousel(blocks.StructBlock):
@@ -141,7 +128,7 @@ class Carousel(blocks.StructBlock):
         ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
         ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
     ], icon='arrow-left', label='Items', required=False)
-    shelf_id = blocks.CharBlock(required=False, label="ID")
+    shelf_id = IDBlock(required=False, label="ID")
 
 
 class Grid(blocks.StructBlock):
@@ -154,7 +141,7 @@ class Grid(blocks.StructBlock):
         ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image"))
     ], icon='arrow-left', label='Items')
     meta_layout = blocks.ChoiceBlock(choices=GRID_LAYOUT_CHOICES, label="Layout")
-    shelf_id = blocks.CharBlock(required=False, label="ID")
+    shelf_id = IDBlock(required=False, label="ID")
 
 
 # Pages
