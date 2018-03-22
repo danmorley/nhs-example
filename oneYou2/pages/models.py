@@ -1,14 +1,10 @@
 import json
 import uuid
 import logging
-import datetime
 
-from django.conf import settings
 from django.db import models
 from django.db.models import DateField, TextField
 from django.forms.models import model_to_dict
-from django.utils import timezone
-from django.utils.encoding import is_protected_type
 
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.models import Page, Orderable
@@ -19,14 +15,15 @@ from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtailsnippetscopy.models import SnippetCopyMixin
 from wagtailsnippetscopy.registry import snippet_copy_registry
-from modelcluster.models import get_all_child_relations, get_all_child_m2m_relations
 
+from modelcluster.models import get_all_child_relations, get_all_child_m2m_relations
 from modelcluster.fields import ParentalKey
 
-from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppTeaserChooserBlock, BlobImageChooserBlock
-from shelves.models import ShelfAbstract
+from .utils import get_serializable_data_for_fields
 
 from home.models import SiteSettings
+
+from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppTeaserChooserBlock, BlobImageChooserBlock
 
 GRID_LAYOUT_CHOICES = (
     ('full_width', 'Full Width'),
@@ -34,60 +31,7 @@ GRID_LAYOUT_CHOICES = (
 )
 
 
-SHARED_CONTENT_TYPES = ['promo_shelf', 'banner_shelf', 'app_shelf']
 logger = logging.getLogger('wagtail.core')
-
-
-def get_field_value(field, model):
-    if field.remote_field is None:
-        value = field.pre_save(model, add=model.pk is None)
-
-        # Make datetimes timezone aware
-        # https://github.com/django/django/blob/master/django/db/models/fields/__init__.py#L1394-L1403
-        if isinstance(value, datetime.datetime) and settings.USE_TZ:
-            if timezone.is_naive(value):
-                default_timezone = timezone.get_default_timezone()
-                value = timezone.make_aware(value, default_timezone).astimezone(timezone.utc)
-            # convert to UTC
-            value = timezone.localtime(value, timezone.utc)
-
-        if is_protected_type(value):
-            return value
-        else:
-            if field.verbose_name is 'body':
-                field_dict = json.loads(field.value_to_string(model))
-                final_content = []
-                for shelf in field_dict:
-                    if shelf['type'] in SHARED_CONTENT_TYPES:
-                        shelf['content'] = ShelfAbstract.objects.get(id=shelf['value']).specific.serializable_data()
-                        final_content.append(shelf)
-                    else:
-                        shelf['content'] = shelf['value']
-                        final_content.append(shelf)
-                return json.dumps(final_content)
-            else:
-                return field.value_to_string(model)
-    else:
-        return getattr(model, field.get_attname())
-
-
-def get_serializable_data_for_fields(model):
-    """
-    Return a serialised version of the model's fields which exist as local database
-    columns (i.e. excluding m2m and incoming foreign key relations)
-    """
-    pk_field = model._meta.pk
-    # If model is a child via multitable inheritance, use parent's pk
-    while pk_field.remote_field and pk_field.remote_field.parent_link:
-        pk_field = pk_field.remote_field.model._meta.pk
-
-    obj = {'pk': get_field_value(pk_field, model)}
-
-    for field in model._meta.fields:
-        if field.serialize:
-            obj[field.name] = get_field_value(field, model)
-
-    return obj
 
 
 class SimpleMenuItem(blocks.StructBlock):
