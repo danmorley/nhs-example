@@ -15,7 +15,7 @@ const content = {
   "close_button": 'OK', 
   cta_link: {
     link_text: 'Learn more',
-    link_external: 'http://www.edfs.co.uk'
+    link_external: 'https://www.nhs.uk/oneyou/privacy-policy'
   }
 }
 
@@ -28,14 +28,6 @@ class CookieBanner extends Component {
     this.state = {addClass: false};
     this.addClass = this.addClass.bind(this);
     this.handleClick = this.handleClick.bind(this);
-  }
-  
-  checkCookie() { 
-    var deployed = cookies.get('cookieBanner');
-    if (deployed === "true") {
-      return true;
-    }
-    return false;
   }
   
   deployCookie() {
@@ -54,10 +46,7 @@ class CookieBanner extends Component {
   }
   
   render() {
-    if (this.checkCookie()) { return false };
-    
     let tempImage = { link: logo, title: 'PHE logo' };  
-    var someElementClass = this.state.isClicked ? 'clicked' : '';
     
     return (    
       <section className={classNames("cookie-banner", {"closed":this.state.close})}>

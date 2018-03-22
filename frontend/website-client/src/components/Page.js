@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../assets/styles/page.css';
 import CmsComponentRegistry from './CmsComponentRegistry';
+import Cookies from 'universal-cookie';
 import CookieBanner from './cookie-banner/CookieBanner';
 import Footer from './Footer';
 import PageHeader from './page-header/PageHeader';
@@ -21,7 +22,11 @@ import GridShelf from './shelves/GridShelf';
 import HeadingBodyShelf from './shelves/HeadingBodyShelf';
 import NoticeShelf from './shelves/NoticeShelf';
 
+const cookies = new Cookies();
+const deployed = cookies.get('cookieBanner');
+
 class Page extends Component {
+    
   renderPage(content, pageTheme, pageStyles, site, page) {
     let { menu, header, footer } = site;
     let theme = (pageTheme && pageTheme.class_name) || 'oneyou';
@@ -29,7 +34,9 @@ class Page extends Component {
     return (
       <div className={`page-wrapper ${theme}`}>
         <PageStyles content={pageStyles} />
+        { deployed !== "true" &&
           <CookieBanner />
+        }
         <PageHeader navItems={menu} header={header}/>
         <div className="page-content-wrapper">
           <div className="page-content">
