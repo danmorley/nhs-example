@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Text from '../Text';
-import CtaLink from '../shared/CtaLink';
+import CtaLinks from '../shared/CtaLinks';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import styles from './video-teaser.css';
 import Panel from './Panel';
@@ -44,7 +44,7 @@ class VideoTeaserPanel extends Component {
           <Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />
           <div className={`${classNamePrefix}__text`}>
             <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
-            <CtaLink cta={content.cta} />
+            <CtaLinks cta={content.cta} />
           </div>
         </div>
       </Panel>

@@ -120,16 +120,15 @@ class ShowMorePanel extends Component {
       </div>
     );
 
-    const info =
-      <div key="3" className="debug-info">
-        Rows to show: {rowsToShow}, Children: {children.length}, To view: {this.state.childrenToView}, Collapsed capacity: {this.childrenToView(false)}
-      </div>
-    ;
+    // const info =
+    //   <div key="3" className="debug-info">
+    //     Rows to show: {rowsToShow}, Children: {children.length}, To view: {this.state.childrenToView}, Collapsed capacity: {this.childrenToView(false)}
+    //   </div>
+    // ;
 
     return [
       container,
-      buttons,
-      info
+      buttons
     ];
   }
 }
