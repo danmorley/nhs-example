@@ -7,6 +7,7 @@ from django.conf import settings
 from django.db import models
 from django.db.models import DateField, TextField
 from django.forms.models import model_to_dict
+from django.template.defaultfilters import slugify
 from django.utils import timezone
 from django.utils.encoding import is_protected_type
 
@@ -36,6 +37,12 @@ GRID_LAYOUT_CHOICES = (
 
 SHARED_CONTENT_TYPES = ['promo_shelf', 'banner_shelf', 'app_shelf']
 logger = logging.getLogger('wagtail.core')
+
+
+class IDBlock(blocks.CharBlock):
+    def get_api_representation(self, value, context=None):
+        print('HERE I AM', value)
+        return slugify(value)
 
 
 def get_field_value(field, model):
@@ -117,12 +124,12 @@ class PageHeading(blocks.StructBlock):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     background_image = BlobImageChooserBlock(required=False)
-    shelf_id = blocks.CharBlock(required=False, label="ID", help_text="Not displayed in the front end")
+    shelf_id = IDBlock(required=False, label="ID", help_text="Not displayed in the front end")
 
 
 class SectionHeading(blocks.StructBlock):
     heading = blocks.CharBlock(required=False)
-    shelf_id = blocks.CharBlock(required=False, label="ID", help_text="Not displayed in the front end")
+    shelf_id = IDBlock(required=False, label="ID", help_text="Not displayed in the front end")
     body = blocks.RichTextBlock(required=False)
 
 
@@ -152,7 +159,7 @@ class BackwardsCompatibleContent(CTABlock):
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False, verbose_name="cta")
-    shelf_id = blocks.CharBlock(required=False, label="ID")
+    shelf_id = IDBlock(required=False, label="ID")
 
 
 class FindOutMoreDropDown(CTABlock):
@@ -160,7 +167,7 @@ class FindOutMoreDropDown(CTABlock):
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items')
-    shelf_id = blocks.CharBlock(required=False, label="ID")
+    shelf_id = IDBlock(required=False, label="ID")
 
 
 class VideoTemplate(blocks.StructBlock):
@@ -171,7 +178,7 @@ class VideoTemplate(blocks.StructBlock):
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False)
-    shelf_id = blocks.CharBlock(required=False, label="ID")
+    shelf_id = IDBlock(required=False, label="ID")
 
 
 class ImageTeaserTemplate(blocks.StructBlock):
@@ -186,7 +193,7 @@ class ImageTeaserTemplate(blocks.StructBlock):
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False)
-    shelf_id = blocks.CharBlock(required=False, label="ID")
+    shelf_id = IDBlock(required=False, label="ID")
 
 
 class Carousel(blocks.StructBlock):
@@ -197,7 +204,7 @@ class Carousel(blocks.StructBlock):
         ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
         ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
     ], icon='arrow-left', label='Items', required=False)
-    shelf_id = blocks.CharBlock(required=False, label="ID")
+    shelf_id = IDBlock(required=False, label="ID")
 
 
 class Grid(blocks.StructBlock):
@@ -210,7 +217,7 @@ class Grid(blocks.StructBlock):
         ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image"))
     ], icon='arrow-left', label='Items')
     meta_layout = blocks.ChoiceBlock(choices=GRID_LAYOUT_CHOICES, label="Layout")
-    shelf_id = blocks.CharBlock(required=False, label="ID")
+    shelf_id = IDBlock(required=False, label="ID")
 
 
 # Pages
