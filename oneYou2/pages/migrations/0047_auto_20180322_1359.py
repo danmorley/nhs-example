@@ -11,7 +11,7 @@ import wagtail.wagtailcore.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0042_auto_20180319_1028'),
+        ('pages', '0046_auto_20180319_1028'),
     ]
 
     operations = [
