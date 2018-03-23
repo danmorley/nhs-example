@@ -16,15 +16,13 @@ from pages.models import OneYou2Page
 
 from release.factories import create_test_release, create_test_release_content, create_test_release_page
 from release.models import Release
-from release.utils import get_release_object, get_latest_release
+from release.utils import get_release_object, get_latest_release, populate_release_if_required
 from release.views import release_html
 
 
 index_file = '<head><link href="/static/css/main.da59b65b.css" rel="stylesheet"></head><body>' \
              '<div id="root" data-content-store-endpoint="%apiurl%" data-site="oneyou" data-release="%releaseid%">' \
              '</div><script type="text/javascript" src="/static/js/main.c6e8367e.js"></script></body>'
-
-from release.utils import populate_release_if_required
 
 
 @patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
