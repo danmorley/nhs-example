@@ -15,7 +15,7 @@ const content = {
   "close_button": 'OK', 
   cta_link: {
     link_text: 'Learn more',
-    link_external: 'https://www.nhs.uk/oneyou/privacy-policy'
+    link: 'privacy-policy'
   }
 }
 
@@ -31,7 +31,9 @@ class CookieBanner extends Component {
   }
   
   deployCookie() {
-    cookies.set('cookieBanner', 'true', { path: '/' });
+    let d = new Date();
+    d.setTime(d.getTime() + 364*24*60*60*1000);
+    cookies.set('cookieBanner', 'true', { path: '/' , expires: d});
   }
   
   handleClick() {
