@@ -86,6 +86,13 @@ class BackwardsCompatibleContent(CTABlock):
     shelf_id = IDBlock(required=False, label="ID")
 
 
+class InformationPanel(CTABlock):
+    heading = blocks.CharBlock(required=False)
+    body = blocks.RichTextBlock(required=False)
+    image = BlobImageChooserBlock(required=False)
+    shelf_id = IDBlock(required=False, label="ID")
+
+
 class FindOutMoreDropDown(CTABlock):
     heading = blocks.CharBlock(required=False)
     cta = blocks.StreamBlock([
@@ -138,7 +145,8 @@ class Grid(blocks.StructBlock):
         ('oneyou1_teaser', BackwardsCompatibleContent(label="OneYou1 teaser", icon="folder-inverse")),
         ('video_teaser', VideoTemplate(icon="media")),
         ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
-        ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image"))
+        ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
+        ('information_panel', InformationPanel(target_model="shelves.AppTeaser", icon="image"))
     ], icon='arrow-left', label='Items')
     meta_layout = blocks.ChoiceBlock(choices=GRID_LAYOUT_CHOICES, label="Layout")
     shelf_id = IDBlock(required=False, label="ID")
