@@ -1,7 +1,7 @@
 import json
 import uuid
 
-from datetime import datetime, timedelta
+from datetime import timedelta
 from unittest.mock import patch
 
 from django.http import HttpRequest
@@ -60,7 +60,7 @@ class ReleaseModelTests(OneYouTests):
         to_dict method should return a dictionary representing the object
         """
         test_name = "Test release"
-        test_date = datetime.now()
+        test_date = timezone.now()
         release = create_test_release(test_name, test_date)
         release_dict = release.dict()
         self.assertIs(release_dict['release_name'], test_name)
@@ -111,7 +111,7 @@ class ReleaseModelTests(OneYouTests):
         create_test_page()
 
         release_name = "Future release"
-        release_date = datetime.now() + timedelta(days=1)
+        release_date = timezone.now() + timedelta(days=1)
 
         create_test_release(release_name, release_date)
 
@@ -461,9 +461,9 @@ class ReleaseUtilsTests(OneYouTests):
 
         current_release = get_latest_release(release1.site_id)
 
-        self.assertIsTrue(release1.is_released())
-        self.assertIsTrue(release2.is_released())
-        self.assertIsFalse(release3.is_released())
+        self.assertIsTrue(release1.release_date_has_passed())
+        self.assertIsTrue(release2.release_date_has_passed())
+        self.assertIsFalse(release3.release_date_has_passed())
 
         self.assertEqual(current_release.id, release2.id)
 
