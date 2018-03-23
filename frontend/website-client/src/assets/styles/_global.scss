@@ -128,7 +128,7 @@ a {
     color: inherit;
   }
   
-  &:focus {
+  &:active {
     background-color: $teal-blue;
     color: $white;
   }
