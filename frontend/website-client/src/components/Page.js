@@ -21,12 +21,14 @@ import CarouselShelf from './shelves/CarouselShelf';
 import GridShelf from './shelves/GridShelf';
 import HeadingBodyShelf from './shelves/HeadingBodyShelf';
 import NoticeShelf from './shelves/NoticeShelf';
+import IframeShelf from './shelves/IframeShelf';
+import ScriptShelf from './shelves/ScriptShelf';
 
 const cookies = new Cookies();
 const deployed = cookies.get('cookieBanner');
 
 class Page extends Component {
-    
+
   renderPage(content, pageTheme, pageStyles, site, page) {
     let { menu, header, footer } = site;
     let theme = (pageTheme && pageTheme.class_name) || 'oneyou';
@@ -107,8 +109,6 @@ class Page extends Component {
             <div className="sk-cube2 sk-cube"></div>
             <div className="sk-cube4 sk-cube"></div>
             <div className="sk-cube3 sk-cube"></div>
-          )
-          
           </div>
         </div>
       );
