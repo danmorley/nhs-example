@@ -89,7 +89,7 @@ class BackwardsCompatibleContent(CTABlock):
 class InformationPanel(CTABlock):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
-    image = BlobImageChooserBlock()
+    image = BlobImageChooserBlock(required=False)
     shelf_id = IDBlock(required=False, label="ID")
 
 
