@@ -30,26 +30,39 @@
 {% block extra_js %}
   {% include "wagtailadmin/pages/_editor_js.html" %}
   {{ view.media.js }}
-  
+
   <script type="text/javascript" charset="utf-8">
     (function($) {
+      function startPopUpToggleWatcher() {
+        $('button[name="action-publish"]').attr('id', 'release-picker-toggle');
+
+        $('#release-picker-toggle').click(function(e) {
+          e.preventDefault();
+          $('.popup-cover').show();
+        })
+      }
+
+      function startCancelWatcher(popUp) {
+        popUp.append('<button id="cancel-btn" class="button no">Close</button>');
+        $('#cancel-btn').click(function(e) {
+          e.preventDefault();
+          $('.popup-cover').hide();
+        })
+      }
+
       function setUpReleaseSelectorPopUp() {
         var releasePicker = $('#id_release').closest('.object.model_choice_field');
         releasePicker.wrap('<div class="popup-cover"><div class="popup"></div></div>');
         var releasePopUp = releasePicker.parent();
         $('button[name="action-publish"]').clone().appendTo(releasePopUp);
+        releasePopUp.find('button[name="action-publish"]').attr('id', 'publish-page');
+        startCancelWatcher(releasePopUp)
       }
 
-      function init(){
+      function init() {
+        startPopUpToggleWatcher();
+
         setUpReleaseSelectorPopUp();
-        var canPublish = false;
-        $('button[name="action-publish"]').click(function(e) {
-          if (!canPublish) {
-            e.preventDefault();
-            canPublish = true;
-            $('.popup-cover').show();
-          }
-        })
       }
 
       $(document).on('page:load', init);
