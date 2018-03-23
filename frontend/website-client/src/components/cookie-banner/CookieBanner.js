@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import CtaUtils from '../shared/CtaUtils';
 import { Link } from 'react-router-dom';
-import CtaLink from '../shared/CtaLink';
 import Text from '../Text';
 import Image from '../Image.js';
 import styles from './cookie-banner.css';
