@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SimpleMenuItem from './SimpleMenuItem';
+import { Link } from 'react-router-dom';
 import styles from './footer-menu.css';
 
 class FooterMenu extends Component {
@@ -18,6 +19,9 @@ class FooterMenu extends Component {
     return (
       <ul className ="footer-nav__items">
         {items}
+        <li>
+          <Link to="sitemap" className="footer-nav__link">Sitemap</Link>
+        </li>
       </ul>
     );
   }

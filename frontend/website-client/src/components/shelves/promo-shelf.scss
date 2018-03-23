@@ -130,9 +130,13 @@ $shelf-padding-extra: 2em;
       color: $white;
     }
 
-    p, ul, ol, a {
+    p, ul, ol {
       color: $white;
     }
+    
+    a:not(.button-cta) { 
+     color: $white;
+   }
 
     .marker {
       color: $sunflower-yellow;
