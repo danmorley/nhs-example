@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import CtaUtils from '../shared/CtaUtils';
-import CtaLink from '../shared/CtaLink';
+import { Link } from 'react-router-dom';
 import Text from '../Text';
 import Image from '../Image.js';
 import styles from './cookie-banner.css';
@@ -8,16 +7,6 @@ import classNames from 'classnames';
 import Cookies from 'universal-cookie';
 
 import logo from '../../assets/images/public-health-england-logo.png';
-
-const content = {
-  "body" : '<p>We use cookies on our website for various purposes, which you can find out more about by reading our <a href="#">Privacy Policy</a>. By continuing to use our website, you are consenting to our use of cookies.</p>',
-  "link" : ''  ,
-  "close_button": 'OK', 
-  cta_link: {
-    link_text: 'Learn more',
-    link_external: 'https://www.nhs.uk/oneyou/privacy-policy'
-  }
-}
 
 const cookies = new Cookies();
 
@@ -31,7 +20,9 @@ class CookieBanner extends Component {
   }
   
   deployCookie() {
-    cookies.set('cookieBanner', 'true', { path: '/' });
+    let d = new Date();
+    d.setTime(d.getTime() + 364*24*60*60*1000);
+    cookies.set('cookieBanner', 'true', { path: '/' , expires: d});
   }
   
   handleClick() {
@@ -54,16 +45,20 @@ class CookieBanner extends Component {
           <div className="row">
             <div className="col">  
               <Image image={tempImage} className="cookie-banner__phe-logo" />
-              <Text content={content.body} className={"cookie-banner__body"} format="richtext" tagName="div" />
+              <p className="cookie-banner__body">
+                We use cookies on our website for various purposes, which you can find out more about by reading our <Link to={global.rootUrl+'/privacy-policy'}>Privacy Policy</Link>. By continuing to use our website, you are consenting to our use of cookies.
+              </p>
               <ul className="link-list link-list--centered">
                 <li>
                   <button className="button-cta" onClick={this.handleClick}>
-                    {content.close_button}
+                    OK
                   </button>  
                 </li>
                 <li>
-                  <CtaLink cta={content.cta_link}/>
-                </li>
+                  <Link to={global.rootUrl+'/privacy-policy'}>
+                    Learn More
+                  </Link>  
+                </li>    
               </ul>
             </div>
           </div>
