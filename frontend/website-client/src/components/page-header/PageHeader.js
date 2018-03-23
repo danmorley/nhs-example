@@ -35,6 +35,7 @@ class PageHeader extends Component {
               </Link>
             </div>
             <Swipeable
+              className={'page-header__nav-container'}
                innerRef={(el) => this.swipeableElem = el}
                onSwipedLeft={this.swipedLeft}
              >

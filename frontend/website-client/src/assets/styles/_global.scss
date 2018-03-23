@@ -132,6 +132,11 @@ a {
     background-color: $teal-blue;
     color: $white;
   }
+  
+  &:visited {
+    color: inherit;
+    background-color: transparent;    
+  }
 }
 
 .link-list {
