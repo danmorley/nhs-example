@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Shelf from './Shelf';
 import CmsComponentRegistry from '../CmsComponentRegistry';
+import Text from '../Text';
 
 /**
  *  iFrame Shelf is a simple shelf that can be used to
@@ -27,16 +28,19 @@ class IframeShelf extends Component {
 
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
-        <iframe
-          id={id}
-          src={content.src}
-          frameBorder={content.frame_border || '0'}
-          scrolling={content.scrolling || 'auto'}
-          height={content.height || '300px'}
-          width={content.width || '100%'}
-          sandbox={content.sandbox || undefined}
-          seamless>
-        </iframe>
+        <div className="shelf__container container">
+          <Text tagName="h2" className="shelf__header" content={content.heading} />
+          <iframe
+            id={id}
+            src={content.src}
+            frameBorder={content.frame_border || '0'}
+            scrolling={content.scrolling || 'auto'}
+            height={content.height || '300px'}
+            width={content.width || '100%'}
+            sandbox={content.sandbox || undefined}
+            seamless>
+          </iframe>
+        </div>
       </Shelf>
     );
   }
