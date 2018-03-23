@@ -229,27 +229,26 @@ class OneYou2Page(Page):
     page_ref = models.CharField(max_length=255, unique=True)
 
     # Meta Fields
-    og_title = models.CharField(max_length=255, default="Change4Life - Change4Life",)
-    og_description = models.CharField(max_length=255, default="Fun ideas, recipes, top tips and activities to"
-                                                              " help your kids stay healthy. Make a change today"
-                                                              " with Change4Life!")
-    og_url = models.CharField(max_length=255, default="https://www.nhs.uk/change4life")
+    og_title = models.CharField(max_length=255, default="One You - Home",)
+    og_description = models.CharField(max_length=255, default="Start the fight back to a healthier you! One You is"
+                                                              " packed with practical tips, tools and free apps"
+                                                              " to help you improve your health today")
+    og_url = models.CharField(max_length=255, default="https://www.nhs.uk/oneyou")
     og_image = models.CharField(max_length=255,
-                                default="https://www.nhs.uk/change4life/assets/"
-                                        "c4l-generic-social-share-f6de41c98796bab1b40f263d13f5933cf68c295524b40ec7445aa"
-                                        "2016aed156f.jpg")
+                                default="https://campaignstorage.blob.core.windows.net/oneyou/production/section_page/"
+                                        "social_image/1/5536388cbc87edbba77951fa802cf3f9.jpg")
     og_type = models.CharField(max_length=255, default="website")
-    twitter_url = models.CharField(max_length=255, default="https://www.nhs.uk/change4life")
+    twitter_url = models.CharField(max_length=255, default="https://www.nhs.uk/oneyou")
     twitter_card = models.CharField(max_length=255, default="summary")
-    twitter_site = models.CharField(max_length=255, default="@Change4Life")
-    twitter_title = models.CharField(max_length=255, default="Change4Life - Change4Life")
+    twitter_site = models.CharField(max_length=255, default="@OneYouPHE")
+    twitter_title = models.CharField(max_length=255, default="One You - Home")
     twitter_description = models.CharField(max_length=255,
-                                           default="Fun ideas, recipes, top tips and activities to help your kids"
-                                                   " stay healthy. Make a change today with Change4Life!")
+                                           default="Start the fight back to a healthier you! One You is packed with"
+                                                   " practical tips, tools and free apps to help you improve"
+                                                   " your health today")
     twitter_image = models.CharField(max_length=255,
-                                     default="https://www.nhs.uk/change4life/assets/"
-                                             "c4l-generic-social-share-f6de41c98796bab1b40f263d13f5933cf68c295524b40ec7"
-                                             "445aa2016aed156f.jpg")
+                                     default="https://campaignstorage.blob.core.windows.net/oneyou/production/"
+                                             "section_page/social_image/1/5536388cbc87edbba77951fa802cf3f9.jpg")
 
     release = models.ForeignKey(
         'release.Release',
