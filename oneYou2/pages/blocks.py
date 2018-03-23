@@ -9,10 +9,11 @@ class CTABlock(blocks.StructBlock):
             (name, self.child_blocks[name].get_api_representation(val, context=context))
             for name, val in value.items()
         ])
-        cta_links = []
-        for link in result['cta']:
-            cta_links.append(link['value'])
-        result['cta'] = cta_links
+        if 'cta' in result:
+            cta_links = []
+            for link in result['cta']:
+                cta_links.append(link['value'])
+            result['cta'] = cta_links
         return result
 
 
