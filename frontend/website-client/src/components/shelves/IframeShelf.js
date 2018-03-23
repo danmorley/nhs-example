@@ -34,7 +34,7 @@ class IframeShelf extends Component {
           scrolling={content.scrolling || 'auto'}
           height={content.height || '300px'}
           width={content.width || '100%'}
-          sandbox={content.sandbox}
+          sandbox={content.sandbox || undefined}
           seamless>
         </iframe>
       </Shelf>
