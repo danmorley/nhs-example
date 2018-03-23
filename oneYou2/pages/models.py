@@ -13,7 +13,8 @@ from django.utils.encoding import is_protected_type
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, InlinePanel, ObjectList, TabbedInterface
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, InlinePanel, ObjectList, TabbedInterface, \
+    MultiFieldPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
@@ -226,6 +227,30 @@ class OneYou2Page(Page):
         ('find_out_more_dropdown', FindOutMoreDropDown(label="Link dropdown", icon="order-down")),
     ])
     page_ref = models.CharField(max_length=255, unique=True)
+
+    # Meta Fields
+    og_title = models.CharField(max_length=255, default="Change4Life - Change4Life",)
+    og_description = models.CharField(max_length=255, default="Fun ideas, recipes, top tips and activities to"
+                                                              " help your kids stay healthy. Make a change today"
+                                                              " with Change4Life!")
+    og_url = models.CharField(max_length=255, default="https://www.nhs.uk/change4life")
+    og_image = models.CharField(max_length=255,
+                                default="https://www.nhs.uk/change4life/assets/"
+                                        "c4l-generic-social-share-f6de41c98796bab1b40f263d13f5933cf68c295524b40ec7445aa"
+                                        "2016aed156f.jpg")
+    og_type = models.CharField(max_length=255, default="website")
+    twitter_url = models.CharField(max_length=255, default="https://www.nhs.uk/change4life")
+    twitter_card = models.CharField(max_length=255, default="summary")
+    twitter_site = models.CharField(max_length=255, default="@Change4Life")
+    twitter_title = models.CharField(max_length=255, default="Change4Life - Change4Life")
+    twitter_description = models.CharField(max_length=255,
+                                           default="Fun ideas, recipes, top tips and activities to help your kids"
+                                                   " stay healthy. Make a change today with Change4Life!")
+    twitter_image = models.CharField(max_length=255,
+                                     default="https://www.nhs.uk/change4life/assets/"
+                                             "c4l-generic-social-share-f6de41c98796bab1b40f263d13f5933cf68c295524b40ec7"
+                                             "445aa2016aed156f.jpg")
+
     release = models.ForeignKey(
         'release.Release',
         related_name='pages',
@@ -258,9 +283,34 @@ class OneYou2Page(Page):
         InlinePanel('change_history', label='Change history'),
     ]
 
+    meta_content_panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel('og_title'),
+                FieldPanel('og_description'),
+                FieldPanel('og_url'),
+                FieldPanel('og_image'),
+                FieldPanel('og_type'),
+            ],
+            heading='Open Graph Tags',
+            classname='collapsible collapsed'),
+        MultiFieldPanel(
+            [
+                FieldPanel('twitter_url'),
+                FieldPanel('twitter_card'),
+                FieldPanel('twitter_site'),
+                FieldPanel('twitter_title'),
+                FieldPanel('twitter_description'),
+                FieldPanel('twitter_image'),
+            ],
+            heading='Twitter Tags',
+            classname='collapsible collapsed'),
+    ]
+
     edit_handler = TabbedInterface([
         ObjectList(content_panels, heading='Content'),
         ObjectList(info_content_panels, heading='Info'),
+        ObjectList(meta_content_panels, heading='Meta'),
         ObjectList(Page.promote_panels, heading='Promote'),
         ObjectList(Page.settings_panels, heading='Settings', classname='settings'),
     ])
@@ -356,7 +406,6 @@ class ChangeHistory(Orderable):
 
 # Snippets
 # TODO: Move these to shelves
-
 @register_snippet
 class Menu(SnippetCopyMixin, models.Model):
     label = models.CharField(max_length=255)
