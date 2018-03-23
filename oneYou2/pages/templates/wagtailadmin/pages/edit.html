@@ -38,6 +38,7 @@
         releasePicker.wrap('<div class="popup-cover"><div class="popup"></div></div>');
         var releasePopUp = releasePicker.parent();
         $('button[name="action-publish"]').clone().appendTo(releasePopUp);
+        releasePopUp.append('<button id="cancel-btn" class="button no">Close</button>');
       }
 
       function init(){
