@@ -24,8 +24,14 @@ class CtaLink extends Component {
 
   render() {
     let { cta, variant } = this.props;
-    if (!cta || (!cta.link_page && !cta.link_external)) return null;
-    // let linkClass = (variant === 'button') ? 'button-cta' : null;
+    if (!cta) return null;
+
+    // Check to see if type present.
+    if (cta.type) {
+      cta = cta.value;
+    }
+
+    if (!cta.link_page && !cta.link_external) return null;
     var linkClass;
 
     if (variant === 'button') {
