@@ -234,9 +234,15 @@ class OneYou2Page(Page):
                                                               " packed with practical tips, tools and free apps"
                                                               " to help you improve your health today")
     og_url = models.CharField(max_length=255, default="https://www.nhs.uk/oneyou")
-    og_image = models.CharField(max_length=255,
-                                default="https://campaignstorage.blob.core.windows.net/oneyou/production/section_page/"
-                                        "social_image/1/5536388cbc87edbba77951fa802cf3f9.jpg")
+    og_image_fk = models.ForeignKey(
+        'images.PHEImage',
+        null=True,
+        blank=True,
+        default=1,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name="OG image"
+    )
     og_type = models.CharField(max_length=255, default="website")
     twitter_url = models.CharField(max_length=255, default="https://www.nhs.uk/oneyou")
     twitter_card = models.CharField(max_length=255, default="summary")
@@ -246,10 +252,15 @@ class OneYou2Page(Page):
                                            default="Start the fight back to a healthier you! One You is packed with"
                                                    " practical tips, tools and free apps to help you improve"
                                                    " your health today")
-    twitter_image = models.CharField(max_length=255,
-                                     default="https://campaignstorage.blob.core.windows.net/oneyou/production/"
-                                             "section_page/social_image/1/5536388cbc87edbba77951fa802cf3f9.jpg")
-
+    twitter_image_fk = models.ForeignKey(
+        'images.PHEImage',
+        null=True,
+        blank=True,
+        default=1,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name="Twitter image"
+    )
     release = models.ForeignKey(
         'release.Release',
         related_name='pages',
@@ -262,6 +273,18 @@ class OneYou2Page(Page):
         related_name='pages',
         null=True,
         on_delete=models.SET_NULL)
+
+    @property
+    def og_image(self):
+        if self.og_image_fk:
+            return self.og_image_fk.file.pk
+        return ""
+
+    @property
+    def twitter_image(self):
+        if self.twitter_image_fk:
+            return self.twitter_image_fk.file.pk
+        return ""
 
     @property
     def page_theme(self):
@@ -288,7 +311,7 @@ class OneYou2Page(Page):
                 FieldPanel('og_title'),
                 FieldPanel('og_description'),
                 FieldPanel('og_url'),
-                FieldPanel('og_image'),
+                ImageChooserPanel('og_image_fk'),
                 FieldPanel('og_type'),
             ],
             heading='Open Graph Tags',
@@ -300,7 +323,7 @@ class OneYou2Page(Page):
                 FieldPanel('twitter_site'),
                 FieldPanel('twitter_title'),
                 FieldPanel('twitter_description'),
-                FieldPanel('twitter_image'),
+                ImageChooserPanel('twitter_image_fk'),
             ],
             heading='Twitter Tags',
             classname='collapsible collapsed'),

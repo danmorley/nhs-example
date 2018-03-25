@@ -150,14 +150,15 @@ class Release(ClusterableModel):
                       'detail_url', 'html_url', 'slug', 'show_in_menus', 'seo_title', 'search_description',
                       'first_published_at', 'parent', 'og_title', 'og_description', 'og_url', 'og_image', 'og_type',
                       'twitter_url', 'twitter_card', 'twitter_site', 'twitter_title', 'twitter_description',
-                      'twitter_image']
+                      'twitter_image'
+                      ]
 
         attrs = {
             'Meta': Meta,
             'meta_fields': ['type', 'detail_url', 'html_url', 'slug', 'show_in_menus', 'seo_title',
-                            'search_description', 'first_published_at', 'parent', 'og_title', 'og_description', 'og_url',
-                            'og_image', 'og_type', 'twitter_url', 'twitter_card', 'twitter_site', 'twitter_title',
-                            'twitter_description', 'twitter_image'],
+                            'search_description', 'first_published_at', 'parent', 'og_title', 'og_description',
+                            'og_url', 'og_image', 'og_type', 'twitter_url', 'twitter_card', 'twitter_site',
+                            'twitter_title', 'twitter_description', 'twitter_image'],
             'child_serializer_classes': {},
         }
 

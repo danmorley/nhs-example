@@ -10,6 +10,8 @@ from release.factories import create_test_release
 
 from shelves.factories import create_test_promo_shelf
 
+from images.factories import create_default_test_image
+
 
 class OneYou2PageModelTests(OneYouTests):
 
@@ -90,6 +92,7 @@ class OneYou2PageModelTests(OneYouTests):
 
     def test_save_doesnt_update_page_ref_if_exists(self):
         theme = create_test_theme()
+        create_default_test_image(id=1)
 
         page = OneYou2Page(title="Test page", path='1111', depth=0, theme=theme)
         original_page_ref = page.page_ref
@@ -105,6 +108,7 @@ class OneYou2PageModelTests(OneYouTests):
 
     def test_save_creates_page_ref_if_doesnt_exists(self):
         theme = create_test_theme()
+        create_default_test_image(id=1)
 
         page = OneYou2Page(title="Test page", path='1111', depth=0, theme=theme)
         page.page_ref = ''
