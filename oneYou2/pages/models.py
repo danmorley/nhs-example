@@ -101,7 +101,7 @@ class FindOutMoreDropDown(CTABlock):
     shelf_id = IDBlock(required=False, label="ID")
 
 
-class VideoTemplate(blocks.StructBlock):
+class VideoTemplate(CTABlock):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     image = BlobImageChooserBlock(help_text="Click this image plays the video")
@@ -112,7 +112,7 @@ class VideoTemplate(blocks.StructBlock):
     shelf_id = IDBlock(required=False, label="ID")
 
 
-class ImageTeaserTemplate(blocks.StructBlock):
+class ImageTeaserTemplate(CTABlock):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     image = BlobImageChooserBlock()
