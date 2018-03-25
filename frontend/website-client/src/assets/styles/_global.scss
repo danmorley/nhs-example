@@ -133,6 +133,11 @@ a.button-googleplay {
 a {
   color: $teal-blue;
   
+  &:visited {
+    color: $teal-blue;
+    background-color: transparent;    
+  }
+  
   &:hover {
     text-decoration: none;
     color: inherit;
@@ -141,11 +146,6 @@ a {
   &:active {
     background-color: $teal-blue;
     color: $white;
-  }
-  
-  &:visited {
-    color: inherit;
-    background-color: transparent;    
   }
 }
 
@@ -169,6 +169,7 @@ ul.cta-list {
   margin-top: 0;
   margin-bottom: 0;
   list-style-type: none;
+  padding-left: 0;
 }
 
 .oneyou { //theme
