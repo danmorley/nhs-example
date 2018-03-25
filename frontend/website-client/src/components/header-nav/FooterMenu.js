@@ -20,7 +20,7 @@ class FooterMenu extends Component {
       <ul className ="footer-nav__items">
         {items}
         <li>
-          <Link to="sitemap" className="footer-nav__link">Sitemap</Link>
+          <Link to={global.rootUrl +"/sitemap"} className="footer-nav__link">Sitemap</Link>
         </li>
       </ul>
     );

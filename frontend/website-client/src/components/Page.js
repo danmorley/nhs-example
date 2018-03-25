@@ -23,6 +23,7 @@ import HeadingBodyShelf from './shelves/HeadingBodyShelf';
 import NoticeShelf from './shelves/NoticeShelf';
 import IframeShelf from './shelves/IframeShelf';
 import ScriptShelf from './shelves/ScriptShelf';
+import SiteMapShelf from './shelves/SiteMapShelf';
 
 const cookies = new Cookies();
 const deployed = cookies.get('cookieBanner');
