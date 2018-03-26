@@ -229,13 +229,13 @@ class OneYou2Page(Page):
     @property
     def og_image(self):
         if self.og_image_fk:
-            return self.og_image_fk.file.pk
+            return self.og_image_fk.file.url
         return ""
 
     @property
     def twitter_image(self):
         if self.twitter_image_fk:
-            return self.twitter_image_fk.file.pk
+            return self.twitter_image_fk.file.url
         return ""
 
     @property
