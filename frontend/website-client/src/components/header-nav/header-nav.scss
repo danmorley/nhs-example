@@ -373,7 +373,6 @@ $secondary-item-padding: 0.4em;
 
   .header-nav--open & {
     position: relative;
-    left: 66%;  
     
     @include media-breakpoint-up(md) {
       left: auto;
