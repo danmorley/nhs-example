@@ -59,25 +59,25 @@ class Page extends Component {
       let { menu, footer } = site;
       // let pageTheme = (page_theme && page_theme.class_name) || 'oneyou';
 
-      const documentTitle = `${site.site_name} - ${page.title}`;
+      const documentTitle = `${site.site_name} - ${page.meta.seo_title || page.title}`;
       const meta = {
         title: documentTitle,
         description: page.meta.search_description,
         meta: {
           property: {
             'og:title': documentTitle,
-            'og:description': 'to do',
-            'og:url': 'to do',
-            'og:image': 'to do',
-            'og:type': 'to do'
+            'og:description': page.meta.og_description,
+            'og:url': page.meta.og_url,
+            'og:image': page.meta.og_image,
+            'og:type': page.meta.og_type
           },
           name: {
-            'twitter:url': 'to do',
-            'twitter:card': 'to do',
-            'twitter:site': 'to do',
+            'twitter:url': page.meta.twitter_url,
+            'twitter:card': page.meta.twitter_card,
+            'twitter:site': page.meta.twitter_site,
             'twitter:title': documentTitle,
-            'twitter:description': 'to do',
-            'twitter:imgae': 'to do'
+            'twitter:description': page.meta.twitter_description,
+            'twitter:image': page.meta.twitter_image
           }
         }
       };
@@ -95,9 +95,7 @@ class Page extends Component {
           return (<PlaceholderShelf key={i} shelfType={shelf.type} id={shelfId} classNamePrefix={shelfClassNamePrefix}/>);
         }
       });
-
-      // <DocumentMeta {...meta}>this.renderPage(shelves, page_theme, page_styles, site, page)</DocumentMeta>
-
+      
       return (
         <DocumentMeta {...meta}>{this.renderPage(shelves, page_theme, page_styles, site, page)}</DocumentMeta>
       );
