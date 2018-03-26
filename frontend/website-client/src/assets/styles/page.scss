@@ -8,6 +8,12 @@
   margin-right: auto;
   max-width: 1440px;
   position: relative;
+  
+  @include media-breakpoint-down(sm) {
+    &.header-nav--open {
+      left: 66%;
+    }
+  }
 }
 
 .text-right {
