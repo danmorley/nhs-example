@@ -232,6 +232,8 @@ class OneYou2Page(Page):
             return self.og_image_fk.file.url
         except AttributeError:
             pass
+        except ValueError:
+            pass
         return ""
 
     @property
@@ -240,7 +242,8 @@ class OneYou2Page(Page):
             return self.twitter_image_fk.file.url
         except AttributeError:
             pass
-
+        except ValueError:
+            pass
         return ""
 
     @property
