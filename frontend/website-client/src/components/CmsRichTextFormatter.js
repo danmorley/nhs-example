@@ -2,6 +2,7 @@ import React from 'react';
 import Parser from 'html-react-parser';
 import domToReact from 'html-react-parser/lib/dom-to-react';
 import { Link } from 'react-router-dom';
+import CtaLink from './shared/CtaLink';
 
 /**
  *  Helper class to convert links and images in Wagtail rich text fields to actual
@@ -16,7 +17,7 @@ class CmsRichTextFormatter  {
   static renderLink(node) {
     if (node.attribs.linktype === 'page') {
       // Internal link - use react router to prevent page refresh.
-      const href = this.pathForPage(node.attribs.id);
+      const href = CtaLink.pathForPage(node.attribs.id);
 
       return (
         <Link to={href}>{domToReact(node.children, parserOptions)}</Link>
@@ -30,7 +31,7 @@ class CmsRichTextFormatter  {
   }
 
   static pathForPage(pageId) {
-    return global.pages[pageId];
+    return global.rootUrl + global.pages[pageId];
   }
 }
 

@@ -19,8 +19,8 @@ class CtaLink extends Component {
     return link && (startsWith(link, 'http://') || startsWith(link, 'https://'));
   }
 
-  pathForPage(pageId) {
-    return global.pages[pageId];
+  static pathForPage(pageId) {
+    return global.rootUrl + global.pages[pageId];
   }
 
   render() {
@@ -50,7 +50,7 @@ class CtaLink extends Component {
     }
 
     // Convert page id to path if given.
-    let href = (cta.link_page) ? this.pathForPage(cta.link_page) : cta.link_external;
+    let href = (cta.link_page) ? CtaLink.pathForPage(cta.link_page) : cta.link_external;
 
     // Render the link.
     if (this.isExternal(href)) {
