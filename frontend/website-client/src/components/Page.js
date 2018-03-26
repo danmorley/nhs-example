@@ -23,6 +23,7 @@ import HeadingBodyShelf from './shelves/HeadingBodyShelf';
 import NoticeShelf from './shelves/NoticeShelf';
 import IframeShelf from './shelves/IframeShelf';
 import ScriptShelf from './shelves/ScriptShelf';
+import SiteMapShelf from './shelves/SiteMapShelf';
 
 const cookies = new Cookies();
 const deployed = cookies.get('cookieBanner');
@@ -89,7 +90,7 @@ class Page extends Component {
         const shelfLayout = shelfInfo && shelfInfo.layout;
         const shelfId = shelf.value.field_id || shelf.id;
         if (ShelfClass) {
-          return (<ShelfClass key={i} content={shelf.value} id={shelfId} classNamePrefix={shelfClassNamePrefix} variant={shelfVariant} layout={shelfLayout}/>);
+          return (<ShelfClass key={i} content={shelf.value} id={shelfId} site={site} classNamePrefix={shelfClassNamePrefix} variant={shelfVariant} layout={shelfLayout}/>);
         } else {
           return (<PlaceholderShelf key={i} shelfType={shelf.type} id={shelfId} classNamePrefix={shelfClassNamePrefix}/>);
         }

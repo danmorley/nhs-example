@@ -3,6 +3,7 @@ import 'normalize.css';
 import './assets/styles/fonts.css';
 import Page from './components/Page';
 import ShelfSamplesPage from './components/pages/ShelfSamplesPage';
+import SiteMapPage from './components/pages/SiteMapPage';
 import notFoundPage from './data/notFoundPage';
 import ContentStore from './services/ContentStore';
 import createHistory from 'history/createBrowserHistory';
@@ -124,6 +125,9 @@ class App extends Component {
           <Switch>
             <Route path={global.rootUrl + '/shelf-samples'}
               render={() => <ShelfSamplesPage site={this.state.site} />
+            }/>
+            <Route path={global.rootUrl + '/sitemap'}
+              render={() => <SiteMapPage site={this.state.site} />
             }/>
             <Route path={global.rootUrl + '/'}
               render={(props) => {return this.loadPage(props)}

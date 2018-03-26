@@ -108,6 +108,11 @@ a.button-googleplay {
   li {
     margin-left: 0;
   }
+  
+  ul {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 .shelf-section ol {
@@ -118,10 +123,20 @@ a.button-googleplay {
   li {
     margin-left: 0;
   }
+  
+  ol {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 a {
   color: $teal-blue;
+  
+  &:visited {
+    color: $teal-blue;
+    background-color: transparent;    
+  }
   
   &:hover {
     text-decoration: none;
@@ -131,11 +146,6 @@ a {
   &:active {
     background-color: $teal-blue;
     color: $white;
-  }
-  
-  &:visited {
-    color: inherit;
-    background-color: transparent;    
   }
 }
 
@@ -153,6 +163,13 @@ a {
 
 .link-list--centered {
   align-items: center;
+}
+
+ul.cta-list {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+  padding-left: 0;
 }
 
 .oneyou { //theme
