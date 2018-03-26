@@ -9,7 +9,8 @@ from django.forms.models import model_to_dict
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, InlinePanel, ObjectList, TabbedInterface
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, InlinePanel, ObjectList, TabbedInterface, \
+    MultiFieldPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
@@ -178,6 +179,40 @@ class OneYou2Page(Page):
         ('iframe_shelf', IFrameShelf(label="IFrame", icon='code')),
     ])
     page_ref = models.CharField(max_length=255, unique=True)
+
+    # Meta Fields
+    og_title = models.CharField(max_length=255, default="One You - Home",)
+    og_description = models.CharField(max_length=255, default="Start the fight back to a healthier you! One You is"
+                                                              " packed with practical tips, tools and free apps"
+                                                              " to help you improve your health today")
+    og_url = models.CharField(max_length=255, default="https://www.nhs.uk/oneyou")
+    og_image_fk = models.ForeignKey(
+        'images.PHEImage',
+        null=True,
+        blank=True,
+        default=1,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name="OG image"
+    )
+    og_type = models.CharField(max_length=255, default="website")
+    twitter_url = models.CharField(max_length=255, default="https://www.nhs.uk/oneyou")
+    twitter_card = models.CharField(max_length=255, default="summary")
+    twitter_site = models.CharField(max_length=255, default="@OneYouPHE")
+    twitter_title = models.CharField(max_length=255, default="One You - Home")
+    twitter_description = models.CharField(max_length=255,
+                                           default="Start the fight back to a healthier you! One You is packed with"
+                                                   " practical tips, tools and free apps to help you improve"
+                                                   " your health today")
+    twitter_image_fk = models.ForeignKey(
+        'images.PHEImage',
+        null=True,
+        blank=True,
+        default=1,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name="Twitter image"
+    )
     release = models.ForeignKey(
         'release.Release',
         related_name='pages',
@@ -190,6 +225,26 @@ class OneYou2Page(Page):
         related_name='pages',
         null=True,
         on_delete=models.SET_NULL)
+
+    @property
+    def og_image(self):
+        try:
+            return self.og_image_fk.file.url
+        except AttributeError:
+            pass
+        except ValueError:
+            pass
+        return ""
+
+    @property
+    def twitter_image(self):
+        try:
+            return self.twitter_image_fk.file.url
+        except AttributeError:
+            pass
+        except ValueError:
+            pass
+        return ""
 
     @property
     def page_theme(self):
@@ -210,9 +265,34 @@ class OneYou2Page(Page):
         InlinePanel('change_history', label='Change history'),
     ]
 
+    meta_content_panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel('og_title'),
+                FieldPanel('og_description'),
+                FieldPanel('og_url'),
+                ImageChooserPanel('og_image_fk'),
+                FieldPanel('og_type'),
+            ],
+            heading='Open Graph Tags',
+            classname='collapsible collapsed'),
+        MultiFieldPanel(
+            [
+                FieldPanel('twitter_url'),
+                FieldPanel('twitter_card'),
+                FieldPanel('twitter_site'),
+                FieldPanel('twitter_title'),
+                FieldPanel('twitter_description'),
+                ImageChooserPanel('twitter_image_fk'),
+            ],
+            heading='Twitter Tags',
+            classname='collapsible collapsed'),
+    ]
+
     edit_handler = TabbedInterface([
         ObjectList(content_panels, heading='Content'),
         ObjectList(info_content_panels, heading='Info'),
+        ObjectList(meta_content_panels, heading='Meta'),
         ObjectList(Page.promote_panels, heading='Promote'),
         ObjectList(Page.settings_panels, heading='Settings', classname='settings'),
     ])
@@ -308,7 +388,6 @@ class ChangeHistory(Orderable):
 
 # Snippets
 # TODO: Move these to shelves
-
 @register_snippet
 class Menu(SnippetCopyMixin, models.Model):
     label = models.CharField(max_length=255)
