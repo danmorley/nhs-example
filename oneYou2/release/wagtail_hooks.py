@@ -56,6 +56,14 @@ class ReleaseAdmin(ModelAdmin):
     list_filter = ('release_name',)
     search_fields = ('release_name',)
 
+    def get_queryset(self, request):
+        """
+        Returns a QuerySet of all model instances that can be edited by the
+        admin site.
+        """
+        qs = Release.objects.all()
+        return qs
+
 
 # Now you just need to register your customised ModelAdmin class with Wagtail
 modeladmin_register(ReleaseAdmin)

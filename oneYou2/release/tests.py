@@ -1,18 +1,28 @@
 import json
 import uuid
 
-from datetime import datetime, timedelta
+from datetime import timedelta
 from unittest.mock import patch
 
+from django.http import HttpRequest
 from django.utils import timezone
 
-from oneYou2.tests.utils import OneYouTests
+from home.models import SiteSettings
+
+from oneYou2.test.utils import OneYouTests
 
 from pages.factories import create_test_page
 from pages.models import OneYou2Page
 
 from release.factories import create_test_release, create_test_release_content, create_test_release_page
 from release.models import Release
+from release.utils import get_release_object, get_latest_release, populate_release_if_required
+from release.views import release_html
+
+
+index_file = '<head><link href="/static/css/main.da59b65b.css" rel="stylesheet"></head><body>' \
+             '<div id="root" data-content-store-endpoint="%apiurl%" data-site="oneyou" data-release="%releaseid%">' \
+             '</div><script type="text/javascript" src="/static/js/main.c6e8367e.js"></script></body>'
 
 
 @patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
@@ -48,7 +58,7 @@ class ReleaseModelTests(OneYouTests):
         to_dict method should return a dictionary representing the object
         """
         test_name = "Test release"
-        test_date = datetime.now()
+        test_date = timezone.now()
         release = create_test_release(test_name, test_date)
         release_dict = release.dict()
         self.assertIs(release_dict['release_name'], test_name)
@@ -89,7 +99,7 @@ class ReleaseModelTests(OneYouTests):
 
         loaded_release = Release.objects.get(release_name=release_name)
 
-        self.assertEqual(loaded_release.content.count(), 0)
+        self.assertEqual(loaded_release.content_status, 0)
 
     def test_release_doesnt_lock_content_before_its_release_time(self, mock_file_service):
 
@@ -99,13 +109,13 @@ class ReleaseModelTests(OneYouTests):
         create_test_page()
 
         release_name = "Future release"
-        release_date = datetime.now() + timedelta(days=1)
+        release_date = timezone.now() + timedelta(days=1)
 
         create_test_release(release_name, release_date)
 
         loaded_release = Release.objects.get(release_name=release_name)
 
-        self.assertEqual(loaded_release.content.count(), 0)
+        self.assertEqual(loaded_release.content_status, 0)
 
     def test_release_locks_content_after_its_release_time(self, mock_file_service):
 
@@ -115,13 +125,15 @@ class ReleaseModelTests(OneYouTests):
         create_test_page()
 
         release_name = "Past release"
-        release_date = datetime.now() + timedelta(days=-1)
+        release_date = timezone.now() + timedelta(days=-1)
 
-        create_test_release(release_name, release_date)
+        release = create_test_release(release_name, release_date)
+        populate_release_if_required(release)
 
         loaded_release = Release.objects.get(release_name=release_name)
 
         self.assertEqual(loaded_release.content.count(), 1)
+        self.assertEqual(loaded_release.content_status, 1)
 
     def test_release_initialised_from_a_base_release_gets_revisions_from_base(self, mock_file_service):
         """
@@ -149,7 +161,7 @@ class ReleaseModelTests(OneYouTests):
         """
         release = create_test_release()
 
-        self.assertIsFalse(release.is_released())
+        self.assertIsFalse(release.release_date_has_passed())
 
     def test_is_released_returns_false_if_date_is_in_the_future(self, mock_file_service):
         """
@@ -158,7 +170,7 @@ class ReleaseModelTests(OneYouTests):
         release = create_test_release()
         release.release_time = timezone.now() + timedelta(days=1)
 
-        self.assertIsFalse(release.is_released())
+        self.assertIsFalse(release.release_date_has_passed())
 
     def test_is_released_returns_true_if_date_is_in_the_past(self, mock_file_service):
         """
@@ -167,7 +179,7 @@ class ReleaseModelTests(OneYouTests):
         release = create_test_release()
         release.release_time = timezone.now() + timedelta(days=-1)
 
-        self.assertIsTrue(release.is_released())
+        self.assertIsTrue(release.release_date_has_passed())
 
     def test_remove_page_removes_the_linked_revision_of_the_page_from_the_release(self, mock_file_service):
         """
@@ -359,6 +371,7 @@ class ReleaseModelTests(OneYouTests):
 
         release_time = timezone.now() + timedelta(days=-1)
         release = create_test_release(release_date=release_time)
+        populate_release_if_required(release)
 
         loaded_release = Release.objects.get(id=release.id)
 
@@ -369,6 +382,7 @@ class ReleaseModelTests(OneYouTests):
 
         release_page_content = loaded_release.get_content_for(page.id)
 
+        self.assertIsNotNone(release.content_status, 1)
         self.assertIsNotNone(release_page_content)
         self.assertNotEqual(json.loads(revision.content_json)['title'], initial_title)
         self.assertEqual(release_page_content['title'], initial_title)
@@ -397,9 +411,8 @@ class ReleaseContentModelTests(OneYouTests):
         release = create_test_release()
 
         release_content = create_test_release_content(release, json.dumps(release.generate_fixed_content()))
-        loaded_page_content = release_content.get_content_for('0')
 
-        self.assertIsNone(loaded_page_content)
+        self.assertRaises(KeyError, release_content.get_content_for, '0')
 
 
 @patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
@@ -414,3 +427,65 @@ class ReleasePageModelTests(OneYouTests):
 
         self.assertEqual(type(revision), type(release_page.revision))
         self.assertEqual(type(release), type(release_page.release))
+
+
+@patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
+class ReleaseUtilsTests(OneYouTests):
+    def test_get_release_object_returns_the_correct_release(self, mock_file_service):
+        release = create_test_release()
+
+        release_uuid = release.uuid
+
+        loaded_release = get_release_object(release_uuid)
+
+        self.assertEqual(release.id, loaded_release.id)
+        self.assertEqual(release.release_name, loaded_release.release_name)
+
+    def test_get_latest_release_returns_the_newest_published_release(self, mock_file_service):
+        """
+        A published release is one whose release_time is in the past.
+        """
+        release1_name = "Old release"
+        release1_date = timezone.now() + timedelta(days=-10)
+        release1 = create_test_release(release_name=release1_name, release_date=release1_date)
+
+        release2_name = "Current release"
+        release2_date = timezone.now() + timedelta(days=-1)
+        release2 = create_test_release(release_name=release2_name, release_date=release2_date)
+
+        release3_name = "Future release"
+        release3_date = timezone.now() + timedelta(days=+10)
+        release3 = create_test_release(release_name=release3_name, release_date=release3_date)
+
+        current_release = get_latest_release(release1.site_id)
+
+        self.assertIsTrue(release1.release_date_has_passed())
+        self.assertIsTrue(release2.release_date_has_passed())
+        self.assertIsFalse(release3.release_date_has_passed())
+
+        self.assertEqual(current_release.id, release2.id)
+
+
+@patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
+@patch('frontendHandler.models.FrontendVersion.get_html_for_version', return_value=index_file)
+class ReleaseViewsTests(OneYouTests):
+    def test_release_html_endpoint_returns_an_index_with_substituted_values(self, mock_file_service, mock_index_file):
+        release_date = timezone.now() + timedelta(days=-1)
+        release = create_test_release(release_date=release_date)
+        site_name = 'oneyou'
+        SiteSettings(site_id=release.site_id, uid=site_name).save()
+        http_host = 'phe.nhs.uk'
+        request = HttpRequest()
+        request.META['HTTP_HOST'] = http_host
+
+        response = release_html(request, site_name)
+        response_content_string = response.content.decode("utf-8")
+
+        self.assertIsFalse("/static/css/" in response_content_string)
+        self.assertIsTrue("/version/css/" in response_content_string)
+        self.assertIsFalse("/static/js/" in response_content_string)
+        self.assertIsTrue("/version/js/" in response_content_string)
+        self.assertIsFalse("%apiurl%" in response_content_string)
+        self.assertIsTrue("http://phe.nhs.uk/api/v2" in response_content_string)
+        self.assertIsFalse("%releaseid%" in response_content_string)
+        self.assertIsTrue(release.uuid in response_content_string)

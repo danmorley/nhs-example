@@ -108,6 +108,11 @@ a.button-googleplay {
   li {
     margin-left: 0;
   }
+  
+  ul {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 .shelf-section ol {
@@ -118,20 +123,53 @@ a.button-googleplay {
   li {
     margin-left: 0;
   }
+  
+  ol {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 a {
   color: $teal-blue;
+  
+  &:visited {
+    color: $teal-blue;
+    background-color: transparent;    
+  }
   
   &:hover {
     text-decoration: none;
     color: inherit;
   }
   
-  &:focus {
+  &:active {
     background-color: $teal-blue;
     color: $white;
   }
+}
+
+.link-list {
+  display: flex;
+  
+  li {
+    margin-left: 1em;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+.link-list--centered {
+  align-items: center;
+}
+
+ul.cta-list {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+  padding-left: 0;
 }
 
 .oneyou { //theme

@@ -1,14 +1,10 @@
 import json
 import uuid
 import logging
-import datetime
 
-from django.conf import settings
 from django.db import models
 from django.db.models import DateField, TextField
 from django.forms.models import model_to_dict
-from django.utils import timezone
-from django.utils.encoding import is_protected_type
 
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.models import Page, Orderable
@@ -20,14 +16,16 @@ from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtailsnippetscopy.models import SnippetCopyMixin
 from wagtailsnippetscopy.registry import snippet_copy_registry
-from modelcluster.models import get_all_child_relations, get_all_child_m2m_relations
 
+from modelcluster.models import get_all_child_relations, get_all_child_m2m_relations
 from modelcluster.fields import ParentalKey
 
-from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppTeaserChooserBlock, BlobImageChooserBlock
-from shelves.models import ShelfAbstract
+from .blocks import IDBlock, CTABlock
+from .utils import get_serializable_data_for_fields
 
 from home.models import SiteSettings
+
+from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppTeaserChooserBlock, BlobImageChooserBlock
 
 GRID_LAYOUT_CHOICES = (
     ('full_width', 'Full Width'),
@@ -35,60 +33,7 @@ GRID_LAYOUT_CHOICES = (
 )
 
 
-SHARED_CONTENT_TYPES = ['promo_shelf', 'banner_shelf', 'app_shelf']
 logger = logging.getLogger('wagtail.core')
-
-
-def get_field_value(field, model):
-    if field.remote_field is None:
-        value = field.pre_save(model, add=model.pk is None)
-
-        # Make datetimes timezone aware
-        # https://github.com/django/django/blob/master/django/db/models/fields/__init__.py#L1394-L1403
-        if isinstance(value, datetime.datetime) and settings.USE_TZ:
-            if timezone.is_naive(value):
-                default_timezone = timezone.get_default_timezone()
-                value = timezone.make_aware(value, default_timezone).astimezone(timezone.utc)
-            # convert to UTC
-            value = timezone.localtime(value, timezone.utc)
-
-        if is_protected_type(value):
-            return value
-        else:
-            if field.verbose_name is 'body':
-                field_dict = json.loads(field.value_to_string(model))
-                final_content = []
-                for shelf in field_dict:
-                    if shelf['type'] in SHARED_CONTENT_TYPES:
-                        shelf['content'] = ShelfAbstract.objects.get(id=shelf['value']).specific.serializable_data()
-                        final_content.append(shelf)
-                    else:
-                        shelf['content'] = shelf['value']
-                        final_content.append(shelf)
-                return json.dumps(final_content)
-            else:
-                return field.value_to_string(model)
-    else:
-        return getattr(model, field.get_attname())
-
-
-def get_serializable_data_for_fields(model):
-    """
-    Return a serialised version of the model's fields which exist as local database
-    columns (i.e. excluding m2m and incoming foreign key relations)
-    """
-    pk_field = model._meta.pk
-    # If model is a child via multitable inheritance, use parent's pk
-    while pk_field.remote_field and pk_field.remote_field.parent_link:
-        pk_field = pk_field.remote_field.model._meta.pk
-
-    obj = {'pk': get_field_value(pk_field, model)}
-
-    for field in model._meta.fields:
-        if field.serialize:
-            obj[field.name] = get_field_value(field, model)
-
-    return obj
 
 
 class SimpleMenuItem(blocks.StructBlock):
@@ -118,32 +63,18 @@ class PageHeading(blocks.StructBlock):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     background_image = BlobImageChooserBlock(required=False)
-    shelf_id = blocks.CharBlock(required=False, label="ID", help_text="Not displayed in the front end")
+    shelf_id = IDBlock(required=False, label="ID", help_text="Not displayed in the front end")
 
 
 class SectionHeading(blocks.StructBlock):
     heading = blocks.CharBlock(required=False)
-    shelf_id = blocks.CharBlock(required=False, label="ID", help_text="Not displayed in the front end")
+    shelf_id = IDBlock(required=False, label="ID", help_text="Not displayed in the front end")
     body = blocks.RichTextBlock(required=False)
 
 
 class SimplePageHeading(SectionHeading):
     """This is a page heading with only text."""
     pass
-
-
-class CTABlock(blocks.StructBlock):
-    def get_api_representation(self, value, context=None):
-        # recursively call get_api_representation on children and return as a plain dict
-        result = dict([
-            (name, self.child_blocks[name].get_api_representation(val, context=context))
-            for name, val in value.items()
-        ])
-        cta_links = []
-        for link in result['cta']:
-            cta_links.append(link['value'])
-        result['cta'] = cta_links
-        return result
 
 
 class BackwardsCompatibleContent(CTABlock):
@@ -153,7 +84,14 @@ class BackwardsCompatibleContent(CTABlock):
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False, verbose_name="cta")
-    shelf_id = blocks.CharBlock(required=False, label="ID")
+    shelf_id = IDBlock(required=False, label="ID")
+
+
+class InformationPanel(CTABlock):
+    heading = blocks.CharBlock(required=False)
+    body = blocks.RichTextBlock(required=False)
+    image = BlobImageChooserBlock(required=False)
+    shelf_id = IDBlock(required=False, label="ID")
 
 
 class FindOutMoreDropDown(CTABlock):
@@ -161,10 +99,10 @@ class FindOutMoreDropDown(CTABlock):
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items')
-    shelf_id = blocks.CharBlock(required=False, label="ID")
+    shelf_id = IDBlock(required=False, label="ID")
 
 
-class VideoTemplate(blocks.StructBlock):
+class VideoTemplate(CTABlock):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     image = BlobImageChooserBlock(help_text="Click this image plays the video")
@@ -172,10 +110,10 @@ class VideoTemplate(blocks.StructBlock):
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False)
-    shelf_id = blocks.CharBlock(required=False, label="ID")
+    shelf_id = IDBlock(required=False, label="ID")
 
 
-class ImageTeaserTemplate(blocks.StructBlock):
+class ImageTeaserTemplate(CTABlock):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     image = BlobImageChooserBlock()
@@ -187,6 +125,17 @@ class ImageTeaserTemplate(blocks.StructBlock):
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False)
+    shelf_id = IDBlock(required=False, label="ID")
+
+
+class IFrameShelf(blocks.StructBlock):
+    heading = blocks.CharBlock(required=False)
+    src = blocks.CharBlock(required=True, label="Source URl")
+    frame_border = blocks.IntegerBlock(default=0, required=False)
+    scrolling = blocks.CharBlock(required=False)
+    width = blocks.IntegerBlock(default=100, required=False)
+    height = blocks.IntegerBlock(default=100, required=False)
+    sandbox = blocks.CharBlock(required=False)
     shelf_id = blocks.CharBlock(required=False, label="ID")
 
 
@@ -196,8 +145,9 @@ class Carousel(blocks.StructBlock):
         ('video_teaser', VideoTemplate(icon="media")),
         ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
         ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
+        ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
     ], icon='arrow-left', label='Items', required=False)
-    shelf_id = blocks.CharBlock(required=False, label="ID")
+    shelf_id = IDBlock(required=False, label="ID")
 
 
 class Grid(blocks.StructBlock):
@@ -207,10 +157,11 @@ class Grid(blocks.StructBlock):
         ('oneyou1_teaser', BackwardsCompatibleContent(label="OneYou1 teaser", icon="folder-inverse")),
         ('video_teaser', VideoTemplate(icon="media")),
         ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
-        ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image"))
+        ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
+        ('information_panel', InformationPanel(target_model="shelves.AppTeaser", icon="image"))
     ], icon='arrow-left', label='Items')
     meta_layout = blocks.ChoiceBlock(choices=GRID_LAYOUT_CHOICES, label="Layout")
-    shelf_id = blocks.CharBlock(required=False, label="ID")
+    shelf_id = IDBlock(required=False, label="ID")
 
 
 # Pages
@@ -225,6 +176,7 @@ class OneYou2Page(Page):
         ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
         ('grid_shelf', Grid(icon="form")),
         ('find_out_more_dropdown', FindOutMoreDropDown(label="Link dropdown", icon="order-down")),
+        ('iframe_shelf', IFrameShelf(label="IFrame", icon='code')),
     ])
     page_ref = models.CharField(max_length=255, unique=True)
 

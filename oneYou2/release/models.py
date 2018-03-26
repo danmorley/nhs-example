@@ -11,6 +11,9 @@ from modelcluster.models import ClusterableModel
 from django.db import models
 from django.forms.models import model_to_dict
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
+from django.core.exceptions import ValidationError
+
 from wagtail.api.v2.serializers import PageSerializer
 
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
@@ -24,6 +27,11 @@ from pages.models import OneYou2Page
 
 from rest_framework.viewsets import GenericViewSet
 
+CONTENT_STATUS = (
+    (0, "PENDING"),
+    (1, "FROZEN"),
+)
+
 
 class DummyView(GenericViewSet):
 
@@ -35,6 +43,11 @@ class DummyView(GenericViewSet):
         # is added to this mapping. This is used by the Admin API which appends a
         # summary of the used types to the response.
         self.seen_types = OrderedDict()
+
+
+def validate_in_future(date_time):
+    if date_time < timezone.now():
+        raise ValidationError(_('Release date has already passed. Please choose one in the future.'))
 
 
 def query_set_to_dict(querySet):
@@ -63,9 +76,10 @@ class Release(ClusterableModel):
         null=True,
         on_delete=models.SET_NULL)
     release_name = models.CharField(max_length=255, unique=True)
-    release_time = models.DateTimeField(blank=True, null=True)
+    release_time = models.DateTimeField(blank=True, null=True, validators=[validate_in_future])
     uuid = models.CharField(max_length=255, unique=True)
     frontend_id = models.CharField(max_length=255)
+    content_status = models.IntegerField(choices=CONTENT_STATUS)
     site = models.ForeignKey(
         'wagtailcore.Site',
         related_name='releases',
@@ -80,22 +94,16 @@ class Release(ClusterableModel):
         FieldPanel('base_release', classname='base_release', ),
         FieldPanel('release_name', classname='release_name', ),
         ReadOnlyPanel('uuid', classname='uuid', ),
+        ReadOnlyPanel('content_status', classname='release_status'),
         FieldPanel('release_time', classname='release_time', ),
     ]
 
     def __init__(self, *args, **kwargs):
         super(Release, self).__init__(*args, **kwargs)
 
-        if self.id and self.content.count() == 0:
-            if self.is_released():
-                rc = ReleaseContent(release=self)
-                rc.save()
-                pages = self.generate_fixed_content()
-                rc.content = json.dumps(pages)
-                rc.save()
-
         if not self.id:
             self.frontend_id = self.get_current_frontend_id()
+            self.content_status = 0
 
     def save(self, *args, **kwargs):
         is_new_entry = self.id is None
@@ -128,7 +136,7 @@ class Release(ClusterableModel):
     def __str__(self):
         return self.release_name
 
-    def is_released(self):
+    def release_date_has_passed(self):
         return (self.release_time is not None) and self.release_time < timezone.now()
 
     def add_revision(self, new_revision):
@@ -181,7 +189,7 @@ class Release(ClusterableModel):
 
     def get_content_for(self, key):
         page_content = None
-        if self.is_released():
+        if self.release_date_has_passed():
             page_content = self.content.first().get_content_for(str(key))
         else:
             for revision in self.revisions.all():
@@ -231,8 +239,4 @@ class ReleaseContent(models.Model):
 
     def get_content_for(self, key):
         content_dict = json.loads(self.content)
-        try:
-            page_content = content_dict[key]
-        except KeyError:
-            page_content = None
-        return page_content
+        return content_dict[key]

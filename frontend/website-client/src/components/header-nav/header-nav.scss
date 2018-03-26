@@ -176,11 +176,15 @@ $secondary-item-padding: 0.4em;
   text-decoration: none;
   white-space: nowrap;
   
+  &:visited {
+    color: white;
+  }
+  
   &:hover {
     color: $sunflower-yellow;
   }
   
-  &:focus {
+  &:active {
     background-color: inherit;
   }
   
@@ -189,7 +193,7 @@ $secondary-item-padding: 0.4em;
     color: $text-primary;
     padding-bottom: 0.3em;
     
-      &:focus {
+      &:focus, &:visited {
         color: inherit;
       }
   }

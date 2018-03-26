@@ -44,9 +44,10 @@ class Oneyou1TeaserPanel extends Component {
     if (!CtaUtils.isCta(content.cta)) return null;
 
     if (CtaUtils.isSingleCta(content.cta)) {
+      let cta = CtaUtils.getSingleCta(content.cta);
       return (
         <div className={`${classNamePrefix}__cta-item`}>
-          <CtaLink cta={content.cta} />
+          <CtaLink cta={cta} />
         </div>
       );
     } else {

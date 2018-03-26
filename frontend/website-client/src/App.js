@@ -3,9 +3,11 @@ import 'normalize.css';
 import './assets/styles/fonts.css';
 import Page from './components/Page';
 import ShelfSamplesPage from './components/pages/ShelfSamplesPage';
+import SiteMapPage from './components/pages/SiteMapPage';
 import notFoundPage from './data/notFoundPage';
 import ContentStore from './services/ContentStore';
 import createHistory from 'history/createBrowserHistory';
+import startsWith from 'lodash.startswith';
 
 import {
   Router,
@@ -87,7 +89,7 @@ class App extends Component {
   checkForRedirect() {
     let redirect = (this.state.site.redirects && this.state.site.redirects[window.location.pathname]);
     if (redirect) {
-      if (redirect.startsWith('http:') || redirect.startsWith('https:')) {
+      if (startsWith(redirect, 'http:') || startsWith(redirect, 'https:')) {
         // Redirect to another site.
         window.location.pathname = redirect;
       } else {
@@ -123,6 +125,9 @@ class App extends Component {
           <Switch>
             <Route path={global.rootUrl + '/shelf-samples'}
               render={() => <ShelfSamplesPage site={this.state.site} />
+            }/>
+            <Route path={global.rootUrl + '/sitemap'}
+              render={() => <SiteMapPage site={this.state.site} />
             }/>
             <Route path={global.rootUrl + '/'}
               render={(props) => {return this.loadPage(props)}

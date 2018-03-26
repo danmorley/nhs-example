@@ -52,11 +52,19 @@ update master
 version=$(npm version --prefix frontend/website-client  "$1" --no-git-tag-version)
 echo "Bumped version to $version"
 
+#Find version.txt
+git_root_dir=$(git rev-parse --show-toplevel)
+version_file_prefix=/oneYou2/version.txt
+version_file=${git_root_dir}${version_file_prefix}
+
+echo ${version} > ${version_file}
+
 # commit version number increment
 git commit -am "$version"
 
 # create tag for new version from -master
 git tag "$version"
+
 
 
 #Atomic ensures nothing is pushed if any of the repos fails to push

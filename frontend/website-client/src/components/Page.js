@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import '../assets/styles/page.css';
 import CmsComponentRegistry from './CmsComponentRegistry';
+import Cookies from 'universal-cookie';
+import CookieBanner from './cookie-banner/CookieBanner';
 import Footer from './Footer';
 import PageHeader from './page-header/PageHeader';
 import PageStyles from './PageStyles';
@@ -19,8 +21,15 @@ import CarouselShelf from './shelves/CarouselShelf';
 import GridShelf from './shelves/GridShelf';
 import HeadingBodyShelf from './shelves/HeadingBodyShelf';
 import NoticeShelf from './shelves/NoticeShelf';
+import IframeShelf from './shelves/IframeShelf';
+import ScriptShelf from './shelves/ScriptShelf';
+import SiteMapShelf from './shelves/SiteMapShelf';
+
+const cookies = new Cookies();
+const deployed = cookies.get('cookieBanner');
 
 class Page extends Component {
+
   renderPage(content, pageTheme, pageStyles, site, page) {
     let { menu, header, footer } = site;
     let theme = (pageTheme && pageTheme.class_name) || 'oneyou';
@@ -28,6 +37,9 @@ class Page extends Component {
     return (
       <div className={`page-wrapper ${theme}`}>
         <PageStyles content={pageStyles} />
+        { deployed !== "true" &&
+          <CookieBanner />
+        }
         <PageHeader navItems={menu} header={header}/>
         <div className="page-content-wrapper">
           <div className="page-content">
@@ -78,7 +90,7 @@ class Page extends Component {
         const shelfLayout = shelfInfo && shelfInfo.layout;
         const shelfId = shelf.value.field_id || shelf.id;
         if (ShelfClass) {
-          return (<ShelfClass key={i} content={shelf.value} id={shelfId} classNamePrefix={shelfClassNamePrefix} variant={shelfVariant} layout={shelfLayout}/>);
+          return (<ShelfClass key={i} content={shelf.value} id={shelfId} site={site} classNamePrefix={shelfClassNamePrefix} variant={shelfVariant} layout={shelfLayout}/>);
         } else {
           return (<PlaceholderShelf key={i} shelfType={shelf.type} id={shelfId} classNamePrefix={shelfClassNamePrefix}/>);
         }

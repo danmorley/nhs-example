@@ -15,6 +15,28 @@ const sampleShelvesPage = {
     {
       type: 'guidance_shelf',
       value: {
+        heading: 'Iframe Shelf',
+        body: 'Layout <b>not given</b>, variant <b>not given</b>'
+      }
+    },
+    {
+      id: 'iframe-shelf-1',
+      type: 'iframe_shelf',
+      value: {
+        src: 'https://www.nhs.uk/oneyou/how-are-you',
+        height: '1000px',
+        field_id: 'how-are-you'
+      }
+    },
+    {
+      type: 'script_shelf',
+      value: {
+        script: 'console.log("This is output by some inline javascript!");',
+      }
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
         heading: 'Carousel Shelf',
         body: 'Layout <b>not given</b>, variant <b>not given</b>'
       }

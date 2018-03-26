@@ -5,6 +5,7 @@
   text-align: center;
   padding-top: 1em;
   margin-bottom: 1em;
+  position: relative;
   
   @include media-breakpoint-up(md) {
     margin-bottom: 0;
@@ -23,6 +24,11 @@
     padding-top: 0;
     text-align: left;
   }
+}
+
+.page-header__nav-container {
+  display: flex;
+  margin-left: auto;
 }
 
 .page-header__row {

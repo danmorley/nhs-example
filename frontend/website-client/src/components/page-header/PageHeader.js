@@ -31,10 +31,11 @@ class PageHeader extends Component {
                   <i className="font-icon"></i>
               </button>
               <Link to={global.rootUrl} className="page-header__logo">
-                <Text content={header.title || 'html::One <span>You</span>'} />
+                <Text content={header.title || 'html::One <span>You</span>'} tagName={"div"} />
               </Link>
             </div>
             <Swipeable
+              className={'page-header__nav-container'}
                innerRef={(el) => this.swipeableElem = el}
                onSwipedLeft={this.swipedLeft}
              >

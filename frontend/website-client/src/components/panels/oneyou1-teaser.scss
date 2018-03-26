@@ -40,6 +40,10 @@
   color: $white;
   text-decoration: none;
   
+  &:visited {
+    color: $white   
+  }
+  
   &:hover {
     text-decoration: underline;
   }  

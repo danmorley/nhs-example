@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Text from '../Text';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import startsWith from 'lodash.startswith';
 
 /**
  *  Link component that will render a react router <Link> tag for internal
@@ -15,7 +16,7 @@ import PropTypes from 'prop-types';
  */
 class CtaLink extends Component {
   isExternal(link) {
-    return link && (link.startsWith('http://') || link.startsWith('https://'));
+    return link && (startsWith(link, 'http://') || startsWith(link, 'https://'));
   }
 
   pathForPage(pageId) {
@@ -24,8 +25,15 @@ class CtaLink extends Component {
 
   render() {
     let { cta, variant } = this.props;
-    if (!cta || (!cta.link_page && !cta.link_external)) return null;
-    // let linkClass = (variant === 'button') ? 'button-cta' : null;
+
+    if (!cta) return null;
+
+    // Check to see if type present.
+    if (cta.type) {
+      cta = cta.value;
+    }
+
+    if (!cta.link_page && !cta.link_external) return null;
     var linkClass;
 
     if (variant === 'button') {

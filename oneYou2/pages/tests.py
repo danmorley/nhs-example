@@ -1,10 +1,16 @@
 import json
 from unittest.mock import patch
 
-from oneYou2.tests.utils import OneYouTests
+from wagtail.wagtailcore.blocks.stream_block import StreamValue
+from wagtail.wagtailcore.blocks.struct_block import StructValue
+
+from images.models import PHEImage
+
+from oneYou2.test.utils import OneYouTests
 
 from pages.factories import create_test_page, create_test_theme
 from pages.models import OneYou2Page, Theme
+from pages.utils import get_serializable_data_for_fields, replace_embeds_with_links
 
 from release.factories import create_test_release
 
@@ -214,3 +220,26 @@ class ThemeModelTests(OneYouTests):
         theme_dict = theme.to_dict()
         self.assertIs(theme_dict['label'], test_label)
         self.assertIs(theme_dict['class_name'], test_class_name)
+
+
+class PagesUtilsTests(OneYouTests):
+    def test_get_serializable_data_for_fields_correctly_serialises_the_page(self):
+        page = create_test_page()
+        field = OneYou2Page._meta.get_field('body')
+        page.body = StreamValue(field.stream_block,
+                                [('section_heading_shelf',
+                                  StructValue([('heading', 'This is a section heading'), ('shelf_id', 'shelf1')]))])
+        serialized_data = get_serializable_data_for_fields(page)
+
+        self.assertEqual(type(serialized_data), dict)
+
+    def test_replace_embeds_with_links_correctly_turns_embeds_into_img_tags(self):
+        image = PHEImage(width=100, height=100)
+        image.save()
+        image_id = image.id
+        rich_text_source = '<p><embed alt="one_you_logo.png" embedtype="image" format="right" id="'\
+                           + str(image_id) + '"/><br/></p>'
+        processed_content = replace_embeds_with_links(rich_text_source)
+        self.assertNotEquals(rich_text_source, processed_content)
+        self.assertIsFalse('<embed' in processed_content)
+        self.assertIsTrue('<img' in processed_content)
