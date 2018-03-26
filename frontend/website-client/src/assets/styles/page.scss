@@ -3,6 +3,10 @@
 @import "../../../node_modules/bootstrap-4-grid/scss/grid";
 @import 'global';
 
+#root {
+  overflow: hidden;
+}
+
 .page-wrapper {
   margin-left: auto;
   margin-right: auto;
