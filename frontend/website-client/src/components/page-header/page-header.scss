@@ -68,6 +68,10 @@
     border-bottom: 0.15em solid  $text-primary;
   }
   
+  &:visited {
+    color: $text-primary;
+  }
+  
   &:hover, &:focus {
     background-color: inherit;
     color: inherit;
