@@ -13,7 +13,6 @@
   
   .header-nav--open & {
     position: relative;
-    left: 67%;
     
     @include media-breakpoint-up(md) {
       left: auto;
