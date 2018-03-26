@@ -228,14 +228,19 @@ class OneYou2Page(Page):
 
     @property
     def og_image(self):
-        if self.og_image_fk:
+        try:
             return self.og_image_fk.file.url
+        except AttributeError:
+            pass
         return ""
 
     @property
     def twitter_image(self):
-        if self.twitter_image_fk:
+        try:
             return self.twitter_image_fk.file.url
+        except AttributeError:
+            pass
+
         return ""
 
     @property
