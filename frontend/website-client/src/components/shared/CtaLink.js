@@ -25,6 +25,7 @@ class CtaLink extends Component {
 
   render() {
     let { cta, variant } = this.props;
+
     if (!cta) return null;
 
     // Check to see if type present.

@@ -127,6 +127,17 @@ class ImageTeaserTemplate(CTABlock):
     shelf_id = IDBlock(required=False, label="ID")
 
 
+class IFrameShelf(blocks.StructBlock):
+    heading = blocks.CharBlock(required=False)
+    src = blocks.CharBlock(required=True, label="Source URl")
+    frame_border = blocks.IntegerBlock(default=0, required=False)
+    scrolling = blocks.CharBlock(required=False)
+    width = blocks.IntegerBlock(default=100, required=False)
+    height = blocks.IntegerBlock(default=100, required=False)
+    sandbox = blocks.CharBlock(required=False)
+    shelf_id = blocks.CharBlock(required=False, label="ID")
+
+
 class Carousel(blocks.StructBlock):
     heading = blocks.CharBlock(required=False)
     items = blocks.StreamBlock([
@@ -164,6 +175,7 @@ class OneYou2Page(Page):
         ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
         ('grid_shelf', Grid(icon="form")),
         ('find_out_more_dropdown', FindOutMoreDropDown(label="Link dropdown", icon="order-down")),
+        ('iframe_shelf', IFrameShelf(label="IFrame", icon='code')),
     ])
     page_ref = models.CharField(max_length=255, unique=True)
     release = models.ForeignKey(
