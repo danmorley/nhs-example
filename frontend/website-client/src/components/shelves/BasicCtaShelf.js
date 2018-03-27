@@ -91,7 +91,7 @@ class BasicCtaShelf extends Component {
         <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
           <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
-              <div className="shelf__col col col-vertical-center">
+              <div className="shelf__col col col-vertical-center col-shrink-to-fit">
                 {this.renderCta(content.cta)}
               </div>
               <div className="shelf__col col col-vertical-center md-content-right">
@@ -109,7 +109,7 @@ class BasicCtaShelf extends Component {
               <div className="shelf__col col col-vertical-center">
                 {this.renderHeadingBody(content, headingTagName)}
               </div>
-              <div className="shelf__col col col-vertical-center md-content-right">
+              <div className="shelf__col col col-vertical-center md-content-right col-shrink-to-fit">
                 {this.renderCta(content.cta)}
               </div>
             </div>

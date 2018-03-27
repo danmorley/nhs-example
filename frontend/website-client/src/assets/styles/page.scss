@@ -43,6 +43,10 @@
   display: flex;
 }
 
+.col-shrink-to-fit {
+  flex-grow: 0;
+}
+
 .md-content-right {
   
   @include media-breakpoint-up(md) {
