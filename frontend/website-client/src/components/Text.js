@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CmsRichTextFormatter from './CmsRichTextFormatter';
+import startsWith from 'lodash.startswith';
 
 /**
  *  Text is a simple field that will output escaped text or
@@ -31,7 +32,7 @@ class Text extends Component {
       // Treat as straight HTML that doesn't require escaping.
       return (<Tag dangerouslySetInnerHTML={{__html: content}} {...rest}/>);
 
-    } else if (content.startsWith('html::')) {
+    } else if (startsWith(content, 'html::')) {
       // Treat as straight HTML that doesn't require escaping.
       return (<Tag dangerouslySetInnerHTML={{__html: content.substring(6)}} {...rest}/>);
 
