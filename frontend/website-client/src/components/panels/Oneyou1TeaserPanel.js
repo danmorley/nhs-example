@@ -43,22 +43,13 @@ class Oneyou1TeaserPanel extends Component {
 
     if (!CtaUtils.isCta(content.cta)) return null;
 
-    if (CtaUtils.isSingleCta(content.cta)) {
-      let cta = CtaUtils.getSingleCta(content.cta);
-      return (
-        <div className={`${classNamePrefix}__cta-item`}>
-          <CtaLink cta={cta} />
-        </div>
-      );
-    } else {
-      return (
-        <div className={`${classNamePrefix}__cta-list`}>
-          <Collapsible trigger={<h4>{content.cta_heading || 'Find out more'}</h4>} transitionTime={200}>
-            <CtaList items={content.cta} />
-          </Collapsible>
-        </div>
-      );
-    }
+    return (
+      <div className={`${classNamePrefix}__cta-list`}>
+        <Collapsible trigger={<h4>{content.cta_heading || 'Find out more'}</h4>} transitionTime={200}>
+          <CtaList items={content.cta} />
+        </Collapsible>
+      </div>
+    );
   }
 }
 
