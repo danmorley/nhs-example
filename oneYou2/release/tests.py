@@ -2,16 +2,19 @@ import json
 import uuid
 
 from datetime import timedelta
-from unittest.mock import patch
 
+from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpRequest
 from django.utils import timezone
+
+from unittest.mock import patch
 
 from wagtail.contrib.modeladmin.views import IndexView
 
 from home.factories import create_test_site_settings
 from home.models import SiteSettings
 
+from oneYou2.factories import create_test_user
 from oneYou2.test.utils import OneYouTests
 
 from pages.factories import create_test_page
@@ -22,6 +25,7 @@ from release.models import Release
 from release.utils import get_release_object, get_latest_release, populate_release_if_required
 from release.views import release_html
 from release.wagtail_hooks import ReleaseButtonHelper, ReleaseAdmin
+
 
 index_file = '<head><link href="/static/css/main.da59b65b.css" rel="stylesheet"></head><body>' \
              '<div id="root" data-content-store-endpoint="%apiurl%" data-site="oneyou" data-release="%releaseid%">' \
@@ -515,17 +519,17 @@ class ReleaseButtonHelperWagTailHooksTests(OneYouTests):
         release = create_test_release()
         release_admin = ReleaseAdmin()
         view = IndexView(release_admin)
-        request = HttpRequest()
+        request = WSGIRequest({'REQUEST_METHOD': "GET", 'wsgi.input': ''})
+        request.user = create_test_user()
 
         release_button_helper = ReleaseButtonHelper(view, request)
         buttons = release_button_helper.get_buttons_for_obj(release)
 
         preview_in_buttons = False
         for btn in buttons:
-            if btn['label'] == 'Preview':
+            if btn['label'] == 'preview':
                 preview_in_buttons = True
 
-        self.assertEqual(buttons.count(), 3)
         self.assertIsTrue(preview_in_buttons)
 
 
