@@ -2,8 +2,18 @@ from django.contrib.contenttypes.models import ContentType
 
 from oneYou2.test.utils import OneYouTests
 
-from shelves.factories import create_test_abstract_shelf, create_test_promo_shelf, create_test_revision
-from shelves.models import ShelfAbstract, ShelfRevision, PromoShelf
+from shelves.factories import create_test_abstract_shelf, create_test_promo_shelf, create_test_revision,\
+    create_test_banner_shelf
+from shelves.models import ShelfAbstract, ShelfRevision, PromoShelf, get_default_shelf_content_type
+
+
+class ShelfModelHelperFunctionsTests(OneYouTests):
+    def test_get_default_shelf_content_type_returns_shelf_abstract_as_the_default(self):
+        actual_type = get_default_shelf_content_type()
+
+        expected_type = ContentType.objects.get_for_model(ShelfAbstract)
+
+        self.assertEqual(actual_type, expected_type)
 
 
 class ShelfAbstractModelTests(OneYouTests):
@@ -90,6 +100,18 @@ class ShelfAbstractModelTests(OneYouTests):
         self.assertEqual(shelf_dict['shelf_id'], shelf.shelf_id)
 
         shelf.delete()
+
+    def test_string_function_returns_the_db_id_if_no_string_id_set(self):
+        shelf = create_test_abstract_shelf(shelf_id=None)
+
+        self.assertNotEqual(shelf.__str__(), shelf.shelf_id)
+        self.assertEqual(shelf.__str__(), str(shelf.id))
+
+    def test_string_function_returns_the_string_id_if_set(self):
+        shelf = create_test_abstract_shelf()
+
+        self.assertNotEqual(shelf.__str__(), str(shelf.id))
+        self.assertEqual(shelf.__str__(), shelf.shelf_id)
 
 
 class ShelfRevisionModelTests(OneYouTests):
@@ -192,6 +214,45 @@ class ShelfRevisionModelTests(OneYouTests):
         self.assertIsTrue('live_revision' in serialized_shelf)
         self.assertIsTrue('shelf_id' in serialized_shelf)
         self.assertIsTrue('content_type' in serialized_shelf)
+
+    def test_string_function_returns_correct_value(self):
+        revision = create_test_revision()
+
+        expected_string = str(revision.shelf) + '" at ' + str(revision.created_at)
+
+        self.assertEqual(revision.__str__(), expected_string)
+
+
+class BannerShelfModelTests(OneYouTests):
+    def test_meta_layout_returns_the_correct_value(self):
+        shelf = create_test_banner_shelf()
+
+        expected_value = "full_width"
+
+        self.assertEqual(expected_value, shelf.meta_layout)
+
+    def test_meta_variant_returns_the_correct_value(self):
+        shelf = create_test_banner_shelf()
+
+        expected_value = "main-banner"
+
+        self.assertEqual(expected_value, shelf.meta_variant)
+
+
+class PromoShelfModelTests(OneYouTests):
+    def test_meta_layout_returns_the_correct_value(self):
+        shelf = create_test_promo_shelf()
+
+        expected_value = "cta_on_right"
+
+        self.assertEqual(expected_value, shelf.meta_layout)
+
+    def test_meta_variant_returns_the_correct_value(self):
+        shelf = create_test_promo_shelf()
+
+        expected_value = "how-are-you"
+
+        self.assertEqual(expected_value, shelf.meta_variant)
 
 
 class ShelfFactoriesTests(OneYouTests):
