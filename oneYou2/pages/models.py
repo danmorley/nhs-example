@@ -144,10 +144,19 @@ class Carousel(blocks.StructBlock):
     items = blocks.StreamBlock([
         ('video_teaser', VideoTemplate(icon="media")),
         ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
+        ('promo_shelf', PromoShelfChooserBlock(target_model="shelves.PromoShelf", icon="image")),
         ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
         ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
+        ('oneyou1_teaser', BackwardsCompatibleContent(label="OneYou1 teaser", icon="folder-inverse")),
+        ('video_teaser', VideoTemplate(icon="media")),
+        ('information_panel', InformationPanel(target_model="shelves.AppTeaser", icon="image")),
     ], icon='arrow-left', label='Items', required=False)
     shelf_id = IDBlock(required=False, label="ID")
+    meta_variant = blocks.ChoiceBlock(choices=[
+        ('shelf_carousel', 'Shelf carousel'),
+        ('panel_carousel', 'Panel carousel')
+    ], label="Type of carousel", default="shelf_carousel")
+
 
 
 class Grid(blocks.StructBlock):
