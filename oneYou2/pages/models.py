@@ -158,7 +158,6 @@ class Carousel(blocks.StructBlock):
     ], label="Type of carousel", default="shelf_carousel")
 
 
-
 class Grid(blocks.StructBlock):
     heading = blocks.CharBlock(required=False)
     rows_to_show = blocks.IntegerBlock(default=0)
