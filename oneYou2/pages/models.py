@@ -29,7 +29,8 @@ from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppT
 
 GRID_LAYOUT_CHOICES = (
     ('full_width', 'Full Width'),
-    ('2_col_1_on_mobile', 'Responsive (1 column on mobile, 2 on desktop)'),
+    ('2_col_1_on_mobile', 'Responsive (2 columns on desktop)'),
+    ('3_col_1_on_mobile', 'Responsive (3 columns on desktop)'),
 )
 
 
@@ -160,7 +161,10 @@ class Grid(blocks.StructBlock):
         ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
         ('information_panel', InformationPanel(target_model="shelves.AppTeaser", icon="image"))
     ], icon='arrow-left', label='Items')
-    meta_layout = blocks.ChoiceBlock(choices=GRID_LAYOUT_CHOICES, label="Layout")
+    meta_layout = blocks.ChoiceBlock(choices=GRID_LAYOUT_CHOICES,
+                                     label="Layout",
+                                     help_text="Use this to select number of columns on desktop (only one column"
+                                               " on mobile)")
     shelf_id = IDBlock(required=False, label="ID")
 
 
