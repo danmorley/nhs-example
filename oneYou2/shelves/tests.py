@@ -218,7 +218,7 @@ class ShelfRevisionModelTests(OneYouTests):
     def test_string_function_returns_correct_value(self):
         revision = create_test_revision()
 
-        expected_string = str(revision.shelf) + '" at ' + str(revision.created_at)
+        expected_string = '"' + str(revision.shelf) + '" at ' + str(revision.created_at)
 
         self.assertEqual(revision.__str__(), expected_string)
 
