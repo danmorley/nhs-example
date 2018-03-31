@@ -343,6 +343,10 @@ class AltPagesEndpoint(PagesAPIEndpoint):
         return base.specific
 
 
+class PagePreviewEndpoint(PagesAPIEndpoint):
+    pass
+
+
 class OneYouAPIRouter(WagtailAPIRouter):
     """This is the default WagtailAPI router with some of our own endpoints pre-registered"""
 

@@ -5,6 +5,8 @@ import logging
 from django.db import models
 from django.db.models import DateField, TextField
 from django.forms.models import model_to_dict
+from django.http import JsonResponse
+from django.template.response import TemplateResponse
 
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.models import Page, Orderable
@@ -26,6 +28,7 @@ from .utils import get_serializable_data_for_fields
 from home.models import SiteSettings
 
 from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppTeaserChooserBlock, BlobImageChooserBlock
+
 
 GRID_LAYOUT_CHOICES = (
     ('full_width', 'Full Width'),
@@ -375,6 +378,61 @@ class OneYou2Page(Page):
                    body=json.dumps(obj_dict['body']),
                    live=obj_dict['live'],
                    theme_id=obj_dict['page_theme']['id'])
+
+    def serve_preview(self, request, mode_name):
+        request.is_preview = True
+
+        if mode_name == 'json':
+            latest_revision_as_page = self.get_latest_revision_as_page()
+            data = latest_revision_as_page.serializable_data()
+
+            # TODO: Class method, can be used in the release object, release content
+            # The above will make everything much neater
+
+            from .serializers import OneYouPageSerializer
+            serialized_page = OneYouPageSerializer(instance=latest_revision_as_page)
+            print(serialized_page.data)
+
+            return JsonResponse(serialized_page.data)
+
+        return self.serve(request)
+
+    def serve(self, request, *args, **kwargs):
+        request.is_preview = getattr(request, 'is_preview', False)
+
+        return TemplateResponse(
+            request,
+            self.get_template(request, *args, **kwargs),
+            self.get_context(request, *args, **kwargs)
+        )
+
+    @property
+    def meta_data(self):
+        from .serializers import OneYouPageMetaSerializer
+        meta = OneYouPageMetaSerializer(instance=self)
+        return meta.data
+
+
+    DEFAULT_PREVIEW_MODES = [
+        ('react', 'Default'),
+        #('html', 'AMP'),
+        ('json', 'API'),
+    ]
+
+    @property
+    def preview_modes(self):
+        """
+        A list of (internal_name, display_name) tuples for the modes in which
+        this page can be displayed for preview/moderation purposes. Ordinarily a page
+        will only have one display mode, but subclasses of Page can override this -
+        for example, a page containing a form might have a default view of the form,
+        and a post-submission 'thankyou' page
+        """
+        return self.DEFAULT_PREVIEW_MODES
+
+    @property
+    def default_preview_mode(self):
+        return self.preview_modes[0][0]
 
 
 # Orderables
