@@ -383,16 +383,9 @@ class OneYou2Page(Page):
         request.is_preview = True
 
         if mode_name == 'json':
-            latest_revision_as_page = self.get_latest_revision_as_page()
-            data = latest_revision_as_page.serializable_data()
-
-            # TODO: Class method, can be used in the release object, release content
-            # The above will make everything much neater
-
             from .serializers import OneYouPageSerializer
+            latest_revision_as_page = self.get_latest_revision_as_page()
             serialized_page = OneYouPageSerializer(instance=latest_revision_as_page)
-            print(serialized_page.data)
-
             return JsonResponse(serialized_page.data)
 
         return self.serve(request)
@@ -412,10 +405,9 @@ class OneYou2Page(Page):
         meta = OneYouPageMetaSerializer(instance=self)
         return meta.data
 
-
     DEFAULT_PREVIEW_MODES = [
         ('react', 'Default'),
-        #('html', 'AMP'),
+        # ('html', 'AMP'),
         ('json', 'API'),
     ]
 
