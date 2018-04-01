@@ -297,13 +297,18 @@ class OneYou2Page(Page):
             classname='collapsible collapsed'),
     ]
 
+    promote_panels = [
+        FieldPanel('slug')
+    ]
+
     edit_handler = TabbedInterface([
         ObjectList(content_panels, heading='Content'),
-        ObjectList(info_content_panels, heading='Info'),
+        ObjectList(info_content_panels, heading='Notes'),
         ObjectList(meta_content_panels, heading='Meta'),
-        ObjectList(Page.promote_panels, heading='Promote'),
-        ObjectList(Page.settings_panels, heading='Settings', classname='settings'),
+        ObjectList(Page.promote_panels, heading='Settings'),
     ])
+
+
 
     api_fields = ['body', 'path', 'depth', 'numchild', 'page_ref', 'live', 'page_theme']
 
