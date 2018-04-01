@@ -57,3 +57,22 @@ class OneYouPageMetaSerializer(serializers.ModelSerializer):
             'twitter_description',
             'twitter_image',
         )
+
+
+class OneYouPageListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = apps.get_model('pages', 'OneYou2Page')
+        fields = (
+            'id',
+            # 'detail_url',
+            # 'relative_path'
+            # 'title',
+            # 'slug',
+            # 'page_ref',
+            # 'depth',
+            # 'numchild',
+            # 'preview',
+
+            # 'revision'
+
+        )

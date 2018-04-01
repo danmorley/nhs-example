@@ -18,6 +18,7 @@ from .api import api_router
 from release import views
 
 from search import views as search_views
+from api import urls as api_urls
 
 from pages import urls as pages_urls
 
@@ -32,6 +33,7 @@ urlpatterns = [
 
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt'), name='robots'),
 
+    url(r'^api/', include(api_urls)),
     url(r'^api/v2/', api_router.urls),
 
     url(r'^search/$', search_views.search, name='search'),

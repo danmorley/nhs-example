@@ -2,7 +2,6 @@ from __future__ import absolute_import, unicode_literals
 
 import json
 import uuid
-from collections import OrderedDict
 
 from datetime import datetime
 
@@ -14,35 +13,19 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 
-from wagtail.api.v2.serializers import PageSerializer
-
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
 
-from oneYou2.panels import ReadOnlyPanel
 from .forms import ReleaseAdminForm
 
 from frontendHandler.models import FrontendVersion
-
 from pages.models import OneYou2Page
+from oneYou2.panels import ReadOnlyPanel
 
-from rest_framework.viewsets import GenericViewSet
 
 CONTENT_STATUS = (
     (0, "PENDING"),
     (1, "FROZEN"),
 )
-
-
-class DummyView(GenericViewSet):
-
-    def __init__(self, *args, **kwargs):
-        super(DummyView, self).__init__(*args, **kwargs)
-
-        # seen_types is a mapping of type name strings (format: "app_label.ModelName")
-        # to model classes. When an object is serialised in the API, its model
-        # is added to this mapping. This is used by the Admin API which appends a
-        # summary of the used types to the response.
-        self.seen_types = OrderedDict()
 
 
 def validate_in_future(date_time):
@@ -151,62 +134,27 @@ class Release(ClusterableModel):
             if revision.revision.page_id == page_id:
                 revision.delete()
 
-    def get_serializer_class(self):
-        class Meta:
-            model = OneYou2Page
-            fields = ['id', 'title', 'body', 'path', 'depth', 'numchild', 'page_ref', 'live', 'page_theme', 'type',
-                      'detail_url', 'html_url', 'slug', 'show_in_menus', 'seo_title', 'search_description',
-                      'first_published_at', 'parent', 'og_title', 'og_description', 'og_url', 'og_image', 'og_type',
-                      'twitter_url', 'twitter_card', 'twitter_site', 'twitter_title', 'twitter_description',
-                      'twitter_image'
-                      ]
-
-        attrs = {
-            'Meta': Meta,
-            'meta_fields': ['type', 'detail_url', 'html_url', 'slug', 'show_in_menus', 'seo_title',
-                            'search_description', 'first_published_at', 'parent', 'og_title', 'og_description',
-                            'og_url', 'og_image', 'og_type', 'twitter_url', 'twitter_card', 'twitter_site',
-                            'twitter_title', 'twitter_description', 'twitter_image'],
-            'child_serializer_classes': {},
-        }
-
-        return type("OneYou2PageSerializer", (PageSerializer,), attrs)
-
     def generate_fixed_content(self):
-        from oneYou2.api import api_router
+        from pages.serializers import OneYouPageSerializer
         pages = {}
         for revision in self.revisions.all():
-            class Request(object):
-                def __init__(self):
-                    self.site = revision.revision.page.get_site()
-
-            page_obj = revision.revision.as_page_object()
-            serializer = self.get_serializer_class()
-            response = serializer(page_obj,
-                                  context={'request': Request(), 'view': DummyView(), 'router': api_router})
-            pages[str(revision.revision.page_id)] = response.data
+            page = revision.revision.as_page_object()
+            page_content = OneYouPageSerializer(page).data
+            pages[str(revision.revision.page_id)] = page_content
         return pages
 
     def get_content_for(self, key):
-        page_content = None
         if self.release_date_has_passed():
             page_content = self.content.first().get_content_for(str(key))
         else:
-            for revision in self.revisions.all():
-                if str(revision.revision.page_id) == str(key):
-                    from oneYou2.api import api_router
-
-                    class Request(object):
-                        def __init__(self):
-                            self.site = revision.revision.page.get_site()
-
-                    page_obj = revision.revision.as_page_object()
-                    serializer = self.get_serializer_class()
-                    response = serializer(page_obj,
-                                          context={'request': Request(),
-                                                   'view': DummyView(), 'router': api_router})
-                    page_content = response.data
-
+            from pages.serializers import OneYouPageSerializer
+            try:
+                release_page = ReleasePage.objects.get(release=self, revision__page=key)
+            except ReleasePage.DoesNotExist:
+                # I swapped this for a key error so both previews, and non-previews return the same error
+                raise KeyError
+            page = release_page.revision.as_page_object()
+            page_content = OneYouPageSerializer(page).data
         return page_content
 
     def get_current_frontend_id(self):
@@ -214,6 +162,7 @@ class Release(ClusterableModel):
 
 
 class ReleasePage(models.Model):
+    # TODO: I'm guessing these related names are the wrong way round
     release = models.ForeignKey(
         'release.Release',
         related_name='revisions',

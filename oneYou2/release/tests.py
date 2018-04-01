@@ -339,9 +339,8 @@ class ReleaseModelTests(OneYouTests):
         """
         release = create_test_release()
 
-        release_page_content = release.get_content_for(0)
-
-        self.assertIsNone(release_page_content)
+        with self.assertRaises(KeyError):
+            release.get_content_for(0)
 
     def test_release_loads_content_from_tables_if_not_yet_released(self, mock_file_service):
         """
