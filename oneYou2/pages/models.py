@@ -308,8 +308,6 @@ class OneYou2Page(Page):
         ObjectList(Page.promote_panels, heading='Settings'),
     ])
 
-
-
     api_fields = ['body', 'path', 'depth', 'numchild', 'page_ref', 'live', 'page_theme']
 
     def save(self, *args, **kwargs):

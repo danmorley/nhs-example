@@ -2,7 +2,7 @@ from django.conf.urls import url
 
 from . import views
 
-app_name = 'oneyou_pages'
+app_name = 'react_api'
 urlpatterns = [
     url(r'^sites/(?P<site_identifier>[\w\-]+)/$',
         views.site_view,
