@@ -228,13 +228,20 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
         return self.response
 
     def detail_view(self, request, pk, release_uuid=None):
+        from.serializers import SiteSerializer
+
         instance = self.get_object()
+        site = Site.objects.get(pk=pk)
+        settings = SiteSettings.objects.get(site=site)
         # TODO: Currently no site data is associated with a release, so this doesn't really do anything
+        # This might actually expose a fundamental issue, this url should effectively return a release
+
         if not release_uuid or release_uuid == "current":
             current_release = get_latest_release(instance.pk)
             if not current_release:
                 raise NoReleasesFound("The current site has no live releases")
             setattr(instance, 'release_id', current_release.uuid)
+            setattr(settings, 'release_uuid', current_release.uuid)
         else:
             # Request is asking for a specific release
             release_object = get_release_object(release_uuid)
@@ -242,8 +249,15 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
                 raise NotFound()
 
             setattr(instance, 'release_id', release_uuid)
-        serializer = self.get_serializer(instance)
-        return Response(serializer.data)
+            setattr(settings, 'release_uuid', release_uuid)
+
+        # serializer = self.get_serializer(instance)
+        # See the todo above, this is highl
+
+        data = SiteSerializer(settings).data
+        # import pprint; pprint.pprint(data)
+
+        return Response(data)
 
     def listing_view(self, request):
         queryset = self.get_queryset()

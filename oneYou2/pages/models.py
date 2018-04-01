@@ -22,7 +22,7 @@ from wagtailsnippetscopy.registry import snippet_copy_registry
 from modelcluster.models import get_all_child_relations, get_all_child_m2m_relations
 from modelcluster.fields import ParentalKey
 
-from .blocks import IDBlock, CTABlock
+from .blocks import IDBlock, CTABlock, MenuItemPageBlock
 from .utils import get_serializable_data_for_fields
 
 from home.models import SiteSettings
@@ -43,7 +43,7 @@ logger = logging.getLogger('wagtail.core')
 class SimpleMenuItem(blocks.StructBlock):
     link_text = blocks.CharBlock(required=False)
     link_external = blocks.URLBlock(label='External link', required=False)
-    link_page = blocks.PageChooserBlock(required=False)
+    link_page = MenuItemPageBlock(required=False)
 
 
 class MultiMenuItem(blocks.StructBlock):
@@ -259,6 +259,7 @@ class OneYou2Page(Page):
 
     @property
     def link_url(self):
+        # TODO: This could potentially use some base page methods
         site_name = SiteSettings.objects.get(site_id=self.get_site().id).uid
         return '/' + site_name + self.url_path
 
