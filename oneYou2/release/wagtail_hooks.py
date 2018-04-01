@@ -52,6 +52,7 @@ class ReleaseAdmin(ModelAdmin):
     list_display = ('release_name', 'uuid', 'content_status', 'release_time')
     list_filter = ('content_status',)
     search_fields = ('release_name',)
+    index_view_extra_css = ('css/admin_index.css',)
 
     def get_queryset(self, request):
         """

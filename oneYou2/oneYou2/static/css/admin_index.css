@@ -1,0 +1,41 @@
+
+.listing thead th.sorted a {
+    color: #005ea5
+}
+
+
+.changelist-filter a {
+    font-family: Open Sans, Arial, sans-serif;
+    border-radius: 3px;
+    width: auto;
+    line-height: 1.2em;
+    padding: 8px 12px;
+    font-size: .9em;
+    font-weight: 400;
+    vertical-align: middle;
+    display: block;
+    background-color: #fff;
+    border: 1px solid #005ea5;
+    color: #005ea5;
+    text-decoration: none;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    outline: none;
+    box-sizing: border-box;
+    -webkit-font-smoothing: auto;
+    -moz-appearance: none
+}
+
+.changelist-filter a:hover {
+    background-color: #005ea5;
+    border-color: #005ea5;
+    color: #fff
+}
+
+.changelist-filter li.selected a {
+    color: #fff!important;
+    border-color: #005ea5!important;
+    background-color: #005ea5
+}
+
