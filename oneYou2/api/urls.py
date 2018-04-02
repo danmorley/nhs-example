@@ -9,7 +9,7 @@ urlpatterns = [
         name='current-release-view'),
 
     url(r'^sites/(?P<site_identifier>[\w\-]+)/(?P<release_uuid>[\w\-]+)/$',
-        views.site_view,
+        views.release_view,
         name='specific-release-view'),
 
     url(r'^sites/(?P<site_identifier>[\w\-]+)/(?P<release_uuid>[\w\-]+)/pages/$',

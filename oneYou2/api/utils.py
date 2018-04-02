@@ -17,3 +17,5 @@ def get_site_or_404(identifier):
     site = get_site_by_id_or_uuid(identifier)
     if not site:
         raise Http404("Site Not Found")
+
+    return site

@@ -19,8 +19,6 @@ from .utils import get_site_or_404
 @require_safe
 def site_view(request, site_identifier):
     site = get_site_or_404(site_identifier)
-    if not site:
-        raise Http404("Site Not Found")
 
     current_release = get_latest_release(site.site.pk)
     if not current_release:
@@ -35,14 +33,16 @@ def site_view(request, site_identifier):
 def release_view(request, site_identifier, release_uuid):
     site = get_site_or_404(site_identifier)
 
-    current_release = get_latest_release(site.site.pk)
-    if not current_release:
-        raise NoReleasesFound("The current site has no live releases")
+    if release_uuid == "current":
+        current_release = get_latest_release(site.site.pk)
+        if not current_release:
+            raise NoReleasesFound("The current site has no live releases")
 
-    # Request is asking for a specific release
-    release_object = get_release_object(release_uuid)
-    if not release_object:
-        raise Http404("Release Not Found")
+    else:
+        # Request is asking for a specific release
+        release_object = get_release_object(release_uuid)
+        if not release_object:
+            raise Http404("Release Not Found")
 
     setattr(site, 'release_uuid', release_uuid)
 
