@@ -37,6 +37,7 @@ def release_view(request, site_identifier, release_uuid):
         current_release = get_latest_release(site.site.pk)
         if not current_release:
             raise NoReleasesFound("The current site has no live releases")
+        release_uuid = current_release.uuid
 
     else:
         # Request is asking for a specific release
