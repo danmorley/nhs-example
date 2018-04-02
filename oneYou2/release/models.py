@@ -145,7 +145,8 @@ class Release(ClusterableModel):
 
     def get_content_for(self, key):
         if self.release_date_has_passed():
-            page_content = self.content.first().get_content_for(str(key))
+            content = ReleaseContent.objects.get(release=self)
+            page_content = content.get_content_for(str(key))
         else:
             from pages.serializers import OneYouPageSerializer
             try:

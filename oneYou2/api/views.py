@@ -77,6 +77,7 @@ def page_detail(request, site_identifier, release_uuid, page_pk):
     release = get_release_object(release_uuid)
     if not release:
         raise Http404("Release Not Found")
+    populate_release_if_required(release)
 
     try:
         page_content = release.get_content_for(page_pk)
