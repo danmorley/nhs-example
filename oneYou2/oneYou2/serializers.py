@@ -49,9 +49,6 @@ class SiteSerializer(serializers.ModelSerializer):
         model = apps.get_model('wagtailcore', 'Site')
         fields = (
             'id',
-            'hostname',
-            'release_id',
-            'site_uid',
             'port',
             'site_name',
             # 'root_page',
@@ -66,3 +63,5 @@ class SiteSerializer(serializers.ModelSerializer):
             'release_id',
             'site_uid'
         )
+
+        fields = fields + meta_fields

@@ -403,12 +403,6 @@ class OneYou2Page(Page):
             self.get_context(request, *args, **kwargs)
         )
 
-    @property
-    def meta_data(self):
-        from .serializers import OneYouPageMetaSerializer
-        meta = OneYouPageMetaSerializer(instance=self)
-        return meta.data
-
     DEFAULT_PREVIEW_MODES = [
         ('react', 'Default'),
         # ('html', 'AMP'),
