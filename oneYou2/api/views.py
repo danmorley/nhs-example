@@ -7,6 +7,7 @@ from oneYou2.serializers import SiteSerializer
 from release.utils import get_latest_release, get_release_object, populate_release_if_required
 from release.exceptions import NoReleasesFound
 from pages.serializers import OneYouPageListSerializer
+from wagtail.wagtailcore.models import Page
 
 from .utils import get_site_or_404
 
@@ -72,7 +73,9 @@ def page_list(request, site_identifier, release_uuid):
 
 
 @require_safe
-def page_detail(request, site_identifier, release_uuid, page_pk):
+def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug=None):
+    if page_slug:
+        page_pk = Page.objects.get(slug=page_slug)
     get_site_or_404(site_identifier)
     release = get_release_object(release_uuid)
     if not release:

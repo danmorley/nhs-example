@@ -34,7 +34,7 @@ class FooterSerializer(serializers.ModelSerializer):
 
 class HeaderSerializer(serializers.ModelSerializer):
     title = ReadOnlyField(source='label')
-    
+
     class Meta:
         model = apps.get_model('pages', 'Header')
         fields = (

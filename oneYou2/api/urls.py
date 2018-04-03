@@ -19,4 +19,8 @@ urlpatterns = [
     url(r'^sites/(?P<site_identifier>[\w\-]+)/(?P<release_uuid>[\w\-]+)/pages/(?P<page_pk>\d+)/$',
         views.page_detail,
         name='page-detail'),
+
+    url(r'^sites/(?P<site_identifier>[\w\-]+)/(?P<release_uuid>[\w\-]+)/pages/(?P<page_slug>[\w\-]+)/$',
+        views.page_detail,
+        name='page-detail'),
 ]
