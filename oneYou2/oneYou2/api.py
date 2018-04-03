@@ -243,7 +243,9 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
 
             setattr(instance, 'release_id', release_uuid)
         serializer = self.get_serializer(instance)
-        return Response(serializer.data)
+        response = Response(serializer.data)
+        response['Cache-Control'] = 'max-age=300'
+        return response
 
     def listing_view(self, request):
         queryset = self.get_queryset()
