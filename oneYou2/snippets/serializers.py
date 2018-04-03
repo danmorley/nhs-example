@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from django.apps import apps
+from rest_framework.fields import ReadOnlyField
 
 from wagtail.api.v2.serializers import StreamField
 
@@ -28,4 +29,15 @@ class FooterSerializer(serializers.ModelSerializer):
             'items',
             'social_media',
             'image',
+        )
+
+
+class HeaderSerializer(serializers.ModelSerializer):
+    title = ReadOnlyField(source='label')
+    
+    class Meta:
+        model = apps.get_model('pages', 'Header')
+        fields = (
+            'title',
+            'image'
         )

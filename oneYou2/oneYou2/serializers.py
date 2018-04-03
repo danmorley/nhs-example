@@ -3,7 +3,7 @@ from rest_framework.fields import ReadOnlyField
 
 from django.apps import apps
 
-from snippets.serializers import MenuSerializer, FooterSerializer
+from snippets.serializers import MenuSerializer, FooterSerializer, HeaderSerializer
 
 
 class RedirectSerializer(serializers.ModelSerializer):
@@ -28,6 +28,7 @@ class SiteSerializer(serializers.ModelSerializer):
     is_default_site = ReadOnlyField(source='site.is_default_site')
     menu = MenuSerializer()
     footer = FooterSerializer()
+    header = HeaderSerializer()
     redirects = RedirectSerializer(source='site.redirects', many=True, read_only=True)
     release_id = ReadOnlyField(source='release_uuid')
 
@@ -54,6 +55,7 @@ class SiteSerializer(serializers.ModelSerializer):
             # 'root_page',
             'is_default_site',
             'menu',
+            'header',
             'footer',
             'redirects',
             # pages,
