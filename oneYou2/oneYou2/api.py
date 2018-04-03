@@ -24,7 +24,7 @@ from release.exceptions import NoReleasesFound
 
 from pages.models import OneYou2Page
 
-from release.utils import populate_release_if_required
+from release.utils import populate_release_if_required, cached_response
 
 
 class MenuField(Field):
@@ -231,10 +231,10 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
         instance = self.get_object()
         # TODO: Currently no site data is associated with a release, so this doesn't really do anything
         if not release_uuid or release_uuid == "current":
-            current_release = get_latest_release(instance.pk)
-            if not current_release:
+            release_object = get_latest_release(instance.pk)
+            if not release_object:
                 raise NoReleasesFound("The current site has no live releases")
-            setattr(instance, 'release_id', current_release.uuid)
+            setattr(instance, 'release_id', release_object.uuid)
         else:
             # Request is asking for a specific release
             release_object = get_release_object(release_uuid)
@@ -243,9 +243,9 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
 
             setattr(instance, 'release_id', release_uuid)
         serializer = self.get_serializer(instance)
-        response = Response(serializer.data)
-        response['Cache-Control'] = 'max-age=300'
-        return response
+
+        # Cache the response if the release has been frozen.
+        return cached_response(serializer.data, release_object.content_status == 0)
 
     def listing_view(self, request):
         queryset = self.get_queryset()
@@ -317,15 +317,17 @@ class ReleasePagesAPIEndpoint(PagesAPIEndpoint):
         return serializer_class(*args, **kwargs)
 
     def detail_view(self, request, pk, site_uid, release_uuid):
-        release = get_release_object(release_uuid)
-        if not release:
+        release_object = get_release_object(release_uuid)
+        if not release_object:
             raise NotFound()
-        populate_release_if_required(release)
+        populate_release_if_required(release_object)
         try:
-            page_content = release.get_content_for(pk)
+            page_content = release_object.get_content_for(pk)
         except KeyError:
             raise NotFound("Page not found in this release")
-        return Response(page_content)
+
+        # Cache the response if the release has been frozen.
+        return cached_response(page_content, release_object.content_status == 0)
 
     def listing_view(self, request, site_uid, release_uuid):
         release = get_release_object(release_uuid)
