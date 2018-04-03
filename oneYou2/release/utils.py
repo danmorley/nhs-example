@@ -30,6 +30,7 @@ def populate_release_if_required(release):
 
     return release
 
+
 def cached_response(content, should_cache):
     response = Response(content)
     if should_cache:
