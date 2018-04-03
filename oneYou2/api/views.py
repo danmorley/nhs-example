@@ -56,9 +56,9 @@ def page_list(request, site_identifier, release_uuid):
     # Ideally the react client would never need to use this endpoint
     get_site_or_404(site_identifier)
     release = get_release_object(release_uuid)
-    populate_release_if_required(release)
     if not release:
         raise Http404("Release Not Found")
+    populate_release_if_required(release)
 
     pages = release.revisions.all()
     serialized_page_data = OneYouPageListSerializer(pages, many=True).data
