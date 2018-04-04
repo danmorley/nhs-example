@@ -21,7 +21,7 @@ import queryString from 'query-string';
  */
 let rootElem = document.getElementById('root');
 global.rootUrl = rootElem.getAttribute('data-site') ? '/' + rootElem.getAttribute('data-site') : '/oneyou';
-let dataContentStoreEndpoint = rootElem.getAttribute('data-content-store-endpoint') || 'http://localhost:8000/api/v2';
+let dataContentStoreEndpoint = rootElem.getAttribute('data-content-store-endpoint') || 'http://localhost:8000/api';
 let dataSite = rootElem.getAttribute('data-site') || 'oneyou';
 let dataRelease = rootElem.getAttribute('data-release') || 'current';
 

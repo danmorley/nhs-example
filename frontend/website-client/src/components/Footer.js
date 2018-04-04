@@ -12,7 +12,7 @@ class Footer extends Component {
       return null;
     }
 
-    let { image, links, social_media } = content;
+    let { image, items, social_media } = content;
     let tempImage = { link: logo, title: 'PHE logo' };
 
     return (
@@ -21,7 +21,7 @@ class Footer extends Component {
           <div className = "row">
             <div className ="col">
               <Image image={tempImage} height="68" className="page-footer__phe-logo" />
-              <FooterMenu items={links} />
+              <FooterMenu items={items} />
             </div>
             <div className ="col text-right">
               <SocialLinks links={social_media} site={site} />

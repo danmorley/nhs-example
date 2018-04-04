@@ -31,7 +31,8 @@ class App extends Component {
     console.log('First time load of page for path ' + path);
     if (!this.isAppPage(path)) {
       console.log('Loading cms page', path);
-      let key = this.state.site.pages[path];
+      let key = this.pageSlug(path);
+
       this.loadPageForKey(key);
     } else {
       console.log('Loading app page', path);
@@ -47,12 +48,12 @@ class App extends Component {
       console.log('Internal load of page for path ' + location.pathname);
       let path = this.pagePathToRender(location.pathname);
       if (!this.isAppPage(path)) {
-        path = path.replace(global.rootUrl, '')
+        path = path.replace(global.rootUrl, '');
         console.log('Loading cms page', path);
-        let key = this.state.site.pages[path];
+        let key = this.pageSlug(path);
         this.loadPageForKey(key);
       } else {
-        path = path.replace(global.rootUrl, '')
+        path = path.replace(global.rootUrl, '');
         console.log('Loading app page', path);
       }
     });
@@ -105,6 +106,13 @@ class App extends Component {
   pagePathToRender() {
     let path = window.location.pathname.replace(global.rootUrl, '');
     return path.slice(-1) === '/' ? path : path + '/';
+  }
+
+  pageSlug(path) {
+    // Remove trailing slash
+    let path_minus_slash = path.replace(/\/$/, "");
+    let slug = path_minus_slash.substr(path_minus_slash.lastIndexOf('/') + 1)
+    return slug
   }
 
   loadPage(props) {
