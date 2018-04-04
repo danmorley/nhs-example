@@ -17,9 +17,6 @@ class ReleaseButtonHelper(ButtonHelper):
             classnames_exclude = []
         classnames = self.edit_button_classnames + classnames_add
         cn = self.finalise_classname(classnames, classnames_exclude)
-        print(self)
-        print(self.__dict__)
-        print(pk)
         release = Release.objects.get(id=pk)
         return {
             'url': '/' + release.site.sitesettings.uid + '/?id=' + release.uuid,
@@ -32,9 +29,7 @@ class ReleaseButtonHelper(ButtonHelper):
                             classnames_exclude=None):
         btns = ButtonHelper.get_buttons_for_obj(self, obj, exclude=None, classnames_add=None, classnames_exclude=None)
         pk = getattr(obj, self.opts.pk.attname)
-        btns.insert(1,
-                    self.preview_button(pk, ['button'], classnames_exclude)
-                    )
+        btns.insert(1, self.preview_button(pk, ['button'], classnames_exclude))
         return btns
 
 

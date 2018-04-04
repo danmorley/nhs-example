@@ -1,4 +1,3 @@
-
 def get_release_version():
     try:
         with open('version.txt') as data_file:

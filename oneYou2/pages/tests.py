@@ -1,16 +1,22 @@
 import json
 from unittest.mock import patch
 
+from django.core.handlers.wsgi import WSGIRequest
+from django.http import HttpRequest
+
+from wagtail.contrib.modeladmin.views import IndexView
 from wagtail.wagtailcore.blocks.stream_block import StreamValue
 from wagtail.wagtailcore.blocks.struct_block import StructValue
 
 from images.models import PHEImage
 
+from oneYou2.factories import create_test_user
 from oneYou2.test.utils import OneYouTests
 
-from pages.factories import create_test_page, create_test_theme
+from pages.factories import create_test_page, create_test_theme, create_test_menu
 from pages.models import OneYou2Page, Theme
 from pages.utils import get_serializable_data_for_fields, replace_embeds_with_links
+from pages.wagtail_hooks import MenuAdmin, MenuButtonHelper
 
 from release.factories import create_test_release
 
@@ -243,3 +249,42 @@ class PagesUtilsTests(OneYouTests):
         self.assertNotEquals(rich_text_source, processed_content)
         self.assertIsFalse('<embed' in processed_content)
         self.assertIsTrue('<img' in processed_content)
+
+
+class PagesMenuAdminWagtailHooksTests(OneYouTests):
+    def test_menu_admin_button_helper_class_is_correct(self):
+        menu_admin = MenuAdmin()
+
+        menu_button_helper = menu_admin.get_button_helper_class()
+
+        self.assertEqual(type(menu_button_helper), type(MenuButtonHelper))
+
+
+class PagesButtonHelperWagTailHooksTests(OneYouTests):
+    def test_copy_button_returns_a_link_to_copy_the_menu(self):
+        menu = create_test_menu()
+        menu_admin = MenuAdmin()
+        view = IndexView(menu_admin)
+        request = HttpRequest()
+
+        menu_button_helper = MenuButtonHelper(view, request)
+        copy_button = menu_button_helper.copy_button(menu.id)
+
+        self.assertEqual(copy_button['label'], 'copy')
+
+    def test_get_btns_for_obj_returns_a_list_containing_a_copy_button(self):
+        menu = create_test_menu()
+        menu_admin = MenuAdmin()
+        view = IndexView(menu_admin)
+        request = WSGIRequest({'REQUEST_METHOD': "GET", 'wsgi.input': ''})
+        request.user = create_test_user()
+
+        menu_button_helper = MenuButtonHelper(view, request)
+        buttons = menu_button_helper.get_buttons_for_obj(menu)
+
+        copy_in_buttons = False
+        for btn in buttons:
+            if btn['label'] == 'copy':
+                copy_in_buttons = True
+
+        self.assertIsTrue(copy_in_buttons)
