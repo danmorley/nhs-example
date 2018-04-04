@@ -4,6 +4,8 @@
 .oneyou1-teaser {
   display: flex;
   flex-direction: column;
+  position: relative;
+  height: 100%;
 }
 
 .oneyou1-teaser__heading {
@@ -34,6 +36,13 @@
   margin-top: 0;
   margin-bottom: 0;
   list-style-type: none;
+}
+
+.oneyou1-teaser__cta-list {
+  
+  @include media-breakpoint-up(sm) {
+    margin-top: 1em;
+  }
 }
 
 .oneyou1-teaser__cta-list a {
