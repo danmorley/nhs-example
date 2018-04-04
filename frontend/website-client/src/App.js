@@ -27,7 +27,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    let path = this.checkForRedirect() || this.pagePathToRender();
+    let path = this.checkForRedirect() || this.pagePathToRender(window.location.pathname);
     console.log('First time load of page for path ' + path);
     if (!this.isAppPage(path)) {
       console.log('Loading cms page', path);
@@ -102,8 +102,8 @@ class App extends Component {
   }
 
   // Take path from window location and ensure it has a trailing slash.
-  pagePathToRender() {
-    let path = window.location.pathname.replace(global.rootUrl, '');
+  pagePathToRender(pathname) {
+    let path = pathname.replace(global.rootUrl, '');
     return path.slice(-1) === '/' ? path : path + '/';
   }
 
