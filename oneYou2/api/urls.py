@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.views.generic import RedirectView
 
 from . import views
 
@@ -15,6 +16,10 @@ urlpatterns = [
     url(r'^sites/(?P<site_identifier>[\w\-]+)/(?P<release_uuid>[\w\-]+)/pages/$',
         views.page_list,
         name='page-list'),
+
+    url(r'^sites/(?P<site_identifier>[\w\-]+)/(?P<release_uuid>[\w\-]+)/pages//$',
+        views.home_page_detail,
+        name='home-page-detail'),
 
     url(r'^sites/(?P<site_identifier>[\w\-]+)/(?P<release_uuid>[\w\-]+)/pages/(?P<page_pk>\d+)/$',
         views.page_detail,

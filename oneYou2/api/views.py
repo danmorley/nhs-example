@@ -54,6 +54,7 @@ def release_view(request, site_identifier, release_uuid):
 
 @require_safe
 def page_list(request, site_identifier, release_uuid):
+    """The frontend shouldn't call this, iterating through release pages is not optimal"""
     # Ideally the react client would never need to use this endpoint
     get_site_or_404(site_identifier)
     release = get_release_object(release_uuid)
@@ -61,7 +62,8 @@ def page_list(request, site_identifier, release_uuid):
         raise Http404("Release Not Found")
     populate_release_if_required(release)
 
-    pages = release.revisions.all()
+    release_pages = release.revisions.all()
+    pages = [p.revision.as_page_object() for p in release_pages]
     serialized_page_data = OneYouPageListSerializer(pages, many=True).data
     page_data = {
         "meta": {
@@ -89,3 +91,9 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug=
         raise Http404("Page Not Found In Release")
 
     return HttpResponse(json.dumps(page_content), content_type="application/json")
+
+
+@require_safe
+def home_page_detail(request, site_identifier, release_uuid):
+    """Because the home page lives on a hardcoded / url"""
+    return page_detail(request, site_identifier, release_uuid, page_slug="home")

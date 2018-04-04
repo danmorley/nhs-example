@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from django.apps import apps
+from rest_framework.fields import ReadOnlyField
 from wagtail.api.v2.serializers import StreamField
 
 
@@ -12,7 +13,6 @@ class OneYouPageSerializer(serializers.ModelSerializer):
     def to_representation(self, data):
         # It's slightly weird that I do this a different way in the page serializer
         meta_fields = getattr(self.Meta, 'meta_fields')
-        print("META FIELDS")
         serialized_data = super(OneYouPageSerializer, self).to_representation(data)
         serialized_data['meta'] = {}
         for meta_field in meta_fields:
@@ -70,6 +70,7 @@ class OneYouPageSerializer(serializers.ModelSerializer):
 
 
 class OneYouPageListSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = apps.get_model('pages', 'OneYou2Page')
         fields = (
@@ -77,7 +78,7 @@ class OneYouPageListSerializer(serializers.ModelSerializer):
             # 'detail_url',
             # 'relative_path'
             # 'title',
-            # 'slug',
+            'slug',
             # 'page_ref',
             # 'depth',
             # 'numchild',
