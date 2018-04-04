@@ -14,7 +14,7 @@ from oneYou2.factories import create_test_user
 from oneYou2.test.utils import OneYouTests
 
 from pages.factories import create_test_page, create_test_theme, create_test_menu
-from pages.models import OneYou2Page, Theme, Menu
+from pages.models import OneYou2Page, Theme
 from pages.utils import get_serializable_data_for_fields, replace_embeds_with_links
 from pages.wagtail_hooks import MenuAdmin, MenuButtonHelper
 
