@@ -1,7 +1,6 @@
 from rest_framework import serializers
 
 from django.apps import apps
-from rest_framework.fields import ReadOnlyField
 from wagtail.api.v2.serializers import StreamField
 
 
