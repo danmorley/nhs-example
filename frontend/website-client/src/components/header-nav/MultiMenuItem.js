@@ -34,7 +34,6 @@ class MultiMenuItem extends Component {
   }
   
   handleClick(e) {
-    console.log(`'${this.props.classNamePrefix}-nav__secondary-title--open'`);
     e.target.classList.toggle(`${this.props.classNamePrefix}-nav__secondary-title--open`);
   }
 }
