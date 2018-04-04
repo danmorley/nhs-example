@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+from django.conf import settings
 from django.http import HttpResponse
 from django.views.static import serve
 
@@ -11,11 +12,11 @@ from frontendHandler.models import FrontendVersion
 from home.models import SiteSettings
 
 
-def get_protocol(domain_name):
-    if "service" in domain_name:
-        return 'https://'
-    else:
+def get_protocol():
+    if settings.ENV == 'dev':
         return 'http://'
+    else:
+        return 'https://'
 
 
 def release_html(request, site_name):
@@ -29,7 +30,7 @@ def release_html(request, site_name):
     index = FrontendVersion.get_html_for_version(release.frontend_id)
     substituted_index = index.replace("/static/css/", "/version/css/" + release.frontend_id + "/?file_name=")
     substituted_index = substituted_index.replace("/static/js/", "/version/js/" + release.frontend_id + "/?file_name=")
-    substituted_index = substituted_index.replace("%apiurl%", get_protocol(request.__dict__['META']['HTTP_HOST'])
+    substituted_index = substituted_index.replace("%apiurl%", get_protocol()
                                                   + request.__dict__['META']['HTTP_HOST'] + "/api/v2")
     substituted_index = substituted_index.replace("%releaseid%", release.uuid)
     return HttpResponse(substituted_index)
