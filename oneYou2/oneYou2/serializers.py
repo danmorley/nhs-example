@@ -33,7 +33,6 @@ class SiteSerializer(serializers.ModelSerializer):
     release_id = ReadOnlyField(source='release_uuid')
 
     def to_representation(self, data):
-        # It's slightly weird that I do this a different way in the page serializer
         meta_fields = getattr(self.Meta, 'meta_fields')
         serialized_data = super(SiteSerializer, self).to_representation(data)
         serialized_data['meta'] = {}
