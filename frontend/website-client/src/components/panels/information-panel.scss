@@ -18,10 +18,7 @@
   }
   
   @include media-breakpoint-up(lg) {
-    position: absolute;
-    right: 0;
-    top: 0;
-    min-height: 330px;
+    min-height: 336px;
   }
 }
 
