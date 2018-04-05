@@ -140,6 +140,10 @@ class IFrameShelf(blocks.StructBlock):
     shelf_id = blocks.CharBlock(required=False, label="ID")
 
 
+class Divider(blocks.StructBlock):
+    shelf_id = IDBlock(required=False, label="ID", help_text="Not displayed in the front end")
+
+
 class Carousel(blocks.StructBlock):
     heading = blocks.CharBlock(required=False)
     items = blocks.StreamBlock([
@@ -181,6 +185,7 @@ class OneYou2Page(Page):
         ('grid_shelf', Grid(icon="form")),
         ('find_out_more_dropdown', FindOutMoreDropDown(label="Link dropdown", icon="order-down")),
         ('iframe_shelf', IFrameShelf(label="IFrame", icon='code')),
+        ('divider', Divider(label="Divider", icon='code')),
     ])
     page_ref = models.CharField(max_length=255, unique=True)
 

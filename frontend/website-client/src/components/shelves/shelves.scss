@@ -34,6 +34,10 @@ $shelf-padding-extra: 2em;
       }
     }
   }
+
+  &.shelf-no-padding {
+    padding: 0px;
+  }
 }
 
 .shelf__col {
