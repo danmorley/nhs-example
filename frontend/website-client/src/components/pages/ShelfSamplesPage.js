@@ -203,10 +203,10 @@ const sampleShelvesPage = {
             value: {
               heading: 'Be Active With a Disability',
               body: '<p>There are so many ways to move - whatever your situation. Get ideas on the EDFS website</p>',
-              cta: {
+              cta: [ {
                 link_text: 'Link 1 text',
                 link_external: 'http://www.edfs.co.uk'
-              },
+              }] ,
             }
           },
           {
