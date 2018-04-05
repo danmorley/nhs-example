@@ -141,7 +141,7 @@ class IFrameShelf(blocks.StructBlock):
 
 
 class Divider(blocks.StructBlock):
-    shelf_id=IDBlock(required=False, label="ID", help_text="Not displayed in the front end")
+    shelf_id = IDBlock(required=False, label="ID", help_text="Not displayed in the front end")
 
 
 class Carousel(blocks.StructBlock):
