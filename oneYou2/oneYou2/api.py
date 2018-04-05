@@ -245,7 +245,7 @@ class SitesAPIEndpoint(BaseAPIEndpoint):
         serializer = self.get_serializer(instance)
 
         # Cache the response if the release has been frozen.
-        return cached_response(serializer.data, release_object.content_status == 0)
+        return cached_response(serializer.data, release_object.content_status == 1)
 
     def listing_view(self, request):
         queryset = self.get_queryset()
@@ -327,7 +327,7 @@ class ReleasePagesAPIEndpoint(PagesAPIEndpoint):
             raise NotFound("Page not found in this release")
 
         # Cache the response if the release has been frozen.
-        return cached_response(page_content, release_object.content_status == 0)
+        return cached_response(page_content, release_object.content_status == 1)
 
     def listing_view(self, request, site_uid, release_uuid):
         release = get_release_object(release_uuid)
