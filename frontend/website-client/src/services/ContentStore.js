@@ -11,7 +11,13 @@ ContentStore.prototype.getSite = async function() {
 };
 
 ContentStore.prototype.getPage = async function(pageId) {
-  return await _getPage(this.contentStoreEndpoint, this.site, this.release, pageId);
+  console.log("getPage", pageId, global.preview_page);
+  if (pageId === global.preview_page) {
+    return await _getPreviewPage(this.contentStoreEndpoint, this.site, pageId);
+  }
+  else {
+      return await _getPage(this.contentStoreEndpoint, this.site, this.release, pageId);
+  }
 };
 
 /**
@@ -69,6 +75,28 @@ async function _getPage(contentStoreEndpoint, site, release, pageId) {
     const response = await request(options);
     console.debug('_getPage: A2');
     return response ? 
+      { code: 0, response: response } :
+      { code: -1, error: 'Error getting page data', info: { statusCode: '-1', message: 'Page might need to be published' } };
+  }
+  catch (error) {
+    console.debug('_getPage: A3 - error');
+    return { code: -1, error: 'Error getting page data', info: { statusCode: error.statusCode, message: error.message } };
+  }
+}
+
+async function _getPreviewPage(contentStoreEndpoint, site, pageId) {
+  console.debug('_getPreviewPage: Entry');
+  let pageUrl = `${contentStoreEndpoint}/preview/sites/${site}/pages/${pageId}/`;
+  let options = {
+    url: pageUrl,
+    json: true
+  };
+
+  try {
+    console.debug('_getPage: A1', pageUrl);
+    const response = await request(options);
+    console.debug('_getPage: A2');
+    return response ?
       { code: 0, response: response } :
       { code: -1, error: 'Error getting page data', info: { statusCode: '-1', message: 'Page might need to be published' } };
   }

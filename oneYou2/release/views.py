@@ -51,15 +51,4 @@ def web_statics(request, path):
     if "wagtail" in path:
         return serve(request, path, document_root='./static/')
     else:
-        pass
         return serve(request, path, document_root='./web/static/')
-
-
-def serve_local_assets(request, path):
-    # asset_manifest = json.load(open('/code/frontend/website-client/build/asset-manifest.json'))
-    # reverse_asset_manifest = dict((v, k) for k, v in asset_manifest.items())
-    path = path.split('/')
-    file_path = "{}/{}".format(path[0], request.GET['file_name'])
-    print(file_path)
-    return serve(request, file_path, document_root='/code/frontend/website-client/build/static')
-

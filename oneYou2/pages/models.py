@@ -6,6 +6,7 @@ from django.db import models
 from django.db.models import DateField, TextField
 from django.forms.models import model_to_dict
 from django.http import JsonResponse
+from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 
 from wagtail.wagtailcore import blocks
@@ -391,6 +392,9 @@ class OneYou2Page(Page):
             latest_revision_as_page = self.get_latest_revision_as_page()
             serialized_page = OneYouPageSerializer(instance=latest_revision_as_page)
             return JsonResponse(serialized_page.data)
+
+        if mode_name == 'react':
+            return redirect('/oneyou{}'.format(self.get_url()))
 
         return self.serve(request)
 

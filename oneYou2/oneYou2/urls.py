@@ -73,10 +73,3 @@ if settings.DEBUG:
     urlpatterns = [
                       url(r'^__debug__/', include(debug_toolbar.urls)),
                   ] + urlpatterns
-
-
-SERVE_LOCAL_FRONTEND = True
-if SERVE_LOCAL_FRONTEND:
-    urlpatterns = [
-                      url(r'^version/(?P<path>.*)$', views.serve_local_assets),
-                  ] + urlpatterns

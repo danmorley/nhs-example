@@ -6,8 +6,10 @@ from django.views.decorators.http import require_safe
 from oneYou2.serializers import SiteSerializer
 from release.utils import get_latest_release, get_release_object, populate_release_if_required
 from release.exceptions import NoReleasesFound
-from pages.serializers import OneYouPageListSerializer
-from wagtail.wagtailcore.models import Page
+from pages.serializers import OneYouPageListSerializer, OneYouPageSerializer
+from pages.models import OneYou2Page
+
+from wagtail.wagtailcore.models import Page, Site
 
 from .utils import get_site_or_404
 
@@ -97,3 +99,12 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug=
 def home_page_detail(request, site_identifier, release_uuid):
     """Because the home page lives on a hardcoded / url"""
     return page_detail(request, site_identifier, release_uuid, page_slug="home")
+
+
+@require_safe
+def page_preview(request, site_identifier, page_slug):
+    site = Site.objects.get(site_name=site_identifier)
+    pages = Page.objects.filter(slug=page_slug)
+    page = [p for p in pages if p.get_site().pk == site.id][0]
+    serialized_page = OneYouPageSerializer(instance=page.specific.get_latest_revision_as_page())
+    return HttpResponse(json.dumps(serialized_page.data), content_type="application/json")

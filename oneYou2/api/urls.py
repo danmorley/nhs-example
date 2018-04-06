@@ -4,6 +4,10 @@ from . import views
 
 app_name = 'react_api'
 urlpatterns = [
+    url(r'^preview/sites/(?P<site_identifier>[\w\-]+)/pages/(?P<page_slug>[\w\-]+)/$',
+        views.page_preview,
+        name='page-preview'),
+
     url(r'^sites/(?P<site_identifier>[\w\-]+)/$',
         views.site_view,
         name='current-release-view'),
@@ -22,9 +26,9 @@ urlpatterns = [
 
     url(r'^sites/(?P<site_identifier>[\w\-]+)/(?P<release_uuid>[\w\-]+)/pages/(?P<page_pk>\d+)/$',
         views.page_detail,
-        name='page-detail'),
+        name='page-detail-by-pk'),
 
     url(r'^sites/(?P<site_identifier>[\w\-]+)/(?P<release_uuid>[\w\-]+)/pages/(?P<page_slug>[\w\-]+)/$',
         views.page_detail,
-        name='page-detail'),
+        name='page-detail-by-slug'),
 ]
