@@ -15,6 +15,11 @@ $arrow-distance: 4%;
   .shelf-section {
     padding-top: 0;
     padding-bottom: 0;
+    height: 100%;
+    
+    > div.shelf, div.shelf__container {
+      height: 100%;
+    }
   }
   
   .shelf__container {
@@ -94,6 +99,10 @@ $arrow-distance: 4%;
     height: 40px;
     width: 40px;
   }
+}
+
+.slick-list, .slick-track {
+  height: 100%;
 }
 
 // specific styles
