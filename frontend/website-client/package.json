@@ -23,6 +23,7 @@
     "react-swipeable": "^4.2.0",
     "request-promise-native": "^1.0.5",
     "slick-carousel": "^1.8.1",
+    "scroll-to-element": "^2.0.0",
     "universal-cookie": "^2.1.2"
   },
   "scripts": {
