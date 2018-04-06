@@ -74,14 +74,14 @@ button {
 .button-cta {
   padding: 1em;
   font-weight: bold;
-  box-shadow: 0 5px 4px 0 rgba(0,0,0,0.27);
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.26);
   text-transform: uppercase;
   cursor: pointer;
   white-space: nowrap;
 
   &:active {
     transform: translateY(1px);
-    box-shadow: 0 3px 4px 0 rgba(0,0,0,0.27);
+    box-shadow: 0 0 0 0;
   }
 }
 

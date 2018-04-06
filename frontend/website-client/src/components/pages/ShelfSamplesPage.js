@@ -15,6 +15,39 @@ const sampleShelvesPage = {
     {
       type: 'guidance_shelf',
       value: {
+        heading: 'Information Panel',
+        body: 'Layout <b>not given</b>, variant <b>not given</b>'
+      }
+    },
+    {
+      id: 'grid-shelf-1',
+      type: 'grid_shelf',
+      value: {
+        heading: 'Responsive Grid Shelf',
+        rows_to_show: 2,
+        items: [
+          {
+            id: 'information-panel-1a',
+            type: 'information_panel',
+            value: {
+              heading: 'html::There\'s Only One <span class="marker">You</span>',
+              body: '<p>Your health is important. It\'s not about doing the right thing - it\'s about making changes that fit your life to help feel your best. One You is all about finding that balance, and inspiring you with easy ways to help you feel great, every day.</p>',
+              image: {
+                title: 'Image name',
+              },
+              cta: {
+                link_text: 'Find out more',
+                link_external: 'http://www.somewebsite.co.uk'
+              }
+            }
+          }
+        ]
+      }
+    },
+          
+    {
+      type: 'guidance_shelf',
+      value: {
         heading: 'Iframe Shelf',
         body: 'Layout <b>not given</b>, variant <b>not given</b>'
       }
@@ -288,22 +321,6 @@ const sampleShelvesPage = {
               cta_googleplay: {
                 link_external: 'https://play.google.com/store/apps/details?id=com.bluestepsolutions.wellmind&hl=en_GB'
               },
-            }
-          },
-          {
-            id: 'information-panel-1a',
-            type: 'information_panel',
-            value: {
-              heading: 'html::There\'s Only <em>One</em>  <span class="marker">You</span>',
-              body: '<p>Your health is important. It\'s not about doing the right thing - it\'s about making changes that fit your life to help feel your best. One You is all about finding that balance, and inspiring you with easy ways to help you feel great, every day.</p>',
-              image: {
-                title: 'Image name',
-              },
-              video: '5520584848001',
-              cta: {
-                link_text: 'Find out more',
-                link_external: 'http://www.somewebsite.co.uk'
-              }
             }
           }
         ]
