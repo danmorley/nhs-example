@@ -14,7 +14,6 @@ from wagtail.wagtaildocs import urls as wagtaildocs_urls
 from wagtail.contrib.wagtailsitemaps.views import sitemap
 
 from oneYou2.utils import get_release_version
-from .api import api_router
 from release import views
 
 from search import views as search_views
@@ -34,7 +33,6 @@ urlpatterns = [
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt'), name='robots'),
 
     url(r'^api/', include(api_urls)),
-    url(r'^api/v2/', api_router.urls),
 
     url(r'^search/$', search_views.search, name='search'),
 

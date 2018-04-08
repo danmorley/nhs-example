@@ -10,16 +10,17 @@ from pages.serializers import OneYouPageListSerializer, OneYouPageSerializer
 
 from wagtail.wagtailcore.models import Page, Site
 
-from .utils import get_site_or_404
+from .utils import get_site_or_404, set_cache_headers
+
 
 # Release is basically implicit, menus/footers etc should be attached to something else
 # TODO: Refactor (release and site are realistically the wrong way round)
 
-# return cached_response(serializer.data, release_object.content_status == 1)
 
 # TODO: Detect content type
 # TODO: Test HTTP methods
 @require_safe
+@set_cache_headers
 def site_view(request, site_identifier):
     site = get_site_or_404(site_identifier)
 
@@ -33,6 +34,7 @@ def site_view(request, site_identifier):
 
 
 @require_safe
+@set_cache_headers
 def release_view(request, site_identifier, release_uuid):
     site = get_site_or_404(site_identifier)
 
@@ -55,6 +57,7 @@ def release_view(request, site_identifier, release_uuid):
 
 
 @require_safe
+@set_cache_headers
 def page_list(request, site_identifier, release_uuid):
     """The frontend shouldn't call this, iterating through release pages is not optimal"""
     # Ideally the react client would never need to use this endpoint
@@ -77,6 +80,7 @@ def page_list(request, site_identifier, release_uuid):
 
 
 @require_safe
+@set_cache_headers
 def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug=None):
     if page_slug:
         page_pk = Page.objects.get(slug=page_slug).pk
