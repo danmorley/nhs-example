@@ -13,14 +13,13 @@ from wagtail.wagtaildocs import urls as wagtaildocs_urls
 
 from wagtail.contrib.wagtailsitemaps.views import sitemap
 
-from oneYou2.utils import get_release_version
-from release import views
+from .utils import get_release_version
 
+from release import views
 from search import views as search_views
 from api import urls as api_urls
-
 from pages import urls as pages_urls
-
+from api.wagtail import api_router
 
 urlpatterns = [
     url(r'^django-admin/', include(admin.site.urls)),
@@ -32,6 +31,7 @@ urlpatterns = [
 
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt'), name='robots'),
 
+    url(r'^api/', api_router.urls),
     url(r'^api/', include(api_urls)),
 
     url(r'^search/$', search_views.search, name='search'),
