@@ -24,6 +24,7 @@ import NoticeShelf from './shelves/NoticeShelf';
 import IframeShelf from './shelves/IframeShelf';
 import ScriptShelf from './shelves/ScriptShelf';
 import SiteMapShelf from './shelves/SiteMapShelf';
+import DividerShelf from './shelves/DividerShelf';
 
 const cookies = new Cookies();
 const deployed = cookies.get('cookieBanner');

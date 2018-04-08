@@ -1,3 +1,5 @@
+from django.conf import settings
+
 
 def get_release_version():
     try:
@@ -7,8 +9,8 @@ def get_release_version():
         return "Cannot locate version number"
 
 
-def get_protocol(domain_name):
-    if "service" in domain_name:
-        return 'https://'
-    else:
+def get_protocol():
+    if settings.ENV == 'dev':
         return 'http://'
+    else:
+        return 'https://'

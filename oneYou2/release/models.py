@@ -29,7 +29,7 @@ CONTENT_STATUS = (
 
 
 def validate_in_future(date_time):
-    if date_time < timezone.now():
+    if date_time < timezone.localtime(timezone.now(), timezone.get_current_timezone()):
         raise ValidationError(_('Release date has already passed. Please choose one in the future.'))
 
 
@@ -120,7 +120,8 @@ class Release(ClusterableModel):
         return self.release_name
 
     def release_date_has_passed(self):
-        return (self.release_time is not None) and self.release_time < timezone.now()
+        return (self.release_time is not None) and\
+               self.release_time < timezone.localtime(timezone.now(), timezone.get_current_timezone())
 
     def add_revision(self, new_revision):
         for revision in self.revisions.all():

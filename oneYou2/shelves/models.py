@@ -144,7 +144,7 @@ class ShelfRevision(models.Model):
         # We cannot use auto_now_add as that will override
         # any value that is set before saving
         if self.created_at is None:
-            self.created_at = timezone.now()
+            self.created_at = timezone.localtime(timezone.now(), timezone.get_current_timezone())
 
         super(ShelfRevision, self).save(*args, **kwargs)
 

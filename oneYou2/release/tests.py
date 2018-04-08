@@ -2,13 +2,19 @@ import json
 import uuid
 
 from datetime import timedelta
-from unittest.mock import patch
 
+from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpRequest
 from django.utils import timezone
 
+from unittest.mock import patch
+
+from wagtail.contrib.modeladmin.views import IndexView
+
+from home.factories import create_test_site_settings
 from home.models import SiteSettings
 
+from oneYou2.factories import create_test_user
 from oneYou2.test.utils import OneYouTests
 
 from pages.factories import create_test_page
@@ -18,6 +24,7 @@ from release.factories import create_test_release, create_test_release_content, 
 from release.models import Release
 from release.utils import get_release_object, get_latest_release, populate_release_if_required
 from release.views import release_html
+from release.wagtail_hooks import ReleaseButtonHelper, ReleaseAdmin
 
 
 index_file = '<head><link href="/static/css/main.da59b65b.css" rel="stylesheet"></head><body>' \
@@ -488,3 +495,59 @@ class ReleaseViewsTests(OneYouTests):
         self.assertIsTrue("http://phe.nhs.uk/api" in response_content_string)
         self.assertIsFalse("%releaseid%" in response_content_string)
         self.assertIsTrue(release.uuid in response_content_string)
+
+
+@patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
+class ReleaseButtonHelperWagTailHooksTests(OneYouTests):
+    def test_preview_button_returns_a_link_to_view_the_releases_content(self, mock_file_service):
+        create_test_site_settings()
+        release = create_test_release()
+        release_admin = ReleaseAdmin()
+        view = IndexView(release_admin)
+        request = HttpRequest()
+
+        release_button_helper = ReleaseButtonHelper(view, request)
+        preview_button = release_button_helper.preview_button(release.id)
+
+        expected_release_url = '/' + release.site.sitesettings.uid + '/?id=' + release.uuid
+
+        self.assertEqual(preview_button['url'], expected_release_url)
+
+    def test_get_btns_for_obj_returns_a_list_containing_preview_button(self, mock_file_service):
+        create_test_site_settings()
+        release = create_test_release()
+        release_admin = ReleaseAdmin()
+        view = IndexView(release_admin)
+        request = WSGIRequest({'REQUEST_METHOD': "GET", 'wsgi.input': ''})
+        request.user = create_test_user()
+
+        release_button_helper = ReleaseButtonHelper(view, request)
+        buttons = release_button_helper.get_buttons_for_obj(release)
+
+        preview_in_buttons = False
+        for btn in buttons:
+            if btn['label'] == 'preview':
+                preview_in_buttons = True
+
+        self.assertIsTrue(preview_in_buttons)
+
+
+@patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
+class ReleaseAdminWagTailHooksTests(OneYouTests):
+    def test_release_admin_button_helper_class_is_correct(self, mock_file_service):
+        release_admin = ReleaseAdmin()
+
+        release_button_helper = release_admin.get_button_helper_class()
+
+        self.assertEqual(type(release_button_helper), type(ReleaseButtonHelper))
+
+    def test_get_queryset_returns_all_the_releases_in_the_db(self, mock_file_service):
+        create_test_release()
+        release_admin = ReleaseAdmin()
+        request = HttpRequest()
+
+        admin_release_list = release_admin.get_queryset(request)
+
+        expected_release_count = Release.objects.count()
+
+        self.assertEqual(expected_release_count, admin_release_list.count())

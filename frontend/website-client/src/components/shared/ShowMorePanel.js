@@ -31,6 +31,13 @@ class ShowMorePanel extends Component {
     sessionStorage.setItem(this.storageKey, this.state.isExpanded ? 'Y' : 'N');
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.props = nextProps;
+    this.storageKey = `${this.props.id}_panelExpanded`;
+    const isExpanded = sessionStorage.getItem(this.storageKey) === 'Y';
+    this.setState({ isExpanded: isExpanded, childrenToView: this.childrenToView(isExpanded) });
+  }
+
   doExpand() {
     this.setState({ isExpanded: true, childrenToView: this.childrenToView(true) });
   }

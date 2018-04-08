@@ -15,6 +15,7 @@ from .utils import get_site_or_404
 # Release is basically implicit, menus/footers etc should be attached to something else
 # TODO: Refactor (release and site are realistically the wrong way round)
 
+# return cached_response(serializer.data, release_object.content_status == 1)
 
 # TODO: Detect content type
 # TODO: Test HTTP methods

@@ -11,6 +11,24 @@ class PageHeader extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  state = {
+    navHeight: "0"
+  }
+
+  handleResize = () => { 
+    this.state = {navHeight: this.divElement.clientHeight};
+    document.querySelector('.page-wrapper').style.paddingTop = (this.state.navHeight +'px');
+  }; 
+  
+  componentDidMount() {
+    this.handleResize();
+    window.addEventListener('resize', this.handleResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize)
+  }
+  
   setBurgerElem(elem) {
     this.burgerElem = elem;
   }
@@ -18,12 +36,12 @@ class PageHeader extends Component {
   swipedLeft(e, absX) {
     PageHeader.toggleMenu(e);
   }
-
+  
   render() {
     let { navItems, header } = this.props;
 
     return (
-      <div className="container-fluid page-header">
+      <div ref={ (divElement) => this.divElement = divElement} className="container-fluid page-header">
         <div className="container">
           <div className="page-header__row">
             <div className="page-header__info">
@@ -34,7 +52,7 @@ class PageHeader extends Component {
                 <Text content={header.title || 'html::One <span>You</span>'} tagName={"div"} />
               </Link>
             </div>
-            <Swipeable
+            <Swipeable 
               className={'page-header__nav-container'}
                innerRef={(el) => this.swipeableElem = el}
                onSwipedLeft={this.swipedLeft}

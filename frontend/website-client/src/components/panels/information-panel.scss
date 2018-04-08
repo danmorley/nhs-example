@@ -18,15 +18,13 @@
   }
   
   @include media-breakpoint-up(lg) {
-    position: absolute;
-    right: 0;
-    top: 0;
-    min-height: 330px;
+    min-height: 336px;
   }
 }
 
 .information-panel__info {
   display: flex;
+  align-items: flex-start;
   flex-direction: column;
   width: 60%;
   padding-right: 1em;
@@ -43,26 +41,25 @@
 .information-panel__text {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  margin-bottom: 1em;
 
   p {
     margin-bottom: 1em;
-  }
-
-  a {
-    margin-top: auto;
   }
 }
 
 // theming
 .oneyou {
+  
+  .shelf .information-panel__heading {
+    color: $grey-brown-dark;
+  }
 
   .information-panel__info {
       background: none;
   }
 
   .information-panel__heading {
-    color: $teal-blue;
     font-weight: normal;
     font-family: $secondary-brand-font;
     margin-bottom: 0.5em;
@@ -77,6 +74,7 @@
       line-height: 0.9em;
       border-bottom: 0.15em solid $black;
       font-family: $tertiary-brand-font;
+      color: $teal-blue;
     }
   }
 
