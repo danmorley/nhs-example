@@ -6,8 +6,7 @@ from django.db import models
 from django.db.models import DateField, TextField
 from django.forms.models import model_to_dict
 from django.http import JsonResponse
-from django.shortcuts import redirect
-from django.template.response import TemplateResponse
+from django.template.response import TemplateResponse, SimpleTemplateResponse
 
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.models import Page, Orderable
@@ -23,11 +22,10 @@ from wagtailsnippetscopy.registry import snippet_copy_registry
 from modelcluster.models import get_all_child_relations, get_all_child_m2m_relations
 from modelcluster.fields import ParentalKey
 
+from oneYou2.utils import get_protocol
 from .blocks import IDBlock, CTABlock, MenuItemPageBlock
 from .utils import get_serializable_data_for_fields
-
 from home.models import SiteSettings
-
 from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppTeaserChooserBlock, BlobImageChooserBlock
 
 
@@ -394,7 +392,15 @@ class OneYou2Page(Page):
             return JsonResponse(serialized_page.data)
 
         if mode_name == 'react':
-            return redirect('/oneyou{}'.format(self.get_url()))
+            address = get_protocol(request.__dict__['META']['HTTP_HOST']) + request.__dict__['META']['HTTP_HOST']
+            if 'localhost' in address:
+                address += ':8000'
+
+            context = {
+                'preview_url': '{}/oneyou{}?preview_page={}'.format(address, self.get_url(), self.slug)
+            }
+            print(context)
+            return SimpleTemplateResponse(template='preview_wrapper.html', context=context)
 
         return self.serve(request)
 

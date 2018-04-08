@@ -7,7 +7,6 @@ from oneYou2.serializers import SiteSerializer
 from release.utils import get_latest_release, get_release_object, populate_release_if_required
 from release.exceptions import NoReleasesFound
 from pages.serializers import OneYouPageListSerializer, OneYouPageSerializer
-from pages.models import OneYou2Page
 
 from wagtail.wagtailcore.models import Page, Site
 

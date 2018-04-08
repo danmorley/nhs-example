@@ -1,23 +1,14 @@
 from __future__ import unicode_literals
 
-import json
-
 from django.http import HttpResponse
 from django.views.static import serve
 
 from release.utils import get_latest_release
-from .models import Release
-
+from oneYou2.utils import get_protocol
 from frontendHandler.models import FrontendVersion
-
 from home.models import SiteSettings
 
-
-def get_protocol(domain_name):
-    if "service" in domain_name:
-        return 'https://'
-    else:
-        return 'http://'
+from .models import Release
 
 
 def release_html(request, site_name):

@@ -5,3 +5,10 @@ def get_release_version():
             return data_file.read()
     except FileNotFoundError:
         return "Cannot locate version number"
+
+
+def get_protocol(domain_name):
+    if "service" in domain_name:
+        return 'https://'
+    else:
+        return 'http://'
