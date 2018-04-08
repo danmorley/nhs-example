@@ -20,7 +20,6 @@ from .utils import get_site_or_404, set_cache_headers
 # TODO: Detect content type
 # TODO: Test HTTP methods
 @require_safe
-@set_cache_headers
 def site_view(request, site_identifier):
     site = get_site_or_404(site_identifier)
 
