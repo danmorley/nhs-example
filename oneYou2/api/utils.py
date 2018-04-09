@@ -1,8 +1,6 @@
 from django.http import Http404
 
 from home.models import SiteSettings as CustomSite
-from release.utils import get_release_object
-from release.utils import get_latest_release
 
 
 def get_site_by_id_or_uuid(identifier):
