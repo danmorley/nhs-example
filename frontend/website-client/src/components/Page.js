@@ -36,10 +36,11 @@ class Page extends Component {
     let scrollTarget = document.getElementById(hash.substring(1));
 
     if (hash && scrollTarget) {
-      // TODO isn't currently scrolling to hash
-      scrollToElement(hash);
+      // Scroll gently to anchor.
+      scrollToElement(hash, { duration: 500, offset: -50 });
     } else {
-      scrollToElement('#root');
+      // Fast scroll to top.
+      scrollToElement('#root', { duration: 100 });
     }
   }
 
