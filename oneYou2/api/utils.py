@@ -28,12 +28,12 @@ def set_cache_headers(original_function):
     # TODO: you can make this more efficient
     def new_function(*args, **kwargs):
         original_response = original_function(*args, **kwargs)
-        release = get_release_object(kwargs.get('release_uuid'))
-        if not release or release == 'current':
-            site = get_site_or_404(kwargs['site_identifier'])
-            release = get_latest_release(site.site.pk)
-        if release.content_status == 1:
-            original_response['Cache-Control'] = 'max-age=3600'
+        # release = get_release_object(kwargs.get('release_uuid'))
+        # if not release or release == 'current':
+        #     site = get_site_or_404(kwargs['site_identifier'])
+        #     release = get_latest_release(site.site.pk)
+        # if release.content_status == 1:
+        #     original_response['Cache-Control'] = 'max-age=3600'
         return original_response
 
     return new_function
