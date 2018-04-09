@@ -20,3 +20,17 @@ class CTABlock(blocks.StructBlock):
 class IDBlock(blocks.CharBlock):
     def get_api_representation(self, value, context=None):
         return slugify(value)
+
+
+class MenuItemPageBlock(blocks.PageChooserBlock):
+    def get_api_representation(self, value, context=None):
+        if value:
+            site_name = value.get_site().site_name
+            url_parts = value.get_url_parts()
+
+            return {'id': value.id,
+                    'slug': value.slug,
+                    'relative_path': '/{}{}'.format(site_name.lower(), url_parts[2])
+                    }
+        else:
+            return {}

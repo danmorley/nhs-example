@@ -346,9 +346,8 @@ class ReleaseModelTests(OneYouTests):
         """
         release = create_test_release()
 
-        release_page_content = release.get_content_for(0)
-
-        self.assertIsNone(release_page_content)
+        with self.assertRaises(KeyError):
+            release.get_content_for(0)
 
     def test_release_loads_content_from_tables_if_not_yet_released(self, mock_file_service):
         """
@@ -493,7 +492,7 @@ class ReleaseViewsTests(OneYouTests):
         self.assertIsFalse("/static/js/" in response_content_string)
         self.assertIsTrue("/version/js/" in response_content_string)
         self.assertIsFalse("%apiurl%" in response_content_string)
-        self.assertIsTrue("http://phe.nhs.uk/api/v2" in response_content_string)
+        self.assertIsTrue("http://phe.nhs.uk/api" in response_content_string)
         self.assertIsFalse("%releaseid%" in response_content_string)
         self.assertIsTrue(release.uuid in response_content_string)
 

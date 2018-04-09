@@ -19,9 +19,11 @@ class FrontendVersion:
 
     @classmethod
     def get_html_for_version(cls, uuid):
-        file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
-
-        return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, settings.ENV + '/' + uuid, 'index.html')
+        # file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
+        #
+        # return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, settings.ENV + '/' + uuid, 'index.html')
+        f = open('/code/frontend/website-client/build/index.html', 'r')
+        return f.read()
 
     @classmethod
     def get_js_for_version(cls, version_id, file_name):

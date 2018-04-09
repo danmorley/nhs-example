@@ -47,9 +47,10 @@ class ReleaseAdmin(ModelAdmin):
     menu_order = 900  # will put in 10th place (000 being 1st, 100 2nd)
     add_to_settings_menu = False  # or True to add your model to the Settings sub-menu
     exclude_from_explorer = False  # or True to exclude pages of this type from Wagtail's explorer view
-    list_display = ('release_name',)
-    list_filter = ('release_name',)
+    list_display = ('release_name', 'uuid', 'content_status', 'release_time')
+    list_filter = ('content_status',)
     search_fields = ('release_name',)
+    index_view_extra_css = ('css/admin_index.css',)
 
     def get_queryset(self, request):
         """

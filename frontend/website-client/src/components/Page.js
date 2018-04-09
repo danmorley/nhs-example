@@ -41,7 +41,7 @@ class Page extends Component {
         { deployed !== "true" &&
           <CookieBanner />
         }
-        <PageHeader navItems={menu} header={header}/>
+        <PageHeader navItems={menu.items} header={header}/>
         <div className="page-content-wrapper">
           <div className="page-content">
             {content}

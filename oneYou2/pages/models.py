@@ -5,6 +5,8 @@ import logging
 from django.db import models
 from django.db.models import DateField, TextField
 from django.forms.models import model_to_dict
+from django.http import JsonResponse
+from django.template.response import TemplateResponse, SimpleTemplateResponse
 
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.models import Page, Orderable
@@ -20,12 +22,12 @@ from wagtailsnippetscopy.registry import snippet_copy_registry
 from modelcluster.models import get_all_child_relations, get_all_child_m2m_relations
 from modelcluster.fields import ParentalKey
 
-from .blocks import IDBlock, CTABlock
+from oneYou2.utils import get_protocol
+from .blocks import IDBlock, CTABlock, MenuItemPageBlock
 from .utils import get_serializable_data_for_fields
-
 from home.models import SiteSettings
-
 from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppTeaserChooserBlock, BlobImageChooserBlock
+
 
 GRID_LAYOUT_CHOICES = (
     ('full_width', 'Full Width'),
@@ -40,7 +42,7 @@ logger = logging.getLogger('wagtail.core')
 class SimpleMenuItem(blocks.StructBlock):
     link_text = blocks.CharBlock(required=False)
     link_external = blocks.URLBlock(label='External link', required=False)
-    link_page = blocks.PageChooserBlock(required=False)
+    link_page = MenuItemPageBlock(required=False)
 
 
 class MultiMenuItem(blocks.StructBlock):
@@ -261,6 +263,7 @@ class OneYou2Page(Page):
 
     @property
     def link_url(self):
+        # TODO: This could potentially use some base page methods
         site_name = SiteSettings.objects.get(site_id=self.get_site().id).uid
         return '/' + site_name + self.url_path
 
@@ -298,12 +301,15 @@ class OneYou2Page(Page):
             classname='collapsible collapsed'),
     ]
 
+    promote_panels = [
+        FieldPanel('slug')
+    ]
+
     edit_handler = TabbedInterface([
         ObjectList(content_panels, heading='Content'),
-        ObjectList(info_content_panels, heading='Info'),
+        ObjectList(info_content_panels, heading='Notes'),
         ObjectList(meta_content_panels, heading='Meta'),
-        ObjectList(Page.promote_panels, heading='Promote'),
-        ObjectList(Page.settings_panels, heading='Settings', classname='settings'),
+        ObjectList(Page.promote_panels, heading='Settings'),
     ])
 
     api_fields = ['body', 'path', 'depth', 'numchild', 'page_ref', 'live', 'page_theme']
@@ -380,6 +386,58 @@ class OneYou2Page(Page):
                    body=json.dumps(obj_dict['body']),
                    live=obj_dict['live'],
                    theme_id=obj_dict['page_theme']['id'])
+
+    def serve_preview(self, request, mode_name):
+        request.is_preview = True
+
+        if mode_name == 'json':
+            from .serializers import OneYouPageSerializer
+            latest_revision_as_page = self.get_latest_revision_as_page()
+            serialized_page = OneYouPageSerializer(instance=latest_revision_as_page)
+            return JsonResponse(serialized_page.data)
+
+        if mode_name == 'react':
+            address = get_protocol() + request.__dict__['META']['HTTP_HOST']
+            if 'localhost' in address:
+                address += ':8000'
+
+            context = {
+                'preview_url': '{}/oneyou{}?preview_page={}'.format(address, self.get_url(), self.slug)
+            }
+            print(context)
+            return SimpleTemplateResponse(template='preview_wrapper.html', context=context)
+
+        return self.serve(request)
+
+    def serve(self, request, *args, **kwargs):
+        request.is_preview = getattr(request, 'is_preview', False)
+
+        return TemplateResponse(
+            request,
+            self.get_template(request, *args, **kwargs),
+            self.get_context(request, *args, **kwargs)
+        )
+
+    DEFAULT_PREVIEW_MODES = [
+        ('react', 'Default'),
+        # ('html', 'AMP'),
+        ('json', 'API'),
+    ]
+
+    @property
+    def preview_modes(self):
+        """
+        A list of (internal_name, display_name) tuples for the modes in which
+        this page can be displayed for preview/moderation purposes. Ordinarily a page
+        will only have one display mode, but subclasses of Page can override this -
+        for example, a page containing a form might have a default view of the form,
+        and a post-submission 'thankyou' page
+        """
+        return self.DEFAULT_PREVIEW_MODES
+
+    @property
+    def default_preview_mode(self):
+        return self.preview_modes[0][0]
 
 
 # Orderables

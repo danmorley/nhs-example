@@ -2,13 +2,12 @@ import json
 from datetime import datetime
 
 from release.models import Release, ReleaseContent
-from rest_framework.response import Response
 
 
 def get_latest_release(site_id):
     """Helper function to return the latest release by date"""
     # TODO: test this
-    released = Release.objects.order_by('-release_time').filter(release_time__lte=datetime.now(), site_id=site_id)
+    released = Release.objects.order_by('-release_time').filter(release_time__lte=datetime.now(), site__id=site_id)
     latest_release = released.first()
     return latest_release
 
@@ -29,11 +28,3 @@ def populate_release_if_required(release):
         release.save()
 
     return release
-
-
-def cached_response(content, should_cache):
-    response = Response(content)
-    if should_cache:
-        response['Cache-Control'] = 'max-age=3600'  # Cache for 1 hour
-
-    return response
