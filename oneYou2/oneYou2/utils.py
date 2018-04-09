@@ -10,7 +10,7 @@ def get_release_version():
 
 
 def get_protocol():
-    if settings.ENV == 'dev':
-        return 'http://'
-    else:
-        return 'https://'
+    # if settings.ENV == 'dev':
+    #     return 'http://'
+    # else:
+    return 'https://'
