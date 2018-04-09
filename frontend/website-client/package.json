@@ -5,7 +5,6 @@
   "dependencies": {
     "bootstrap-4-grid": "^2.3.0",
     "html-react-parser": "^0.4.2",
-    "lodash.invert": "^4.3.0",
     "lodash.startswith": "^4.2.1",
     "node-sass-chokidar": "0.0.3",
     "normalize.css": "^7.0.0",
@@ -22,8 +21,8 @@
     "react-slick": "^0.18.1",
     "react-swipeable": "^4.2.0",
     "request-promise-native": "^1.0.5",
-    "slick-carousel": "^1.8.1",
     "scroll-to-element": "^2.0.0",
+    "slick-carousel": "^1.8.1",
     "universal-cookie": "^2.1.2"
   },
   "scripts": {

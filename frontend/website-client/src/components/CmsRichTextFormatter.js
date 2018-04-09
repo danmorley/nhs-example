@@ -3,6 +3,7 @@ import Parser from 'html-react-parser';
 import domToReact from 'html-react-parser/lib/dom-to-react';
 import { Link } from 'react-router-dom';
 import CtaLink from './shared/CtaLink';
+import UrlUtils from './shared/UrlUtils';
 
 /**
  *  Helper class to convert links and images in Wagtail rich text fields to actual
@@ -15,23 +16,16 @@ class CmsRichTextFormatter  {
   }
 
   static renderLink(node) {
-    if (node.attribs.linktype === 'page') {
-      // Internal link - use react router to prevent page refresh.
-      const href = CtaLink.pathForPage(node.attribs.id);
+    if (node.attribs.linktype !== 'page') {
+      if (UrlUtils.isInternalLink(node.attribs.href)) {
+        // Internal link - use react router to prevent page refresh.
+        return (<Link to={node.attribs.href}>{domToReact(node.children, parserOptions)}</Link>);
 
-      return (
-        <Link to={href}>{domToReact(node.children, parserOptions)}</Link>
-      );
-    } else {
-      // External link - use normal <a> tag.
-      return (
-        <a href={node.attribs.href}>{domToReact(node.children, parserOptions)}</a>
-      );
+      } else {
+        // External link - use normal <a> tag.
+        return (<a href={node.attribs.href}>{domToReact(node.children, parserOptions)}</a>);
+      }
     }
-  }
-
-  static pathForPage(pageId) {
-    return global.rootUrl + global.pages[pageId];
   }
 }
 

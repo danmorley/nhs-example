@@ -37,12 +37,12 @@ class GridShelf extends Component {
         default:
           return 'shelf__col col-sm-12';
     }})(metaLayout);
-    
+
     var panels = content.items.map((panel, i) => {
       const panelInfo = CmsComponentRegistry.components[panel.type];
       const PanelClass = panelInfo && panelInfo.class;
       const panelClassNamePrefix = panelInfo && panelInfo.classNamePrefix;
-      const panelId = panel.value.field_id || panel.id;
+      const panelId = panel.value.field_id || 'panel-' + panel.id;
       if (PanelClass) {
         return (<div key={i} className={panelClass}><PanelClass content={panel.value} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
       } else {

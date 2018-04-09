@@ -101,14 +101,14 @@ class Page extends Component {
         const shelfClassNamePrefix = shelfInfo && shelfInfo.classNamePrefix;
         const shelfVariant = shelfInfo && shelfInfo.variant;
         const shelfLayout = shelfInfo && shelfInfo.layout;
-        const shelfId = shelf.value.field_id || shelf.id;
+        const shelfId = shelf.value.field_id || shelf.value.shelf_id || 'shelf-' + shelf.id;
         if (ShelfClass) {
           return (<ShelfClass key={i} content={shelf.value} id={shelfId} site={site} classNamePrefix={shelfClassNamePrefix} variant={shelfVariant} layout={shelfLayout}/>);
         } else {
           return (<PlaceholderShelf key={i} shelfType={shelf.type} id={shelfId} classNamePrefix={shelfClassNamePrefix}/>);
         }
       });
-      
+
       return (
         <DocumentMeta {...meta}>{this.renderPage(shelves, page_theme, page_styles, site, page)}</DocumentMeta>
       );

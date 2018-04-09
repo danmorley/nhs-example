@@ -4,7 +4,6 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 // import site from './sample-data/SiteSample';
 import ContentStore from './services/ContentStore';
-import invert from 'lodash.invert';
 import queryString from 'query-string';
 
 /**
@@ -13,11 +12,11 @@ import queryString from 'query-string';
  *  The root element may have one or more of the following data attributes:
  *
  *  <div id="root"
- *       data-content-store-endpoint="https://oneyou-cms.service.nhs.uk/api/v2"
+ *       data-content-store-endpoint="https://oneyou-cms.service.nhs.uk/api"
  *       data-site="oneyou"
  *       data-release="1293129038712093824" />
  *
- *  data-content-store-endpoint: "https://oneyou-cms.service.nhs.uk/api/v2"
+ *  data-content-store-endpoint: "https://oneyou-cms.service.nhs.uk/api"
  */
 let rootElem = document.getElementById('root');
 global.rootUrl = rootElem.getAttribute('data-site') ? '/' + rootElem.getAttribute('data-site') : '/oneyou';
@@ -28,9 +27,9 @@ global.preview_page = rootElem.getAttribute('page_preview') || null;
 
 // Ensure query param release id is used if given.
 let params = queryString.parse(window.location.search);
-if (params.id ) dataRelease = params.id;
+if (params.id) dataRelease = params.id;
+if (params.cms) dataContentStoreEndpoint = params.cms;
 if (params.cmsid) dataRelease = params.cmsid;
-if (params.cms ) dataContentStoreEndpoint = params.cms;
 
 global.contentStore = new ContentStore(dataContentStoreEndpoint, dataSite, dataRelease);
 
@@ -38,7 +37,6 @@ global.contentStore = new ContentStore(dataContentStoreEndpoint, dataSite, dataR
 global.contentStore.getSite().then((site) => {
   if (site.code === 0) {
     global.contentStore.release = site.response.meta.release_id; // Set release to the actual release guid
-    global.pages = invert(site.response.pages);
     ReactDOM.render(<App site={site && site.response}/>, rootElem);
     registerServiceWorker();
   } else {
