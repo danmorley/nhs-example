@@ -22,7 +22,6 @@ from wagtailsnippetscopy.registry import snippet_copy_registry
 from modelcluster.models import get_all_child_relations, get_all_child_m2m_relations
 from modelcluster.fields import ParentalKey
 
-from oneYou2.utils import get_protocol
 from .blocks import IDBlock, CTABlock, MenuItemPageBlock
 from .utils import get_serializable_data_for_fields
 from home.models import SiteSettings
@@ -397,14 +396,9 @@ class OneYou2Page(Page):
             return JsonResponse(serialized_page.data)
 
         if mode_name == 'react':
-            address = get_protocol() + request.__dict__['META']['HTTP_HOST']
-            if 'localhost' in address:
-                address += ':8000'
-
             context = {
-                'preview_url': '{}/oneyou{}?preview_page={}'.format(address, self.get_url(), self.slug)
+                'preview_url': '/oneyou{}?preview_page={}'.format(self.get_url(), self.slug)
             }
-            print(context)
             return SimpleTemplateResponse(template='preview_wrapper.html', context=context)
 
         return self.serve(request)
