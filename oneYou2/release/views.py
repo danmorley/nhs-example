@@ -40,7 +40,7 @@ def release_css(request, version_id):
 
 
 def web_statics(request, path):
-    if "wagtail" in path:
+    if "wagtail" in path or "cms" in path:
         return serve(request, path, document_root='./static/')
     else:
         return serve(request, path, document_root='./web/static/')
