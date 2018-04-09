@@ -71,7 +71,6 @@ class App extends Component {
    */
   loadPageForKey(key) {
     console.log('Loading page for key', key);
-
     if (key !== undefined) {
       global.contentStore.getPage(key).then((page) => {
         if (page.code === 0) {

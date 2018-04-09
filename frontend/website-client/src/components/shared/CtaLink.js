@@ -3,6 +3,7 @@ import Text from '../Text';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import startsWith from 'lodash.startswith';
+import CtaUtils from "./CtaUtils";
 
 /**
  *  Link component that will render a react router <Link> tag for internal
@@ -50,7 +51,7 @@ class CtaLink extends Component {
     }
 
     // Convert page id to path if given.
-    let href = (!cta.link_page) ? cta.link_external : cta.link_page.relative_path;
+    let href = (!CtaUtils.isInternalLink(cta.link_page) ) ? cta.link_external : cta.link_page.relative_path;
 
     // Render the link.
     if (this.isExternal(href)) {

@@ -29,6 +29,7 @@ global.preview_page = rootElem.getAttribute('page_preview') || null;
 // Ensure query param release id is used if given.
 let params = queryString.parse(window.location.search);
 if (params.id ) dataRelease = params.id;
+if (params.cmsid) dataRelease = params.cmsid;
 if (params.cms ) dataContentStoreEndpoint = params.cms;
 
 global.contentStore = new ContentStore(dataContentStoreEndpoint, dataSite, dataRelease);

@@ -33,6 +33,10 @@ class CtaUtils {
     if (cta instanceof Array) return cta[0];
     return cta;
   }
+
+  static isInternalLink (cta) {
+    return cta && cta.relative_path;
+  }
 }
 
 export default CtaUtils;
