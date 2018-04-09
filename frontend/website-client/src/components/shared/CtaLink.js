@@ -50,7 +50,7 @@ class CtaLink extends Component {
     }
 
     // Convert page id to path if given.
-    let href = (cta.link_page.relative_path) || cta.link_external;
+    let href = (!cta.link_page) ? cta.link_external : cta.link_page.relative_path;
 
     // Render the link.
     if (this.isExternal(href)) {

@@ -88,19 +88,22 @@ class App extends Component {
   }
 
   checkForRedirect() {
-    let redirect = (this.state.site.redirects && this.state.site.redirects[window.location.pathname]);
-    if (redirect) {
-      if (startsWith(redirect, 'http:') || startsWith(redirect, 'https:')) {
-        // Redirect to another site.
-        window.location.pathname = redirect;
-      } else {
-        // Redirect to a relative path without causing a page refresh.
-        window.history.replaceState('', '', redirect);
-      }
-    }
+    this.state.site.redirects.map((redirect, i) => {
+      console.log("REDIRECT", redirect);
 
-    return redirect;
+      if (redirect.source + '/' === window.location.pathname) {
+        console.log("match")
+        if (startsWith(redirect, 'http:') || startsWith(redirect, 'https:')) {
+          // Redirect to another site.
+          window.location.pathname = redirect.destination;
+        } else {
+          // Redirect to a relative path without causing a page refresh.
+          window.history.replaceState('', '', redirect.destination);
+        }
+      }
+    });
   }
+
 
   // Take path from window location and ensure it has a trailing slash.
   pagePathToRender() {
