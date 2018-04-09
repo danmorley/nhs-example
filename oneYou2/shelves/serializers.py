@@ -70,7 +70,11 @@ class BannerShelfSerializer(HyperlinkedModelSerializer):
             'link_external': cta_link,
         }
         if cta_page:
-            representation['cta']['link_page'] = cta_page.get('id')
+            representation['cta']['link_page'] = {
+                "id": cta_page.get('id'),
+                "slug": cta_page.get('slug'),
+                "relative_path": cta_page.get('relative_path'),
+            }
 
         representation['shelf_id'] = slugify(representation['shelf_id'])
         return representation
