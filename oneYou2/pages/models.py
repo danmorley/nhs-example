@@ -148,8 +148,16 @@ class Divider(blocks.StructBlock):
 class Carousel(blocks.StructBlock):
     heading = blocks.CharBlock(required=False)
     items = blocks.StreamBlock([
-        ('video_teaser', VideoTemplate(icon="media")),
+        ('promo_shelf', PromoShelfChooserBlock(target_model="shelves.PromoShelf", icon="media")),
         ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
+    ], icon='arrow-left', label='Items', required=False)
+    shelf_id = IDBlock(required=False, label="ID")
+
+
+class PanelCarousel(blocks.StructBlock):
+    heading = blocks.CharBlock(required=False)
+    items = blocks.StreamBlock([
+        ('video_teaser', VideoTemplate(icon="media")),
         ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
         ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
     ], icon='arrow-left', label='Items', required=False)
@@ -180,7 +188,8 @@ class OneYou2Page(Page):
         ('page_heading_shelf', PageHeading(icon='title')),
         ('simple_page_heading_shelf', SimplePageHeading(icon='title')),
         ('section_heading_shelf', SectionHeading(classname="full title", icon='title')),
-        ('carousel_shelf', Carousel(icon="repeat")),
+        ('main_carousel_shelf', Carousel(icon="repeat")),
+        ('panel_carousel_shelf', PanelCarousel(icon="repeat")),
         ('promo_shelf', PromoShelfChooserBlock(target_model="shelves.PromoShelf", icon="image")),
         ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
         ('grid_shelf', Grid(icon="form")),
