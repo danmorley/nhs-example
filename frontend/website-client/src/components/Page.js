@@ -7,7 +7,6 @@ import Footer from './Footer';
 import PageHeader from './page-header/PageHeader';
 import PageStyles from './PageStyles';
 import DocumentMeta from 'react-document-meta';
-import scrollToElement from 'scroll-to-element';
 
 // Wildcard imports are not supported by Babel without babel-wildcard plugin.
 // Create react app template app hides away Babel, plugin can not be added. You must import
@@ -31,19 +30,6 @@ const cookies = new Cookies();
 const deployed = cookies.get('cookieBanner');
 
 class Page extends Component {
-  componentDidUpdate() {
-    const hash = window.location.hash;
-    let scrollTarget = document.getElementById(hash.substring(1));
-
-    if (hash && scrollTarget) {
-      // Scroll gently to anchor.
-      scrollToElement(hash, { duration: 500, offset: -50 });
-    } else {
-      // Fast scroll to top.
-      scrollToElement('#root', { duration: 100 });
-    }
-  }
-
   renderPage(content, pageTheme, pageStyles, site, page) {
     let { menu, header, footer } = site;
     let theme = (pageTheme && pageTheme.class_name) || 'oneyou';
@@ -56,7 +42,7 @@ class Page extends Component {
         }
         <PageHeader navItems={menu.items} header={header}/>
         <div className="page-content-wrapper">
-          <div className="page-content">
+          <div id="page-content" className="page-content">
             {content}
           </div>
         </div>

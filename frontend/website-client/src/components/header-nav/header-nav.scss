@@ -18,11 +18,11 @@ $secondary-item-padding: 0.4em;
   left: -68%;
   z-index: 1;
   box-shadow: 8px 6px 8px -4px rgba(0,0,0,0.64);
-  
+
   .header-nav--open & {
     left: 0;
   }
-  
+
   @include media-breakpoint-up(md) {
     display: flex;
     margin-left: auto;
@@ -38,7 +38,7 @@ $secondary-item-padding: 0.4em;
 }
 
 .header-nav__items {
-  
+
   >  li:first-child  {
 
     .header-nav__link {
@@ -47,13 +47,13 @@ $secondary-item-padding: 0.4em;
       font-family: $secondary-brand-font;
     }
   }
-  
+
   @include media-breakpoint-up(md) {
     display: flex;
-    
+
       >  li:first-child  {
         display: none;
-      }        
+      }
   }
 }
 
@@ -64,7 +64,7 @@ $secondary-item-padding: 0.4em;
   font-family: $primary-brand-font;
   font-size: 1.6em;
   font-weight: normal;
-  
+
   @include media-breakpoint-up(md) {
     display: none;
   }
@@ -73,18 +73,18 @@ $secondary-item-padding: 0.4em;
 .header-nav__item {
   border-bottom: 1px solid $white;
   padding: $pimary-item-padding 0;
-  
+
   @include media-breakpoint-up(md) {
     border-bottom:0;
   }
-  
+
   .header-nav__secondary-nav & {
     border-bottom: 0;
     padding: 0.5em 0 0.5em 1em;
-    
+
     &:first-child{
       padding-top: 1em;
-      
+
       @include media-breakpoint-up(md) {
         padding-top: 0;
       }
@@ -94,15 +94,15 @@ $secondary-item-padding: 0.4em;
   &:last-child {
     border-bottom: 0;
   }
-  
+
   @include media-breakpoint-up(md) {
     padding: 2em 0 1em;
-    
+
     &:first-child{
       margin-right: auto;
       font-size: inherit;
     };
-  
+
     .header-nav__link {
       border-bottom: 0.2em solid transparent;
     }
@@ -110,20 +110,20 @@ $secondary-item-padding: 0.4em;
 }
 
 .header-nav__items > .header-nav__item >
-.header-nav__separator {  
-  
+.header-nav__separator {
+
   @include media-breakpoint-up(md) {
     padding: 0.3em 1em 0.5em;
-    border-left: 2px solid $text-primary; 
-    
+    border-left: 2px solid $text-primary;
+
     .header-nav__secondary-title,
    > .header-nav__link {
        top: 0.5em;
    }
-    
+
     &:hover {
       background: $grey-brown-dark;
-      
+
       .header-nav__secondary-title,
      > .header-nav__link {
         color: $white;
@@ -134,25 +134,25 @@ $secondary-item-padding: 0.4em;
 }
 
 .header-nav__items > .header-nav__item  {
-  
+
   @include media-breakpoint-up(md) {
-    
+
     &:nth-child(2) {
       .header-nav__separator {
         border-left: 0;
       }
     }
-    
+
     &:hover {
       background: $grey-brown-dark;
-      
+
       .header-nav__secondary-title,
      > .header-nav__separator > .header-nav__link {
         color: $white;
         border-bottom-color: $white;
       }
     }
-    
+
     &:focus {
       background-color: inherit;
     }
@@ -161,38 +161,38 @@ $secondary-item-padding: 0.4em;
 
 .header-nav__items >
 .header-nav__item:hover + .header-nav__item {
-  
+
   @include media-breakpoint-up(md) {
-    > .header-nav__separator { 
-       border-left: 2px solid transparent; 
+    > .header-nav__separator {
+       border-left: 2px solid transparent;
     }
   }
 }
 
 .header-nav__link {
-  
+
   position: relative;
   color: $white;
   text-decoration: none;
   white-space: nowrap;
-  
+
   &:visited {
     color: white;
   }
-  
+
   &:hover {
     color: $sunflower-yellow;
   }
-  
+
   &:active {
     background-color: inherit;
   }
-  
+
   @include media-breakpoint-up(md) {
     display: inline-block;
     color: $text-primary;
     padding-bottom: 0.3em;
-    
+
       &:focus, &:visited {
         color: inherit;
       }
@@ -201,7 +201,7 @@ $secondary-item-padding: 0.4em;
 
 .header-nav__link--home {
   color: $sunflower-yellow;
-  
+
   @include media-breakpoint-up(md) {
     display: none;
   }
@@ -239,14 +239,14 @@ $secondary-item-padding: 0.4em;
 }
 
 .header-nav__secondary-nav {
-  
+
   @include media-breakpoint-down(sm) {
-    transition: max-height 0.5s;  
+    transition: max-height 0.5s;
     overflow: hidden;
     max-height: 0;
     padding: 0;
   }
-  
+
   @include media-breakpoint-up(md) {
   /*  display: flex;
     flex-wrap: wrap; */
@@ -262,25 +262,25 @@ $secondary-item-padding: 0.4em;
     box-shadow: 5px 12px 8px -6px rgba(0,0,0,0.64);
     background: $grey-brown-dark;
   }
-  
+
   .header-nav__item {
-    
+
     @include media-breakpoint-up(md) {
-      padding: 0 1em 0; 
+      padding: 0 1em 0;
       margin: 6px 0;
-      
+
       &:first-child {
         margin-right: initial;
-      }    
+      }
     }
   }
-  
-  .header-nav__link { 
-    
+
+  .header-nav__link {
+
     @include media-breakpoint-up(md) {
       color: $white;
     }
-    
+
     &:hover {
       color: $sunflower-yellow;
     }
@@ -288,7 +288,7 @@ $secondary-item-padding: 0.4em;
 }
 
 .header-nav__secondary-nav-inner {
-  
+
   @include media-breakpoint-up(md) {
     position: relative;
     z-index: 3;
@@ -299,42 +299,42 @@ $secondary-item-padding: 0.4em;
 
 
 .header-nav__secondary-title {
-  
+
   color: $white;
   font-weight: normal;
   position: relative;
   cursor: pointer;
   display: block;
   white-space: nowrap;
-  
+
   &:hover {
     color: $sunflower-yellow;
   }
-  
+
   &:focus {
     background-color: inherit;
     color: inherit;
   }
-  
+
   &:after {
-    
+
     @extend %icon-chevron-right;
     position: absolute;
     right: 0;
     top: 0;
     font-size: 16px;
-    
+
     @include media-breakpoint-up(md) {
       display: none;
     }
   }
-  
+
   @include media-breakpoint-up(md) {
-    color: $text-primary; 
+    color: $text-primary;
     padding-top: 0;
     padding-bottom: 0.3em;
     border-bottom: 0.2em solid transparent;
-    
+
     &:hover {
       color: $white;
     }
@@ -342,26 +342,26 @@ $secondary-item-padding: 0.4em;
 }
 
 .header-nav__secondary-title--open {
-    
+
   & + .header-nav__secondary-nav {
-    
+
     @include media-breakpoint-down(md) {
-      transition: max-height 0.5s; 
+      transition: max-height 0.5s;
       overflow: hidden;
       max-height: 350px;
     }
   }
-  
+
   &:after {
     @extend %icon-chevron-down;
-  }   
+  }
 }
 
 .header-nav-multi__item:hover {
-  
+
   > .header-nav__separator
   > .header-nav__secondary-nav {
-    
+
     @include media-breakpoint-up(md) {
       display: block;
       animation: navFadeIn 0.4s ease-in-out both;
@@ -373,9 +373,17 @@ $secondary-item-padding: 0.4em;
 
   .header-nav--open & {
     position: relative;
-    
+
     @include media-breakpoint-up(md) {
       left: auto;
+    }
+  }
+
+  .page-content {
+    &.hidden {
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s 0.2s, opacity 0.2s linear;  
     }
   }
 }
