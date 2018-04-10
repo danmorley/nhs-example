@@ -3,14 +3,14 @@
 
 // generic styles
 
-$arrow-distance: 4%;
+$arrow-distance: 9%;
 
-.carousel-shelf * {
+.panel-carousel-shelf * {
   min-height: 0;
   min-width: 0;
 }
 
-.carousel {
+.panel-carousel {
 
   .shelf-section {
     padding-top: 0;
@@ -40,16 +40,68 @@ $arrow-distance: 4%;
       padding-right: inherit;
     }
   }
-}
 
-.slick-dots {
-  position: absolute;
-  bottom: 0.6em;
-  margin: 0 !important;
-  padding: 0 !important;
+  .slick-dots {
+    position: absolute;
+    bottom: 0.6em;
+    margin: 0 !important;
+    padding: 0 !important;
 
-  @include media-breakpoint-up(sm) {
-    bottom: 1.2em;
+    @include media-breakpoint-up(sm) {
+      bottom: 1.2em;
+    }
+  }
+
+  .slick-dots li {
+    margin: 0 3px;
+    height: auto;
+    width: auto;
+
+    @include media-breakpoint-up(sm) {
+      margin: 0 15px;
+
+      button {
+        height: 28px;
+        width: 28px;
+      }
+    }
+  }
+
+  .slick-dots li button::before {
+    font-size: 14px;
+    color: $grey-brown-dark;
+    opacity: 1;
+
+    @include media-breakpoint-up(sm) {
+      font-size: 28px;
+      height: 28px;
+      width: 28px;
+    }
+  }
+
+  .slick-dots li.slick-active button:before {
+    color: $sunflower-yellow;
+    opacity: 1;
+  }
+
+  .slick-next {
+
+    @include media-breakpoint-up(sm) {
+      right: -$arrow-distance;
+      z-index: 1;
+      height: 40px;
+      width: 40px;
+    }
+  }
+
+  .slick-prev {
+
+    @include media-breakpoint-up(sm) {
+      left:  -$arrow-distance;
+      z-index: 1;
+      height: 40px;
+      width: 40px;
+    }
   }
 }
 
@@ -59,60 +111,23 @@ $arrow-distance: 4%;
   display: block;
 }
 
-.slick-dots li {
-  margin: 0 3px;
-  height: auto;
-  width: auto;
+// specific styles
+.carousel-panel {
+  margin: 10px 100px 40px 100px;
 
-  @include media-breakpoint-up(sm) {
-    margin: 0 15px;
+  .slick-slide {
+    padding: 10px;
+    transition: padding 0.5s ease-in-out;
 
-    button {
-      height: 28px;
-      width: 28px;
+    &.slick-current {
+      padding: 0px;
+      transition: padding 0.5s ease-in-out;
     }
   }
-}
 
-.slick-dots li button::before {
-  font-size: 14px;
-  color: $white;
-  opacity: 1;
-
-  @include media-breakpoint-up(sm) {
-    font-size: 28px;
-    height: 28px;
-    width: 28px;
+  .slick-dots {
+    bottom: -40px;
   }
-}
-
-.slick-dots li.slick-active button:before {
-  color: $sunflower-yellow;
-  opacity: 1;
-}
-
-.slick-next {
-
-  @include media-breakpoint-up(sm) {
-    right: $arrow-distance;
-    z-index: 1;
-    height: 40px;
-    width: 40px;
-  }
-}
-
-.slick-prev {
-
-  @include media-breakpoint-up(sm) {
-    left:  $arrow-distance;
-    z-index: 1;
-    height: 40px;
-    width: 40px;
-  }
-}
-
-// specific styles
-.carousel-full {
 
   .slick-next:before {
       @extend %icon-chevron-right;
@@ -124,7 +139,7 @@ $arrow-distance: 4%;
 
   .slick-prev:before,
   .slick-next:before {
-      color: $white !important;
+      color: $grey-brown-dark !important;
       opacity: 1;
 
       @include media-breakpoint-up(sm) {
