@@ -169,9 +169,10 @@ class App extends Component {
       contentElem.classList.remove('hidden');
       const hash = window.location.hash;
       let scrollTarget = document.getElementById(hash.substring(1));
-      scrollTarget.scrollIntoView();
-      window.scrollBy(0, -80);
-
+      if (scrollTarget) {
+        scrollTarget.scrollIntoView();
+        window.scrollBy(0, -80);
+      }
     } else {
       contentElem.classList.add('hidden');
     }
