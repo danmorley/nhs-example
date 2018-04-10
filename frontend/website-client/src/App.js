@@ -71,6 +71,8 @@ class App extends Component {
    */
   loadPageForKey(key) {
     console.log('Loading page for key', key);
+    App.setContentVisibile(false);
+
     if (key !== undefined) {
       global.contentStore.getPage(key).then((page) => {
         if (page.code === 0) {
@@ -79,10 +81,12 @@ class App extends Component {
           console.log(page.error, page.info.statusCode, page.info.message);
           this.setState({ currentPage: notFoundPage() });
         }
+        App.setContentVisibile(true);
       });
     } else {
       console.log('No such page in site');
       this.setState({ currentPage: notFoundPage() });
+      App.setContentVisibile(true);
     }
   }
 
@@ -102,7 +106,6 @@ class App extends Component {
       }
     });
   }
-
 
   // Take path from window location and ensure it has a trailing slash.
   pagePathToRender() {
@@ -151,6 +154,27 @@ class App extends Component {
         <p>Global root URL: {global.rootUrl}</p>
       </div>
     );
+  }
+
+  // Helper functions.
+
+  static setContentVisibile(visible) {
+    const contentElem = document.getElementById('page-content');
+    if (!contentElem) return;
+
+    if (visible) {
+      // Making the content visible after load - ensure it is initially at the top,
+      // then scroll to the fragment identifier if given.
+      window.scrollTo(0, 0);
+      contentElem.classList.remove('hidden');
+      const hash = window.location.hash;
+      let scrollTarget = document.getElementById(hash.substring(1));
+      scrollTarget.scrollIntoView();
+      window.scrollBy(0, -80);
+
+    } else {
+      contentElem.classList.add('hidden');
+    }
   }
 }
 

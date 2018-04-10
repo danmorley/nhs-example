@@ -40,7 +40,7 @@ logger = logging.getLogger('wagtail.core')
 
 class SimpleMenuItem(blocks.StructBlock):
     link_text = blocks.CharBlock(required=False)
-    link_external = blocks.URLBlock(label='External link', required=False)
+    link_external = blocks.CharBlock(label='External link', required=False)
     link_page = MenuItemPageBlock(required=False)
 
 

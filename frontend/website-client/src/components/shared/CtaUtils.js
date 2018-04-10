@@ -3,15 +3,7 @@
  */
 class CtaUtils {
   /**
-   * Return true if CTA is an object:
-   *
-   * {
-   *   "link_text": "More about Cholesterol",
-   *   "link_external": "https://www.nhs.uk/conditions/high-cholesterol/",
-   *   "link_page": null
-   * }
-   *
-   * or and array of one or more CTAs.
+   * Return true if CTA is an object or an array of one or more CTAs.
    */
   static isCta(cta) {
     if (cta instanceof Array) return cta.length > 0;
@@ -34,8 +26,42 @@ class CtaUtils {
     return cta;
   }
 
-  static isInternalLink (cta) {
-    return cta && cta.relative_path;
+  /**
+   * Helper function to validate an actual CTA object. The following object is expected:
+   *
+   * cta: {
+   *   link_text: "More about Cholesterol",
+   *   link_external: "https://www.nhs.uk/conditions/high-cholesterol/",
+   *   link_page: {}
+   * }
+   *
+   * or
+   *
+   * cta: {
+   *   link_text: "More about Cholesterol",
+   *   link_external: "",
+   *   link_page: {
+   *     relative_path: "/oneyou/apps"
+   *   }
+   * }
+   */
+  static isValidCta(cta) {
+    if (!(cta instanceof Object) || !cta.link_text) return false;
+    if (cta.link_external && cta.link_external.length > 0) return true;
+    if (cta.link_page && cta.link_page.relative_path) return true;
+    return false;
+  }
+
+  static getCtaPath(cta) {
+    return CtaUtils.isInternalCta(cta) ? cta.link_page.relative_path : cta.link_external;
+  }
+
+  static isInternalCta(cta) {
+    return cta && cta.link_page && cta.link_page.relative_path;
+  }
+
+  static isExternalCta(cta) {
+    return !CtaUtils.isInternalCta(cta);
   }
 }
 

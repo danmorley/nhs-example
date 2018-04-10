@@ -41,7 +41,7 @@ class CarouselShelf extends Component {
       const shelfInfo = CmsComponentRegistry.components[shelf.type];
       const ShelfClass = shelfInfo && shelfInfo.class;
       const shelfClassNamePrefix = shelfInfo && shelfInfo.classNamePrefix;
-      const shelfId = shelf.value.field_id || shelf.id;
+      const shelfId = shelf.value.field_id || shelf.value.shelf_id || 'shelf-' + shelf.id;
       if (ShelfClass) {
         return (<div key={i}><ShelfClass content={shelf.value} id={shelfId} classNamePrefix={shelfClassNamePrefix}/></div>);
       } else {

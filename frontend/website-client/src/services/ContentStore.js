@@ -27,8 +27,8 @@ ContentStore.prototype.getPage = async function(pageId) {
  *
  *  Examples:
  *
- *  https://oneyou-cms.service.nhs.uk/api/v2/sites/oneyou/current
- *  https://oneyou-cms.service.nhs.uk/api/v2/sites/oneyou/47872384982394723987
+ *  https://oneyou-cms.service.nhs.uk/api/sites/oneyou/current
+ *  https://oneyou-cms.service.nhs.uk/api/sites/oneyou/47872384982394723987
  */
 async function _getSite(contentStoreEndpoint, site, release) {
   console.debug('_getSite: Entry');
@@ -58,8 +58,8 @@ async function _getSite(contentStoreEndpoint, site, release) {
  *
  *  Examples:
  *
- *  https://oneyou-cms.service.nhs.uk/api/v2/sites/oneyou/current/pages/4
- *  https://oneyou-cms.service.nhs.uk/api/v2/sites/oneyou/47872384982394723987/pages/4
+ *  https://oneyou-cms.service.nhs.uk/api/sites/oneyou/current/pages/4
+ *  https://oneyou-cms.service.nhs.uk/api/sites/oneyou/47872384982394723987/pages/4
  */
 async function _getPage(contentStoreEndpoint, site, release, pageId) {
   console.debug('_getPage: Entry');
@@ -74,7 +74,7 @@ async function _getPage(contentStoreEndpoint, site, release, pageId) {
     console.debug('_getPage: A1', pageUrl);
     const response = await request(options);
     console.debug('_getPage: A2');
-    return response ? 
+    return response ?
       { code: 0, response: response } :
       { code: -1, error: 'Error getting page data', info: { statusCode: '-1', message: 'Page might need to be published' } };
   }
