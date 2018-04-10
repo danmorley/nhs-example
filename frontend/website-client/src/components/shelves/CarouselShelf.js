@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Shelf from './Shelf';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import Slider from 'react-slick';
+import Equalizer from 'react-equalizer';
 
 import PlaceholderShelf from './PlaceholderShelf';
 import GeneralTextShelf from './GeneralTextShelf';
@@ -24,6 +25,11 @@ import styles from './carousel.css';
  *  }
  */
 class CarouselShelf extends Component {
+  
+  getNodes(equalizerComponent, equalizerElement) {
+    return equalizerElement.querySelectorAll(".slick-slide");
+  }
+  
   render() {
     let { id, content, classNamePrefix } = this.props;
     let settings = {
@@ -53,17 +59,17 @@ class CarouselShelf extends Component {
       <Shelf id={id} classNamePrefix={classNamePrefix}>
         <div className="container-fluid">
           <div className="row carousel__row">
-            <Slider className ="carousel carousel-full" {...settings}>
-              {slides}
-            </Slider>
+            <Equalizer nodes={this.getNodes.bind(this)}>
+              <Slider className ="carousel carousel-full" {...settings}>
+                {slides}
+              </Slider>
+            </Equalizer>
           </div>
         </div>
       </Shelf>
     );
   }
 }
-
-// ReactDOM.render(<CarouselShelf />, document.querySelector('.carousel-shelf'));
 
 CmsComponentRegistry.register('carousel_shelf', CarouselShelf, 'carousel-shelf');
 
