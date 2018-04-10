@@ -17,7 +17,7 @@ import PlaceholderShelf from './shelves/PlaceholderShelf';
 import GeneralTextShelf from './shelves/GeneralTextShelf';
 import BasicCtaShelf from './shelves/BasicCtaShelf';
 import GuidanceShelf from './shelves/GuidanceShelf';
-import CarouselShelf from './shelves/CarouselShelf';
+import MainCarouselShelf from './shelves/MainCarouselShelf';
 import PanelCarouselShelf from './shelves/PanelCarouselShelf';
 import GridShelf from './shelves/GridShelf';
 import HeadingBodyShelf from './shelves/HeadingBodyShelf';
