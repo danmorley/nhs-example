@@ -18,6 +18,7 @@ $secondary-item-padding: 0.4em;
   left: -68%;
   z-index: 1;
   box-shadow: 8px 6px 8px -4px rgba(0,0,0,0.64);
+  overflow-y: auto;
 
   .header-nav--open & {
     left: 0;
@@ -25,6 +26,7 @@ $secondary-item-padding: 0.4em;
 
   @include media-breakpoint-up(md) {
     display: flex;
+    overflow-y: unset;
     margin-left: auto;
     background: white;
     position: static;
@@ -35,6 +37,18 @@ $secondary-item-padding: 0.4em;
     font-size: 0.9em;
     box-shadow: 0px 0px 0px 0px;
   }
+}
+
+.header-nav::-webkit-scrollbar-thumb {
+  background: $warm-grey
+}
+
+.header-nav::-webkit-scrollbar-track {
+  background: $light-grey;
+}
+
+.header-nav::-webkit-scrollbar {
+  background: $grey-brown;
 }
 
 .header-nav__items {
@@ -80,10 +94,10 @@ $secondary-item-padding: 0.4em;
 
   .header-nav__secondary-nav & {
     border-bottom: 0;
-    padding: 0.5em 0 0.5em 1em;
+    padding: 0.4em 0 0.4em 1em;
 
     &:first-child{
-      padding-top: 1em;
+      padding-top: 0.5em;
 
       @include media-breakpoint-up(md) {
         padding-top: 0;
@@ -348,7 +362,7 @@ $secondary-item-padding: 0.4em;
     @include media-breakpoint-down(md) {
       transition: max-height 0.5s;
       overflow: hidden;
-      max-height: 350px;
+      max-height: 600px;
     }
   }
 
