@@ -25,11 +25,11 @@ import styles from './carousel.css';
  *  }
  */
 class CarouselShelf extends Component {
-  
+
   getNodes(equalizerComponent, equalizerElement) {
     return equalizerElement.querySelectorAll(".slick-slide");
   }
-  
+
   render() {
     let { id, content, classNamePrefix } = this.props;
     let settings = {
@@ -57,6 +57,9 @@ class CarouselShelf extends Component {
 
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix}>
+        <div className="shelf__container container">
+          <h2 className="shelf__header">{content.heading}</h2>
+        </div>
         <div className="container-fluid">
           <div className="row carousel__row">
             <Equalizer nodes={this.getNodes.bind(this)}>
@@ -71,6 +74,6 @@ class CarouselShelf extends Component {
   }
 }
 
-CmsComponentRegistry.register('carousel_shelf', CarouselShelf, 'carousel-shelf');
+CmsComponentRegistry.register('main_carousel_shelf', CarouselShelf, 'carousel-shelf');
 
 export default CarouselShelf;
