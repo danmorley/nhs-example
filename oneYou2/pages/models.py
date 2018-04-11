@@ -191,7 +191,7 @@ class OneYou2Page(Page):
         ('page_heading_shelf', PageHeading(icon='title')),
         ('simple_page_heading_shelf', SimplePageHeading(icon='title')),
         ('section_heading_shelf', SectionHeading(classname="full title", icon='title')),
-        ('main_carousel_shelf', Carousel(icon="repeat")),
+        ('carousel_shelf', Carousel(icon="repeat")),
         ('panel_carousel_shelf', PanelCarousel(icon="repeat")),
         ('promo_shelf', PromoShelfChooserBlock(target_model="shelves.PromoShelf", icon="image")),
         ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),

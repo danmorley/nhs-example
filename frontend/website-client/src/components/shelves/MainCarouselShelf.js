@@ -75,5 +75,6 @@ class MainCarouselShelf extends Component {
 }
 
 CmsComponentRegistry.register('main_carousel_shelf', MainCarouselShelf, 'carousel-shelf');
+CmsComponentRegistry.register('carousel_shelf', MainCarouselShelf, 'carousel-shelf');
 
 export default MainCarouselShelf;
