@@ -46,7 +46,7 @@ class CtaUtils {
    * }
    */
   static isValidCta(cta) {
-    if (!(cta instanceof Object) || !cta.link_text) return false;
+    if (!(cta instanceof Object)) return false;
     if (cta.link_external && cta.link_external.length > 0) return true;
     if (cta.link_page && cta.link_page.relative_path) return true;
     return false;
