@@ -10,8 +10,19 @@ $arrow-distance: 9%;
   min-width: 0;
 }
 
-.panel-carousel {
+.panel-carousel-shelf {
+  position: relative;
+  width: auto;
+  padding-bottom: 35px;
+  
+  .container-fluid {
+    position: relative;
+      width: auto;
+  }
+}
 
+.panel-carousel {
+  
   .shelf-section {
     padding-top: 0;
     padding-bottom: 0;
@@ -48,7 +59,7 @@ $arrow-distance: 9%;
     padding: 0 !important;
 
     @include media-breakpoint-up(sm) {
-      bottom: 1.2em;
+      bottom: 1.2em;  width: auto;
     }
   }
 
@@ -58,7 +69,7 @@ $arrow-distance: 9%;
     width: auto;
 
     @include media-breakpoint-up(sm) {
-      margin: 0 15px;
+      margin: 0 15px 0 0;
 
       button {
         height: 28px;
@@ -87,7 +98,7 @@ $arrow-distance: 9%;
   .slick-next {
 
     @include media-breakpoint-up(sm) {
-      right: -$arrow-distance;
+     right: -60px;
       z-index: 1;
       height: 40px;
       width: 40px;
@@ -97,7 +108,7 @@ $arrow-distance: 9%;
   .slick-prev {
 
     @include media-breakpoint-up(sm) {
-      left:  -$arrow-distance;
+      left: -60px;
       z-index: 1;
       height: 40px;
       width: 40px;
@@ -113,12 +124,21 @@ $arrow-distance: 9%;
 
 // specific styles
 .carousel-panel {
-  margin: 10px 100px 40px 100px;
 
+  margin: 0.5em 0 0;
+
+  @include media-breakpoint-up(md) {
+    margin: 0.5em 100px 0;
+  }
+  
   .slick-slide {
-    padding: 10px;
+    padding: 15px;
     transition: padding 0.5s ease-in-out;
-
+    
+    @include media-breakpoint-up(md) {
+      padding: 20px;
+    }
+    
     &.slick-current {
       padding: 0px;
       transition: padding 0.5s ease-in-out;
@@ -126,7 +146,12 @@ $arrow-distance: 9%;
   }
 
   .slick-dots {
-    bottom: -40px;
+    bottom: -25px;
+    width: 100%;
+    
+    @include media-breakpoint-up(sm) {
+      bottom: -45px;
+    }
   }
 
   .slick-next:before {

@@ -45,33 +45,29 @@ class PanelCarouselShelf extends Component {
   getNodes(equalizerComponent, equalizerElement) {
     return equalizerElement.querySelectorAll(".slick-slide");
   }
-
+     
   render() {
     let { id, content, classNamePrefix } = this.props;
     let settings = {
       centerMode: true,
-      centerPadding: '160px',
       slidesToShow: 1,
-      slidesToScroll: 1,
+      centerPadding: '200px', 
       dots: true,
       infinite: true,
       speed: 500,
       autoplay: true,
       autoplaySpeed: 12000,
       arrows: true,
-      responsive: [
-        {
-          breakpoint: 992,
-          settings: {
-            arrows: true,
-            centerMode: true,
-            centerPadding: '80px',
-            slidesToShow: 1
-          }
-        }
-      ]
+      responsive: [ 
+       { 
+         breakpoint: 992, 
+         settings: { 
+           centerPadding: '60px'  
+         } 
+       } 
+     ]   
     };
-
+    
     var slides = content.items.map((panel, i) => {
       const panelInfo = CmsComponentRegistry.components[panel.type];
       const PanelClass = panelInfo && panelInfo.class;
@@ -88,11 +84,15 @@ class PanelCarouselShelf extends Component {
       <Shelf id={id} classNamePrefix={classNamePrefix}>
         <div className="shelf__container container">
           <h2 className="shelf__header">{content.heading}</h2>
-          <Equalizer nodes={this.getNodes.bind(this)}>
-            <Slider className="panel-carousel carousel-panel" {...settings}>
-              {slides}
-            </Slider>
-          </Equalizer>
+        </div>
+        <div className="container-fluid">
+          <div className="row carousel__row">
+            <Equalizer nodes={this.getNodes.bind(this)}>
+              <Slider className="panel-carousel carousel-panel" {...settings}>
+                  {slides}
+              </Slider>
+            </Equalizer>
+          </div>
         </div>
       </Shelf>
     );
