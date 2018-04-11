@@ -78,6 +78,7 @@ class Release(ClusterableModel):
         FieldPanel('release_name', classname='release_name', ),
         ReadOnlyPanel('uuid', classname='uuid', ),
         ReadOnlyPanel('content_status', classname='release_status'),
+        ReadOnlyPanel('frontend_id', classname='frontend_id'),
         FieldPanel('release_time', classname='release_time', ),
     ]
 
