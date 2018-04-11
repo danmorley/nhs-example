@@ -1,4 +1,5 @@
 @import '../../assets/styles/variables/variables';
+@import '../../assets/styles/variables/icons';
 @import "../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
 
 .show-more-panel {
@@ -7,9 +8,42 @@
   transition-delay: 0s;
   transition-timing-function: linear;
 }
+
 .show-more-content > .shelf__col {
   &.hidden {
     display: none;
+  }
+}
+
+.more-less-toggle {
+  margin: 4px 0 8px;
+
+  a {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  a.see-more {
+    &:after {
+      @extend %icon-chevron-down;
+      position: relative;
+      display: inline-block;
+      font-weight: normal;
+      font-size: 0.8em;
+      margin-left: 6px;
+    }
+  }
+
+  a.see-less {
+    &:after {
+      @extend %icon-chevron-up;
+      position: relative;
+      display: inline-block;
+      font-weight: normal;
+      font-size: 0.8em;
+      margin-left: 6px;
+    }
   }
 }
 
