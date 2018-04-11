@@ -118,11 +118,11 @@ class ShowMorePanel extends Component {
     ;
 
     const buttons = (this.shouldShowMoreLessButton() &&
-      <div key="2" className="row" style={{justifyContent: 'center'}}>
+      <div key="2" className="row more-less-toggle" style={{justifyContent: 'center'}}>
         {this.state.isExpanded ? (
-          <a onClick={this.doContract}>See less</a>
+          <a onClick={this.doContract} className="see-less">See less</a>
         ) : (
-          <a onClick={this.doExpand}>See more</a>
+          <a onClick={this.doExpand} className="see-more">See more</a>
         )}
       </div>
     );
