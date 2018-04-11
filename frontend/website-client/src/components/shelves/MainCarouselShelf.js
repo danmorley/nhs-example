@@ -8,10 +8,10 @@ import PlaceholderShelf from './PlaceholderShelf';
 import GeneralTextShelf from './GeneralTextShelf';
 import BasicCtaShelf from './BasicCtaShelf';
 
-import styles from './carousel.css';
+import styles from './main-carousel-shelf.css';
 
 /**
- *  Carousel Shelf is used to display a list of slides in a carousel widget.
+ *  Main Carousel Shelf is used to display a list of slides in a full width carousel widget.
  *
  *  It expects the following properties:
  *  - content
@@ -24,7 +24,7 @@ import styles from './carousel.css';
  *    field_id: "learn-more-shelf"
  *  }
  */
-class CarouselShelf extends Component {
+class MainCarouselShelf extends Component {
 
   getNodes(equalizerComponent, equalizerElement) {
     return equalizerElement.querySelectorAll(".slick-slide");
@@ -63,7 +63,7 @@ class CarouselShelf extends Component {
         <div className="container-fluid">
           <div className="row carousel__row">
             <Equalizer nodes={this.getNodes.bind(this)}>
-              <Slider className ="carousel carousel-full" {...settings}>
+              <Slider className="carousel carousel-full" {...settings}>
                 {slides}
               </Slider>
             </Equalizer>
@@ -74,6 +74,6 @@ class CarouselShelf extends Component {
   }
 }
 
-CmsComponentRegistry.register('main_carousel_shelf', CarouselShelf, 'carousel-shelf');
+CmsComponentRegistry.register('main_carousel_shelf', MainCarouselShelf, 'carousel-shelf');
 
-export default CarouselShelf;
+export default MainCarouselShelf;

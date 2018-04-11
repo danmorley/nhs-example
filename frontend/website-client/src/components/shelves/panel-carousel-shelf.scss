@@ -1,0 +1,192 @@
+@import '../../assets/styles/variables/variables';
+@import '../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints';
+
+// generic styles
+
+$arrow-distance: 9%;
+
+.panel-carousel-shelf * {
+  min-height: 0;
+  min-width: 0;
+}
+
+.panel-carousel-shelf {
+  position: relative;
+  width: auto;
+  padding-bottom: 35px;
+  
+  .container-fluid {
+    position: relative;
+      width: auto;
+  }
+}
+
+.panel-carousel {
+  
+  .shelf-section {
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 100%;
+
+    > div.shelf, div.shelf__container {
+      height: 100%;
+    }
+  }
+
+  .shelf__container {
+    padding-top: 1.4em;
+    padding-bottom: 1.5em;
+
+    @include media-breakpoint-up(sm) {
+      padding-top: 1.2em;
+      padding-bottom: 2.5em;
+    }
+
+    @include media-breakpoint-up(md) {
+      padding-left: 5%;
+      padding-right: 5%;
+    }
+    @include media-breakpoint-up(xl) {
+      padding-left: inherit;
+      padding-right: inherit;
+    }
+  }
+
+  .slick-dots {
+    position: absolute;
+    bottom: 0.6em;
+    margin: 0 !important;
+    padding: 0 !important;
+
+    @include media-breakpoint-up(sm) {
+      bottom: 1.2em;  width: auto;
+    }
+  }
+
+  .slick-dots li {
+    margin: 0 3px;
+    height: auto;
+    width: auto;
+
+    @include media-breakpoint-up(sm) {
+      margin: 0 15px 0 0;
+
+      button {
+        height: 28px;
+        width: 28px;
+      }
+    }
+  }
+
+  .slick-dots li button::before {
+    font-size: 14px;
+    color: $grey-brown-dark;
+    opacity: 1;
+
+    @include media-breakpoint-up(sm) {
+      font-size: 28px;
+      height: 28px;
+      width: 28px;
+    }
+  }
+
+  .slick-dots li.slick-active button:before {
+    color: $sunflower-yellow;
+    opacity: 1;
+  }
+
+  .slick-next {
+
+    @include media-breakpoint-up(sm) {
+     right: -60px;
+      z-index: 1;
+      height: 40px;
+      width: 40px;
+    }
+  }
+
+  .slick-prev {
+
+    @include media-breakpoint-up(sm) {
+      left: -60px;
+      z-index: 1;
+      height: 40px;
+      width: 40px;
+    }
+  }
+}
+
+.carousel__row {
+  position: relative;
+  z-index: 0;
+  display: block;
+}
+
+// specific styles
+.carousel-panel {
+
+  margin: 0.5em 0 0;
+
+  @include media-breakpoint-up(md) {
+    margin: 0.5em 100px 0;
+  }
+  
+  .slick-slide {
+    padding: 15px;
+    transition: padding 0.5s ease-in-out;
+    
+    @include media-breakpoint-up(md) {
+      padding: 20px;
+    }
+    
+    &.slick-current {
+      padding: 0px;
+      transition: padding 0.5s ease-in-out;
+    }
+  }
+
+  .slick-dots {
+    bottom: -25px;
+    width: 100%;
+    
+    @include media-breakpoint-up(sm) {
+      bottom: -45px;
+    }
+  }
+
+  .slick-next:before {
+      @extend %icon-chevron-right;
+  }
+
+  .slick-prev:before {
+      @extend %icon-chevron-left;
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+      color: $grey-brown-dark !important;
+      opacity: 1;
+
+      @include media-breakpoint-up(sm) {
+        font-size: 40px;
+      }
+  }
+
+  .slick-next:hover:before,
+  .slick-prev:hover:before {
+    color: $sunflower-yellow !important;
+  }
+
+  .container {
+
+    @include media-breakpoint-up(sm) {
+      padding-left: 2.5em;
+      padding-right: 2.5em;
+    }
+
+    @include media-breakpoint-up(xl) {
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+  }
+}
