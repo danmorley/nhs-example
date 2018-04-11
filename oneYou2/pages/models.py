@@ -94,6 +94,9 @@ class InformationPanel(CTABlock):
     body = blocks.RichTextBlock(required=False)
     image = BlobImageChooserBlock(required=False)
     shelf_id = IDBlock(required=False, label="ID")
+    cta = blocks.StreamBlock([
+        ('simple_menu_item', SimpleMenuItem())
+    ], icon='arrow-left', label='Items', required=False, verbose_name="cta")
 
 
 class FindOutMoreDropDown(CTABlock):
