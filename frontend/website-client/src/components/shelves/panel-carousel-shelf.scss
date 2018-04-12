@@ -80,7 +80,7 @@ $arrow-distance: 9%;
 
   .slick-dots li button::before {
     font-size: 14px;
-    color: $grey-brown-dark;
+    color: $warm-grey;
     opacity: 1;
 
     @include media-breakpoint-up(sm) {
@@ -91,7 +91,7 @@ $arrow-distance: 9%;
   }
 
   .slick-dots li.slick-active button:before {
-    color: $sunflower-yellow;
+    color: $teal-blue;
     opacity: 1;
   }
 
@@ -132,14 +132,17 @@ $arrow-distance: 9%;
   }
   
   .slick-slide {
-    padding: 15px;    
+    padding: 20px 5px;
     
     @include media-breakpoint-up(md) {
-      padding: 20px;
+      padding: 30px 10px;
     }
     
-    &.slick-current {
-      padding: 0;
+    &.slick-center {
+      padding-top: 0;
+      padding-bottom: 0;
+      transform: scale(1); 
+      transition: 0.3s all ease;
     }
   }
 

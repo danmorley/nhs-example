@@ -45,11 +45,12 @@ class PanelCarouselShelf extends Component {
   getNodes(equalizerComponent, equalizerElement) {
     return equalizerElement.querySelectorAll(".slick-slide");
   }
-     
+  
   render() {
     let { id, content, classNamePrefix } = this.props;
     let settings = {
       centerMode: true,
+      pauseOnFocus: true,
       slidesToShow: 1,
       centerPadding: '200px', 
       dots: true,
@@ -68,10 +69,10 @@ class PanelCarouselShelf extends Component {
         {
           breakpoint: 992, 
           settings: { 
-            centerPadding: '80px'  
-          } 
+            centerPadding: '80px'
+          }  
         }
-     ]   
+      ]
     };
     
     var slides = content.items.map((panel, i) => {

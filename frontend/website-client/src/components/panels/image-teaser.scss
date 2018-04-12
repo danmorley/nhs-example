@@ -36,7 +36,7 @@
     margin-bottom: 1em;
   }
 
-  a {
+  a, .cta-list {
     margin-top: auto;
     font-weight: bold;
   }
@@ -62,6 +62,8 @@
   }
   
   .image-teaser__text {
+    
+    padding-bottom: 0;
     
     @include media-breakpoint-down(sm) {
       padding-top: 0.5em;
