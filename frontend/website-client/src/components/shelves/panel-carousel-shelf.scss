@@ -132,16 +132,14 @@ $arrow-distance: 9%;
   }
   
   .slick-slide {
-    padding: 15px;
-    transition: padding 0.5s ease-in-out;
+    padding: 15px;    
     
     @include media-breakpoint-up(md) {
       padding: 20px;
     }
     
     &.slick-current {
-      padding: 0px;
-      transition: padding 0.5s ease-in-out;
+      padding: 0;
     }
   }
 
