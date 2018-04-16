@@ -26,10 +26,9 @@ def site_view(request, site_identifier):
     current_release = get_latest_release(site.site.pk)
     if not current_release:
         raise NoReleasesFound("The current site has no live releases")
-    setattr(site, 'release_uuid', current_release.uuid)
+    populate_release_if_required(current_release)
 
-    serialized_site_data = SiteSerializer(site).data
-    return HttpResponse(json.dumps(serialized_site_data), content_type="application/json")
+    return HttpResponse(json.dumps(current_release.get_content_for('site_json')), content_type="application/json")
 
 
 @require_safe
