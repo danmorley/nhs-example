@@ -1,323 +1,332 @@
 {
-    "id": 2,
-    "meta": {
-        "hostname": "localhost",
-        "release_id": "5e6103c7-3caf-432a-9516-9d590c44077b",
-        "site_uid": "oneyou",
-        "type": "wagtailcore.Site"
-    },
-    "port": 80,
-    "site_name": "OneYou",
-    "root_page": {
-        "id": 3,
-        "meta": {
-            "type": "pages.OneYou2Page",
-            "detail_url": "http://localhost/api/v2/release_pages/3/"
+  "id":2,
+  "port":80,
+  "site_name":"OneYou",
+  "is_default_site":true,
+  "menu":{
+    "items":[
+      {
+        "type":"simple_menu_item",
+        "value":{
+          "link_text":"Home",
+          "link_external":"",
+          "link_page":{
+            "id":3,
+            "slug":"home",
+            "relative_path":"/oneyou/"
+          }
         },
-        "title": "Home"
-    },
-    "is_default_site": true,
-    "menu": [
-        {
-            "type": "simple_menu_item",
-            "value": {
-                "link_text": "Home",
-                "link_external": "",
-                "link_page": null,
-                "link_slug": null,
-                "link_path": null
-            },
-            "id": "3b9c8471-f143-4d03-b27e-c2a6824da79a"
+        "id":"3b9c8471-f143-4d03-b27e-c2a6824da79a"
+      },
+      {
+        "type":"simple_menu_item",
+        "value":{
+          "link_text":"How are you? quiz",
+          "link_external":"",
+          "link_page":{
+            "id":5,
+            "slug":"how-are-you-quiz",
+            "relative_path":"/oneyou/how-are-you-quiz/"
+          }
         },
-        {
-            "type": "simple_menu_item",
-            "value": {
-                "link_text": "How are you? quiz",
-                "link_external": "",
-                "link_page": 5,
-                "link_slug": "how-are-you",
-                "link_path": "/oneyou/how-are-you/"
+        "id":"f33c25ac-44ec-4586-9169-ce97e551eb15"
+      },
+      {
+        "type":"multi_menu_item",
+        "value":{
+          "label":"Be healthier",
+          "menu_items":[
+            {
+              "type":"simple_menu_item",
+              "value":{
+                "link_text":"Check your health",
+                "link_external":"",
+                "link_page":{
+                  "id":10,
+                  "slug":"check-your-health",
+                  "relative_path":"/oneyou/be-healthier/check-your-health/"
+                }
+              },
+              "id":"19cd89cc-e7dc-468d-a220-85077884ee8c"
             },
-            "id": "f33c25ac-44ec-4586-9169-ce97e551eb15"
+            {
+              "type":"simple_menu_item",
+              "value":{
+                "link_text":"Quit smoking",
+                "link_external":"",
+                "link_page":{
+                  "id":11,
+                  "slug":"quit-smoking",
+                  "relative_path":"/oneyou/be-healthier/quit-smoking/"
+                }
+              },
+              "id":"b4ac84d1-8580-4faf-a842-ff0af649137b"
+            },
+            {
+              "type":"simple_menu_item",
+              "value":{
+                "link_text":"Drink less",
+                "link_external":"",
+                "link_page":{
+                  "id":12,
+                  "slug":"drink-less",
+                  "relative_path":"/oneyou/be-healthier/drink-less/"
+                }
+              },
+              "id":"dd9419a6-561e-45a6-ba4b-bc7c24c16863"
+            },
+            {
+              "type":"simple_menu_item",
+              "value":{
+                "link_text":"Eat better",
+                "link_external":"",
+                "link_page":{
+                  "id":13,
+                  "slug":"eat-better",
+                  "relative_path":"/oneyou/be-healthier/eat-better/"
+                }
+              },
+              "id":"ed396895-0708-4bc4-871c-f7c7cf32e0dc"
+            },
+            {
+              "type":"simple_menu_item",
+              "value":{
+                "link_text":"Move more",
+                "link_external":"",
+                "link_page":{
+                  "id":14,
+                  "slug":"move-more",
+                  "relative_path":"/oneyou/be-healthier/move-more/"
+                }
+              },
+              "id":"75438bed-976b-4380-9231-3ae1f289ee4c"
+            },
+            {
+              "type":"simple_menu_item",
+              "value":{
+                "link_text":"Sleep better",
+                "link_external":"",
+                "link_page":{
+                  "id":1009,
+                  "slug":"sleep-better",
+                  "relative_path":"/oneyou/be-healthier/sleep-better/"
+                }
+              },
+              "id":"8247c8d4-e3f2-4e76-819b-733740e81efc"
+            },
+            {
+              "type":"simple_menu_item",
+              "value":{
+                "link_text":"Stress less",
+                "link_external":"",
+                "link_page":{
+                  "id":1010,
+                  "slug":"stress-less",
+                  "relative_path":"/oneyou/be-healthier/stress-less/"
+                }
+              },
+              "id":"b7ebb2e2-764e-4f8b-a9a6-1b63453fd846"
+            },
+            {
+              "type":"simple_menu_item",
+              "value":{
+                "link_text":"Diabetes",
+                "link_external":"",
+                "link_page":{
+                  "id":2016,
+                  "slug":"diabetes",
+                  "relative_path":"/oneyou/be-healthier/diabetes/"
+                }
+              },
+              "id":"e1116cac-ff86-4694-9dbc-7553881083f5"
+            },
+            {
+              "type":"simple_menu_item",
+              "value":{
+                "link_text":"Sexual health",
+                "link_external":"",
+                "link_page":{
+                  "id":2017,
+                  "slug":"sexual-health",
+                  "relative_path":"/oneyou/be-healthier/sexual-health/"
+                }
+              },
+              "id":"3bd17115-7f86-4673-9d37-288005cc7a55"
+            },
+            {
+              "type":"simple_menu_item",
+              "value":{
+                "link_text":"Weight loss",
+                "link_external":"",
+                "link_page":{
+                  "id":2018,
+                  "slug":"weight-loss",
+                  "relative_path":"/oneyou/be-healthier/weight-loss/"
+                }
+              },
+              "id":"9c8fed6a-a9b1-4ce4-8460-fa77269914db"
+            }
+          ]
         },
-        {
-            "type": "multi_menu_item",
-            "value": {
-                "label": "Be healthier",
-                "menu_items": [
-                    {
-                        "type": "simple_menu_item",
-                        "value": {
-                            "link_text": "Check your health",
-                            "link_external": "",
-                            "link_page": 10,
-                            "link_slug": "check-your-health",
-                            "link_path": "/oneyou/be-healthier/check-your-health/"
-                        },
-                        "id": "19cd89cc-e7dc-468d-a220-85077884ee8c"
-                    },
-                    {
-                        "type": "simple_menu_item",
-                        "value": {
-                            "link_text": "Quit smoking",
-                            "link_external": "",
-                            "link_page": 11,
-                            "link_slug": "quit-smoking",
-                            "link_path": "/oneyou/be-healthier/quit-smoking/"
-                        },
-                        "id": "b4ac84d1-8580-4faf-a842-ff0af649137b"
-                    },
-                    {
-                        "type": "simple_menu_item",
-                        "value": {
-                            "link_text": "Drink less",
-                            "link_external": "",
-                            "link_page": 12,
-                            "link_slug": "drink-less",
-                            "link_path": "/oneyou/be-healthier/drink-less/"
-                        },
-                        "id": "dd9419a6-561e-45a6-ba4b-bc7c24c16863"
-                    },
-                    {
-                        "type": "simple_menu_item",
-                        "value": {
-                            "link_text": "Eat better",
-                            "link_external": "",
-                            "link_page": 13,
-                            "link_slug": "eat-better",
-                            "link_path": "/oneyou/be-healthier/eat-better/"
-                        },
-                        "id": "ed396895-0708-4bc4-871c-f7c7cf32e0dc"
-                    },
-                    {
-                        "type": "simple_menu_item",
-                        "value": {
-                            "link_text": "Move more",
-                            "link_external": "",
-                            "link_page": 14,
-                            "link_slug": "move-more",
-                            "link_path": "/oneyou/be-healthier/move-more/"
-                        },
-                        "id": "75438bed-976b-4380-9231-3ae1f289ee4c"
-                    },
-                    {
-                        "type": "simple_menu_item",
-                        "value": {
-                            "link_text": "Sleep better",
-                            "link_external": "",
-                            "link_page": 1009,
-                            "link_slug": "sleep-better",
-                            "link_path": "/oneyou/be-healthier/sleep-better/"
-                        },
-                        "id": "8247c8d4-e3f2-4e76-819b-733740e81efc"
-                    },
-                    {
-                        "type": "simple_menu_item",
-                        "value": {
-                            "link_text": "Stress less",
-                            "link_external": "",
-                            "link_page": 1010,
-                            "link_slug": "stress-less",
-                            "link_path": "/oneyou/be-healthier/stress-less/"
-                        },
-                        "id": "b7ebb2e2-764e-4f8b-a9a6-1b63453fd846"
-                    }
-                ]
-            },
-            "id": "05e07fe8-77a8-46e3-8a18-0eafc20124d9"
+        "id":"05e07fe8-77a8-46e3-8a18-0eafc20124d9"
+      },
+      {
+        "type":"simple_menu_item",
+        "value":{
+          "link_text":"Offers",
+          "link_external":"",
+          "link_page":{
+            "id":8,
+            "slug":"offers",
+            "relative_path":"/oneyou/offers/"
+          }
         },
-        {
-            "type": "multi_menu_item",
-            "value": {
-                "label": "More Topics",
-                "menu_items": [
-                    {
-                        "type": "simple_menu_item",
-                        "value": {
-                            "link_text": "Diabetes",
-                            "link_external": "",
-                            "link_page": 2016,
-                            "link_slug": "diabetes",
-                            "link_path": "/oneyou/more-topics/diabetes/"
-                        },
-                        "id": "cdd680ec-8f72-41f2-854e-df6586113ec9"
-                    },
-                    {
-                        "type": "simple_menu_item",
-                        "value": {
-                            "link_text": "Sexual Health",
-                            "link_external": "",
-                            "link_page": 2017,
-                            "link_slug": "sexual-health",
-                            "link_path": "/oneyou/more-topics/sexual-health/"
-                        },
-                        "id": "9b4aea24-f68d-4d31-b1d7-a17f84b53d21"
-                    },
-                    {
-                        "type": "simple_menu_item",
-                        "value": {
-                            "link_text": "Weight Loss",
-                            "link_external": "",
-                            "link_page": 2018,
-                            "link_slug": "weight-loss",
-                            "link_path": "/oneyou/more-topics/weight-loss/"
-                        },
-                        "id": "c76bbdd9-2326-4568-b1ee-9b737159028c"
-                    }
-                ]
-            },
-            "id": "e4c02046-eb5b-448f-a6eb-5f35a74ecff5"
+        "id":"9fe59f9f-3be0-4c3d-b581-dcc70b92818f"
+      },
+      {
+        "type":"simple_menu_item",
+        "value":{
+          "link_text":"Apps",
+          "link_external":"",
+          "link_page":{
+            "id":9,
+            "slug":"apps",
+            "relative_path":"/oneyou/apps/"
+          }
         },
-        {
-            "type": "simple_menu_item",
-            "value": {
-                "link_text": "Offers",
-                "link_external": "",
-                "link_page": 8,
-                "link_slug": "offers",
-                "link_path": "/oneyou/offers/"
-            },
-            "id": "9fe59f9f-3be0-4c3d-b581-dcc70b92818f"
+        "id":"9a006ab3-b795-4d42-8dfc-ea13a671bedf"
+      },
+      {
+        "type":"simple_menu_item",
+        "value":{
+          "link_text":"About",
+          "link_external":"",
+          "link_page":{
+            "id":2015,
+            "slug":"about-one-you",
+            "relative_path":"/oneyou/about-one-you/"
+          }
         },
-        {
-            "type": "simple_menu_item",
-            "value": {
-                "link_text": "Apps",
-                "link_external": "",
-                "link_page": 9,
-                "link_slug": "apps",
-                "link_path": "/oneyou/apps/"
-            },
-            "id": "9a006ab3-b795-4d42-8dfc-ea13a671bedf"
-        }
+        "id":"fab9d2e1-faef-427a-a64b-236db1164ce4"
+      }
+    ]
+  },
+  "header":{
+    "title":"html::One <span>You</span>",
+    "image":2
+  },
+  "footer":{
+    "items":[
+      {
+        "type":"simple_menu_item",
+        "value":{
+          "link_text":"About One You",
+          "link_external":"",
+          "link_page":{
+            "id":2015,
+            "slug":"about-one-you",
+            "relative_path":"/oneyou/about-one-you/"
+          }
+        },
+        "id":"8779b4c6-2c48-484d-9194-13561cdfd548"
+      },
+      {
+        "type":"simple_menu_item",
+        "value":{
+          "link_text":"Contact Us",
+          "link_external":"",
+          "link_page":{
+            "id":2009,
+            "slug":"contact-us",
+            "relative_path":"/oneyou/contact-us/"
+          }
+        },
+        "id":"41228c2e-5be4-4ef3-87fb-e19822a72d38"
+      },
+      {
+        "type":"simple_menu_item",
+        "value":{
+          "link_text":"Partners",
+          "link_external":"",
+          "link_page":{
+            "id":2010,
+            "slug":"partners",
+            "relative_path":"/oneyou/partners/"
+          }
+        },
+        "id":"ae912c87-416d-48cf-8c23-756dd3f4f0bb"
+      },
+      {
+        "type":"simple_menu_item",
+        "value":{
+          "link_text":"Terms and conditions",
+          "link_external":"",
+          "link_page":{
+            "id":2011,
+            "slug":"terms-and-conditions",
+            "relative_path":"/oneyou/terms-and-conditions/"
+          }
+        },
+        "id":"963a2c13-27a3-43ac-bb68-b2253a4af67e"
+      },
+      {
+        "type":"simple_menu_item",
+        "value":{
+          "link_text":"Crown Copyright",
+          "link_external":"",
+          "link_page":{
+            "id":2012,
+            "slug":"crown-copyright",
+            "relative_path":"/oneyou/crown-copyright/"
+          }
+        },
+        "id":"47a829cc-6d37-4f97-a034-099688eec90c"
+      },
+      {
+        "type":"simple_menu_item",
+        "value":{
+          "link_text":"Privacy Policy",
+          "link_external":"",
+          "link_page":{
+            "id":2013,
+            "slug":"privacy-policy",
+            "relative_path":"/oneyou/privacy-policy/"
+          }
+        },
+        "id":"79dbf6df-4b11-457a-a1f8-3b2902f1a24b"
+      }
     ],
-    "header": {
-        "image": {
-            "title": "OneYou Logo",
-            "image": "https://campaignstorage.blob.core.windows.net/oneyou-cms-production/original_images/codeoneYou2oneYou2staticimgone_you_logo.jpg"
-        }
-    },
-    "footer": {
-        "links": [
-            {
-                "type": "simple_menu_item",
-                "value": {
-                    "link_text": "About One You",
-                    "link_external": "",
-                    "link_page": 2015,
-                    "link_slug": "about-one-you",
-                    "link_path": "/oneyou/about-one-you/"
-                },
-                "id": "8779b4c6-2c48-484d-9194-13561cdfd548"
-            },
-            {
-                "type": "simple_menu_item",
-                "value": {
-                    "link_text": "Contact Us",
-                    "link_external": "",
-                    "link_page": 2009,
-                    "link_slug": "contact-us",
-                    "link_path": "/oneyou/contact-us/"
-                },
-                "id": "41228c2e-5be4-4ef3-87fb-e19822a72d38"
-            },
-            {
-                "type": "simple_menu_item",
-                "value": {
-                    "link_text": "Partners",
-                    "link_external": "",
-                    "link_page": 2010,
-                    "link_slug": "partners",
-                    "link_path": "/oneyou/partners/"
-                },
-                "id": "ae912c87-416d-48cf-8c23-756dd3f4f0bb"
-            },
-            {
-                "type": "simple_menu_item",
-                "value": {
-                    "link_text": "Terms and conditions",
-                    "link_external": "",
-                    "link_page": 2011,
-                    "link_slug": "terms-and-conditions",
-                    "link_path": "/oneyou/terms-and-conditions/"
-                },
-                "id": "963a2c13-27a3-43ac-bb68-b2253a4af67e"
-            },
-            {
-                "type": "simple_menu_item",
-                "value": {
-                    "link_text": "Crown Copyright",
-                    "link_external": "",
-                    "link_page": 2012,
-                    "link_slug": "crown-copyright",
-                    "link_path": "/oneyou/crown-copyright/"
-                },
-                "id": "47a829cc-6d37-4f97-a034-099688eec90c"
-            },
-            {
-                "type": "simple_menu_item",
-                "value": {
-                    "link_text": "Privacy Policy",
-                    "link_external": "",
-                    "link_page": 2013,
-                    "link_slug": "privacy-policy",
-                    "link_path": "/oneyou/privacy-policy/"
-                },
-                "id": "79dbf6df-4b11-457a-a1f8-3b2902f1a24b"
-            }
-        ],
-        "social_media": [
-            {
-                "type": "social_media_link",
-                "value": {
-                    "label": "Facebook",
-                    "type": "facebook",
-                    "link": "https://www.facebook.com/OneYouPHE/"
-                },
-                "id": "76e00772-24fc-4bc6-8ecd-ae757e6735fe"
-            },
-            {
-                "type": "social_media_link",
-                "value": {
-                    "label": "Twitter",
-                    "type": "twitter",
-                    "link": "https://twitter.com/oneyouphe"
-                },
-                "id": "6a75a35b-b2dc-48a7-96f1-f3a05ec3e57f"
-            }
-        ],
-        "image": {
-            "title": "PHE Logo",
-            "image": "https://campaignstorage.blob.core.windows.net/oneyou-cms-production/original_images/codeoneYou2oneYou2staticimgphe_logo.png"
-        }
-    },
-    "redirects": {
-        "/oneyou/test": "/offers/"
-    },
-    "pages": {
-        "/": 3,
-        "/how-are-you/": 5,
-        "/be-healthier/": 6,
-        "/be-healthier/check-your-health/": 10,
-        "/be-healthier/quit-smoking/": 11,
-        "/be-healthier/drink-less/": 12,
-        "/be-healthier/eat-better/": 13,
-        "/be-healthier/move-more/": 14,
-        "/be-healthier/sleep-better/": 1009,
-        "/be-healthier/stress-less/": 1010,
-        "/more-topics/": 7,
-        "/more-topics/diabetes/": 2016,
-        "/more-topics/sexual-health/": 2017,
-        "/more-topics/weight-loss/": 2018,
-        "/offers/": 8,
-        "/apps/": 9,
-        "/contact-us/": 2009,
-        "/partners/": 2010,
-        "/terms-and-conditions/": 2011,
-        "/crown-copyright/": 2012,
-        "/privacy-policy/": 2013,
-        "/about-one-you/": 2015,
-        "/apps-terms-and-conditions/": 2019,
-        "/quiz-score-explained/": 2020
+    "social_media":[
+      {
+        "type":"social_media_link",
+        "value":{
+          "label":"Facebook",
+          "type":"facebook",
+          "link":"https://www.facebook.com/OneYouPHE/"
+        },
+        "id":"76e00772-24fc-4bc6-8ecd-ae757e6735fe"
+      },
+      {
+        "type":"social_media_link",
+        "value":{
+          "label":"Twitter",
+          "type":"twitter",
+          "link":"https://twitter.com/oneyouphe"
+        },
+        "id":"6a75a35b-b2dc-48a7-96f1-f3a05ec3e57f"
+      }
+    ],
+    "image":{
+      "title":"PHE Logo",
+      "image":"https://campaignstorage.blob.core.windows.net/oneyou-cms-production/original_images/codeoneYou2oneYou2staticimgphe_logo_929dNAz.png"
     }
+  },
+  "redirects":[
+
+  ],
+  "meta":{
+    "hostname":"localhost",
+    "release_id":"8d8a2898-c0de-4dac-807b-8df29258c2ea",
+    "site_uid":"OneYou"
+  }
 }
