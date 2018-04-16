@@ -9,6 +9,7 @@ $shelf-padding-extra: 2em;
   .container, .container-fluid {
     background-size: cover;
     background-position: 50%;
+    background-repeat: no-repeat;
     padding-top: 1em;
     padding-bottom: 1em;
   }
