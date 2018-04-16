@@ -14,11 +14,16 @@ class PageHeader extends Component {
   state = {
     navHeight: "0"
   }
-
+ 
   handleResize = () => { 
-    this.state = {navHeight: this.divElement.clientHeight};
-    document.querySelector('.page-wrapper').style.paddingTop = (this.state.navHeight +'px');
-  }; 
+    this.state = { 
+      navHeight: this.divElement.clientHeight                    
+    };
+    let cookieBanner = document.querySelector('.cookie-banner');
+    let cookieBannerHeight = document.body.contains(cookieBanner) ? cookieBanner.clientHeight : 0;
+    document.querySelector('.page-wrapper').style.paddingTop = (this.state.navHeight + cookieBannerHeight +'px');
+    document.querySelector('.page-header').style.top = cookieBannerHeight + 'px';
+  }
   
   componentDidMount() {
     this.handleResize();

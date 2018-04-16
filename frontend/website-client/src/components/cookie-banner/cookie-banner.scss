@@ -4,6 +4,11 @@
 .cookie-banner {
   background-color: $grey-brown;
   max-height: 400px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
   
   .container {
     padding-top: 1.5em;
@@ -32,7 +37,7 @@
   
   &.closed {
     max-height: 0;
-    transition: max-height 0.5s ease-in-out;
+    transition: max-height 0.2s ease-in-out;
     overflow: hidden;
   }
 }
