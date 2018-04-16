@@ -63,7 +63,7 @@ class PanelCarouselShelf extends Component {
         { 
           breakpoint: 576, 
           settings: { 
-            centerPadding: '40px'  
+            centerPadding: '30px'  
           } 
         },
         {
