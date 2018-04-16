@@ -11,6 +11,7 @@
   background-repeat: none;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
 
   @include media-breakpoint-up(sm) {
     min-height: 263px;
