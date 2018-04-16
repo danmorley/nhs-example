@@ -5,3 +5,10 @@ def get_release_version():
             return data_file.read()
     except FileNotFoundError:
         return "Cannot locate version number"
+
+
+def get_protocol():
+    # if settings.ENV == 'dev':
+    #     return 'http://'
+    # else:
+    return 'https://'

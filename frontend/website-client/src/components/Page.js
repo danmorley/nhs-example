@@ -17,19 +17,20 @@ import PlaceholderShelf from './shelves/PlaceholderShelf';
 import GeneralTextShelf from './shelves/GeneralTextShelf';
 import BasicCtaShelf from './shelves/BasicCtaShelf';
 import GuidanceShelf from './shelves/GuidanceShelf';
-import CarouselShelf from './shelves/CarouselShelf';
+import MainCarouselShelf from './shelves/MainCarouselShelf';
+import PanelCarouselShelf from './shelves/PanelCarouselShelf';
 import GridShelf from './shelves/GridShelf';
 import HeadingBodyShelf from './shelves/HeadingBodyShelf';
 import NoticeShelf from './shelves/NoticeShelf';
 import IframeShelf from './shelves/IframeShelf';
 import ScriptShelf from './shelves/ScriptShelf';
 import SiteMapShelf from './shelves/SiteMapShelf';
+import DividerShelf from './shelves/DividerShelf';
 
 const cookies = new Cookies();
 const deployed = cookies.get('cookieBanner');
 
 class Page extends Component {
-
   renderPage(content, pageTheme, pageStyles, site, page) {
     let { menu, header, footer } = site;
     let theme = (pageTheme && pageTheme.class_name) || 'oneyou';
@@ -40,9 +41,9 @@ class Page extends Component {
         { deployed !== "true" &&
           <CookieBanner />
         }
-        <PageHeader navItems={menu} header={header}/>
+        <PageHeader navItems={menu.items} header={header}/>
         <div className="page-content-wrapper">
-          <div className="page-content">
+          <div id="page-content" className="page-content">
             {content}
           </div>
         </div>
@@ -88,14 +89,14 @@ class Page extends Component {
         const shelfClassNamePrefix = shelfInfo && shelfInfo.classNamePrefix;
         const shelfVariant = shelfInfo && shelfInfo.variant;
         const shelfLayout = shelfInfo && shelfInfo.layout;
-        const shelfId = shelf.value.field_id || shelf.id;
+        const shelfId = shelf.value.field_id || shelf.value.shelf_id || 'shelf-' + shelf.id;
         if (ShelfClass) {
           return (<ShelfClass key={i} content={shelf.value} id={shelfId} site={site} classNamePrefix={shelfClassNamePrefix} variant={shelfVariant} layout={shelfLayout}/>);
         } else {
           return (<PlaceholderShelf key={i} shelfType={shelf.type} id={shelfId} classNamePrefix={shelfClassNamePrefix}/>);
         }
       });
-      
+
       return (
         <DocumentMeta {...meta}>{this.renderPage(shelves, page_theme, page_styles, site, page)}</DocumentMeta>
       );

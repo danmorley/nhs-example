@@ -6,7 +6,6 @@ import styles from './footer-menu.css';
 class FooterMenu extends Component {
   render() {
     if (!this.props.items) return null;
-
     // Render simple menu items only.
     let items = this.props.items.map((item, i) => {
       if (item.type === 'simple_menu_item') {

@@ -31,7 +31,8 @@ class App extends Component {
     console.log('First time load of page for path ' + path);
     if (!this.isAppPage(path)) {
       console.log('Loading cms page', path);
-      let key = this.state.site.pages[path];
+      let key = this.pageSlug(path);
+
       this.loadPageForKey(key);
     } else {
       console.log('Loading app page', path);
@@ -47,12 +48,12 @@ class App extends Component {
       console.log('Internal load of page for path ' + location.pathname);
       let path = this.pagePathToRender(location.pathname);
       if (!this.isAppPage(path)) {
-        path = path.replace(global.rootUrl, '')
+        path = path.replace(global.rootUrl, '');
         console.log('Loading cms page', path);
-        let key = this.state.site.pages[path];
+        let key = this.pageSlug(path);
         this.loadPageForKey(key);
       } else {
-        path = path.replace(global.rootUrl, '')
+        path = path.replace(global.rootUrl, '');
         console.log('Loading app page', path);
       }
     });
@@ -70,6 +71,7 @@ class App extends Component {
    */
   loadPageForKey(key) {
     console.log('Loading page for key', key);
+    App.setContentVisibile(false);
 
     if (key !== undefined) {
       global.contentStore.getPage(key).then((page) => {
@@ -79,32 +81,43 @@ class App extends Component {
           console.log(page.error, page.info.statusCode, page.info.message);
           this.setState({ currentPage: notFoundPage() });
         }
+        App.setContentVisibile(true);
       });
     } else {
       console.log('No such page in site');
       this.setState({ currentPage: notFoundPage() });
+      App.setContentVisibile(true);
     }
   }
 
   checkForRedirect() {
-    let redirect = (this.state.site.redirects && this.state.site.redirects[window.location.pathname]);
-    if (redirect) {
-      if (startsWith(redirect, 'http:') || startsWith(redirect, 'https:')) {
-        // Redirect to another site.
-        window.location.pathname = redirect;
-      } else {
-        // Redirect to a relative path without causing a page refresh.
-        window.history.replaceState('', '', redirect);
-      }
-    }
+    this.state.site.redirects.map((redirect, i) => {
+      console.log("REDIRECT", redirect);
 
-    return redirect;
+      if (redirect.source + '/' === window.location.pathname) {
+        console.log("match")
+        if (startsWith(redirect, 'http:') || startsWith(redirect, 'https:')) {
+          // Redirect to another site.
+          window.location.pathname = redirect.destination;
+        } else {
+          // Redirect to a relative path without causing a page refresh.
+          window.history.replaceState('', '', redirect.destination);
+        }
+      }
+    });
   }
 
   // Take path from window location and ensure it has a trailing slash.
   pagePathToRender(pathname) {
     let path = pathname.replace(global.rootUrl, '');
     return path.slice(-1) === '/' ? path : path + '/';
+  }
+
+  pageSlug(path) {
+    // Remove trailing slash
+    let path_minus_slash = path.replace(/\/$/, "");
+    let slug = path_minus_slash.substr(path_minus_slash.lastIndexOf('/') + 1)
+    return slug
   }
 
   loadPage(props) {
@@ -141,6 +154,28 @@ class App extends Component {
         <p>Global root URL: {global.rootUrl}</p>
       </div>
     );
+  }
+
+  // Helper functions.
+
+  static setContentVisibile(visible) {
+    const contentElem = document.getElementById('page-content');
+    if (!contentElem) return;
+
+    if (visible) {
+      // Making the content visible after load - ensure it is initially at the top,
+      // then scroll to the fragment identifier if given.
+      window.scrollTo(0, 0);
+      contentElem.classList.remove('hidden');
+      const hash = window.location.hash;
+      let scrollTarget = document.getElementById(hash.substring(1));
+      if (scrollTarget) {
+        scrollTarget.scrollIntoView();
+        window.scrollBy(0, -80);
+      }
+    } else {
+      contentElem.classList.add('hidden');
+    }
   }
 }
 

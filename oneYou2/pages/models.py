@@ -5,6 +5,8 @@ import logging
 from django.db import models
 from django.db.models import DateField, TextField
 from django.forms.models import model_to_dict
+from django.http import JsonResponse
+from django.template.response import TemplateResponse, SimpleTemplateResponse
 
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.models import Page, Orderable
@@ -20,16 +22,16 @@ from wagtailsnippetscopy.registry import snippet_copy_registry
 from modelcluster.models import get_all_child_relations, get_all_child_m2m_relations
 from modelcluster.fields import ParentalKey
 
-from .blocks import IDBlock, CTABlock
+from .blocks import IDBlock, CTABlock, MenuItemPageBlock
 from .utils import get_serializable_data_for_fields
-
 from home.models import SiteSettings
-
 from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppTeaserChooserBlock, BlobImageChooserBlock
+
 
 GRID_LAYOUT_CHOICES = (
     ('full_width', 'Full Width'),
-    ('2_col_1_on_mobile', 'Responsive (1 column on mobile, 2 on desktop)'),
+    ('2_col_1_on_mobile', 'Responsive (2 columns on desktop)'),
+    ('3_col_1_on_mobile', 'Responsive (3 columns on desktop)'),
 )
 
 
@@ -38,8 +40,8 @@ logger = logging.getLogger('wagtail.core')
 
 class SimpleMenuItem(blocks.StructBlock):
     link_text = blocks.CharBlock(required=False)
-    link_external = blocks.URLBlock(label='External link', required=False)
-    link_page = blocks.PageChooserBlock(required=False)
+    link_external = blocks.CharBlock(label='External link', required=False)
+    link_page = MenuItemPageBlock(required=False)
 
 
 class MultiMenuItem(blocks.StructBlock):
@@ -92,6 +94,9 @@ class InformationPanel(CTABlock):
     body = blocks.RichTextBlock(required=False)
     image = BlobImageChooserBlock(required=False)
     shelf_id = IDBlock(required=False, label="ID")
+    cta = blocks.StreamBlock([
+        ('simple_menu_item', SimpleMenuItem())
+    ], icon='arrow-left', label='Items', required=False, verbose_name="cta")
 
 
 class FindOutMoreDropDown(CTABlock):
@@ -139,11 +144,25 @@ class IFrameShelf(blocks.StructBlock):
     shelf_id = blocks.CharBlock(required=False, label="ID")
 
 
+class Divider(blocks.StructBlock):
+    shelf_id = IDBlock(required=False, label="ID", help_text="Not displayed in the front end")
+
+
 class Carousel(blocks.StructBlock):
     heading = blocks.CharBlock(required=False)
     items = blocks.StreamBlock([
         ('video_teaser', VideoTemplate(icon="media")),
         ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
+        ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
+        ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
+    ], icon='arrow-left', label='Items', required=False)
+    shelf_id = IDBlock(required=False, label="ID")
+
+
+class PanelCarousel(blocks.StructBlock):
+    heading = blocks.CharBlock(required=False)
+    items = blocks.StreamBlock([
+        ('video_teaser', VideoTemplate(icon="media")),
         ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
         ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
     ], icon='arrow-left', label='Items', required=False)
@@ -160,7 +179,10 @@ class Grid(blocks.StructBlock):
         ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
         ('information_panel', InformationPanel(target_model="shelves.AppTeaser", icon="image"))
     ], icon='arrow-left', label='Items')
-    meta_layout = blocks.ChoiceBlock(choices=GRID_LAYOUT_CHOICES, label="Layout")
+    meta_layout = blocks.ChoiceBlock(choices=GRID_LAYOUT_CHOICES,
+                                     label="Layout",
+                                     help_text="Use this to select number of columns on desktop (only one column"
+                                               " on mobile)")
     shelf_id = IDBlock(required=False, label="ID")
 
 
@@ -172,11 +194,13 @@ class OneYou2Page(Page):
         ('simple_page_heading_shelf', SimplePageHeading(icon='title')),
         ('section_heading_shelf', SectionHeading(classname="full title", icon='title')),
         ('carousel_shelf', Carousel(icon="repeat")),
+        ('panel_carousel_shelf', PanelCarousel(icon="repeat")),
         ('promo_shelf', PromoShelfChooserBlock(target_model="shelves.PromoShelf", icon="image")),
         ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
         ('grid_shelf', Grid(icon="form")),
         ('find_out_more_dropdown', FindOutMoreDropDown(label="Link dropdown", icon="order-down")),
         ('iframe_shelf', IFrameShelf(label="IFrame", icon='code')),
+        ('divider', Divider(label="Divider", icon='code')),
     ])
     page_ref = models.CharField(max_length=255, unique=True)
 
@@ -252,6 +276,7 @@ class OneYou2Page(Page):
 
     @property
     def link_url(self):
+        # TODO: This could potentially use some base page methods
         site_name = SiteSettings.objects.get(site_id=self.get_site().id).uid
         return '/' + site_name + self.url_path
 
@@ -289,12 +314,15 @@ class OneYou2Page(Page):
             classname='collapsible collapsed'),
     ]
 
+    promote_panels = [
+        FieldPanel('slug')
+    ]
+
     edit_handler = TabbedInterface([
         ObjectList(content_panels, heading='Content'),
-        ObjectList(info_content_panels, heading='Info'),
+        ObjectList(info_content_panels, heading='Notes'),
         ObjectList(meta_content_panels, heading='Meta'),
-        ObjectList(Page.promote_panels, heading='Promote'),
-        ObjectList(Page.settings_panels, heading='Settings', classname='settings'),
+        ObjectList(Page.promote_panels, heading='Settings'),
     ])
 
     api_fields = ['body', 'path', 'depth', 'numchild', 'page_ref', 'live', 'page_theme']
@@ -371,6 +399,53 @@ class OneYou2Page(Page):
                    body=json.dumps(obj_dict['body']),
                    live=obj_dict['live'],
                    theme_id=obj_dict['page_theme']['id'])
+
+    def serve_preview(self, request, mode_name):
+        request.is_preview = True
+
+        if mode_name == 'json':
+            from .serializers import OneYouPageSerializer
+            latest_revision_as_page = self.get_latest_revision_as_page()
+            serialized_page = OneYouPageSerializer(instance=latest_revision_as_page)
+            return JsonResponse(serialized_page.data)
+
+        if mode_name == 'react':
+            context = {
+                'preview_url': '/oneyou{}?preview_page={}'.format(self.get_url(), self.slug)
+            }
+            return SimpleTemplateResponse(template='preview_wrapper.html', context=context)
+
+        return self.serve(request)
+
+    def serve(self, request, *args, **kwargs):
+        request.is_preview = getattr(request, 'is_preview', False)
+
+        return TemplateResponse(
+            request,
+            self.get_template(request, *args, **kwargs),
+            self.get_context(request, *args, **kwargs)
+        )
+
+    DEFAULT_PREVIEW_MODES = [
+        ('react', 'Default'),
+        # ('html', 'AMP'),
+        ('json', 'API'),
+    ]
+
+    @property
+    def preview_modes(self):
+        """
+        A list of (internal_name, display_name) tuples for the modes in which
+        this page can be displayed for preview/moderation purposes. Ordinarily a page
+        will only have one display mode, but subclasses of Page can override this -
+        for example, a page containing a form might have a default view of the form,
+        and a post-submission 'thankyou' page
+        """
+        return self.DEFAULT_PREVIEW_MODES
+
+    @property
+    def default_preview_mode(self):
+        return self.preview_modes[0][0]
 
 
 # Orderables

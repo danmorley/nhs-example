@@ -2,27 +2,15 @@ import React, { Component } from 'react';
 import Text from '../Text';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import startsWith from 'lodash.startswith';
+import CtaUtils from "./CtaUtils";
+import UrlUtils from "./UrlUtils";
 
 /**
- *  Link component that will render a react router <Link> tag for internal
- *  links, and a standard <a> tag for external links.
+ * Link component that will render a react router <Link> tag for internal
+ * links, and a standard <a> tag for external links.
  *
- *  cta: {
- *    link_text: 'Some link text',
- *    link_external: 'http://',
- *    link_page: 5,
- *  }
  */
 class CtaLink extends Component {
-  isExternal(link) {
-    return link && (startsWith(link, 'http://') || startsWith(link, 'https://'));
-  }
-
-  static pathForPage(pageId) {
-    return global.rootUrl + global.pages[pageId];
-  }
-
   render() {
     let { cta, variant } = this.props;
 
@@ -33,7 +21,8 @@ class CtaLink extends Component {
       cta = cta.value;
     }
 
-    if (!cta.link_page && !cta.link_external) return null;
+    if (!CtaUtils.isValidCta(cta)) return null;
+
     var linkClass;
 
     if (variant === 'button') {
@@ -49,11 +38,10 @@ class CtaLink extends Component {
       linkClass = null;
     }
 
-    // Convert page id to path if given.
-    let href = (cta.link_page) ? CtaLink.pathForPage(cta.link_page) : cta.link_external;
+    const href = CtaUtils.getCtaPath(cta);
 
     // Render the link.
-    if (this.isExternal(href)) {
+    if (UrlUtils.isExternalLink(href)) {
       // External link - use normal <a> tag.
       return (
         <a className={linkClass} href={href}><Text tagName="span" content={cta.link_text} /></a>
@@ -68,7 +56,7 @@ class CtaLink extends Component {
 }
 
 CtaLink.propTypes = {
-  cta: PropTypes.oneOfType([PropTypes.object,PropTypes.array]),
+  cta: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   variant: PropTypes.string
 };
 

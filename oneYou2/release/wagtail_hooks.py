@@ -17,9 +17,6 @@ class ReleaseButtonHelper(ButtonHelper):
             classnames_exclude = []
         classnames = self.edit_button_classnames + classnames_add
         cn = self.finalise_classname(classnames, classnames_exclude)
-        print(self)
-        print(self.__dict__)
-        print(pk)
         release = Release.objects.get(id=pk)
         return {
             'url': '/' + release.site.sitesettings.uid + '/?id=' + release.uuid,
@@ -32,9 +29,7 @@ class ReleaseButtonHelper(ButtonHelper):
                             classnames_exclude=None):
         btns = ButtonHelper.get_buttons_for_obj(self, obj, exclude=None, classnames_add=None, classnames_exclude=None)
         pk = getattr(obj, self.opts.pk.attname)
-        btns.insert(1,
-                    self.preview_button(pk, ['button'], classnames_exclude)
-                    )
+        btns.insert(1, self.preview_button(pk, ['button'], classnames_exclude))
         return btns
 
 
@@ -52,9 +47,10 @@ class ReleaseAdmin(ModelAdmin):
     menu_order = 900  # will put in 10th place (000 being 1st, 100 2nd)
     add_to_settings_menu = False  # or True to add your model to the Settings sub-menu
     exclude_from_explorer = False  # or True to exclude pages of this type from Wagtail's explorer view
-    list_display = ('release_name',)
-    list_filter = ('release_name',)
+    list_display = ('release_name', 'uuid', 'content_status', 'release_time')
+    list_filter = ('content_status',)
     search_fields = ('release_name',)
+    index_view_extra_css = ('css/admin_index.css',)
 
     def get_queryset(self, request):
         """

@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import Shelf from './Shelf';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import Slider from 'react-slick';
+import Equalizer from 'react-equalizer';
 
 import PlaceholderShelf from './PlaceholderShelf';
 import GeneralTextShelf from './GeneralTextShelf';
 import BasicCtaShelf from './BasicCtaShelf';
 
-import styles from './carousel.css';
+import styles from './main-carousel-shelf.css';
 
 /**
- *  Carousel Shelf is used to display a list of slides in a carousel widget.
+ *  Main Carousel Shelf is used to display a list of slides in a full width carousel widget.
  *
  *  It expects the following properties:
  *  - content
@@ -23,7 +24,12 @@ import styles from './carousel.css';
  *    field_id: "learn-more-shelf"
  *  }
  */
-class CarouselShelf extends Component {
+class MainCarouselShelf extends Component {
+
+  getNodes(equalizerComponent, equalizerElement) {
+    return equalizerElement.querySelectorAll(".slick-slide");
+  }
+
   render() {
     let { id, content, classNamePrefix } = this.props;
     let settings = {
@@ -41,7 +47,7 @@ class CarouselShelf extends Component {
       const shelfInfo = CmsComponentRegistry.components[shelf.type];
       const ShelfClass = shelfInfo && shelfInfo.class;
       const shelfClassNamePrefix = shelfInfo && shelfInfo.classNamePrefix;
-      const shelfId = shelf.value.field_id || shelf.id;
+      const shelfId = shelf.value.field_id || shelf.value.shelf_id || 'shelf-' + shelf.id;
       if (ShelfClass) {
         return (<div key={i}><ShelfClass content={shelf.value} id={shelfId} classNamePrefix={shelfClassNamePrefix}/></div>);
       } else {
@@ -51,11 +57,16 @@ class CarouselShelf extends Component {
 
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix}>
+        <div className="shelf__container container">
+          <h2 className="shelf__header">{content.heading}</h2>
+        </div>
         <div className="container-fluid">
           <div className="row carousel__row">
-            <Slider className ="carousel carousel-full" {...settings}>
-              {slides}
-            </Slider>
+            <Equalizer nodes={this.getNodes.bind(this)}>
+              <Slider className="carousel carousel-full" {...settings}>
+                {slides}
+              </Slider>
+            </Equalizer>
           </div>
         </div>
       </Shelf>
@@ -63,8 +74,7 @@ class CarouselShelf extends Component {
   }
 }
 
-// ReactDOM.render(<CarouselShelf />, document.querySelector('.carousel-shelf'));
+CmsComponentRegistry.register('main_carousel_shelf', MainCarouselShelf, 'carousel-shelf');
+CmsComponentRegistry.register('carousel_shelf', MainCarouselShelf, 'carousel-shelf');
 
-CmsComponentRegistry.register('carousel_shelf', CarouselShelf, 'carousel-shelf');
-
-export default CarouselShelf;
+export default MainCarouselShelf;

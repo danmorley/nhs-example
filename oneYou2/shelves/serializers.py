@@ -15,6 +15,16 @@ class ImageSerializer(serializers.Serializer):
 
 class CTAPageSerializer(serializers.Serializer):
     id = serializers.CharField()
+    slug = serializers.CharField()
+
+    def to_representation(self, value):
+        serialized_data = super(CTAPageSerializer, self).to_representation(value)
+        if value:
+            site_name = value.get_site().site_name
+            url_parts = value.get_url_parts()
+            serialized_data['relative_path'] = '/{}{}'.format(site_name.lower(), url_parts[2])
+
+        return serialized_data
 
 
 class PromoShelfSerializer(HyperlinkedModelSerializer):
@@ -31,7 +41,11 @@ class PromoShelfSerializer(HyperlinkedModelSerializer):
             'link_external': cta_link,
         }
         if cta_page:
-            representation['cta']['link_page'] = cta_page.get('id')
+            representation['cta']['link_page'] = {
+                "id": cta_page.get('id'),
+                "slug": cta_page.get('slug'),
+                "relative_path": cta_page.get('relative_path'),
+            }
 
         representation['shelf_id'] = slugify(representation['shelf_id'])
         return representation
@@ -56,7 +70,11 @@ class BannerShelfSerializer(HyperlinkedModelSerializer):
             'link_external': cta_link,
         }
         if cta_page:
-            representation['cta']['link_page'] = cta_page.get('id')
+            representation['cta']['link_page'] = {
+                "id": cta_page.get('id'),
+                "slug": cta_page.get('slug'),
+                "relative_path": cta_page.get('relative_path'),
+            }
 
         representation['shelf_id'] = slugify(representation['shelf_id'])
         return representation

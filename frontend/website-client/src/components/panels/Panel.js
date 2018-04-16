@@ -3,10 +3,6 @@ import styles from './panels.css';
 import PropTypes from 'prop-types';
 
 class Panel extends Component {
-  panelId() {
-    return this.props.id ? 'panel-' + this.props.id : null;
-  }
-
   panelClasses() {
     let classNamePrefix = this.props.classNamePrefix;
     return this.props.variant ? `panel ${classNamePrefix} ${classNamePrefix}--${this.props.variant}` : `panel ${classNamePrefix}`;
@@ -14,7 +10,7 @@ class Panel extends Component {
 
   render() {
     return (
-      <div id={this.panelId()} className={this.panelClasses()} style={this.props.style}>
+      <div id={this.props.id} className={this.panelClasses()} style={this.props.style}>
         {this.props.children}
       </div>
     );

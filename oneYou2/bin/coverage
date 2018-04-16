@@ -4,3 +4,6 @@ docker exec -ti oneyou2_web-prod_1 bash -c "coverage run manage.py test" >/dev/n
 
 docker exec -ti oneyou2_web-prod_1 bash -c "coverage report"
 
+docker exec -ti oneyou2_web-prod_1 bash -c "coverage html"
+
+docker cp oneyou2_web-prod_1:code/htmlcov .

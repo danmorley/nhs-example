@@ -3,7 +3,7 @@ from wagtail.wagtailcore.models import Site
 from images.factories import create_default_test_image
 
 from images.models import PHEImage
-from .models import OneYou2Page, Theme
+from .models import OneYou2Page, Theme, Menu
 
 
 def create_test_theme(label="Test theme", class_name="test-class"):
@@ -27,3 +27,9 @@ def create_test_page(title='Test page', path="1111", depth=0, theme=None):
     page.save()
 
     return page
+
+
+def create_test_menu(label='Test Menu'):
+    menu = Menu(label=label)
+    menu.save()
+    return menu

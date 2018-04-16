@@ -16,6 +16,7 @@
   @include media-breakpoint-down(sm) {
     &.header-nav--open {
       left: 66%;
+      padding-top: 0 !important;
     }
   }
 }

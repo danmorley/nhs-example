@@ -7,7 +7,7 @@ from release.models import Release, ReleaseContent
 def get_latest_release(site_id):
     """Helper function to return the latest release by date"""
     # TODO: test this
-    released = Release.objects.order_by('-release_time').filter(release_time__lte=datetime.now(), site_id=site_id)
+    released = Release.objects.order_by('-release_time').filter(release_time__lte=datetime.now(), site__id=site_id)
     latest_release = released.first()
     return latest_release
 
