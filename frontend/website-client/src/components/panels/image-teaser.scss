@@ -12,6 +12,11 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  
+  .image--Contain & {
+    background-size: contain;
+    background-position: top left;
+  }
 
   @include media-breakpoint-up(sm) {
     min-height: 263px;

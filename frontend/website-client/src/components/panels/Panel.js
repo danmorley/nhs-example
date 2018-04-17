@@ -7,7 +7,7 @@ class Panel extends Component {
     let classNamePrefix = this.props.classNamePrefix;
     return this.props.variant ? `panel ${classNamePrefix} ${classNamePrefix}--${this.props.variant}` : `panel ${classNamePrefix}`;
   }
-
+  
   render() {
     return (
       <div id={this.props.id} className={this.panelClasses()} style={this.props.style}>
