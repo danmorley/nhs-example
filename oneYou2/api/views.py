@@ -80,6 +80,20 @@ def page_list(request, site_identifier, release_uuid):
 
 @require_safe
 @set_cache_headers
+def full_page_list(request, site_identifier):
+    """The frontend shouldn't call this, iterating through release pages is not optimal"""
+    # Ideally the react client would never need to use this endpoint
+    get_site_or_404(site_identifier)
+
+    pages = Page.objects.all()
+    serialized_page_data = []
+    for page in pages:
+        serialized_page_data.append(json.loads(page.to_json()))
+    return HttpResponse(json.dumps(serialized_page_data), content_type="application/json")
+
+
+@require_safe
+@set_cache_headers
 def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug=None):
     if page_slug:
         page_pk = Page.objects.get(slug=page_slug).pk

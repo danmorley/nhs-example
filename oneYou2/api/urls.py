@@ -12,6 +12,10 @@ urlpatterns = [
         views.site_view,
         name='current-release-view'),
 
+    url(r'^sites/(?P<site_identifier>[\w\-]+)/pages/$',
+        views.full_page_list,
+        name='all-pages'),
+
     url(r'^sites/(?P<site_identifier>[\w\-]+)/(?P<release_uuid>[\w\-]+)/$',
         views.release_view,
         name='specific-release-view'),
