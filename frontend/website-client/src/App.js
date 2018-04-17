@@ -60,7 +60,7 @@ class App extends Component {
   }
 
   componentWillUnmount() {
-      this.historyUnlisten();
+    this.historyUnlisten();
   }
 
   /**
@@ -92,10 +92,9 @@ class App extends Component {
 
   checkForRedirect() {
     this.state.site.redirects.map((redirect, i) => {
-      console.log("REDIRECT", redirect);
+      console.log('Redirecting to:', redirect);
 
       if (redirect.source + '/' === window.location.pathname) {
-        console.log("match")
         if (startsWith(redirect, 'http:') || startsWith(redirect, 'https:')) {
           // Redirect to another site.
           window.location.pathname = redirect.destination;
@@ -115,13 +114,13 @@ class App extends Component {
 
   pageSlug(path) {
     // Remove trailing slash
-    let path_minus_slash = path.replace(/\/$/, "");
+    let path_minus_slash = path.replace(/\/$/, '');
     let slug = path_minus_slash.substr(path_minus_slash.lastIndexOf('/') + 1)
     return slug
   }
 
   loadPage(props) {
-    // console.log(this.state);
+    console.log('loadPage: ', this.state);
     return (<Page page={this.state.currentPage} site={this.state.site} />);
   }
 
@@ -133,7 +132,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-
         <Router history={history}>
           <Switch>
             <Route path={global.rootUrl + '/shelf-samples'}
@@ -163,10 +161,12 @@ class App extends Component {
       window.scrollTo(0, 0);
       contentElem.classList.remove('hidden');
       const hash = window.location.hash;
-      let scrollTarget = document.getElementById(hash.substring(1));
-      if (scrollTarget) {
-        scrollTarget.scrollIntoView();
-        window.scrollBy(0, -80);
+      if (hash) {
+        let scrollTarget = document.getElementById(hash.substring(1));
+        if (scrollTarget) {
+          scrollTarget.scrollIntoView();
+          window.scrollBy(0, -100);
+        }
       }
     } else {
       contentElem.classList.add('hidden');
