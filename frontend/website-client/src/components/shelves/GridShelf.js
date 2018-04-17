@@ -25,6 +25,7 @@ class GridShelf extends Component {
   render() {
     let { id, content, classNamePrefix, layout, variant } = this.props;
     let metaLayout = content.meta_layout || layout;
+    let metaImageDisplay = content.meta_image_display;
 
     const panelClass = ((metaLayout) => {
       switch(metaLayout) {
@@ -52,7 +53,7 @@ class GridShelf extends Component {
 
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix}>
-        <div className="shelf__container container">
+        <div className={`shelf__container container image--${metaImageDisplay}`}>
           <h2 className="shelf__header">{content.heading}</h2>
           <ShowMorePanel rowsToShow={content.rows_to_show}>
             {panels}
