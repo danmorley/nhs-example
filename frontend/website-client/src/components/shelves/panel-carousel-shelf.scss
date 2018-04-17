@@ -214,12 +214,15 @@ $arrow-distance: 9%;
     .image-teaser__image {
       
       @include media-breakpoint-down(md) {
+        min-height: 120px;
         height: 35%;
         width: 100%;
         background-position: top center;
       }
       
-      min-height: 168px;
+      @include media-breakpoint-up(lg) {
+        min-height: 263px;
+      }
     }
     
     .image-teaser__info {
