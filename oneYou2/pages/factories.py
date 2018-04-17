@@ -19,6 +19,9 @@ def create_test_page(title='Test page', path="1111", depth=0, theme=None):
         create_default_test_image(id=1)
 
     site = Site.objects.first()
+    if not site.site_name:
+        site.site_name = 'oneyoutest'
+        site.save()
     root_page = site.root_page
 
     page = OneYou2Page(title=title, path=path, depth=depth, theme=theme)
