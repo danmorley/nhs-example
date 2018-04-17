@@ -16,9 +16,11 @@ class CmsRichTextFormatter  {
   }
 
   static renderLink(node) {
+    console.log('Rendering inline link', node.attribs);
     if (node.attribs.linktype !== 'page') {
       if (UrlUtils.isInternalLink(node.attribs.href)) {
         // Internal link - use react router to prevent page refresh.
+        // if (!node.attribs.href) return domToReact(node.children, parserOptions);
         return (<Link to={node.attribs.href}>{domToReact(node.children, parserOptions)}</Link>);
 
       } else {

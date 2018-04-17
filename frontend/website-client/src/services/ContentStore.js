@@ -11,12 +11,12 @@ ContentStore.prototype.getSite = async function() {
 };
 
 ContentStore.prototype.getPage = async function(pageId) {
-  console.log("getPage", pageId, global.preview_page);
+  console.log('getPage', pageId, global.preview_page);
   if (pageId === global.preview_page) {
     return await _getPreviewPage(this.contentStoreEndpoint, this.site, pageId);
   }
   else {
-      return await _getPage(this.contentStoreEndpoint, this.site, this.release, pageId);
+    return await _getPage(this.contentStoreEndpoint, this.site, this.release, pageId);
   }
 };
 
