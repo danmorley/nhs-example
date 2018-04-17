@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.views.static import serve
 
@@ -12,20 +13,30 @@ from .models import Release
 
 
 def release_html(request, site_name):
-    site_id = SiteSettings.objects.get(uid=site_name).site.id
+    try:
+        site_id = SiteSettings.objects.get(uid=site_name).site.id
+    except ObjectDoesNotExist:
+        return HttpResponse("Page Not Found", status=404)
     release_id = request.GET.get('id')
     if release_id:
         release = Release.objects.get(uuid=release_id)
     else:
         release = get_latest_release(site_id)
 
-    index = FrontendVersion.get_html_for_version(release.frontend_id)
-    substituted_index = index.replace("/static/css/", "/version/css/" + release.frontend_id + "/?file_name=")
-    substituted_index = substituted_index.replace("/static/js/", "/version/js/" + release.frontend_id + "/?file_name=")
+    if release:
+        frontend_id = release.frontend_id
+        uuid = release.uuid
+    else:
+        frontend_id = FrontendVersion.get_current_version()
+        uuid = 'current'
+
+    index = FrontendVersion.get_html_for_version(frontend_id)
+    substituted_index = index.replace("/static/css/", "/version/css/" + frontend_id + "/?file_name=")
+    substituted_index = substituted_index.replace("/static/js/", "/version/js/" + frontend_id + "/?file_name=")
 
     substituted_index = substituted_index.replace("%apiurl%", get_protocol()
                                                   + request.__dict__['META']['HTTP_HOST'] + "/api")
-    substituted_index = substituted_index.replace("%releaseid%", release.uuid)
+    substituted_index = substituted_index.replace("%releaseid%", uuid)
     return HttpResponse(substituted_index)
 
 

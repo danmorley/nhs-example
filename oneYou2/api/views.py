@@ -1,11 +1,13 @@
 import json
 
-from django.http import HttpResponse, Http404
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponse
 from django.views.decorators.http import require_safe
 
 from oneYou2.serializers import SiteSerializer
+
 from release.utils import get_latest_release, get_release_object, populate_release_if_required
-from release.exceptions import NoReleasesFound
+
 from pages.serializers import OneYouPageListSerializer, OneYouPageSerializer
 
 from wagtail.wagtailcore.models import Page, Site
@@ -25,7 +27,7 @@ def site_view(request, site_identifier):
 
     current_release = get_latest_release(site.site.pk)
     if not current_release:
-        raise NoReleasesFound("The current site has no live releases")
+        return HttpResponse("The current site has no live releases", status=404)
     setattr(site, 'release_uuid', current_release.uuid)
 
     serialized_site_data = SiteSerializer(site).data
@@ -40,14 +42,14 @@ def release_view(request, site_identifier, release_uuid):
     if release_uuid == "current":
         current_release = get_latest_release(site.site.pk)
         if not current_release:
-            raise NoReleasesFound("The current site has no live releases")
+            return HttpResponse("The current site has no live releases", status=404)
         release_uuid = current_release.uuid
 
     else:
         # Request is asking for a specific release
         release_object = get_release_object(release_uuid)
         if not release_object:
-            raise Http404("Release Not Found")
+            return HttpResponse("Release not found", status=404)
 
     setattr(site, 'release_uuid', release_uuid)
 
@@ -63,7 +65,7 @@ def page_list(request, site_identifier, release_uuid):
     get_site_or_404(site_identifier)
     release = get_release_object(release_uuid)
     if not release:
-        raise Http404("Release Not Found")
+        return HttpResponse("Release not found", status=404)
     populate_release_if_required(release)
 
     release_pages = release.revisions.all()
@@ -95,19 +97,23 @@ def full_page_list(request, site_identifier):
 @require_safe
 @set_cache_headers
 def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug=None):
+    print("loading page - " + page_slug)
     if page_slug:
-        page_pk = Page.objects.get(slug=page_slug).pk
+        try:
+            page_pk = Page.objects.get(slug=page_slug).pk
+        except ObjectDoesNotExist:
+            return HttpResponse("Page Not Found", status=404)
 
     get_site_or_404(site_identifier)
     release = get_release_object(release_uuid)
     if not release:
-        raise Http404("Release Not Found")
+        return HttpResponse("Release not found", status=404)
     populate_release_if_required(release)
 
     try:
         page_content = release.get_content_for(page_pk)
     except KeyError:
-        raise Http404("Page Not Found In Release")
+        return HttpResponse("Page Not Found", status=404)
 
     return HttpResponse(json.dumps(page_content), content_type="application/json")
 

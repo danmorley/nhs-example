@@ -78,7 +78,7 @@ class App extends Component {
         if (page.code === 0) {
           this.setState({ currentPage: page.response });
         } else {
-          console.log(page.error, page.info.statusCode, page.info.message);
+          console.error(page.error, page.info.statusCode, page.info.message);
           this.setState({ currentPage: notFoundPage() });
         }
         App.setContentVisibile(true);
