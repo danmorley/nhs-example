@@ -15,7 +15,7 @@ from oneYou2.test.utils import OneYouTests
 
 from pages.factories import create_test_page, create_test_theme, create_test_menu
 from pages.models import OneYou2Page, Theme
-from pages.utils import get_serializable_data_for_fields, replace_embeds_with_links
+from pages.utils import get_serializable_data_for_fields, replace_links
 from pages.wagtail_hooks import MenuAdmin, MenuButtonHelper
 
 from release.factories import create_test_release
@@ -245,10 +245,19 @@ class PagesUtilsTests(OneYouTests):
         image_id = image.id
         rich_text_source = '<p><embed alt="one_you_logo.png" embedtype="image" format="right" id="'\
                            + str(image_id) + '"/><br/></p>'
-        processed_content = replace_embeds_with_links(rich_text_source)
+        processed_content = replace_links(rich_text_source)
         self.assertNotEquals(rich_text_source, processed_content)
         self.assertIsFalse('<embed' in processed_content)
         self.assertIsTrue('<img' in processed_content)
+
+    def test_replace_internal_links_correctly_returns_a_tag_with_hrf(self):
+        page = create_test_page()
+        print("SITE",  page.get_site())
+        rich_text_source = '<p><a id="{}" linktype="page">link 1</a></p>'.format(page.id)
+        processed_content = replace_links(rich_text_source)
+        self.assertNotEquals(rich_text_source, processed_content)
+        self.assertIsTrue('<a' in processed_content)
+        self.assertIsTrue('href="' in processed_content)
 
 
 class PagesMenuAdminWagtailHooksTests(OneYouTests):
