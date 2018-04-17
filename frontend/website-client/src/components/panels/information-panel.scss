@@ -4,6 +4,10 @@
 .information-panel {
   display: flex;
   position: relative;
+  
+  div {
+    max-width: 100%
+  }
 }
 
 .information-panel__image {
