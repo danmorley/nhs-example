@@ -415,7 +415,8 @@ class ReleaseContentModelTests(OneYouTests):
         When a page is requested that isn't included in a release a None object should be returned.
         """
         release = create_test_release()
-
+        site_name = 'oneyou'
+        SiteSettings(site_id=release.site_id, uid=site_name).save()
         release_content = create_test_release_content(release, json.dumps(release.generate_fixed_content()))
 
         self.assertRaises(KeyError, release_content.get_content_for, '0')

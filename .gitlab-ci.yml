@@ -9,6 +9,9 @@ stages:
 
 image: docker:git
 
+services:
+- docker:dind
+
 # Enable sharing of secrets etc.
 cache:
   key: "${CI_JOB_NAME}-${CI_COMMIT_SHA}"

@@ -15,11 +15,12 @@ from django.core.exceptions import ValidationError
 
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
 
+from oneYou2.panels import ReadOnlyPanel
 from .forms import ReleaseAdminForm
 
 from frontendHandler.models import FrontendVersion
+
 from pages.models import OneYou2Page
-from oneYou2.panels import ReadOnlyPanel
 
 
 CONTENT_STATUS = (
@@ -138,12 +139,17 @@ class Release(ClusterableModel):
 
     def generate_fixed_content(self):
         from pages.serializers import OneYouPageSerializer
-        pages = {}
+        from oneYou2.serializers import SiteSerializer
+        from home.models import SiteSettings
+        content = {}
+        site = SiteSettings.objects.get(site=self.site)
+        setattr(site, 'release_uuid', self.uuid)
+        content['site_json'] = SiteSerializer(site).data
         for revision in self.revisions.all():
             page = revision.revision.as_page_object()
             page_content = OneYouPageSerializer(page).data
-            pages[str(revision.revision.page_id)] = page_content
-        return pages
+            content[str(revision.revision.page_id)] = page_content
+        return content
 
     def get_content_for(self, key):
         if self.release_date_has_passed():

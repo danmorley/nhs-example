@@ -46,6 +46,7 @@
 
 .col-shrink-to-fit {
   flex-grow: 0;
+   -ms-flex-positive: 1;
 }
 
 .md-content-right {

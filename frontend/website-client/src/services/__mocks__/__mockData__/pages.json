@@ -1,0 +1,413 @@
+{
+  "3": {
+      "id": 3,
+      "meta": {
+          "type": "pages.OneYou2Page",
+          "detail_url": "http://localhost/api/v2/release_pages/3/",
+          "html_url": "http://localhost/",
+          "slug": "home",
+          "show_in_menus": false,
+          "seo_title": "",
+          "search_description": "",
+          "first_published_at": "2018-03-20T10:50:15.941959Z",
+          "parent": null,
+          "og_title": "One You - Home",
+          "og_description": "Start the fight back to a healthier you! One You is packed with practical tips, tools and free apps to help you improve your health today",
+          "og_url": "https://www.nhs.uk/oneyou",
+          "og_image": "https://campaignstorage.blob.core.windows.net/oneyou-cms-production/original_images/codeoneYou2oneYou2staticimgphe_logo.png",
+          "og_type": "website",
+          "twitter_url": "https://www.nhs.uk/oneyou",
+          "twitter_card": "summary",
+          "twitter_site": "@OneYouPHE",
+          "twitter_title": "One You - Home",
+          "twitter_description": "Start the fight back to a healthier you! One You is packed with practical tips, tools and free apps to help you improve your health today",
+          "twitter_image": "https://campaignstorage.blob.core.windows.net/oneyou-cms-production/original_images/codeoneYou2oneYou2staticimgphe_logo.png"
+      },
+      "title": "Home",
+      "body": [
+          {
+              "type": "carousel_shelf",
+              "value": {
+                  "heading": "",
+                  "items": [
+                      {
+                          "type": "banner_shelf",
+                          "value": {
+                              "heading": "How are you?",
+                              "body": "<p>There's more than enough to look after in life -- but don't forget about you. Check in with how you're doing and get ideas for simple steps to a healthier you.</p>",
+                              "background_image": {
+                                  "title": "How Are You banner test",
+                                  "link": "https://campaignstorage.blob.core.windows.net/oneyou-cms-production/original_images/HAY_Final.jpg"
+                              },
+                              "shelf_id": "how-are-you-quiz",
+                              "meta_layout": "full_width",
+                              "meta_variant": "main-banner",
+                              "cta": {
+                                  "link_text": "Take the quiz",
+                                  "link_external": null,
+                                  "link_page": "5"
+                              }
+                          },
+                          "id": "df6a95fe-177d-42b3-ab4e-6b8a2faeb7db"
+                      },
+                      {
+                          "type": "banner_shelf",
+                          "value": {
+                              "heading": "Find your balance",
+                              "body": "<p>Drinking a bit less can help you find a healthier balance with things like sleep, mood, energy and weight. Get started today with easy ideas to cut down. </p>",
+                              "background_image": null,
+                              "shelf_id": "drink-less",
+                              "meta_layout": "full_width",
+                              "meta_variant": "main-banner",
+                              "cta": {
+                                  "link_text": "Cut back now",
+                                  "link_external": null,
+                                  "link_page": "12"
+                              }
+                          },
+                          "id": "2f65e5c5-19b9-41fb-b070-901ef61d4766"
+                      },
+                      {
+                          "type": "banner_shelf",
+                          "value": {
+                              "heading": "A bit better, today",
+                              "body": "<p>You dont have to turn your life upside down to feel healthier.  If you've got 10 minutes today, you can take the first step to being active and feeling great.</p>",
+                              "background_image": null,
+                              "shelf_id": "move-more",
+                              "meta_layout": "full_width",
+                              "meta_variant": "main-banner",
+                              "cta": {
+                                  "link_text": "Move more",
+                                  "link_external": null,
+                                  "link_page": "14"
+                              }
+                          },
+                          "id": "0c59553d-877b-408d-adde-b2f4765fd1c9"
+                      },
+                      {
+                          "type": "banner_shelf",
+                          "value": {
+                              "heading": "Active 10 app",
+                              "body": "<p>Did you know that a brisk 10 minute walk counts as exercise? Get started with our free app. </p>",
+                              "background_image": {
+                                  "title": "holding image",
+                                  "link": "https://campaignstorage.blob.core.windows.net/oneyou-cms-production/original_images/HoldingThumbnail.png"
+                              },
+                              "shelf_id": "active-10-app",
+                              "meta_layout": "full_width",
+                              "meta_variant": "main-banner",
+                              "cta": {
+                                  "link_text": "Download",
+                                  "link_external": null,
+                                  "link_page": "9"
+                              }
+                          },
+                          "id": "474aebee-f6e8-4221-b5fd-6315a7ff628e"
+                      }
+                  ],
+                  "shelf_id": ""
+              },
+              "id": "02c54827-92d6-47e1-a190-ca2ec1192af5"
+          },
+          {
+              "type": "grid_shelf",
+              "value": {
+                  "heading": "",
+                  "rows_to_show": 0,
+                  "items": [
+                      {
+                          "type": "image_teaser",
+                          "value": {
+                              "heading": "There's only One You",
+                              "body": "<p>Your health is important. But being healthier isn't just about 'doing the right thing' -- it's about making changes to fit your life and make you feel good. One You helps you find that balance, so you feel better, every day.</p>",
+                              "image": {
+                                  "title": "group test",
+                                  "link": "https://campaignstorage.blob.core.windows.net/oneyou-cms-production/original_images/Group.jpg"
+                              },
+                              "meta_variant": "light-bg",
+                              "cta": [],
+                              "shelf_id": ""
+                          },
+                          "id": "96970be8-4d32-40a8-b977-975665819005"
+                      }
+                  ],
+                  "meta_layout": "full_width",
+                  "shelf_id": ""
+              },
+              "id": "235b20a6-af65-40d8-9f67-5ba496ec1404"
+          },
+          {
+              "type": "promo_shelf",
+              "value": {
+                  "heading": "html::How Are <span class=\"marker\">You</span>? quiz",
+                  "shelf_id": "how-are-you-quiz",
+                  "meta_layout": "cta_on_right",
+                  "meta_variant": "how-are-you",
+                  "cta": {
+                      "link_text": "Have a go",
+                      "link_external": null,
+                      "link_page": "5"
+                  }
+              },
+              "id": "bb29de49-65d6-40f5-8d8b-5054787ab6b3"
+          },
+          {
+              "type": "carousel_shelf",
+              "value": {
+                  "heading": "Easy ways to get started",
+                  "items": [
+                      {
+                          "type": "image_teaser",
+                          "value": {
+                              "heading": "Drink less",
+                              "body": "<p>Cut back on alcohol and feel a bit better every day - it’s easier to start than you think.<br/></p>",
+                              "image": {
+                                  "title": "wine test",
+                                  "link": "https://campaignstorage.blob.core.windows.net/oneyou-cms-production/original_images/wine.jpg"
+                              },
+                              "meta_variant": "dark-bg",
+                              "cta": [
+                                  {
+                                      "link_text": "Get started",
+                                      "link_external": "",
+                                      "link_page": 12
+                                  }
+                              ],
+                              "shelf_id": ""
+                          },
+                          "id": "c1724e9a-e700-4ce2-8719-9dc0a8160e72"
+                      },
+                      {
+                          "type": "image_teaser",
+                          "value": {
+                              "heading": "Quit smoking",
+                              "body": "<p>Stopping smoking is one of the best things you'll ever do for your health. Get started with free expert support, stop smoking aids, tools and practical tips.   </p>",
+                              "image": {
+                                  "title": "smoking test image",
+                                  "link": "https://campaignstorage.blob.core.windows.net/oneyou-cms-production/original_images/smoking.jpg"
+                              },
+                              "meta_variant": "dark-bg",
+                              "cta": [
+                                  {
+                                      "link_text": "Ways to quit",
+                                      "link_external": "",
+                                      "link_page": 11
+                                  }
+                              ],
+                              "shelf_id": ""
+                          },
+                          "id": "6ee93c1c-e00c-460f-b713-a23ecb3e3e6a"
+                      },
+                      {
+                          "type": "image_teaser",
+                          "value": {
+                              "heading": "Move more",
+                              "body": "<p>Moving is good for your body and mind. Find out the easy ways you can move more every day.</p>",
+                              "image": {
+                                  "title": "moving test",
+                                  "link": "https://campaignstorage.blob.core.windows.net/oneyou-cms-production/original_images/moving.jpg"
+                              },
+                              "meta_variant": "dark-bg",
+                              "cta": [
+                                  {
+                                      "link_text": "",
+                                      "link_external": "",
+                                      "link_page": 14
+                                  }
+                              ],
+                              "shelf_id": ""
+                          },
+                          "id": "4139df0d-0827-45c6-8b7e-0da3d819d687"
+                      },
+                      {
+                          "type": "image_teaser",
+                          "value": {
+                              "heading": "Sleep well",
+                              "body": "<p>Sleeping well can help boost your immune system and helps you feel refreshed. Get practical tips to help you wind down and sleep soundly.</p>",
+                              "image": {
+                                  "title": "3.Watching_your_weight.jpg",
+                                  "link": "https://campaignstorage.blob.core.windows.net/oneyou-cms-production/original_images/3.Watching_your_weight.jpg"
+                              },
+                              "meta_variant": "dark-bg",
+                              "cta": [
+                                  {
+                                      "link_text": "Start sleeping soundly",
+                                      "link_external": "",
+                                      "link_page": 1009
+                                  }
+                              ],
+                              "shelf_id": ""
+                          },
+                          "id": "6d7390e0-99d1-4a93-8e1a-e21968495d9e"
+                      },
+                      {
+                          "type": "image_teaser",
+                          "value": {
+                              "heading": "Stress less",
+                              "body": "<p>There's no quick-fix cure for stress, but there are simple things you can do to help you stress less and relax. </p>",
+                              "image": {
+                                  "title": "6.Build_positive.jpg",
+                                  "link": "https://campaignstorage.blob.core.windows.net/oneyou-cms-production/original_images/6.Build_positive.jpg"
+                              },
+                              "meta_variant": "dark-bg",
+                              "cta": [
+                                  {
+                                      "link_text": "Get stress-busting tips",
+                                      "link_external": "",
+                                      "link_page": 1010
+                                  }
+                              ],
+                              "shelf_id": ""
+                          },
+                          "id": "94bd5df2-5417-4b84-a865-264a0a95eb0d"
+                      },
+                      {
+                          "type": "image_teaser",
+                          "value": {
+                              "heading": "Eat better",
+                              "body": "<p>What you eat, and how much, is so important for your health and your waistline. Find out more about calories, the benefits of eating well and simple ways you can make a change.</p>",
+                              "image": {
+                                  "title": "4.For_your_family.jpg",
+                                  "link": "https://campaignstorage.blob.core.windows.net/oneyou-cms-production/original_images/4.For_your_family.jpg"
+                              },
+                              "meta_variant": "dark-bg",
+                              "cta": [
+                                  {
+                                      "link_text": "Find out more",
+                                      "link_external": "",
+                                      "link_page": 13
+                                  }
+                              ],
+                              "shelf_id": ""
+                          },
+                          "id": "0922b2a9-74b4-49a4-a41a-9ea62283bf13"
+                      }
+                  ],
+                  "shelf_id": ""
+              },
+              "id": "8e42b257-722e-4b90-8213-8f171c70e38b"
+          },
+          {
+              "type": "promo_shelf",
+              "value": {
+                  "heading": "Over 40? Check your health",
+                  "shelf_id": "check-your-health",
+                  "meta_layout": "cta_on_right",
+                  "meta_variant": "how-are-you",
+                  "cta": {
+                      "link_text": "Find out more",
+                      "link_external": null,
+                      "link_page": "10"
+                  }
+              },
+              "id": "3791d5c5-bdb3-4300-8411-118345d97b39"
+          },
+          {
+              "type": "grid_shelf",
+              "value": {
+                  "heading": "Learn more",
+                  "rows_to_show": 0,
+                  "items": [
+                      {
+                          "type": "image_teaser",
+                          "value": {
+                              "heading": "E-cigarettes for quitting",
+                              "body": "<p>E-cigarettes are a great way to fight cravings - and they carry a small fraction of the risk of cigarettes. </p>",
+                              "image": {
+                                  "title": "Smoking test",
+                                  "link": "https://campaignstorage.blob.core.windows.net/oneyou-cms-production/original_images/SmokingSquare.jpg"
+                              },
+                              "meta_variant": "light-bg",
+                              "cta": [
+                                  {
+                                      "link_text": "Find out more",
+                                      "link_external": "https://www.nhs.uk/smokefree/help-and-advice/e-cigarettes",
+                                      "link_page": null
+                                  }
+                              ],
+                              "shelf_id": ""
+                          },
+                          "id": "10daf330-fbda-4b8e-83b6-c62e6f7f1bdb"
+                      },
+                      {
+                          "type": "image_teaser",
+                          "value": {
+                              "heading": "Drop the pounds",
+                              "body": "<p>Don't forget to count the calories in drinks. Did you know that a large glass of wine has the same number of calories as an ice cream!</p>",
+                              "image": {
+                                  "title": "drop the pounds",
+                                  "link": "https://campaignstorage.blob.core.windows.net/oneyou-cms-production/original_images/WineIcecream.jpg"
+                              },
+                              "meta_variant": "light-bg",
+                              "cta": [
+                                  {
+                                      "link_text": "Calories in drinks",
+                                      "link_external": "",
+                                      "link_page": 12
+                                  }
+                              ],
+                              "shelf_id": ""
+                          },
+                          "id": "b07d50f2-22ae-4324-8633-83ae1d9deecc"
+                      },
+                      {
+                          "type": "image_teaser",
+                          "value": {
+                              "heading": "How much exercise should you really do?",
+                              "body": "<p>Do you need to do 30 minutes a day to feel the health benefits, or can you get away with just 10? Let's clear up the confusion by looking at what's recommended by medical experts.<br/></p>",
+                              "image": {
+                                  "title": "Swimming pool",
+                                  "link": "https://campaignstorage.blob.core.windows.net/oneyou-cms-production/original_images/OpenArmsPool.jpg"
+                              },
+                              "meta_variant": "light-bg",
+                              "cta": [
+                                  {
+                                      "link_text": "Read more",
+                                      "link_external": "",
+                                      "link_page": 14
+                                  }
+                              ],
+                              "shelf_id": ""
+                          },
+                          "id": "50a2b220-a62a-410f-9038-9bbff9e9e811"
+                      },
+                      {
+                          "type": "image_teaser",
+                          "value": {
+                              "heading": "Five practical tips to quit smoking",
+                              "body": "<p>If you're trying to quit and finding that you get cravings for a cigarette that are hard to resist, try ourpractical tips to help keep you on track.</p>",
+                              "image": {
+                                  "title": "Stop-smoking medicines",
+                                  "link": "https://campaignstorage.blob.core.windows.net/oneyou-cms-production/original_images/Tips.jpg"
+                              },
+                              "meta_variant": "light-bg",
+                              "cta": [
+                                  {
+                                      "link_text": "Read more",
+                                      "link_external": "",
+                                      "link_page": 11
+                                  }
+                              ],
+                              "shelf_id": ""
+                          },
+                          "id": "3a3b4f83-0421-40ec-9b3b-608f70c912cb"
+                      }
+                  ],
+                  "meta_layout": "2_col_1_on_mobile",
+                  "shelf_id": ""
+              },
+              "id": "ac57bbae-10df-4685-aca6-7192c6b82e89"
+          }
+      ],
+      "path": "00010001",
+      "depth": 2,
+      "numchild": 12,
+      "page_ref": "c07daff8-e945-4d84-8857-79217d37209f",
+      "live": true,
+      "page_theme": {
+          "id": 1,
+          "label": "One You Default",
+          "class_name": "oneyou"
+      }
+  }
+}

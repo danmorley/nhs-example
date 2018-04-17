@@ -21,8 +21,8 @@ def get_release_object(uuid):
 def populate_release_if_required(release):
     # This could be a class method
     if release.release_date_has_passed() and release.content_status == 0:
-        pages = release.generate_fixed_content()
-        rc = ReleaseContent(release=release, content=json.dumps(pages))
+        content = release.generate_fixed_content()
+        rc = ReleaseContent(release=release, content=json.dumps(content))
         rc.save()
         release.content_status = 1
         release.save()
