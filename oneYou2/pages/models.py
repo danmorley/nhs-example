@@ -183,6 +183,11 @@ class Grid(blocks.StructBlock):
                                      label="Layout",
                                      help_text="Use this to select number of columns on desktop (only one column"
                                                " on mobile)")
+    meta_image_display = blocks.ChoiceBlock(choices=[
+        ('contain', 'Contain'),
+        ('cover', 'Stretch')
+    ],
+        label='Teaser Image Display', default="Contain")
     shelf_id = IDBlock(required=False, label="ID")
 
 
