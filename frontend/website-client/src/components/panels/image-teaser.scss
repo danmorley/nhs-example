@@ -21,10 +21,14 @@
 .image-teaser__info {
   display: flex;
   flex-direction: column;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
+
 .image-teaser__heading {
-  padding: 1em;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 .image-teaser__body {
@@ -34,7 +38,8 @@
 .image-teaser__text {
   display: flex;
   flex-direction: column;
-  padding: 1em;
+  padding-top: 1em;
+  padding-bottom: 1em;
   height: 100%;
   
   .cta-list {
@@ -87,6 +92,8 @@
   
   .image-teaser__info {
     width: 65%;
+    padding-left: 0;
+    padding-right: 0;
   }
   
   .image-teaser__image {
@@ -117,9 +124,13 @@
     .image-teaser__heading {
       background-color: $teal-dark;
       color: $white;
+      padding-left: 1em;
+      padding-right: 1em;
     }
 
     .image-teaser__text {
+      padding-left: 1em;
+      padding-right: 1em;
       color: $white;
 
       a {
