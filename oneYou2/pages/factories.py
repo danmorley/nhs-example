@@ -3,7 +3,15 @@ from wagtail.wagtailcore.models import Site
 from images.factories import create_default_test_image
 
 from images.models import PHEImage
+
+from home.models import SiteSettings
 from .models import OneYou2Page, Theme, Menu
+
+
+def create_test_menu(label="menu_label"):
+    menu = Menu(label=label)
+    menu.save()
+    return menu
 
 
 def create_test_theme(label="Test theme", class_name="test-class"):
@@ -22,6 +30,13 @@ def create_test_page(title='Test page', path="1111", depth=0, theme=None):
     if not site.site_name:
         site.site_name = 'oneyoutest'
         site.save()
+
+    site_settings = SiteSettings.objects.filter(site_id=site.id).first()
+    if not site_settings:
+        site_settings = SiteSettings(site_id=site.id)
+    site_settings.menu = create_test_menu()
+    site_settings.save()
+
     root_page = site.root_page
 
     page = OneYou2Page(title=title, path=path, depth=depth, theme=theme)
@@ -30,9 +45,3 @@ def create_test_page(title='Test page', path="1111", depth=0, theme=None):
     page.save()
 
     return page
-
-
-def create_test_menu(label='Test Menu'):
-    menu = Menu(label=label)
-    menu.save()
-    return menu

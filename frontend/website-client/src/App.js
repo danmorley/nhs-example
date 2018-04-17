@@ -147,11 +147,6 @@ class App extends Component {
             }/>
           </Switch>
         </Router>
-
-        <hr />
-        <p>Site name: {this.state.site.site_name}</p>
-        <p>Page title: {this.state.currentPage && this.state.currentPage.title}</p>
-        <p>Global root URL: {global.rootUrl}</p>
       </div>
     );
   }
