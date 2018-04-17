@@ -1,6 +1,7 @@
 import datetime
 import json
 
+from bs4 import BeautifulSoup
 from django.conf import settings
 from django.utils import timezone
 from django.utils.encoding import is_protected_type
@@ -11,23 +12,41 @@ from shelves.models import ShelfAbstract
 SHARED_CONTENT_TYPES = ['promo_shelf', 'banner_shelf', 'app_shelf']
 
 
-def replace_embeds_with_links(field):
-    from images.models import PHEImage
-    start = 0
-    while start >= 0:
-        start = field.find('<embed')
-        finish = field.find('/>', start) + 2
-        if not start < 0:
-            initial_string = field[start:finish]
-            embed_string = initial_string.replace('<embed', '<img')
-            id_start = embed_string.find('id="') + 4
-            id_end = embed_string.find('"', id_start)
-            id = embed_string[id_start:id_end]
-            image = PHEImage.objects.get(id=id)
-            embed_string = embed_string.replace(id, image.link)
-            embed_string = embed_string.replace('id', 'src')
-            field = field.replace(initial_string, embed_string)
+def replace_links(field):
+    field = render_image_links(field)
+    field = render_page_chooser_links(field)
     return field
+
+
+def render_image_links(field):
+    from images.models import PHEImage
+    if field:
+        soup = BeautifulSoup(field, "html.parser")
+        results = soup.findAll("embed")
+        for result in results:
+            image = PHEImage.objects.get(id=result['id'])
+            alt_text = result.get("alt", "")
+            img_tag_src = '<img alt="{}" src="{}"/>'.format(alt_text, image.link)
+            img_tag = BeautifulSoup(img_tag_src, "html.parser")
+            result.replaceWith(img_tag)
+        return str(soup)
+    else:
+        return field
+
+
+def render_page_chooser_links(field):
+    from wagtail.wagtailcore.models import Page
+    if field:  # If the field is blank soup would return html, head & body tags.
+        soup = BeautifulSoup(field, "html.parser")
+        results = soup.findAll("a", {"linktype": "page"})
+        for result in results:
+            page = Page.objects.get(id=result['id'])
+            site_name = page.get_site().site_name
+            url_parts = page.get_url_parts()
+            result['href'] = '/{}{}'.format(site_name.lower(), url_parts[2])
+        return str(soup)
+    else:
+        return field
 
 
 def get_field_value(field, model):
@@ -53,7 +72,7 @@ def get_field_value(field, model):
                     if type(shelf['value']) is dict:
                         for key in shelf['value']:
                             if type(shelf['value'][key]) is str:
-                                shelf['value'][key] = replace_embeds_with_links(shelf['value'][key])
+                                shelf['value'][key] = replace_links(shelf['value'][key])
                     if shelf['type'] in SHARED_CONTENT_TYPES:
                         shelf['content'] = ShelfAbstract.objects.get(id=shelf['value']).specific.serializable_data()
                         final_content.append(shelf)

@@ -27,6 +27,10 @@ def create_test_page(title='Test page', path="1111", depth=0, theme=None):
         create_default_test_image(id=1)
 
     site = Site.objects.first()
+    if not site.site_name:
+        site.site_name = 'oneyoutest'
+        site.save()
+
     site_settings = SiteSettings.objects.filter(site_id=site.id).first()
     if not site_settings:
         site_settings = SiteSettings(site_id=site.id)
