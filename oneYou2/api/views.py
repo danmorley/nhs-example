@@ -99,7 +99,6 @@ def full_page_list(request, site_identifier):
 
 @require_safe
 def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug=None):
-    print("loading page - " + page_slug)
     if page_slug:
         try:
             page_pk = Page.objects.get(slug=page_slug).pk

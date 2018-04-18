@@ -25,7 +25,7 @@ class NoticeShelf extends Component {
       <Shelf id={id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
         <div className="shelf__container container">
           <div className="row">
-            <div className="shelf__col col-12 col-vertical-center">
+            <div className="shelf__col col-12">
               <h1>{content.header}</h1>
               <Text content={content.body} format="richtext" />
             </div>
