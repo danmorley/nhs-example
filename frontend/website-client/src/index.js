@@ -40,8 +40,12 @@ global.contentStore.getSite().then((site) => {
     ReactDOM.render(<App site={site && site.response}/>, rootElem);
     registerServiceWorker();
   } else {
-    console.log(site.error, site.info.statusCode, site.info.message);
-    ReactDOM.render(<div class='container'><h1>Page not found.</h1><p>Please retry later.</p></div>, rootElem);
+    console.error(site.error, site.info.statusCode, site.info.message);
+    if (site.info.statusCode === 404) {
+      ReactDOM.render(<div className='container'><h1>Page not found.</h1><p>Please retry later.</p></div>, rootElem);
+    } else {
+      ReactDOM.render(<div className='container'><h1>Something went wrong.</h1><p>Please refresh or try again later.</p></div>, rootElem);
+    }
     registerServiceWorker();
   }
 });
