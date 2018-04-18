@@ -16,7 +16,6 @@ from django.core.exceptions import ValidationError
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
 
 from oneYou2.panels import ReadOnlyPanel
-from .forms import ReleaseAdminForm
 
 from frontendHandler.models import FrontendVersion
 
@@ -70,8 +69,6 @@ class Release(ClusterableModel):
         blank=False,
         null=False,
         on_delete=models.CASCADE)
-
-    base_form_class = ReleaseAdminForm
 
     panels = [
         FieldPanel('site', classname='site', ),
