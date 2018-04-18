@@ -1,4 +1,6 @@
-from django.http import Http404, JsonResponse
+import json
+
+from django.http import Http404, JsonResponse, HttpResponse
 from django.views.decorators.http import require_safe
 
 from oneYou2.serializers import SiteSerializer
@@ -77,6 +79,19 @@ def page_list(request, site_identifier, release_uuid):
     }
     json_response = JsonResponse(page_data)
     return json_response
+
+
+@require_safe
+def full_page_list(request, site_identifier):
+    """The frontend shouldn't call this, iterating through release pages is not optimal"""
+    # Ideally the react client would never need to use this endpoint
+    get_site_or_404(site_identifier)
+
+    pages = Page.objects.all()
+    serialized_page_data = []
+    for page in pages:
+        serialized_page_data.append(json.loads(page.to_json()))
+    return HttpResponse(json.dumps(serialized_page_data), content_type="application/json")
 
 
 @require_safe
