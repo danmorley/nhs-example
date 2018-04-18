@@ -60,7 +60,7 @@ class ShowMorePanel extends Component {
     let { rowsToShow, children } = this.props;
 
     if (isExpanded || rowsToShow === 0) {
-      console.log('childrenToView', children.length);
+      // console.log('childrenToView', children.length);
       return children.length;  // Display all children.
 
     } else {
@@ -71,11 +71,11 @@ class ShowMorePanel extends Component {
         const availableWidth = this.contentElem.clientWidth * rowsToShow;
         let childrenToView = availableWidth / width;
         if (childrenToView > children.length) childrenToView = children.length;
-        console.log('Calculated children to view is', childrenToView);
+        // console.log('Calculated children to view is', childrenToView);
         return childrenToView;
 
       } else {
-        console.log('childrenToView', 1);
+        // console.log('childrenToView', 1);
         return 1;
       }
     }

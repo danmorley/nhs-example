@@ -6,9 +6,12 @@ import CtaLink from './shared/CtaLink';
 import UrlUtils from './shared/UrlUtils';
 
 /**
- *  Helper class to convert links and images in Wagtail rich text fields to actual
- *  links and images with actual URLs. The resulting link will be 'application aware'
- *  so links to internal pages will remain in the app and avoid full pages reloads.
+ * Helper class to process rich text 'body' fields according to a number of rules:
+ *
+ * 1. Links a made 'application aware' so links to internal pages will remain in the app
+ *    and avoid full pages reloads.
+ * 2. '---' in plain text is converted to HTML &mdash;
+ * 3. '--' in plain text is converted to HTML &ndash;
  */
 class CmsRichTextFormatter  {
   static format(content) {
@@ -16,11 +19,12 @@ class CmsRichTextFormatter  {
   }
 
   static renderLink(node) {
-    console.log('Rendering inline link', node.attribs);
-    if (node.attribs.linktype !== 'page') {
+    if (node.attribs && node.attribs.linktype !== 'page') {
+      // Simply return children if href attribute not given.
+      if (!node.attribs.href) return domToReact(node.children, parserOptions);
+
       if (UrlUtils.isInternalLink(node.attribs.href)) {
         // Internal link - use react router to prevent page refresh.
-        // if (!node.attribs.href) return domToReact(node.children, parserOptions);
         return (<Link to={node.attribs.href}>{domToReact(node.children, parserOptions)}</Link>);
 
       } else {
@@ -29,15 +33,24 @@ class CmsRichTextFormatter  {
       }
     }
   }
+
+  static renderText(node) {
+    if (node.data) {
+      // Replace double or triple dashes with &endash; or &emdash;
+      const translatedText = node.data.replace(/---/g, '&mdash;').replace(/--/g, '&ndash;');
+      return <span dangerouslySetInnerHTML={{__html: translatedText}} />;
+    }
+  }
 }
 
 const parserOptions = {
   replace: (node, options) => {
-    // do not replace if element has no attributes
-    if (!node.attribs) return;
-
     if (node.type === 'tag' && node.name === 'a') {
       return CmsRichTextFormatter.renderLink(node);
+    }
+
+    if (node.type === 'text') {
+      return CmsRichTextFormatter.renderText(node);
     }
   }
 };
