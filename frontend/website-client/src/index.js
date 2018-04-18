@@ -41,7 +41,7 @@ global.contentStore.getSite().then((site) => {
     registerServiceWorker();
   } else {
     console.log(site.error, site.info.statusCode, site.info.message);
-    ReactDOM.render(<h1>Unable to display the One You website. Please retry later.</h1>, rootElem);
+    ReactDOM.render(<div class='container'><h1>Page not found.</h1><p>Please retry later.</p></div>, rootElem);
     registerServiceWorker();
   }
 });
