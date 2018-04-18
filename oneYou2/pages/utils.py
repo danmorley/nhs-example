@@ -83,7 +83,6 @@ def get_field_value(field, model):
                 final_content = []
                 for shelf in field_dict:
                     parse_shelf(shelf)
-                    print(shelf)
 
                     if shelf['type'] in SHARED_CONTENT_TYPES:
                         shelf['content'] = ShelfAbstract.objects.get(id=shelf['value']).specific.serializable_data()
