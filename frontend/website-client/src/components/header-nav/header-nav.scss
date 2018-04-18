@@ -24,7 +24,7 @@ $secondary-item-padding: 0.4em;
     left: 0;
   }
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(lg) {
     display: flex;
     overflow-y: visible;
     margin-left: auto;
@@ -62,7 +62,7 @@ $secondary-item-padding: 0.4em;
     }
   }
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(lg) {
     display: flex;
 
       >  li:first-child  {
@@ -79,7 +79,7 @@ $secondary-item-padding: 0.4em;
   font-size: 1.6em;
   font-weight: normal;
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(lg) {
     display: none;
   }
 }
@@ -88,7 +88,7 @@ $secondary-item-padding: 0.4em;
   border-bottom: 1px solid $white;
   padding: $pimary-item-padding 0;
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(lg) {
     border-bottom:0;
   }
 
@@ -99,7 +99,7 @@ $secondary-item-padding: 0.4em;
     &:first-child{
       padding-top: 0.5em;
 
-      @include media-breakpoint-up(md) {
+      @include media-breakpoint-up(lg) {
         padding-top: 0;
       }
     }
@@ -109,7 +109,7 @@ $secondary-item-padding: 0.4em;
     border-bottom: 0;
   }
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(lg) {
     padding: 2em 0 1em;
 
     &:first-child{
@@ -126,7 +126,7 @@ $secondary-item-padding: 0.4em;
 .header-nav__items > .header-nav__item >
 .header-nav__separator {
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(lg) {
     padding: 0.3em 1em 0.5em;
     border-left: 2px solid $text-primary;
 
@@ -149,7 +149,7 @@ $secondary-item-padding: 0.4em;
 
 .header-nav__items > .header-nav__item  {
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(lg) {
 
     &:nth-child(2) {
       .header-nav__separator {
@@ -176,7 +176,7 @@ $secondary-item-padding: 0.4em;
 .header-nav__items >
 .header-nav__item:hover + .header-nav__item {
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(lg) {
     > .header-nav__separator {
        border-left: 2px solid transparent;
     }
@@ -202,7 +202,7 @@ $secondary-item-padding: 0.4em;
     background-color: inherit;
   }
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(lg) {
     display: inline-block;
     color: $text-primary;
     padding-bottom: 0.3em;
@@ -216,7 +216,7 @@ $secondary-item-padding: 0.4em;
 .header-nav__link--home {
   color: $sunflower-yellow;
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(lg) {
     display: none;
   }
 }
@@ -254,14 +254,14 @@ $secondary-item-padding: 0.4em;
 
 .header-nav__secondary-nav {
 
-  @include media-breakpoint-down(sm) {
+  @include media-breakpoint-down(md) {
     transition: max-height 0.5s;
     overflow: hidden;
     max-height: 0;
     padding: 0;
   }
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(lg) {
   /*  display: flex;
     flex-wrap: wrap; */
     position: absolute;
@@ -279,7 +279,7 @@ $secondary-item-padding: 0.4em;
 
   .header-nav__item {
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(lg) {
       padding: 0 1em 0;
       margin: 6px 0;
 
@@ -291,7 +291,7 @@ $secondary-item-padding: 0.4em;
 
   .header-nav__link {
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(lg) {
       color: $white;
     }
 
@@ -303,7 +303,7 @@ $secondary-item-padding: 0.4em;
 
 .header-nav__secondary-nav-inner {
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(lg) {
     position: relative;
     z-index: 3;
     display: grid;
@@ -338,12 +338,12 @@ $secondary-item-padding: 0.4em;
     top: 0;
     font-size: 16px;
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(lg) {
       display: none;
     }
   }
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(lg) {
     color: $text-primary;
     padding-top: 0;
     padding-bottom: 0.3em;
@@ -376,7 +376,7 @@ $secondary-item-padding: 0.4em;
   > .header-nav__separator
   > .header-nav__secondary-nav {
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(lg) {
       display: block;
       animation: navFadeIn 0.4s ease-in-out both;
     }
@@ -388,7 +388,7 @@ $secondary-item-padding: 0.4em;
   .header-nav--open & {
     position: relative;
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(lg) {
       left: auto;
     }
   }

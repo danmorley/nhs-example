@@ -122,7 +122,7 @@ class BasicCtaShelf extends Component {
           <div className="shelf__container container-fluid" style={shelfStyle}>
             <div className="container">
               <div className="row">
-                <div className="shelf__col col-10 col-sm-10">
+                <div className="shelf__col col-10 col-sm-10 col-md-7">
                   {this.renderHeadingBody(content, headingTagName)}
                   {this.renderCta(content.cta)}
                 </div>
@@ -155,7 +155,7 @@ class BasicCtaShelf extends Component {
           <div className="shelf__container container-fluid" style={shelfStyle}>
             <div className="container">
               <div className="row">
-                <div className="shelf__col col-10 col-sm-8">
+                <div className="shelf__col col-10 col-sm-8 col-md-7">
                   {this.renderHeadingBody(content, headingTagName)}
                   {this.renderCta(content.cta)}
                 </div>
