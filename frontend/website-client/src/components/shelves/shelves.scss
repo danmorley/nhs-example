@@ -73,9 +73,11 @@ $shelf-padding-extra: 2em;
   }
 }
 
+.carousel-full .container-fluid,
 .section-heading-shelf,
-.basic-grid-shelf {
-
+.basic-grid-shelf,
+.panel-carousel-shelf {
+  
    > .container {
     @include media-breakpoint-up(sm) {
       padding-left: 0;

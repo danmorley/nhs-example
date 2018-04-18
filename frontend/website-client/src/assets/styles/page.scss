@@ -13,7 +13,7 @@
   max-width: 1440px;
   position: relative;
   
-  @include media-breakpoint-down(sm) {
+  @include media-breakpoint-down(md) {
     &.header-nav--open {
       left: 66%;
       padding-top: 0 !important;
