@@ -167,8 +167,8 @@ BASE_URL = 'http://example.com'
 
 # Cross origin whitelist
 CORS_ORIGIN_REGEX_WHITELIST = (
-    r'^(https?://)?(\w+\.)?nhschoices\.net$',
-    r'^(https?://)?(\w+\.)?nhs\.uk$',
+    r'^(https?://)?([\w|-]+\.)+nhschoices\.net$',
+    r'^(https?://)?([\w|-]+\.)+nhs\.uk$',
     r'^(http://)?localhost:(\d+)$',
     )
 
