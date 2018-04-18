@@ -34,6 +34,7 @@ GRID_LAYOUT_CHOICES = (
     ('3_col_1_on_mobile', 'Responsive (3 columns on desktop)'),
 )
 
+CONTENT_STATUS_PENDING = 0
 
 logger = logging.getLogger('wagtail.core')
 
@@ -248,7 +249,9 @@ class OneYou2Page(Page):
         blank=True,
         null=True,
         default=None,
-        on_delete=models.SET_NULL)
+        on_delete=models.SET_NULL,
+        limit_choices_to={'content_status': CONTENT_STATUS_PENDING})
+
     theme = models.ForeignKey(
         'pages.Theme',
         related_name='pages',
