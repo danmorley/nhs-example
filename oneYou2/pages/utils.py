@@ -49,6 +49,19 @@ def render_page_chooser_links(field):
         return field
 
 
+def parse_shelf(shelf):
+    if type(shelf['value']) is dict:
+        for key in shelf['value']:
+            if type(shelf['value'][key]) is str:
+                shelf['value'][key] = replace_links(shelf['value'][key])
+            if type(shelf['value'][key]) is list:
+                items = shelf['value'][key]
+                for item in items:
+                    parse_shelf(item)
+
+    return shelf
+
+
 def get_field_value(field, model):
     if field.remote_field is None:
         value = field.pre_save(model, add=model.pk is None)
@@ -69,10 +82,9 @@ def get_field_value(field, model):
                 field_dict = json.loads(field.value_to_string(model))
                 final_content = []
                 for shelf in field_dict:
-                    if type(shelf['value']) is dict:
-                        for key in shelf['value']:
-                            if type(shelf['value'][key]) is str:
-                                shelf['value'][key] = replace_links(shelf['value'][key])
+                    parse_shelf(shelf)
+                    print(shelf)
+
                     if shelf['type'] in SHARED_CONTENT_TYPES:
                         shelf['content'] = ShelfAbstract.objects.get(id=shelf['value']).specific.serializable_data()
                         final_content.append(shelf)
