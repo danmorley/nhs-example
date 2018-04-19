@@ -20,14 +20,14 @@ $shelf-padding-extra: 2em;
 
 .shelf-section {
   padding: 0.5em 0;
-  
+
   @include media-breakpoint-up(sm) {
     padding: 1em 0;
   }
-  
+
   &:first-child {
     padding-top: 0;
-    
+
     @include media-breakpoint-down(sm) {
       p {
         font-weight: bold;
@@ -37,6 +37,10 @@ $shelf-padding-extra: 2em;
 
   &.shelf-no-padding {
     padding: 0px;
+  }
+
+  &.hidden {
+    display: none;
   }
 }
 
@@ -49,11 +53,11 @@ $shelf-padding-extra: 2em;
     margin-top: 0.5em;
     margin-bottom: 1em;
   }
-  
+
   div > p:last-child {
     margin-bottom: 0;
   }
-  
+
   div + a.button-cta {
     margin-top: 1em;
   }
@@ -69,8 +73,10 @@ $shelf-padding-extra: 2em;
   }
 }
 
+.carousel-full .container-fluid,
 .section-heading-shelf,
-.basic-grid-shelf {
+.basic-grid-shelf,
+.panel-carousel-shelf {
   
    > .container {
     @include media-breakpoint-up(sm) {
@@ -95,7 +101,7 @@ $shelf-padding-extra: 2em;
 }
 
 .shelf-full_to_half_width {
-  
+
   @include media-breakpoint-only(lg) {
     padding-top: 0;
   }
@@ -107,13 +113,13 @@ $shelf-padding-extra: 2em;
 }
 //theme
 .oneyou {
-  
-  .shelf {    
+
+  .shelf {
     h2 {
     color: $teal-blue;
     }
   }
-  
+
   h1, h2 {
     .marker {
       display: inline-block;

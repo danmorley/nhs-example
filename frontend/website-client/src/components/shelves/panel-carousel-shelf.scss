@@ -5,11 +5,6 @@
 
 $arrow-distance: 9%;
 
-.panel-carousel-shelf * {
-  min-height: 0;
-  min-width: 0;
-}
-
 .panel-carousel-shelf {
   position: relative;
   width: auto;
@@ -144,7 +139,7 @@ $arrow-distance: 9%;
       transform: scale(1); 
       transition: 0.3s all ease;
       
-      @include media-breakpoint-up(md) {
+      @include media-breakpoint-up(lg) {
         .image-teaser__info {
           padding-top: 1.5em;
           padding-bottom: 1.5em;
@@ -204,26 +199,62 @@ $arrow-distance: 9%;
   
   .panel-carousel {
     
-    .image-teaser__image {
-      min-height: 168px;
+    .image-teaser {
+    
+      @include media-breakpoint-down(md) { 
+        flex-direction: column;
+      }
     }
+    
+    .image-teaser__image {
+      
+      @include media-breakpoint-down(md) {
+        min-height: 120px;
+        height: 35%;
+        width: 100%;
+        background-position: top center;
+      }
+      
+      @include media-breakpoint-up(lg) {
+        min-height: 263px;
+      }
+    }
+    
+    .image-teaser__info {
   
+      padding-left: 1em;
+      padding-right: 1em;
+      
+      @include media-breakpoint-down(md) { 
+        height: 65%;
+        width: 100%;
+      }
+    }
+    
     .image-teaser__heading {
-      padding: 0.9em 0.7em 0.7em; 
+      padding-top: 0.9em;
+      padding-bottom: 0.9em;  
       font-family: $secondary-brand-font;
       font-weight: normal;
+      padding-left: 0;
+      padding-right: 0;
 
-      @include media-breakpoint-up(sm) { 
-        padding: 1em 1em 1em inherit; 
+      @include media-breakpoint-up(md) { 
         @include heading-h2()
+        padding-top: 1em;
+        padding-bottom: 1em;
       } 
     } 
    
     .image-teaser__text {  
-      padding: 0.7em; 
+      padding-top: 0.7em;
+      padding-bottom: 0.9em; 
+      padding-left: 0;
+      padding-right: 0;
      
       @include media-breakpoint-up(sm) { 
-        padding: 1em; 
+        padding-top: 1em;
+        padding-bottom: 1em; 
       } 
    
       p { 
@@ -242,7 +273,10 @@ $arrow-distance: 9%;
     .image-teaser--light-bg { 
      
         .image-teaser__heading {   
-          padding-top: 0; 
+          
+          @include media-breakpoint-up(lg) {
+            padding-top: 0; 
+          }
         } 
     }
     

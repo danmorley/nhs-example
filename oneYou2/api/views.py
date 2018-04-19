@@ -27,7 +27,7 @@ def site_view(request, site_identifier):
 
     current_release = get_latest_release(site.site.pk)
     if not current_release:
-        return HttpResponse("The current site has no live releases", status=404)
+        return JsonResponse({'message': "The current site has no live releases"}, status=404)
 
     populate_release_if_required(current_release)
 

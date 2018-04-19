@@ -31,10 +31,6 @@ $arrow-distance: 4%;
       padding-bottom: 2.5em;
     }
 
-    @include media-breakpoint-up(md) {
-      padding-left: 5%;
-      padding-right: 5%;
-    }
     @include media-breakpoint-up(xl) {
       padding-left: inherit;
       padding-right: inherit;
@@ -92,8 +88,10 @@ $arrow-distance: 4%;
 }
 
 .slick-next {
-
-  @include media-breakpoint-up(sm) {
+  display: none;
+  
+  @include media-breakpoint-up(bg) {
+    display: block;
     right: $arrow-distance;
     z-index: 1;
     height: 40px;
@@ -102,8 +100,10 @@ $arrow-distance: 4%;
 }
 
 .slick-prev {
-
-  @include media-breakpoint-up(sm) {
+  display: none;
+  
+  @include media-breakpoint-up(bg) {
+    display: block;
     left:  $arrow-distance;
     z-index: 1;
     height: 40px;
