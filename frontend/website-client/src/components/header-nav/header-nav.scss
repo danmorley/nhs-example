@@ -306,8 +306,11 @@ $secondary-item-padding: 0.4em;
   @include media-breakpoint-up(lg) {
     position: relative;
     z-index: 3;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    > li {
+      width: 25%;
+    }
   }
 }
 
