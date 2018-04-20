@@ -4,7 +4,7 @@ import './assets/styles/fonts.css';
 import Page from './components/Page';
 import ShelfSamplesPage from './components/pages/ShelfSamplesPage';
 import SiteMapPage from './components/pages/SiteMapPage';
-import notFoundPage from './data/notFoundPage';
+import { notFoundPage, serverErrorPage } from './data/exceptionPages';
 import ContentStore from './services/ContentStore';
 import createHistory from 'history/createBrowserHistory';
 import startsWith from 'lodash.startswith';
@@ -78,8 +78,12 @@ class App extends Component {
         if (page.code === 0) {
           this.setState({ currentPage: page.response });
         } else {
-          console.log(page.error, page.info.statusCode, page.info.message);
-          this.setState({ currentPage: notFoundPage() });
+          console.error(page.error, page.info.statusCode, page.info.message);
+          if (page.info.statusCode === 404) {
+            this.setState({ currentPage: notFoundPage() });
+          } else {
+            this.setState({ currentPage: serverErrorPage() });
+          }
         }
         App.setContentVisibile(true);
       });
