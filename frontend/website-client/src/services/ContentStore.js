@@ -1,4 +1,4 @@
-import request from 'request-promise-native';
+import ServerError from './ServerError';
 
 function ContentStore(contentStoreEndpoint, site, release) {
   this.contentStoreEndpoint = contentStoreEndpoint;
@@ -11,7 +11,6 @@ ContentStore.prototype.getSite = async function() {
 };
 
 ContentStore.prototype.getPage = async function(pageId) {
-  console.log('getPage', pageId, global.preview_page);
   if (pageId === global.preview_page) {
     return await _getPreviewPage(this.contentStoreEndpoint, this.site, pageId);
   }
@@ -31,22 +30,13 @@ ContentStore.prototype.getPage = async function(pageId) {
  *  https://oneyou-cms.service.nhs.uk/api/sites/oneyou/47872384982394723987
  */
 async function _getSite(contentStoreEndpoint, site, release) {
-  console.debug('_getSite: Entry');
-  // let siteUrl = contentStoreEndpoint + '/sites/' + site + '/';
   let siteUrl = `${contentStoreEndpoint}/sites/${site}/${release}/`;
-  let options = {
-    url: siteUrl,
-    json: true
-  }
 
   try {
-    console.debug('_getSite: A1');
-    const response = await request(options);
-    console.debug('_getSite: A2');
+    const response = await _getRequest(siteUrl);
     return { code: 0, response: response };
   }
   catch (error) {
-    console.debug('_getSite: A3 - error');
     return { code: -1, error: 'Error getting site data', info: { statusCode: error.statusCode, message: error.message } };
   }
 }
@@ -62,48 +52,50 @@ async function _getSite(contentStoreEndpoint, site, release) {
  *  https://oneyou-cms.service.nhs.uk/api/sites/oneyou/47872384982394723987/pages/4
  */
 async function _getPage(contentStoreEndpoint, site, release, pageId) {
-  console.debug('_getPage: Entry');
-  // let pageUrl = contentStoreEndpoint + '/pages/' + pageId;
   let pageUrl = `${contentStoreEndpoint}/sites/${site}/${release}/pages/${pageId}/`;
-  let options = {
-    url: pageUrl,
-    json: true
-  }
 
   try {
-    console.debug('_getPage: A1', pageUrl);
-    const response = await request(options);
-    console.debug('_getPage: A2');
+    const response = await _getRequest(pageUrl);
     return response ?
       { code: 0, response: response } :
       { code: -1, error: 'Error getting page data', info: { statusCode: '-1', message: 'Page might need to be published' } };
   }
   catch (error) {
-    console.debug('_getPage: A3 - error');
     return { code: -1, error: 'Error getting page data', info: { statusCode: error.statusCode, message: error.message } };
   }
 }
 
 async function _getPreviewPage(contentStoreEndpoint, site, pageId) {
-  console.debug('_getPreviewPage: Entry');
   let pageUrl = `${contentStoreEndpoint}/preview/sites/${site}/pages/${pageId}/`;
-  let options = {
-    url: pageUrl,
-    json: true
-  };
 
   try {
-    console.debug('_getPage: A1', pageUrl);
-    const response = await request(options);
-    console.debug('_getPage: A2');
+    const response = await _getRequest(pageUrl);
     return response ?
       { code: 0, response: response } :
       { code: -1, error: 'Error getting page data', info: { statusCode: '-1', message: 'Page might need to be published' } };
   }
   catch (error) {
-    console.debug('_getPage: A3 - error');
     return { code: -1, error: 'Error getting page data', info: { statusCode: error.statusCode, message: error.message } };
   }
+}
+
+/**
+ *  Helper function to simplify netwrok request and error handling.
+ */
+async function _getRequest(url) {
+  let data = await (await (fetch(url)
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        throw new ServerError(res.status, res.statusText);
+      }
+    })
+    .catch(err => {
+      throw err;
+    })
+  ))
+  return data;
 }
 
 export default ContentStore;
