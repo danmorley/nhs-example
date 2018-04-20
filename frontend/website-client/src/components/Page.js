@@ -131,12 +131,12 @@ class Page extends Component {
         property: {
           'og:title': documentTitle,
           'og:description': page.meta.og_description,
-          'og:url': (page.meta.og_url === "") ? window.location.href : page.meta.og_url,
+          'og:url': page.meta.og_url || window.location.href,
           'og:image': page.meta.og_image,
           'og:type': page.meta.og_type
         },
         name: {
-          'twitter:url': (page.meta.twitter_url === "") ? window.location.href : page.meta.twitter_url,
+          'twitter:url': page.meta.twitter_url || window.location.href,
           'twitter:card': page.meta.twitter_card,
           'twitter:site': page.meta.twitter_site,
           'twitter:title': documentTitle,
