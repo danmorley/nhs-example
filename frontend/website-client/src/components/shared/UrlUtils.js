@@ -9,7 +9,7 @@ class UrlUtils {
   }
 
   static isExternalLink(link) {
-    return link && (startsWith(link, 'http://') || startsWith(link, 'https://'));
+    return link && (startsWith(link, 'http://') || startsWith(link, 'https://') || startsWith(link, 'mailto:'));
   }
 }
 
