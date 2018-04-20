@@ -214,7 +214,7 @@ class OneYou2Page(Page):
     og_description = models.CharField(max_length=255, default="Start the fight back to a healthier you! One You is"
                                                               " packed with practical tips, tools and free apps"
                                                               " to help you improve your health today")
-    og_url = models.CharField(max_length=255, default="https://www.nhs.uk/oneyou")
+    og_url = models.CharField(max_length=255, blank=True)
     og_image_fk = models.ForeignKey(
         'images.PHEImage',
         null=True,
@@ -225,7 +225,7 @@ class OneYou2Page(Page):
         verbose_name="OG image"
     )
     og_type = models.CharField(max_length=255, default="website")
-    twitter_url = models.CharField(max_length=255, default="https://www.nhs.uk/oneyou")
+    twitter_url = models.CharField(max_length=255, blank=True)
     twitter_card = models.CharField(max_length=255, default="summary")
     twitter_site = models.CharField(max_length=255, default="@OneYouPHE")
     twitter_title = models.CharField(max_length=255, default="One You - Home")
