@@ -43,7 +43,8 @@ class GridShelf extends Component {
       const panelInfo = CmsComponentRegistry.components[panel.type];
       const PanelClass = panelInfo && panelInfo.class;
       const panelClassNamePrefix = panelInfo && panelInfo.classNamePrefix;
-      const panelId = panel.value.field_id || 'panel-' + panel.id;
+      const panelId = panel.value.field_id || panel.value.shelf_id || 'panel-' + panel.id;
+
       if (PanelClass) {
         return (<div key={i} className={panelClass}><PanelClass content={panel.value} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
       } else {
