@@ -1,7 +1,7 @@
 import json
 
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.views.decorators.http import require_safe
 
 from oneYou2.serializers import SiteSerializer
@@ -44,13 +44,13 @@ def release_view(request, site_identifier, release_uuid):
     if release_uuid == "current":
         release_object = get_latest_release(site.site.pk)
         if not release_object:
-            return HttpResponse("The current site has no live releases", status=404)
+            return JsonResponse({'message': "The current site has no live releases"}, status=404)
         release_uuid = release_object.uuid
     else:
         # Request is asking for a specific release
         release_object = get_release_object(release_uuid)
         if not release_object:
-            return HttpResponse("Release not found", status=404)
+            return JsonResponse({'message': "Release not found"}, status=404)
 
     setattr(site, 'release_uuid', release_uuid)
 
@@ -68,7 +68,7 @@ def page_list(request, site_identifier, release_uuid):
     get_site_or_404(site_identifier)
     release = get_release_object(release_uuid)
     if not release:
-        return HttpResponse("Release not found", status=404)
+        return JsonResponse({'message': "Release not found"}, status=404)
     populate_release_if_required(release)
 
     release_pages = release.revisions.all()
@@ -94,7 +94,13 @@ def full_page_list(request, site_identifier):
     serialized_page_data = []
     for page in pages:
         serialized_page_data.append(json.loads(page.to_json()))
-    return HttpResponse(json.dumps(serialized_page_data), content_type="application/json")
+    page_data = {
+        "meta": {
+            "total_count": len(pages)
+        },
+        "items": serialized_page_data
+    }
+    return JsonResponse(page_data)
 
 
 @require_safe
@@ -103,18 +109,18 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug=
         try:
             page_pk = Page.objects.get(slug=page_slug).pk
         except ObjectDoesNotExist:
-            return HttpResponse("Page Not Found", status=404)
+            return JsonResponse({'message': "Page Not Found"}, status=404)
 
     get_site_or_404(site_identifier)
     release = get_release_object(release_uuid)
     if not release:
-        return HttpResponse("Release not found", status=404)
+        return JsonResponse({'message': "Release not found"}, status=404)
     populate_release_if_required(release)
 
     try:
         page_content = release.get_content_for(page_pk)
     except KeyError:
-        return HttpResponse("Page Not Found", status=404)
+        return JsonResponse({'message': "Page Not Found"}, status=404)
 
     json_response = JsonResponse(page_content)
     if release.content_status == 1:
