@@ -17,7 +17,6 @@ $secondary-item-padding: 0.4em;
   bottom: 0;
   left: -68%;
   z-index: 1;
-  box-shadow: 8px 6px 8px -4px rgba(0,0,0,0.64);
   overflow-y: auto;
 
   .header-nav--open & {
@@ -35,7 +34,6 @@ $secondary-item-padding: 0.4em;
     padding: 0;
     font-family: $secondary-brand-font;
     font-size: 0.9em;
-    box-shadow: 0px 0px 0px 0px;
   }
 }
 
@@ -273,7 +271,6 @@ $secondary-item-padding: 0.4em;
     width: 100%;
     display: none;
     animation: navFadeOut 0.3s ease-in-out both;
-    box-shadow: 5px 12px 8px -6px rgba(0,0,0,0.64);
     background: $grey-brown-dark;
   }
 

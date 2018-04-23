@@ -11,7 +11,7 @@
   right: 0;
   z-index: 100;
   background: $white;
-  box-shadow: 0 10px 18px -16px rgba(0,0,0,0.35);
+  border-bottom: 1px solid $light-grey;
   
   @include media-breakpoint-up(lg) {
     padding-bottom: 0;
@@ -19,7 +19,7 @@
   }
   
   @include media-breakpoint-up(lg) {
-    box-shadow: 0 0 0 0;
+    border-bottom: none;
   }
   
   .header-nav--open & {
@@ -55,7 +55,7 @@
   }
   
   @include media-breakpoint-up(lg) {
-    box-shadow: 0 10px 18px -16px rgba(0,0,0,0.35);
+    border-bottom: 1px solid $light-grey;
   }
 }
 
