@@ -187,7 +187,7 @@ class Grid(blocks.StructBlock):
         ('contain', 'Contain'),
         ('cover', 'Stretch')
     ),
-        label='Teaser Image Display', default="Stretch")
+        label='Teaser Image Display', default="cover")
     shelf_id = IDBlock(required=False, label="ID")
 
 
