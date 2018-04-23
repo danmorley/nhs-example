@@ -87,13 +87,6 @@ $shelf-padding-extra: 2em;
   h2 {
     @include heading-h1();
   }
-  
-  @include media-breakpoint-up(md) {
-  
-    p {
-      line-height: 1.8
-    }
-  }
 }
 
 .page-heading-shelf {
@@ -122,12 +115,6 @@ $shelf-padding-extra: 2em;
       @include media-breakpoint-up(sm) {
         margin-bottom: 0.2em;
       }
-  }
-  
-  p {
-    @include media-breakpoint-up(sm) {
-      line-height: 1.5em
-    }
   }
 }
 
@@ -165,10 +152,6 @@ $shelf-padding-extra: 2em;
     .shelf__container {
       padding-top: $shelf-padding-extra;
       padding-bottom: $shelf-padding-extra;
-    }
-
-    p {
-      line-height: 1.4em;
     }
   }
 
