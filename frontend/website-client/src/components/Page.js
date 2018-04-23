@@ -136,6 +136,9 @@ class Page extends Component {
           'og:type': page.meta.og_type
         },
         name: {
+          'WT.cg_n': 'OneYou Core',
+          'WT.cg_s': page.title,
+          'DCSext.RealUrl': window.location.pathname,
           'twitter:url': page.meta.twitter_url || window.location.href,
           'twitter:card': page.meta.twitter_card,
           'twitter:site': page.meta.twitter_site,
