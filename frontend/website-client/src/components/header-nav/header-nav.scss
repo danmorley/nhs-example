@@ -114,7 +114,7 @@ $secondary-item-padding: 0.4em;
       margin-right: auto;
       font-size: inherit;
     };
-
+  
     .header-nav__link {
       border-bottom: 0.2em solid transparent;
     }
@@ -260,12 +260,10 @@ $secondary-item-padding: 0.4em;
   }
 
   @include media-breakpoint-up(lg) {
-  /*  display: flex;
-    flex-wrap: wrap; */
     position: absolute;
-    padding: 1.1em 5% 0.5em 2em;
+    padding: 1.1em 0 0.5em 0;
     z-index: 2;
-    top: 5.1em;
+    top: 99px;
     left: 0;
     right: 0;
     width: 100%;
@@ -282,6 +280,10 @@ $secondary-item-padding: 0.4em;
 
       &:first-child {
         margin-right: initial;
+      }
+      
+      &:nth-child(4n+1) {
+        padding-left: 0;
       }
     }
   }
@@ -309,7 +311,7 @@ $secondary-item-padding: 0.4em;
     flex-wrap: wrap;
     > li {
       width: 25%;
-    }
+    }    
   }
 }
 
