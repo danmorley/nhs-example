@@ -37,7 +37,10 @@ def release_html(request, site_name):
     substituted_index = substituted_index.replace("%apiurl%", get_protocol()
                                                   + request.__dict__['META']['HTTP_HOST'] + "/api")
     substituted_index = substituted_index.replace("%releaseid%", uuid)
-    return HttpResponse(substituted_index)
+    http_response = HttpResponse(substituted_index)
+    if release.content_status == 1:
+        http_response['Cache-Control'] = 'max-age=3600'
+    return http_response
 
 
 def release_js(request, version_id):
