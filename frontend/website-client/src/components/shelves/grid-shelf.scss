@@ -8,3 +8,37 @@
   transition-timing-function: linear;
   overflow: hidden;
 }
+
+.basic-grid-shelf {
+  
+  .shelf__col {
+    
+    @include media-breakpoint-up(md) {
+      padding-bottom: 1em;
+      
+      &.col-sm-12:last-child {
+        padding-bottom: 0.5em;
+      }
+      
+      &.col-md-6:nth-last-child(2) + .shelf__col {
+        padding-bottom: 0.5em;
+      }
+      
+      &.col-md-6:nth-last-child(2):nth-child(odd) {
+        padding-bottom: 0.5em;
+      }
+      
+      &.col-md-4:nth-last-child(4) + .shelf__col {
+        padding-bottom: 0.5em;
+      }
+      
+      &.col-md-4:nth-last-child(3) + .shelf__col {
+        padding-bottom: 0.5em;
+      }
+      
+      &.col-md-4:nth-last-child(3):nth-child(odd) {
+        padding-bottom: 0.5em;
+      }
+    }
+  }
+}
