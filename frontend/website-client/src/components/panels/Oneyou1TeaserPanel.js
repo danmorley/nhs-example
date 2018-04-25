@@ -8,10 +8,7 @@ import CtaList from '../shared/CtaList';
 import ImageUtils from './ImageUtils';
 import CtaUtils from '../shared/CtaUtils';
 import PropTypes from 'prop-types';
-import Collapsible from 'react-collapsible';
-
-// import sampleBgImage from '../shelves/healthcheckup.png'; // Tell Webpack this JS file uses this image
-// import testImage from '../../assets/images/Trump2.jpg';
+import Collapsible from '../shared/Collapsible';
 
 /**
  *

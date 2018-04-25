@@ -5,7 +5,6 @@ import Page from './components/Page';
 import ShelfSamplesPage from './components/pages/ShelfSamplesPage';
 import SiteMapPage from './components/pages/SiteMapPage';
 import { notFoundPage, serverErrorPage } from './data/exceptionPages';
-import ContentStore from './services/ContentStore';
 import createHistory from 'history/createBrowserHistory';
 import startsWith from 'lodash.startswith';
 
