@@ -7,9 +7,9 @@ describe('PageHeader', () => {
       title: 'test',
     };
 
-    it('renders without crashing', () => {
-      const div = document.createElement('div');
-      shallow(<PageHeader header={header} />, div)
-    })
+  it('renders without crashing', () => {
+    const wrapper = shallow(<PageHeader header={header} />);
+    expect(wrapper.exists()).toBe(true);
+  })
 
 })
