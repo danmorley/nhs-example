@@ -21,27 +21,27 @@
   a {
     font-size: 1.2em;
     text-decoration: underline;
+    position: relative;
+    
+    &:after {
+      position: absolute;
+      display: inline-block;
+      font-weight: normal;
+      font-size: 40px;
+      top: -4px;
+      right: -32px;
+    }
   }
 
   a.see-more {
     &:after {
       @extend %icon-chevron-down;
-      position: relative;
-      display: inline-block;
-      font-weight: normal;
-      font-size: 0.8em;
-      margin-left: 6px;
     }
   }
 
   a.see-less {
     &:after {
       @extend %icon-chevron-up;
-      position: relative;
-      display: inline-block;
-      font-weight: normal;
-      font-size: 0.8em;
-      margin-left: 6px;
     }
   }
 }
