@@ -20,6 +20,8 @@
     "react-scripts": "1.1.0",
     "react-slick": "^0.18.1",
     "react-swipeable": "^4.2.1",
+    "request": "^2.85.0",
+    "request-promise-native": "^1.0.5",
     "slick-carousel": "^1.8.1",
     "universal-cookie": "^2.1.2"
   },
@@ -45,5 +47,9 @@
     "eject": "react-scripts eject",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive"
+  },
+  "devDependencies": {
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1"
   }
 }
