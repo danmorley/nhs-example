@@ -12,6 +12,25 @@ from wagtail.wagtailimages.models import Image, AbstractImage, AbstractRendition
 
 from pages.models import OneYou2Page
 
+ONEYOU_RENDITIONS = {
+    "blog-cards-mobile": "344x184",  # widthxheight
+    "blog-cards-desktop": "550x294",
+    "inline-stories-mobile": "344x168",
+    "inline-stories-desktop": "1154x294",
+    "carousel-mobile": "104x168",
+    "carousel-desktop": "246x338",
+    "banner-promo-mobile": "375x136",
+    "banner-promo-desktop": "1153x168",
+    "page-header-carousel-mobile": "375x231",
+    "page-header-carousel-desktop": "1440x384",
+    "drop-down-mobile": "344x120",
+    "drop-down-desktop": "553x216",
+    "page-header-mobile": "375x143",
+    "page-header-desktop": "1440x240",
+    "variant-mobile": "344x120",
+    "variant-desktop": "480x336",
+
+}
 
 class PHEImage(AbstractImage):
     def get_usage(self):
@@ -31,6 +50,12 @@ class PHEImage(AbstractImage):
             return self.file.url
         else:
             return ""
+
+    def save(self, *args, **kwargs):
+        print(args)
+        print(kwargs)
+        rendition = 1
+        super(PHEImage, self).save(*args, **kwargs)
 
 
 class PHERendition(AbstractRendition):
