@@ -114,12 +114,12 @@
       @extend %icon-hamburger;
       position: absolute;
       right: 0;
-      top: 0;
-      color: black;
-      font-size: 30px;
+      top: 3px;
+      color: $text-primary;
+      font-size: 20px;
       
       @include media-breakpoint-up(md) {
-        font-size:40px;
+        font-size:30px;
       }  
     }
   }      

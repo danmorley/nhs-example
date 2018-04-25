@@ -78,22 +78,22 @@
   &.is-closed {
     
     &:before {
-      @extend %icon-chevron-right;
+      @extend %icon-chevron-down;
       position: absolute;
-      right: 0.5em;
-      font-weight: bold;
-      font-size: 1.2em;        
+      right: 0.3em;
+      top: 6px;    
+      font-size: 2.2em;  
     }
   }
   
   &.is-open {
     
     &:before {
-      @extend %icon-chevron-down;
+      @extend %icon-chevron-up;
       position: absolute;
-      right: 0.5em;
-      font-weight: bold;
-      font-size: 1.2em
+      right: 0.3em;
+      top: 6px;
+      font-size: 2.2em;
     }
   }
   
