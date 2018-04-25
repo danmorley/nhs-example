@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.views.static import serve
+from django.conf import settings
 
 from release.utils import get_latest_release
 from oneYou2.utils import get_protocol
@@ -34,8 +35,11 @@ def release_html(request, site_name):
     substituted_index = index.replace("/static/css/", "/version/css/" + frontend_id + "/?file_name=")
     substituted_index = substituted_index.replace("/static/js/", "/version/js/" + frontend_id + "/?file_name=")
 
-    substituted_index = substituted_index.replace("%apiurl%", get_protocol()
-                                                  + request.__dict__['META']['HTTP_HOST'] + "/api")
+    if settings.CONTENT_STORE_ENDPOINT:
+        content_store_endpoint = settings.CONTENT_STORE_ENDPOINT
+    else:
+        content_store_endpoint = get_protocol() + request.__dict__['META']['HTTP_HOST'] + "/api"
+    substituted_index = substituted_index.replace("%apiurl%", content_store_endpoint)
     substituted_index = substituted_index.replace("%releaseid%", uuid)
     http_response = HttpResponse(substituted_index)
     if release.content_status == 1:
