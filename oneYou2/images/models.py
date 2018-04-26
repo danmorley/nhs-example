@@ -15,8 +15,10 @@ from pages.models import OneYou2Page
 ONEYOU_RENDITIONS = {
     "mobile-landscape": "375x231",
     "mobile-portrait": "104x168",
+    "mobile-square": "250x250",
     "desktop-landscape": "1440x384",
     "desktop-portrait": "246x338",
+    "desktop-square": "500x500",
 }
 
 
