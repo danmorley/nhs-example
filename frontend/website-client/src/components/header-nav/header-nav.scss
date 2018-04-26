@@ -7,7 +7,7 @@ $secondary-item-padding: 0.4em;
 .header-nav {
   font-family: $nav-font;
   background: $grey-brown-dark;
-  padding: 1em;
+  padding: 1.2em 1em 1em;
   padding-bottom: 0;
   text-align: left;
   width: 66%;
@@ -47,6 +47,29 @@ $secondary-item-padding: 0.4em;
 
 .header-nav::-webkit-scrollbar {
   background: $grey-brown;
+}
+
+.header-nav__close {
+  
+  position: absolute;
+  top: 1.2em;
+  right: 1em;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  
+  @include media-breakpoint-up(lg) {
+    display:none;
+  }
+  
+  &:after {
+    @extend %icon-cross;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 1em;
+    color: $white;
+  }
 }
 
 .header-nav__items {

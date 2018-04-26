@@ -4,7 +4,11 @@ import MultiMenuItem from './MultiMenuItem';
 import styles from './header-nav.css';
 
 class SiteNav extends Component {
-
+  
+  onNavCloseClick() {
+    document.querySelector('.page-wrapper').classList.toggle('header-nav--open');
+  };
+  
   render() {
     if (!this.props.navItems) return null;
 
@@ -22,6 +26,7 @@ class SiteNav extends Component {
 
     return (
       <nav className="header-nav">
+        <div className="header-nav__close" aria-label="Close navigation" onClick={this.onNavCloseClick}>x</div>
         <h2 className="header-nav__title">
           MENU
         </h2>
