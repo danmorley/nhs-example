@@ -5,11 +5,11 @@ from rest_framework.fields import ReadOnlyField
 
 
 class ImageSerializer(serializers.ModelSerializer):
-    image = ReadOnlyField(source='file.url')
+    renditions = ReadOnlyField(source='generate_or_get_all_renditions')
 
     class Meta:
         model = apps.get_model('images', 'PHEImage')
         fields = (
             'title',
-            'image',
+            'renditions',
         )

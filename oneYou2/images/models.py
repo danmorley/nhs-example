@@ -13,24 +13,12 @@ from wagtail.wagtailimages.models import Image, AbstractImage, AbstractRendition
 from pages.models import OneYou2Page
 
 ONEYOU_RENDITIONS = {
-    "blog-cards-mobile": "344x184",  # widthxheight
-    "blog-cards-desktop": "550x294",
-    "inline-stories-mobile": "344x168",
-    "inline-stories-desktop": "1154x294",
-    "carousel-mobile": "104x168",
-    "carousel-desktop": "246x338",
-    "banner-promo-mobile": "375x136",
-    "banner-promo-desktop": "1153x168",
-    "page-header-carousel-mobile": "375x231",
-    "page-header-carousel-desktop": "1440x384",
-    "drop-down-mobile": "344x120",
-    "drop-down-desktop": "553x216",
-    "page-header-mobile": "375x143",
-    "page-header-desktop": "1440x240",
-    "variant-mobile": "344x120",
-    "variant-desktop": "480x336",
-
+    "mobile-landscape": "375x231",
+    "mobile-portrait": "104x168",
+    "desktop-landscape": "1440x384",
+    "desktop-portrait": "246x338",
 }
+
 
 class PHEImage(AbstractImage):
     def get_usage(self):
@@ -51,11 +39,18 @@ class PHEImage(AbstractImage):
         else:
             return ""
 
+    def generate_or_get_all_renditions(self):
+        if self.file:
+            renditions_dict = {}
+            for k, v in ONEYOU_RENDITIONS.items():
+                renditions_dict[k] = self.get_rendition('fill-{}'.format(v)).url
+            return renditions_dict
+        else:
+            return {}
+
     def save(self, *args, **kwargs):
-        print(args)
-        print(kwargs)
-        rendition = 1
         super(PHEImage, self).save(*args, **kwargs)
+        self.generate_or_get_all_renditions()
 
 
 class PHERendition(AbstractRendition):
