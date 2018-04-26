@@ -31,7 +31,8 @@ class FrontendVersion:
                                                                settings.ENV + '/' + directory.name)
             available_versions.append((directory.name, properties['last-modified']))
 
-        return sorted(available_versions, key=lambda x: datetime.strptime(x[1], '%a, %d %b %Y %H:%M:%S %Z'), reverse=True)
+        return sorted(available_versions, key=lambda x: datetime.strptime(x[1], '%a, %d %b %Y %H:%M:%S %Z'),
+                      reverse=True)
 
     @classmethod
     def get_html_for_version(cls, uuid):
