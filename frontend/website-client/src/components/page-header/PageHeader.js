@@ -76,7 +76,7 @@ class PageHeader extends Component {
 
   static toggleMenu(event) {
     const box = document.querySelector('.page-wrapper');
-    event.preventDefault()
+    event.preventDefault();
     box.classList.toggle('header-nav--open');
   }
 }
