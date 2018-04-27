@@ -34,7 +34,7 @@ def release_html(request, site_name):
     index = FrontendVersion.get_html_for_version(frontend_id)
     substituted_index = index.replace("/static/css/", "/{}/version/css/{}/?file_name=".format(site_name, frontend_id))
     substituted_index = substituted_index.replace("/static/js/", "/{}/version/js/{}/?file_name=".format(site_name,
-                                                                                                       frontend_id))
+                                                                                                        frontend_id))
 
     if settings.CONTENT_STORE_ENDPOINT:
         content_store_endpoint = settings.CONTENT_STORE_ENDPOINT
