@@ -41,16 +41,14 @@ urlpatterns = [
     url('^service-worker\.js$', serve, {'path': 'service-worker.js', 'document_root': './web/'}),
     url('^index\.html$', serve, {'path': 'index.html', 'document_root': './web/'}),
 
-    url('^version/css/(?P<version_id>[\w-]+)/$', views.release_css, name='release_css'),
-    url('^version/js/(?P<version_id>[\w-]+)/$', views.release_js, name='release_js'),
-    url(r'^version/$', lambda request: HttpResponse(get_release_version()), name='cms_version'),
+    url('^(?P<site_name>[\w-]+)/version/css/(?P<version_id>[\w-]+)/$', views.release_css, name='release_css'),
+    url('^(?P<site_name>[\w-]+)/version/js/(?P<version_id>[\w-]+)/$', views.release_js, name='release_js'),
+    url(r'^(?P<site_name>[\w-]+)/version/$', lambda request: HttpResponse(get_release_version()), name='cms_version'),
     # url(r'^(?P<path>main.js/)$', serve, {'document_root': './web/'}),
     # url(r'^(service-worker.js/)$', serve, {'document_root': './web/'}),
-    url(r'^static/(?P<path>.*)$', views.web_statics),
-    url(r'^static/(?P<path>.*)$', views.web_statics),
-
+    url(r'^(?P<site_name>[\w-]+)/static/(?P<path>.*)$', views.web_statics),
+    url(r'^(?P<site_name>[\w-]+)/public/(?P<path>.*)$', views.statics),
     url(r'^(?P<site_name>[\w-]+)/', views.release_html, name='release_html'),
-    url(r'^(?P<path>.*)$', views.statics),
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's page serving mechanism. This should be the last pattern in
     # the list:
