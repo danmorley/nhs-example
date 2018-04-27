@@ -16,7 +16,7 @@ class FrontendVersion:
     @classmethod
     def get_current_version(cls):
         # TODO try to find a way to mock this function on server start
-        if settings.AZURE_ACCOUNT_NAME == 'test':
+        if settings.AZURE_ACCOUNT_NAME == 'test' or settings.AZURE_ACCOUNT_NAME is None:
             return 'test'
 
         file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
@@ -26,7 +26,7 @@ class FrontendVersion:
     @classmethod
     def get_available_versions(cls):
         # TODO try to find a way to mock this function on server start
-        if settings.AZURE_ACCOUNT_NAME == 'test':
+        if settings.AZURE_ACCOUNT_NAME == 'test' or settings.AZURE_ACCOUNT_NAME is None:
             return []
 
         file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
