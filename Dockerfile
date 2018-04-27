@@ -4,8 +4,7 @@ WORKDIR /code
 ADD . /code
 
 RUN npm install --prefix frontend/website-client \
-    && export PUBLIC_URL='oneyou/public' \
-    && npm run build --prefix frontend/website-client \
+    && PUBLIC_URL='/oneyou/public'  && npm run build --prefix frontend/website-client \
     && cp -R frontend/website-client/build oneYou2/web \
     && rm -rf frontend/website-client/node_modules \
     && cp frontend/website-client/public/webtrends.load.js oneYou2/web \
