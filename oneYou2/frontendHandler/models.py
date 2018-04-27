@@ -15,12 +15,20 @@ class FrontendVersion:
 
     @classmethod
     def get_current_version(cls):
+        # TODO try to find a way to mock this function on server start
+        if settings.AZURE_ACCOUNT_NAME == 'test':
+            return 'test'
+
         file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
 
         return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, settings.ENV, 'current_version.txt')
 
     @classmethod
     def get_available_versions(cls):
+        # TODO try to find a way to mock this function on server start
+        if settings.AZURE_ACCOUNT_NAME == 'test':
+            return []
+
         file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
 
         directories = file_service.list_directories_and_files(settings.AZURE_FILE_SHARE, settings.ENV).directories
