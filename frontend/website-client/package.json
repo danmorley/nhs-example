@@ -26,7 +26,7 @@
   "scripts": {
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
-    "build": "mv public/index-build.html public/index.html && npm run build-css && react-scripts build && node bin/postbuild.js",
+    "build": "PUBLIC_URL=/oneyou/public && mv public/index-build.html public/index.html && npm run build-css && react-scripts build && node bin/postbuild.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
