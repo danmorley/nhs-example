@@ -3,6 +3,8 @@ import uuid
 
 from azure.storage.file import FileService
 
+from datetime import datetime
+
 from django.conf import settings
 
 
@@ -13,9 +15,32 @@ class FrontendVersion:
 
     @classmethod
     def get_current_version(cls):
+        # TODO try to find a way to mock this function on server start
+        if settings.AZURE_ACCOUNT_NAME == 'test':
+            return 'test'
+
         file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
 
         return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, settings.ENV, 'current_version.txt')
+
+    @classmethod
+    def get_available_versions(cls):
+        # TODO try to find a way to mock this function on server start
+        if settings.AZURE_ACCOUNT_NAME == 'test':
+            return []
+
+        file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
+
+        directories = file_service.list_directories_and_files(settings.AZURE_FILE_SHARE, settings.ENV).directories
+        available_versions = []
+
+        for directory in directories:
+            properties = file_service.get_directory_properties(settings.AZURE_FILE_SHARE,
+                                                               settings.ENV + '/' + directory.name)
+            available_versions.append((directory.name, properties['last-modified']))
+
+        return sorted(available_versions, key=lambda x: datetime.strptime(x[1], '%a, %d %b %Y %H:%M:%S %Z'),
+                      reverse=True)
 
     @classmethod
     def get_html_for_version(cls, uuid):

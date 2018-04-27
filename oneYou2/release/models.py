@@ -61,7 +61,8 @@ class Release(ClusterableModel):
     release_name = models.CharField(max_length=255, unique=True)
     release_time = models.DateTimeField(blank=True, null=True, validators=[validate_in_future])
     uuid = models.CharField(max_length=255, unique=True)
-    frontend_id = models.CharField(max_length=255)
+    frontend_id = models.CharField(max_length=255, choices=FrontendVersion.get_available_versions(),
+                                   default=FrontendVersion.get_current_version())
     content_status = models.IntegerField(choices=CONTENT_STATUS)
     site = models.ForeignKey(
         'wagtailcore.Site',
@@ -76,7 +77,7 @@ class Release(ClusterableModel):
         FieldPanel('release_name', classname='release_name', ),
         ReadOnlyPanel('uuid', classname='uuid', ),
         ReadOnlyPanel('content_status', classname='release_status'),
-        ReadOnlyPanel('frontend_id', classname='frontend_id'),
+        FieldPanel('frontend_id', classname='frontend_id'),
         FieldPanel('release_time', classname='release_time', ),
     ]
 
