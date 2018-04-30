@@ -16,12 +16,12 @@ class PageHeader extends Component {
   }
  
   handleResize = () => { 
-    this.state = { 
+    this.setState = { 
       navHeight: this.divElement.clientHeight                    
     };
     let cookieBanner = document.querySelector('.cookie-banner');
     let cookieBannerHeight = document.body.contains(cookieBanner) ? cookieBanner.clientHeight : 0;
-    document.querySelector('.page-wrapper').style.paddingTop = (this.state.navHeight + cookieBannerHeight +'px');
+    document.querySelector('.page-wrapper').style.paddingTop = (this.divElement.clientHeight + cookieBannerHeight +'px');
     document.querySelector('.page-header').style.top = cookieBannerHeight + 'px';
   }
   
@@ -46,7 +46,7 @@ class PageHeader extends Component {
     let { navItems, header } = this.props;
 
     return (
-      <div ref={ (divElement) => this.divElement = divElement} className="container-fluid page-header">
+      <div ref={(divElement) => this.divElement = divElement} className="container-fluid page-header">
         <div className="container">
           <div className="page-header__row">
             <div className="page-header__info">
