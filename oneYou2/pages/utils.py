@@ -49,15 +49,23 @@ def render_page_chooser_links(field):
         return field
 
 
-def parse_shelf(shelf):
+def parse_shelf(shelf, parent=None):
     if type(shelf['value']) is dict:
+        shelf_type = shelf['type']
+        if not parent:
+            shelf['value']['image_meta'] = '{}/{}/{}'.format(shelf_type, None, None)
+        elif parent.get('type') == 'grid_shelf':
+            shelf['value']['image_meta'] = "{}/{}/{}".format(shelf_type, parent['type'], parent['value']['meta_layout'])
+        else:
+            shelf['value']['image_meta'] = "{}/{}/{}".format(shelf_type, parent['type'], None)
+
         for key in shelf['value']:
             if type(shelf['value'][key]) is str:
                 shelf['value'][key] = replace_links(shelf['value'][key])
             if type(shelf['value'][key]) is list:
                 items = shelf['value'][key]
                 for item in items:
-                    parse_shelf(item)
+                    parse_shelf(item, parent=shelf)
 
     return shelf
 
@@ -82,7 +90,7 @@ def get_field_value(field, model):
                 field_dict = json.loads(field.value_to_string(model))
                 final_content = []
                 for shelf in field_dict:
-                    parse_shelf(shelf)
+                    parse_shelf(shelf, parent=None)
 
                     if shelf['type'] in SHARED_CONTENT_TYPES:
                         shelf['content'] = ShelfAbstract.objects.get(id=shelf['value']).specific.serializable_data()

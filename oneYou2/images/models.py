@@ -12,14 +12,7 @@ from wagtail.wagtailimages.models import Image, AbstractImage, AbstractRendition
 
 from pages.models import OneYou2Page
 
-ONEYOU_RENDITIONS = {
-    "mobile-landscape": "375x231",
-    "mobile-portrait": "104x168",
-    "mobile-square": "250x250",
-    "desktop-landscape": "1440x384",
-    "desktop-portrait": "246x338",
-    "desktop-square": "500x500",
-}
+from images.renditions import ONEYOU_RENDITIONS
 
 
 class PHEImage(AbstractImage):
@@ -44,8 +37,14 @@ class PHEImage(AbstractImage):
     def generate_or_get_all_renditions(self):
         if self.file:
             renditions_dict = {}
-            for k, v in ONEYOU_RENDITIONS.items():
-                renditions_dict[k] = self.get_rendition('fill-{}'.format(v)).url
+            for rendition in ONEYOU_RENDITIONS:
+                for device, size in rendition[3].items():
+                    renditions_dict[
+                        '{}/{}/{}/{}'.format(rendition[0],
+                                             rendition[1],
+                                             rendition[2],
+                                             device)
+                    ] = self.get_rendition('fill-{}'.format(size)).url
             return renditions_dict
         else:
             return {}
