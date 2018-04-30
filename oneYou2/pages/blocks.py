@@ -1,8 +1,6 @@
 from django.template.defaultfilters import slugify
 from wagtail.wagtailcore import blocks
 
-from images.renditions import ONEYOU_RENDITIONS
-
 
 class CTABlock(blocks.StructBlock):
     image_meta = blocks.TextBlock(required=False)
