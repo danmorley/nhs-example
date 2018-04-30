@@ -1,8 +1,5 @@
 FROM phedct/oneyou-cms:mssql-python-nodejs
 
-ARG PUBLIC_URL=/oneyou/public
-ENV PUBLIC_URL=$PUBLIC_URL
-
 WORKDIR /code
 ADD . /code
 RUN npm install --prefix frontend/website-client \
