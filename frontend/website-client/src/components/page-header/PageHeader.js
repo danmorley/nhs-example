@@ -16,7 +16,7 @@ class PageHeader extends Component {
   }
  
   handleResize = () => { 
-    this.setState = ({ 
+    this.setState({ 
       navHeight: this.divElement.clientHeight                    
     });
     let cookieBanner = document.querySelector('.cookie-banner');
