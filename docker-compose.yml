@@ -15,6 +15,7 @@ services:
       AZURE_FILE_SHARE: ${AZURE_FILE_SHARE}
       CONTENT_STORE_ENDPOINT: ${CONTENT_STORE_ENDPOINT}
       CMS_ENV: ${CMS_ENV}
+      PUBLIC_URL: /oneyou/public
     ports:
       - "8000:8000"
 
@@ -31,4 +32,5 @@ services:
       AZURE_FILE_SHARE: ${AZURE_FILE_SHARE}
       CONTENT_STORE_ENDPOINT: ${CONTENT_STORE_ENDPOINT}
       CMS_ENV: ${CMS_ENV}
+      PUBLIC_URL: /oneyou/public
     command: bash ./initialize.sh

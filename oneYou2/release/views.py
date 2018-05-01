@@ -32,8 +32,10 @@ def release_html(request, site_name):
         uuid = 'current'
 
     index = FrontendVersion.get_html_for_version(frontend_id)
-    substituted_index = index.replace("/static/css/", "/version/css/" + frontend_id + "/?file_name=")
-    substituted_index = substituted_index.replace("/static/js/", "/version/js/" + frontend_id + "/?file_name=")
+    substituted_index = index.replace("/oneyou/public/static/css/",
+                                      "/{}/version/css/{}/?file_name=".format(site_name, frontend_id))
+    substituted_index = substituted_index.replace("/oneyou/public/static/js/",
+                                                  "/{}/version/js/{}/?file_name=".format(site_name, frontend_id))
 
     if settings.CONTENT_STORE_ENDPOINT:
         content_store_endpoint = settings.CONTENT_STORE_ENDPOINT
@@ -47,22 +49,23 @@ def release_html(request, site_name):
     return http_response
 
 
-def release_js(request, version_id):
+def release_js(request, site_name, version_id):
     file_name = request.GET.get('file_name')
     return HttpResponse(FrontendVersion.get_js_for_version(version_id, file_name))
 
 
-def release_css(request, version_id):
+def release_css(request, site_name, version_id):
     file_name = request.GET.get('file_name')
     return HttpResponse(FrontendVersion.get_css_for_version(version_id, file_name), 'text/css')
 
 
-def web_statics(request, path):
-    if "wagtail" in path or "cms" in path:
-        return serve(request, path, document_root='./static/')
-    else:
-        return serve(request, path, document_root='./web/static/')
+def cms_statics(request, path):
+    return serve(request, path, document_root='./static/')
 
 
-def statics(request, path):
+def web_statics(request, site_name, path):
+    return serve(request, path, document_root='./web/static/')
+
+
+def statics(request, site_name, path):
     return serve(request, path, document_root='./web/')
