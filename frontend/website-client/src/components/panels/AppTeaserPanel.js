@@ -37,7 +37,6 @@ class AppTeaserPanel extends Component {
     window.removeEventListener('resize', this.setImage);
   }
 
-
   render() {
     let { content, classNamePrefix } = this.props;
     let backgroundTeaserImage = this.state.backgroundImageStyle;
