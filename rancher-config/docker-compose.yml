@@ -15,6 +15,7 @@ services:
       AZURE_FILE_SHARE: ${AZURE_FILE_SHARE}
       CONTENT_STORE_ENDPOINT: ${CONTENT_STORE_ENDPOINT}
       CMS_ENV: ${CMS_ENV}
+      PUBLIC_URL: ${REACT_APP_PUBLIC_URL}
     labels:
       io.rancher.container.pull_image: always
       traefik.enable: true
