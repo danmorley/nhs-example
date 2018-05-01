@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-// import site from './sample-data/SiteSample';
+// import registerServiceWorker from './registerServiceWorker';
+import { unregister } from './registerServiceWorker';
 import ContentStore from './services/ContentStore';
 import queryString from 'query-string';
 
@@ -47,5 +47,6 @@ global.contentStore.getSite().then((site) => {
       ReactDOM.render(<div className='container'><h1>Something went wrong.</h1><p>Please refresh or try again later.</p></div>, rootElem);
     }
     // registerServiceWorker();
+    unregister();
   }
 });
