@@ -26,6 +26,7 @@
     
     @include media-breakpoint-up(lg) {
       left: auto;
+      position: fixed;
     }
   }
   
