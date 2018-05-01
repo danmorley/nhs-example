@@ -27,9 +27,9 @@ from release.views import release_html
 from release.wagtail_hooks import ReleaseButtonHelper, ReleaseAdmin
 
 
-index_file = '<head><link href="/static/css/main.da59b65b.css" rel="stylesheet"></head><body>' \
+index_file = '<head><link href="/oneyou/public/static/css/main.da59b65b.css" rel="stylesheet"></head><body>' \
              '<div id="root" data-content-store-endpoint="%apiurl%" data-site="oneyou" data-release="%releaseid%">' \
-             '</div><script type="text/javascript" src="/static/js/main.c6e8367e.js"></script></body>'
+             '</div><script type="text/javascript" src="/oneyou/public/static/js/main.c6e8367e.js"></script></body>'
 
 
 @patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
