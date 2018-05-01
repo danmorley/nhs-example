@@ -2,7 +2,6 @@
   "name": "website-client",
   "version": "0.11.26",
   "private": true,
-  "homepage": "/oneyou/public",
   "dependencies": {
     "bootstrap-4-grid": "^2.3.0",
     "html-react-parser": "^0.4.3",
