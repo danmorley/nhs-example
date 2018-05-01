@@ -14,19 +14,33 @@ import ImageUtils from './ImageUtils';
  *  }
  */
 class AppTeaserPanel extends Component {
-  // backgroundImageUrl(image, defaultImage) {
-  //   return (image && image.link) || defaultImage.link;
-  // }
-  //
-  // backgroundImageStyle(image, defaultImage) {
-  //   return {
-  //     backgroundImage: 'url(' + ImageUtils.backgroundImageUrl(image, ImageUtils.placeholderImage) + ')'
-  //   }
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      backgroundImageStyle: null
+    }
+  }
+
+  setImage() {
+    this.setState({
+      backgroundImageStyle: ImageUtils.backgroundImageStyle(this.props.content.image,
+                                                            ImageUtils.placeholderBackgroundImage())
+    })
+  }
+
+  componentDidMount() {
+    this.setImage();
+    window.addEventListener('resize', this.setImage.bind(this));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.setImage);
+  }
+
 
   render() {
     let { content, classNamePrefix } = this.props;
-    let backgroundTeaserImage = ImageUtils.backgroundImageStyle(content.image, ImageUtils.placeholderBackgroundImage());
+    let backgroundTeaserImage = this.state.backgroundImageStyle;
 
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
