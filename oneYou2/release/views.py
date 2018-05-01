@@ -58,11 +58,12 @@ def release_css(request, site_name, version_id):
     return HttpResponse(FrontendVersion.get_css_for_version(version_id, file_name), 'text/css')
 
 
+def cms_statics(request, path):
+    return serve(request, path, document_root='./static/')
+
+
 def web_statics(request, site_name, path):
-    if "wagtail" in path or "cms" in path:
-        return serve(request, path, document_root='./static/')
-    else:
-        return serve(request, path, document_root='./web/static/')
+    return serve(request, path, document_root='./web/static/')
 
 
 def statics(request, site_name, path):

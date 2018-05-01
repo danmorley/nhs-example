@@ -46,6 +46,7 @@ urlpatterns = [
     url(r'^(?P<site_name>[\w-]+)/version/$', lambda request: HttpResponse(get_release_version()), name='cms_version'),
     # url(r'^(?P<path>main.js/)$', serve, {'document_root': './web/'}),
     # url(r'^(service-worker.js/)$', serve, {'document_root': './web/'}),
+    url(r'^static/(?P<path>.*)$', views.cms_statics),
     url(r'^(?P<site_name>[\w-]+)/static/(?P<path>.*)$', views.web_statics),
     url(r'^(?P<site_name>[\w-]+)/public/(?P<path>.*)$', views.statics),
     url(r'^(?P<site_name>[\w-]+)/', views.release_html, name='release_html'),
