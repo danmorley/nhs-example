@@ -7,8 +7,10 @@ import testBackgroundImage from '../../assets/images/app-screen.jpg';
 *
 *  }
 */
+const MOBILE_TRANSITION_POINT = 992;
+
 class ImageUtils {
-  
+
   static isValid(image) {
     return image && image.link && image.link.length > 0;
   }
@@ -21,19 +23,26 @@ class ImageUtils {
     return { link: testBackgroundImage, title: 'Placeholder background image' };
   }
 
-  static imageUrl(image, defaultImage) {
-    image = ImageUtils.imageOrDefault(image, defaultImage); 
-    return image ? image.link : '';
-  }
-
-  static imageOrDefault(image, defaultImage) {
-    return (image && image.link) ? image : defaultImage;
-  }
-
   static backgroundImageStyle(image, defaultImage) {
     return {
       backgroundImage: 'url(' + ImageUtils.imageUrl(image, defaultImage) + ')'
     };
+  }
+
+  static imageUrl(image, defaultImage) {
+    const key = ImageUtils.screenSize();
+    image.link = image.renditions[key];
+    image = ImageUtils.imageOrDefault(image, defaultImage);
+    return image ? image.link : '';
+  }
+
+  static screenSize() {
+    const screenWidth = document.documentElement.clientWidth;
+    return (screenWidth > MOBILE_TRANSITION_POINT) ? 'desktop' : 'mobile';
+  }
+
+  static imageOrDefault(image, defaultImage) {
+    return (image && image.link) ? image : defaultImage;
   }
 }
 
