@@ -46,6 +46,6 @@ global.contentStore.getSite().then((site) => {
     } else {
       ReactDOM.render(<div className='container'><h1>Something went wrong.</h1><p>Please refresh or try again later.</p></div>, rootElem);
     }
-    registerServiceWorker();
+    // registerServiceWorker();
   }
 });
