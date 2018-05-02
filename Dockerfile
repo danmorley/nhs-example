@@ -3,7 +3,6 @@ FROM phedct/oneyou-cms:mssql-python-nodejs
 WORKDIR /code
 ADD . /code
 
-ARG PUBLIC_ENV
 RUN npm install --prefix frontend/website-client \
     && npm run build --prefix frontend/website-client \
     && cp -R frontend/website-client/build oneYou2/web \

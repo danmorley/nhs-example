@@ -32,10 +32,12 @@ def release_html(request, site_name):
         uuid = 'current'
 
     index = FrontendVersion.get_html_for_version(frontend_id)
-    substituted_index = index.replace("/oneyou/public/static/css/",
-                                      "/{}/version/css/{}/?file_name=".format(site_name, frontend_id))
-    substituted_index = substituted_index.replace("/oneyou/public/static/js/",
+    substituted_index = index.replace("/static/css/", "/{}/version/css/{}/?file_name=".format(site_name, frontend_id))
+    substituted_index = substituted_index.replace("/static/js/",
                                                   "/{}/version/js/{}/?file_name=".format(site_name, frontend_id))
+    substituted_index = substituted_index.replace("/manifest", "/{}/public/manifest".format(site_name))
+    substituted_index = substituted_index.replace("/favicon", "/{}/public/favicon".format(site_name))
+    substituted_index = substituted_index.replace("/webtrends", "/{}/public/webtrends".format(site_name))
 
     if settings.CONTENT_STORE_ENDPOINT:
         content_store_endpoint = settings.CONTENT_STORE_ENDPOINT
@@ -51,12 +53,16 @@ def release_html(request, site_name):
 
 def release_js(request, site_name, version_id):
     file_name = request.GET.get('file_name')
-    return HttpResponse(FrontendVersion.get_js_for_version(version_id, file_name))
+    main_js = FrontendVersion.get_js_for_version(version_id, file_name)
+    substituted_main_js = main_js.replace('/static/media', '/{}/public/static/media'.format(site_name))
+    return HttpResponse(substituted_main_js)
 
 
 def release_css(request, site_name, version_id):
     file_name = request.GET.get('file_name')
-    return HttpResponse(FrontendVersion.get_css_for_version(version_id, file_name), 'text/css')
+    main_css = FrontendVersion.get_css_for_version(version_id, file_name)
+    substituted_main_css = main_css.replace('/static/media', '/{}/public/static/media'.format(site_name))
+    return HttpResponse(substituted_main_css, 'text/css')
 
 
 def cms_statics(request, path):
