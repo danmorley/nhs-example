@@ -1,3 +1,4 @@
+from axes.models import AccessAttempt
 from django.urls import reverse
 from wagtail.contrib.modeladmin.helpers import ButtonHelper
 from wagtail.contrib.modeladmin.options import (
@@ -5,6 +6,14 @@ from wagtail.contrib.modeladmin.options import (
 from django.utils.translation import ugettext as _
 
 from .models import Menu, Theme
+
+
+class AccessAttemptAdmin(ModelAdmin):
+    model = AccessAttempt
+    menu_label = 'Access'
+    menu_icon = 'code'
+    menu_order = 5
+    add_to_settings_menu = True
 
 
 class MenuButtonHelper(ButtonHelper):
@@ -49,7 +58,7 @@ class MenuAdmin(ModelAdmin):
 
 class ThemeAdmin(ModelAdmin):
     model = Theme
-    menu_label = 'Theme'
+    menu_label = 'Themes'
     menu_icon = 'code'
     menu_order = 900
     add_to_settings_menu = True  # or True to add your model to the Settings sub-menu
@@ -61,3 +70,4 @@ class ThemeAdmin(ModelAdmin):
 
 modeladmin_register(ThemeAdmin)
 modeladmin_register(MenuAdmin)
+modeladmin_register(AccessAttemptAdmin)
