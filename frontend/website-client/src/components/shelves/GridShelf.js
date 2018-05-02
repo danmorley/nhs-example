@@ -11,6 +11,7 @@ import ImageTeaserPanel from '../panels/ImageTeaserPanel';
 import Oneyou1TeaserPanel from '../panels/Oneyou1TeaserPanel';
 import AppTeaserPanel from '../panels/AppTeaserPanel';
 import InformationPanel from '../panels/InformationPanel';
+import ShareButtonPanel from '../panels/ShareButtonPanel';
 
 /**
  *  Grid Shelf is a simple shelf that can be used to display other
@@ -26,7 +27,8 @@ class GridShelf extends Component {
     let { id, content, classNamePrefix, layout, variant } = this.props;
     let metaLayout = content.meta_layout || layout;
     let metaImageDisplay = content.meta_image_display;
-
+    let gridHeading = content.heading || '';
+    
     const panelClass = ((metaLayout) => {
       switch(metaLayout) {
       case 'full_width':
@@ -56,7 +58,9 @@ class GridShelf extends Component {
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix}>
         <div className={`shelf__container container image--${metaImageDisplay}`}>
-          <h2 className="shelf__header">{content.heading}</h2>
+          {gridHeading !='' &&
+            <h2 className="shelf__header">{content.heading}</h2>
+          }
           <ShowMorePanel rowsToShow={content.rows_to_show}>
             {panels}
           </ShowMorePanel>
