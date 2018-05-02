@@ -146,7 +146,7 @@ $shelf-padding-extra: 2em;
     
     > .shelf__container {
       
-      &.shelf__container-gradient--false:after {
+      &.shelf__container-gradient--true:after {
         width:100%;
         content:'';
         display:block;
