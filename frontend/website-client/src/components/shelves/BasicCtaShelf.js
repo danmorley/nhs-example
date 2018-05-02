@@ -45,7 +45,7 @@ class BasicCtaShelf extends Component {
     let { id, content, classNamePrefix, variant, layout } = this.props;
     let metaVariant = content.meta_variant || variant;
     let metaLayout = content.meta_layout || layout;
-
+    let gradient = content.gradient || false;
     let backgroundColourShelfStyle = {};
 
     let shelfStyle = (ImageUtils.isValid(content.background_image)) ?
@@ -119,7 +119,7 @@ class BasicCtaShelf extends Component {
     } else if (metaLayout === 'full_width') {
       return (
         <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
-          <div className="shelf__container container-fluid" style={shelfStyle}>
+          <div className={`shelf__container container-fluid shelf__container-gradient--${gradient}`}  style={shelfStyle}>
             <div className="container">
               <div className="row">
                 <div className="shelf__col col-10 col-sm-10 col-md-7">
@@ -152,7 +152,7 @@ class BasicCtaShelf extends Component {
      else if (metaLayout === 'page_header') {
       return (
         <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
-          <div className="shelf__container container-fluid" style={shelfStyle}>
+          <div className={`shelf__container container-fluid  shelf__container-gradient--${gradient}`} style={shelfStyle}>
             <div className="container">
               <div className="row">
                 <div className="shelf__col col-10 col-sm-8 col-md-7">
