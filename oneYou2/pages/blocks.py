@@ -11,12 +11,9 @@ class CTABlock(blocks.StructBlock):
             (name, self.child_blocks[name].get_api_representation(val, context=context))
             for name, val in value.items()
         ])
-        print("TYPE", type(value))
         if 'image' in result:
             image_meta = value.get('image_meta')
             if image_meta:
-                print(image_meta)
-                print(result['image']['renditions'].keys())
                 mobile_rendition = result['image']['renditions'][image_meta + '/mobile']
                 desktop_rendition = result['image']['renditions'][image_meta + '/desktop']
                 result['image']['renditions'] = {

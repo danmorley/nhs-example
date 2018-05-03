@@ -1,13 +1,13 @@
 import datetime
 import json
 
+from collections import OrderedDict
 from bs4 import BeautifulSoup
 from django.conf import settings
 from django.utils import timezone
 from django.utils.encoding import is_protected_type
 
 from shelves.models import ShelfAbstract
-
 
 SHARED_CONTENT_TYPES = ['promo_shelf', 'banner_shelf', 'app_shelf']
 
@@ -50,7 +50,7 @@ def render_page_chooser_links(field):
 
 
 def parse_shelf(shelf, parent=None):
-    if type(shelf['value']) is dict:
+    if type(shelf['value']) is dict or type(shelf['value']) is OrderedDict:
         shelf_type = shelf['type']
         if not parent:
             shelf['value']['image_meta'] = '{}/{}/{}'.format(shelf_type, None, None)
@@ -122,3 +122,52 @@ def get_serializable_data_for_fields(model):
             obj[field.name] = get_field_value(field, model)
 
     return obj
+
+
+def determine_image_rendtions_for_shared_content_shelves(shelf, parent=None):
+    if type(shelf['value']) is dict or type(shelf['value']) is OrderedDict:
+        shelf_type = shelf['type']
+        if not parent:
+            shelf['value']['image_meta'] = '{}/{}/{}'.format(shelf_type, None, None)
+        elif parent.get('type') == 'grid_shelf':
+            shelf['value']['image_meta'] = "{}/{}/{}".format(shelf_type, parent['type'], parent['value']['meta_layout'])
+        else:
+            shelf['value']['image_meta'] = "{}/{}/{}".format(shelf_type, parent['type'], None)
+
+        if 'banner_shelf' in shelf_type:
+            background_image = shelf['value']['background_image']
+            if background_image:
+                rendition_shelf_type = 'banner_shelf'
+                if parent:
+                    parent_shelf_type = parent["type"]
+                else:
+                    parent_shelf_type = None
+
+                background_image['renditions'] = {
+                    'mobile': background_image['renditions']["{}/{}/None/mobile".format(rendition_shelf_type,
+                                                                                        parent_shelf_type)],
+                    'desktop': background_image['renditions']["{}/{}/None/desktop".format(rendition_shelf_type,
+                                                                                          parent_shelf_type)]
+                }
+
+        if 'app_teaser' in shelf_type:
+            image = shelf['value']['image']
+            if image:
+                rendition_shelf_type = 'app_teaser'
+                parent_shelf_type = parent["type"]
+                parent_meta_layout = parent['value'].get('meta_layout')
+
+                image['renditions'] = {
+                    'mobile': image['renditions']["{}/{}/{}/mobile".format(rendition_shelf_type,
+                                                                           parent_shelf_type,
+                                                                           parent_meta_layout)],
+                    'desktop': image['renditions']["{}/{}/{}/desktop".format(rendition_shelf_type,
+                                                                             parent_shelf_type,
+                                                                             parent_meta_layout)]
+                }
+
+        items = shelf['value'].get('items', [])
+        for item in items:
+            determine_image_rendtions_for_shared_content_shelves(item, parent=shelf)
+
+    return shelf
