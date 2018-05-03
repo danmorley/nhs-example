@@ -23,9 +23,32 @@ import ImageUtils from '../panels/ImageUtils';
  *  }
  */
 class BasicCtaShelf extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      backgroundImageStyle: null,
+      image: null
+    }
+  }
+
+  setImage() {
+    this.setState({
+      backgroundImageStyle: ImageUtils.backgroundImageStyle(this.props.content.background_image,
+                                                            ImageUtils.placeholderBackgroundImage()),
+      image: ImageUtils.deviceImage(this.props.content.image)
+    })
+  }
+
+  componentDidMount() {
+    this.setImage();
+    window.addEventListener('resize', this.setImage.bind(this));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.setImage);
+  }
 
   renderImage(image) {
-    // return (<img alt="roger"/>);
     return (<Image image={image} />);
   }
 
@@ -49,8 +72,7 @@ class BasicCtaShelf extends Component {
     let backgroundColourShelfStyle = {};
 
     let shelfStyle = (ImageUtils.isValid(content.background_image)) ?
-      ImageUtils.backgroundImageStyle(content.background_image) :
-      backgroundColourShelfStyle;
+      this.state.backgroundImageStyle : backgroundColourShelfStyle;
 
     let headingTagName = (classNamePrefix === 'page-heading-shelf') ? 'h1' : 'h2';
 
@@ -60,7 +82,7 @@ class BasicCtaShelf extends Component {
           <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
               <div className="shelf__col col">
-                {this.renderImage(content.image)}
+                {this.renderImage(this.state.image)}
               </div>
               <div className="shelf__col col">
               {this.renderHeadingBody(content, headingTagName)}
@@ -80,7 +102,7 @@ class BasicCtaShelf extends Component {
                 {this.renderCta(content.cta)}
               </div>
               <div className="shelf__col col">
-                {this.renderImage(content.image)}
+                {this.renderImage(this.state.image)}
               </div>
             </div>
           </div>

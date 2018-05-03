@@ -12,7 +12,7 @@ const MOBILE_TRANSITION_POINT = 992;
 class ImageUtils {
 
   static isValid(image) {
-    return image && image.link && image.link.length > 0;
+    return image && image.renditions && image.renditions.mobile.length > 0 && image.renditions.desktop.length > 0;
   }
 
   static placeholderImage() {
@@ -43,6 +43,12 @@ class ImageUtils {
 
   static imageOrDefault(image, defaultImage) {
     return (image && image.link) ? image : defaultImage;
+  }
+
+  static deviceImage(image) {
+    const key = ImageUtils.screenSize();
+    image = image.renditions[key];
+    return image;
   }
 }
 
