@@ -12,7 +12,9 @@ const MOBILE_TRANSITION_POINT = 992;
 class ImageUtils {
 
   static isValid(image) {
-    return image && image.renditions && image.renditions.mobile.length > 0 && image.renditions.desktop.length > 0;
+    return image && image.renditions
+     && image.renditions.mobile && image.renditions.mobile.length > 0
+     && image.renditions.desktop && image.renditions.desktop.length > 0;
   }
 
   static placeholderImage() {
