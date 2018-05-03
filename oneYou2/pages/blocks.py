@@ -12,11 +12,18 @@ class CTABlock(blocks.StructBlock):
             for name, val in value.items()
         ])
         if 'image' in result:
+            image_field = 'image'
+        elif 'background_image' in result:
+            image_field = 'background_image'
+        else:
+            image_field = None
+
+        if image_field in result:
             image_meta = value.get('image_meta')
             if image_meta:
-                mobile_rendition = result['image']['renditions'][image_meta + '/mobile']
-                desktop_rendition = result['image']['renditions'][image_meta + '/desktop']
-                result['image']['renditions'] = {
+                mobile_rendition = result[image_field]['renditions'][image_meta + '/mobile']
+                desktop_rendition = result[image_field]['renditions'][image_meta + '/desktop']
+                result[image_field]['renditions'] = {
                     'mobile': mobile_rendition,
                     'desktop': desktop_rendition
                 }
