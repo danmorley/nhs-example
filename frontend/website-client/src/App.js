@@ -69,6 +69,7 @@ class App extends Component {
    *  a re-render of the new page.
    */
   loadPageForKey(key) {
+    if (!key) key = 'home';
     console.log('Loading page for key', key);
     App.setContentVisibile(false);
 
