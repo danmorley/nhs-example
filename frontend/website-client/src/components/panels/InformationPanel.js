@@ -6,7 +6,6 @@ import Panel from './Panel';
 import PropTypes from 'prop-types';
 import ImageUtils from './ImageUtils';
 import CtaLinks from '../shared/CtaLinks';
-import Image from '../Image';
 
 /**
  *  Information panel component displaying a panel in the form of a heading

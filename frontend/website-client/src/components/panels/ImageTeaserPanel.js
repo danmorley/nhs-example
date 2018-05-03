@@ -6,7 +6,6 @@ import styles from './image-teaser.css';
 import Panel from './Panel';
 import PropTypes from 'prop-types';
 import ImageUtils from './ImageUtils';
-import Image from '../Image';
 
 /**
  *  Image Teaser panel component displaying a teaser panel in the form of a heading

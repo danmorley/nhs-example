@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 import ImageUtils from './ImageUtils';
 import BrightcoveVideo from '../BrightcoveVideo';
 import VideoModal from '../VideoModal';
-import Image from '../Image';
 
 /**
  *  Video Teaser panel component, that provides 'teaser' details for a video_teaser
