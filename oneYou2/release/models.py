@@ -97,16 +97,14 @@ class Release(ClusterableModel):
         super(Release, self).save(*args, **kwargs)
 
         if is_new_entry:
+            content = {}
             if self.base_release:
-                for page in self.base_release.revisions.all():
-                    relation = ReleasePage(release=self, revision=page.revision)
-                    relation.save()
+                content = json.loads(self.base_release.content.first().content)
             else:
                 live_pages = OneYou2Page.objects.live()
                 for page in live_pages:
-                    relation = ReleasePage(release=self, revision=page.get_latest_revision())
-                    relation.save()
-
+                    content[str(page.id)] = Release.generate_fixed_content(page.get_latest_revision())
+            ReleaseContent(release=self, content=json.dumps(content)).save()
         return self
 
     def dict(self):
@@ -124,45 +122,36 @@ class Release(ClusterableModel):
                self.release_time < timezone.localtime(timezone.now(), timezone.get_current_timezone())
 
     def add_revision(self, new_revision):
-        for revision in self.revisions.all():
-            if revision.revision.page_id == new_revision.page_id:
-                revision.delete()
-        relation = ReleasePage(release=self, revision=new_revision)
-        relation.save()
+        release_content = self.content.first()
+        content = json.loads(release_content.content)
+        content[str(new_revision.page_id)] = Release.generate_fixed_content(new_revision)
+        release_content.content = json.dumps(content)
+        release_content.save()
 
     def remove_page(self, page_id):
-        for revision in self.revisions.all():
-            if revision.revision.page_id == page_id:
-                revision.delete()
+        release_content = self.content.first()
+        content = json.loads(release_content.content)
+        if str(page_id) in content:
+            del content[str(page_id)]
+        release_content.content = json.dumps(content)
+        release_content.save()
 
-    def generate_fixed_content(self):
+    @classmethod
+    def generate_fixed_content(cls, revision):
         from pages.serializers import OneYouPageSerializer
+        page = revision.as_page_object()
+        return OneYouPageSerializer(page).data
+
+    def generate_fixed_site_meta(self):
         from oneYou2.serializers import SiteSerializer
         from home.models import SiteSettings
-        content = {}
         site = SiteSettings.objects.get(site=self.site)
         setattr(site, 'release_uuid', self.uuid)
-        content['site_json'] = SiteSerializer(site).data
-        for revision in self.revisions.all():
-            page = revision.revision.as_page_object()
-            page_content = OneYouPageSerializer(page).data
-            content[str(revision.revision.page_id)] = page_content
-        return content
+        return SiteSerializer(site).data
 
     def get_content_for(self, key):
-        if self.release_date_has_passed():
-            content = ReleaseContent.objects.get(release=self)
-            page_content = content.get_content_for(str(key))
-        else:
-            from pages.serializers import OneYouPageSerializer
-            try:
-                release_page = ReleasePage.objects.get(release=self, revision__page=key)
-            except ReleasePage.DoesNotExist:
-                # I swapped this for a key error so both previews, and non-previews return the same error
-                raise KeyError
-            page = release_page.revision.as_page_object()
-            page_content = OneYouPageSerializer(page).data
-        return page_content
+        content = ReleaseContent.objects.get(release=self)
+        return content.get_content_for(str(key))
 
     def get_current_frontend_id(self):
         return FrontendVersion.get_current_version()
