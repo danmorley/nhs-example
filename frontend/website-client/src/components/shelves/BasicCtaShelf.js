@@ -45,7 +45,7 @@ class BasicCtaShelf extends Component {
     let { id, content, classNamePrefix, variant, layout } = this.props;
     let metaVariant = content.meta_variant || variant;
     let metaLayout = content.meta_layout || layout;
-    let gradient = content.gradient || false;
+    let gradient = content.meta_gradient || false;
     let backgroundColourShelfStyle = {};
 
     let shelfStyle = (ImageUtils.isValid(content.background_image)) ?

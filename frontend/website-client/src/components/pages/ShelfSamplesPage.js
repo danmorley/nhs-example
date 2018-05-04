@@ -385,7 +385,7 @@ const sampleShelvesPage = {
         background_image: 'http://aaa.bbb.ccc/gb.png',
         meta_layout: 'page_header',
         meta_variant: 'home-page',
-        gradient: true
+        meta_gradient: true
       }
     },
     {
