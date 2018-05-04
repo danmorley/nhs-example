@@ -4,7 +4,6 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.http import HttpResponse
-from django.views.generic import TemplateView
 from django.views.static import serve
 
 from wagtail.wagtailadmin import urls as wagtailadmin_urls
@@ -20,6 +19,7 @@ from search import views as search_views
 from api import urls as api_urls
 from pages import urls as pages_urls
 from api.wagtail import api_router
+from api import views as api_views
 
 urlpatterns = [
     url(r'^django-admin/', include(admin.site.urls)),
@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
 
-    url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt'), name='robots'),
+    url(r'^robots\.txt$', api_views.robots, name='robots'),
 
     url(r'^api/', api_router.urls),
     url(r'^api/', include(api_urls)),
