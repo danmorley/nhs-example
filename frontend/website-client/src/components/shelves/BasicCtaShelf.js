@@ -35,7 +35,7 @@ class BasicCtaShelf extends Component {
     this.setState({
       backgroundImageStyle: ImageUtils.backgroundImageStyle(this.props.content.background_image,
                                                             ImageUtils.placeholderBackgroundImage()),
-      image: this.props.content.image ? ImageUtils.deviceImage(this.props.content.image) : null
+      image: ImageUtils.isValid(this.props.content.image) ? ImageUtils.deviceImage(this.props.content.image) : null
     })
   }
 

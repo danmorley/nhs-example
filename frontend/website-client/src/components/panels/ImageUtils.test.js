@@ -2,7 +2,10 @@ import ImageUtils from './ImageUtils';
 
 it('returns true from isValid if all required properties present', () => {
     const image = {
-        link: 'image-link-address'
+        renditions: {
+            mobile: 'mobile-image-link-address',
+            desktop: 'desktop-image-link-address'
+        }
     };
     const validResult = ImageUtils.isValid(image);
     expect(validResult).toBe(true);
@@ -107,4 +110,16 @@ it('returns the css for the placeholder background image if no image provided', 
 
     const returnedCss = ImageUtils.backgroundImageStyle(image, ImageUtils.placeholderBackgroundImage());
     expect(returnedCss.backgroundImage).toEqual('url(app-screen.jpg)');
+})
+
+it('returns an image object with the relevant url for the screen size', () => {
+    const image = {
+        renditions: {
+            'mobile': 'mobile-image-rendition',
+            'desktop': 'desktop-image-rendition'
+        }
+    };
+
+    const imageObject = ImageUtils.deviceImage(image);
+    expect(imageObject.link).toEqual('mobile-image-rendition');
 })

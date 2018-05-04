@@ -49,7 +49,7 @@ class ImageUtils {
 
   static deviceImage(image) {
     const key = ImageUtils.screenSize();
-    image = image.renditions[key];
+    image.link = image.renditions[key];
     return image;
   }
 }
