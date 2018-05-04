@@ -91,8 +91,11 @@ class ReleaseModelTests(OneYouTests):
 
         count_of_pages = OneYou2Page.objects.count()
 
-        self.assertEqual(count_of_pages, release.revisions.count())
-        self.assertEqual(page.get_latest_revision().id, release.revisions.first().revision.id)
+        release_content = release.content.first()
+        release_content_dict = json.loads(release_content.content)
+
+        self.assertEqual(count_of_pages, len(release_content_dict))
+        self.assertEqual(str(page.id), list(release_content_dict.keys())[0])
 
     def test_release_doesnt_lock_content_if_no_release_time_set(self, mock_file_service):
         """
@@ -155,12 +158,18 @@ class ReleaseModelTests(OneYouTests):
 
         page.save_revision().publish()
 
-        self.assertEquals(base_release.revisions.count(), 1)
+        base_release_content = base_release.content.first()
+        base_release_content_dict = json.loads(base_release_content.content)
+
+        self.assertEquals(len(base_release_content_dict), 1)
 
         new_release = create_test_release(base_release=base_release)
 
-        self.assertEquals(new_release.revisions.count(), 1)
-        self.assertEquals(base_release.revisions.first().revision.id, new_release.revisions.first().revision.id)
+        new_release_content = new_release.content.first()
+        new_release_content_dict = json.loads(new_release_content.content)
+
+        self.assertEquals(len(new_release_content_dict), 1)
+        self.assertEquals(list(base_release_content_dict.keys())[0], list(new_release_content_dict.keys())[0])
 
     def test_is_released_returns_false_if_now_date_set(self, mock_file_service):
         """
@@ -200,11 +209,11 @@ class ReleaseModelTests(OneYouTests):
         page1_in_release = False
         page2_in_release = False
 
-        for revision in release.revisions.all():
-            if revision.revision.page_id == page1.id:
-                page1_in_release = True
-            if revision.revision.page_id == page2.id:
-                page2_in_release = True
+        content = json.loads(release.content.first().content)
+        if str(page1.id) in content:
+            page1_in_release = True
+        if str(page2.id) in content:
+            page2_in_release = True
 
         self.assertIsTrue(page1_in_release)
         self.assertIsTrue(page2_in_release)
@@ -214,11 +223,11 @@ class ReleaseModelTests(OneYouTests):
         page1_in_release = False
         page2_in_release = False
 
-        for revision in release.revisions.all():
-            if revision.revision.page_id == page1.id:
-                page1_in_release = True
-            if revision.revision.page_id == page2.id:
-                page2_in_release = True
+        content = json.loads(release.content.first().content)
+        if str(page1.id) in content:
+            page1_in_release = True
+        if str(page2.id) in content:
+            page2_in_release = True
 
         self.assertIsTrue(page1_in_release)
         self.assertIsFalse(page2_in_release)
@@ -238,13 +247,13 @@ class ReleaseModelTests(OneYouTests):
         page2_in_release = False
         page3_in_release = False
 
-        for revision in release.revisions.all():
-            if revision.revision.page_id == page1.id:
-                page1_in_release = True
-            if revision.revision.page_id == page2.id:
-                page2_in_release = True
-            if revision.revision.page_id == page3.id:
-                page3_in_release = True
+        content = json.loads(release.content.first().content)
+        if str(page1.id) in content:
+            page1_in_release = True
+        if str(page2.id) in content:
+            page2_in_release = True
+        if str(page3.id) in content:
+            page3_in_release = True
 
         self.assertIsTrue(page1_in_release)
         self.assertIsTrue(page2_in_release)
@@ -256,13 +265,13 @@ class ReleaseModelTests(OneYouTests):
         page2_in_release = False
         page3_in_release = False
 
-        for revision in release.revisions.all():
-            if revision.revision.page_id == page1.id:
-                page1_in_release = True
-            if revision.revision.page_id == page2.id:
-                page2_in_release = True
-            if revision.revision.page_id == page3.id:
-                page3_in_release = True
+        content = json.loads(release.content.first().content)
+        if str(page1.id) in content:
+            page1_in_release = True
+        if str(page2.id) in content:
+            page2_in_release = True
+        if str(page3.id) in content:
+            page3_in_release = True
 
         self.assertIsTrue(page1_in_release)
         self.assertIsTrue(page2_in_release)
@@ -280,12 +289,14 @@ class ReleaseModelTests(OneYouTests):
         release = create_test_release()
 
         initial_revision_in_release = False
-        for revision in release.revisions.all():
-            if revision.revision.id == initial_revision.id:
-                initial_revision_in_release = True
+
+        content = json.loads(release.content.first().content)
+        if content[str(page.id)]['title'] == initial_revision.as_page_object().title:
+            initial_revision_in_release = True
 
         self.assertIsTrue(initial_revision_in_release)
 
+        page.title = 'Updated page'
         page.save_revision().publish()
         second_revision = page.get_latest_revision()
 
@@ -295,11 +306,12 @@ class ReleaseModelTests(OneYouTests):
 
         initial_revision_in_release = False
         second_revision_in_release = False
-        for revision in release.revisions.all():
-            if revision.revision.id == initial_revision.id:
-                initial_revision_in_release = True
-            if revision.revision.id == second_revision.id:
-                second_revision_in_release = True
+
+        content = json.loads(release.content.first().content)
+        if content[str(page.id)]['title'] == initial_revision.as_page_object().title:
+            initial_revision_in_release = True
+        if content[str(page.id)]['title'] == second_revision.as_page_object().title:
+            second_revision_in_release = True
 
         self.assertIsFalse(initial_revision_in_release)
         self.assertIsTrue(second_revision_in_release)
@@ -315,13 +327,18 @@ class ReleaseModelTests(OneYouTests):
 
         release = create_test_release()
 
-        initial_revision_in_release = False
-        for revision in release.revisions.all():
-            if revision.revision.id == initial_revision.id:
-                initial_revision_in_release = True
+        initial_revision_in_release = False\
+
+        content = json.loads(release.content.first().content)
+        if str(initial_revision.page_id) in content:
+            initial_revision_in_release = True
 
         self.assertIsTrue(initial_revision_in_release)
-        self.assertEqual(release.revisions.count(), 1)
+
+        release_content = release.content.first()
+        release_content_dict = json.loads(release_content.content)
+
+        self.assertEquals(len(release_content_dict), 1)
 
         page2 = create_test_page(title='Page 2', path='1112')
         second_revision = page2.get_latest_revision()
@@ -330,13 +347,17 @@ class ReleaseModelTests(OneYouTests):
 
         initial_revision_in_release = False
         second_revision_in_release = False
-        for revision in release.revisions.all():
-            if revision.revision.id == initial_revision.id:
-                initial_revision_in_release = True
-            if revision.revision.id == second_revision.id:
-                second_revision_in_release = True
 
-        self.assertEqual(release.revisions.count(), 2)
+        content = json.loads(release.content.first().content)
+        if str(initial_revision.page_id) in content:
+            initial_revision_in_release = True
+        if str(second_revision.page_id) in content:
+            second_revision_in_release = True
+
+        release_content = release.content.first()
+        release_content_dict = json.loads(release_content.content)
+
+        self.assertEquals(len(release_content_dict), 2)
         self.assertIsTrue(initial_revision_in_release)
         self.assertIsTrue(second_revision_in_release)
 
@@ -405,7 +426,8 @@ class ReleaseContentModelTests(OneYouTests):
 
         release = create_test_release()
 
-        release_content = create_test_release_content(release, json.dumps(release.generate_fixed_content()))
+        # release_content = create_test_release_content(release, json.dumps(release.generate_fixed_content()))
+        release_content = release.content.first()
         loaded_page_content = release_content.get_content_for(str(page.id))
 
         self.assertEqual(page.title, loaded_page_content['title'])
@@ -417,7 +439,8 @@ class ReleaseContentModelTests(OneYouTests):
         release = create_test_release()
         site_name = 'oneyou'
         SiteSettings(site_id=release.site_id, uid=site_name).save()
-        release_content = create_test_release_content(release, json.dumps(release.generate_fixed_content()))
+        release_content = release.content.first()
+        # release_content = create_test_release_content(release, json.dumps(release.generate_fixed_content()))
 
         self.assertRaises(KeyError, release_content.get_content_for, '0')
 
