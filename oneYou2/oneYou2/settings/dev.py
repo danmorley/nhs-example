@@ -4,7 +4,7 @@ from .base import *
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if ENV != 'dev':
-    DEBUG = False
+    DEBUG = True
 else:
     DEBUG = True
 
