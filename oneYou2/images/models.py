@@ -12,6 +12,8 @@ from wagtail.wagtailimages.models import Image, AbstractImage, AbstractRendition
 
 from pages.models import OneYou2Page
 
+from images.renditions import ONEYOU_RENDITIONS
+
 
 class PHEImage(AbstractImage):
     def get_usage(self):
@@ -31,6 +33,25 @@ class PHEImage(AbstractImage):
             return self.file.url
         else:
             return ""
+
+    def generate_or_get_all_renditions(self):
+        if self.file:
+            renditions_dict = {}
+            for rendition in ONEYOU_RENDITIONS:
+                for device, size in rendition[3].items():
+                    renditions_dict[
+                        '{}/{}/{}/{}'.format(rendition[0],
+                                             rendition[1],
+                                             rendition[2],
+                                             device)
+                    ] = self.get_rendition('fill-{}'.format(size)).url
+            return renditions_dict
+        else:
+            return {}
+
+    def save(self, *args, **kwargs):
+        super(PHEImage, self).save(*args, **kwargs)
+        self.generate_or_get_all_renditions()
 
 
 class PHERendition(AbstractRendition):

@@ -3,12 +3,31 @@ from wagtail.wagtailcore import blocks
 
 
 class CTABlock(blocks.StructBlock):
+    image_meta = blocks.TextBlock(required=False)
+
     def get_api_representation(self, value, context=None):
         # recursively call get_api_representation on children and return as a plain dict
         result = dict([
             (name, self.child_blocks[name].get_api_representation(val, context=context))
             for name, val in value.items()
         ])
+        if 'image' in result:
+            image_field = 'image'
+        elif 'background_image' in result:
+            image_field = 'background_image'
+        else:
+            image_field = None
+
+        if image_field in result:
+            image_meta = value.get('image_meta')
+            if image_meta:
+                mobile_rendition = result[image_field]['renditions'][image_meta + '/mobile']
+                desktop_rendition = result[image_field]['renditions'][image_meta + '/desktop']
+                result[image_field]['renditions'] = {
+                    'mobile': mobile_rendition,
+                    'desktop': desktop_rendition
+                }
+
         if 'cta' in result:
             cta_links = []
             for link in result['cta']:

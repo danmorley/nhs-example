@@ -6,7 +6,6 @@ import styles from './image-teaser.css';
 import Panel from './Panel';
 import PropTypes from 'prop-types';
 import ImageUtils from './ImageUtils';
-import Image from '../Image';
 
 /**
  *  Image Teaser panel component displaying a teaser panel in the form of a heading
@@ -28,9 +27,32 @@ import Image from '../Image';
  *  }
  */
 class ImageTeaserPanel extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      backgroundImageStyle: null
+    }
+  }
+
+  setImage() {
+    this.setState({
+      backgroundImageStyle: ImageUtils.backgroundImageStyle(this.props.content.image,
+                                                            ImageUtils.placeholderBackgroundImage())
+    })
+  }
+
+  componentDidMount() {
+    this.setImage();
+    window.addEventListener('resize', this.setImage.bind(this));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.setImage);
+  }
+
   render() {
     let { content, classNamePrefix } = this.props;
-    let backgroundTeaserImage = ImageUtils.backgroundImageStyle(content.image, ImageUtils.placeholderImage());
+    let backgroundTeaserImage = this.state.backgroundImageStyle;
 
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>

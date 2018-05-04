@@ -5,12 +5,20 @@ from rest_framework.serializers import HyperlinkedModelSerializer
 from shelves.models import PromoShelf, BannerShelf, AppTeaser
 
 
+# TODO: Remove this, use the one in image.serializers. This exists due to circular imports.
 class ImageSerializer(serializers.Serializer):
     title = serializers.CharField()
-    link = serializers.CharField()
+
+    def to_representation(self, data):
+        serialized_data = super(ImageSerializer, self).to_representation(data)
+        if data:
+            serialized_data['renditions'] = data.generate_or_get_all_renditions()
+        else:
+            serialized_data['renditions'] = {}
+        return serialized_data
 
     class Meta:
-        fields = ['title', 'link']
+        fields = ['title', ]
 
 
 class CTAPageSerializer(serializers.Serializer):
