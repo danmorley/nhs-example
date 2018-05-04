@@ -3,8 +3,8 @@ ONEYOU_RENDITIONS = [
     # shelf type, parent, parent_layout, size
     ('page_heading_shelf', None, None, {'desktop': '1440x240', 'mobile': '375x143'}),
 
-    ('banner_shelf', None, None,  {'desktop': '1440x268', 'mobile': '375x80'}),
-    ('banner_shelf', 'carousel_shelf', None,  {'desktop': '1440x302', 'mobile': '375x95'}),
+    ('banner_shelf', None, None,  {'desktop': '1440x309', 'mobile': '375x256'}),
+    ('banner_shelf', 'carousel_shelf', None,  {'desktop': '1440x366', 'mobile': '375x307'}),
 
     ('video_teaser', 'carousel_shelf', None,  {'desktop': '504x263', 'mobile': '132x176'}),
     ('video_teaser', 'panel_carousel_shelf', None,  {'desktop': '287x263', 'mobile': '107x176'}),
