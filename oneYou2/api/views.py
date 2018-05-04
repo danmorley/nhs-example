@@ -150,4 +150,3 @@ def robots(request):
         return TemplateResponse(request, 'robots-disallow.txt',)
     else:
         return TemplateResponse(request, 'robots-allow.txt', )
-
