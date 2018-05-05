@@ -20,7 +20,7 @@ from oneYou2.test.utils import OneYouTests
 from pages.factories import create_test_page
 from pages.models import OneYou2Page
 
-from release.factories import create_test_release, create_test_release_content, create_test_release_page
+from release.factories import create_test_release, create_test_release_page
 from release.models import Release
 from release.utils import get_release_object, get_latest_release, populate_release_if_required
 from release.views import release_html

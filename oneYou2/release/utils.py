@@ -1,7 +1,7 @@
 import json
 from datetime import datetime
 
-from release.models import Release, ReleaseContent
+from release.models import Release
 
 
 def get_latest_release(site_id):
