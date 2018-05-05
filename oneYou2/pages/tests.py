@@ -143,6 +143,7 @@ class OneYou2PageModelTests(OneYouTests):
         release = create_test_release()
 
         page.release = release
+        page.title = 'Updated page'
         page.save_revision().publish()
         page.save()
 
@@ -150,11 +151,12 @@ class OneYou2PageModelTests(OneYouTests):
 
         initial_revision_in_release = False
         second_revision_in_release = False
-        for revision in release.revisions.all():
-            if revision.revision.id == initial_revision.id:
-                initial_revision_in_release = True
-            if revision.revision.id == second_revision.id:
-                second_revision_in_release = True
+
+        content = json.loads(release.content.first().content)
+        if content[str(page.id)]['title'] == initial_revision.as_page_object().title:
+            initial_revision_in_release = True
+        if content[str(page.id)]['title'] == second_revision.as_page_object().title:
+            second_revision_in_release = True
 
         self.assertTrue(second_revision_in_release)
         self.assertIsFalse(initial_revision_in_release)
@@ -167,13 +169,16 @@ class OneYou2PageModelTests(OneYouTests):
 
         page_count = OneYou2Page.objects.count()
         live_page_count = OneYou2Page.objects.live().count()
-        self.assertEquals(page_count, release.revisions.count())
-        self.assertEquals(live_page_count, release.revisions.count())
+
+        release_content = release.content.first()
+        release_content_dict = json.loads(release_content.content)
+
+        self.assertEquals(page_count, len(release_content_dict))
+        self.assertEquals(live_page_count, len(release_content_dict))
 
         revision_in_release = False
-        for revision in release.revisions.all():
-            if revision.revision.id == page.get_latest_revision().id:
-                revision_in_release = True
+        if str(page.id) in release_content_dict:
+            revision_in_release = True
 
         self.assertTrue(revision_in_release)
 
@@ -183,13 +188,15 @@ class OneYou2PageModelTests(OneYouTests):
         page_count = OneYou2Page.objects.count()
         live_page_count = OneYou2Page.objects.live().count()
 
-        self.assertNotEquals(page_count, release.revisions.count())
-        self.assertEquals(live_page_count, release.revisions.count())
+        release_content = release.content.first()
+        release_content_dict = json.loads(release_content.content)
+
+        self.assertNotEquals(page_count, len(release_content_dict))
+        self.assertEquals(live_page_count, len(release_content_dict))
 
         revision_in_release = False
-        for revision in release.revisions.all():
-            if revision.revision.id == page.get_latest_revision().id:
-                revision_in_release = True
+        if str(page.id) in release_content_dict:
+            revision_in_release = True
 
         self.assertIsFalse(revision_in_release)
 
