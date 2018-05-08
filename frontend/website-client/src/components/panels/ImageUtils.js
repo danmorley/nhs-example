@@ -31,11 +31,20 @@ class ImageUtils {
     };
   }
 
+  /**
+   * Return image URL for passed image. Use the calculated
+   * rendition if available, otherwise use the image link.
+   */
   static imageUrl(image, defaultImage) {
-    const key = ImageUtils.screenSize();
-    image.link = image.renditions[key];
     image = ImageUtils.imageOrDefault(image, defaultImage);
-    return image ? image.link : '';
+    if (!image) return '';
+
+    if (image.renditions) {
+      const key = ImageUtils.screenSize();
+      return image.renditions[key] || '';
+    } else {
+      return image.link || '';
+    }
   }
 
   static screenSize() {
@@ -44,7 +53,7 @@ class ImageUtils {
   }
 
   static imageOrDefault(image, defaultImage) {
-    return (image && image.link) ? image : defaultImage;
+    return (image && (image.link || image.renditions)) ? image : defaultImage;
   }
 
   static deviceImage(image) {
