@@ -43,6 +43,11 @@ class InformationPanel extends Component {
     window.removeEventListener('resize', this.setImage);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.props = nextProps;
+    this.setImage();
+  }
+
   render() {
     let { content, classNamePrefix } = this.props;
     let backgroundImage = this.state.backgroundImageStyle;

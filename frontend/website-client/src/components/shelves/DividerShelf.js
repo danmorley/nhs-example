@@ -17,7 +17,9 @@ class DividerShelf extends Component {
 
     return (
       <Shelf id={id} layout={'no-padding'}>
-        <hr className='divider-shelf' />
+        <div className='container'>
+          <hr className='divider-shelf' />
+        </div>
       </Shelf>
     );
   }
