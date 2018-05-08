@@ -22,7 +22,8 @@ if [[ $# -eq 0 ]]; then
       --log-level=info \
       --log-file=- \
       --access-logfile=- \
-      --error-logfile=-
+      --error-logfile=- \
+      --timeout 60
 
 fi
 
