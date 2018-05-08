@@ -48,6 +48,11 @@ class BasicCtaShelf extends Component {
     window.removeEventListener('resize', this.setImage);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.props = nextProps;
+    this.setImage();
+  }
+
   renderImage(image) {
     return (<Image image={image} />);
   }

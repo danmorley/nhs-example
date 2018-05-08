@@ -50,6 +50,11 @@ class ImageTeaserPanel extends Component {
     window.removeEventListener('resize', this.setImage);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.props = nextProps;
+    this.setImage();
+  }
+
   render() {
     let { content, classNamePrefix } = this.props;
     let backgroundTeaserImage = this.state.backgroundImageStyle;
