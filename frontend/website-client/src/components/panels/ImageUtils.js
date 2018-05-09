@@ -1,4 +1,4 @@
-import testImage from '../../assets/images/Trump2.jpg';
+import testImage from '../../assets/images/test-image.jpg';
 import testBackgroundImage from '../../assets/images/app-screen.jpg';
 
 /**

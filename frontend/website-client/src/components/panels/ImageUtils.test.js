@@ -25,7 +25,7 @@ it('returns false from isValid if some properties missing', () => {
 it('returns a placeholder image', () => {
     const placeholderImage = ImageUtils.placeholderImage();
     expect(placeholderImage.title).toEqual('Placeholder image');
-    expect(placeholderImage.link).toEqual('Trump2.jpg');
+    expect(placeholderImage.link).toEqual('test-image.jpg');
 });
 
 it('returns a placeholder background image', () => {
