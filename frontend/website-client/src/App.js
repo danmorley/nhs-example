@@ -101,7 +101,9 @@ class App extends Component {
     this.state.site.redirects.map((redirect, i) => {
       console.log('Redirecting to:', redirect);
 
-      if (redirect.source + '/' === window.location.pathname) {
+      const path_minus_slash = window.location.pathname.replace(/\/$/, '');
+
+      if (redirect.source === path_minus_slash) {
         if (startsWith(redirect, 'http:') || startsWith(redirect, 'https:')) {
           // Redirect to another site.
           window.location.pathname = redirect.destination;
