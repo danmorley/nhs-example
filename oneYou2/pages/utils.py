@@ -1,4 +1,5 @@
 import datetime
+import html
 import json
 
 from collections import OrderedDict
@@ -12,41 +13,36 @@ from shelves.models import ShelfAbstract
 SHARED_CONTENT_TYPES = ['promo_shelf', 'banner_shelf', 'app_shelf']
 
 
-def replace_links(field):
-    field = render_image_links(field)
-    field = render_page_chooser_links(field)
+def process_inlines(field):
+    if field:
+        field = process_inline_hyperlinks(field)
+        field = process_inline_images(field)
     return field
 
 
-def render_image_links(field):
+def process_inline_images(field):
     from images.models import PHEImage
-    if field:
-        soup = BeautifulSoup(field, "html.parser")
-        results = soup.findAll("embed")
-        for result in results:
-            image = PHEImage.objects.get(id=result['id'])
-            alt_text = result.get("alt", "")
-            img_tag_src = '<img alt="{}" src="{}"/>'.format(alt_text, image.link)
-            img_tag = BeautifulSoup(img_tag_src, "html.parser")
-            result.replaceWith(img_tag)
-        return str(soup)
-    else:
-        return field
+    soup = BeautifulSoup(field, "html.parser")
+    embed_tags = soup.findAll("embed")
+    for embed_tag in embed_tags:
+        image = PHEImage.objects.get(id=embed_tag['id'])
+        alt_text = embed_tag.get("alt", "")
+        img_tag_src = '<img alt="{}" src="{}"/>'.format(alt_text, image.link)
+        img_tag = BeautifulSoup(img_tag_src, "html.parser")
+        embed_tag.replaceWith(img_tag)
+    return html.unescape(str(soup)).replace(';=', '=')
 
 
-def render_page_chooser_links(field):
+def process_inline_hyperlinks(field):
     from wagtail.wagtailcore.models import Page
-    if field:  # If the field is blank soup would return html, head & body tags.
-        soup = BeautifulSoup(field, "html.parser")
-        results = soup.findAll("a", {"linktype": "page"})
-        for result in results:
-            page = Page.objects.get(id=result['id'])
-            site_name = page.get_site().site_name
-            url_parts = page.get_url_parts()
-            result['href'] = '/{}{}'.format(site_name.lower(), url_parts[2])
-        return str(soup)
-    else:
-        return field
+    soup = BeautifulSoup(field, "html.parser")
+    a_tags = soup.findAll("a", {"linktype": "page"})
+    for a_tag in a_tags:
+        page = Page.objects.get(id=a_tag['id'])
+        site_name = page.get_site().site_name
+        url_parts = page.get_url_parts()
+        a_tag['href'] = '/{}{}'.format(site_name.lower(), url_parts[2])
+    return html.unescape(str(soup)).replace(';=', '=')
 
 
 def parse_shelf(shelf, parent=None):
@@ -61,7 +57,7 @@ def parse_shelf(shelf, parent=None):
 
         for key in shelf['value']:
             if type(shelf['value'][key]) is str:
-                shelf['value'][key] = replace_links(shelf['value'][key])
+                shelf['value'][key] = process_inlines(shelf['value'][key])
             if type(shelf['value'][key]) is list:
                 items = shelf['value'][key]
                 for item in items:
