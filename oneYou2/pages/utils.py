@@ -15,15 +15,14 @@ SHARED_CONTENT_TYPES = ['promo_shelf', 'banner_shelf', 'app_shelf']
 
 def process_inlines(field):
     if field:
-        field = process_inline_images(field)
         field = process_inline_hyperlinks(field)
+        field = process_inline_images(field)
     return field
 
 
 def process_inline_images(field):
     from images.models import PHEImage
-    escaped_field = html.escape(field)
-    soup = BeautifulSoup(escaped_field, "html.parser")
+    soup = BeautifulSoup(field, "html.parser")
     embed_tags = soup.findAll("embed")
     for embed_tag in embed_tags:
         image = PHEImage.objects.get(id=embed_tag['id'])
@@ -31,20 +30,19 @@ def process_inline_images(field):
         img_tag_src = '<img alt="{}" src="{}"/>'.format(alt_text, image.link)
         img_tag = BeautifulSoup(img_tag_src, "html.parser")
         embed_tag.replaceWith(img_tag)
-    return html.unescape(soup.text)
+    return html.unescape(str(soup)).replace(';=', '=')
 
 
 def process_inline_hyperlinks(field):
     from wagtail.wagtailcore.models import Page
-    escaped_field = html.escape(field)
-    soup = BeautifulSoup(escaped_field, "html.parser")
+    soup = BeautifulSoup(field, "html.parser")
     a_tags = soup.findAll("a", {"linktype": "page"})
     for a_tag in a_tags:
         page = Page.objects.get(id=a_tag['id'])
         site_name = page.get_site().site_name
         url_parts = page.get_url_parts()
         a_tag['href'] = '/{}{}'.format(site_name.lower(), url_parts[2])
-    return html.unescape(soup.text)
+    return html.unescape(str(soup)).replace(';=', '=')
 
 
 def parse_shelf(shelf, parent=None):
