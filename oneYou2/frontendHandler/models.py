@@ -88,4 +88,8 @@ class FrontendVersion:
                                             './web/' + manifest[key])
         file_service.put_file_from_path(settings.AZURE_FILE_SHARE, version_directory, 'index.html', './web/index.html')
 
+        release_tag = get_release_version()
+        file_service.put_file_from_text(settings.AZURE_FILE_SHARE, version_directory, 'tag.txt', release_tag)
+        file_service.put_file_from_text(settings.AZURE_FILE_SHARE, settings.ENV, "current_tag.txt", release_tag)
+
         file_service.put_file_from_text(settings.AZURE_FILE_SHARE, settings.ENV, "current_version.txt", unique_id)
