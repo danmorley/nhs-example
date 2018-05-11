@@ -36,7 +36,8 @@ class FrontendVersion:
         file_directory = settings.ENV if settings.ENV != 'local' else 'dev'
 
         current_tag = get_release_version()
-        latest_deployed_tag = file_service.get_file_to_text(settings.AZURE_FILE_SHARE, file_directory, 'current_tag.txt')
+        latest_deployed_tag = file_service.get_file_to_text(settings.AZURE_FILE_SHARE, file_directory,
+                                                            'current_tag.txt')
 
         if settings.ENV == 'dev':
             # always deploy the frontend version in the integration and review environments
@@ -54,12 +55,12 @@ class FrontendVersion:
         for directory in directories:
             properties = file_service.get_directory_properties(settings.AZURE_FILE_SHARE,
                                                                file_directory + '/' + directory.name)
-            release_tag = file_service.get_file_to_text(settings.AZURE_FILE_SHARE, file_directory + '/' + directory.name,
-                                                        'tag.txt')
+            release_tag = file_service.get_file_to_text(settings.AZURE_FILE_SHARE,
+                                                        file_directory + '/' + directory.name, 'tag.txt')
             available_versions.append((directory.name, release_tag + ' - ' + properties['last-modified']))
 
         sorted_list = sorted(available_versions, key=lambda x: datetime.strptime(x[1].split(' - ')[1],
-                                                                                 '%a, %d %b %Y %H:%M:%S %Z'), reverse=True)
+                                                                             '%a, %d %b %Y %H:%M:%S %Z'), reverse=True)
         return sorted_list[:20]
 
     @classmethod
