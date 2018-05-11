@@ -261,7 +261,6 @@ class PagesUtilsTests(OneYouTests):
         page = create_test_page()
         rich_text_source = '<p><a id="{}" linktype="page">link 1</a></p>'.format(page.id)
         processed_content = process_inlines(rich_text_source)
-        print(processed_content)
         self.assertNotEquals(rich_text_source, processed_content)
         self.assertIsTrue('<a' in processed_content)
         self.assertIsTrue('href="' in processed_content)
