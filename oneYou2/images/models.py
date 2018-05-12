@@ -47,7 +47,6 @@ class PHEImage(AbstractImage):
                                              rendition[2],
                                              device)
                     ] = self.get_rendition('fill-{}'.format(size)).url
-            import pprint;pprint.pprint(renditions_dict)
             return renditions_dict
         else:
             return {}
