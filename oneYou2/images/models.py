@@ -36,7 +36,9 @@ class PHEImage(AbstractImage):
 
     def generate_or_get_all_renditions(self):
         if self.file:
-            renditions_dict = {}
+            renditions_dict = {
+                'original': self.file.url
+            }
             for rendition in ONEYOU_RENDITIONS:
                 for device, size in rendition[3].items():
                     renditions_dict[
@@ -45,6 +47,7 @@ class PHEImage(AbstractImage):
                                              rendition[2],
                                              device)
                     ] = self.get_rendition('fill-{}'.format(size)).url
+            import pprint;pprint.pprint(renditions_dict)
             return renditions_dict
         else:
             return {}
