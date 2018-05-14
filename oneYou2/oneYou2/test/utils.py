@@ -8,3 +8,7 @@ class OneYouTests(WagtailPageTests):
 
     def assertIsFalse(self, value):
         self.assertIs(value, False)
+
+    def login(self):
+        user = self.create_test_user()
+        return user

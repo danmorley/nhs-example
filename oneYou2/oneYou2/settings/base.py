@@ -61,9 +61,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'storages',
     'django.contrib.sitemaps',
     'debug_toolbar',
+    'axes',
 ]
 
 MIDDLEWARE = [
@@ -78,10 +80,31 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'wagtail.wagtailcore.middleware.SiteMiddleware',
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
-
 ]
 
 ROOT_URLCONF = 'oneYou2.urls'
+
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesModelBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
+
 
 TEMPLATES = [
     {
@@ -122,6 +145,17 @@ DATABASES = {
       }
     }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    },
+    'axes_cache': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
+}
+
+AXES_CACHE = 'axes_cache'
+AXES_FAILURE_LIMIT = 5
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
@@ -183,5 +217,6 @@ AZURE_FILE_SHARE = os.environ.get('AZURE_FILE_SHARE')
 CONTENT_STORE_ENDPOINT = os.environ.get('CONTENT_STORE_ENDPOINT')
 
 ENV = os.environ.get('CMS_ENV', 'dev')
+
 
 # INTERNAL_IPS = ('127.0.0.1', 'localhost', '172.18.0.1')

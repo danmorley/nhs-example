@@ -3,14 +3,13 @@ from rest_framework import serializers
 from django.apps import apps
 from wagtail.api.v2.serializers import StreamField
 
+from .utils import determine_image_rendtions_for_shared_content_shelves
 
-# TODO: Some rationalisation can be done here. We currently just copy the default wagtail format
 
 class OneYouPageSerializer(serializers.ModelSerializer):
     body = StreamField()
 
     def to_representation(self, data):
-        # It's slightly weird that I do this a different way in the page serializer
         meta_fields = getattr(self.Meta, 'meta_fields')
         serialized_data = super(OneYouPageSerializer, self).to_representation(data)
         serialized_data['meta'] = {}
@@ -20,6 +19,9 @@ class OneYouPageSerializer(serializers.ModelSerializer):
                 serialized_data['meta'][meta_field] = meta_field_value
             except KeyError:
                 pass
+
+        for shelf in serialized_data['body']:
+            determine_image_rendtions_for_shared_content_shelves(shelf)
 
         return serialized_data
 

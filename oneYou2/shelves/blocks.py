@@ -3,7 +3,7 @@ from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
 
 from shelves.serializers import PromoShelfSerializer, BannerShelfSerializer, AppTeaserSerializer
 
-from shelves.serializers import ImageSerializer
+from .serializers import ImageSerializer
 
 
 class PromoShelfChooserBlock(SnippetChooserBlock):

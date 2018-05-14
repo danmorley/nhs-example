@@ -112,3 +112,6 @@ db.sqlite3
 media/
 web/
 
+*.ipynb
+
+*/local.py

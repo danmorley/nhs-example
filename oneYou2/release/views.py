@@ -53,12 +53,16 @@ def release_html(request, site_name):
 
 def release_js(request, site_name, version_id):
     file_name = request.GET.get('file_name')
-    return HttpResponse(FrontendVersion.get_js_for_version(version_id, file_name))
+    main_js = FrontendVersion.get_js_for_version(version_id, file_name)
+    substituted_main_js = main_js.replace('/static/media', '/{}/public/static/media'.format(site_name))
+    return HttpResponse(substituted_main_js)
 
 
 def release_css(request, site_name, version_id):
     file_name = request.GET.get('file_name')
-    return HttpResponse(FrontendVersion.get_css_for_version(version_id, file_name), 'text/css')
+    main_css = FrontendVersion.get_css_for_version(version_id, file_name)
+    substituted_main_css = main_css.replace('/static/media', '/{}/public/static/media'.format(site_name))
+    return HttpResponse(substituted_main_css, 'text/css')
 
 
 def cms_statics(request, path):

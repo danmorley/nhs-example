@@ -9,7 +9,7 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="hostname" elementType="Argument">
             <stringProp name="Argument.name">hostname</stringProp>
-            <stringProp name="Argument.value">${__P(hostname,oneyou-cms-staging.service.nhs.uk)}</stringProp>
+            <stringProp name="Argument.value">${__P(hostname,www.nhschoicespreview.nhs.uk)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="users" elementType="Argument">
@@ -37,6 +37,16 @@
             <stringProp name="Argument.value">${__P(throughput,600)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
+          <elementProp name="api_hostname" elementType="Argument">
+            <stringProp name="Argument.name">api_hostname</stringProp>
+            <stringProp name="Argument.value">${__P(api_hostname,staging.api.nhs.uk)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="api_prefix" elementType="Argument">
+            <stringProp name="Argument.name">api_prefix</stringProp>
+            <stringProp name="Argument.value">${__P(api_prefix,)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
         </collectionProp>
       </elementProp>
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
@@ -46,7 +56,7 @@
         <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
           <collectionProp name="Arguments.arguments"/>
         </elementProp>
-        <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
+        <stringProp name="HTTPSampler.domain">${api_hostname}</stringProp>
         <stringProp name="HTTPSampler.port"></stringProp>
         <stringProp name="HTTPSampler.protocol">https</stringProp>
         <stringProp name="HTTPSampler.contentEncoding"></stringProp>
@@ -79,7 +89,7 @@
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.domain">${hostname}</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
@@ -102,7 +112,7 @@
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/api/sites/oneyou/${release_id}/</stringProp>
+          <stringProp name="HTTPSampler.path">${api_prefix}/sites/oneyou/${release_id}/</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -121,7 +131,7 @@
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/api/sites/oneyou/${release_id}/pages//</stringProp>
+          <stringProp name="HTTPSampler.path">${api_prefix}/sites/oneyou/${release_id}/pages/home/</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -273,7 +283,7 @@ if (failureMessage?.trim()) {
               <stringProp name="HTTPSampler.port"></stringProp>
               <stringProp name="HTTPSampler.protocol"></stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/api/sites/oneyou/${release_id}/pages/check-your-health/</stringProp>
+              <stringProp name="HTTPSampler.path">${api_prefix}/sites/oneyou/${release_id}/pages/check-your-health/</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -349,7 +359,7 @@ if (failureMessage?.trim()) {
               <stringProp name="HTTPSampler.port"></stringProp>
               <stringProp name="HTTPSampler.protocol"></stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/api/sites/oneyou/${release_id}/pages/move-more/</stringProp>
+              <stringProp name="HTTPSampler.path">${api_prefix}/sites/oneyou/${release_id}/pages/move-more/</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -425,7 +435,7 @@ if (failureMessage?.trim()) {
               <stringProp name="HTTPSampler.port"></stringProp>
               <stringProp name="HTTPSampler.protocol"></stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/api/sites/oneyou/${release_id}/pages/sexual-health/</stringProp>
+              <stringProp name="HTTPSampler.path">${api_prefix}/sites/oneyou/${release_id}/pages/sexual-health/</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -501,7 +511,7 @@ if (failureMessage?.trim()) {
               <stringProp name="HTTPSampler.port"></stringProp>
               <stringProp name="HTTPSampler.protocol"></stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/api/sites/oneyou/${release_id}/pages/quit-smoking/</stringProp>
+              <stringProp name="HTTPSampler.path">${api_prefix}/sites/oneyou/${release_id}/pages/quit-smoking/</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -577,7 +587,7 @@ if (failureMessage?.trim()) {
               <stringProp name="HTTPSampler.port"></stringProp>
               <stringProp name="HTTPSampler.protocol"></stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/api/sites/oneyou/${release_id}/pages/sleep-better/</stringProp>
+              <stringProp name="HTTPSampler.path">${api_prefix}/sites/oneyou/${release_id}/pages/sleep-better/</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -653,7 +663,7 @@ if (failureMessage?.trim()) {
               <stringProp name="HTTPSampler.port"></stringProp>
               <stringProp name="HTTPSampler.protocol"></stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/api/sites/oneyou/${release_id}/pages/weight-loss/</stringProp>
+              <stringProp name="HTTPSampler.path">${api_prefix}/sites/oneyou/${release_id}/pages/weight-loss/</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -729,7 +739,7 @@ if (failureMessage?.trim()) {
               <stringProp name="HTTPSampler.port"></stringProp>
               <stringProp name="HTTPSampler.protocol"></stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/api/sites/oneyou/${release_id}/pages/drink-less/</stringProp>
+              <stringProp name="HTTPSampler.path">${api_prefix}/sites/oneyou/${release_id}/pages/drink-less/</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -805,7 +815,7 @@ if (failureMessage?.trim()) {
               <stringProp name="HTTPSampler.port"></stringProp>
               <stringProp name="HTTPSampler.protocol"></stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/api/sites/oneyou/${release_id}/pages/stress-less/</stringProp>
+              <stringProp name="HTTPSampler.path">${api_prefix}/sites/oneyou/${release_id}/pages/stress-less/</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -881,7 +891,7 @@ if (failureMessage?.trim()) {
               <stringProp name="HTTPSampler.port"></stringProp>
               <stringProp name="HTTPSampler.protocol"></stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/api/sites/oneyou/${release_id}/pages/eat-better/</stringProp>
+              <stringProp name="HTTPSampler.path">${api_prefix}/sites/oneyou/${release_id}/pages/eat-better/</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -957,7 +967,7 @@ if (failureMessage?.trim()) {
               <stringProp name="HTTPSampler.port"></stringProp>
               <stringProp name="HTTPSampler.protocol"></stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/api/sites/oneyou/${release_id}/pages/diabetes/</stringProp>
+              <stringProp name="HTTPSampler.path">${api_prefix}/sites/oneyou/${release_id}/pages/diabetes/</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1033,7 +1043,7 @@ if (failureMessage?.trim()) {
               <stringProp name="HTTPSampler.port"></stringProp>
               <stringProp name="HTTPSampler.protocol"></stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/api/sites/oneyou/${release_id}/pages/offers/</stringProp>
+              <stringProp name="HTTPSampler.path">${api_prefix}/sites/oneyou/${release_id}/pages/offers/</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1109,7 +1119,7 @@ if (failureMessage?.trim()) {
               <stringProp name="HTTPSampler.port"></stringProp>
               <stringProp name="HTTPSampler.protocol"></stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/api/sites/oneyou/${release_id}/pages/apps/</stringProp>
+              <stringProp name="HTTPSampler.path">${api_prefix}/sites/oneyou/${release_id}/pages/apps/</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1185,7 +1195,7 @@ if (failureMessage?.trim()) {
               <stringProp name="HTTPSampler.port"></stringProp>
               <stringProp name="HTTPSampler.protocol"></stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/api/sites/oneyou/${release_id}/pages/about-one-you/</stringProp>
+              <stringProp name="HTTPSampler.path">${api_prefix}/sites/oneyou/${release_id}/pages/about-one-you/</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1261,7 +1271,7 @@ if (failureMessage?.trim()) {
               <stringProp name="HTTPSampler.port"></stringProp>
               <stringProp name="HTTPSampler.protocol"></stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/api/sites/oneyou/${release_id}/pages/contact-us/</stringProp>
+              <stringProp name="HTTPSampler.path">${api_prefix}/sites/oneyou/${release_id}/pages/contact-us/</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1337,7 +1347,7 @@ if (failureMessage?.trim()) {
               <stringProp name="HTTPSampler.port"></stringProp>
               <stringProp name="HTTPSampler.protocol"></stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/api/sites/oneyou/${release_id}/pages/partners/</stringProp>
+              <stringProp name="HTTPSampler.path">${api_prefix}/sites/oneyou/${release_id}/pages/partners/</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1413,7 +1423,7 @@ if (failureMessage?.trim()) {
               <stringProp name="HTTPSampler.port"></stringProp>
               <stringProp name="HTTPSampler.protocol"></stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/api/sites/oneyou/${release_id}/pages/terms-and-conditions/</stringProp>
+              <stringProp name="HTTPSampler.path">${api_prefix}/sites/oneyou/${release_id}/pages/terms-and-conditions/</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1489,7 +1499,7 @@ if (failureMessage?.trim()) {
               <stringProp name="HTTPSampler.port"></stringProp>
               <stringProp name="HTTPSampler.protocol"></stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/api/sites/oneyou/${release_id}/pages/crown-copyright/</stringProp>
+              <stringProp name="HTTPSampler.path">${api_prefix}/sites/oneyou/${release_id}/pages/crown-copyright/</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1565,7 +1575,7 @@ if (failureMessage?.trim()) {
               <stringProp name="HTTPSampler.port"></stringProp>
               <stringProp name="HTTPSampler.protocol"></stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/api/sites/oneyou/${release_id}/pages/privacy-policy/</stringProp>
+              <stringProp name="HTTPSampler.path">${api_prefix}/sites/oneyou/${release_id}/pages/privacy-policy/</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>

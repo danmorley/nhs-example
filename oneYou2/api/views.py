@@ -2,6 +2,7 @@ import json
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
+from django.template.response import TemplateResponse
 from django.views.decorators.http import require_safe
 
 from oneYou2.serializers import SiteSerializer
@@ -141,3 +142,11 @@ def page_preview(request, site_identifier, page_slug):
     page = [p for p in pages if p.get_site().pk == site.id][0]
     serialized_page = OneYouPageSerializer(instance=page.specific.get_latest_revision_as_page())
     return JsonResponse(serialized_page.data)
+
+
+@require_safe
+def robots(request):
+    if "service" in request.get_host():
+        return TemplateResponse(request, 'robots-disallow.txt',)
+    else:
+        return TemplateResponse(request, 'robots-allow.txt', )

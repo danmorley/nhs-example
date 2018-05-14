@@ -1,7 +1,7 @@
 import json
 from datetime import datetime
 
-from release.models import Release, ReleaseContent
+from release.models import Release
 
 
 def get_latest_release(site_id):
@@ -21,9 +21,11 @@ def get_release_object(uuid):
 def populate_release_if_required(release):
     # This could be a class method
     if release.release_date_has_passed() and release.content_status == 0:
-        content = release.generate_fixed_content()
-        rc = ReleaseContent(release=release, content=json.dumps(content))
-        rc.save()
+        release_content = release.content.first()
+        content = json.loads(release_content.content)
+        content['site_json'] = release.generate_fixed_site_meta()
+        release_content.content = json.dumps(content)
+        release_content.save()
         release.content_status = 1
         release.save()
 

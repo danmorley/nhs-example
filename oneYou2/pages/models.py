@@ -62,7 +62,7 @@ class SocialMediaFooterLink(blocks.StructBlock):
     link = blocks.URLBlock(label='External link', required=False)
 
 
-class PageHeading(blocks.StructBlock):
+class PageHeading(CTABlock):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     background_image = BlobImageChooserBlock(required=False)
