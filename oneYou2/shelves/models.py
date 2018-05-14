@@ -216,6 +216,7 @@ class BannerShelf(ShelfAbstract):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    green_gradient = models.BooleanField(label='Green gradient', null=True, blank=True, default=False)
     cta_text = models.CharField(max_length=255, null=True, blank=True)
     cta_link = models.CharField(max_length=255, null=True, blank=True)
     cta_page = ParentalKey('wagtailcore.Page',
