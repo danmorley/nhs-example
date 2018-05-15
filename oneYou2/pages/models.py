@@ -66,6 +66,7 @@ class PageHeading(CTABlock):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     background_image = BlobImageChooserBlock(required=False)
+    meta_gradient = blocks.BooleanBlock(label='Green gradient', required=False, default=False)
     shelf_id = IDBlock(required=False, label="ID", help_text="Not displayed in the front end")
 
 

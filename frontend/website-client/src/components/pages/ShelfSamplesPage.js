@@ -372,7 +372,7 @@ const sampleShelvesPage = {
     {
       type: 'guidance_shelf',
       value: {
-        heading: 'Page Heading Shelf (Jira Sub Page Heading Shelf ON2-90)',
+        heading: 'Page Heading Shelf with gradient (Jira Sub Page Heading Shelf ON2-90)',
         body: '<p>Type <b>page_heading_shelf</b>, Layout <b>full_width</b>, variant <b>home-page</b></p><p>Used on sub-pages.</p>'
       }
     },
@@ -384,7 +384,8 @@ const sampleShelvesPage = {
         body: '<p>Moving is good for your body and mind. Try these easy ways to move more each day.</p>',
         background_image: 'http://aaa.bbb.ccc/gb.png',
         meta_layout: 'page_header',
-        meta_variant: 'home-page'
+        meta_variant: 'home-page',
+        meta_gradient: true
       }
     },
     {
