@@ -52,7 +52,7 @@
   flex-grow: 0;
    -ms-flex-positive: 1;
 }
-
+/*
 @media not all and (min-resolution:.001dpcm) { 
   @supports (-webkit-appearance:none) and (stroke-color:transparent) { 
     // safari 11.1+
@@ -64,8 +64,8 @@
   } 
 }
 
-@media not all and (min-resolution:.001dpcm) { @supports 
-  (-webkit-appearance:none) and (not (stroke-color:transparent)) {
+@media not all and (min-resolution:.001dpcm) { 
+  @supports (-webkit-appearance:none) and (not (stroke-color:transparent)) {
     .col-shrink-to-fit {
       @include media-breakpoint-down(sm) {
         flex-basis: unset;
@@ -73,6 +73,39 @@
     }
  } 
 }
+*/
+
+
+
+
+  @supports (stroke-color:transparent) {
+    @supports (-webkit-appearance:none) {
+      @media not all and (min-resolution:.001dpcm) { 
+        .col-shrink-to-fit {
+          @include media-breakpoint-down(sm) {
+            background-color: green;
+            flex-basis: 0;
+          }
+        }
+      }
+    }
+  } 
+
+  @supports (not (stroke-color:transparent)) {
+   .col-shrink-to-fit {
+     @include media-breakpoint-down(sm) {
+       flex-basis: unset;
+     }
+   } 
+  }
+  
+  @media not all and (min-resolution:.001dpcm) { 
+    .col-shrink-to-fit {
+      @include media-breakpoint-down(sm) {
+        flex-basis: unset;
+      }
+    }
+  }
 
 _:-ms-fullscreen, :root { 
   // ie 11
