@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
+from django.shortcuts import redirect
 from django.views.static import serve
 from django.conf import settings
 
@@ -9,6 +10,7 @@ from release.utils import get_latest_release
 from oneYou2.utils import get_protocol
 from frontendHandler.models import FrontendVersion
 from home.models import SiteSettings
+from wagtail.wagtailredirects.models import Redirect
 
 from .models import Release
 
@@ -18,6 +20,24 @@ def release_html(request, site_name):
         site_id = SiteSettings.objects.get(uid=site_name).site.id
     except ObjectDoesNotExist:
         return HttpResponse("Page Not Found", status=404)
+
+    if getattr(request, 'path', None):
+        wagtail_redirect = Redirect.objects.filter(site=site_id, old_path=request.path).first()
+        if not wagtail_redirect:
+            if request.path[-1] == '/':
+                wagtail_redirect = Redirect.objects.filter(site=site_id, old_path=request.path[:-1]).first()
+            else:
+                wagtail_redirect = Redirect.objects.filter(site=site_id, old_path=request.path + '/').first()
+
+        if wagtail_redirect:
+            if wagtail_redirect.redirect_page:
+                redirect_path = '/oneyou{}'.format(wagtail_redirect.redirect_page.url)
+            else:
+                redirect_path = wagtail_redirect.redirect_link
+
+            permanent = wagtail_redirect.is_permanent
+            return redirect(redirect_path, permanent=permanent)
+
     release_id = request.GET.get('id')
     if release_id:
         release = Release.objects.get(uuid=release_id)
