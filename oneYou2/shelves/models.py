@@ -233,7 +233,7 @@ class BannerShelf(ShelfAbstract):
     def meta_variant(self):
         return "main-banner"
 
-    api_fields = ['heading', 'body', 'image', 'cta_text', 'cta_link', 'cta_page', meta_gradient]
+    api_fields = ['heading', 'body', 'image', 'cta_text', 'cta_link', 'cta_page', 'meta_gradient']
 
     panels = [
         FieldPanel('shelf_id'),
