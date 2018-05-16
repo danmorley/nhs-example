@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MainCarouselShelf from './MainCarouselShelf';
+import {
+  MemoryRouter
+} from 'react-router-dom';
 
 describe('MainCarouselShelf', () => {
 
@@ -36,7 +39,7 @@ describe('MainCarouselShelf', () => {
     }
 
     const div = document.createElement('div');
-    ReactDOM.render(<MainCarouselShelf content={content} />, div)
+    ReactDOM.render(<MemoryRouter><MainCarouselShelf content={content} /></MemoryRouter>, div)
   });
 
   it('renders without crashing with invalid shelf types', () => {
