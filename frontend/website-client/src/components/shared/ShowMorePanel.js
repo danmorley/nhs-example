@@ -89,10 +89,11 @@ class ShowMorePanel extends Component {
     return children.length > noOfChildrenWhenCollapsed;
   }
 
-  firstChildDimensions() {
-    const childElems = this.contentElem.children;
-
-  }
+//  Don't think this does anything
+//  firstChildDimensions() {
+//    const childElems = this.contentElem.children;
+//
+//  }
 
   renderChildren() {
     return React.Children.map(this.props.children, (child, i) => {
