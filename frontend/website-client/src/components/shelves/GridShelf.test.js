@@ -1,14 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import GridShelf from './GridShelf';
+import { shallow } from 'enzyme';
 
 describe('GridShelf', () => {
   let content = {
-    items: ['test', 'test']
+    items: [{
+      id: 1,
+      type: 'app_teaser',
+      value: {}
+    }]
   }
 
   it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<GridShelf content={content} />, div)
+    const wrapper = shallow(<GridShelf content={content} />);
+    expect(wrapper.exists()).toBe(true);
   })
 })
