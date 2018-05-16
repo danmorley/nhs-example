@@ -20,7 +20,9 @@ $shelf-padding-extra: 2em;
 .promo-shelf {
 
   h1, h2 {
-    white-space: nowrap
+    @include media-breakpoint-up(sm) {
+      white-space: nowrap;
+    }
   }
 }
 
