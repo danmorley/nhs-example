@@ -68,10 +68,7 @@ it('returns the url for the image if one is provided', () => {
 
 it('returns the url for the placeholder image if one is provided', () => {
     const image = {
-        renditions: {
-            'mobile': null,
-            'desktop': null
-        }
+        renditions: null
     };
     const url = ImageUtils.imageUrl(image, ImageUtils.placeholderBackgroundImage());
     expect(url).toEqual('app-screen.jpg')
@@ -102,10 +99,7 @@ it('returns the css for the background image if provided', () => {
 
 it('returns the css for the placeholder background image if no image provided', () => {
     const image = {
-        renditions: {
-            'mobile': null,
-            'desktop': null
-        }
+        renditions: null
     };
 
     const returnedCss = ImageUtils.backgroundImageStyle(image, ImageUtils.placeholderBackgroundImage());
