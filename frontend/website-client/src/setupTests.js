@@ -10,3 +10,37 @@ window.matchMedia = window.matchMedia || function() {
         removeListener: function() {}
     };
 };
+
+const localStorageMock = (() => {
+  let store = {}
+  return {
+    getItem(key) {
+      return store[key]
+    },
+    setItem(key, value) {
+      store[key] = value.toString()
+    },
+    clear() {
+      store = {}
+    }
+  };
+})()
+
+global.localStorage = localStorageMock
+
+const sessionStorageMock = (() => {
+  let store = {}
+  return {
+    getItem(key) {
+      return store[key]
+    },
+    setItem(key, value) {
+      store[key] = value.toString()
+    },
+    clear() {
+      store = {}
+    }
+  };
+})()
+
+global.sessionStorage = sessionStorageMock
