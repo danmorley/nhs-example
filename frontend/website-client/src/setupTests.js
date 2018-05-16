@@ -44,3 +44,5 @@ const sessionStorageMock = (() => {
 })()
 
 global.sessionStorage = sessionStorageMock
+
+global.rootUrl = 'oneyou.co.uk';
