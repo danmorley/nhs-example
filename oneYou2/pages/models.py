@@ -34,6 +34,24 @@ GRID_LAYOUT_CHOICES = (
     ('3_col_1_on_mobile', 'Responsive (3 columns on desktop)'),
 )
 
+TABLE_VARIANTS = (
+    ('standard', 'Standard'),
+)
+
+ICON_CARD_LAYOUTS = (
+    ('icon_on_left', 'Icon on Left'),
+    ('icon_on_right', 'Icon on Right'),
+    ('icon_heading_left', 'Icon Heading Left'),
+    ('icon_body_right', 'Icon Body Right'),
+)
+
+ICON_CARD_VARIANTS = (
+    ('standard_grey_bg', 'Standard on Grey Background'),
+    ('standard_heading_standard_body_grey_bg', 'Standard Heading, Standard Body Text, Grey Background'),
+    ('large_green_heading_standard_body_grey_bg', 'Large Green Heading, Standard Body Text, Grey Background'),
+    ('x_small_heading_large_body_no_bg', 'X Small Heading, Large Body Text, No Background'),
+)
+
 CONTENT_STATUS_PENDING = 0
 
 logger = logging.getLogger('wagtail.core')
@@ -211,6 +229,40 @@ class RecipeGrid(blocks.StructBlock):
     ),
         label='Teaser Image Display', default="cover")
     shelf_id = IDBlock(required=False, label="ID")
+
+
+class SimpleTextPanel(blocks.StructBlock):
+    text = blocks.ListBlock(blocks.CharBlock(required=False))
+
+
+class IconCardPanel(CTABlock):
+    heading = blocks.CharBlock(required=False)
+    body = blocks.RichTextBlock(required=False)
+    image = BlobImageChooserBlock(required=False)
+    panel_id = IDBlock(required=False, label="ID")
+    meta_layout = blocks.ChoiceBlock(choices=ICON_CARD_LAYOUTS, label="Layout")
+    meta_variant = blocks.ChoiceBlock(choices=ICON_CARD_VARIANTS, label="Variant")
+
+
+class HeaderRow(blocks.StructBlock):
+    cells = blocks.ListBlock(SimpleTextPanel(required=False))
+
+
+class BodyRow(blocks.StructBlock):
+    cells = blocks.StreamBlock([
+        ('simple_text_panel', SimpleTextPanel(required=False)),
+        ('icon_card_panel', IconCardPanel(required=False))
+    ])
+
+
+class Table(blocks.StructBlock):
+    header = HeaderRow(label='Header row', icon='form')
+    display_header = blocks.BooleanBlock(label='Display the table header?', required=False)
+    rows = blocks.StreamBlock([
+        ('body_row', BodyRow(label='Body row', icon='form'))
+    ])
+    shelf_id = IDBlock(required=False, label="ID")
+    meta_variant = blocks.ChoiceBlock(choices=TABLE_VARIANTS, label="Variant")
 
 
 # Pages
