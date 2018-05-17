@@ -7,6 +7,8 @@ from datetime import datetime
 
 from django.conf import settings
 
+from oneYou2.utils import get_release_version
+
 
 class FrontendVersion:
     def __init__(self, uuid, live_date):
@@ -20,8 +22,8 @@ class FrontendVersion:
             return 'test'
 
         file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
-
-        return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, settings.ENV, 'current_version.txt')
+        file_directory = settings.ENV if settings.ENV != 'local' else 'dev'
+        return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, file_directory, 'current_version.txt')
 
     @classmethod
     def get_available_versions(cls):
@@ -31,16 +33,36 @@ class FrontendVersion:
 
         file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
 
-        directories = file_service.list_directories_and_files(settings.AZURE_FILE_SHARE, settings.ENV).directories
+        file_directory = settings.ENV if settings.ENV != 'local' else 'dev'
+
+        current_tag = get_release_version()
+        latest_deployed_tag = file_service.get_file_to_text(settings.AZURE_FILE_SHARE, file_directory,
+                                                            'current_tag.txt')
+
+        if settings.ENV == 'dev':
+            # always deploy the frontend version in the integration and review environments
+            FrontendVersion.deploy_version()
+        elif settings.ENV != 'local' and current_tag != latest_deployed_tag:
+            # we need to start using 'local' as the environment variable on local machines, to prevent frontend
+            # deployment when running locally.
+            # check the latest deployed version so we only deploy each tag once on staging and production
+            FrontendVersion.deploy_version()
+
+        # we have to return all directories as azure SDK had no way to order and limit response count
+        directories = file_service.list_directories_and_files(settings.AZURE_FILE_SHARE, file_directory).directories
         available_versions = []
 
         for directory in directories:
             properties = file_service.get_directory_properties(settings.AZURE_FILE_SHARE,
-                                                               settings.ENV + '/' + directory.name)
-            available_versions.append((directory.name, properties['last-modified']))
+                                                               file_directory + '/' + directory.name)
+            release_tag = file_service.get_file_to_text(settings.AZURE_FILE_SHARE,
+                                                        file_directory + '/' + directory.name, 'tag.txt')
+            available_versions.append((directory.name, release_tag + ' - ' + properties['last-modified']))
 
-        return sorted(available_versions, key=lambda x: datetime.strptime(x[1], '%a, %d %b %Y %H:%M:%S %Z'),
-                      reverse=True)
+        sorted_list = sorted(available_versions, key=lambda x: datetime.strptime(x[1].split(' - ')[1],
+                                                                                 '%a, %d %b %Y %H:%M:%S %Z'),
+                             reverse=True)
+        return sorted_list[:20]
 
     @classmethod
     def get_html_for_version(cls, uuid):
@@ -87,5 +109,9 @@ class FrontendVersion:
             file_service.put_file_from_path(settings.AZURE_FILE_SHARE, version_directory, manifest[key],
                                             './web/' + manifest[key])
         file_service.put_file_from_path(settings.AZURE_FILE_SHARE, version_directory, 'index.html', './web/index.html')
+
+        release_tag = get_release_version()
+        file_service.put_file_from_text(settings.AZURE_FILE_SHARE, version_directory, 'tag.txt', release_tag)
+        file_service.put_file_from_text(settings.AZURE_FILE_SHARE, settings.ENV, "current_tag.txt", release_tag)
 
         file_service.put_file_from_text(settings.AZURE_FILE_SHARE, settings.ENV, "current_version.txt", unique_id)
