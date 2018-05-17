@@ -7,6 +7,7 @@ import CmsComponentRegistry from '../CmsComponentRegistry';
 import styles from './article-page-heading-shelf.css';
 import ImageUtils from '../panels/ImageUtils';
 import { Link } from 'react-router-dom';
+import UrlUtils from '../shared/UrlUtils';
 
 /**
  *  Article Page Heading Shelf is used to display article headings and an
@@ -23,26 +24,19 @@ import { Link } from 'react-router-dom';
  *  }
  */
 class ArticlePageHeadingShelf extends Component {
-  constructor (props) {
-    super(props);
-    this.goBack = this.goBack.bind(this);
-  }
-
-  goBack() {
-    alert('going back');
-  }
-
   render() {
     let { id, content, classNamePrefix, variant, layout } = this.props;
     let metaVariant = content.meta_variant || variant;
     // let metaLayout = content.meta_layout || layout;
+
+    const parentPath = UrlUtils.parentPath(window.location.pathname);
 
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
         <div className="shelf__container container">
           <div className="row justify-content-center align-items-center">
             <div className="shelf__col col-12">
-              {content.display_back_button && <Link to='/' className="shelf__backbutton">{content.back_button_label}</Link>}
+              {content.display_back_button && <Link to={parentPath} className="shelf__backbutton">{content.back_button_label}</Link>}
               <Text tagName="h1" content={content.heading} />
             </div>
           </div>
