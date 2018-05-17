@@ -1,0 +1,86 @@
+@import '../../assets/styles/variables/variables';
+@import "../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+.table-shelf {
+  margin: 0;
+  padding: 0;
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+}
+
+.table-shelf--standard {
+  table {
+    caption {
+      caption-side: bottom;
+      color: $teal-blue;
+      font-family: $secondary-brand-font;
+      text-transform: uppercase;
+      font-size: $h4;
+      text-align: left;
+      margin: 10px;
+    }
+  }
+
+  thead {
+    color: $white;
+    background-color: $teal-blue;
+
+    th {
+      font-family: $secondary-brand-font;
+      text-transform: uppercase;
+      font-size: $h4;
+      line-height: $h4 * 2;
+      font-weight: normal;
+      text-align: left;
+      border: 0;
+      padding-left: 10px;
+    }
+  }
+
+  tbody {
+    text-align: left;
+
+    tr {
+      background-color: $light-grey;
+      border-top: 16px solid $white;
+
+      &:first-child {
+        border-top: 8px solid $white;
+      }
+
+      td {
+        padding: 10px;
+        border-right: 2px solid $pink-grey;
+
+        .cell-content {
+          padding-right: 20px;
+          margin-left: 170px;
+
+          h2 {
+            font-size: 0.9em;
+            font-family: $secondary-brand-font;
+            color: $dark;
+            text-transform: uppercase;
+          }
+        }
+
+        &:last-child {
+          border: none;
+
+          .cell-content {
+          }
+        }
+
+      }
+    }
+
+    h4 {
+      font-size: $h4;
+      font-family: $secondary-brand-font;
+      font-weight: bold;
+    }
+  }
+}

@@ -232,7 +232,11 @@ class RecipeGrid(blocks.StructBlock):
 
 
 class SimpleTextPanel(blocks.StructBlock):
-    text = blocks.ListBlock(blocks.CharBlock(required=False))
+    text = blocks.CharBlock(required=False)
+
+
+class RichTextPanel(blocks.StructBlock):
+    text = blocks.RichTextBlock(required=False)
 
 
 class IconCardPanel(CTABlock):
@@ -244,23 +248,14 @@ class IconCardPanel(CTABlock):
     meta_variant = blocks.ChoiceBlock(choices=ICON_CARD_VARIANTS, label="Variant")
 
 
-class HeaderRow(blocks.StructBlock):
-    cells = blocks.ListBlock(SimpleTextPanel(required=False))
-
-
-class BodyRow(blocks.StructBlock):
-    cells = blocks.StreamBlock([
-        ('simple_text_panel', SimpleTextPanel(required=False)),
-        ('icon_card_panel', IconCardPanel(required=False))
-    ])
-
-
 class Table(blocks.StructBlock):
-    header = HeaderRow(label='Header row', icon='form')
+    header = blocks.ListBlock(blocks.CharBlock(required=False), label='Column headings')
     display_header = blocks.BooleanBlock(label='Display the table header?', required=False)
-    rows = blocks.StreamBlock([
-        ('body_row', BodyRow(label='Body row', icon='form'))
-    ])
+    body_rows = blocks.ListBlock(blocks.StreamBlock([
+        ('simple_text_panel', SimpleTextPanel(required=False)),
+        ('rich_text_panel', RichTextPanel(required=False)),
+        ('icon_card_panel', IconCardPanel(required=False))
+    ]))
     shelf_id = IDBlock(required=False, label="ID")
     meta_variant = blocks.ChoiceBlock(choices=TABLE_VARIANTS, label="Variant")
 
@@ -282,6 +277,7 @@ class OneYou2Page(Page):
         ('iframe_shelf', IFrameShelf(label="IFrame", icon='placeholder')),
         ('divider', Divider(label="Divider", icon='horizontalrule')),
         ('article_page_heading_shelf', ArticlePageHeadingShelf(label="Article Page Heading", icon='title')),
+        ('table', Table(label="Table", icon='list-ul')),
     ], null=True, blank=True)
 
     # Meta Fields
