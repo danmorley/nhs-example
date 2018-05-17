@@ -18,10 +18,11 @@ class PageHeader extends Component {
     this.setState({
       navHeight: this.divElement.clientHeight
     });
-    let cookieBanner = document.querySelector('.cookie-banner');
-    let cookieBannerHeight = document.body.contains(cookieBanner) ? cookieBanner.clientHeight : 0;
-    document.querySelector('.page-wrapper').style.paddingTop = (this.divElement.clientHeight + cookieBannerHeight +'px');
-    document.querySelector('.page-header').style.top = cookieBannerHeight + 'px';
+    //let cookieBanner = document.querySelector('.cookie-banner');
+    //let cookieBannerHeight = document.body.contains(cookieBanner) ? cookieBanner.clientHeight : 0;
+  //  document.querySelector('.page-wrapper').style.paddingTop = (this.divElement.clientHeight + cookieBannerHeight +'px');
+    document.querySelector('.page-wrapper').style.paddingTop = (this.divElement.clientHeight +'px');
+  //  document.querySelector('.page-header').style.top = cookieBannerHeight + 'px';
   }
 
   componentDidMount() {
