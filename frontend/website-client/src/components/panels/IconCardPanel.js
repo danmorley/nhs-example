@@ -5,6 +5,7 @@ import styles from './icon-card-panel.css';
 import Panel from './Panel';
 import PropTypes from 'prop-types';
 import ImageUtils from './ImageUtils';
+import Image from '../Image';
 
 /**
  *  Information panel component displaying a panel in the form of a heading
@@ -22,14 +23,13 @@ class IconCardPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      backgroundImageStyle: null
+      iconImage: null
     }
   }
 
   setImage() {
     this.setState({
-      backgroundImageStyle: ImageUtils.backgroundImageStyle(this.props.content.image,
-                                                            ImageUtils.placeholderBackgroundImage())
+      iconImage: ImageUtils.imageUrl(this.props.content.image, ImageUtils.placeholderBackgroundImage())
     })
   }
 
@@ -49,17 +49,22 @@ class IconCardPanel extends Component {
 
   render() {
     let { content, classNamePrefix } = this.props;
-    let backgroundImage = this.state.backgroundImageStyle;
 
     return (
-      <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
-        <div className={`${classNamePrefix}__info`}>
-          <Text tagName="h2" content={content.heading} className={`${classNamePrefix}__heading`} />
-          <div className={`${classNamePrefix}__text`}>
-            <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
+      <Panel id={content.panel_id || this.props.id}
+             classNamePrefix={classNamePrefix}
+             variant={content.meta_variant}
+             layout={content.meta_layout}>
+        <div className={`${classNamePrefix}__wrapper row justify-content-start no-gutters`}>
+          {this.state.iconImage && <div className={`${classNamePrefix}__image`}>
+            <Image image={{link: this.state.iconImage, title: content.image.title}} />
+          </div>}
+          <div className={`${classNamePrefix}__body`}>
+            <Text tagName="h2" content={content.heading} className={`${classNamePrefix}__heading`} />
+            <div className={`${classNamePrefix}__text`}>
+              <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
+            </div>
           </div>
-        </div>
-        <div className={`${classNamePrefix}__image`} style={backgroundImage}>
         </div>
       </Panel>
     );

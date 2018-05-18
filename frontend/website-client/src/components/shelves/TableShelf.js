@@ -31,10 +31,10 @@ class TableShelf extends Component {
       const PanelClass = panelInfo && panelInfo.class;
       const panelClassNamePrefix = panelInfo && panelInfo.classNamePrefix;
       const panelId = panel.value.field_id || panel.value.shelf_id || panel.value.panel_id || 'panel-' + panel.id;
-      const panelClass = 'abc';
+      const panelClass = 'row-' + i;
 
       if (PanelClass) {
-        return (<td key={i} className={panelClass}><PanelClass content={panel.value} /></td>);
+        return (<td key={i} className={panelClass}><PanelClass content={panel.value} classNamePrefix={panelClassNamePrefix} /></td>);
       } else {
         return (<td key={i} className={panelClass}><PlaceholderPanel panelType={panel.type} /></td>);
       }
@@ -49,7 +49,7 @@ class TableShelf extends Component {
     let metaLayout = content.meta_layout || layout;
 
     return (
-      <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+      <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} layout={metaLayout}>
         <div className="shelf__container container">
           {content.heading && <h2 className="shelf__header">{content.heading}</h2>}
           <div className="row">
