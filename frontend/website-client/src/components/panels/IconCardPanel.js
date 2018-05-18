@@ -48,26 +48,42 @@ class IconCardPanel extends Component {
   }
 
   render() {
-    let { content, classNamePrefix } = this.props;
+    const { content, classNamePrefix, variant, layout } = this.props;
+    const metaVariant = content.meta_variant || variant;
+    const metaLayout = content.meta_layout || layout;
+
+    if (metaLayout === 'icon_on_left' || metaLayout === 'icon_on_right') {
+      var html = this.renderLayoutsIconOnLeftOrRight(content, classNamePrefix, metaLayout);
+    } else {
+      var html = <p>Layout {metaLayout} not supported</p>;
+    }
 
     return (
       <Panel id={content.panel_id || this.props.id}
              classNamePrefix={classNamePrefix}
-             variant={content.meta_variant}
-             layout={content.meta_layout}>
-        <div className={`${classNamePrefix}__wrapper row justify-content-start no-gutters`}>
-          {this.state.iconImage && <div className={`${classNamePrefix}__image`}>
-            <Image image={{link: this.state.iconImage, title: content.image.title}} />
-          </div>}
-          <div className={`${classNamePrefix}__body`}>
-            <Text tagName="h2" content={content.heading} className={`${classNamePrefix}__heading`} />
-            <div className={`${classNamePrefix}__text`}>
-              <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
-            </div>
-          </div>
-        </div>
+             variant={metaVariant}
+             layout={metaLayout}>
+        {html}
       </Panel>
     );
+  }
+
+  renderLayoutsIconOnLeftOrRight(content, classNamePrefix, layout) {
+    const flexRowReverse = (layout === 'icon_on_left') ? '' : 'flex-row-reverse';
+
+    return (
+      <div className={`${classNamePrefix}__wrapper row justify-content-start no-gutters ${flexRowReverse}`}>
+        {this.state.iconImage && <div className={`${classNamePrefix}__image`}>
+          <Image image={{link: this.state.iconImage, title: content.image.title}} />
+        </div>}
+        <div className={`${classNamePrefix}__body`}>
+          <Text tagName="h2" content={content.heading} className={`${classNamePrefix}__heading`} />
+          <div className={`${classNamePrefix}__text`}>
+            <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
+          </div>
+        </div>
+      </div>
+    )
   }
 }
 
