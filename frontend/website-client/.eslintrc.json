@@ -23,6 +23,7 @@
       "no-unused-vars": 0,
       "camelcase": 0,
       "no-underscore-dangle": 0,
+      "comma-dangle": ["error", "never"],
       "no-console": 0,
       "react/prop-types": ["error", {"ignore": ["children"]}],
       "react/no-access-state-in-setstate": "error",

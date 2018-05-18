@@ -143,7 +143,7 @@ class ShowMorePanel extends Component {
 ShowMorePanel.propTypes = {
   rowsToShow: PropTypes.number.isRequired,
   childRowHeight: PropTypes.number,
-  id: PropTypes.string,
+  id: PropTypes.string
 };
 
 export default ShowMorePanel;

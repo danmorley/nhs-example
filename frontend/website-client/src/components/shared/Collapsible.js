@@ -65,14 +65,14 @@ Collapsible.propTypes = {
     PropTypes.element
   ]),
   triggerDisabled: PropTypes.bool,
-  tabIndex: PropTypes.number,
+  tabIndex: PropTypes.number
 }
 
 Collapsible.defaultProps = {
   triggerTagName: 'span',
   triggerDisabled: false,
   triggerStyle: null,
-  tabIndex: null,
+  tabIndex: null
 };
 
 export default Collapsible;

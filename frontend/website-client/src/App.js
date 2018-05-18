@@ -23,7 +23,7 @@ class App extends Component {
     super(props);
     this.state = {
       site: props.site || {},
-      currentPage: null,
+      currentPage: null
     };
   }
 
@@ -187,7 +187,7 @@ class App extends Component {
 }
 
 App.propTypes = {
-  site: PropTypes.object.isRequired,
+  site: PropTypes.object.isRequired
 }
 
 export default App;
