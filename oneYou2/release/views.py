@@ -1,5 +1,7 @@
 from __future__ import unicode_literals
 
+from urllib.parse import urlparse
+
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.shortcuts import redirect
@@ -47,7 +49,10 @@ def release_html(request, site_name):
     if release:
         frontend_id = release.frontend_id
         uuid = release.uuid
+        if release.content_status:
+            http_response['Cache-Control'] = 'max-age=3600'
     else:
+        # In this sc
         frontend_id = FrontendVersion.get_current_version()
         uuid = 'current'
 
@@ -59,14 +64,19 @@ def release_html(request, site_name):
     substituted_index = substituted_index.replace("/favicon", "/{}/public/favicon".format(site_name))
     substituted_index = substituted_index.replace("/webtrends", "/{}/public/webtrends".format(site_name))
 
+    # Why don't we use this?
     if settings.CONTENT_STORE_ENDPOINT:
         content_store_endpoint = settings.CONTENT_STORE_ENDPOINT
     else:
         content_store_endpoint = get_protocol() + request.__dict__['META']['HTTP_HOST'] + "/api"
+    if "oneyou-cms" in request.get_host() or "localhost" in request.get_host():
+        print(request.get_raw_uri())
+        content_store_endpoint = request.get_raw_uri().replace(urlparse(request.get_raw_uri()).path, '/api')
+    print("CONTENT STORE ENDPOINT", content_store_endpoint)
     substituted_index = substituted_index.replace("%apiurl%", content_store_endpoint)
     substituted_index = substituted_index.replace("%releaseid%", uuid)
     http_response = HttpResponse(substituted_index)
-    if release.content_status == 1:
+    if release and release.content_status == 1:
         http_response['Cache-Control'] = 'max-age=3600'
     return http_response
 
