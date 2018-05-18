@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import Text from '../Text';
 import CtaLink from '../shared/CtaLink';
 import CmsComponentRegistry from '../CmsComponentRegistry';
@@ -7,7 +9,6 @@ import Panel from './Panel';
 import CtaList from '../shared/CtaList';
 import ImageUtils from './ImageUtils';
 import CtaUtils from '../shared/CtaUtils';
-import PropTypes from 'prop-types';
 import Collapsible from '../shared/Collapsible';
 
 /**
@@ -26,8 +27,10 @@ class Oneyou1TeaserPanel extends Component {
 
   setImage() {
     this.setState({
-      backgroundImageStyle: ImageUtils.backgroundImageStyle(this.props.content.image,
-                                                            ImageUtils.placeholderBackgroundImage())
+      backgroundImageStyle: ImageUtils.backgroundImageStyle(
+        this.props.content.image,
+        ImageUtils.placeholderBackgroundImage()
+      )
     })
   }
 
@@ -40,7 +43,7 @@ class Oneyou1TeaserPanel extends Component {
     window.removeEventListener('resize', this.setImage);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.props = nextProps;
     this.setImage();
   }
@@ -80,7 +83,8 @@ class Oneyou1TeaserPanel extends Component {
 
 Oneyou1TeaserPanel.propTypes = {
   content: PropTypes.object.isRequired,
-  classNamePrefix: PropTypes.string.isRequired
+  classNamePrefix: PropTypes.string.isRequired,
+  id: PropTypes.string
 };
 
 CmsComponentRegistry.register('oneyou1_teaser', Oneyou1TeaserPanel, 'oneyou1-teaser');

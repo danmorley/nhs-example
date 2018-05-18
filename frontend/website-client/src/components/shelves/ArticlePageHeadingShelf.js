@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import Shelf from './Shelf';
 import Text from '../Text';
 import Image from '../Image';
@@ -44,6 +46,14 @@ class ArticlePageHeadingShelf extends Component {
       </Shelf>
     );
   }
+}
+
+ArticlePageHeadingShelf.propTypes = {
+  content: PropTypes.object.isRequired,
+  classNamePrefix: PropTypes.string.isRequired,
+  variant: PropTypes.string,
+  layout: PropTypes.string,
+  id: PropTypes.string
 }
 
 CmsComponentRegistry.register('article_page_heading_shelf', ArticlePageHeadingShelf, 'article-page-heading-shelf');

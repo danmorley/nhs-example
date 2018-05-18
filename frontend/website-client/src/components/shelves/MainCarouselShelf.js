@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import Shelf from './Shelf';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import Slider from 'react-slick';
@@ -73,6 +75,12 @@ class MainCarouselShelf extends Component {
     );
   }
 }
+
+MainCarouselShelf.propTypes = {
+  content: PropTypes.object.isRequired,
+  classNamePrefix: PropTypes.string.isRequired,
+  id: PropTypes.string
+};
 
 CmsComponentRegistry.register('main_carousel_shelf', MainCarouselShelf, 'carousel-shelf');
 CmsComponentRegistry.register('carousel_shelf', MainCarouselShelf, 'carousel-shelf');

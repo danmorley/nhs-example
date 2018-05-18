@@ -31,7 +31,7 @@ class ShowMorePanel extends Component {
     sessionStorage.setItem(this.storageKey, this.state.isExpanded ? 'Y' : 'N');
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.props = nextProps;
     this.storageKey = `${this.props.id}_panelExpanded`;
     const isExpanded = sessionStorage.getItem(this.storageKey) === 'Y';
@@ -142,6 +142,8 @@ class ShowMorePanel extends Component {
 
 ShowMorePanel.propTypes = {
   rowsToShow: PropTypes.number.isRequired,
+  childRowHeight: PropTypes.number,
+  id: PropTypes.string,
 };
 
 export default ShowMorePanel;

@@ -35,9 +35,9 @@ class CookieBanner extends Component {
       close:true
     });
 
-    let pageHeader = document.querySelector('.page-header');  
+    let pageHeader = document.querySelector('.page-header');
     pageHeader.style.top = 0;
-    document.querySelector('.page-wrapper').style.paddingTop = pageHeader.clientHeight + 'px';;
+    document.querySelector('.page-wrapper').style.paddingTop = pageHeader.clientHeight + 'px';
   }
 
   render() {

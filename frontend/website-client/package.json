@@ -24,12 +24,17 @@
     "universal-cookie": "^2.1.2"
   },
   "scripts": {
-    "start-js": "react-scripts start",
+    "start-js": "react-app-rewired start",
     "start": "npm-run-all -p watch-css start-js",
-    "build": "mv public/index-build.html public/index.html && npm run build-css && react-scripts build && node bin/postbuild.js",
-    "test": "react-scripts test --env=jsdom",
+    "build": "mv public/index-build.html public/index.html && npm run build-css && react-app-rewired build && node bin/postbuild.js",
+    "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive"
+  },
+  "devDependencies": {
+    "eslint-plugin-react": "^7.8.2",
+    "react-app-rewire-eslint": "^0.2.3",
+    "react-app-rewired": "^1.5.2"
   }
 }

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { Link } from 'react-router-dom';
 
 class SimpleMenuItem extends Component {
-  
   render() {
     let { link_page, link_external, link_text } = this.props.item.value;
-  
+
     return (
       <li className = {this.props.classNamePrefix+"-nav__item"}>
         <div className= {this.props.classNamePrefix+"-nav__separator"}>
@@ -14,7 +15,7 @@ class SimpleMenuItem extends Component {
       </li>
     );
   }
-  
+
   handleClick(event) {
     SimpleMenuItem.closeMenu(event);
   }
@@ -23,6 +24,11 @@ class SimpleMenuItem extends Component {
     const box = document.querySelector('.page-wrapper');
     box.classList.remove('header-nav--open');
   }
+}
+
+SimpleMenuItem.propTypes = {
+  item: PropTypes.object.isRequired,
+  classNamePrefix: PropTypes.string.isRequired
 }
 
 export default SimpleMenuItem;

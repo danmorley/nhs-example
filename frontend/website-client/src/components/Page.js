@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import '../assets/styles/page.css';
 import CmsComponentRegistry from './CmsComponentRegistry';
 import Cookies from 'universal-cookie';
@@ -114,7 +116,7 @@ class Page extends Component {
         <PageHeader navItems={menu.items} header={header}/>
         <div className="page-content-wrapper">
           <div id="page-content" className="page-content">
-              {content}
+            {content}
           </div>
         </div>
         <Footer className="page-footer" content={footer} site={site}/>
@@ -150,7 +152,11 @@ class Page extends Component {
       }
     };
   }
+}
 
+Page.propTypes = {
+  site: PropTypes.object.isRequired,
+  page: PropTypes.object.isRequired
 }
 
 export default Page;

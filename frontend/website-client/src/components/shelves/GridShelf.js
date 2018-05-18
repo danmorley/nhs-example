@@ -29,15 +29,16 @@ class GridShelf extends Component {
 
     const panelClass = ((metaLayout) => {
       switch(metaLayout) {
-        case 'full_width':
-          return 'shelf__col col-sm-12';
-        case '2_col_1_on_mobile':
-          return 'shelf__col col-sm-12 col-md-6';
-        case '3_col_1_on_mobile':
-          return'shelf__col col-sm-12 col-md-4';;
-        default:
-          return 'shelf__col col-sm-12';
-    }})(metaLayout);
+      case 'full_width':
+        return 'shelf__col col-sm-12';
+      case '2_col_1_on_mobile':
+        return 'shelf__col col-sm-12 col-md-6';
+      case '3_col_1_on_mobile':
+        return'shelf__col col-sm-12 col-md-4';
+      default:
+        return 'shelf__col col-sm-12';
+      }
+    })(metaLayout);
 
     var panels = content.items.map((panel, i) => {
       const panelInfo = CmsComponentRegistry.components[panel.type];
@@ -69,7 +70,8 @@ GridShelf.propTypes = {
   content: PropTypes.object.isRequired,
   classNamePrefix: PropTypes.string.isRequired,
   layout: PropTypes.string,
-  variant: PropTypes.string
+  variant: PropTypes.string,
+  id: PropTypes.string
 };
 
 CmsComponentRegistry.register('grid_shelf', GridShelf, 'basic-grid-shelf', null, 'responsive_2_col');

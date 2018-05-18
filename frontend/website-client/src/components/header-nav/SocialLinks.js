@@ -11,7 +11,7 @@ class SocialLinks extends Component {
       if (item.type === 'social_media_link') {
         return (
           <li key={i}>
-            <a href={item.value.link} target="_blank" tabIndex="-1" title="(opens in new window)" className={"page-footer__"+item.value.type}></a>
+            <a href={item.value.link} target="_blank" tabIndex="-1" title="(opens in new window)" className={"page-footer__"+item.value.type}>&nbsp;</a>
           </li>
         );
       } else {

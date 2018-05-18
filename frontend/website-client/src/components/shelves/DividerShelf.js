@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import Shelf from './Shelf';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import styles from './divider-shelf.css';
@@ -17,13 +19,17 @@ class DividerShelf extends Component {
 
     return (
       <Shelf id={id} layout={'no-padding'}>
-        <div className='container'>
-          <hr className='divider-shelf' />
+        <div className="container">
+          <hr className="divider-shelf" />
         </div>
       </Shelf>
     );
   }
 }
+
+DividerShelf.propTypes = {
+  id: PropTypes.string
+};
 
 CmsComponentRegistry.register('divider', DividerShelf, 'divider-shelf');
 

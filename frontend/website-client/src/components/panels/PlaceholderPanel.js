@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import Panel from './Panel';
 import styles from './panels.css';
@@ -14,6 +16,11 @@ class PlaceholderPanel extends Component {
       </Panel>
     );
   }
+}
+
+PlaceholderPanel.propTypes = {
+  panelType: PropTypes.string.isRequired,
+  id: PropTypes.string
 }
 
 CmsComponentRegistry.register('placeholder_panel', PlaceholderPanel);

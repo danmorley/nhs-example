@@ -44,7 +44,7 @@ const sampleShelvesPage = {
         ]
       }
     },
-          
+
     {
       type: 'guidance_shelf',
       value: {
@@ -346,12 +346,12 @@ const sampleShelvesPage = {
       }
     },
     {
-       id: 'section-heading-shelf-1',
-       type: 'section_heading_shelf',
-       value: {
-           heading: 'This is a section heading',
-           field_id: 'test-section-heading-1',
-       }
+      id: 'section-heading-shelf-1',
+      type: 'section_heading_shelf',
+      value: {
+        heading: 'This is a section heading',
+        field_id: 'test-section-heading-1',
+      }
     },
     {
       type: 'guidance_shelf',
@@ -361,13 +361,13 @@ const sampleShelvesPage = {
       }
     },
     {
-       id: 'section-heading-shelf-2',
-       type: 'section_heading_shelf',
-       value: {
-           heading: 'This is a section heading',
-           body: '<p>Lorem ipsum dolor sit amet, <b>consectetur adipiscing</b> elit, sed do eiusmod tempor incididunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>',
-           field_id: 'test-section-heading-2',
-       }
+      id: 'section-heading-shelf-2',
+      type: 'section_heading_shelf',
+      value: {
+        heading: 'This is a section heading',
+        body: '<p>Lorem ipsum dolor sit amet, <b>consectetur adipiscing</b> elit, sed do eiusmod tempor incididunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>',
+        field_id: 'test-section-heading-2',
+      }
     },
     {
       type: 'guidance_shelf',

@@ -1,21 +1,31 @@
 {
-    "extends": ["eslint:recommended", "plugin:react/recommended"],
-    "env": {
-        "es6": true,
-        "browser": true,
-        "jsx": true
-    },
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-        "indent":["warn",2],
-        "jsx-quotes":["warn", "prefer-double"],
-        "strict": 0,
-        "quotes": 0,
-        "no-unused-vars": 0,
-        "camelcase": 0,
-        "no-underscore-dangle": 0,
-        "react/prop-types": 0
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "env": {
+      "es6": true,
+      "browser": true
+  },
+  "plugins": [
+      "react"
+  ],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "classes": true,
+      "decorators": true,
+      "jsx": true
     }
+  },
+  "rules": {
+      "indent":["warn", 2],
+      "jsx-quotes":["warn", "prefer-double"],
+      "strict": 0,
+      "quotes": 0,
+      "no-unused-vars": 0,
+      "camelcase": 0,
+      "no-underscore-dangle": 0,
+      "no-console": 0,
+      "react/prop-types": ["error", {"ignore": ["children"]}],
+      "react/no-access-state-in-setstate": "error",
+      "react/no-string-refs": 0
+  }
 }

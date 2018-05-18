@@ -14,7 +14,7 @@ class Collapsible extends Component {
 
   handleTriggerClick(event) {
     event.preventDefault();
-    this.setState({ open: !this.state.open });
+    this.setState(prevState => ({open: !prevState.open}));
   }
 
   render() {
@@ -39,11 +39,10 @@ class Collapsible extends Component {
           style={this.props.triggerStyle}
           onKeyPress={(event) => {
             const { key } = event;
-              if (key === ' ' || key === 'Enter') {
-                this.handleTriggerClick(event);
-              }
+            if (key === ' ' || key === 'Enter') {
+              this.handleTriggerClick(event);
             }
-          }
+          }}
           tabIndex={this.props.tabIndex}
         >
           {this.props.trigger}

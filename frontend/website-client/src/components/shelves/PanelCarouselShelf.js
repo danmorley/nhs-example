@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import Shelf from './Shelf';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import Slider from 'react-slick';
@@ -45,36 +47,36 @@ class PanelCarouselShelf extends Component {
   getNodes(equalizerComponent, equalizerElement) {
     return equalizerElement.querySelectorAll(".slick-slide");
   }
-  
+
   render() {
     let { id, content, classNamePrefix } = this.props;
     let settings = {
       centerMode: true,
       pauseOnFocus: true,
       slidesToShow: 1,
-      centerPadding: '200px', 
+      centerPadding: '200px',
       dots: true,
       infinite: true,
       speed: 500,
       autoplay: true,
       autoplaySpeed: 12000,
       arrows: true,
-      responsive: [ 
-        { 
-          breakpoint: 576, 
-          settings: { 
-            centerPadding: '30px'  
-          } 
+      responsive: [
+        {
+          breakpoint: 576,
+          settings: {
+            centerPadding: '30px'
+          }
         },
         {
-          breakpoint: 992, 
-          settings: { 
+          breakpoint: 992,
+          settings: {
             centerPadding: '80px'
-          }  
+          }
         }
       ]
     };
-    
+
     var slides = content.items.map((panel, i) => {
       const panelInfo = CmsComponentRegistry.components[panel.type];
       const PanelClass = panelInfo && panelInfo.class;
@@ -96,7 +98,7 @@ class PanelCarouselShelf extends Component {
           <div className="row carousel__row">
             <Equalizer nodes={this.getNodes.bind(this)}>
               <Slider className="panel-carousel carousel-panel" {...settings}>
-                  {slides}
+                {slides}
               </Slider>
             </Equalizer>
           </div>
@@ -104,6 +106,12 @@ class PanelCarouselShelf extends Component {
       </Shelf>
     );
   }
+}
+
+PanelCarouselShelf.propTypes = {
+  content: PropTypes.object.isRequired,
+  classNamePrefix: PropTypes.string.isRequired,
+  id: PropTypes.string
 }
 
 CmsComponentRegistry.register('panel_carousel_shelf', PanelCarouselShelf, 'panel-carousel-shelf');

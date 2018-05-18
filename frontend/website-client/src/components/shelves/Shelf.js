@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import styles from './shelves.css';
 
 class Shelf extends Component {
@@ -17,6 +19,15 @@ class Shelf extends Component {
       </section>
     );
   }
+}
+
+Shelf.propTypes = {
+  content: PropTypes.object.isRequired,
+  classNamePrefix: PropTypes.string.isRequired,
+  variant: PropTypes.string,
+  layout: PropTypes.string,
+  style: PropTypes.object,
+  id: PropTypes.string
 }
 
 export default Shelf;
