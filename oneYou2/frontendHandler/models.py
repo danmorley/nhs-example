@@ -67,22 +67,22 @@ class FrontendVersion:
     @classmethod
     def get_html_for_version(cls, uuid):
         file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
-
-        return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, settings.ENV + '/' + uuid, 'index.html')
+        file_directory = settings.ENV if settings.ENV != 'local' else 'dev'
+        return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, file_directory + '/' + uuid, 'index.html')
 
     @classmethod
     def get_js_for_version(cls, version_id, file_name):
         file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
-
-        directory_name = settings.ENV + '/' + version_id + '/static/js'
+        file_directory = settings.ENV if settings.ENV != 'local' else 'dev'
+        directory_name = file_directory + '/' + version_id + '/static/js'
 
         return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, directory_name, file_name)
 
     @classmethod
     def get_css_for_version(cls, version_id, file_name):
         file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
-
-        directory_name = settings.ENV + '/' + version_id + '/static/css'
+        file_directory = settings.ENV if settings.ENV != 'local' else 'dev'
+        directory_name = file_directory + '/' + version_id + '/static/css'
         return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, directory_name, file_name)
 
     @classmethod
