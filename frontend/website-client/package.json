@@ -5,6 +5,7 @@
   "dependencies": {
     "bootstrap-4-grid": "^2.3.0",
     "html-react-parser": "^0.4.3",
+    "lodash.chunk": "^4.2.0",
     "lodash.startswith": "^4.2.1",
     "node-sass-chokidar": "0.0.3",
     "normalize.css": "^7.0.0",
