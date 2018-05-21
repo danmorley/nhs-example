@@ -7,21 +7,35 @@ class FooterMenu extends Component {
   render() {
     if (!this.props.items) return null;
     // Render simple menu items only.
-    let items = this.props.items.map((item, i) => {
+    
+    let itemCol1 = [];
+    let itemCol2 = [];
+    
+    this.props.items.map((item, i) => {
       if (item.type === 'simple_menu_item') {
-        return (<SimpleMenuItem key={i} item={item} classNamePrefix="footer" />);
+        if (i <= 3) {
+          itemCol1.push((<SimpleMenuItem key={i} item={item} classNamePrefix="footer" />));
+        }  
+        else {
+          itemCol2.push ((<SimpleMenuItem key={i} item={item} classNamePrefix="footer" />));
+        }
       } else {
         return null;
       }
     });
 
     return (
-      <ul className ="footer-nav__items">
-        {items}
-        <li>
-          <Link to={global.rootUrl +"/sitemap"} className="footer-nav__link">Sitemap</Link>
-        </li>
-      </ul>
+      <div className ="footer-nav">
+        <ul className ="footer-nav__col-1">
+          {itemCol1}
+        </ul>
+        <ul className ="footer-nav__col-2">
+          {itemCol2}
+          <li>
+            <Link to={global.rootUrl +"/sitemap"} className="footer-nav__link">Sitemap</Link>
+          </li>
+        </ul>
+      </div>
     );
   }
 }
