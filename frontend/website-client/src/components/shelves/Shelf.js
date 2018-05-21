@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import styles from './shelves.css';
+import './shelves.css';
 
 class Shelf extends Component {
   shelfClasses() {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import SimpleMenuItem from './SimpleMenuItem';
 import MultiMenuItem from './MultiMenuItem';
-import styles from './header-nav.css';
+import './header-nav.css';
 
 class SiteNav extends Component {
   onNavCloseClick() {

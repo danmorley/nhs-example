@@ -6,7 +6,7 @@ import Text from '../Text';
 import Image from '../Image';
 import CtaLink from '../shared/CtaLink';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-import styles from './promo-shelf.css';
+import './promo-shelf.css';
 import ImageUtils from '../panels/ImageUtils';
 
 /**

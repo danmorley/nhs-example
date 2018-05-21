@@ -5,7 +5,7 @@ import Swipeable from 'react-swipeable';
 import SiteNav from '../header-nav/SiteNav';
 import Text from '../Text';
 import { Link } from 'react-router-dom';
-import styles from './page-header.css';
+import './page-header.css';
 
 class PageHeader extends Component {
   constructor (props) {
@@ -37,7 +37,7 @@ class PageHeader extends Component {
     this.burgerElem = elem;
   }
 
-  swipedLeft(e, absX) {
+  swipedLeft(e, _absX) {
     PageHeader.toggleMenu(e);
   }
 

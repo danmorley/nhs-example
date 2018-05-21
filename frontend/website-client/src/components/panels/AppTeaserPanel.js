@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Text from '../Text';
 import CtaLink from '../shared/CtaLinks';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-import styles from './app-teaser.css';
+import './app-teaser.css';
 import Panel from './Panel';
 import ImageUtils from './ImageUtils';
 

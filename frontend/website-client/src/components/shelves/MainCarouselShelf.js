@@ -10,7 +10,7 @@ import PlaceholderShelf from './PlaceholderShelf';
 import GeneralTextShelf from './GeneralTextShelf';
 import BasicCtaShelf from './BasicCtaShelf';
 
-import styles from './main-carousel-shelf.css';
+import './main-carousel-shelf.css';
 
 /**
  *  Main Carousel Shelf is used to display a list of slides in a full width carousel widget.

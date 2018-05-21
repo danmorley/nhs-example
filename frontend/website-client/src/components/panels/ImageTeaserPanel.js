@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Text from '../Text';
 import CtaLinks from '../shared/CtaLinks';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-import styles from './image-teaser.css';
+import './image-teaser.css';
 import Panel from './Panel';
 import PropTypes from 'prop-types';
 import ImageUtils from './ImageUtils';

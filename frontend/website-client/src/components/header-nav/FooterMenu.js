@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import SimpleMenuItem from './SimpleMenuItem';
 import { Link } from 'react-router-dom';
-import styles from './footer-menu.css';
+import './footer-menu.css';
 
 class FooterMenu extends Component {
   render() {

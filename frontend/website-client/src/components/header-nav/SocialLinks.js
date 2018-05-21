@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class SocialLinks extends Component {
 
   render() {
-    let { links, site } = this.props;
+    let { links } = this.props;
     if (!links) return null;
 
     let items = links.map((item, i) => {

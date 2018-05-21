@@ -13,7 +13,7 @@ import Oneyou1TeaserPanel from '../panels/Oneyou1TeaserPanel';
 import AppTeaserPanel from '../panels/AppTeaserPanel';
 import InformationPanel from '../panels/InformationPanel';
 
-import styles from './panel-carousel-shelf.css';
+import './panel-carousel-shelf.css';
 
 /**
  *  Panel Carousel Shelf is used to display a list of slides in a panel carousel widget.

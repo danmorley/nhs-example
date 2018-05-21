@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import Panel from './Panel';
-import styles from './panels.css';
+import './panels.css';
 
 class PlaceholderPanel extends Component {
   render() {

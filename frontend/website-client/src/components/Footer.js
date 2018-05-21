@@ -14,7 +14,7 @@ class Footer extends Component {
       return null;
     }
 
-    let { image, items, social_media } = content;
+    let { items, social_media } = content;
     let tempImage = { link: logo, title: 'PHE logo' };
 
     return (

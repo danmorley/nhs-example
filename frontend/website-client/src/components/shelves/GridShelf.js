@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Shelf from '../shelves/Shelf';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-import styles from './grid-shelf.css';
+import './grid-shelf.css';
 import ShowMorePanel from '../shared/ShowMorePanel';
 
 import PlaceholderPanel from '../panels/PlaceholderPanel';

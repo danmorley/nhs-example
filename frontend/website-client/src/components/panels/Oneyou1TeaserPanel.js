@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Text from '../Text';
-import CtaLink from '../shared/CtaLink';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-import styles from './oneyou1-teaser.css';
+import './oneyou1-teaser.css';
 import Panel from './Panel';
 import CtaList from '../shared/CtaList';
 import ImageUtils from './ImageUtils';

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Shelf from './Shelf';
 import Text from '../Text';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-import styles from './promo-shelf.css';
+import './promo-shelf.css';
 
 /**
  *  Heading and Body Shelf is a simple shelf that can be used to display generic
@@ -24,9 +24,9 @@ import styles from './promo-shelf.css';
  */
 class HeadingBodyShelf extends Component {
   render() {
-    let { id, content, classNamePrefix, variant, layout } = this.props;
+    let { id, content, classNamePrefix, variant } = this.props;
     let metaVariant = content.meta_variant || variant;
-    let metaLayout = content.meta_layout || layout;
+    // let metaLayout = content.meta_layout || layout;
 
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>

@@ -57,9 +57,7 @@ class Page extends Component {
   }
 
   renderPageContent(page, site) {
-    let { title, body } = page;
-    let { menu, footer } = site;
-    // let pageTheme = (page_theme && page_theme.class_name) || 'oneyou';
+    let { body } = page;
 
     var shelves = body.map((shelf, i) => {
       const shelfInfo = CmsComponentRegistry.components[shelf.type];
@@ -91,7 +89,7 @@ class Page extends Component {
     );
   }
 
-  renderPageLoadError(page) {
+  renderPageLoadError() {
     const warningMessage = {
       heading: 'Page cannot be displayed',
       body: `<p>The page ${window.location.pathname} cannot be displayed.</p>`,
@@ -103,7 +101,7 @@ class Page extends Component {
     );
   }
 
-  renderPage(content, pageTheme, pageStyles, site, page) {
+  renderPage(content, pageTheme, pageStyles, site, _page) {
     let { menu, header, footer } = site;
     let theme = (pageTheme && pageTheme.class_name) || 'oneyou';
 

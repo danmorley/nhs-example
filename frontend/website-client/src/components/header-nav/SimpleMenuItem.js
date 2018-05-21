@@ -20,7 +20,7 @@ class SimpleMenuItem extends Component {
     SimpleMenuItem.closeMenu(event);
   }
 
-  static closeMenu(event) {
+  static closeMenu(_event) {
     const box = document.querySelector('.page-wrapper');
     box.classList.remove('header-nav--open');
   }

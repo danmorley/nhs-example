@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import Shelf from './Shelf';
-import styles from './shelves.css';
+import './shelves.css';
 
 class PlaceholderShelf extends Component {
   render() {

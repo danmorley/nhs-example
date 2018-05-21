@@ -44,8 +44,7 @@ class App extends Component {
     // history.listen detects when the user navigates within the site and
     // returns a function to cancel the listener for use in the component
     // unmount.
-    const that = this;
-    this.historyUnlisten = history.listen((location, action) => {
+    this.historyUnlisten = history.listen((location, _action) => {
       console.log('Internal load of page for path ' + location.pathname);
       let path = this.pagePathToRender(location.pathname);
       if (!this.isAppPage(path)) {
@@ -101,7 +100,7 @@ class App extends Component {
   }
 
   checkForRedirect() {
-    this.state.site.redirects.map((redirect, i) => {
+    this.state.site.redirects.map((redirect, _i) => {
       console.log('Redirecting to:', redirect);
 
       const path_minus_slash = window.location.pathname.replace(/\/$/, '');
@@ -131,7 +130,7 @@ class App extends Component {
     return slug
   }
 
-  loadPage(props) {
+  loadPage(_props) {
     // console.log('loadPage: ', this.state);
     return (<Page page={this.state.currentPage} site={this.state.site} />);
   }

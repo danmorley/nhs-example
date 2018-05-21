@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Shelf from './Shelf';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-import styles from './divider-shelf.css';
+import './divider-shelf.css';
 
 /**
  *  Divider Shelf is a simple shelf that can be used to

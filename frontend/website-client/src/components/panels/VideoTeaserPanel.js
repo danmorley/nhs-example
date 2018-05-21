@@ -4,10 +4,9 @@ import PropTypes from 'prop-types';
 import Text from '../Text';
 import CtaLinks from '../shared/CtaLinks';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-import styles from './video-teaser.css';
+import './video-teaser.css';
 import Panel from './Panel';
 import ImageUtils from './ImageUtils';
-import BrightcoveVideo from '../BrightcoveVideo';
 import VideoModal from '../VideoModal';
 
 /**
