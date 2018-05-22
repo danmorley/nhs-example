@@ -40,16 +40,17 @@ class FrontendVersion:
         latest_deployed_tag = file_service.get_file_to_text(settings.AZURE_FILE_SHARE, file_directory,
                                                             'current_tag.txt')
 
-        if settings.ENV == 'dev':
-            print('running deploy for integration environment')
-            # always deploy the frontend version in the integration and review environments
-            FrontendVersion.deploy_version()
-        elif settings.ENV != 'local' and current_tag != latest_deployed_tag:
-            print('running deploy for ' + settings.ENV + ' environment')
-            # we need to start using 'local' as the environment variable on local machines, to prevent frontend
-            # deployment when running locally.
-            # check the latest deployed version so we only deploy each tag once on staging and production
-            FrontendVersion.deploy_version()
+        if settings.INITIALIZER is not False:
+            if settings.ENV == 'dev':
+                print('running deploy for integration environment')
+                # always deploy the frontend version in the integration and review environments
+                FrontendVersion.deploy_version()
+            elif settings.ENV != 'local' and current_tag != latest_deployed_tag:
+                print('running deploy for ' + settings.ENV + ' environment')
+                # we need to start using 'local' as the environment variable on local machines, to prevent frontend
+                # deployment when running locally.
+                # check the latest deployed version so we only deploy each tag once on staging and production
+                FrontendVersion.deploy_version()
 
         # we have to return all directories as azure SDK had no way to order and limit response count
         directories = file_service.list_directories_and_files(settings.AZURE_FILE_SHARE, file_directory).directories
