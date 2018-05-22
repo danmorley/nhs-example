@@ -14,6 +14,7 @@ from wagtail.contrib.wagtailsitemaps.views import sitemap
 
 from .utils import get_release_version
 
+from experiments import urls as experiment_urls
 from release import views
 from search import views as search_views
 from api import urls as api_urls
@@ -21,10 +22,12 @@ from pages import urls as pages_urls
 from api.wagtail import api_router
 from api import views as api_views
 
+
 urlpatterns = [
     url(r'^django-admin/', include(admin.site.urls)),
 
     url(r'^admin/custom/pages/', include(pages_urls, namespace="oneyou_pages")),
+    url(r'^admin/experiments/', include(experiment_urls)),
 
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),

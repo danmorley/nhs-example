@@ -220,5 +220,4 @@ CONTENT_STORE_ENDPOINT = os.environ.get('CONTENT_STORE_ENDPOINT')
 
 ENV = os.environ.get('CMS_ENV', 'dev')
 
-
 # INTERNAL_IPS = ('127.0.0.1', 'localhost', '172.18.0.1')

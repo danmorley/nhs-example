@@ -1,6 +1,7 @@
 from modelcluster.models import ClusterableModel
 from django.db import models
-from wagtail.wagtailcore.models import Page
+
+from pages.models import OneYou2Page
 
 
 class Experiment(ClusterableModel):
@@ -13,5 +14,10 @@ class Experiment(ClusterableModel):
     control_page = models.ForeignKey('wagtailcore.Page', related_name='+', on_delete=models.CASCADE)
 
 
-class Variant(Page):
-    pass
+class OneYouVariant(OneYou2Page):
+
+    @classmethod
+    def from_page(cls, page):
+        return cls(
+            page.x
+        )

@@ -15,6 +15,7 @@ class FrontendVersion:
 
     @classmethod
     def get_current_version(cls):
+        return '1234'
         # TODO try to find a way to mock this function on server start
         if settings.AZURE_ACCOUNT_NAME == 'test' or settings.AZURE_ACCOUNT_NAME is None:
             return 'test'
