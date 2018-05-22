@@ -27,6 +27,7 @@ class FrontendVersion:
 
     @classmethod
     def get_available_versions(cls):
+        print('loading available versions')
         # TODO try to find a way to mock this function on server start
         if settings.AZURE_ACCOUNT_NAME == 'test' or settings.AZURE_ACCOUNT_NAME is None:
             return []
@@ -40,9 +41,11 @@ class FrontendVersion:
                                                             'current_tag.txt')
 
         if settings.ENV == 'dev':
+            print('running deploy for integration environment')
             # always deploy the frontend version in the integration and review environments
             FrontendVersion.deploy_version()
         elif settings.ENV != 'local' and current_tag != latest_deployed_tag:
+            print('running deploy for ' + settings.ENV + ' environment')
             # we need to start using 'local' as the environment variable on local machines, to prevent frontend
             # deployment when running locally.
             # check the latest deployed version so we only deploy each tag once on staging and production
@@ -53,6 +56,7 @@ class FrontendVersion:
         available_versions = []
 
         for directory in directories:
+            print('loading meta for ' + directory.name)
             properties = file_service.get_directory_properties(settings.AZURE_FILE_SHARE,
                                                                file_directory + '/' + directory.name)
             release_tag = file_service.get_file_to_text(settings.AZURE_FILE_SHARE,
@@ -87,13 +91,16 @@ class FrontendVersion:
 
     @classmethod
     def deploy_version(cls):
+        print('deploying frontend to azure')
         file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
 
         unique_id = str(uuid.uuid4())
 
-        file_service.create_directory(settings.AZURE_FILE_SHARE, settings.ENV, fail_on_exist=False)
+        file_directory = settings.ENV if settings.ENV != 'local' else 'dev'
 
-        version_directory = settings.ENV + "/" + unique_id
+        file_service.create_directory(settings.AZURE_FILE_SHARE, file_directory, fail_on_exist=False)
+
+        version_directory = file_directory + "/" + unique_id
 
         file_service.create_directory(settings.AZURE_FILE_SHARE, version_directory)
         file_service.create_directory(settings.AZURE_FILE_SHARE, version_directory + '/static')
@@ -112,6 +119,6 @@ class FrontendVersion:
 
         release_tag = get_release_version()
         file_service.put_file_from_text(settings.AZURE_FILE_SHARE, version_directory, 'tag.txt', release_tag)
-        file_service.put_file_from_text(settings.AZURE_FILE_SHARE, settings.ENV, "current_tag.txt", release_tag)
+        file_service.put_file_from_text(settings.AZURE_FILE_SHARE, file_directory, "current_tag.txt", release_tag)
 
-        file_service.put_file_from_text(settings.AZURE_FILE_SHARE, settings.ENV, "current_version.txt", unique_id)
+        file_service.put_file_from_text(settings.AZURE_FILE_SHARE, file_directory, "current_version.txt", unique_id)
