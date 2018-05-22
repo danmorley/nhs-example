@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styles from './show-more-panel.css';
+import './show-more-panel.css';
 import classNames from 'classnames';
 
 /**
@@ -31,7 +31,7 @@ class ShowMorePanel extends Component {
     sessionStorage.setItem(this.storageKey, this.state.isExpanded ? 'Y' : 'N');
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.props = nextProps;
     this.storageKey = `${this.props.id}_panelExpanded`;
     const isExpanded = sessionStorage.getItem(this.storageKey) === 'Y';
@@ -89,11 +89,6 @@ class ShowMorePanel extends Component {
     return children.length > noOfChildrenWhenCollapsed;
   }
 
-  firstChildDimensions() {
-    const childElems = this.contentElem.children;
-
-  }
-
   renderChildren() {
     return React.Children.map(this.props.children, (child, i) => {
       if (i < this.state.childrenToView) return child;
@@ -107,8 +102,6 @@ class ShowMorePanel extends Component {
   }
 
   render() {
-    let { rowsToShow, childRowHeight, children } = this.props;
-
     const container =
       <div key="1" ref={(elem) => this.setContainerElem (elem)} className="show-more-panel">
         <div ref={elem => this.setContentElem(elem)} className="row show-more-content">
@@ -127,12 +120,6 @@ class ShowMorePanel extends Component {
       </div>
     );
 
-    // const info =
-    //   <div key="3" className="debug-info">
-    //     Rows to show: {rowsToShow}, Children: {children.length}, To view: {this.state.childrenToView}, Collapsed capacity: {this.childrenToView(false)}
-    //   </div>
-    // ;
-
     return [
       container,
       buttons
@@ -142,6 +129,8 @@ class ShowMorePanel extends Component {
 
 ShowMorePanel.propTypes = {
   rowsToShow: PropTypes.number.isRequired,
+  childRowHeight: PropTypes.number,
+  id: PropTypes.string
 };
 
 export default ShowMorePanel;

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import Shelf from './Shelf';
 import Text from '../Text';
-import Image from '../Image';
-import CtaLink from '../shared/CtaLink';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-import styles from './article-page-heading-shelf.css';
-import ImageUtils from '../panels/ImageUtils';
+import './article-page-heading-shelf.css';
 import { Link } from 'react-router-dom';
 import UrlUtils from '../shared/UrlUtils';
 
@@ -25,7 +24,7 @@ import UrlUtils from '../shared/UrlUtils';
  */
 class ArticlePageHeadingShelf extends Component {
   render() {
-    let { id, content, classNamePrefix, variant, layout } = this.props;
+    let { id, content, classNamePrefix, variant } = this.props;
     let metaVariant = content.meta_variant || variant;
     // let metaLayout = content.meta_layout || layout;
 
@@ -44,6 +43,14 @@ class ArticlePageHeadingShelf extends Component {
       </Shelf>
     );
   }
+}
+
+ArticlePageHeadingShelf.propTypes = {
+  content: PropTypes.object.isRequired,
+  classNamePrefix: PropTypes.string.isRequired,
+  variant: PropTypes.string,
+  layout: PropTypes.string,
+  id: PropTypes.string
 }
 
 CmsComponentRegistry.register('article_page_heading_shelf', ArticlePageHeadingShelf, 'article-page-heading-shelf');

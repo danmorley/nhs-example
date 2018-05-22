@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import Shelf from './Shelf';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 
@@ -30,6 +32,12 @@ class GeneralTextShelf extends Component {
       </Shelf>
     );
   }
+}
+
+GeneralTextShelf.propTypes = {
+  content: PropTypes.object.isRequired,
+  classNamePrefix: PropTypes.string.isRequired,
+  id: PropTypes.string
 }
 
 CmsComponentRegistry.register('general_text_shelf', GeneralTextShelf, 'general-text-shelf');

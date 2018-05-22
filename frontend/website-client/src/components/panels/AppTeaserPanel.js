@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import Text from '../Text';
 import CtaLink from '../shared/CtaLinks';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-import styles from './app-teaser.css';
+import './app-teaser.css';
 import Panel from './Panel';
-import PropTypes from 'prop-types';
 import ImageUtils from './ImageUtils';
 
 /**
@@ -23,8 +24,10 @@ class AppTeaserPanel extends Component {
 
   setImage() {
     this.setState({
-      backgroundImageStyle: ImageUtils.backgroundImageStyle(this.props.content.image,
-                                                            ImageUtils.placeholderBackgroundImage())
+      backgroundImageStyle: ImageUtils.backgroundImageStyle(
+        this.props.content.image,
+        ImageUtils.placeholderBackgroundImage()
+      )
     })
   }
 
@@ -37,7 +40,7 @@ class AppTeaserPanel extends Component {
     window.removeEventListener('resize', this.setImage);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.props = nextProps;
     this.setImage();
   }
@@ -72,7 +75,8 @@ class AppTeaserPanel extends Component {
 
 AppTeaserPanel.propTypes = {
   content: PropTypes.object.isRequired,
-  classNamePrefix: PropTypes.string.isRequired
+  classNamePrefix: PropTypes.string.isRequired,
+  id: PropTypes.string
 };
 
 CmsComponentRegistry.register('app_teaser', AppTeaserPanel, 'app-teaser');

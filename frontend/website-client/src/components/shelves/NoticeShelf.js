@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import Shelf from './Shelf';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import Text from '../Text';
@@ -34,6 +36,12 @@ class NoticeShelf extends Component {
       </Shelf>
     );
   }
+}
+
+NoticeShelf.propTypes = {
+  content: PropTypes.object.isRequired,
+  classNamePrefix: PropTypes.string.isRequired,
+  id: PropTypes.string
 }
 
 CmsComponentRegistry.register('notice_shelf', NoticeShelf, 'notice-shelf');

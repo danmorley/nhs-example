@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import Shelf from './Shelf';
-import styles from './shelves.css';
+import './shelves.css';
 
 class PlaceholderShelf extends Component {
   render() {
@@ -16,6 +18,11 @@ class PlaceholderShelf extends Component {
       </Shelf>
     );
   }
+}
+
+PlaceholderShelf.propTypes = {
+  shelfType: PropTypes.string.isRequired,
+  id: PropTypes.string
 }
 
 CmsComponentRegistry.register('placeholder_shelf', PlaceholderShelf, 'placeholder-shelf');

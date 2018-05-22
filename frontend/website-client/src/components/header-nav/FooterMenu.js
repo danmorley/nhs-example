@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import SimpleMenuItem from './SimpleMenuItem';
 import { Link } from 'react-router-dom';
-import styles from './footer-menu.css';
+import './footer-menu.css';
 import chunk from 'lodash.chunk';
 
 class FooterMenu extends Component {
@@ -32,6 +34,10 @@ class FooterMenu extends Component {
       </div>
     );
   }
+}
+
+FooterMenu.propTypes = {
+  items: PropTypes.object.isRequired
 }
 
 export default FooterMenu;

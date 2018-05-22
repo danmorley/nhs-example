@@ -1,0 +1,32 @@
+{
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "env": {
+      "es6": true,
+      "browser": true
+  },
+  "plugins": [
+      "react"
+  ],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "classes": true,
+      "decorators": true,
+      "jsx": true
+    }
+  },
+  "rules": {
+      "indent":["warn", 2],
+      "jsx-quotes":["warn", "prefer-double"],
+      "strict": "error",
+      "quotes": 0,
+      "no-unused-vars": [1, { "argsIgnorePattern": "^_" }],
+      "camelcase": 0,
+      "no-underscore-dangle": 0,
+      "comma-dangle": ["error", "never"],
+      "no-console": 0,
+      "react/prop-types": ["error", {"ignore": ["children"]}],
+      "react/no-access-state-in-setstate": "error",
+      "react/no-string-refs": 1
+  }
+}
