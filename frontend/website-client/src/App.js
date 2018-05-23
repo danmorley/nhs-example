@@ -78,10 +78,12 @@ class App extends Component {
       global.contentStore.getPage(key).then((page) => {
         if (page.code === 0) {
           this.setState({ currentPage: page.response });
-          if (window.dcsMultiTrack) window.dcsMultiTrack(
-            'WT.cg_n', 'OneYou Core',
-            'WT.cg_s', page.response.title,
-            'DCSext.RealUrl', window.location.pathname);
+          if (window.dcsMultiTrack) {
+            window.dcsMultiTrack(
+              'WT.cg_n', 'OneYou Core',
+              'WT.cg_s', page.response.title,
+              'DCSext.RealUrl', window.location.pathname);
+          }
         } else {
           console.error(page.error, page.info.statusCode, page.info.message);
           if (page.info.statusCode === 404) {

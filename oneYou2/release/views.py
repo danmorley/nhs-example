@@ -57,7 +57,7 @@ def release_html(request, site_name):
                                                   "/{}/version/js/{}/?file_name=".format(site_name, frontend_id))
     substituted_index = substituted_index.replace("/manifest", "/{}/public/manifest".format(site_name))
     substituted_index = substituted_index.replace("/favicon", "/{}/public/favicon".format(site_name))
-    substituted_index = substituted_index.replace("/webtrends", "/{}/public/webtrends".format(site_name))
+    # substituted_index = substituted_index.replace("/webtrends", "/{}/public/webtrends".format(site_name))
 
     if settings.CONTENT_STORE_ENDPOINT:
         content_store_endpoint = settings.CONTENT_STORE_ENDPOINT
