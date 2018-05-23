@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import Shelf from './Shelf';
 import Text from '../Text';
 import Image from '../Image';
 import CtaLink from '../shared/CtaLink';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-import styles from './promo-shelf.css';
+import './promo-shelf.css';
 import ImageUtils from '../panels/ImageUtils';
 
 /**
@@ -33,8 +35,10 @@ class BasicCtaShelf extends Component {
 
   setImage() {
     this.setState({
-      backgroundImageStyle: ImageUtils.backgroundImageStyle(this.props.content.background_image,
-                                                            ImageUtils.placeholderBackgroundImage()),
+      backgroundImageStyle: ImageUtils.backgroundImageStyle(
+        this.props.content.background_image,
+        ImageUtils.placeholderBackgroundImage()
+      ),
       image: ImageUtils.isValid(this.props.content.image) ? ImageUtils.deviceImage(this.props.content.image) : null
     })
   }
@@ -48,7 +52,7 @@ class BasicCtaShelf extends Component {
     window.removeEventListener('resize', this.setImage);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.props = nextProps;
     this.setImage();
   }
@@ -73,7 +77,7 @@ class BasicCtaShelf extends Component {
     let { id, content, classNamePrefix, variant, layout } = this.props;
     let metaVariant = content.meta_variant || variant;
     let metaLayout = content.meta_layout || layout;
-
+    let gradient = content.meta_gradient || false;
     let backgroundColourShelfStyle = {};
 
     let shelfStyle = (ImageUtils.isValid(content.background_image)) ?
@@ -90,8 +94,8 @@ class BasicCtaShelf extends Component {
                 {this.renderImage(this.state.image)}
               </div>
               <div className="shelf__col col">
-              {this.renderHeadingBody(content, headingTagName)}
-              {this.renderCta(content.cta)}
+                {this.renderHeadingBody(content, headingTagName)}
+                {this.renderCta(content.cta)}
               </div>
             </div>
           </div>
@@ -146,7 +150,7 @@ class BasicCtaShelf extends Component {
     } else if (metaLayout === 'full_width') {
       return (
         <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
-          <div className="shelf__container container-fluid" style={shelfStyle}>
+          <div className={`shelf__container container-fluid shelf__container-gradient--${gradient}`}  style={shelfStyle}>
             <div className="container">
               <div className="row">
                 <div className="shelf__col col-10 col-sm-10 col-md-7">
@@ -176,10 +180,10 @@ class BasicCtaShelf extends Component {
         </Shelf>
       );
     }
-     else if (metaLayout === 'page_header') {
+    else if (metaLayout === 'page_header') {
       return (
         <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
-          <div className="shelf__container container-fluid" style={shelfStyle}>
+          <div className={`shelf__container container-fluid  shelf__container-gradient--${gradient}`} style={shelfStyle}>
             <div className="container">
               <div className="row">
                 <div className="shelf__col col-10 col-sm-8 col-md-7">
@@ -192,17 +196,17 @@ class BasicCtaShelf extends Component {
         </Shelf>
       );
     } else if (metaLayout === 'section_heading') {
-        return (
-          <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
-            <div className="shelf__container container" style={shelfStyle}>
-              <div className="row">
-                <div className="col shelf__col">
-                  {this.renderHeadingBody(content, headingTagName)}
-                </div>
+      return (
+        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+          <div className="shelf__container container" style={shelfStyle}>
+            <div className="row">
+              <div className="col shelf__col">
+                {this.renderHeadingBody(content, headingTagName)}
               </div>
             </div>
-          </Shelf>
-        );
+          </div>
+        </Shelf>
+      );
     } else {
       // Default layout: ???
       return (
@@ -219,6 +223,14 @@ class BasicCtaShelf extends Component {
       );
     }
   }
+}
+
+BasicCtaShelf.propTypes = {
+  content: PropTypes.object.isRequired,
+  classNamePrefix: PropTypes.string.isRequired,
+  variant: PropTypes.string,
+  layout: PropTypes.string,
+  id: PropTypes.string
 }
 
 // Basic CTA Shelf

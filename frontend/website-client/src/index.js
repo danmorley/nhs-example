@@ -38,14 +38,14 @@ global.contentStore.getSite().then((site) => {
   if (site.code === 0) {
     global.contentStore.release = site.response.meta.release_id; // Set release to the actual release guid
     ReactDOM.render(<App site={site && site.response}/>, rootElem);
-//    registerServiceWorker();
+    // registerServiceWorker();
     unregister();
   } else {
     console.error(site.error, site.info.statusCode, site.info.message);
     if (site.info.statusCode === 404) {
-      ReactDOM.render(<div className='container'><h1>Page not found.</h1><p>Please retry later.</p></div>, rootElem);
+      ReactDOM.render(<div className="container"><h1>Page not found.</h1><p>Please retry later.</p></div>, rootElem);
     } else {
-      ReactDOM.render(<div className='container'><h1>Something went wrong.</h1><p>Please refresh or try again later.</p></div>, rootElem);
+      ReactDOM.render(<div className="container"><h1>Something went wrong.</h1><p>Please refresh or try again later.</p></div>, rootElem);
     }
     // registerServiceWorker();
     unregister();

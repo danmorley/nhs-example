@@ -1,7 +1,7 @@
 import React from 'react';
 
 function withOwnContent(WrappedComponent, ownContent) {
-  return class extends React.Component {
+  class WithOwnContent extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -12,7 +12,13 @@ function withOwnContent(WrappedComponent, ownContent) {
     render() {
       return <WrappedComponent page={this.state.content} {...this.props} />;
     }
-  };
+  }
+  WithOwnContent.displayName = `WithOwnContent(${getDisplayName(WrappedComponent)})`;
+  return WithOwnContent;
+}
+
+function getDisplayName(WrappedComponent) {
+  return WrappedComponent.displayName || WrappedComponent.name || 'Component';
 }
 
 export default withOwnContent;

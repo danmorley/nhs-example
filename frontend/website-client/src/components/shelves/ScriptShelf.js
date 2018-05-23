@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import CmsComponentRegistry from '../CmsComponentRegistry';
 
 /**
@@ -26,6 +28,10 @@ class ScriptShelf extends Component {
   render() {
     return <div ref={el => (this.instance = el)} />;
   }
+}
+
+ScriptShelf.propTypes = {
+  content: PropTypes.object.isRequired
 }
 
 CmsComponentRegistry.register('script_shelf', ScriptShelf, 'script-shelf');

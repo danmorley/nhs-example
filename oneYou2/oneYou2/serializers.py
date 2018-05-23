@@ -11,6 +11,12 @@ class RedirectSerializer(serializers.ModelSerializer):
     source = ReadOnlyField(source='old_path')
     destination = ReadOnlyField(source='link')
 
+    def to_representation(self, data):
+        serialized_data = super(RedirectSerializer, self).to_representation(data)
+        if 'http' not in serialized_data['destination']:
+            serialized_data['destination'] = "/oneyou{}".format(serialized_data['destination'])
+        return serialized_data
+
     class Meta:
         model = apps.get_model('wagtailredirects', 'Redirect')
         fields = (

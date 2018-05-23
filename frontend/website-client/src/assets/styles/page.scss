@@ -53,6 +53,43 @@
    -ms-flex-positive: 1;
 }
 
+@supports (stroke-color:transparent) {
+  @supports (-webkit-appearance:none) {
+    @media not all and (min-resolution:.001dpcm) { 
+      .col-shrink-to-fit {
+        @include media-breakpoint-down(sm) {
+          flex-basis: 0;
+        }
+      }
+    }
+  }
+} 
+
+@supports (not (stroke-color:transparent)) {
+ .col-shrink-to-fit {
+   @include media-breakpoint-down(sm) {
+     flex-basis: unset;
+   }
+ } 
+}
+  
+@media not all and (min-resolution:.001dpcm) { 
+  .col-shrink-to-fit {
+    @include media-breakpoint-down(sm) {
+      flex-basis: unset;
+    }
+  }
+}
+
+_:-ms-fullscreen, :root { 
+  // ie 11
+  .col-shrink-to-fit {
+    @include media-breakpoint-down(sm) {
+      flex-basis: 100%;
+    }
+  }
+}
+
 .md-content-right {
   
   @include media-breakpoint-up(md) {

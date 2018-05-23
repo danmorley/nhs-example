@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import '../assets/styles/page.css';
 import CmsComponentRegistry from './CmsComponentRegistry';
 import Cookies from 'universal-cookie';
@@ -27,6 +29,7 @@ import IframeShelf from './shelves/IframeShelf';
 import ScriptShelf from './shelves/ScriptShelf';
 import SiteMapShelf from './shelves/SiteMapShelf';
 import DividerShelf from './shelves/DividerShelf';
+import ArticlePageHeadingShelf from './shelves/ArticlePageHeadingShelf';
 
 const cookies = new Cookies();
 const deployed = cookies.get('cookieBanner');
@@ -54,9 +57,7 @@ class Page extends Component {
   }
 
   renderPageContent(page, site) {
-    let { title, body } = page;
-    let { menu, footer } = site;
-    // let pageTheme = (page_theme && page_theme.class_name) || 'oneyou';
+    let { body } = page;
 
     var shelves = body.map((shelf, i) => {
       const shelfInfo = CmsComponentRegistry.components[shelf.type];
@@ -88,7 +89,7 @@ class Page extends Component {
     );
   }
 
-  renderPageLoadError(page) {
+  renderPageLoadError() {
     const warningMessage = {
       heading: 'Page cannot be displayed',
       body: `<p>The page ${window.location.pathname} cannot be displayed.</p>`,
@@ -100,7 +101,7 @@ class Page extends Component {
     );
   }
 
-  renderPage(content, pageTheme, pageStyles, site, page) {
+  renderPage(content, pageTheme, pageStyles, site, _page) {
     let { menu, header, footer } = site;
     let theme = (pageTheme && pageTheme.class_name) || 'oneyou';
 
@@ -113,7 +114,7 @@ class Page extends Component {
         <PageHeader navItems={menu.items} header={header}/>
         <div className="page-content-wrapper">
           <div id="page-content" className="page-content">
-              {content}
+            {content}
           </div>
         </div>
         <Footer className="page-footer" content={footer} site={site}/>
@@ -149,7 +150,11 @@ class Page extends Component {
       }
     };
   }
+}
 
+Page.propTypes = {
+  site: PropTypes.object.isRequired,
+  page: PropTypes.object.isRequired
 }
 
 export default Page;

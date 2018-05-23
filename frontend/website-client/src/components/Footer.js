@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import FooterMenu from './header-nav/FooterMenu';
 import Image from './Image.js';
 import SocialLinks from './header-nav/SocialLinks';
@@ -12,7 +14,7 @@ class Footer extends Component {
       return null;
     }
 
-    let { image, items, social_media } = content;
+    let { items, social_media } = content;
     let tempImage = { link: logo, title: 'PHE logo' };
 
     return (
@@ -31,6 +33,12 @@ class Footer extends Component {
       </div>
     );
   }
+}
+
+Footer.propTypes = {
+  content: PropTypes.object.isRequired,
+  site: PropTypes.object.isRequired,
+  className: PropTypes.string
 }
 
 export default Footer;

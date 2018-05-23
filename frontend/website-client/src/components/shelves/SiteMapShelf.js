@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import Shelf from './Shelf';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import SimpleMenuItem from '../header-nav/SimpleMenuItem';
 import MultiMenuItem from '../header-nav/MultiMenuItem';
 
 class SiteMapShelf extends Component {
-
-  constructor (props) {
-    super(props);
-  }
-
   render() {
     let topNav = this.props.site.menu;
     let footerNav = this.props.site.footer;
@@ -50,6 +47,11 @@ class SiteMapShelf extends Component {
     );
   }
 }
+
+SiteMapShelf.propTypes = {
+  site: PropTypes.object.isRequired,
+  classNamePrefix: PropTypes.string.isRequired
+};
 
 CmsComponentRegistry.register('sitemap_shelf', SiteMapShelf);
 

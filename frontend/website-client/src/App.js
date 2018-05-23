@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import 'normalize.css';
 import './assets/styles/fonts.css';
 import Page from './components/Page';
@@ -21,11 +23,11 @@ class App extends Component {
     super(props);
     this.state = {
       site: props.site || {},
-      currentPage: null,
+      currentPage: null
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     let path = this.checkForRedirect() || this.pagePathToRender(window.location.pathname);
     console.log('First time load of page for path ' + path);
     if (!this.isAppPage(path)) {
@@ -42,8 +44,7 @@ class App extends Component {
     // history.listen detects when the user navigates within the site and
     // returns a function to cancel the listener for use in the component
     // unmount.
-    const that = this;
-    this.historyUnlisten = history.listen((location, action) => {
+    this.historyUnlisten = history.listen((location, _action) => {
       console.log('Internal load of page for path ' + location.pathname);
       let path = this.pagePathToRender(location.pathname);
       if (!this.isAppPage(path)) {
@@ -77,9 +78,10 @@ class App extends Component {
       global.contentStore.getPage(key).then((page) => {
         if (page.code === 0) {
           this.setState({ currentPage: page.response });
-          if (window.dcsMultiTrack) window.dcsMultiTrack('WT.cg_n', 'OneYou Core',
-                                                         'WT.cg_s', page.response.title,
-                                                         'DCSext.RealUrl', window.location.pathname);
+          if (window.dcsMultiTrack) window.dcsMultiTrack(
+            'WT.cg_n', 'OneYou Core',
+            'WT.cg_s', page.response.title,
+            'DCSext.RealUrl', window.location.pathname);
         } else {
           console.error(page.error, page.info.statusCode, page.info.message);
           if (page.info.statusCode === 404) {
@@ -98,10 +100,12 @@ class App extends Component {
   }
 
   checkForRedirect() {
-    this.state.site.redirects.map((redirect, i) => {
+    this.state.site.redirects.map((redirect, _i) => {
       console.log('Redirecting to:', redirect);
 
-      if (redirect.source + '/' === window.location.pathname) {
+      const path_minus_slash = window.location.pathname.replace(/\/$/, '');
+
+      if (redirect.source === path_minus_slash) {
         if (startsWith(redirect, 'http:') || startsWith(redirect, 'https:')) {
           // Redirect to another site.
           window.location.pathname = redirect.destination;
@@ -126,7 +130,7 @@ class App extends Component {
     return slug
   }
 
-  loadPage(props) {
+  loadPage(_props) {
     // console.log('loadPage: ', this.state);
     return (<Page page={this.state.currentPage} site={this.state.site} />);
   }
@@ -143,13 +147,13 @@ class App extends Component {
           <Switch>
             <Route path={global.rootUrl + '/shelf-samples'}
               render={() => <ShelfSamplesPage site={this.state.site} />
-            }/>
+              }/>
             <Route path={global.rootUrl + '/sitemap'}
               render={() => <SiteMapPage site={this.state.site} />
-            }/>
+              }/>
             <Route path={global.rootUrl + '/'}
               render={(props) => {return this.loadPage(props)}
-            }/>
+              }/>
           </Switch>
         </Router>
       </div>
@@ -179,6 +183,10 @@ class App extends Component {
       contentElem.classList.add('hidden');
     }
   }
+}
+
+App.propTypes = {
+  site: PropTypes.object.isRequired
 }
 
 export default App;

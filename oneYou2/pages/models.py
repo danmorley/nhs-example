@@ -66,6 +66,7 @@ class PageHeading(CTABlock):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     background_image = BlobImageChooserBlock(required=False)
+    meta_gradient = blocks.BooleanBlock(label='Green gradient', required=False, default=False)
     shelf_id = IDBlock(required=False, label="ID", help_text="Not displayed in the front end")
 
 
@@ -78,6 +79,12 @@ class SectionHeading(blocks.StructBlock):
 class SimplePageHeading(SectionHeading):
     """This is a page heading with only text."""
     pass
+
+
+class ArticlePageHeadingShelf(blocks.StructBlock):
+    heading = blocks.CharBlock(required=False)
+    display_back_button = blocks.BooleanBlock(label='Display a back button', required=False, default=True)
+    back_button_label = blocks.CharBlock(required=False)
 
 
 class BackwardsCompatibleContent(CTABlock):
@@ -205,8 +212,9 @@ class OneYou2Page(Page):
         ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
         ('grid_shelf', Grid(icon="form")),
         ('find_out_more_dropdown', FindOutMoreDropDown(label="Link dropdown", icon="order-down")),
-        ('iframe_shelf', IFrameShelf(label="IFrame", icon='code')),
-        ('divider', Divider(label="Divider", icon='code')),
+        ('iframe_shelf', IFrameShelf(label="IFrame", icon='placeholder')),
+        ('divider', Divider(label="Divider", icon='horizontalrule')),
+        ('article_page_heading_shelf', ArticlePageHeadingShelf(label="Article Page Heading", icon='title')),
     ])
     page_ref = models.CharField(max_length=255, unique=True)
 

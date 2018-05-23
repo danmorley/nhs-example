@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import Shelf from './Shelf';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import queryString from 'query-string';
@@ -30,6 +32,12 @@ class GuidanceShelf extends Component {
       </Shelf>
     );
   }
+}
+
+GuidanceShelf.propTypes = {
+  content: PropTypes.object.isRequired,
+  classNamePrefix: PropTypes.string.isRequired,
+  id: PropTypes.string
 }
 
 CmsComponentRegistry.register('guidance_shelf', GuidanceShelf, 'guidance-shelf');

@@ -89,8 +89,8 @@ class BannerShelfSerializer(HyperlinkedModelSerializer):
 
     class Meta:
         model = BannerShelf
-        fields = ['heading', 'body', 'background_image', 'cta_text', 'cta_link', 'cta_page', 'shelf_id',
-                  'meta_layout', 'meta_variant']
+        fields = ['heading', 'body', 'background_image', 'meta_gradient', 'cta_text', 'cta_link', 'cta_page',
+                  'shelf_id', 'meta_layout', 'meta_variant']
 
 
 class AppTeaserSerializer(HyperlinkedModelSerializer):
