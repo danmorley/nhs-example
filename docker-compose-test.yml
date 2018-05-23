@@ -28,4 +28,4 @@ services:
       CONTENT_STORE_ENDPOINT: ""
     ports:
       - "8001:8001"
-    command: bash -c "flake8 && ./bin/wait-for-it.sh db:1433 -- && coverage run manage.py test --settings=oneYou2.settings.test && coverage report --fail-under=70"
+    command: bash -c "flake8 && ./bin/wait-for-it.sh db:1433 -- && coverage run manage.py test && coverage report --fail-under=70"
