@@ -18,15 +18,16 @@
   text-decoration: none;
   display: inline-block; 
   height: auto;
+  cursor: pointer;
   
   .share-button__items {
     display: none;
   }
   
-  &:focus, &:hover {
+  &.share-button--reveal {
     background: $white;
-    border: 1px solid $warm-grey;
-
+    border: 1px solid $pink-grey;
+    cursor: auto;
     
     .share-button__title  {
       display: none;

@@ -10,6 +10,7 @@ class ShareButtonPanel extends Component {
   constructor (props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.shareButtonClick = this.shareButtonClick.bind(this);
     this.socialWindow = this.socialWindow.bind(this);
   }
   
@@ -20,33 +21,38 @@ class ShareButtonPanel extends Component {
     window.open(encodeURI(url),"NewWindow",params);
   }
   
-  handleClick(evt) {
+  setShareButton(elem) {
+    this.shareButton = elem;
+  }
+  
+  handleClick(evt, shareText) {
     let pageUrl = window.location.href,
       title = document.title,
       site = '';  
-        
+      console.log('text = ' +shareText);
     switch (evt.currentTarget.getAttribute('data-social-type')) {
       case 'facebook':
-          evt.preventDefault();
-          site = "https://www.facebook.com/sharer/sharer.php?u=" + pageUrl + "&t=;" + title + " ";
-          this.socialWindow(site);
-          break;
+        evt.preventDefault();
+        site = "https://www.facebook.com/sharer/sharer.php?quote=" + shareText + "&amp;" + "u=;" + pageUrl;
+        this.socialWindow(site);
+        break;
       case 'twitter':
-          evt.preventDefault();
-          site = "https://twitter.com/share?url=" + pageUrl + "&amp;" + "text=" + title + " ";
-          this.socialWindow(site);
-          break;
+        evt.preventDefault();
+        site = "https://twitter.com/share?text=" + shareText + "&amp;" + "url=" + pageUrl;
+        this.socialWindow(site);
+        break;
       case 'email':
-          var link = "mailto:"
-              + "?subject=test subject"
-              + "&body=" + pageUrl;
-            evt.currentTarget.href=link;
-          break;
+        var link = "mailto:"
+            + "?subject=" 
+            + shareText 
+            + "&body=" + pageUrl;
+          evt.currentTarget.href=link;
+        break;
       case 'whatsapp':
-            evt.preventDefault();
-            site = "whatsapp://send?text=" + title + " " + pageUrl;
-            this.socialWindow(site);
-          break;
+        evt.preventDefault();
+        site = "whatsapp://send?text=" + shareText + " " + pageUrl;
+        this.socialWindow(site);
+        break;
       default:
         break;
       }
@@ -58,7 +64,7 @@ class ShareButtonPanel extends Component {
     let items = content.social_links.map((item, i) => {
       return (
         <li className={"share-button__"+item.share_item} key={i}>
-          <a href="#" data-social-type={item.share_item} target="_blank" title="(opens in new window)" onClick={(evt) => this.handleClick(evt)}
+          <a href="#" data-social-type={item.share_item} title="(opens in new window)" onClick={(evt) => this.handleClick(evt, item.share_text)}
           ></a>
         </li>
       );
@@ -66,7 +72,7 @@ class ShareButtonPanel extends Component {
   
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
-        <div className="share-button">
+        <div className="share-button" ref={(elem) => this.setShareButton(elem)} onClick={(e) => this.shareButtonClick(e)}>
           <span className="share-button__title">Share</span>
           <ul className="share-button__items">  
             {items}
@@ -74,6 +80,10 @@ class ShareButtonPanel extends Component {
         </div>
       </Panel>
     );
+  }
+  
+  shareButtonClick(e) {
+    this.shareButton.classList.add('share-button--reveal');
   }
 }
 
