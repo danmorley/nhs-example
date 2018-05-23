@@ -19,6 +19,7 @@ class OneYouVariantAdmin(ModelAdmin):
     menu_order = 911
     add_to_settings_menu = False
     url_helper_class = VarientAdminURLHelper
+    list_display = ('title', 'url', 'part_of_experiments')
 
 
 class ExperimentAdminGroup(ModelAdminGroup):
