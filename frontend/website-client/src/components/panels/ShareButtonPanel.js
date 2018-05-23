@@ -24,7 +24,6 @@ class ShareButtonPanel extends Component {
     let pageUrl = window.location.href,
       title = document.title,
       site = '';  
-  //  window.location.href = link;
         
     switch (evt.currentTarget.getAttribute('data-social-type')) {
       case 'facebook':
@@ -38,7 +37,7 @@ class ShareButtonPanel extends Component {
           this.socialWindow(site);
           break;
       case 'email':
-            let link = "mailto:"
+          var link = "mailto:"
               + "?subject=test subject"
               + "&body=" + pageUrl;
             evt.currentTarget.href=link;
@@ -47,7 +46,6 @@ class ShareButtonPanel extends Component {
             evt.preventDefault();
             site = "whatsapp://send?text=" + title + " " + pageUrl;
             this.socialWindow(site);
-            console.log('you chose whatsapp');
           break;
       default:
         break;
@@ -80,7 +78,9 @@ class ShareButtonPanel extends Component {
 }
 
 ShareButtonPanel.propTypes = {
-  classNamePrefix: PropTypes.string.isRequired
+  content: PropTypes.object.isRequired,
+  classNamePrefix: PropTypes.string.isRequired,
+  id: PropTypes.string
 };
 
 CmsComponentRegistry.register('share_button_panel', ShareButtonPanel, 'share-button-panel');
