@@ -29,7 +29,7 @@ class ShareButtonPanel extends Component {
     let pageUrl = window.location.href,
       title = document.title,
       site = '';  
-      console.log('text = ' +shareText);
+      
     switch (evt.currentTarget.getAttribute('data-social-type')) {
       case 'facebook':
         evt.preventDefault();
@@ -38,7 +38,7 @@ class ShareButtonPanel extends Component {
         break;
       case 'twitter':
         evt.preventDefault();
-        site = "https://twitter.com/share?text=" + shareText + "&amp;" + "url=" + pageUrl;
+        site = "https://twitter.com/intent/tweet?text=" + shareText + "&amp;" + "url=" + pageUrl;
         this.socialWindow(site);
         break;
       case 'email':
