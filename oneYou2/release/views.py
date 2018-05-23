@@ -49,8 +49,6 @@ def release_html(request, site_name):
     if release:
         frontend_id = release.frontend_id
         uuid = release.uuid
-        if release.content_status:
-            http_response['Cache-Control'] = 'max-age=3600'
     else:
         # In this sc
         frontend_id = FrontendVersion.get_current_version()
