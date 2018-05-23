@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import SimpleMenuItem from './SimpleMenuItem';
 import MultiMenuItem from './MultiMenuItem';
-import styles from './header-nav.css';
+import './header-nav.css';
 
 class SiteNav extends Component {
-  
   onNavCloseClick() {
     document.querySelector('.page-wrapper').classList.toggle('header-nav--open');
-  };
-  
+  }
+
   render() {
     if (!this.props.navItems) return null;
 
@@ -37,5 +38,9 @@ class SiteNav extends Component {
     );
   }
 }
+
+SiteNav.propTypes = {
+  navItems: PropTypes.object.isRequired
+};
 
 export default SiteNav;

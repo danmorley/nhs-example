@@ -2,7 +2,6 @@ import React from 'react';
 import Parser from 'html-react-parser';
 import domToReact from 'html-react-parser/lib/dom-to-react';
 import { Link } from 'react-router-dom';
-import CtaLink from './shared/CtaLink';
 import UrlUtils from './shared/UrlUtils';
 
 /**
@@ -44,7 +43,7 @@ class CmsRichTextFormatter  {
 }
 
 const parserOptions = {
-  replace: (node, options) => {
+  replace: (node, _options) => {
     if (node.type === 'tag' && node.name === 'a') {
       return CmsRichTextFormatter.renderLink(node);
     }

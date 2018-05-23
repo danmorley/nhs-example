@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import Shelf from './Shelf';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import Text from '../Text';
@@ -31,6 +33,7 @@ class IframeShelf extends Component {
         <div className="shelf__container container">
           <Text tagName="h2" className="shelf__header" content={content.heading} />
           <iframe
+            title={id}
             id={id}
             src={content.src}
             frameBorder={content.frame_border || '0'}
@@ -44,6 +47,12 @@ class IframeShelf extends Component {
       </Shelf>
     );
   }
+}
+
+IframeShelf.propTypes = {
+  content: PropTypes.object.isRequired,
+  classNamePrefix: PropTypes.string.isRequired,
+  id: PropTypes.string
 }
 
 CmsComponentRegistry.register('iframe_shelf', IframeShelf, 'iframe-shelf');

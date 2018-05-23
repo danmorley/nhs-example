@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Shelf from '../shelves/Shelf';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-import styles from './grid-shelf.css';
+import './grid-shelf.css';
 import ShowMorePanel from '../shared/ShowMorePanel';
 
 import PlaceholderPanel from '../panels/PlaceholderPanel';
@@ -29,15 +29,16 @@ class GridShelf extends Component {
 
     const panelClass = ((metaLayout) => {
       switch(metaLayout) {
-        case 'full_width':
-          return 'shelf__col col-sm-12';
-        case '2_col_1_on_mobile':
-          return 'shelf__col col-sm-12 col-md-6';
-        case '3_col_1_on_mobile':
-          return'shelf__col col-sm-12 col-md-4';;
-        default:
-          return 'shelf__col col-sm-12';
-    }})(metaLayout);
+      case 'full_width':
+        return 'shelf__col col-sm-12';
+      case '2_col_1_on_mobile':
+        return 'shelf__col col-sm-12 col-md-6';
+      case '3_col_1_on_mobile':
+        return'shelf__col col-sm-12 col-md-4';
+      default:
+        return 'shelf__col col-sm-12';
+      }
+    })(metaLayout);
 
     var panels = content.items.map((panel, i) => {
       const panelInfo = CmsComponentRegistry.components[panel.type];
@@ -69,7 +70,8 @@ GridShelf.propTypes = {
   content: PropTypes.object.isRequired,
   classNamePrefix: PropTypes.string.isRequired,
   layout: PropTypes.string,
-  variant: PropTypes.string
+  variant: PropTypes.string,
+  id: PropTypes.string
 };
 
 CmsComponentRegistry.register('grid_shelf', GridShelf, 'basic-grid-shelf', null, 'responsive_2_col');

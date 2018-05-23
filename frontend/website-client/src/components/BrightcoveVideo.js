@@ -24,12 +24,12 @@ class BrightcoveVideo extends Component {
     return (
       <div {...rest}>
         <video data-video-id={video}
-           data-account={this.brightcoveAccount}
-           data-player={this.brightcovePlayer}
-           data-embed="default"
-           data-application-id
-           className="video-js"
-           controls>
+          data-account={this.brightcoveAccount}
+          data-player={this.brightcovePlayer}
+          data-embed="default"
+          data-application-id
+          className="video-js"
+          controls>
         </video>
 
       </div>
