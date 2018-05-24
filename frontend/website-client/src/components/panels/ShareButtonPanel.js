@@ -33,7 +33,7 @@ class ShareButtonPanel extends Component {
     switch (evt.currentTarget.getAttribute('data-social-type')) {
       case 'facebook':
         evt.preventDefault();
-        site = "https://www.facebook.com/sharer/sharer.php?quote=" + shareText + "&amp;" + "u=;" + pageUrl;
+        site = "https://www.facebook.com/sharer/sharer.php?quote=" + shareText + "&" + "u=" + pageUrl;
         this.socialWindow(site);
         break;
       case 'twitter':
