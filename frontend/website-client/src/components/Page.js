@@ -23,6 +23,7 @@ import GuidanceShelf from './shelves/GuidanceShelf';
 import MainCarouselShelf from './shelves/MainCarouselShelf';
 import PanelCarouselShelf from './shelves/PanelCarouselShelf';
 import GridShelf from './shelves/GridShelf';
+import RecipeGridShelf from './shelves/RecipeGridShelf';
 import HeadingBodyShelf from './shelves/HeadingBodyShelf';
 import NoticeShelf from './shelves/NoticeShelf';
 import IframeShelf from './shelves/IframeShelf';

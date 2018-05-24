@@ -6,11 +6,7 @@ import './grid-shelf.css';
 import ShowMorePanel from '../shared/ShowMorePanel';
 
 import PlaceholderPanel from '../panels/PlaceholderPanel';
-import VideoTeaserPanel from '../panels/VideoTeaserPanel';
-import ImageTeaserPanel from '../panels/ImageTeaserPanel';
-import Oneyou1TeaserPanel from '../panels/Oneyou1TeaserPanel';
-import AppTeaserPanel from '../panels/AppTeaserPanel';
-import InformationPanel from '../panels/InformationPanel';
+import RecipeTeaserPanel from '../panels/RecipeTeaserPanel';
 
 /**
  *  Grid Shelf is a simple shelf that can be used to display other
@@ -25,6 +21,8 @@ class RecipeGridShelf extends Component {
   render() {
     let { id, content, classNamePrefix } = this.props;
     let metaImageDisplay = content.meta_image_display;
+
+    const panelClass = 'shelf__col col-6 col-md-3';
 
     var panels = content.items.map((panel, i) => {
       const panelInfo = CmsComponentRegistry.components[panel.type];
@@ -60,4 +58,4 @@ RecipeGridShelf.propTypes = {
 
 CmsComponentRegistry.register('recipe_grid_shelf', RecipeGridShelf, 'recipe-grid-shelf', null, 'responsive_2_col');
 
-export default GridShelf;
+export default RecipeGridShelf;
