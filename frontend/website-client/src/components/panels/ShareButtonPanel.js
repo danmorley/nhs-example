@@ -38,7 +38,7 @@ class ShareButtonPanel extends Component {
         break;
       case 'twitter':
         evt.preventDefault();
-        site = "https://twitter.com/intent/tweet?text=" + shareText + "&amp;" + "url=" + pageUrl;
+        site = "https://twitter.com/intent/tweet?text=" + shareText + "&" + "url=" + pageUrl;
         this.socialWindow(site);
         break;
       case 'email':
