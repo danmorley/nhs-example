@@ -114,4 +114,4 @@ web/
 
 *.ipynb
 
-*/local.py
+local.py
