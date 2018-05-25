@@ -21,7 +21,14 @@ class ScriptShelf extends Component {
     const s = document.createElement('script');
     s.type = 'text/javascript';
     s.async = true;
-    s.innerHTML = content.script;
+    s.id = content.id;
+
+    if (content.src) {
+      s.src = content.src;
+    } else {
+      s.innerHTML = content.script || '';
+    }
+
     this.instance.appendChild(s);
   }
 
