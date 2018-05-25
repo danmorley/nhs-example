@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Text from '../Text';
 import CtaLink from '../shared/CtaLinks';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-import './app-teaser.css';
+import './recipe-teaser.css';
 import Panel from './Panel';
 import ImageUtils from './ImageUtils';
 
@@ -25,7 +25,7 @@ class RecipeTeaserPanel extends Component {
   setImage() {
     this.setState({
       backgroundImageStyle: ImageUtils.backgroundImageStyle(
-        this.props.content.image,
+        this.props.content.background_image,
         ImageUtils.placeholderBackgroundImage()
       )
     })
@@ -48,11 +48,13 @@ class RecipeTeaserPanel extends Component {
   render() {
     let { content, classNamePrefix } = this.props;
     let backgroundTeaserImage = this.state.backgroundImageStyle;
-
+    
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix}>
         <div className={`${classNamePrefix}__image`} style={backgroundTeaserImage}>
-          <Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />
+          <div className={`${classNamePrefix}__info`}>
+            <Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />
+          </div>
         </div>
       </Panel>
     );
