@@ -34,7 +34,7 @@ def site_view(request, site_identifier):
 
     json_response = JsonResponse(current_release.get_content_for('site_json'))
     if current_release.content_status == 1:
-        json_response['Cache-Control'] = 'max-age=3600'
+        json_response['Cache-Control'] = 'max-age=900'
     return json_response
 
 
@@ -58,7 +58,7 @@ def release_view(request, site_identifier, release_uuid):
     serialized_site_data = SiteSerializer(site).data
     json_response = JsonResponse(serialized_site_data)
     if release_object.content_status == 1:
-        json_response['Cache-Control'] = 'max-age=3600'
+        json_response['Cache-Control'] = 'max-age=900'
     return json_response
 
 
@@ -125,7 +125,7 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug=
 
     json_response = JsonResponse(page_content)
     if release.content_status == 1:
-        json_response['Cache-Control'] = 'max-age=3600'
+        json_response['Cache-Control'] = 'max-age=900'
     return json_response
 
 
