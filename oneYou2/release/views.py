@@ -22,7 +22,8 @@ def release_html(request, site_name):
         return HttpResponse("Page Not Found", status=404)
 
     if getattr(request, 'path', None):
-        wagtail_redirect = Redirect.objects.filter(site=site_id, old_path=request.path).first()
+        site_redirects = Redirect.get_for_site(site_id)
+        wagtail_redirect = site_redirects.filter(old_path=request.path).first()
         if not wagtail_redirect:
             if request.path[-1] == '/':
                 wagtail_redirect = Redirect.objects.filter(site=site_id, old_path=request.path[:-1]).first()
