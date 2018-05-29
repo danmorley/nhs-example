@@ -6,7 +6,7 @@ class SocialLinks extends Component {
   render() {
     let { links } = this.props;
     if (!links) return null;
-
+        
     let items = links.map((item, i) => {
       if (item.type === 'social_media_link') {
         return (

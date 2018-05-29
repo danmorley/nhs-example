@@ -29,6 +29,8 @@ import SiteMapShelf from './shelves/SiteMapShelf';
 import DividerShelf from './shelves/DividerShelf';
 import ArticlePageHeadingShelf from './shelves/ArticlePageHeadingShelf';
 
+import ShareButtonShelf from './shelves/ShareButtonShelf';
+
 class Page extends Component {
   render() {
     let { site, page } = this.props;
@@ -99,6 +101,7 @@ class Page extends Component {
   renderPage(content, pageTheme, pageStyles, site, _page) {
     let { menu, header, footer } = site;
     let theme = (pageTheme && pageTheme.class_name) || 'oneyou';
+    let useShareButton = _page ? _page.meta.use_share_button : null;
 
     return (
       <div className={`page-wrapper ${theme}`}>
@@ -109,6 +112,9 @@ class Page extends Component {
             {content}
           </div>
         </div>
+        { useShareButton &&
+          <ShareButtonShelf />
+        }
         <Footer className="page-footer" content={footer} site={site}/>
       </div>
     );

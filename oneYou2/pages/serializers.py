@@ -65,6 +65,8 @@ class OneYouPageSerializer(serializers.ModelSerializer):
             'twitter_title',
             'twitter_description',
             'twitter_image',
+
+            'use_share_button',
         )
 
         fields = fields + meta_fields

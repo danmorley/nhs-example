@@ -105,23 +105,35 @@ class FrontendVersion:
 
         version_directory = file_directory + "/" + unique_id
 
+        print('creating frontend version directory')
         file_service.create_directory(settings.AZURE_FILE_SHARE, version_directory)
+        print('creating statics directory')
         file_service.create_directory(settings.AZURE_FILE_SHARE, version_directory + '/static')
+        print('creating js directory')
         file_service.create_directory(settings.AZURE_FILE_SHARE, version_directory + '/static/js')
+        print('creating css directory')
         file_service.create_directory(settings.AZURE_FILE_SHARE, version_directory + '/static/css')
+        print('creating media directory')
         file_service.create_directory(settings.AZURE_FILE_SHARE, version_directory + '/static/media')
 
+        print('adding current_version to the version directory')
         file_service.put_file_from_text(settings.AZURE_FILE_SHARE, version_directory, "current_version.txt", unique_id)
 
         manifest = json.loads(open('./web/asset-manifest.json').read())
 
         for key in manifest:
+            print('uploading ' + manifest[key])
             file_service.put_file_from_path(settings.AZURE_FILE_SHARE, version_directory, manifest[key],
                                             './web/' + manifest[key])
+        print('uploading index.html')
         file_service.put_file_from_path(settings.AZURE_FILE_SHARE, version_directory, 'index.html', './web/index.html')
 
         release_tag = get_release_version()
+        print('adding tag meta to the version directory')
         file_service.put_file_from_text(settings.AZURE_FILE_SHARE, version_directory, 'tag.txt', release_tag)
+
+        print('adding current tag meta to the environment directory')
         file_service.put_file_from_text(settings.AZURE_FILE_SHARE, file_directory, "current_tag.txt", release_tag)
 
+        print('updating current version meta in the environment directory')
         file_service.put_file_from_text(settings.AZURE_FILE_SHARE, file_directory, "current_version.txt", unique_id)

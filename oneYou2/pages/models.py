@@ -242,6 +242,9 @@ class OneYou2Page(Page):
                                            default="Start the fight back to a healthier you! One You is packed with"
                                                    " practical tips, tools and free apps to help you improve"
                                                    " your health today")
+
+    use_share_button = models.BooleanField(default=True)
+
     twitter_image_fk = models.ForeignKey(
         'images.PHEImage',
         null=True,
@@ -328,10 +331,16 @@ class OneYou2Page(Page):
             ],
             heading='Twitter Tags',
             classname='collapsible collapsed'),
+        MultiFieldPanel(
+            [
+                FieldPanel('use_share_button'),
+            ],
+            heading='Share buttons',
+            classname='collapsible collapsed'),
     ]
 
     promote_panels = [
-        FieldPanel('slug')
+        FieldPanel('slug'),
     ]
 
     edit_handler = TabbedInterface([
