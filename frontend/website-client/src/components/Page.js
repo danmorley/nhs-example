@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import '../assets/styles/page.css';
 import CmsComponentRegistry from './CmsComponentRegistry';
-import Cookies from 'universal-cookie';
-import CookieBanner from './cookie-banner/CookieBanner';
 import Footer from './Footer';
 import PageHeader from './page-header/PageHeader';
 import PageStyles from './PageStyles';
@@ -32,9 +30,6 @@ import DividerShelf from './shelves/DividerShelf';
 import ArticlePageHeadingShelf from './shelves/ArticlePageHeadingShelf';
 
 import ShareButtonShelf from './shelves/ShareButtonShelf';
-
-const cookies = new Cookies();
-const deployed = cookies.get('cookieBanner');
 
 class Page extends Component {
   render() {
@@ -111,9 +106,6 @@ class Page extends Component {
     return (
       <div className={`page-wrapper ${theme}`}>
         <PageStyles content={pageStyles} />
-        { deployed !== "true" &&
-          <CookieBanner />
-        }
         <PageHeader navItems={menu.items} header={header}/>
         <div className="page-content-wrapper">
           <div id="page-content" className="page-content">

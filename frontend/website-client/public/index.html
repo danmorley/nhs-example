@@ -6,6 +6,7 @@
     <meta name="indexlocation" content="public/index.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
+    <meta name="DCS.dcsipa" content="1" />
     <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
@@ -126,12 +127,46 @@
         }
       }
     </style>
-    <script type="text/javascript" src="%PUBLIC_URL%/webtrends.load.js"></script>
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="9d5293f5-cb06-4c3c-a81c-58ac270dec41" type="text/javascript" async></script>
+    <script type="text/javascript">
+  function CookiebotCallback_OnAccept()
+    {
+      if(Cookiebot.consent.statistics)
+      {
+        enableWebtrends();
+      }
+    }
+
+  function enableWebtrends() {
+   window.webtrendsAsyncInit=function(){
+    var dcs=new Webtrends.dcs().init({
+        dcsid:"dcss9yzisf9xjyg74mgbihg8p_8d2u",
+        domain:"statse.webtrendslive.com",
+        timezone:0,
+        i18n:true,
+        adimpressions:true,
+        adsparam:"WT.ac",
+        offsite:true,
+        download:true,
+        downloadtypes:"xls,doc,pdf,txt,csv,zip,docx,xlsx,rar,gzip",
+        onsitedoms: "nhs.uk",
+        fpcdom: ".www.nhs.uk",
+        plugins:{
+            id_migrate:{src:"//s.webtrends.com/js/webtrends.idmigrate.js", waitForCallback: true}
+        }
+      }).track();
+    };
+    (function(){
+        var s=document.createElement("script"); s.async=true; s.src="/oneyou/public/webtrends.min.js";
+        var s2=document.getElementsByTagName("script")[0]; s2.parentNode.insertBefore(s,s2);
+    }());
+  }
+</script>
   </head>
   <body>
     <noscript>
       You need to enable JavaScript to run this app.
-      <div aria-hidden="true"><img style="border: 0; width: 1px; height: 1px;" alt="" src="https://statse.webtrendslive.com/dcss9yzisf9xjyg74mgbihg8p_8d2u/njs.gif?dcsuri=/nojavascript&amp;wt.js=no&amp;wt.tv=8.0.3" /></div>
+      <div aria-hidden="true"><img style="border: 0; width: 1px; height: 1px;" alt="" src="https://statse.webtrendslive.com/dcss9yzisf9xjyg74mgbihg8p_8d2u/njs.gif?dcsuri=/nojavascript&amp;wt.js=no&amp;wt.tv=8.0.3&dcsipa=1" /></div>
     </noscript>
     <div id="root">
       <div class="center-center">

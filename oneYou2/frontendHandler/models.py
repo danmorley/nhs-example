@@ -7,7 +7,7 @@ from datetime import datetime
 
 from django.conf import settings
 
-from oneYou2.utils import get_release_version
+from oneYou2.utils import get_release_version, frontend_deployed, set_frontend_deployed_status
 
 
 class FrontendVersion:
@@ -40,7 +40,8 @@ class FrontendVersion:
         latest_deployed_tag = file_service.get_file_to_text(settings.AZURE_FILE_SHARE, file_directory,
                                                             'current_tag.txt')
 
-        if settings.INITIALIZER is not False:
+        deployed_status = frontend_deployed()
+        if settings.INITIALIZER is not False and not deployed_status:
             if settings.ENV == 'dev':
                 print('running deploy for integration environment')
                 # always deploy the frontend version in the integration and review environments
@@ -51,6 +52,7 @@ class FrontendVersion:
                 # deployment when running locally.
                 # check the latest deployed version so we only deploy each tag once on staging and production
                 FrontendVersion.deploy_version()
+            set_frontend_deployed_status('True')
 
         # we have to return all directories as azure SDK had no way to order and limit response count
         directories = file_service.list_directories_and_files(settings.AZURE_FILE_SHARE, file_directory).directories

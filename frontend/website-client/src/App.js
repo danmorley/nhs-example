@@ -6,6 +6,7 @@ import './assets/styles/fonts.css';
 import Page from './components/Page';
 import ShelfSamplesPage from './components/pages/ShelfSamplesPage';
 import SiteMapPage from './components/pages/SiteMapPage';
+import CookieDeclarationPage from './components/pages/CookieDeclarationPage';
 import { notFoundPage, serverErrorPage } from './data/exceptionPages';
 import createHistory from 'history/createBrowserHistory';
 import startsWith from 'lodash.startswith';
@@ -78,10 +79,12 @@ class App extends Component {
       global.contentStore.getPage(key).then((page) => {
         if (page.code === 0) {
           this.setState({ currentPage: page.response });
-          if (window.dcsMultiTrack) window.dcsMultiTrack(
-            'WT.cg_n', 'OneYou Core',
-            'WT.cg_s', page.response.title,
-            'DCSext.RealUrl', window.location.pathname);
+          if (window.dcsMultiTrack) {
+            window.dcsMultiTrack(
+              'WT.cg_n', 'OneYou Core',
+              'WT.cg_s', page.response.title,
+              'DCSext.RealUrl', window.location.pathname);
+          }
         } else {
           console.error(page.error, page.info.statusCode, page.info.message);
           if (page.info.statusCode === 404) {
@@ -150,6 +153,9 @@ class App extends Component {
               }/>
             <Route path={global.rootUrl + '/sitemap'}
               render={() => <SiteMapPage site={this.state.site} />
+              }/>
+            <Route path={global.rootUrl + '/cookie-declaration'}
+              render={() => <CookieDeclarationPage site={this.state.site} />
               }/>
             <Route path={global.rootUrl + '/'}
               render={(props) => {return this.loadPage(props)}

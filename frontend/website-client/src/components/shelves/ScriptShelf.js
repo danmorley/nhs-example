@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import Shelf from './Shelf';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 
 /**
@@ -21,17 +21,34 @@ class ScriptShelf extends Component {
     const s = document.createElement('script');
     s.type = 'text/javascript';
     s.async = true;
-    s.innerHTML = content.script;
+    s.id = content.id;
+
+    if (content.src) {
+      s.src = content.src;
+    } else {
+      s.innerHTML = content.script || '';
+    }
+
     this.instance.appendChild(s);
   }
 
   render() {
-    return <div ref={el => (this.instance = el)} />;
+    let { id, content, classNamePrefix } = this.props;
+      
+    return (
+      <Shelf id={id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
+        <div className="shelf__container container">
+          <div ref={el => (this.instance = el)} />
+        </div>
+      </Shelf>
+     )
   }
 }
 
 ScriptShelf.propTypes = {
-  content: PropTypes.object.isRequired
+  content: PropTypes.object.isRequired,
+  classNamePrefix: PropTypes.string.isRequired,
+  id: PropTypes.string
 }
 
 CmsComponentRegistry.register('script_shelf', ScriptShelf, 'script-shelf');
