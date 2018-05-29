@@ -1,5 +1,6 @@
 import Page from '../Page';
 import withOwnContent from './withOwnContent';
+import './cookie-declaration.css';
 
 /**
  *  Shelf Sample Page uses the withOwnContent higher order component to return a page
@@ -23,6 +24,7 @@ const cookieDeclarationPage = {
       type: 'script_shelf',
       value: {
         id: 'CookieDeclaration',
+        meta_variant: 'cookie-dec',
         src: 'https://consent.cookiebot.com/9d5293f5-cb06-4c3c-a81c-58ac270dec41/cd.js'
       }
     }
