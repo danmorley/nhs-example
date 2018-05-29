@@ -2,10 +2,29 @@ import React, { Component } from 'react';
 import Text from '../Text';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import styles from './share-button.css';
-import Panel from './Panel';
 import PropTypes from 'prop-types';
+import Shelf from '../shelves/Shelf';
 
-class ShareButtonPanel extends Component {  
+const SOCIAL_LINKS= [
+                {
+                  share_item: 'email',
+                  share_text: ''
+                },
+                {
+                  share_item: 'whatsapp',
+                  share_text: ''
+                },
+                {
+                  share_item: 'facebook',
+                  share_text: ''
+                },
+                {
+                  share_item: 'twitter',
+                  share_text: ''
+                }
+              ]
+
+class ShareButtonShelf extends Component {
   
   constructor (props) {
     super(props);
@@ -59,9 +78,7 @@ class ShareButtonPanel extends Component {
   }
 
   render() {
-    let { content, classNamePrefix } = this.props;
-    
-    let items = content.social_links.map((item, i) => {
+    let items = SOCIAL_LINKS.map((item, i) => {
       return (
         <li className={"share-button__"+item.share_item} key={i}>
           <a href="#" data-social-type={item.share_item} title="(opens in new window)" onClick={(evt) => this.handleClick(evt, item.share_text)}
@@ -71,14 +88,16 @@ class ShareButtonPanel extends Component {
     });
   
     return (
-      <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
-        <div className="share-button" ref={(elem) => this.setShareButton(elem)} onClick={(e) => this.shareButtonClick(e)}>
-          <span className="share-button__title">Share</span>
-          <ul className="share-button__items">  
-            {items}
-          </ul>
-        </div>
-      </Panel>
+      <div className='shelf__container container'>
+        <Shelf classNamePrefix='share-button-panel' variant='align-right'>
+          <div className="share-button" ref={(elem) => this.setShareButton(elem)} onClick={(e) => this.shareButtonClick(e)}>
+            <span className="share-button__title">Share</span>
+            <ul className="share-button__items">
+              {items}
+            </ul>
+          </div>
+        </Shelf>
+      </div>
     );
   }
   
@@ -87,12 +106,10 @@ class ShareButtonPanel extends Component {
   }
 }
 
-ShareButtonPanel.propTypes = {
-  content: PropTypes.object.isRequired,
-  classNamePrefix: PropTypes.string.isRequired,
-  id: PropTypes.string
+ShareButtonShelf.propTypes = {
+
 };
 
-CmsComponentRegistry.register('share_button_panel', ShareButtonPanel, 'share-button-panel');
+CmsComponentRegistry.register('share_button_panel', ShareButtonShelf, 'share-button-panel');
 
-export default ShareButtonPanel;
+export default ShareButtonShelf;

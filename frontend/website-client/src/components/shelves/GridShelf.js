@@ -11,7 +11,7 @@ import ImageTeaserPanel from '../panels/ImageTeaserPanel';
 import Oneyou1TeaserPanel from '../panels/Oneyou1TeaserPanel';
 import AppTeaserPanel from '../panels/AppTeaserPanel';
 import InformationPanel from '../panels/InformationPanel';
-import ShareButtonPanel from '../panels/ShareButtonPanel';
+import ShareButtonShelf from '../shelves/ShareButtonShelf';
 
 /**
  *  Grid Shelf is a simple shelf that can be used to display other
