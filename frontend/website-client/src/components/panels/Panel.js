@@ -22,6 +22,7 @@ class Panel extends Component {
 Panel.propTypes = {
   classNamePrefix: PropTypes.string.isRequired,
   variant: PropTypes.string,
+  layout: PropTypes.string,
   style: PropTypes.object,
   id: PropTypes.string
 };

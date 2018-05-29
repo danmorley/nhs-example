@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import Text from '../Text';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-import styles from './icon-card-panel.css';
+import './icon-card-panel.css';
 import Panel from './Panel';
-import PropTypes from 'prop-types';
 import ImageUtils from './ImageUtils';
 import Image from '../Image';
 
@@ -42,7 +43,7 @@ class IconCardPanel extends Component {
     window.removeEventListener('resize', this.setImage);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.props = nextProps;
     this.setImage();
   }
@@ -51,18 +52,19 @@ class IconCardPanel extends Component {
     const { content, classNamePrefix, variant, layout } = this.props;
     const metaVariant = content.meta_variant || variant;
     const metaLayout = content.meta_layout || layout;
+    let html;
 
     if (metaLayout === 'icon_on_left' || metaLayout === 'icon_on_right') {
-      var html = this.renderLayoutsIconOnLeftOrRight(content, classNamePrefix, metaLayout);
+      html = this.renderLayoutsIconOnLeftOrRight(content, classNamePrefix, metaLayout);
     } else {
-      var html = <p>Layout {metaLayout} not supported</p>;
+      html = <p>Layout {metaLayout} not supported</p>;
     }
 
     return (
       <Panel id={content.panel_id || this.props.id}
-             classNamePrefix={classNamePrefix}
-             variant={metaVariant}
-             layout={metaLayout}>
+        classNamePrefix={classNamePrefix}
+        variant={metaVariant}
+        layout={metaLayout}>
         {html}
       </Panel>
     );
@@ -89,7 +91,10 @@ class IconCardPanel extends Component {
 
 IconCardPanel.propTypes = {
   content: PropTypes.object.isRequired,
-  classNamePrefix: PropTypes.string.isRequired
+  classNamePrefix: PropTypes.string.isRequired,
+  variant: PropTypes.object,
+  layout: PropTypes.object,
+  id: PropTypes.object
 };
 
 CmsComponentRegistry.register('icon_card_panel', IconCardPanel, 'icon-card-panel');

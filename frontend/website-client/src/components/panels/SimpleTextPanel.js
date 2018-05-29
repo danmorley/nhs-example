@@ -19,9 +19,9 @@ class SimpleTextPanel extends Component {
 
     return (
       <Panel id={content.panel_id || this.props.id}
-             classNamePrefix={classNamePrefix}
-             variant={content.meta_variant}
-             layout={content.meta_layout}>
+        classNamePrefix={classNamePrefix}
+        variant={content.meta_variant}
+        layout={content.meta_layout}>
         <Text tagName="div" content={content.text} className="simple-text" />
       </Panel>
     );
@@ -30,6 +30,8 @@ class SimpleTextPanel extends Component {
 
 SimpleTextPanel.propTypes = {
   content: PropTypes.object.isRequired,
+  classNamePrefix: PropTypes.string.isRequired,
+  id: PropTypes.string
 };
 
 CmsComponentRegistry.register('simple_text_panel', SimpleTextPanel, 'simple-text-panel');

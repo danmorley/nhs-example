@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import Shelf from './Shelf';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import Text from '../Text';
-import styles from './table-shelf.css';
+import './table-shelf.css';
 
 import PlaceholderPanel from '../panels/PlaceholderPanel';
 import SimpleTextPanel from '../panels/SimpleTextPanel';
@@ -34,7 +36,7 @@ class TableShelf extends Component {
       const panelClass = 'row-' + i;
 
       if (PanelClass) {
-        return (<td key={i} className={panelClass}><PanelClass content={panel.value} classNamePrefix={panelClassNamePrefix} /></td>);
+        return (<td key={i} className={panelClass}><PanelClass content={panel.value} id={panelId} classNamePrefix={panelClassNamePrefix} /></td>);
       } else {
         return (<td key={i} className={panelClass}><PlaceholderPanel panelType={panel.type} /></td>);
       }
@@ -74,6 +76,14 @@ class TableShelf extends Component {
     return `<div className="${wrapperClass}">${value}</div>`;
   }
 }
+
+TableShelf.propTypes = {
+  content: PropTypes.object.isRequired,
+  classNamePrefix: PropTypes.string.isRequired,
+  variant: PropTypes.object,
+  layout: PropTypes.object,
+  id: PropTypes.object
+};
 
 CmsComponentRegistry.register('table', TableShelf, 'table-shelf', 'standard');
 
