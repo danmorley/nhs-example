@@ -89,7 +89,7 @@ class ShareButtonShelf extends Component {
   
     return (
       <div className='shelf__container container'>
-        <Shelf classNamePrefix='share-button-panel' variant='align-right'>
+        <Shelf classNamePrefix='share-button-shelf' variant='align-right'>
           <div className="share-button" ref={(elem) => this.setShareButton(elem)} onClick={(e) => this.shareButtonClick(e)}>
             <span className="share-button__title">Share</span>
             <ul className="share-button__items">
