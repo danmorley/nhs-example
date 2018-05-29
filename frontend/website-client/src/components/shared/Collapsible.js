@@ -14,6 +14,8 @@ class Collapsible extends Component {
 
   handleTriggerClick(event) {
     event.preventDefault();
+    // const isOpen = this.state.open;
+    // this.setState({open: !isOpen});
     this.setState(prevState => ({open: !prevState.open}));
   }
 
