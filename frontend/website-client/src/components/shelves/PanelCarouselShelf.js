@@ -83,9 +83,9 @@ class PanelCarouselShelf extends Component {
       const panelClassNamePrefix = panelInfo && panelInfo.classNamePrefix;
       const panelId = panel.value.field_id || panel.value.panel_id || 'panel-' + panel.id;
       if (PanelClass) {
-        return (<div key={i}><PanelClass content={panel.value} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
+        return (<div key={panel.id}><PanelClass content={panel.value} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
       } else {
-        return (<div key={i}><PlaceholderPanel panelType={panel.type} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
+        return (<div key={panel.id}><PlaceholderPanel panelType={panel.type} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
       }
     });
 

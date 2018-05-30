@@ -56,7 +56,7 @@ class Page extends Component {
   renderPageContent(page, site) {
     let { body } = page;
 
-    var shelves = body.map((shelf, i) => {
+    var shelves = body.map((shelf, _i) => {
       const shelfInfo = CmsComponentRegistry.components[shelf.type];
       const ShelfClass = shelfInfo && shelfInfo.class;
       const shelfClassNamePrefix = shelfInfo && shelfInfo.classNamePrefix;
@@ -64,9 +64,9 @@ class Page extends Component {
       const shelfLayout = shelfInfo && shelfInfo.layout;
       const shelfId = shelf.value.field_id || shelf.value.shelf_id || 'shelf-' + shelf.id;
       if (ShelfClass) {
-        return (<ErrorBoundary key={i}><ShelfClass content={shelf.value} id={shelfId} site={site} classNamePrefix={shelfClassNamePrefix} variant={shelfVariant} layout={shelfLayout}/></ErrorBoundary>);
+        return (<ErrorBoundary key={shelf.id}><ShelfClass content={shelf.value} id={shelfId} site={site} classNamePrefix={shelfClassNamePrefix} variant={shelfVariant} layout={shelfLayout}/></ErrorBoundary>);
       } else {
-        return (<PlaceholderShelf key={i} shelfType={shelf.type} id={shelfId} classNamePrefix={shelfClassNamePrefix}/>);
+        return (<PlaceholderShelf key={shelf.id} shelfType={shelf.type} id={shelfId} classNamePrefix={shelfClassNamePrefix}/>);
       }
     });
 

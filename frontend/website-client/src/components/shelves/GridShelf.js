@@ -28,7 +28,7 @@ class GridShelf extends Component {
     let metaLayout = content.meta_layout || layout;
     let metaImageDisplay = content.meta_image_display;
     let gridHeading = content.heading || '';
-    
+
     const panelClass = ((metaLayout) => {
       switch(metaLayout) {
       case 'full_width':
@@ -42,16 +42,16 @@ class GridShelf extends Component {
       }
     })(metaLayout);
 
-    var panels = content.items.map((panel, i) => {
+    var panels = content.items.map((panel, _i) => {
       const panelInfo = CmsComponentRegistry.components[panel.type];
       const PanelClass = panelInfo && panelInfo.class;
       const panelClassNamePrefix = panelInfo && panelInfo.classNamePrefix;
       const panelId = panel.value.field_id || panel.value.shelf_id || 'panel-' + panel.id;
 
       if (PanelClass) {
-        return (<div key={i} className={panelClass}><PanelClass content={panel.value} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
+        return (<div key={panel.id} className={panelClass}><PanelClass content={panel.value} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
       } else {
-        return (<div key={i} className={panelClass}><PlaceholderPanel panelType={panel.type} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
+        return (<div key={panel.id} className={panelClass}><PlaceholderPanel panelType={panel.type} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
       }
     });
 

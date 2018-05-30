@@ -45,15 +45,15 @@ class MainCarouselShelf extends Component {
       arrows: true
     };
 
-    var slides = content.items.map((shelf, i) => {
+    var slides = content.items.map((shelf, _i) => {
       const shelfInfo = CmsComponentRegistry.components[shelf.type];
       const ShelfClass = shelfInfo && shelfInfo.class;
       const shelfClassNamePrefix = shelfInfo && shelfInfo.classNamePrefix;
       const shelfId = shelf.value.field_id || shelf.value.shelf_id || 'shelf-' + shelf.id;
       if (ShelfClass) {
-        return (<div key={i}><ShelfClass content={shelf.value} id={shelfId} classNamePrefix={shelfClassNamePrefix}/></div>);
+        return (<div key={shelf.id}><ShelfClass content={shelf.value} id={shelfId} classNamePrefix={shelfClassNamePrefix}/></div>);
       } else {
-        return (<div key={i}><PlaceholderShelf shelfType={shelf.type} id={shelfId} classNamePrefix={shelfClassNamePrefix}/></div>);
+        return (<div key={shelf.id}><PlaceholderShelf shelfType={shelf.type} id={shelfId} classNamePrefix={shelfClassNamePrefix}/></div>);
       }
     });
 
