@@ -8,6 +8,7 @@ import PageHeader from '../page-header/PageHeader';
 import PageStyles from '../PageStyles';
 import DocumentMeta from 'react-document-meta';
 import ErrorBoundary from '../ErrorBoundary';
+import Text from '../Text';
 
 // Wildcard imports are not supported by Babel without babel-wildcard plugin.
 // Create react app template app hides away Babel, plugin can not be added. You must import
@@ -35,6 +36,27 @@ class RecipePage extends Component {
     let { site, page } = this.props;
 
     if (page) {
+      page = {
+        id: 3015,
+        title: "Test Recipe AAA",
+        body: [ ],
+        recipe_name: "Liquid Lunch",
+        tags: "alcolhol,beer",
+        serves: 1,
+        preparation_time: 1,
+        difficulty: "easy",
+        ingredients_list: "<ul><li>aaaa</li><li>bbb<br/></li></ul>",
+        instructions: "<ul><li>efwef</li><li>dwefwefew<br/></li></ul>",
+        page_theme: {
+          id: 1,
+          label: "Main One You Theme",
+          class_name: "oneyou"
+        },
+        meta: {
+          use_share_button: true,
+          type: "recipe_page"
+        }
+      };
       let { page_theme, page_styles } = page;
       const content = this.renderPageContent(page, site);
       const meta = this.pageMetaData(page, site);
@@ -102,12 +124,27 @@ class RecipePage extends Component {
     let theme = (pageTheme && pageTheme.class_name) || 'oneyou';
     let useShareButton = page ? page.meta.use_share_button : false;
 
+    console.log('page',page);
     return (
       <div className={`page-wrapper ${theme}`}>
         <PageStyles content={pageStyles} />
         <PageHeader navItems={menu.items} header={header}/>
         <div className="page-content-wrapper">
-          <h1>Recipe</h1>
+          { page &&
+            <div>
+              <h1>Recipe</h1>
+              <p>Page title: {page.title}</p>
+              <p>Recipe name: {page.recipe_name}</p>
+              <p>Tags: {page.tags}</p>
+              <p>Serves: {page.serves}</p>
+              <p>Prep: {page.preparation_time}</p>
+              <p>Difficulty: {page.difficulty}</p>
+              <p>Ingredients:</p>
+              <Text tagName="div" content={page.ingredients_list} className="ingredients" format="richtext" />
+              <p>Instructions:</p>
+              <Text tagName="div" content={page.instructions} className="instructions" format="richtext" />
+            </div>
+          }
           <div id="page-content" className="page-content">
             {content}
           </div>

@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 
 import 'normalize.css';
 import './assets/styles/fonts.css';
+import CmsComponentRegistry from './components/CmsComponentRegistry';
 import Page from './components/pages/Page';
+import RecipePage from './components/pages/RecipePage';
 import ShelfSamplesPage from './components/pages/ShelfSamplesPage';
 import SiteMapPage from './components/pages/SiteMapPage';
 import CookieDeclarationPage from './components/pages/CookieDeclarationPage';
@@ -136,9 +138,21 @@ class App extends Component {
   loadPage(_props) {
     // console.log('loadPage: ', this.state);
     const page = this.state.currentPage;
-    const pageInfo = CmsComponentRegistry.components[page.meta.type];
+    let pageType;
+    if (page) {
+      pageType = page.meta.type;
+    }
+
+    if (!pageType) {
+      pageType = 'general_page';
+    }
+
+    pageType = 'recipe_page';
+    const pageInfo = CmsComponentRegistry.components[pageType];
+    console.log('page info is', pageInfo);
     const PageClass = pageInfo && pageInfo.class;
     // TODO: Handle no page for type
+
     return (<PageClass page={this.state.currentPage} site={this.state.site} />);
   }
 
