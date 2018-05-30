@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import 'normalize.css';
 import './assets/styles/fonts.css';
-import Page from './components/Page';
+import Page from './components/pages/Page';
 import ShelfSamplesPage from './components/pages/ShelfSamplesPage';
 import SiteMapPage from './components/pages/SiteMapPage';
 import CookieDeclarationPage from './components/pages/CookieDeclarationPage';
