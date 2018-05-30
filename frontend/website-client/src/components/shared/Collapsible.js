@@ -8,10 +8,6 @@ class Collapsible extends Component {
     this.handleTriggerClick = this.handleTriggerClick.bind(this);
   }
 
-  static getDerivedStateFromProps(_nextProps, _prevState) {
-    return { open: false };   // Always close the content before display.
-  }
-
   handleTriggerClick(event) {
     event.preventDefault();
     this.setState(prevState => ({open: !prevState.open}));
