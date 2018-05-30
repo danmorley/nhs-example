@@ -19,7 +19,7 @@ class OneYouPageSerializer(serializers.ModelSerializer):
                 serialized_data['meta'][meta_field] = meta_field_value
             except KeyError:
                 pass
-        serialized_data['meta']['type'] = 'oneyou'
+        serialized_data['meta']['type'] = 'oneyou_page'
         for shelf in serialized_data['body']:
             determine_image_rendtions_for_shared_content_shelves(shelf)
 
@@ -96,7 +96,7 @@ class RecipePageSerializer(OneYouPageSerializer):
     def to_representation(self, data):
         print('to_representation')
         serialized_data = super(RecipePageSerializer, self).to_representation(data)
-        serialized_data['meta']['type'] = 'recipe'
+        serialized_data['meta']['type'] = 'recipe_page'
         return serialized_data
 
     class Meta:
