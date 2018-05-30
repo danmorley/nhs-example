@@ -90,3 +90,61 @@ class OneYouPageListSerializer(serializers.ModelSerializer):
             # 'revision'
 
         )
+
+
+class RecipePageSerializer(OneYouPageSerializer):
+    body = StreamField()
+
+    def to_representation(self, data):
+        print('to_representation')
+        serialized_data = super(RecipePageSerializer, self).to_representation(data)
+        return serialized_data
+
+    class Meta:
+        model = apps.get_model('pages', 'RecipePage')
+        fields = (
+            'id',
+            'title',
+            'body',
+            'recipe_name',
+            'tags',
+            'serves',
+            'preparation_time',
+            'difficulty',
+            'ingredients_list',
+            'instructions',
+            'page_ref',
+            'page_theme'
+        )
+
+        meta_fields = (
+            # 'type',
+            'slug',
+            # 'html_url',
+            # 'detail_url',
+            'show_in_menus',
+
+            'seo_title',
+            'search_description',
+            'first_published_at',
+            # 'parent',
+
+            # OpenGraph fields
+            'og_title',
+            'og_description',
+            'og_url',
+            'og_image',
+            'og_type',
+
+            # Twitter fields
+            'twitter_url',
+            'twitter_card',
+            'twitter_site',
+            'twitter_title',
+            'twitter_description',
+            'twitter_image',
+
+            'use_share_button',
+        )
+
+        fields = fields + meta_fields

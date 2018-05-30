@@ -10,7 +10,7 @@ from django.template.response import TemplateResponse, SimpleTemplateResponse
 
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.models import Page, Orderable
-from wagtail.wagtailcore.fields import StreamField
+from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, InlinePanel, ObjectList, TabbedInterface, \
     MultiFieldPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
@@ -215,7 +215,7 @@ class OneYou2Page(Page):
         ('iframe_shelf', IFrameShelf(label="IFrame", icon='placeholder')),
         ('divider', Divider(label="Divider", icon='horizontalrule')),
         ('article_page_heading_shelf', ArticlePageHeadingShelf(label="Article Page Heading", icon='title')),
-    ])
+    ], null=True, blank=True)
     page_ref = models.CharField(max_length=255, unique=True)
 
     # Meta Fields
@@ -353,14 +353,16 @@ class OneYou2Page(Page):
     api_fields = ['body', 'path', 'depth', 'numchild', 'page_ref', 'live', 'page_theme']
 
     def save(self, *args, **kwargs):
+        print('oneyoupage', self.__dict__)
         if not self.page_ref or self.page_ref is None:
+            print('oneyoupage', 'no page ref')
             self.page_ref = str(uuid.uuid4())
 
         assigned_release = self.release
 
         if self.release:
             self.release = None
-
+            
         super(OneYou2Page, self).save(*args, **kwargs)
         newest_revision = self.get_latest_revision()
 
@@ -374,7 +376,9 @@ class OneYou2Page(Page):
 
     def __init__(self, *args, **kwargs):
         super(OneYou2Page, self).__init__(*args, **kwargs)
+        print('oneyoupage init', self.__dict__)
         if not self.page_ref or self.page_ref is None:
+            print('no page ref')
             self.page_ref = str(uuid.uuid4())
 
     def serializable_data(self):
@@ -471,6 +475,96 @@ class OneYou2Page(Page):
     @property
     def default_preview_mode(self):
         return self.preview_modes[0][0]
+
+
+class RecipePage(OneYou2Page):
+    DIFFICULTY_OPTIONS = (
+        ('easy', 'Easy'),
+        ('medium', 'Medium'),
+        ('hard', 'Hard'),
+    )
+    image = models.ForeignKey(
+        'images.PHEImage',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    recipe_name = models.CharField(max_length=255, null=True, blank=True)
+    tags = models.CharField(max_length=255, null=True, blank=True)
+    serves = models.IntegerField(default=0)
+    preparation_time = models.IntegerField(default=0)
+    difficulty = models.CharField(max_length=255, choices=DIFFICULTY_OPTIONS, default='medium')
+    ingredients_list = RichTextField(null=True, blank=True)
+    instructions = RichTextField(null=True, blank=True)
+
+    content_panels = [
+        FieldPanel('title'),
+        FieldPanel('image'),
+        FieldPanel('recipe_name'),
+        FieldPanel('tags'),
+        FieldPanel('serves'),
+        FieldPanel('preparation_time'),
+        FieldPanel('difficulty'),
+        FieldPanel('ingredients_list'),
+        FieldPanel('instructions'),
+        FieldPanel('body'),
+        FieldPanel('theme'),
+        FieldPanel('release'),
+    ]
+
+    edit_handler = TabbedInterface([
+        ObjectList(content_panels, heading='Content'),
+        ObjectList(OneYou2Page.info_content_panels, heading='Notes'),
+        ObjectList(OneYou2Page.meta_content_panels, heading='Meta'),
+        ObjectList(Page.promote_panels, heading='Settings'),
+    ])
+
+    # def __init__(self, *args, **kwargs):
+    #     super(RecipePage, self).__init__(*args, **kwargs)
+    #     print('recipepage init', self.__dict__)
+    #     if not self.page_ref or self.page_ref is None:
+    #         print('no page ref')
+    #         self.page_ref = str(uuid.uuid4())
+    #
+    # def save(self, *args, **kwargs):
+    #     print('recipepage', self.__dict__)
+    #     if not self.page_ref or self.page_ref is None:
+    #         print('recipepage', 'no page ref')
+    #         self.page_ref = str(uuid.uuid4())
+    #
+    #     assigned_release = self.release
+    #
+    #     if self.release:
+    #         self.release = None
+    #
+    #     super(RecipePage, self).save(*args, **kwargs)
+    #     newest_revision = self.get_latest_revision()
+    #
+    #     if assigned_release:
+    #         if self.live:
+    #             assigned_release.add_revision(newest_revision)
+    #         else:
+    #             assigned_release.remove_page(self.id)
+    #
+    #     return self
+
+    def serve_preview(self, request, mode_name):
+        request.is_preview = True
+
+        if mode_name == 'json':
+            from .serializers import RecipePageSerializer
+            latest_revision_as_page = self.get_latest_revision_as_page()
+            serialized_page = RecipePageSerializer(instance=latest_revision_as_page)
+            return JsonResponse(serialized_page.data)
+
+        if mode_name == 'react':
+            context = {
+                'preview_url': '/oneyou{}?preview_page={}'.format(self.get_url(), self.slug)
+            }
+            return SimpleTemplateResponse(template='preview_wrapper.html', context=context)
+
+        return self.serve(request)
 
 
 # Orderables
