@@ -216,7 +216,6 @@ class OneYou2Page(Page):
         ('divider', Divider(label="Divider", icon='horizontalrule')),
         ('article_page_heading_shelf', ArticlePageHeadingShelf(label="Article Page Heading", icon='title')),
     ], null=True, blank=True)
-    page_ref = models.CharField(max_length=255, unique=True)
 
     # Meta Fields
     og_title = models.CharField(max_length=255, default="One You - Home",)
@@ -350,19 +349,16 @@ class OneYou2Page(Page):
         ObjectList(Page.promote_panels, heading='Settings'),
     ])
 
-    api_fields = ['body', 'path', 'depth', 'numchild', 'page_ref', 'live', 'page_theme']
+    api_fields = ['body', 'path', 'depth', 'numchild', 'live', 'page_theme']
 
     def save(self, *args, **kwargs):
         print('oneyoupage', self.__dict__)
-        if not self.page_ref or self.page_ref is None:
-            print('oneyoupage', 'no page ref')
-            self.page_ref = str(uuid.uuid4())
 
         assigned_release = self.release
 
         if self.release:
             self.release = None
-            
+
         super(OneYou2Page, self).save(*args, **kwargs)
         newest_revision = self.get_latest_revision()
 
@@ -377,9 +373,6 @@ class OneYou2Page(Page):
     def __init__(self, *args, **kwargs):
         super(OneYou2Page, self).__init__(*args, **kwargs)
         print('oneyoupage init', self.__dict__)
-        if not self.page_ref or self.page_ref is None:
-            print('no page ref')
-            self.page_ref = str(uuid.uuid4())
 
     def serializable_data(self):
         obj = get_serializable_data_for_fields(self)
@@ -424,7 +417,6 @@ class OneYou2Page(Page):
                    show_in_menus=obj_dict['meta']['show_in_menus'],
                    search_description=obj_dict['meta']['search_description'],
                    first_published_at=obj_dict['meta']['first_published_at'],
-                   page_ref=obj_dict['page_ref'],
                    body=json.dumps(obj_dict['body']),
                    live=obj_dict['live'],
                    theme_id=obj_dict['page_theme']['id'])
@@ -523,31 +515,25 @@ class RecipePage(OneYou2Page):
     # def __init__(self, *args, **kwargs):
     #     super(RecipePage, self).__init__(*args, **kwargs)
     #     print('recipepage init', self.__dict__)
-    #     if not self.page_ref or self.page_ref is None:
-    #         print('no page ref')
-    #         self.page_ref = str(uuid.uuid4())
     #
-    # def save(self, *args, **kwargs):
-    #     print('recipepage', self.__dict__)
-    #     if not self.page_ref or self.page_ref is None:
-    #         print('recipepage', 'no page ref')
-    #         self.page_ref = str(uuid.uuid4())
-    #
-    #     assigned_release = self.release
-    #
-    #     if self.release:
-    #         self.release = None
-    #
-    #     super(RecipePage, self).save(*args, **kwargs)
-    #     newest_revision = self.get_latest_revision()
-    #
-    #     if assigned_release:
-    #         if self.live:
-    #             assigned_release.add_revision(newest_revision)
-    #         else:
-    #             assigned_release.remove_page(self.id)
-    #
-    #     return self
+    def save(self, *args, **kwargs):
+        print('recipepage', self.__dict__)
+
+        assigned_release = self.release
+
+        if self.release:
+            self.release = None
+
+        super(RecipePage, self).save(*args, **kwargs)
+        newest_revision = self.get_latest_revision()
+
+        if assigned_release:
+            if self.live:
+                assigned_release.add_revision(newest_revision)
+            else:
+                assigned_release.remove_page(self.id)
+
+        return self
 
     def serve_preview(self, request, mode_name):
         request.is_preview = True
