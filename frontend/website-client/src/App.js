@@ -135,7 +135,11 @@ class App extends Component {
 
   loadPage(_props) {
     // console.log('loadPage: ', this.state);
-    return (<Page page={this.state.currentPage} site={this.state.site} />);
+    const page = this.state.currentPage;
+    const pageInfo = CmsComponentRegistry.components[page.meta.type];
+    const PageClass = pageInfo && pageInfo.class;
+    // TODO: Handle no page for type
+    return (<PageClass page={this.state.currentPage} site={this.state.site} />);
   }
 
   isAppPage(path) {

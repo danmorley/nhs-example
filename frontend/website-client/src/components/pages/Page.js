@@ -122,4 +122,7 @@ Page.propTypes = {
   page: PropTypes.object.isRequired
 }
 
+CmsComponentRegistry.register('general_page', Page, 'general-page');
+CmsComponentRegistry.register('oneyou_page', Page, 'general-page');
+
 export default Page;
