@@ -22,8 +22,6 @@ from release.factories import create_test_release
 
 from shelves.factories import create_test_promo_shelf
 
-from images.factories import create_default_test_image
-
 
 class OneYou2PageModelTests(OneYouTests):
 
