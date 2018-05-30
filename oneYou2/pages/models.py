@@ -492,7 +492,7 @@ class RecipePage(OneYou2Page):
 
     content_panels = [
         FieldPanel('title'),
-        FieldPanel('image'),
+        ImageChooserPanel('image'),
         FieldPanel('recipe_name'),
         FieldPanel('tags'),
         FieldPanel('serves'),
