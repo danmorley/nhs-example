@@ -6,31 +6,14 @@ class Collapsible extends Component {
     super(props);
     this.state = { open: false };
     this.handleTriggerClick = this.handleTriggerClick.bind(this);
-    console.log('TTT', 'Collapsible::constructor');
   }
 
-  // static getDerivedStateFromProps(_nextProps, _prevState) {
-  //   console.log('TTT', 'Collapsible::getDerivedStateFromProps');
-  //   return { open: false };   // Always close the content before display.
-  // }
-
   handleTriggerClick(event) {
-    // console.log('TTT', 'Collapsible::handleTriggerClick');
     event.preventDefault();
-    // const isOpen = this.state.open;
-    // this.setState({open: !this.state.open});
     this.setState(prevState => ({open: !prevState.open}));
   }
 
-  componentDidMount() {
-    console.log('TTT', 'Collapsible::componentDidMount');
-  }
-  componentWillUnmount() {
-    console.log('TTT', 'Collapsible::componentWillUnmount');
-  }
-
   render() {
-    console.log('TTT', 'Collapsible::render');
     const transition = `height 200ms linear`;
     const height = this.state.open ? this.refs.inner.offsetHeight : 0;
     const dropdownStyle = {
