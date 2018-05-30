@@ -34,7 +34,6 @@ class OneYouPageSerializer(serializers.ModelSerializer):
             # 'path',
             # 'depth',
             # 'numchild',
-            'page_ref',
             # 'live',
             'page_theme'
         )
@@ -82,7 +81,6 @@ class OneYouPageListSerializer(serializers.ModelSerializer):
             # 'relative_path'
             # 'title',
             'slug',
-            # 'page_ref',
             # 'depth',
             # 'numchild',
             # 'preview',
@@ -113,7 +111,6 @@ class RecipePageSerializer(OneYouPageSerializer):
             'difficulty',
             'ingredients_list',
             'instructions',
-            'page_ref',
             'page_theme'
         )
 
