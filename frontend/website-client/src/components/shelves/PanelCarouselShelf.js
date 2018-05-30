@@ -77,7 +77,7 @@ class PanelCarouselShelf extends Component {
       ]
     };
 
-    var slides = content.items.map((panel, i) => {
+    var slides = content.items.map((panel, _i) => {
       const panelInfo = CmsComponentRegistry.components[panel.type];
       const PanelClass = panelInfo && panelInfo.class;
       const panelClassNamePrefix = panelInfo && panelInfo.classNamePrefix;
