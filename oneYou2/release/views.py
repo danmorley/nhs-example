@@ -60,10 +60,16 @@ def release_html(request, site_name):
     substituted_index = substituted_index.replace("/favicon", "/{}/public/favicon".format(site_name))
     # substituted_index = substituted_index.replace("/webtrends", "/{}/public/webtrends".format(site_name))
 
+    host = request.__dict__['META']['HTTP_HOST']
+
     if settings.CONTENT_STORE_ENDPOINT:
         content_store_endpoint = settings.CONTENT_STORE_ENDPOINT
     else:
-        content_store_endpoint = get_protocol() + request.__dict__['META']['HTTP_HOST'] + "/api"
+        content_store_endpoint = get_protocol() + host + "/api"
+
+    if "local" in host or "service" in host:
+        content_store_endpoint = get_protocol() + host + "/api"
+
     substituted_index = substituted_index.replace("%apiurl%", content_store_endpoint)
     substituted_index = substituted_index.replace("%releaseid%", uuid)
     http_response = HttpResponse(substituted_index)
