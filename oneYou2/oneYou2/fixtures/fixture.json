@@ -721,5 +721,17 @@
       "menu_items": "[{\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"Contact Us\", \"link_external\": \"\", \"link_page\": 2009}, \"id\": \"41228c2e-5be4-4ef3-87fb-e19822a72d38\"}, {\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"Partners\", \"link_external\": \"\", \"link_page\": 2010}, \"id\": \"ae912c87-416d-48cf-8c23-756dd3f4f0bb\"}, {\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"Terms and conditions\", \"link_external\": \"\", \"link_page\": 2011}, \"id\": \"963a2c13-27a3-43ac-bb68-b2253a4af67e\"}, {\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"Crown Copyright\", \"link_external\": \"\", \"link_page\": 2012}, \"id\": \"47a829cc-6d37-4f97-a034-099688eec90c\"}, {\"type\": \"simple_menu_item\", \"value\": {\"link_text\": \"Privacy Policy\", \"link_external\": \"\", \"link_page\": 2013}, \"id\": \"79dbf6df-4b11-457a-a1f8-3b2902f1a24b\"}]",
       "follow_us": "[{\"type\": \"social_media_link\", \"value\": {\"label\": \"Facebook\", \"type\": \"facebook\", \"link\": \"https://www.facebook.com/OneYouPHE/\"}, \"id\": \"76e00772-24fc-4bc6-8ecd-ae757e6735fe\"}, {\"type\": \"social_media_link\", \"value\": {\"label\": \"Twitter\", \"type\": \"twitter\", \"link\": \"https://twitter.com/oneyouphe\"}, \"id\": \"6a75a35b-b2dc-48a7-96f1-f3a05ec3e57f\"}]"
     }
+  },
+  {
+    "model": "home.sitesettings",
+    "pk": 1,
+    "fields": {
+      "site": 2,
+      "title": "OneYou",
+      "uid": "oneyou",
+      "menu": 1,
+      "footer": 1,
+      "header": 1
+    }
   }
 ]
