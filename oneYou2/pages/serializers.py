@@ -91,11 +91,20 @@ class OneYouPageListSerializer(serializers.ModelSerializer):
         )
 
 
-class RecipePageSerializer(OneYouPageSerializer):
+class RecipePageSerializer(serializers.ModelSerializer):
     body = StreamField()
 
     def to_representation(self, data):
+        meta_fields = getattr(self.Meta, 'meta_fields')
         serialized_data = super(RecipePageSerializer, self).to_representation(data)
+        serialized_data['meta'] = {}
+        for meta_field in meta_fields:
+            try:
+                meta_field_value = serialized_data.pop(meta_field)
+                serialized_data['meta'][meta_field] = meta_field_value
+            except KeyError:
+                pass
+
         serialized_data['meta']['type'] = 'recipe_page'
         image_id = serialized_data['image']
         image_object = PHEImage.objects.get(id=image_id)

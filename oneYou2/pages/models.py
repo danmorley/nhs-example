@@ -351,8 +351,6 @@ class OneYou2Page(Page):
     api_fields = ['body', 'path', 'depth', 'numchild', 'live', 'page_theme']
 
     def save(self, *args, **kwargs):
-        print('oneyoupage', self.__dict__)
-
         assigned_release = self.release
 
         if self.release:
@@ -371,7 +369,6 @@ class OneYou2Page(Page):
 
     def __init__(self, *args, **kwargs):
         super(OneYou2Page, self).__init__(*args, **kwargs)
-        print('oneyoupage init', self.__dict__)
 
     def serializable_data(self):
         obj = get_serializable_data_for_fields(self)
@@ -516,8 +513,6 @@ class RecipePage(OneYou2Page):
     #     print('recipepage init', self.__dict__)
     #
     def save(self, *args, **kwargs):
-        print('recipepage', self.__dict__)
-
         assigned_release = self.release
 
         if self.release:
