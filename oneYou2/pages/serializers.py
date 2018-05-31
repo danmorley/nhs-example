@@ -3,6 +3,7 @@ from rest_framework import serializers
 from django.apps import apps
 from wagtail.api.v2.serializers import StreamField
 
+from images.models import PHEImage
 from .utils import determine_image_rendtions_for_shared_content_shelves
 
 
@@ -94,9 +95,16 @@ class RecipePageSerializer(OneYouPageSerializer):
     body = StreamField()
 
     def to_representation(self, data):
-        print('to_representation')
         serialized_data = super(RecipePageSerializer, self).to_representation(data)
         serialized_data['meta']['type'] = 'recipe_page'
+        image_id = serialized_data['image']
+        image_object = PHEImage.objects.get(id=image_id)
+        renditions = image_object.generate_or_get_all_renditions()
+        serialized_data['image'] = {
+            'desktop': renditions['banner_shelf/None/None/desktop'],
+            'mobile': renditions['banner_shelf/None/None/mobile']
+        }
+
         return serialized_data
 
     class Meta:
@@ -104,6 +112,7 @@ class RecipePageSerializer(OneYouPageSerializer):
         fields = (
             'id',
             'title',
+            'image',
             'body',
             'recipe_name',
             'tags',
