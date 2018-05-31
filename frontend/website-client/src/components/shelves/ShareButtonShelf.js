@@ -61,9 +61,7 @@ class ShareButtonShelf extends Component {
         this.socialWindow(site);
         break;
       case 'email':
-        var link = "mailto:"
-            + "?subject=" 
-            + shareText 
+        var link = "mailto:?"
             + "&body=" + pageUrl;
           evt.currentTarget.href=link;
         break;
