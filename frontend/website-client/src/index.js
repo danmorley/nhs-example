@@ -23,7 +23,6 @@ global.rootUrl = rootElem.getAttribute('data-site') ? '/' + rootElem.getAttribut
 let dataContentStoreEndpoint = rootElem.getAttribute('data-content-store-endpoint') || 'http://localhost:8000/api';
 let dataSite = rootElem.getAttribute('data-site') || 'oneyou';
 let dataRelease = rootElem.getAttribute('data-release') || 'current';
-global.preview_page = rootElem.getAttribute('page_preview') || null;
 
 // Ensure query param release id is used if given.
 let params = queryString.parse(window.location.search);
@@ -31,7 +30,9 @@ if (params.id) dataRelease = params.id;
 if (params.cms) dataContentStoreEndpoint = params.cms;
 if (params.cmsid) dataRelease = params.cmsid;
 
-global.contentStore = new ContentStore(dataContentStoreEndpoint, dataSite, dataRelease);
+let preview_page = params.preview_page || null;
+
+global.contentStore = new ContentStore(dataContentStoreEndpoint, dataSite, dataRelease, preview_page);
 
 // Load site.json before mounting the React app.
 global.contentStore.getSite().then((site) => {

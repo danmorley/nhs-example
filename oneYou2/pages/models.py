@@ -427,6 +427,7 @@ class OneYou2Page(Page):
 
     def serve_preview(self, request, mode_name):
         request.is_preview = True
+        print("SERVE PREVIEW")
 
         if mode_name == 'json':
             from .serializers import OneYouPageSerializer
