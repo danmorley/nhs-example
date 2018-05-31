@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 
 import 'normalize.css';
 import './assets/styles/fonts.css';
-import CmsComponentRegistry from './components/CmsComponentRegistry';
+// import CmsComponentRegistry from './components/CmsComponentRegistry';
 import Page from './components/pages/Page';
-import RecipePage from './components/pages/RecipePage';
 import ShelfSamplesPage from './components/pages/ShelfSamplesPage';
-import SiteMapPage from './components/pages/SiteMapPage';
+import siteMapPage from './components/pages/SiteMapPage';
 import CookieDeclarationPage from './components/pages/CookieDeclarationPage';
 import { notFoundPage, serverErrorPage } from './data/exceptionPages';
 import createHistory from 'history/createBrowserHistory';
@@ -137,23 +136,7 @@ class App extends Component {
 
   loadPage(_props) {
     // console.log('loadPage: ', this.state);
-    const page = this.state.currentPage;
-    let pageType;
-    if (page) {
-      pageType = page.meta.type;
-    }
-
-    if (!pageType) {
-      pageType = 'general_page';
-    }
-
-    pageType = 'recipe_page';
-    const pageInfo = CmsComponentRegistry.components[pageType];
-    console.log('page info is', pageInfo);
-    const PageClass = pageInfo && pageInfo.class;
-    // TODO: Handle no page for type
-
-    return (<PageClass page={this.state.currentPage} site={this.state.site} />);
+    return (<Page page={this.state.currentPage} site={this.state.site} />);
   }
 
   isAppPage(path) {
@@ -170,7 +153,7 @@ class App extends Component {
               render={() => <ShelfSamplesPage site={this.state.site} />
               }/>
             <Route path={global.rootUrl + '/sitemap'}
-              render={() => <SiteMapPage site={this.state.site} />
+              render={() => <Page page={siteMapPage(this.state.site)} site={this.state.site} />
               }/>
             <Route path={global.rootUrl + '/cookie-declaration'}
               render={() => <CookieDeclarationPage site={this.state.site} />

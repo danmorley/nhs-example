@@ -1,37 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import '../../assets/styles/page.css';
-import CmsComponentRegistry from '../CmsComponentRegistry';
+// import '../../assets/styles/page.css';
+// import CmsComponentRegistry from '../CmsComponentRegistry';
+import Footer from '../../Footer';
+import PageHeader from '../../page-header/PageHeader';
+import PageStyles from '../../PageStyles';
 import DocumentMeta from 'react-document-meta';
-import StandardPageLayout from './layouts/StandardPageLayout';
-import ShareButtonShelf from '../shelves/ShareButtonShelf';
-import NoticeShelf from '../shelves/NoticeShelf';
+import NoticeShelf from '../../shelves/NoticeShelf';
 
-import GeneralPageContent from './GeneralPageContent';
-import RecipePageContent from './RecipePageContent';
 
-/**
- *  Component responsible for rendering the header, footer and content of all
- *  pages.
- *
- *  site: the site definition (will always be provided)
- *  page: the page definiton. This will be null until the page def has been loaded.
- */
-class Page extends Component {
+class StandardPageLayout extends Component {
   render() {
     let { site, page } = this.props;
 
     if (page) {
-      const { page_theme, page_styles } = page;
-      const pageType = page.meta.type || 'general_page';
-
-      const pageInfo = CmsComponentRegistry.components[pageType];
-      const PageClass = pageInfo && pageInfo.class;
-      // TODO: Handle no page for type
-      const content = <PageClass page={page} site={site} />;
-
-      // const content = this.renderPageContent(page, site);
+      let { page_theme, page_styles } = page;
+      const content = this.props.children;
       const meta = this.pageMetaData(page, site);
 
       return (
@@ -42,24 +27,9 @@ class Page extends Component {
 
     } else {
       // Page object is null so it must still be loading.
-      var content = this.renderPageLoader();
+      const content = this.renderPageLoader();
       return this.renderPage(content, null, null, site, null);
     }
-  }
-
-  renderPage(content, pageTheme, pageStyles, site, page) {
-    // let { menu, header, footer } = site;
-    // let theme = (pageTheme && pageTheme.class_name) || 'oneyou';
-    let useShareButton = page ? page.meta.use_share_button : false;
-
-    return (
-      <StandardPageLayout site={site} page={page}>
-        {content}
-        {useShareButton &&
-          <ShareButtonShelf />
-        }
-      </StandardPageLayout>
-    );
   }
 
   renderPageLoader() {
@@ -84,6 +54,25 @@ class Page extends Component {
 
     return (
       <NoticeShelf content={warningMessage} />
+    );
+  }
+
+  renderPage(content, pageTheme, pageStyles, site, _page) {
+    let { menu, header, footer } = site;
+    let theme = (pageTheme && pageTheme.class_name) || 'oneyou';
+    // let useShareButton = page ? page.meta.use_share_button : false;
+
+    return (
+      <div className={`page-wrapper ${theme}`}>
+        <PageStyles content={pageStyles} />
+        <PageHeader navItems={menu.items} header={header}/>
+        <div className="page-content-wrapper">
+          <div id="page-content" className="page-content">
+            {content}
+          </div>
+        </div>
+        <Footer className="page-footer" content={footer} site={site}/>
+      </div>
     );
   }
 
@@ -117,9 +106,9 @@ class Page extends Component {
   }
 }
 
-Page.propTypes = {
+StandardPageLayout.propTypes = {
   site: PropTypes.object.isRequired,
   page: PropTypes.object.isRequired
 }
 
-export default Page;
+export default StandardPageLayout;

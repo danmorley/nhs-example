@@ -34,14 +34,14 @@ class ScriptShelf extends Component {
 
   render() {
     let { id, content, classNamePrefix } = this.props;
-      
+
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
         <div className="shelf__container container">
           <div ref={el => (this.instance = el)} />
         </div>
       </Shelf>
-     )
+    )
   }
 }
 
