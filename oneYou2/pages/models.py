@@ -25,7 +25,8 @@ from modelcluster.fields import ParentalKey
 from .blocks import IDBlock, CTABlock, MenuItemPageBlock
 from .utils import get_serializable_data_for_fields
 from home.models import SiteSettings
-from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppTeaserChooserBlock, BlobImageChooserBlock
+from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppTeaserChooserBlock, \
+    BlobImageChooserBlock, RecipeTeaserChooserBlock
 
 
 GRID_LAYOUT_CHOICES = (
@@ -199,6 +200,20 @@ class Grid(blocks.StructBlock):
     shelf_id = IDBlock(required=False, label="ID")
 
 
+class RecipeGrid(blocks.StructBlock):
+    heading = blocks.CharBlock(required=False)
+    rows_to_show = blocks.IntegerBlock(default=0)
+    items = blocks.StreamBlock([
+        ('recipe_teaser', RecipeTeaserChooserBlock(target_model="shelves.RecipeTeaser", icon="image"))
+    ], icon='arrow-left', label='Items')
+    meta_image_display = blocks.ChoiceBlock(choices=(
+        ('contain', 'Contain'),
+        ('cover', 'Stretch')
+    ),
+        label='Teaser Image Display', default="cover")
+    shelf_id = IDBlock(required=False, label="ID")
+
+
 # Pages
 
 class OneYou2Page(Page):
@@ -211,10 +226,12 @@ class OneYou2Page(Page):
         ('promo_shelf', PromoShelfChooserBlock(target_model="shelves.PromoShelf", icon="image")),
         ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
         ('grid_shelf', Grid(icon="form")),
+        ('recipe_grid_shelf', RecipeGrid(icon="form")),
         ('find_out_more_dropdown', FindOutMoreDropDown(label="Link dropdown", icon="order-down")),
         ('iframe_shelf', IFrameShelf(label="IFrame", icon='placeholder')),
         ('divider', Divider(label="Divider", icon='horizontalrule')),
         ('article_page_heading_shelf', ArticlePageHeadingShelf(label="Article Page Heading", icon='title')),
+
     ])
     page_ref = models.CharField(max_length=255, unique=True)
 

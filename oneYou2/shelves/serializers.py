@@ -2,7 +2,7 @@ from django.utils.text import slugify
 
 from rest_framework import serializers
 from rest_framework.serializers import HyperlinkedModelSerializer
-from shelves.models import PromoShelf, BannerShelf, AppTeaser
+from shelves.models import PromoShelf, BannerShelf, AppTeaser, RecipeTeaser
 
 
 # TODO: Remove this, use the one in image.serializers. This exists due to circular imports.
@@ -115,3 +115,15 @@ class AppTeaserSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = AppTeaser
         fields = ['heading', 'body', 'image', 'cta_googleplay', 'cta_appstore', 'shelf_id']
+
+
+class RecipeTeaserSerializer(HyperlinkedModelSerializer):
+    background_image = ImageSerializer()
+
+    def to_representation(self, obj):
+        representation = super().to_representation(obj)
+        return representation
+
+    class Meta:
+        model = RecipeTeaser
+        fields = ['heading', 'background_image', 'shelf_id']

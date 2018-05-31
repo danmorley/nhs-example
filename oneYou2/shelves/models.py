@@ -268,3 +268,21 @@ class AppTeaser(ShelfAbstract):
         FieldPanel('cta_googleplay'),
         FieldPanel('cta_appstore'),
     ]
+
+
+@register_snippet
+class RecipeTeaser(ShelfAbstract):
+    heading = models.CharField(max_length=255, null=True, blank=True)
+    background_image = models.ForeignKey(
+        'images.PHEImage',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    panels = [
+        FieldPanel('shelf_id'),
+        FieldPanel('heading'),
+        ImageChooserPanel('background_image')
+    ]
