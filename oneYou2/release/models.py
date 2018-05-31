@@ -19,8 +19,7 @@ from oneYou2.panels import ReadOnlyPanel
 
 from frontendHandler.models import FrontendVersion
 
-from pages.models import OneYou2Page
-
+from pages.models import OneYou2Page, RecipePage
 
 CONTENT_STATUS = (
     (0, "PENDING"),
@@ -138,8 +137,10 @@ class Release(ClusterableModel):
 
     @classmethod
     def generate_fixed_content(cls, revision):
-        from pages.serializers import OneYouPageSerializer
+        from pages.serializers import OneYouPageSerializer, RecipePageSerializer
         page = revision.as_page_object()
+        if isinstance(page, RecipePage):
+            return RecipePageSerializer(page).data
         return OneYouPageSerializer(page).data
 
     def generate_fixed_site_meta(self):
