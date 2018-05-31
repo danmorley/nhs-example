@@ -497,8 +497,8 @@ class RecipePage(OneYou2Page):
         FieldPanel('ingredients_list'),
         FieldPanel('instructions'),
         FieldPanel('body'),
-        FieldPanel('theme'),
         FieldPanel('release'),
+        SnippetChooserPanel('theme'),
     ]
 
     edit_handler = TabbedInterface([
