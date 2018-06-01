@@ -2,9 +2,27 @@
 @import '../../../assets/styles/variables/icons';
 @import "../../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
 
-.recipe-block {
+.recipe__banner {
+    min-height: 256px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+    margin-bottom: 1em;
+    
+    @include media-breakpoint-up(sm) {
+        min-height: 309px;
+        margin-bottom: 1.5em;
+    }
+}
+
+.recipe__block {
+
+  padding-bottom: 1em;
 
   @include media-breakpoint-up(sm) {
+    
+    padding-bottom: 1.5em;
+    
     &.container {
       padding-left: 0;
       padding-right: 0;
@@ -144,7 +162,7 @@ ul.recipe__tags {
 
 .oneyou {
 
-  .recipe-page {
+  .recipe__block {
 
     h2, .recipe__header {
       color: $teal-blue;
