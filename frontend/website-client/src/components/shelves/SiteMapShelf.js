@@ -8,8 +8,8 @@ import MultiMenuItem from '../header-nav/MultiMenuItem';
 
 class SiteMapShelf extends Component {
   render() {
-    let topNav = this.props.site.menu;
-    let footerNav = this.props.site.footer;
+    let topNav = this.props.content.menu;
+    let footerNav = this.props.content.footer;
 
     let topNavItems = topNav.items.map((item, i) => {
       if (item.type === 'simple_menu_item'){
@@ -49,7 +49,7 @@ class SiteMapShelf extends Component {
 }
 
 SiteMapShelf.propTypes = {
-  site: PropTypes.object.isRequired,
+  content: PropTypes.object.isRequired,
   classNamePrefix: PropTypes.string.isRequired
 };
 

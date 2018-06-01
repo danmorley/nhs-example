@@ -1,5 +1,4 @@
 import json
-import uuid
 
 from datetime import timedelta
 
@@ -34,31 +33,6 @@ index_file = '<head><link href="/oneyou/public/static/css/main.da59b65b.css" rel
 
 @patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
 class ReleaseModelTests(OneYouTests):
-
-    def test_save_doesnt_update_page_ref_if_exists(self, mock_file_service):
-        release = Release(release_name="Test release", site_id=2)
-        original_uuid = str(uuid.uuid4())
-        release.uuid = original_uuid
-
-        self.assertIsNotNone(release.uuid)
-        self.assertIsNot(release.uuid, '')
-
-        release.save()
-
-        loadedRelease = Release.objects.get(release_name="Test release")
-
-        self.assertEqual(loadedRelease.uuid, original_uuid)
-
-    def test_save_creates_page_ref_if_doesnt_exists(self, mock_file_service):
-        release = Release(release_name="Test release", site_id=2)
-
-        self.assertIs(release.uuid, '')
-
-        release.save()
-
-        loadedRelease = Release.objects.get(release_name="Test release")
-
-        self.assertIsNot(loadedRelease.uuid, None)
 
     def test_to_dict(self, mock_file_service):
         """
