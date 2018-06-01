@@ -119,11 +119,15 @@ class AppTeaserSerializer(HyperlinkedModelSerializer):
 
 class RecipeTeaserSerializer(HyperlinkedModelSerializer):
     background_image = ImageSerializer()
+    page_link = CTAPageSerializer()
 
     def to_representation(self, obj):
         representation = super().to_representation(obj)
+        page_link = representation.get('page_link')
+        if page_link:
+            representation['page_link'] = page_link.get('relative_path')
         return representation
 
     class Meta:
         model = RecipeTeaser
-        fields = ['heading', 'background_image', 'shelf_id']
+        fields = ['heading', 'page_link', 'background_image', 'shelf_id']
