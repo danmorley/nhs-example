@@ -51,7 +51,7 @@ class RecipeTeaserPanel extends Component {
 
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix}>
-        <Link to={content.page_link}>
+        <Link to={content.page_link || ''}>
           <div className={`${classNamePrefix}__image`} style={backgroundTeaserImage}>
             <div className={`${classNamePrefix}__info`}>
               <Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />
