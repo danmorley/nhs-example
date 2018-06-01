@@ -230,7 +230,6 @@ class OneYou2Page(Page):
         ('iframe_shelf', IFrameShelf(label="IFrame", icon='placeholder')),
         ('divider', Divider(label="Divider", icon='horizontalrule')),
         ('article_page_heading_shelf', ArticlePageHeadingShelf(label="Article Page Heading", icon='title')),
-
     ], null=True, blank=True)
 
     # Meta Fields
@@ -515,8 +514,8 @@ class RecipePage(OneYou2Page):
         FieldPanel('ingredients_list'),
         FieldPanel('instructions'),
         FieldPanel('body'),
-        FieldPanel('theme'),
         FieldPanel('release'),
+        SnippetChooserPanel('theme'),
     ]
 
     edit_handler = TabbedInterface([
