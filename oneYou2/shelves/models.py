@@ -282,10 +282,10 @@ class RecipeTeaser(ShelfAbstract):
     )
 
     page_link = ParentalKey('wagtailcore.Page',
-                           on_delete=models.SET_NULL,
-                           related_name='recipe_teaser_links',
-                           null=True,
-                           blank=True)
+                            on_delete=models.SET_NULL,
+                            related_name='recipe_teaser_links',
+                            null=True,
+                            blank=True)
 
     panels = [
         FieldPanel('shelf_id'),
