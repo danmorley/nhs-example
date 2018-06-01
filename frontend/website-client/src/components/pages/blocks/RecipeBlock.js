@@ -18,6 +18,7 @@ class RecipeBlock extends Component {
     }
 
     const deviceImage = ImageUtils.deviceImage(reformattedImage);
+    const bkgImage =  ImageUtils.backgroundImageStyle(deviceImage);
     
     const recipeTags = recipe.tags.split(',');
     const recipeItems = recipeTags.map((item, i) =>
@@ -25,53 +26,48 @@ class RecipeBlock extends Component {
     );
 
     return (
-      <div className ="recipe-block container">
-        <div>
-          <Image image={deviceImage} />
-          <h2 className="recipe__header">
-            {recipe.recipe_name}
-          </h2>
-
-          <ul className="recipe__tags">
-            {recipeItems}
-          </ul>
-
-          <div className="recipe__summary">
-            <div className="recipe__summary__item">
-              <div className="recipe__summary__header recipe__summary__plate">
+      <div className="recipe">
+        <div className="recipe__banner container-fluid" style={bkgImage}></div>
+        <div className ="recipe__block container">          
+            <h2 className="recipe__header">
+              {recipe.recipe_name}
+            </h2>
+            <ul className="recipe__tags">
+              {recipeItems}
+            </ul>
+            <div className="recipe__summary">
+              <div className="recipe__summary__item">
+                <div className="recipe__summary__header recipe__summary__plate">
+                </div>
+                <p>
+                  Serves {recipe.serves}
+                </p>
               </div>
-              <p>
-                Serves {recipe.serves}
-              </p>
-            </div>
-            <div className="recipe__summary__item">
-              <div className="recipe__summary__header">
-                {recipe.preparation_time}
+              <div className="recipe__summary__item">
+                <div className="recipe__summary__header">
+                  {recipe.preparation_time}
+                </div>
+                <p>
+                  Mins
+                </p>
               </div>
-              <p>
-                Mins
-              </p>
-            </div>
-            <div className="recipe__summary__item">
-              <div className="recipe__summary__header">
-                {recipe.difficulty}
+              <div className="recipe__summary__item">
+                <div className="recipe__summary__header">
+                  {recipe.difficulty}
+                </div>
+                <p>
+                  Difficulty
+                </p>
               </div>
-              <p>
-                Difficulty
-              </p>
             </div>
-          </div>
-
-          <h2 className="recipe__header">
-            Ingredients
-          </h2>
-          <Text tagName="div" content={recipe.ingredients_list} className="recipe__ingredients" format="richtext" />
-
-          <h2 className="recipe__header">
-            Instructions
-          </h2>
-
-          <Text tagName="div" content={recipe.instructions} className="recipe__instructions" format="richtext" />
+            <h2 className="recipe__header">
+              Ingredients
+            </h2>
+            <Text tagName="div" content={recipe.ingredients_list} className="recipe__ingredients" format="richtext" />
+            <h2 className="recipe__header">
+              Instructions
+            </h2>
+            <Text tagName="div" content={recipe.instructions} className="recipe__instructions" format="richtext" />
         </div>
       </div>
     );
