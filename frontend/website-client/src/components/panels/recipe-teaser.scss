@@ -2,8 +2,12 @@
 @import "../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
 
 .recipe-teaser {
-  display: flex; 
+  display: flex;
   flex: 1 1 auto;
+
+  a {
+    text-decoration: none;
+  }
 }
 
 .recipe-teaser__image {
@@ -16,7 +20,7 @@
   background-position: center;
   background-repeat: no-repeat;
   cursor: pointer;
-  
+
   .recipe--contain & {
     background-size: contain;
     background-position: top left;
@@ -25,11 +29,11 @@
   @include media-breakpoint-up(md) {
     min-height: 165px;
   }
-  
+
   @include media-breakpoint-up(lg) {
     min-height: 220px;
   }
-  
+
   &:after {
     width:100%;
     height:100%;
