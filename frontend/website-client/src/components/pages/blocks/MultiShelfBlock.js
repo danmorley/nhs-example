@@ -23,6 +23,7 @@ import ScriptShelf from '../../shelves/ScriptShelf';
 import SiteMapShelf from '../../shelves/SiteMapShelf';
 import DividerShelf from '../../shelves/DividerShelf';
 import ArticlePageHeadingShelf from '../../shelves/ArticlePageHeadingShelf';
+import RecipeGridShelf from '../../shelves/RecipeGridShelf';
 import ShareButtonShelf from '../../shelves/ShareButtonShelf';
 
 class MultiShelfBlock extends Component {
