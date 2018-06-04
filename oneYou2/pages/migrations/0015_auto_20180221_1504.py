@@ -10,6 +10,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('pages', '0014_oneyou2page_theme'),
+        ('images', '0001_initial')
     ]
 
     operations = [
