@@ -10,6 +10,7 @@ import NoticeShelf from '../shelves/NoticeShelf';
 
 import GeneralPageContent from './GeneralPageContent';
 import RecipePageContent from './RecipePageContent';
+import BackToTopButton from '../BackToTopButton';
 
 /**
  *  Component responsible for rendering the header, footer and content of all
@@ -58,6 +59,7 @@ class Page extends Component {
         {useShareButton &&
           <ShareButtonShelf />
         }
+        <BackToTopButton />
       </StandardPageLayout>
     );
   }
