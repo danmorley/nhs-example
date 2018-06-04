@@ -32,5 +32,5 @@ ONEYOU_RENDITIONS = [
     ('information_panel', 'grid_shelf', '2_col_1_on_mobile', {'desktop': '224x336', 'mobile': '138x176'}),
     ('information_panel', 'grid_shelf', '3_col_1_on_mobile', {'desktop': '146x336', 'mobile': '138x176'}),
 
-    ('recipe_teaser', 'recipe_grid_shelf', None, {'desktop': '280x289', 'mobile': '173x176'}),
+    ('recipe_teaser', 'recipe_grid_shelf', None, {'desktop': '258x220', 'mobile': '158x145'}),
 ]
