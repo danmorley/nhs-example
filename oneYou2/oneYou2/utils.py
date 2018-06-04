@@ -1,3 +1,5 @@
+from django.conf import settings
+
 
 def get_release_version():
     try:
@@ -8,7 +10,22 @@ def get_release_version():
 
 
 def get_protocol():
-    # if settings.ENV == 'dev':
-    #     return 'http://'
-    # else:
-    return 'https://'
+    if settings.ENV == 'local':
+        return 'http://'
+    else:
+        return 'https://'
+
+
+def frontend_deployed():
+    try:
+        with open('frontend_deployed.txt') as data_file:
+            value = data_file.read()
+            return value == 'True'
+    except FileNotFoundError:
+        return False
+
+
+def set_frontend_deployed_status(status):
+    status_file = open("frontend_deployed.txt", "w")
+    status_file.write(status)
+    status_file.close()

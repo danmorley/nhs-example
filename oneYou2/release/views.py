@@ -22,7 +22,8 @@ def release_html(request, site_name):
         return HttpResponse("Page Not Found", status=404)
 
     if getattr(request, 'path', None):
-        wagtail_redirect = Redirect.objects.filter(site=site_id, old_path=request.path).first()
+        site_redirects = Redirect.get_for_site(site_id)
+        wagtail_redirect = site_redirects.filter(old_path=request.path).first()
         if not wagtail_redirect:
             if request.path[-1] == '/':
                 wagtail_redirect = Redirect.objects.filter(site=site_id, old_path=request.path[:-1]).first()
@@ -58,17 +59,23 @@ def release_html(request, site_name):
                                                   "/{}/version/js/{}/?file_name=".format(site_name, frontend_id))
     substituted_index = substituted_index.replace("/manifest", "/{}/public/manifest".format(site_name))
     substituted_index = substituted_index.replace("/favicon", "/{}/public/favicon".format(site_name))
-    substituted_index = substituted_index.replace("/webtrends", "/{}/public/webtrends".format(site_name))
+    # substituted_index = substituted_index.replace("/webtrends", "/{}/public/webtrends".format(site_name))
+
+    host = request.__dict__['META']['HTTP_HOST']
 
     if settings.CONTENT_STORE_ENDPOINT:
         content_store_endpoint = settings.CONTENT_STORE_ENDPOINT
     else:
-        content_store_endpoint = get_protocol() + request.__dict__['META']['HTTP_HOST'] + "/api"
+        content_store_endpoint = get_protocol() + host + "/api"
+
+    if "local" in host or "service" in host:
+        content_store_endpoint = get_protocol() + host + "/api"
+
     substituted_index = substituted_index.replace("%apiurl%", content_store_endpoint)
     substituted_index = substituted_index.replace("%releaseid%", uuid)
     http_response = HttpResponse(substituted_index)
     if release.content_status == 1:
-        http_response['Cache-Control'] = 'max-age=3600'
+        http_response['Cache-Control'] = 'max-age=900'
     return http_response
 
 

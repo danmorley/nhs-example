@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 
 import 'normalize.css';
 import './assets/styles/fonts.css';
-import Page from './components/Page';
+import AppRouteRegistry from './components/AppRouteRegistry';
+import Page from './components/pages/Page';
 import ShelfSamplesPage from './components/pages/ShelfSamplesPage';
-import SiteMapPage from './components/pages/SiteMapPage';
+import siteMapPage from './components/pages/SiteMapPage';
+import CookieDeclarationPage from './components/pages/CookieDeclarationPage';
 import { notFoundPage, serverErrorPage } from './data/exceptionPages';
 import createHistory from 'history/createBrowserHistory';
 import startsWith from 'lodash.startswith';
@@ -25,12 +27,16 @@ class App extends Component {
       site: props.site || {},
       currentPage: null
     };
+
+    AppRouteRegistry.register('shelfSamples', '/shelf-samples');
+    AppRouteRegistry.register('sitemap', '/sitemap');
+    AppRouteRegistry.register('cookieDeclaration', '/cookie-declaration');
   }
 
   componentDidMount() {
     let path = this.checkForRedirect() || this.pagePathToRender(window.location.pathname);
     console.log('First time load of page for path ' + path);
-    if (!this.isAppPage(path)) {
+    if (!AppRouteRegistry.routeIsLocal(path)) {
       console.log('Loading cms page', path);
       let key = this.pageSlug(path);
 
@@ -47,7 +53,7 @@ class App extends Component {
     this.historyUnlisten = history.listen((location, _action) => {
       console.log('Internal load of page for path ' + location.pathname);
       let path = this.pagePathToRender(location.pathname);
-      if (!this.isAppPage(path)) {
+      if (!AppRouteRegistry.routeIsLocal(path)) {
         path = path.replace(global.rootUrl, '');
         console.log('Loading cms page', path);
         let key = this.pageSlug(path);
@@ -55,6 +61,8 @@ class App extends Component {
       } else {
         path = path.replace(global.rootUrl, '');
         console.log('Loading app page', path);
+        // Clear down the CMS page while app page is being displayed.
+        this.setState({ currentPage: null });
       }
     });
   }
@@ -78,10 +86,12 @@ class App extends Component {
       global.contentStore.getPage(key).then((page) => {
         if (page.code === 0) {
           this.setState({ currentPage: page.response });
-          if (window.dcsMultiTrack) window.dcsMultiTrack(
-            'WT.cg_n', 'OneYou Core',
-            'WT.cg_s', page.response.title,
-            'DCSext.RealUrl', window.location.pathname);
+          if (window.dcsMultiTrack) {
+            window.dcsMultiTrack(
+              'WT.cg_n', 'OneYou Core',
+              'WT.cg_s', page.response.title,
+              'DCSext.RealUrl', window.location.pathname);
+          }
         } else {
           console.error(page.error, page.info.statusCode, page.info.message);
           if (page.info.statusCode === 404) {
@@ -135,21 +145,19 @@ class App extends Component {
     return (<Page page={this.state.currentPage} site={this.state.site} />);
   }
 
-  isAppPage(path) {
-    return path === '/shelf-samples/';
-    // return path.match(/\/shelf-samples[\/]?/);
-  }
-
   render() {
     return (
       <div className="App">
         <Router history={history}>
           <Switch>
-            <Route path={global.rootUrl + '/shelf-samples'}
+            <Route path={global.rootUrl + AppRouteRegistry.routes.shelfSamples}
               render={() => <ShelfSamplesPage site={this.state.site} />
               }/>
-            <Route path={global.rootUrl + '/sitemap'}
-              render={() => <SiteMapPage site={this.state.site} />
+            <Route path={global.rootUrl + AppRouteRegistry.routes.sitemap}
+              render={() => <Page page={siteMapPage(this.state.site)} site={this.state.site} />
+              }/>
+            <Route path={global.rootUrl + AppRouteRegistry.routes.cookieDeclaration}
+              render={() => <CookieDeclarationPage site={this.state.site} />
               }/>
             <Route path={global.rootUrl + '/'}
               render={(props) => {return this.loadPage(props)}

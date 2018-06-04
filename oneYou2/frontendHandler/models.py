@@ -7,7 +7,7 @@ from datetime import datetime
 
 from django.conf import settings
 
-from oneYou2.utils import get_release_version
+from oneYou2.utils import get_release_version, frontend_deployed, set_frontend_deployed_status
 
 
 class FrontendVersion:
@@ -40,7 +40,8 @@ class FrontendVersion:
         latest_deployed_tag = file_service.get_file_to_text(settings.AZURE_FILE_SHARE, file_directory,
                                                             'current_tag.txt')
 
-        if settings.INITIALIZER is not False:
+        deployed_status = frontend_deployed()
+        if settings.INITIALIZER is not False and not deployed_status:
             if settings.ENV == 'dev':
                 print('running deploy for integration environment')
                 # always deploy the frontend version in the integration and review environments
@@ -51,6 +52,7 @@ class FrontendVersion:
                 # deployment when running locally.
                 # check the latest deployed version so we only deploy each tag once on staging and production
                 FrontendVersion.deploy_version()
+            set_frontend_deployed_status('True')
 
         # we have to return all directories as azure SDK had no way to order and limit response count
         directories = file_service.list_directories_and_files(settings.AZURE_FILE_SHARE, file_directory).directories
@@ -103,23 +105,35 @@ class FrontendVersion:
 
         version_directory = file_directory + "/" + unique_id
 
+        print('creating frontend version directory')
         file_service.create_directory(settings.AZURE_FILE_SHARE, version_directory)
+        print('creating statics directory')
         file_service.create_directory(settings.AZURE_FILE_SHARE, version_directory + '/static')
+        print('creating js directory')
         file_service.create_directory(settings.AZURE_FILE_SHARE, version_directory + '/static/js')
+        print('creating css directory')
         file_service.create_directory(settings.AZURE_FILE_SHARE, version_directory + '/static/css')
+        print('creating media directory')
         file_service.create_directory(settings.AZURE_FILE_SHARE, version_directory + '/static/media')
 
+        print('adding current_version to the version directory')
         file_service.put_file_from_text(settings.AZURE_FILE_SHARE, version_directory, "current_version.txt", unique_id)
 
         manifest = json.loads(open('./web/asset-manifest.json').read())
 
         for key in manifest:
+            print('uploading ' + manifest[key])
             file_service.put_file_from_path(settings.AZURE_FILE_SHARE, version_directory, manifest[key],
                                             './web/' + manifest[key])
+        print('uploading index.html')
         file_service.put_file_from_path(settings.AZURE_FILE_SHARE, version_directory, 'index.html', './web/index.html')
 
         release_tag = get_release_version()
+        print('adding tag meta to the version directory')
         file_service.put_file_from_text(settings.AZURE_FILE_SHARE, version_directory, 'tag.txt', release_tag)
+
+        print('adding current tag meta to the environment directory')
         file_service.put_file_from_text(settings.AZURE_FILE_SHARE, file_directory, "current_tag.txt", release_tag)
 
+        print('updating current version meta in the environment directory')
         file_service.put_file_from_text(settings.AZURE_FILE_SHARE, file_directory, "current_version.txt", unique_id)

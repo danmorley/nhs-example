@@ -1,9 +1,10 @@
 import ServerError from './ServerError';
 
-function ContentStore(contentStoreEndpoint, site, release) {
+function ContentStore(contentStoreEndpoint, site, release, preview_page) {
   this.contentStoreEndpoint = contentStoreEndpoint;
   this.site = site;
   this.release = release;
+  this.preview_page = preview_page
 }
 
 ContentStore.prototype.getSite = async function() {
@@ -11,7 +12,10 @@ ContentStore.prototype.getSite = async function() {
 };
 
 ContentStore.prototype.getPage = async function(pageId) {
-  if (pageId === global.preview_page) {
+  console.log("PREVIEW");
+  console.log(this.preview_page);
+  if (pageId === this.preview_page) {
+    console.log(pageId);
     return await _getPreviewPage(this.contentStoreEndpoint, this.site, pageId);
   }
   else {

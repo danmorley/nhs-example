@@ -1,4 +1,4 @@
-import Page from '../Page';
+import Page from './Page';
 import withOwnContent from './withOwnContent';
 
 /**
@@ -44,7 +44,40 @@ const sampleShelvesPage = {
         ]
       }
     },
-
+    {
+      id: 'grid-shelf-1',
+      type: 'grid_shelf',
+      value: {
+        rows_to_show: 2,
+        items: [
+          {
+            id: 'share-button-1a',
+            type: 'share_button_panel',
+            value: {
+              social_links: [
+                {
+                  share_item: 'email',
+                  share_text: 'This is the custom text for the email sharing link'
+                },
+                {
+                  share_item: 'whatsapp',
+                  share_text: 'This is the custom text for the whatsapp sharing link'
+                },
+                {
+                  share_item: 'facebook',
+                  share_text: 'This is the custom text for the facebook sharing link'
+                },
+                {
+                  share_item: 'twitter',
+                  share_text: 'This is the custom text for the twitter sharing link'
+                }
+              ],
+              meta_variant: "align-right"
+            }
+          }
+        ]
+      }
+    },
     {
       type: 'guidance_shelf',
       value: {
