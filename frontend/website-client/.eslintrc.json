@@ -27,6 +27,7 @@
       "no-console": 0,
       "react/prop-types": ["error", {"ignore": ["children"]}],
       "react/no-access-state-in-setstate": "error",
-      "react/no-string-refs": 1
+      "react/no-string-refs": 1,
+      "react/jsx-no-target-blank": 0
   }
 }
