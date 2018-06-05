@@ -110,8 +110,8 @@ class RecipePageSerializer(serializers.ModelSerializer):
         image_object = PHEImage.objects.get(id=image_id)
         renditions = image_object.generate_or_get_all_renditions()
         serialized_data['image'] = {
-            'desktop': renditions['banner_shelf/carousel_shelf/None/desktop'],
-            'mobile': renditions['banner_shelf/carousel_shelf/None/mobile']
+            'desktop': renditions['banner_shelf/None/None/desktop'],
+            'mobile': renditions['banner_shelf/None/None/mobile']
         }
 
         return serialized_data
