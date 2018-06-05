@@ -27,39 +27,45 @@ class RecipeBlock extends Component {
 
     return (
       <div className="recipe">
-        <div className="recipe__banner container-fluid" style={bkgImage}></div>
-        <div className ="recipe__block container">          
-            <h2 className="recipe__header">
-              {recipe.recipe_name}
-            </h2>
-            <ul className="recipe__tags">
-              {recipeItems}
-            </ul>
-            <div className="recipe__summary">
-              <div className="recipe__summary__item">
-                <div className="recipe__summary__header recipe__summary__plate">
-                </div>
-                <p>
-                  Serves {recipe.serves}
-                </p>
+        <div className="recipe__banner container" style={bkgImage}></div>
+        <div className ="recipe__block container">      
+            <section className="recipe__intro">   
+              <div className="recipe__intro__col-1">
+                <h1 className="recipe__header">
+                  {recipe.recipe_name}
+                </h1>
+                <ul className="recipe__tags">
+                  {recipeItems}
+                </ul>
               </div>
-              <div className="recipe__summary__item">
-                <div className="recipe__summary__header">
-                  {recipe.preparation_time}
+              <div className="recipe__intro__col-2">
+                <div className="recipe__summary">
+                  <div className="recipe__summary__item">
+                    <div className="recipe__summary__header recipe__summary__plate">
+                    </div>
+                    <p>
+                      Serves {recipe.serves}
+                    </p>
+                  </div>
+                  <div className="recipe__summary__item">
+                    <div className="recipe__summary__header">
+                      {recipe.preparation_time}
+                    </div>
+                    <p>
+                      Mins
+                    </p>
+                  </div>
+                  <div className="recipe__summary__item">
+                    <div className="recipe__summary__header">
+                      {recipe.difficulty}
+                    </div>
+                    <p>
+                      Difficulty
+                    </p>
+                  </div>
                 </div>
-                <p>
-                  Mins
-                </p>
               </div>
-              <div className="recipe__summary__item">
-                <div className="recipe__summary__header">
-                  {recipe.difficulty}
-                </div>
-                <p>
-                  Difficulty
-                </p>
-              </div>
-            </div>
+            </section>
             <h2 className="recipe__header">
               Ingredients
             </h2>
