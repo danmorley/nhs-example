@@ -28,8 +28,7 @@ class RecipeBlock extends Component {
     return (
       <div className="recipe">
         <div className="recipe__banner container" style={bkgImage}></div>
-        <div className ="recipe__block container">  
-            
+        <div className ="recipe__block container">      
             <section className="recipe__intro">   
               <div className="recipe__intro__col-1">
                 <h1 className="recipe__header">
