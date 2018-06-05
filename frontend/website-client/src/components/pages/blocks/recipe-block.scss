@@ -3,14 +3,14 @@
 @import "../../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
 
 .recipe__banner {
-    min-height: 256px;
+    min-height: 307px;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50%;
     margin-bottom: 1em;
     
     @include media-breakpoint-up(sm) {
-        min-height: 309px;
+        min-height: 366px;
         margin-bottom: 1.5em;
     }
 }
