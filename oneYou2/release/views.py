@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect
 from django.views.static import serve
 from django.conf import settings
@@ -105,3 +105,11 @@ def statics(request, site_name, path):
     file_name = path_components.pop()
     FrontendVersion.load_static('/'.join(path_components), file_name)
     return serve(request, file_name, document_root='./web/')
+
+
+def open_releases(request):
+    releases = Release.objects.filter(content_status=0)
+    response_obj = []
+    for release in releases:
+        response_obj.append({"id": release.id, "name": release.release_name})
+    return JsonResponse({"releases": response_obj})
