@@ -28,6 +28,11 @@ from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppT
     BlobImageChooserBlock, RecipeTeaserChooserBlock
 
 
+GRID_VARIANT_CHOICES = (
+    ('standard', 'Standard'),
+    ('grey_background', 'Grey Background'),
+)
+
 GRID_LAYOUT_CHOICES = (
     ('full_width', 'Full Width'),
     ('2_col_1_on_mobile', 'Responsive (2 columns on desktop)'),
@@ -185,6 +190,15 @@ class Carousel(blocks.StructBlock):
     shelf_id = IDBlock(required=False, label="ID")
 
 
+class IconCardPanel(CTABlock):
+    heading = blocks.CharBlock(required=False)
+    body = blocks.RichTextBlock(required=False)
+    image = BlobImageChooserBlock(required=False)
+    panel_id = IDBlock(required=False, label="ID")
+    meta_layout = blocks.ChoiceBlock(choices=ICON_CARD_LAYOUTS, label="Layout")
+    meta_variant = blocks.ChoiceBlock(choices=ICON_CARD_VARIANTS, label="Variant")
+
+
 class PanelCarousel(blocks.StructBlock):
     heading = blocks.CharBlock(required=False)
     items = blocks.StreamBlock([
@@ -203,8 +217,10 @@ class Grid(blocks.StructBlock):
         ('video_teaser', VideoTemplate(icon="media")),
         ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
         ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
-        ('information_panel', InformationPanel(target_model="shelves.AppTeaser", icon="image"))
+        ('information_panel', InformationPanel(target_model="shelves.AppTeaser", icon="image")),
+        ('icon_card_panel', IconCardPanel(icon="snippet"))
     ], icon='arrow-left', label='Items')
+    meta_variant = blocks.ChoiceBlock(choices=GRID_VARIANT_CHOICES, label="Variant")
     meta_layout = blocks.ChoiceBlock(choices=GRID_LAYOUT_CHOICES,
                                      label="Layout",
                                      help_text="Use this to select number of columns on desktop (only one column"
@@ -239,22 +255,13 @@ class RichTextPanel(blocks.StructBlock):
     text = blocks.RichTextBlock(required=False)
 
 
-class IconCardPanel(CTABlock):
-    heading = blocks.CharBlock(required=False)
-    body = blocks.RichTextBlock(required=False)
-    image = BlobImageChooserBlock(required=False)
-    panel_id = IDBlock(required=False, label="ID")
-    meta_layout = blocks.ChoiceBlock(choices=ICON_CARD_LAYOUTS, label="Layout")
-    meta_variant = blocks.ChoiceBlock(choices=ICON_CARD_VARIANTS, label="Variant")
-
-
 class Table(blocks.StructBlock):
     header = blocks.ListBlock(blocks.CharBlock(required=False), label='Column headings')
     display_header = blocks.BooleanBlock(label='Display the table header?', required=False)
     body_rows = blocks.ListBlock(blocks.StreamBlock([
         ('simple_text_panel', SimpleTextPanel(required=False)),
         ('rich_text_panel', RichTextPanel(required=False)),
-        ('icon_card_panel', IconCardPanel(required=False))
+        ('icon_card_panel', IconCardPanel(required=False, icon="snippet"))
     ]))
     shelf_id = IDBlock(required=False, label="ID")
     meta_variant = blocks.ChoiceBlock(choices=TABLE_VARIANTS, label="Variant")

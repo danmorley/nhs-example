@@ -25,6 +25,7 @@ import ShareButtonShelf from '../shelves/ShareButtonShelf';
 class GridShelf extends Component {
   render() {
     let { id, content, classNamePrefix, layout, variant } = this.props;
+    let metaVariant = content.meta_variant || variant;
     let metaLayout = content.meta_layout || layout;
     let metaImageDisplay = content.meta_image_display;
     let gridHeading = content.heading || '';
@@ -56,14 +57,16 @@ class GridShelf extends Component {
     });
 
     return (
-      <Shelf id={id} classNamePrefix={classNamePrefix}>
+      <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
         <div className={`shelf__container container image--${metaImageDisplay}`}>
           {gridHeading !='' &&
             <h2 className="shelf__header">{content.heading}</h2>
           }
-          <ShowMorePanel rowsToShow={content.rows_to_show}>
-            {panels}
-          </ShowMorePanel>
+          <div className="grid-container">
+            <ShowMorePanel rowsToShow={content.rows_to_show}>
+              {panels}
+            </ShowMorePanel>
+          </div>
         </div>
       </Shelf>
     );

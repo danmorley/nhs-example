@@ -32,11 +32,17 @@
       font-family: $secondary-brand-font;
       text-transform: uppercase;
       font-size: $h4;
-      line-height: $h4 * 2;
+      line-height: $h4 * 1.4;
       font-weight: normal;
       text-align: left;
       border: 0;
-      padding: 0px 1em;
+      padding: 12px 1em;
+
+      @include media-breakpoint-down(md) {
+        font-size: $h4 * 0.8;
+        padding: 8px 0.5em;
+        text-align: center;
+      }
     }
   }
 
@@ -55,6 +61,10 @@
         padding: 1em;
         border-right: 2px solid $pink-grey;
         vertical-align: top;
+
+        @include media-breakpoint-down(md) {
+          padding: 0.7em;
+        }
 
         &:last-child {
           border: none;
