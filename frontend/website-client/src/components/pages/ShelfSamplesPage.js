@@ -1,4 +1,4 @@
-import Page from '../Page';
+import Page from './Page';
 import withOwnContent from './withOwnContent';
 
 /**
@@ -33,7 +33,7 @@ const sampleShelvesPage = {
               heading: 'html::There\'s Only One <span class="marker">You</span>',
               body: '<p>Your health is important. It\'s not about doing the right thing - it\'s about making changes that fit your life to help feel your best. One You is all about finding that balance, and inspiring you with easy ways to help you feel great, every day.</p>',
               image: {
-                title: 'Image name',
+                title: 'Image name'
               },
               cta: {
                 link_text: 'Find out more',
@@ -44,7 +44,40 @@ const sampleShelvesPage = {
         ]
       }
     },
-          
+    {
+      id: 'grid-shelf-1',
+      type: 'grid_shelf',
+      value: {
+        rows_to_show: 2,
+        items: [
+          {
+            id: 'share-button-1a',
+            type: 'share_button_panel',
+            value: {
+              social_links: [
+                {
+                  share_item: 'email',
+                  share_text: 'This is the custom text for the email sharing link'
+                },
+                {
+                  share_item: 'whatsapp',
+                  share_text: 'This is the custom text for the whatsapp sharing link'
+                },
+                {
+                  share_item: 'facebook',
+                  share_text: 'This is the custom text for the facebook sharing link'
+                },
+                {
+                  share_item: 'twitter',
+                  share_text: 'This is the custom text for the twitter sharing link'
+                }
+              ],
+              meta_variant: "align-right"
+            }
+          }
+        ]
+      }
+    },
     {
       type: 'guidance_shelf',
       value: {
@@ -64,7 +97,7 @@ const sampleShelvesPage = {
     {
       type: 'script_shelf',
       value: {
-        script: 'console.log("This is output by some inline javascript!");',
+        script: 'console.log("This is output by some inline javascript!");'
       }
     },
     {
@@ -131,7 +164,7 @@ const sampleShelvesPage = {
               heading: 'Walk the walk, talk the talk 2',
               body: '<p>Share walking stories and your progress with others online</p>',
               image: {
-                title: 'Image name',
+                title: 'Image name'
               },
               video: '5520584848001',
               cta: {
@@ -201,7 +234,7 @@ const sampleShelvesPage = {
               },
               cta_googleplay: {
                 link_external: 'https://play.google.com/store/apps/details?id=com.bluestepsolutions.wellmind&hl=en_GB'
-              },
+              }
             }
           },
           {
@@ -239,7 +272,7 @@ const sampleShelvesPage = {
               cta: [ {
                 link_text: 'Link 1 text',
                 link_external: 'http://www.edfs.co.uk'
-              }] ,
+              }]
             }
           },
           {
@@ -296,7 +329,7 @@ const sampleShelvesPage = {
               heading: 'Walk the walk, talk the talk 2',
               body: '<p>Share walking stories and your progress with others online</p>',
               image: {
-                title: 'Image name',
+                title: 'Image name'
               },
               video: '5520584848001',
               cta: {
@@ -320,11 +353,11 @@ const sampleShelvesPage = {
               },
               cta_googleplay: {
                 link_external: 'https://play.google.com/store/apps/details?id=com.bluestepsolutions.wellmind&hl=en_GB'
-              },
+              }
             }
           }
         ]
-      },
+      }
     },
     {
       id: 'promo-shelf-2',
@@ -346,12 +379,12 @@ const sampleShelvesPage = {
       }
     },
     {
-       id: 'section-heading-shelf-1',
-       type: 'section_heading_shelf',
-       value: {
-           heading: 'This is a section heading',
-           field_id: 'test-section-heading-1',
-       }
+      id: 'section-heading-shelf-1',
+      type: 'section_heading_shelf',
+      value: {
+        heading: 'This is a section heading',
+        field_id: 'test-section-heading-1'
+      }
     },
     {
       type: 'guidance_shelf',
@@ -361,13 +394,13 @@ const sampleShelvesPage = {
       }
     },
     {
-       id: 'section-heading-shelf-2',
-       type: 'section_heading_shelf',
-       value: {
-           heading: 'This is a section heading',
-           body: '<p>Lorem ipsum dolor sit amet, <b>consectetur adipiscing</b> elit, sed do eiusmod tempor incididunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>',
-           field_id: 'test-section-heading-2',
-       }
+      id: 'section-heading-shelf-2',
+      type: 'section_heading_shelf',
+      value: {
+        heading: 'This is a section heading',
+        body: '<p>Lorem ipsum dolor sit amet, <b>consectetur adipiscing</b> elit, sed do eiusmod tempor incididunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>',
+        field_id: 'test-section-heading-2'
+      }
     },
     {
       type: 'guidance_shelf',

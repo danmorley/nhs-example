@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import PureModal from 'react-pure-modal';
 import BrightcoveVideo from './BrightcoveVideo';
 import 'react-pure-modal/dist/react-pure-modal.min.css';
-import styles from './video-modal.css';
+import './video-modal.css';
 
 class VideoModal extends Component {
   constructor(props) {

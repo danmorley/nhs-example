@@ -165,6 +165,19 @@ def determine_image_rendtions_for_shared_content_shelves(shelf, parent=None):
                                                                                           parent_shelf_type)]
                 }
 
+        if 'recipe_teaser' in shelf_type:
+            image = shelf['value']['background_image']
+            if image:
+                rendition_shelf_type = 'recipe_teaser'
+                parent_shelf_type = parent["type"]
+
+                image['renditions'] = {
+                    'mobile': image['renditions']["{}/{}/None/mobile".format(rendition_shelf_type,
+                                                                             parent_shelf_type)],
+                    'desktop': image['renditions']["{}/{}/None/desktop".format(rendition_shelf_type,
+                                                                               parent_shelf_type)]
+                }
+
         if 'app_teaser' in shelf_type:
             image = shelf['value']['image']
             if image:

@@ -34,7 +34,7 @@ def site_view(request, site_identifier):
 
     json_response = JsonResponse(current_release.get_content_for('site_json'))
     if current_release.content_status == 1:
-        json_response['Cache-Control'] = 'max-age=3600'
+        json_response['Cache-Control'] = 'max-age=900'
     return json_response
 
 

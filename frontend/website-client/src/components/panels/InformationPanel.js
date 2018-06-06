@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Text from '../Text';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-import styles from './information-panel.css';
+import './information-panel.css';
 import Panel from './Panel';
 import PropTypes from 'prop-types';
 import ImageUtils from './ImageUtils';
@@ -29,8 +29,10 @@ class InformationPanel extends Component {
 
   setImage() {
     this.setState({
-      backgroundImageStyle: ImageUtils.backgroundImageStyle(this.props.content.image,
-                                                            ImageUtils.placeholderBackgroundImage())
+      backgroundImageStyle: ImageUtils.backgroundImageStyle(
+        this.props.content.image,
+        ImageUtils.placeholderBackgroundImage()
+      )
     })
   }
 
@@ -43,7 +45,7 @@ class InformationPanel extends Component {
     window.removeEventListener('resize', this.setImage);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.props = nextProps;
     this.setImage();
   }
@@ -59,7 +61,7 @@ class InformationPanel extends Component {
           <div className={`${classNamePrefix}__text`}>
             <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
           </div>
-          <CtaLinks cta={content.cta} variant='button' />
+          <CtaLinks cta={content.cta} variant="button" />
         </div>
         <div className={`${classNamePrefix}__image`} style={backgroundImage}>
         </div>
@@ -70,7 +72,8 @@ class InformationPanel extends Component {
 
 InformationPanel.propTypes = {
   content: PropTypes.object.isRequired,
-  classNamePrefix: PropTypes.string.isRequired
+  classNamePrefix: PropTypes.string.isRequired,
+  id: PropTypes.string
 };
 
 CmsComponentRegistry.register('information_panel', InformationPanel, 'information-panel');

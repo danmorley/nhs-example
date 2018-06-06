@@ -47,6 +47,7 @@ services:
       AZURE_FILE_SHARE: ${AZURE_FILE_SHARE}
       CONTENT_STORE_ENDPOINT: ${CONTENT_STORE_ENDPOINT}
       CMS_ENV: ${CMS_ENV}
+      INITIALIZER: True
     command: bash ./initialize.sh
     labels:
       io.rancher.container.pull_image: always

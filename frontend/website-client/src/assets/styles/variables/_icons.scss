@@ -1,5 +1,5 @@
 /*
-recommended google material icon sizes 
+recommended google material icon sizes
 
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }
@@ -89,7 +89,7 @@ recommended google material icon sizes
 %icon-cross {
   font-family: "icomoon";
   content: "\e905";
-  display: block; 
+  display: block;
 }
 
 %icon-serach {
@@ -101,5 +101,23 @@ recommended google material icon sizes
 %icon-share {
   font-family: "icomoon";
   content: "\e902";
+  display: block;
+}
+
+%icon-email {
+  font-family: "icomoon";
+  content: "\e90d";
+  display: block;
+}
+
+%icon-whatsapp {
+  font-family: "icomoon";
+  content: "\e90e";
+  display: block;
+}
+
+%icon-dinner-plate {
+  font-family: "icomoon";
+  content: "\e910";
   display: block;
 }

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import Shelf from './Shelf';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import Slider from 'react-slick';
@@ -8,7 +10,7 @@ import PlaceholderShelf from './PlaceholderShelf';
 import GeneralTextShelf from './GeneralTextShelf';
 import BasicCtaShelf from './BasicCtaShelf';
 
-import styles from './main-carousel-shelf.css';
+import './main-carousel-shelf.css';
 
 /**
  *  Main Carousel Shelf is used to display a list of slides in a full width carousel widget.
@@ -43,15 +45,15 @@ class MainCarouselShelf extends Component {
       arrows: true
     };
 
-    var slides = content.items.map((shelf, i) => {
+    var slides = content.items.map((shelf, _i) => {
       const shelfInfo = CmsComponentRegistry.components[shelf.type];
       const ShelfClass = shelfInfo && shelfInfo.class;
       const shelfClassNamePrefix = shelfInfo && shelfInfo.classNamePrefix;
       const shelfId = shelf.value.field_id || shelf.value.shelf_id || 'shelf-' + shelf.id;
       if (ShelfClass) {
-        return (<div key={i}><ShelfClass content={shelf.value} id={shelfId} classNamePrefix={shelfClassNamePrefix}/></div>);
+        return (<div key={shelf.id}><ShelfClass content={shelf.value} id={shelfId} classNamePrefix={shelfClassNamePrefix}/></div>);
       } else {
-        return (<div key={i}><PlaceholderShelf shelfType={shelf.type} id={shelfId} classNamePrefix={shelfClassNamePrefix}/></div>);
+        return (<div key={shelf.id}><PlaceholderShelf shelfType={shelf.type} id={shelfId} classNamePrefix={shelfClassNamePrefix}/></div>);
       }
     });
 
@@ -73,6 +75,12 @@ class MainCarouselShelf extends Component {
     );
   }
 }
+
+MainCarouselShelf.propTypes = {
+  content: PropTypes.object.isRequired,
+  classNamePrefix: PropTypes.string.isRequired,
+  id: PropTypes.string
+};
 
 CmsComponentRegistry.register('main_carousel_shelf', MainCarouselShelf, 'carousel-shelf');
 CmsComponentRegistry.register('carousel_shelf', MainCarouselShelf, 'carousel-shelf');

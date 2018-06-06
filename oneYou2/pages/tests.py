@@ -22,18 +22,8 @@ from release.factories import create_test_release
 
 from shelves.factories import create_test_promo_shelf
 
-from images.factories import create_default_test_image
-
 
 class OneYou2PageModelTests(OneYouTests):
-
-    def test_initialisation_generates_ref(self):
-        """
-        init generates a unique reference for a page
-        """
-        page = OneYou2Page()
-        self.assertIsNotNone(page.page_ref)
-        self.assertIsNot(page.page_ref, '')
 
     def test_page_theme_property(self):
         """
@@ -52,7 +42,7 @@ class OneYou2PageModelTests(OneYouTests):
         create_from_dict method should produce an instance of the class based on the dictonary
         """
         obj_dict = {'title': 'Page title', 'path': '00001', 'depth': '0', 'numchild': '0',
-                    'body': '', 'page_theme': {'id': 1}, 'page_ref': 'ref0001', 'live': True,
+                    'body': '', 'page_theme': {'id': 1}, 'live': True,
                     'meta': {'slug': 'page-path', 'seo_title': 'page-name',
                              'show_in_menus': True, 'search_description': 'page-description',
                              'first_published_at': 'today'}
@@ -63,7 +53,6 @@ class OneYou2PageModelTests(OneYouTests):
         self.assertIs(page.depth, obj_dict['depth'])
         self.assertIs(page.numchild, obj_dict['numchild'])
         self.assertIs(page.theme_id, obj_dict['page_theme']['id'])
-        self.assertIs(page.page_ref, obj_dict['page_ref'])
         self.assertIs(page.live, obj_dict['live'])
         self.assertIs(page.slug, obj_dict['meta']['slug'])
         self.assertIs(page.seo_title, obj_dict['meta']['seo_title'])
@@ -77,11 +66,11 @@ class OneYou2PageModelTests(OneYouTests):
         """
         theme = Theme(id=1, label="Test theme", class_name="test-class")
         page = OneYou2Page(title='Page title', path='00001', depth='0', numchild='0',
-                           theme=theme, page_ref='ref0001', live=True, slug='page-path', seo_title='page-name',
+                           theme=theme, live=True, slug='page-path', seo_title='page-name',
                            show_in_menus=True, search_description='page-description', first_published_at='yesterday')
 
         obj_dict = {'title': 'Page title 2', 'path': '00002', 'depth': '1', 'numchild': '1',
-                    'body': '', 'page_theme': {'id': 2}, 'page_ref': 'ref0001', 'live': True,
+                    'body': '', 'page_theme': {'id': 2}, 'live': True,
                     'meta': {'slug': 'page-path2', 'seo_title': 'page-name2',
                              'show_in_menus': True, 'search_description': 'page-description2',
                              'first_published_at': 'today'}
@@ -94,45 +83,12 @@ class OneYou2PageModelTests(OneYouTests):
         self.assertIs(page.depth, obj_dict['depth'])
         self.assertIs(page.numchild, obj_dict['numchild'])
         self.assertIs(page.theme_id, obj_dict['page_theme']['id'])
-        self.assertIs(page.page_ref, obj_dict['page_ref'])
         self.assertIs(page.live, obj_dict['live'])
         self.assertIs(page.slug, obj_dict['meta']['slug'])
         self.assertIs(page.seo_title, obj_dict['meta']['seo_title'])
         self.assertIs(page.show_in_menus, obj_dict['meta']['show_in_menus'])
         self.assertIs(page.search_description, obj_dict['meta']['search_description'])
         self.assertIs(page.first_published_at, obj_dict['meta']['first_published_at'])
-
-    def test_save_doesnt_update_page_ref_if_exists(self):
-        theme = create_test_theme()
-        create_default_test_image(id=1)
-
-        page = OneYou2Page(title="Test page", path='1111', depth=0, theme=theme)
-        original_page_ref = page.page_ref
-
-        self.assertIsNotNone(page.page_ref)
-        self.assertIsNot(page.page_ref, '')
-
-        page.save()
-
-        loadedPage = OneYou2Page.objects.get(title="Test page")
-
-        self.assertEqual(loadedPage.page_ref, original_page_ref)
-
-    def test_save_creates_page_ref_if_doesnt_exists(self):
-        theme = create_test_theme()
-        create_default_test_image(id=1)
-
-        page = OneYou2Page(title="Test page", path='1111', depth=0, theme=theme)
-        page.page_ref = ''
-        original_page_ref = page.page_ref
-
-        self.assertEqual(page.page_ref, '')
-
-        page.save()
-
-        loadedPage = OneYou2Page.objects.get(title="Test page")
-
-        self.assertIsNot(loadedPage.page_ref, original_page_ref)
 
     @patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
     def test_publishing_page_to_release_links_new_revision_to_release(self, mock_file_service):

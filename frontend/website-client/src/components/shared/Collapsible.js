@@ -8,13 +8,9 @@ class Collapsible extends Component {
     this.handleTriggerClick = this.handleTriggerClick.bind(this);
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    return { open: false };   // Always close the content before display.
-  }
-
   handleTriggerClick(event) {
     event.preventDefault();
-    this.setState({ open: !this.state.open });
+    this.setState(prevState => ({open: !prevState.open}));
   }
 
   render() {
@@ -39,11 +35,10 @@ class Collapsible extends Component {
           style={this.props.triggerStyle}
           onKeyPress={(event) => {
             const { key } = event;
-              if (key === ' ' || key === 'Enter') {
-                this.handleTriggerClick(event);
-              }
+            if (key === ' ' || key === 'Enter') {
+              this.handleTriggerClick(event);
             }
-          }
+          }}
           tabIndex={this.props.tabIndex}
         >
           {this.props.trigger}
@@ -66,14 +61,14 @@ Collapsible.propTypes = {
     PropTypes.element
   ]),
   triggerDisabled: PropTypes.bool,
-  tabIndex: PropTypes.number,
+  tabIndex: PropTypes.number
 }
 
 Collapsible.defaultProps = {
   triggerTagName: 'span',
   triggerDisabled: false,
   triggerStyle: null,
-  tabIndex: null,
+  tabIndex: null
 };
 
 export default Collapsible;
