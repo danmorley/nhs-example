@@ -32,7 +32,6 @@ class VideoModal extends Component {
         header=""
         footer=""
         onClose={() => {
-          console.log('handle closing');
           return true;
         }}
         isOpen={false}
