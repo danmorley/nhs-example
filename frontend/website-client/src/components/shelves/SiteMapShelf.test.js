@@ -18,7 +18,7 @@ describe('SiteMapShelf', () => {
     }
 
     const div = document.createElement('div');
-    ReactDOM.render(<SiteMapShelf site={site} />, div)
+    ReactDOM.render(<SiteMapShelf content={site} />, div)
   });
 
   it('renders without crashing with simple menu items in the footer', () => {
@@ -41,7 +41,7 @@ describe('SiteMapShelf', () => {
     }
 
     const div = document.createElement('div');
-    ReactDOM.render(<MemoryRouter><SiteMapShelf site={site} /></MemoryRouter>, div)
+    ReactDOM.render(<MemoryRouter><SiteMapShelf content={site} /></MemoryRouter>, div)
   });
 
   it('renders without crashing with simple menu items in the header', () => {
@@ -64,7 +64,7 @@ describe('SiteMapShelf', () => {
     }
 
     const div = document.createElement('div');
-    ReactDOM.render(<MemoryRouter><SiteMapShelf site={site} /></MemoryRouter>, div)
+    ReactDOM.render(<MemoryRouter><SiteMapShelf content={site} /></MemoryRouter>, div)
   });
 
   it('renders without crashing with multi menu items in the header', () => {
@@ -94,7 +94,7 @@ describe('SiteMapShelf', () => {
     }
 
     const div = document.createElement('div');
-    ReactDOM.render(<MemoryRouter><SiteMapShelf site={site} /></MemoryRouter>, div)
+    ReactDOM.render(<MemoryRouter><SiteMapShelf content={site} /></MemoryRouter>, div)
   });
 
 })

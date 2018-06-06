@@ -13,9 +13,4 @@ describe('Collapsible', () => {
     const component = ReactDOM.render(<Collapsible />, div);
     component.setState({open: true});
   });
-
-  it('returns open is false from getDerivedStateFromProps', () => {
-    const returnedResponse = Collapsible.getDerivedStateFromProps({}, {});
-    const component = expect(returnedResponse.open).toBe(false);
-  });
 })
