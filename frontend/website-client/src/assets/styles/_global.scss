@@ -169,6 +169,36 @@ ul.cta-list {
   padding-left: 0;
 }
 
+.back-to-top {
+  display: none;
+  
+  &.back-to-top--show {
+    &:after {
+      @extend %icon-chevron-up;
+      position: relative;
+      font-size: 30px;
+      font-weight: bold;
+      z-index: 2;
+    }
+  }
+  
+  @include media-breakpoint-down(sm) {
+    &.back-to-top--show {
+      display: block;
+      position: fixed;
+      z-index: 1;
+      bottom: 1em;
+      right: 1em;
+      width: 50px;
+      height: 50px;
+      border-radius: 50px;
+      background-color: $white;
+      color: $black;
+      border: 1px solid $black;
+    }
+  }
+}
+
 .oneyou { //theme
   .button-cta {
     background-color: $sunflower-yellow;
