@@ -9,4 +9,9 @@ urlpatterns = [
         views.create,
         name='experiments_oneyouvariant_add'
     ),
+    url(
+        r'^oneyouvariant/(\d+)/edit/$',
+        views.edit,
+        name='experiments_oneyouvariant_edit'
+    ),
 ]
