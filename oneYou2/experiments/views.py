@@ -1,5 +1,6 @@
 from __future__ import absolute_import, unicode_literals
 
+import base64
 import hashlib
 import time
 from django.contrib.contenttypes.models import ContentType
@@ -67,8 +68,8 @@ def create(request, content_type_app_name, content_type_model_name, parent_page_
             return result
     parent_page_json = parent_page.to_json()
     page = page_class.from_json(parent_page_json)
-    slug = hashlib.sha224(str(time.time()).encode('utf-8')).hexdigest()
-    page.slug = 'variant-%s-%s' % (page.slug, slug)
+    slug = hashlib.sha224(base64.b64encode(str(time.time()).encode('utf-8'))).hexdigest()
+    page.slug = '%s-v%s' % (page.slug, slug[:6])
     page.title = "%s (describe the variant)" % page.title
     edit_handler_class = page_class.get_edit_handler()
     form_class = edit_handler_class.get_form_class(page_class)
@@ -215,7 +216,7 @@ def edit(request, page_id):
             is_promoting = bool(request.POST.get('action-promote'))
 
             if is_promoting:
-                parent.specific.update_from_dict(page.__dict__, excludes=['title', 'slug', 'draft_title'])
+                parent.specific.update_from_dict(page.__dict__, excludes=['title', 'slug', 'draft_title', 'url_path'])
                 parent.specific.save()
 
             page = form.save(commit=False)
