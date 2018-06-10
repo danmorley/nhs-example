@@ -3,6 +3,7 @@ import json
 from django.db.models.signals import pre_delete, post_save
 from django.dispatch import receiver
 from django.forms import CheckboxSelectMultiple
+from django.utils import timezone
 from modelcluster.models import ClusterableModel
 from django.db import models
 
@@ -44,6 +45,22 @@ class OneYouVariant(OneYou2Page):
     def part_of_experiments(self):
         appears_in = self.experiment_set.all().values_list('name', flat=True).distinct()
         return ",".join(appears_in)
+
+    @property
+    def live_experiments(self):
+        now = timezone.now()
+        appears_in = self.experiment_set.filter(start_date__lte=now,
+                                                end_date__gte=now
+                                                ).values_list('name', flat=True).distinct()
+        return ",".join(appears_in)
+
+    @property
+    def is_live(self):
+        now = timezone.now()
+        if self.experiment_set.filter(start_date__lte=now, end_date__gte=now).count():
+            return True
+        else:
+            return False
 
 
 class ExperimentsContent(ClusterableModel):

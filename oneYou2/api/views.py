@@ -121,7 +121,11 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug=
             not_found_msg = "Page Not Found"
 
         try:
-            page_pk = Page.objects.get(slug=page_slug).pk
+            # This somewhat defeats the point of freezing content
+            # TODO: Fix this, you can do this by freezing content with slug keys
+            # You would then only need to get the page object for variants
+            page = Page.objects.get(slug=page_slug)
+            page_pk = page.pk
         except ObjectDoesNotExist:
             return JsonResponse({'message': not_found_msg}, status=404)
     else:  # If there is no slug it cannot be a variant
@@ -134,10 +138,14 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug=
         return JsonResponse({'message': "Release not found"}, status=404)
     populate_release_if_required(release)
 
-    if variant:  # TODO: Need to check whether an experiment is running
+    if variant:
         try:
             experiments_content = ExperimentsContent.objects.first()
             if experiments_content:
+                if page.specific.is_live:
+                    pass
+                else:
+                    raise KeyError
                 page_content = experiments_content.get_content_for(page_pk)
             else:
                 return JsonResponse({'message': "No content for any experiment found"}, status=500)

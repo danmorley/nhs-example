@@ -10,6 +10,7 @@ class ExperimentAdmin(ModelAdmin):
     menu_icon = 'group'
     menu_order = 910
     add_to_settings_menu = False
+    list_display = ('name', 'start_date', 'end_date')
 
 
 class OneYouVariantAdmin(ModelAdmin):
@@ -19,7 +20,7 @@ class OneYouVariantAdmin(ModelAdmin):
     menu_order = 911
     add_to_settings_menu = False
     url_helper_class = VarientAdminURLHelper
-    list_display = ('title', 'url', 'latest_revision_created_at', 'part_of_experiments')
+    list_display = ('title', 'url', 'latest_revision_created_at', 'part_of_experiments', 'live_experiments')
 
 
 class ExperimentAdminGroup(ModelAdminGroup):
