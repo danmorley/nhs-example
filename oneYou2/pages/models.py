@@ -408,9 +408,13 @@ class OneYou2Page(Page):
         if not default_excludes:
             default_excludes = ['id', 'path', 'depth', 'numchild', 'content_type_id', 'live_revision_id',
                                 'page_ptr_id', 'oneyou2page_ptr_id', 'release_id', 'live', 'locked']
+        if not excludes:
+            excludes = []
+
         excludes = default_excludes + excludes
         for key, value in obj_dict.items():
             if key not in excludes and not key.startswith('_'):
+                print(key, value)
                 setattr(self, key, value)
         return self
 

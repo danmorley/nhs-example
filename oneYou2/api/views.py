@@ -1,5 +1,6 @@
 import json
 
+import re
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
 from django.template.response import TemplateResponse
@@ -13,6 +14,7 @@ from pages.serializers import OneYouPageListSerializer, OneYouPageSerializer
 
 from wagtail.wagtailcore.models import Page, Site
 
+from experiments.models import ExperimentsContent
 from .utils import get_site_or_404
 
 
@@ -106,11 +108,25 @@ def full_page_list(request, site_identifier):
 
 @require_safe
 def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug=None):
+    """RETURN PAGE DETAILS IN API"""
+    # Match variants, a variant's slug should end with -v and then a truncated hash of 6 characters
+    variant_regex = re.compile(r"-v[a-zA-Z0-9]{6}$")
+
     if page_slug:
+        if variant_regex.search(page_slug):
+            variant = True
+            not_found_msg = "Variant Not Found"
+        else:
+            variant = False
+            not_found_msg = "Page Not Found"
+
         try:
             page_pk = Page.objects.get(slug=page_slug).pk
         except ObjectDoesNotExist:
-            return JsonResponse({'message': "Page Not Found"}, status=404)
+            return JsonResponse({'message': not_found_msg}, status=404)
+    else:  # If there is no slug it cannot be a variant
+        variant = False
+        not_found_msg = "Page Not Found"
 
     get_site_or_404(site_identifier)
     release = get_release_object(release_uuid)
@@ -118,10 +134,21 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug=
         return JsonResponse({'message': "Release not found"}, status=404)
     populate_release_if_required(release)
 
-    try:
-        page_content = release.get_content_for(page_pk)
-    except KeyError:
-        return JsonResponse({'message': "Page Not Found"}, status=404)
+    if variant:  # TODO: Need to check whether an experiment is running
+        try:
+            experiments_content = ExperimentsContent.objects.first()
+            if experiments_content:
+                page_content = experiments_content.get_content_for(page_pk)
+            else:
+                return JsonResponse({'message': "No content for any experiment found"}, status=500)
+        except KeyError:
+            return JsonResponse({'message': not_found_msg}, status=404)
+
+    else:
+        try:
+            page_content = release.get_content_for(page_pk)
+        except KeyError:
+            return JsonResponse({'message': not_found_msg}, status=404)
 
     json_response = JsonResponse(page_content)
     if release.content_status == 1:

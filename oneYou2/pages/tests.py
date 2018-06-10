@@ -70,25 +70,27 @@ class OneYou2PageModelTests(OneYouTests):
                            show_in_menus=True, search_description='page-description', first_published_at='yesterday')
 
         obj_dict = {'title': 'Page title 2', 'path': '00002', 'depth': '1', 'numchild': '1',
-                    'body': '', 'page_theme': {'id': 2}, 'live': True,
-                    'meta': {'slug': 'page-path2', 'seo_title': 'page-name2',
-                             'show_in_menus': True, 'search_description': 'page-description2',
-                             'first_published_at': 'today'}
+                    'body': '', 'live': True,
+                    'slug': 'page-path2', 'seo_title': 'page-name2',
+                    'show_in_menus': True, 'search_description': 'page-description2',
+                    'first_published_at': 'today'
                     }
 
-        page = page.update_from_dict(obj_dict)
+        default_excludes = ['id', 'content_type_id', 'live_revision_id',
+                            'page_ptr_id', 'oneyou2page_ptr_id', 'release_id', 'live', 'locked']
+
+        page = page.update_from_dict(obj_dict, default_excludes=default_excludes)
 
         self.assertIs(page.title, obj_dict['title'])
         self.assertIs(page.path, obj_dict['path'])
         self.assertIs(page.depth, obj_dict['depth'])
         self.assertIs(page.numchild, obj_dict['numchild'])
-        self.assertIs(page.theme_id, obj_dict['page_theme']['id'])
         self.assertIs(page.live, obj_dict['live'])
-        self.assertIs(page.slug, obj_dict['meta']['slug'])
-        self.assertIs(page.seo_title, obj_dict['meta']['seo_title'])
-        self.assertIs(page.show_in_menus, obj_dict['meta']['show_in_menus'])
-        self.assertIs(page.search_description, obj_dict['meta']['search_description'])
-        self.assertIs(page.first_published_at, obj_dict['meta']['first_published_at'])
+        self.assertIs(page.slug, obj_dict['slug'])
+        self.assertIs(page.seo_title, obj_dict['seo_title'])
+        self.assertIs(page.show_in_menus, obj_dict['show_in_menus'])
+        self.assertIs(page.search_description, obj_dict['search_description'])
+        self.assertIs(page.first_published_at, obj_dict['first_published_at'])
 
     @patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
     def test_publishing_page_to_release_links_new_revision_to_release(self, mock_file_service):

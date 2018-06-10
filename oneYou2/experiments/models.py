@@ -1,8 +1,13 @@
+import json
+
+from django.db.models.signals import pre_delete, post_save
+from django.dispatch import receiver
 from django.forms import CheckboxSelectMultiple
 from modelcluster.models import ClusterableModel
 from django.db import models
 
 from pages.models import OneYou2Page
+from release.models import Release
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
 
 
@@ -39,3 +44,33 @@ class OneYouVariant(OneYou2Page):
     def part_of_experiments(self):
         appears_in = self.experiment_set.all().values_list('name', flat=True).distinct()
         return ",".join(appears_in)
+
+
+class ExperimentsContent(ClusterableModel):
+    content = models.TextField(null=True, blank=True)
+
+    def get_content_for(self, key):
+        content_dict = json.loads(self.content)
+        return content_dict[str(key)]
+
+
+@receiver(post_save, sender=OneYouVariant, dispatch_uid='variant post save signal')
+def update_frozen_experiments_content(sender, instance, using, **kwargs):
+    experiments_content = ExperimentsContent.objects.all().first()
+    if not experiments_content:
+        experiments_content = ExperimentsContent(content=json.dumps({})).save()
+    newest_revision = instance.get_latest_revision()
+    content = json.loads(experiments_content.content)
+    content[str(newest_revision.page_id)] = Release.generate_fixed_content(newest_revision)
+    experiments_content.content = json.dumps(content)
+    experiments_content.save()
+
+
+@receiver(pre_delete, sender=OneYouVariant, dispatch_uid='variant delete signal')
+def delete_from_frozen_experiments_content(sender, instance, using, **kwargs):
+    experiments_content = ExperimentsContent.objects.all().first()
+    if experiments_content:
+        content = json.loads(experiments_content.content)
+        if str(instance.id) in content:
+            del content[instance.id]
+    print("deleting...")
