@@ -32,7 +32,7 @@ import TableShelf from '../../shelves/TableShelf';
 import ActionPlanShelf from '../../shelves/ActionPlanShelf';
 import ActionPlanDisplayShelf from '../../shelves/ActionPlanDisplayShelf';
 import AccordionGroup from '../../shelves/AccordionGroup';
-
+import TwoColumnShelf from '../../shelves/TwoColumnShelf';
 
 class MultiShelfBlock extends Component {
   render() {

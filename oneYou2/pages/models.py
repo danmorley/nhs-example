@@ -559,6 +559,23 @@ class ActionGroup(Shelf):
         form_classname = 'dct-action-group-shelf dct-meta-panel'
 
 
+class TwoColumnShelf(Shelf):
+    column_1_heading = blocks.CharBlock(required=False)
+    column_1_items = blocks.StreamBlock(GRID_PANELS, icon='arrow-left', label='Column 1 Content')
+    column_2_heading = blocks.CharBlock(required=False)
+    column_2_items = blocks.StreamBlock(GRID_PANELS, icon='arrow-left', label='Column 2 Content')
+    meta_variant = blocks.ChoiceBlock(choices=GRID_VARIANT_CHOICES, label="Variant")
+    meta_image_display = blocks.ChoiceBlock(choices=(
+            ('contain', 'Contain'),
+            ('cover', 'Stretch')
+        ),
+        label='Teaser Image Display', default="cover")
+    shelf_id = IDBlock(required=False, label="ID")
+
+    class Meta:
+        form_classname = 'dct-two-column-shelf dct-meta-panel'
+
+
 class ActionPlan(Shelf):
     action_groups = blocks.StreamBlock([
         ('action_group', ActionGroup(required=False, icon="collapse-down")),
@@ -634,8 +651,10 @@ class OneYou2Page(Page):
         ('svg_shelf', InlineSvgPanel(label="SVG shelf", icon='snippet')),
         ('accordion_group', AccordionGroup(label="Accordion Group", icon='form')),
         ('action_plan_shelf', ActionPlan(label="Action Plan Builder shelf", icon='form')),
-        ('action_plan_display_shelf', ActionPlanDisplay(label="Action Plan Display shelf", icon='form'))
+        ('action_plan_display_shelf', ActionPlanDisplay(label="Action Plan Display shelf", icon='form')),
+        ('two_column_shelf', TwoColumnShelf(label="Two Column Shelf", icon='grip')),
     ], null=True, blank=True)
+
 
     # Meta Fields
     og_title = models.CharField(max_length=255, default="One You - Home",)

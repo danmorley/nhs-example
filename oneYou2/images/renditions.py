@@ -40,4 +40,5 @@ ONEYOU_RENDITIONS = [
     ('icon_card_panel', 'grid_shelf', '3_col_1_on_mobile', {'desktop': '200x200', 'mobile': '120x120'}),
 
     ('grid_shelf', None, None, {'desktop': '1440x800', 'mobile': '375x143'}),
+    ('icon_card_panel', 'two_column_shelf', None, {'desktop': '200x200', 'mobile': '120x120'}),
 ]
