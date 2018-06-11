@@ -18,7 +18,7 @@ from oneYou2.test.utils import OneYouTests
 
 from pages.factories import create_test_page, create_test_theme, create_test_menu, create_test_footer,\
     create_test_header, create_test_recipe_page
-from pages.models import OneYou2Page, Theme
+from pages.models import OneYou2Page, Theme, RecipePage
 from pages.utils import get_serializable_data_for_fields, process_inlines
 from pages.wagtail_hooks import MenuAdmin, MenuButtonHelper
 
@@ -232,6 +232,45 @@ class RecipePageModelTests(OneYouTests):
 
         self.assertTrue(second_revision_in_release)
         self.assertIsFalse(initial_revision_in_release)
+
+    @patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
+    def test_unpublishing_a_page_removes_the_revision_for_that_page_from_the_release(self, mock_file_service):
+        page = create_test_recipe_page()
+
+        release = create_test_release()
+
+        page_count = RecipePage.objects.count()
+        live_page_count = RecipePage.objects.live().count()
+
+        release_content = release.content.first()
+        release_content_dict = json.loads(release_content.content)
+
+        self.assertEquals(page_count, len(release_content_dict))
+        self.assertEquals(live_page_count, len(release_content_dict))
+
+        revision_in_release = False
+        if str(page.id) in release_content_dict:
+            revision_in_release = True
+
+        self.assertTrue(revision_in_release)
+
+        page.release = release
+        page.unpublish()
+
+        page_count = RecipePage.objects.count()
+        live_page_count = RecipePage.objects.live().count()
+
+        release_content = release.content.first()
+        release_content_dict = json.loads(release_content.content)
+
+        self.assertNotEquals(page_count, len(release_content_dict))
+        self.assertEquals(live_page_count, len(release_content_dict))
+
+        revision_in_release = False
+        if str(page.id) in release_content_dict:
+            revision_in_release = True
+
+        self.assertIsFalse(revision_in_release)
 
 
 class ThemeModelTests(OneYouTests):
