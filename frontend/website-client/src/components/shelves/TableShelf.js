@@ -5,10 +5,8 @@ import Shelf from './Shelf';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import Text from '../Text';
 import './table-shelf.css';
+import MultiPanelBlock from '../pages/blocks/MultiPanelBlock';
 
-import PlaceholderPanel from '../panels/PlaceholderPanel';
-import SimpleTextPanel from '../panels/SimpleTextPanel';
-import IconCardPanel from '../panels/IconCardPanel';
 
 /**
  *  Table Shelf is a shelf that can be used to
@@ -28,20 +26,7 @@ class TableShelf extends Component {
   }
 
   renderRow(row, key) {
-    var panels = row.map((panel, i) => {
-      const panelInfo = CmsComponentRegistry.components[panel.type];
-      const PanelClass = panelInfo && panelInfo.class;
-      const panelClassNamePrefix = panelInfo && panelInfo.classNamePrefix;
-      const panelId = panel.value.field_id || panel.value.shelf_id || panel.value.panel_id || 'panel-' + panel.id;
-      const panelClass = 'row-' + i;
-
-      if (PanelClass) {
-        return (<td key={i} className={panelClass}><PanelClass content={panel.value} id={panelId} classNamePrefix={panelClassNamePrefix} /></td>);
-      } else {
-        return (<td key={i} className={panelClass}><PlaceholderPanel panelType={panel.type} /></td>);
-      }
-    });
-
+    const panels = <MultiPanelBlock items={row} panelClass="row-item" containerTagName="td"/>;
     return (<tr key={key}>{panels}</tr>);
   }
 

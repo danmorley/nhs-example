@@ -4,14 +4,8 @@ import Shelf from '../shelves/Shelf';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import './grid-shelf.css';
 import ShowMorePanel from '../shared/ShowMorePanel';
+import MultiPanelBlock from '../pages/blocks/MultiPanelBlock';
 
-import PlaceholderPanel from '../panels/PlaceholderPanel';
-import VideoTeaserPanel from '../panels/VideoTeaserPanel';
-import ImageTeaserPanel from '../panels/ImageTeaserPanel';
-import Oneyou1TeaserPanel from '../panels/Oneyou1TeaserPanel';
-import AppTeaserPanel from '../panels/AppTeaserPanel';
-import InformationPanel from '../panels/InformationPanel';
-import ShareButtonShelf from '../shelves/ShareButtonShelf';
 
 /**
  *  Grid Shelf is a simple shelf that can be used to display other
@@ -43,19 +37,6 @@ class GridShelf extends Component {
       }
     })(metaLayout);
 
-    var panels = content.items.map((panel, _i) => {
-      const panelInfo = CmsComponentRegistry.components[panel.type];
-      const PanelClass = panelInfo && panelInfo.class;
-      const panelClassNamePrefix = panelInfo && panelInfo.classNamePrefix;
-      const panelId = panel.value.field_id || panel.value.shelf_id || 'panel-' + panel.id;
-
-      if (PanelClass) {
-        return (<div key={panel.id} className={panelClass}><PanelClass content={panel.value} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
-      } else {
-        return (<div key={panel.id} className={panelClass}><PlaceholderPanel panelType={panel.type} id={panelId} classNamePrefix={panelClassNamePrefix}/></div>);
-      }
-    });
-
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
         <div className={`shelf__container container image--${metaImageDisplay}`}>
@@ -64,7 +45,7 @@ class GridShelf extends Component {
           }
           <div className="grid-container">
             <ShowMorePanel rowsToShow={content.rows_to_show}>
-              {panels}
+              <MultiPanelBlock items={content.items} panelClass={panelClass}/>
             </ShowMorePanel>
           </div>
         </div>
