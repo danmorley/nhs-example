@@ -39,6 +39,11 @@ GRID_LAYOUT_CHOICES = (
     ('3_col_1_on_mobile', 'Responsive (3 columns on desktop)'),
 )
 
+GRID_IMAGE_CHOICES = (
+    ('contain', 'Contain'),
+    ('cover', 'Stretch'),
+)
+
 TABLE_VARIANTS = (
     ('standard', 'Standard'),
 )
@@ -240,11 +245,9 @@ class Grid(blocks.StructBlock):
                                      label="Layout",
                                      help_text="Use this to select number of columns on desktop (only one column"
                                                " on mobile)")
-    meta_image_display = blocks.ChoiceBlock(choices=(
-        ('contain', 'Contain'),
-        ('cover', 'Stretch')
-    ),
-        label='Teaser Image Display', default="cover")
+    meta_image_display = blocks.ChoiceBlock(GRID_IMAGE_CHOICES,
+                                            label='Teaser Image Display',
+                                            default="cover")
     shelf_id = IDBlock(required=False, label="ID")
 
 
@@ -254,11 +257,9 @@ class RecipeGrid(blocks.StructBlock):
     items = blocks.StreamBlock([
         ('recipe_teaser', RecipeTeaserChooserBlock(target_model="shelves.RecipeTeaser", icon="image"))
     ], icon='arrow-left', label='Items')
-    meta_image_display = blocks.ChoiceBlock(choices=(
-        ('contain', 'Contain'),
-        ('cover', 'Stretch')
-    ),
-        label='Teaser Image Display', default="cover")
+    meta_image_display = blocks.ChoiceBlock(GRID_IMAGE_CHOICES,
+                                            label='Teaser Image Display',
+                                            default="cover")
     shelf_id = IDBlock(required=False, label="ID")
 
 
