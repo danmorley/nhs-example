@@ -414,7 +414,6 @@ class OneYou2Page(Page):
         excludes = default_excludes + excludes
         for key, value in obj_dict.items():
             if key not in excludes and not key.startswith('_'):
-                print(key, value)
                 setattr(self, key, value)
         return self
 

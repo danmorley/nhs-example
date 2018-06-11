@@ -33,14 +33,14 @@
       function createSelectOptions(data, selector) {
         selector.append('<option value="">---------</option>');
         for (var i = 0; i < data.length; i++) {
-          selector.append('<option value="' + data[i].id + '">' + data[i].release_name + '</option>');
+          selector.append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
         }
       }
 
       function setUpReleaseSelectorPopUp() {
         var releasePicker = $('.object.model_choice_field');
-        $.get('/api/v2/releases', function(data) {
-          createSelectOptions(data, releasePicker.find('select'));
+        $.get('/api/open-releases/', function(data) {
+          createSelectOptions(data.releases, releasePicker.find('select'));
         });
         releasePicker.wrap('<div class="popup-cover"><div class="popup"></div></div>');
         var releasePopUp = releasePicker.parent();
