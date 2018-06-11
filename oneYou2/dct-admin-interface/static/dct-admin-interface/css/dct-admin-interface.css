@@ -1,0 +1,57 @@
+.sequence-member {
+  background-color: transparent;
+  border-radius: 4px;
+  padding-top: 24px;
+  margin-bottom: 4px;
+}
+
+.sequence-member .sequence-member {
+  background-color: #e7e8e9;
+  padding-left: 10px;
+  border: 3px solid #e7e8e9 !important;
+}
+
+.sequence-member .sequence-member:hover {
+  border: 3px solid #9a9a9a !important;
+}
+
+.sequence-member .sequence-member .sequence-controls {
+  top: 10px;
+  background-color: #e1e2e3;
+  border: 0;
+}
+
+.sequence-member .sequence-member .sequence-member {
+  background-color: #d7d8d9;
+  border: 3px solid #d7d8d9 !important;
+}
+
+.sequence-member .sequence-member .sequence-member .sequence-controls {
+  background-color: #d1d2d3;
+}
+
+.sequence-member .sequence-member .sequence-member:hover {
+  border: 3px solid #9a9a9a !important;
+}
+
+.stream-menu {
+  margin-top: 2em !important;
+  top: 4px !important;
+}
+
+.sequence-container .stream-menu:first-of-type,
+.sequence-container .stream-menu:last-of-type {
+  top: 0px !important;
+}
+
+.stream-menu .stream-menu:hover {
+  background-color: #c4c4c4 !important;
+}
+
+.stream-menu .stream-menu .stream-menu:hover {
+  background-color: #e4e4e4 !important;
+}
+
+.dct-panel-image-teaser {
+  background-color: red;
+}
