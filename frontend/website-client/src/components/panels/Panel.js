@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 
 class Panel extends Component {
   panelClasses() {
-    let classNamePrefix = this.props.classNamePrefix;
-    return this.props.variant ? `panel ${classNamePrefix} ${classNamePrefix}--${this.props.variant}` : `panel ${classNamePrefix}`;
+    const classNamePrefix = this.props.classNamePrefix;
+    const variantClass = this.props.variant && (classNamePrefix + '--' + this.props.variant) || '';
+    const layoutClass = this.props.layout && (classNamePrefix + '--' + this.props.layout) || '';
+    return `panel ${classNamePrefix} ${variantClass} ${layoutClass}`;
   }
 
   render() {
@@ -20,6 +22,7 @@ class Panel extends Component {
 Panel.propTypes = {
   classNamePrefix: PropTypes.string.isRequired,
   variant: PropTypes.string,
+  layout: PropTypes.string,
   style: PropTypes.object,
   id: PropTypes.string
 };

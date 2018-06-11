@@ -76,8 +76,9 @@ $shelf-padding-extra: 2em;
 .carousel-full .container-fluid,
 .section-heading-shelf,
 .basic-grid-shelf,
-.panel-carousel-shelf {
-  
+.panel-carousel-shelf,
+.table-shelf {
+
    > .container {
     @include media-breakpoint-up(sm) {
       padding-left: 0;

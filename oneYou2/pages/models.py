@@ -28,10 +28,38 @@ from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppT
     BlobImageChooserBlock, RecipeTeaserChooserBlock
 
 
+GRID_VARIANT_CHOICES = (
+    ('standard', 'Standard'),
+    ('grey_background', 'Grey Background'),
+)
+
 GRID_LAYOUT_CHOICES = (
     ('full_width', 'Full Width'),
     ('2_col_1_on_mobile', 'Responsive (2 columns on desktop)'),
     ('3_col_1_on_mobile', 'Responsive (3 columns on desktop)'),
+)
+
+GRID_IMAGE_CHOICES = (
+    ('contain', 'Contain'),
+    ('cover', 'Stretch'),
+)
+
+TABLE_VARIANTS = (
+    ('standard', 'Standard'),
+)
+
+ICON_CARD_LAYOUTS = (
+    ('icon_on_left', 'Icon on Left'),
+    ('icon_on_right', 'Icon on Right'),
+    ('icon_heading_left', 'Icon Heading Left'),
+    ('icon_body_right', 'Icon Body Right'),
+)
+
+ICON_CARD_VARIANTS = (
+    ('standard_grey_bg', 'Standard on Grey Background'),
+    ('standard_heading_standard_body_grey_bg', 'Standard Heading, Standard Body Text, Grey Background'),
+    ('large_green_heading_standard_body_grey_bg', 'Large Green Heading, Standard Body Text, Grey Background'),
+    ('x_small_heading_large_body_no_bg', 'X Small Heading, Large Body Text, No Background'),
 )
 
 CONTENT_STATUS_PENDING = 0
@@ -62,29 +90,14 @@ class SocialMediaFooterLink(blocks.StructBlock):
     link = blocks.URLBlock(label='External link', required=False)
 
 
+# Panels
+
 class PageHeading(CTABlock):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     background_image = BlobImageChooserBlock(required=False)
     meta_gradient = blocks.BooleanBlock(label='Green gradient', required=False, default=False)
     shelf_id = IDBlock(required=False, label="ID", help_text="Not displayed in the front end")
-
-
-class SectionHeading(blocks.StructBlock):
-    heading = blocks.CharBlock(required=False)
-    shelf_id = IDBlock(required=False, label="ID", help_text="Not displayed in the front end")
-    body = blocks.RichTextBlock(required=False)
-
-
-class SimplePageHeading(SectionHeading):
-    """This is a page heading with only text."""
-    pass
-
-
-class ArticlePageHeadingShelf(blocks.StructBlock):
-    heading = blocks.CharBlock(required=False)
-    display_back_button = blocks.BooleanBlock(label='Display a back button', required=False, default=True)
-    back_button_label = blocks.CharBlock(required=False)
 
 
 class BackwardsCompatibleContent(CTABlock):
@@ -141,6 +154,52 @@ class ImageTeaserTemplate(CTABlock):
     shelf_id = IDBlock(required=False, label="ID")
 
 
+class IconCardPanel(CTABlock):
+    heading = blocks.CharBlock(required=False)
+    body = blocks.RichTextBlock(required=False)
+    image = BlobImageChooserBlock(required=False)
+    panel_id = IDBlock(required=False, label="ID")
+    meta_layout = blocks.ChoiceBlock(choices=ICON_CARD_LAYOUTS, label="Layout")
+    meta_variant = blocks.ChoiceBlock(choices=ICON_CARD_VARIANTS, label="Variant")
+
+
+class SimpleTextPanel(blocks.StructBlock):
+    text = blocks.CharBlock(required=False)
+
+
+class RichTextPanel(blocks.StructBlock):
+    text = blocks.RichTextBlock(required=False)
+
+
+GRID_PANELS = [
+    ('oneyou1_teaser', BackwardsCompatibleContent(label="OneYou1 teaser", icon="folder-inverse")),
+    ('video_teaser', VideoTemplate(icon="media")),
+    ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
+    ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
+    ('information_panel', InformationPanel(target_model="shelves.AppTeaser", icon="image")),
+    ('icon_card_panel', IconCardPanel(icon="snippet"))
+]
+
+
+# Shelves
+
+class SectionHeading(blocks.StructBlock):
+    heading = blocks.CharBlock(required=False)
+    shelf_id = IDBlock(required=False, label="ID", help_text="Not displayed in the front end")
+    body = blocks.RichTextBlock(required=False)
+
+
+class SimplePageHeading(SectionHeading):
+    """This is a page heading with only text."""
+    pass
+
+
+class ArticlePageHeadingShelf(blocks.StructBlock):
+    heading = blocks.CharBlock(required=False)
+    display_back_button = blocks.BooleanBlock(label='Display a back button', required=False, default=True)
+    back_button_label = blocks.CharBlock(required=False)
+
+
 class IFrameShelf(blocks.StructBlock):
     heading = blocks.CharBlock(required=False)
     src = blocks.CharBlock(required=True, label="Source URl")
@@ -180,22 +239,15 @@ class PanelCarousel(blocks.StructBlock):
 class Grid(blocks.StructBlock):
     heading = blocks.CharBlock(required=False)
     rows_to_show = blocks.IntegerBlock(default=0)
-    items = blocks.StreamBlock([
-        ('oneyou1_teaser', BackwardsCompatibleContent(label="OneYou1 teaser", icon="folder-inverse")),
-        ('video_teaser', VideoTemplate(icon="media")),
-        ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
-        ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
-        ('information_panel', InformationPanel(target_model="shelves.AppTeaser", icon="image"))
-    ], icon='arrow-left', label='Items')
+    items = blocks.StreamBlock(GRID_PANELS, icon='arrow-left', label='Items')
+    meta_variant = blocks.ChoiceBlock(choices=GRID_VARIANT_CHOICES, label="Variant")
     meta_layout = blocks.ChoiceBlock(choices=GRID_LAYOUT_CHOICES,
                                      label="Layout",
                                      help_text="Use this to select number of columns on desktop (only one column"
                                                " on mobile)")
-    meta_image_display = blocks.ChoiceBlock(choices=(
-        ('contain', 'Contain'),
-        ('cover', 'Stretch')
-    ),
-        label='Teaser Image Display', default="cover")
+    meta_image_display = blocks.ChoiceBlock(GRID_IMAGE_CHOICES,
+                                            label='Teaser Image Display',
+                                            default="cover")
     shelf_id = IDBlock(required=False, label="ID")
 
 
@@ -205,12 +257,22 @@ class RecipeGrid(blocks.StructBlock):
     items = blocks.StreamBlock([
         ('recipe_teaser', RecipeTeaserChooserBlock(target_model="shelves.RecipeTeaser", icon="image"))
     ], icon='arrow-left', label='Items')
-    meta_image_display = blocks.ChoiceBlock(choices=(
-        ('contain', 'Contain'),
-        ('cover', 'Stretch')
-    ),
-        label='Teaser Image Display', default="cover")
+    meta_image_display = blocks.ChoiceBlock(GRID_IMAGE_CHOICES,
+                                            label='Teaser Image Display',
+                                            default="cover")
     shelf_id = IDBlock(required=False, label="ID")
+
+
+class Table(blocks.StructBlock):
+    header = blocks.ListBlock(blocks.CharBlock(required=False), label='Column headings')
+    display_header = blocks.BooleanBlock(label='Display the table header?', required=False)
+    body_rows = blocks.ListBlock(blocks.StreamBlock([
+        ('simple_text_panel', SimpleTextPanel(required=False)),
+        ('rich_text_panel', RichTextPanel(required=False)),
+        ('icon_card_panel', IconCardPanel(required=False, icon="snippet"))
+    ]))
+    shelf_id = IDBlock(required=False, label="ID")
+    meta_variant = blocks.ChoiceBlock(choices=TABLE_VARIANTS, label="Variant")
 
 
 # Pages
@@ -230,6 +292,7 @@ class OneYou2Page(Page):
         ('iframe_shelf', IFrameShelf(label="IFrame", icon='placeholder')),
         ('divider', Divider(label="Divider", icon='horizontalrule')),
         ('article_page_heading_shelf', ArticlePageHeadingShelf(label="Article Page Heading", icon='title')),
+        ('table', Table(label="Table", icon='list-ul')),
     ], null=True, blank=True)
 
     # Meta Fields

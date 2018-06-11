@@ -24,21 +24,20 @@ class CTABlock(blocks.StructBlock):
         if image_field in result:
             if result[image_field].get('renditions'):
                 image_meta = value.get('image_meta')
-                if image_meta:
-                    if result['mobile_use_renditions']:
-                        mobile_rendition = result[image_field]['renditions'][image_meta + '/mobile']
-                    else:
-                        mobile_rendition = result[image_field]['renditions']['original']
+                if image_meta and result['mobile_use_renditions']:
+                    mobile_rendition = result[image_field]['renditions'][image_meta + '/mobile']
+                else:
+                    mobile_rendition = result[image_field]['renditions']['original']
 
-                    if result['desktop_use_renditions']:
-                        desktop_rendition = result[image_field]['renditions'][image_meta + '/desktop']
-                    else:
-                        desktop_rendition = result[image_field]['renditions']['original']
+                if image_meta and result['desktop_use_renditions']:
+                    desktop_rendition = result[image_field]['renditions'][image_meta + '/desktop']
+                else:
+                    desktop_rendition = result[image_field]['renditions']['original']
 
-                    result[image_field]['renditions'] = {
-                        'mobile': mobile_rendition,
-                        'desktop': desktop_rendition
-                    }
+                result[image_field]['renditions'] = {
+                    'mobile': mobile_rendition,
+                    'desktop': desktop_rendition
+                }
 
         if 'cta' in result:
             cta_links = []

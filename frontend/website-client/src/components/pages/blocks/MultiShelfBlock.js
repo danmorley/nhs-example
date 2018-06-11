@@ -25,6 +25,7 @@ import DividerShelf from '../../shelves/DividerShelf';
 import ArticlePageHeadingShelf from '../../shelves/ArticlePageHeadingShelf';
 import RecipeGridShelf from '../../shelves/RecipeGridShelf';
 import ShareButtonShelf from '../../shelves/ShareButtonShelf';
+import TableShelf from '../../shelves/TableShelf';
 
 class MultiShelfBlock extends Component {
   render() {
@@ -37,6 +38,7 @@ class MultiShelfBlock extends Component {
       const shelfVariant = shelfInfo && shelfInfo.variant;
       const shelfLayout = shelfInfo && shelfInfo.layout;
       const shelfId = shelf.value.field_id || shelf.value.shelf_id || 'shelf-' + shelf.id;
+
       if (ShelfClass) {
         return (<ErrorBoundary key={shelf.id}><ShelfClass content={shelf.value} id={shelfId} classNamePrefix={shelfClassNamePrefix} variant={shelfVariant} layout={shelfLayout}/></ErrorBoundary>);
       } else {
