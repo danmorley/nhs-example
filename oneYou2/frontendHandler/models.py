@@ -28,6 +28,7 @@ class FrontendVersion:
     @classmethod
     def get_available_versions(cls):
         print('loading available versions')
+        return []
         # TODO try to find a way to mock this function on server start
         if settings.AZURE_ACCOUNT_NAME == 'test' or settings.AZURE_ACCOUNT_NAME is None:
             return []
@@ -93,6 +94,14 @@ class FrontendVersion:
         return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, directory_name, file_name)
 
     @classmethod
+    def load_static(cls, path, file_name):
+        print(path, file_name)
+        file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
+        file_directory = settings.ENV if settings.ENV != 'local' else 'dev'
+        directory_name = file_directory + '/' + path
+        return file_service.get_file_to_path(settings.AZURE_FILE_SHARE, directory_name, file_name, './web/' + file_name)
+
+    @classmethod
     def deploy_version(cls):
         print('deploying frontend to azure')
         file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
@@ -127,6 +136,10 @@ class FrontendVersion:
                                             './web/' + manifest[key])
         print('uploading index.html')
         file_service.put_file_from_path(settings.AZURE_FILE_SHARE, version_directory, 'index.html', './web/index.html')
+
+        print('uploading favicon')
+        file_service.put_file_from_path(settings.AZURE_FILE_SHARE, version_directory, 'favicon.ico',
+                                        './web/favicon.ico')
 
         release_tag = get_release_version()
         print('adding tag meta to the version directory')
