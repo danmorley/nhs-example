@@ -73,17 +73,15 @@ class ExperimentsContent(ClusterableModel):
 
 @receiver(post_save, sender=OneYouVariant, dispatch_uid='variant post save signal')
 def update_frozen_experiments_content(sender, instance, using, **kwargs):
-    experiments_content = ExperimentsContent.objects.all().first()
-    if not experiments_content:
-        experiments_content = ExperimentsContent(content=json.dumps({})).save()
     newest_revision = instance.get_latest_revision()
-    if experiments_content.content:
-        content = json.loads(experiments_content.content)
-    else:
-        content = {}
-    content[str(newest_revision.page_id)] = Release.generate_fixed_content(newest_revision)
-    experiments_content.content = json.dumps(content)
-    experiments_content.save()
+    if newest_revision:
+        experiments_content = ExperimentsContent.objects.all().first()
+        if not experiments_content:
+            experiments_content = ExperimentsContent(content=json.dumps({}))
+        content = json.loads(getattr(experiments_content, "content", json.dumps({})))
+        content[str(newest_revision.page_id)] = Release.generate_fixed_content(newest_revision)
+        experiments_content.content = json.dumps(content)
+        experiments_content.save()
 
 
 @receiver(pre_delete, sender=OneYouVariant, dispatch_uid='variant delete signal')
