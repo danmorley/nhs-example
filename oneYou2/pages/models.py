@@ -475,6 +475,14 @@ class OneYou2Page(Page):
         site_name = SiteSettings.objects.get(site_id=self.get_site().id).uid
         return '/' + site_name + self.url_path
 
+    @property
+    def breadcrumbs(self):
+        ancestors = self.get_ancestors()[2:]
+        breadcrumbs = []
+        for ancestor in ancestors:
+            breadcrumbs.append({"name": ancestor.specific.title, "url": ancestor.specific.link_url})
+        return breadcrumbs
+
     content_panels = Page.content_panels + [
         StreamFieldPanel('body'),
         FieldPanel('release'),
