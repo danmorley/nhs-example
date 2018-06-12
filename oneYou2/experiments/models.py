@@ -63,13 +63,26 @@ class OneYouVariant(OneYou2Page):
         else:
             return False
 
-    @property
-    def parent_page_title(self):
+    def html_parent_page_title(self):
         return format_html(
             '<a href="/admin/pages/{}/edit/">{}</span>',
             self.get_parent().id,
             self.get_parent().title
         )
+
+    html_parent_page_title.short_description = 'Parent'
+
+    def html_clickable_variant_link(self):
+        if self.is_live:
+            return format_html(
+                '<a href="/oneyou{}">{}</span>',
+                self.url,
+                self.url
+            )
+        else:
+            return self.url
+
+    html_clickable_variant_link.short_description = 'URL'
 
 
 class ExperimentsContent(ClusterableModel):
