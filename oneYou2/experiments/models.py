@@ -4,6 +4,7 @@ from django.db.models.signals import pre_delete, post_save
 from django.dispatch import receiver
 from django.forms import CheckboxSelectMultiple
 from django.utils import timezone
+from django.utils.html import format_html
 from modelcluster.models import ClusterableModel
 from django.db import models
 
@@ -61,6 +62,14 @@ class OneYouVariant(OneYou2Page):
             return True
         else:
             return False
+
+    @property
+    def parent_page_title(self):
+        return format_html(
+            '<a href="/admin/pages/{}/edit/">{}</span>',
+            self.get_parent().id,
+            self.get_parent().title
+        )
 
 
 class ExperimentsContent(ClusterableModel):
