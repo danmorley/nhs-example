@@ -96,14 +96,14 @@ class PageHeading(CTABlock):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     background_image = BlobImageChooserBlock(required=False)
-    meta_gradient = blocks.BooleanBlock(label='Green gradient',
-                                        required=False,
-                                        default=False,
-                                        classname='dct-meta-field')
     shelf_id = IDBlock(required=False,
                        label="ID",
                        help_text="Not displayed in the front end",
                        classname='dct-meta-field')
+    meta_gradient = blocks.BooleanBlock(label='Green gradient',
+                                        required=False,
+                                        default=False,
+                                        classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-page-heading-panel dct-meta-panel'
@@ -126,10 +126,10 @@ class InformationPanel(CTABlock):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     image = BlobImageChooserBlock(required=False)
-    shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False, verbose_name="cta")
+    shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-information-panel dct-meta-panel'
@@ -164,15 +164,15 @@ class ImageTeaserTemplate(CTABlock):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     image = BlobImageChooserBlock()
-    meta_variant = blocks.ChoiceBlock(choices=[
-        ('light-bg', 'Light Background'),
-        ('dark-bg', 'Dark Background')
-    ],
-        label='Variant', classname='dct-meta-field')
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False)
     shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
+    meta_variant = blocks.ChoiceBlock(choices=[
+            ('light-bg', 'Light Background'),
+            ('dark-bg', 'Dark Background')
+        ],
+        label='Variant', classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-panel-image-teaser dct-meta-panel'
@@ -183,8 +183,8 @@ class IconCardPanel(CTABlock):
     body = blocks.RichTextBlock(required=False)
     image = BlobImageChooserBlock(required=False)
     panel_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
-    meta_layout = blocks.ChoiceBlock(choices=ICON_CARD_LAYOUTS, label="Layout", classname='dct-meta-field')
     meta_variant = blocks.ChoiceBlock(choices=ICON_CARD_VARIANTS, label="Variant", classname='dct-meta-field')
+    meta_layout = blocks.ChoiceBlock(choices=ICON_CARD_LAYOUTS, label="Layout", classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-icon-card-panel dct-meta-panel'
@@ -280,8 +280,9 @@ class PanelCarousel(blocks.StructBlock):
 
 class Grid(blocks.StructBlock):
     heading = blocks.CharBlock(required=False)
-    rows_to_show = blocks.IntegerBlock(default=0, classname='dct-meta-field')
     items = blocks.StreamBlock(GRID_PANELS, icon='arrow-left', label='Items')
+    shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
+    rows_to_show = blocks.IntegerBlock(default=0, classname='dct-meta-field')
     meta_variant = blocks.ChoiceBlock(choices=GRID_VARIANT_CHOICES, label="Variant", classname='dct-meta-field')
     meta_layout = blocks.ChoiceBlock(choices=GRID_LAYOUT_CHOICES,
                                      label="Layout",
@@ -291,7 +292,6 @@ class Grid(blocks.StructBlock):
                                             label='Teaser Image Display',
                                             default="cover",
                                             classname='dct-meta-field')
-    shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-grid-shelf dct-meta-panel'
@@ -299,14 +299,14 @@ class Grid(blocks.StructBlock):
 
 class RecipeGrid(blocks.StructBlock):
     heading = blocks.CharBlock(required=False)
-    rows_to_show = blocks.IntegerBlock(default=0, classname='dct-meta-field')
     items = blocks.StreamBlock([
         ('recipe_teaser', RecipeTeaserChooserBlock(target_model="shelves.RecipeTeaser", icon="image"))
     ], icon='arrow-left', label='Items')
+    shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
+    rows_to_show = blocks.IntegerBlock(default=0, classname='dct-meta-field')
     meta_image_display = blocks.ChoiceBlock(GRID_IMAGE_CHOICES,
                                             label='Teaser Image Display',
                                             default="cover", classname='dct-meta-field')
-    shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-recipe-grid-shelf dct-meta-panel'
@@ -315,8 +315,7 @@ class RecipeGrid(blocks.StructBlock):
 class Table(blocks.StructBlock):
     header = blocks.ListBlock(blocks.CharBlock(required=False), label='Column headings')
     display_header = blocks.BooleanBlock(label='Display the table header?',
-                                         required=False,
-                                         classname='dct-inline-field')
+                                         required=False)
     body_rows = blocks.ListBlock(blocks.StreamBlock([
         ('simple_text_panel', SimpleTextPanel(required=False)),
         ('rich_text_panel', RichTextPanel(required=False)),
