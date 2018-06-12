@@ -74,7 +74,8 @@ def release_html(request, site_name):
     substituted_index = substituted_index.replace("%apiurl%", content_store_endpoint)
     substituted_index = substituted_index.replace("%releaseid%", uuid)
     http_response = HttpResponse(substituted_index)
-    if release.content_status == 1:
+
+    if release and release.content_status == 1:
         http_response['Cache-Control'] = 'max-age=900'
     return http_response
 
