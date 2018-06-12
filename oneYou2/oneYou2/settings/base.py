@@ -34,7 +34,8 @@ INSTALLED_APPS = [
     'shelves',
     'images',
     'frontendHandler',
-
+    'dct-admin-interface',
+    
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
     'wagtail.wagtailembeds',
