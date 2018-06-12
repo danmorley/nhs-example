@@ -3,9 +3,9 @@ from wagtail.wagtailcore import blocks
 
 
 class CTABlock(blocks.StructBlock):
-    image_meta = blocks.TextBlock(required=False)
-    mobile_use_renditions = blocks.BooleanBlock(default=True, required=False)
-    desktop_use_renditions = blocks.BooleanBlock(default=True, required=False)
+    image_meta = blocks.TextBlock(required=False, classname='dct-meta-field')
+    mobile_use_renditions = blocks.BooleanBlock(default=True, required=False, classname='dct-meta-field')
+    desktop_use_renditions = blocks.BooleanBlock(default=True, required=False, classname='dct-meta-field')
 
     def get_api_representation(self, value, context=None):
         # TODO: This method could use the function in page utils

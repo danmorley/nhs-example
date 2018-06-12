@@ -1,0 +1,102 @@
+.sequence-member {
+  background-color: transparent;
+  border-radius: 4px;
+  padding-top: 24px;
+  margin-bottom: 4px;
+}
+
+.sequence-container {
+  width: 99% !important;
+}
+
+ul#body-list > li > .sequence-member-inner {
+  padding: 1.5em 0px 1.5em 50px;
+}
+
+div.struct-block > ul.fields {
+  width: 98% !important;
+}
+
+.sequence-container-inner {
+  width: 100% !important;
+}
+
+ul#body-list > li > .sequence-member-inner > .struct-block > .fields {
+  width: 90% !important;
+}
+
+ul.fields > li > label {
+  display: block !important;
+  float: none;
+  padding-bottom: 0.2em;
+  width: 80%;
+}
+
+.sequence-container-inner > ul.sequence {
+  padding-top: 2px;
+}
+
+.sequence-container-inner .sequence-member {
+  border-bottom: 3px solid #e2e2e2;
+  border-radius: 0;
+}
+
+.sequence-member .sequence-member {
+  background-color: #e7e8e9;
+  padding-left: 10px;
+  border: 3px solid #e7e8e9 !important;
+}
+
+.sequence-member .sequence-member:hover {
+  border: 3px solid #9a9a9a !important;
+}
+
+.sequence-member .sequence-member .sequence-controls {
+  top: 0px;
+  background-color: #e1e2e3;
+  border: 0;
+}
+
+.sequence-member .sequence-member .sequence-member {
+  background-color: #d7d8d9;
+  border: 3px solid #d7d8d9 !important;
+}
+
+.sequence-member .sequence-member .sequence-member .sequence-controls {
+  background-color: #d1d2d3;
+}
+
+.sequence-member .sequence-member .sequence-member:hover {
+  border: 3px solid #9a9a9a !important;
+}
+
+.stream-menu {
+  margin-top: 0em !important;
+  top: 4px !important;
+}
+
+.sequence-container .stream-menu:first-of-type,
+.sequence-container .stream-menu:last-of-type {
+  top: 0px !important;
+}
+
+.stream-menu .stream-menu:hover {
+  background-color: #c4c4c4 !important;
+}
+
+.stream-menu .stream-menu .stream-menu:hover {
+  background-color: #e4e4e4 !important;
+}
+
+.dct-panel-image-teaser {
+  background-color: red;
+}
+
+li.dct-hidden-field {
+  visibility: hidden !important;
+  height: 0px !important;
+  width: 0px !important;
+  margin: 0px !important;
+  padding: 0px !important;
+  overflow: hidden;
+}
