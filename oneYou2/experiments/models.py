@@ -89,6 +89,6 @@ def delete_from_frozen_experiments_content(sender, instance, using, **kwargs):
     experiments_content = ExperimentsContent.objects.all().first()
     if experiments_content:
         content = json.loads(experiments_content.content)
-        if str(instance.id) in content:
-            del content[instance.id]
+        if str(instance.id) in content.keys():
+            del content[str(instance.id)]
     print("deleting...")
