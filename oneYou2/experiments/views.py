@@ -215,10 +215,6 @@ def edit(request, page_id):
             is_reverting = bool(request.POST.get('revision'))
             is_promoting = bool(request.POST.get('action-promote'))
 
-            if is_promoting:
-                parent.specific.update_from_dict(page.__dict__, excludes=['title', 'slug', 'draft_title', 'url_path'])
-                parent.specific.save()
-
             page = form.save(commit=False)
 
             # If a revision ID was passed in the form, get that revision so its
@@ -231,6 +227,11 @@ def edit(request, page_id):
                 user=request.user,
                 submitted_for_moderation=is_submitting,
             )
+
+            if is_promoting:
+                parent.specific.update_from_dict(page.__dict__, excludes=['title', 'slug', 'draft_title', 'url_path'])
+                parent.specific.save()
+                parent.specific.save_revision()
 
             # Publish
             if is_publishing:
