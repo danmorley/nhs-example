@@ -75,11 +75,32 @@ def create_test_recipe_page(title='Test Recipe page', path="1111", depth=0, them
         site_settings = SiteSettings(site_id=site.id)
     site_settings.menu = create_test_menu()
     site_settings.save()
-
     root_page = site.root_page
 
     page = RecipePage(title=title, path=path, depth=depth, theme=theme)
     root_page.add_child(instance=page)
+
+
+def create_test_child_page(parent, title='Test child page', path="11111111", depth=1, theme=None):
+    if not theme:
+        theme = create_test_theme()
+    if PHEImage.objects.count() == 0:
+        create_default_test_image(id=1)
+
+    site = Site.objects.first()
+    if not site.site_name:
+        site.site_name = 'oneyoutest'
+        site.save()
+
+    site_settings = SiteSettings.objects.filter(site_id=site.id).first()
+    if not site_settings:
+        site_settings = SiteSettings(site_id=site.id)
+    site_settings.menu = create_test_menu()
+    site_settings.save()
+
+    page = OneYou2Page(title=title, path=path, depth=depth, theme=theme)
+    parent.add_child(instance=page)
+
     page.save_revision().publish()
     page.save()
 

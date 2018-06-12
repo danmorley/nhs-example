@@ -17,7 +17,7 @@ from oneYou2.factories import create_test_user
 from oneYou2.test.utils import OneYouTests
 
 from pages.factories import create_test_page, create_test_theme, create_test_menu, create_test_footer,\
-    create_test_header, create_test_recipe_page
+    create_test_header, create_test_recipe_page, create_test_child_page
 from pages.models import OneYou2Page, Theme, RecipePage
 from pages.utils import get_serializable_data_for_fields, process_inlines
 from pages.wagtail_hooks import MenuAdmin, MenuButtonHelper
@@ -47,6 +47,14 @@ class OneYou2PageModelTests(OneYouTests):
         site_name = SiteSettings.objects.get(site_id=site.id).uid
         expected_url = '/' + site_name + page.url_path
         self.assertEqual(page.link_url, expected_url)
+
+    def test_breadcrumbs_property(self):
+        parent_page = create_test_page()
+        child_page = create_test_child_page(parent_page)
+
+        self.assertEquals(len(child_page.breadcrumbs), 1)
+        self.assertEquals(child_page.breadcrumbs[0]['name'], parent_page.title)
+        self.assertEquals(child_page.breadcrumbs[0]['url'], parent_page.link_url)
 
     def test_from_dict_page_builder(self):
         """
