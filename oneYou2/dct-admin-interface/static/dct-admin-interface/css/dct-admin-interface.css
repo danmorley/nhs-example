@@ -88,10 +88,6 @@ ul.fields > li > label {
   background-color: #e4e4e4 !important;
 }
 
-.dct-panel-image-teaser {
-  background-color: red;
-}
-
 li.dct-hidden-field {
   visibility: hidden !important;
   height: 0px !important;
