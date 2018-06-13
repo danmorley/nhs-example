@@ -114,7 +114,8 @@ def create(request, content_type_app_name, content_type_model_name, parent_page_
                                      _("Page '{0}' created and published.").format(page.get_admin_display_title()),
                                      buttons=[
                                          messages.button(page.url, _('View live'), new_window=True),
-                                         messages.button(reverse('experiments_oneyouvariant_edit', args=(page.id,)), _('Edit'))
+                                         messages.button(reverse('experiments_oneyouvariant_edit',
+                                                                 args=(page.id,)), _('Edit'))
                                      ])
             elif is_submitting:
                 messages.success(
