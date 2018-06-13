@@ -107,14 +107,14 @@ def create(request, content_type_app_name, content_type_model_name, parent_page_
                 if page.go_live_at and page.go_live_at > timezone.now():
                     messages.success(request, _("Page '{0}' created and scheduled for publishing.").format(
                         page.get_admin_display_title()), buttons=[
-                        messages.button(reverse('wagtailadmin_pages:edit', args=(page.id,)), _('Edit'))
+                        messages.button(reverse('experiments_oneyouvariant_edit', args=(page.id,)), _('Edit'))
                     ])
                 else:
                     messages.success(request,
                                      _("Page '{0}' created and published.").format(page.get_admin_display_title()),
                                      buttons=[
                                          messages.button(page.url, _('View live'), new_window=True),
-                                         messages.button(reverse('wagtailadmin_pages:edit', args=(page.id,)), _('Edit'))
+                                         messages.button(reverse('experiments_oneyouvariant_edit', args=(page.id,)), _('Edit'))
                                      ])
             elif is_submitting:
                 messages.success(
@@ -127,7 +127,7 @@ def create(request, content_type_app_name, content_type_model_name, parent_page_
                             new_window=True
                         ),
                         messages.button(
-                            reverse('wagtailadmin_pages:edit', args=(page.id,)),
+                            reverse('experiments_oneyouvariant_edit', args=(page.id,)),
                             _('Edit')
                         )
                     ]
@@ -151,7 +151,7 @@ def create(request, content_type_app_name, content_type_model_name, parent_page_
                 return redirect('wagtailadmin_explore', page.get_parent().id)
             else:
                 # Just saving - remain on edit page for further edits
-                target_url = reverse('wagtailadmin_pages:edit', args=[page.id])
+                target_url = reverse('experiments_oneyouvariant_edit', args=[page.id])
                 if next_url:
                     # Ensure the 'next' url is passed through again if present
                     target_url += '?next=%s' % urlquote(next_url)
@@ -290,7 +290,7 @@ def edit(request, page_id):
                             new_window=True
                         ),
                         messages.button(
-                            reverse('wagtailadmin_pages:edit', args=(page_id,)),
+                            reverse('experiments_oneyouvariant_edit', args=(page_id,)),
                             _('Edit')
                         )
                     ])
@@ -310,7 +310,7 @@ def edit(request, page_id):
                         new_window=True
                     ),
                     messages.button(
-                        reverse('wagtailadmin_pages:edit', args=(page_id,)),
+                        reverse('experiments_oneyouvariant_edit', args=(page_id,)),
                         _('Edit')
                     )
                 ])
@@ -350,7 +350,7 @@ def edit(request, page_id):
                 return redirect('wagtailadmin_explore', page.get_parent().id)
             else:
                 # Just saving - remain on edit page for further edits
-                target_url = reverse('wagtailadmin_pages:edit', args=[page.id])
+                target_url = reverse('experiments_oneyouvariant_edit', args=[page.id])
                 if next_url:
                     # Ensure the 'next' url is passed through again if present
                     target_url += '?next=%s' % urlquote(next_url)
