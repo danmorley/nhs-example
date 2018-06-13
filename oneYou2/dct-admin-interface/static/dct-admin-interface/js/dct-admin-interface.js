@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 document.addEventListener("DOMNodeInserted", function(event) {
   var elem = event.target;
-  if (elem.classList.contains('sequence-member')) {
+  if (elem && elem.classList.contains('sequence-member')) {
     hideMetaFields();
     addSequenceControlsInfoButton();
   }
