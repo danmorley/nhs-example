@@ -62,11 +62,13 @@ def release_html(request, site_name):
 
     host = request.__dict__['META']['HTTP_HOST']
 
+    print('CONTENT_STORE_ENDPOINT is ' + settings.CONTENT_STORE_ENDPOINT)
     if settings.CONTENT_STORE_ENDPOINT:
         content_store_endpoint = settings.CONTENT_STORE_ENDPOINT
     else:
         content_store_endpoint = get_protocol() + host + "/api"
 
+    print('host is ' + host)
     if "local" in host or "service" in host:
         content_store_endpoint = get_protocol() + host + "/api"
 
