@@ -3,15 +3,26 @@ document.addEventListener("DOMContentLoaded", function(event) {
   addSequenceControlsInfoButton();
 });
 
+document.addEventListener("DOMNodeInserted", function(event) {
+  var elem = event.target;
+  if (elem && elem.classList.contains('sequence-member')) {
+    hideMetaFields();
+    addSequenceControlsInfoButton();
+  }
+});
+
 /**
  *  Hides all meta fields when the page loads.
  */
-function hideMetaFields() {
+function hideMetaFields(newElem) {
   console.log('Hiding meta fields');
-  var elems = document.getElementsByClassName("dct-meta-field");
+  var elems = [ newElem ];
+  if (!newElem)
+    elems = document.getElementsByClassName("dct-meta-field");
 
   Array.prototype.forEach.call(elems, function(el) {
-    el.parentElement.classList.add('dct-hidden-field');
+    if (el && !el.classList.contains('error'))
+      el.parentElement.classList.add('dct-hidden-field');
   });
 }
 
@@ -19,9 +30,11 @@ function hideMetaFields() {
  *  Adds info buttons to all panels that have been given the dct-meta-panel
  *  class.
  */
-function addSequenceControlsInfoButton() {
+function addSequenceControlsInfoButton(newElem) {
   console.log('Adding sequence controls');
-  var metaPanelElems = document.getElementsByClassName('dct-meta-panel');
+  var metaPanelElems = [ newElem ];
+  if (!newElem)
+    metaPanelElems = document.getElementsByClassName('dct-meta-panel');
 
   Array.prototype.forEach.call(metaPanelElems, function(el) {
     var parentContainerEl = el.parentElement.parentElement;
@@ -38,8 +51,12 @@ function addSequenceControlsInfoButton() {
  *  unless needed.
  */
 function addInfoButton(buttonGroup, rootId) {
+  var buttonId = rootId + '-info';
+  var existingButton = document.getElementById(buttonId);
+  if (existingButton) return;
+
   var button = document.createElement('button');
-  button.id = rootId + '-info';
+  button.id = buttonId;
   button.classList.add('button','icon', 'text-replace', 'icon-cogs');
   button.title = 'Info';
   button.addEventListener("click", function(e) {
