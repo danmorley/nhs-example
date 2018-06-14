@@ -205,11 +205,14 @@ def edit(request, page_id):
 
     errors_debug = None
 
+    if page.specific.is_live:
+        page.locked = True
+
     if request.method == 'POST':
         form = form_class(request.POST, request.FILES, instance=page,
                           parent_page=parent)
 
-        if form.is_valid() and not page.locked:
+        if form.is_valid() and not page.locked and not page.specific.is_live:
 
             is_publishing = bool(request.POST.get('action-publish')) and page_perms.can_publish()
             is_submitting = bool(request.POST.get('action-submit'))
