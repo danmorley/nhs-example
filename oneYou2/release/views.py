@@ -61,6 +61,11 @@ def release_html(request, site_name):
     # substituted_index = substituted_index.replace("/webtrends", "/{}/public/webtrends".format(site_name))
 
     host = request.__dict__['META']['HTTP_HOST']
+    print('get_host() is' + request.get_host())
+    for header, value in request.META.items():
+        if not header.startswith('HTTP'):
+            continue
+        print('request meta ' + header + ' is ' + value)
 
     print('CONTENT_STORE_ENDPOINT is ' + settings.CONTENT_STORE_ENDPOINT)
     if settings.CONTENT_STORE_ENDPOINT:
