@@ -66,9 +66,6 @@ def release_html(request, site_name):
     else:
         content_store_endpoint = get_protocol() + host + "/api"
 
-    if "local" in host or "service" in host:
-        content_store_endpoint = get_protocol() + host + "/api"
-
     substituted_index = substituted_index.replace("%apiurl%", content_store_endpoint)
     substituted_index = substituted_index.replace("%releaseid%", uuid)
     http_response = HttpResponse(substituted_index)
