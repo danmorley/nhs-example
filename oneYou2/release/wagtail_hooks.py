@@ -4,6 +4,7 @@ from wagtail.contrib.modeladmin.helpers import ButtonHelper
 from wagtail.contrib.modeladmin.options import (
     ModelAdmin, modeladmin_register)
 from .models import Release
+from oneYou2.utils import get_protocol
 
 
 class ReleaseButtonHelper(ButtonHelper):
@@ -18,8 +19,14 @@ class ReleaseButtonHelper(ButtonHelper):
         classnames = self.edit_button_classnames + classnames_add
         cn = self.finalise_classname(classnames, classnames_exclude)
         release = Release.objects.get(id=pk)
+
+        # Build preview URL
+        api_host = self.request.META['HTTP_HOST'];
+        content_store_endpoint = get_protocol() + api_host + "/api"
+        preview_url = release.site.sitesettings.uid + '/?id=' + release.uuid + '&cms=' + content_store_endpoint;
+
         return {
-            'url': '/' + release.site.sitesettings.uid + '/?id=' + release.uuid,
+            'url': '/' + preview_url,
             'label': _('preview'),
             'classname': cn,
             'title': _('Preview this release'),
