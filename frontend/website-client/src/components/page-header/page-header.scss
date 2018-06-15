@@ -3,7 +3,7 @@
 
 .page-header {
   text-align: center;
-  padding-top: 1em;
+  padding-top: 0.5em;
   padding-bottom: 1em;
   position: fixed;
   top: 0;
@@ -56,6 +56,9 @@
 }
 
 .page-header__info {
+  
+  display: flex;
+  align-items: center;
 
   @include media-breakpoint-up(lg) {
     padding-right: 1em;
@@ -71,6 +74,7 @@
   display: inline-block;
 
   @include heading-h1(oneyou);
+  margin: 0 auto;
   
   @include media-breakpoint-up(lg) {
     padding-top: 1rem;
@@ -96,8 +100,9 @@
 
 .page-header__burger {
   cursor: pointer;
-  position: absolute;
-  left: 15px;
+  position: relative;
+  left: 0;
+  top: 0;
   height: 30px;
   width: 30px;
   
