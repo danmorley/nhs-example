@@ -14,6 +14,7 @@ from wagtail.wagtailredirects.models import Redirect
 
 from .models import Release
 
+
 def release_html(request, site_name):
     try:
         site_id = SiteSettings.objects.get(uid=site_name).site.id
