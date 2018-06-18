@@ -477,7 +477,7 @@ class OneYou2Page(Page):
 
     @property
     def breadcrumbs(self):
-        ancestors = self.get_ancestors()[1:]
+        ancestors = self.get_ancestors().live()[1:]
         breadcrumbs = []
         for ancestor in ancestors:
             breadcrumbs.append({"name": ancestor.specific.title, "url": ancestor.specific.link_url})
