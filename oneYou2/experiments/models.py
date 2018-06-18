@@ -37,7 +37,7 @@ class Experiment(ClusterableModel):
     variants = models.ManyToManyField('wagtailcore.Page',
                                       blank=True,
                                       limit_choices_to=Q(content_type_id=ONEYOU_VARIANT_TYPE) |
-                                                       Q(content_type_id=RECIPE_VARIANT_TYPE))
+                                      Q(content_type_id=RECIPE_VARIANT_TYPE))
     start_date = models.DateTimeField(blank=True, null=True)
     end_date = models.DateTimeField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
