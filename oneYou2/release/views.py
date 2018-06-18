@@ -60,27 +60,16 @@ def release_html(request, site_name):
     substituted_index = substituted_index.replace("/favicon", "/{}/public/{}/favicon".format(site_name, frontend_id))
     # substituted_index = substituted_index.replace("/webtrends", "/{}/public/webtrends".format(site_name))
 
-    host = request.__dict__['META']['HTTP_HOST']
-    print('get_host() is' + request.get_host())
-    for header, value in request.META.items():
-        if not header.startswith('HTTP'):
-            continue
-        print('request meta ' + header + ' is ' + value)
-
-    print('CONTENT_STORE_ENDPOINT is ' + settings.CONTENT_STORE_ENDPOINT)
+    host = request.META['HTTP_HOST']
     if settings.CONTENT_STORE_ENDPOINT:
         content_store_endpoint = settings.CONTENT_STORE_ENDPOINT
     else:
         content_store_endpoint = get_protocol() + host + "/api"
 
-    print('host is ' + host)
-    if "local" in host or "service" in host:
-        content_store_endpoint = get_protocol() + host + "/api"
-
     substituted_index = substituted_index.replace("%apiurl%", content_store_endpoint)
     substituted_index = substituted_index.replace("%releaseid%", uuid)
     http_response = HttpResponse(substituted_index)
-    if release.content_status == 1:
+    if release and release.content_status == 1:
         http_response['Cache-Control'] = 'max-age=900'
     return http_response
 

@@ -7,7 +7,7 @@ from django.views.decorators.http import require_safe
 
 from oneYou2.serializers import SiteSerializer
 
-from release.utils import get_latest_release, get_release_object, populate_release_if_required
+from release.utils import get_latest_live_release, get_release_object, populate_release_if_required
 
 from pages.serializers import OneYouPageListSerializer, OneYouPageSerializer
 
@@ -26,7 +26,7 @@ from .utils import get_site_or_404
 def site_view(request, site_identifier):
     site = get_site_or_404(site_identifier)
 
-    current_release = get_latest_release(site.site.pk)
+    current_release = get_latest_live_release(site.site.pk)
     if not current_release:
         return JsonResponse({'message': "The current site has no live releases"}, status=404)
 
@@ -43,7 +43,7 @@ def release_view(request, site_identifier, release_uuid):
     site = get_site_or_404(site_identifier)
 
     if release_uuid == "current":
-        release_object = get_latest_release(site.site.pk)
+        release_object = get_latest_live_release(site.site.pk)
         if not release_object:
             return JsonResponse({'message': "The current site has no live releases"}, status=404)
         release_uuid = release_object.uuid
