@@ -334,8 +334,8 @@ class Table(blocks.StructBlock):
     shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
     meta_variant = blocks.ChoiceBlock(choices=TABLE_VARIANTS, label="Variant", classname='dct-meta-field')
 
-class Meta:
-    form_classname = 'dct-table-shelf dct-meta-panel'
+    class Meta:
+        form_classname = 'dct-table-shelf dct-meta-panel'
 
 
 # Pages
