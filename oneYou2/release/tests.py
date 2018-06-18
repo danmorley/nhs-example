@@ -469,7 +469,6 @@ class ReleaseUtilsTests(OneYouTests):
 
         self.assertEqual(current_release.id, release2.id)
 
-
     def test_get_latest_release_returns_the_newest_release_with_date(self, mock_file_service):
         """
         A published release is one whose release_time is in the past.
@@ -493,7 +492,6 @@ class ReleaseUtilsTests(OneYouTests):
         self.assertIsFalse(release3.release_date_has_passed())
 
         self.assertEqual(latest_release.id, release1.id)
-
 
     def test_get_latest_release_returns_the_newest_release_with_no_date(self, mock_file_service):
         """
