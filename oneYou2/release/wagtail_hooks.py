@@ -21,9 +21,11 @@ class ReleaseButtonHelper(ButtonHelper):
         release = Release.objects.get(id=pk)
 
         # Build preview URL
-        api_host = self.request.META['HTTP_HOST']
-        content_store_endpoint = get_protocol() + api_host + "/api"
-        preview_url = release.site.sitesettings.uid + '/?id=' + release.uuid + '&cms=' + content_store_endpoint
+        preview_url = release.site.sitesettings.uid + '/?id=' + release.uuid
+        api_host = self.request.META.get('HTTP_HOST')
+        if api_host:
+            content_store_endpoint = get_protocol() + api_host + '/api'
+            preview_url += '&cms=' + content_store_endpoint
 
         return {
             'url': '/' + preview_url,
