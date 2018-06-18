@@ -48,6 +48,8 @@ def create(request, content_type_app_name, content_type_model_name, parent_page_
     except ContentType.DoesNotExist:
         raise Http404
 
+    print(content_type)
+
     # Get class
     page_class = content_type.model_class()
 
@@ -66,11 +68,9 @@ def create(request, content_type_app_name, content_type_model_name, parent_page_
         result = fn(request, parent_page, page_class)
         if hasattr(result, 'status_code'):
             return result
-    parent_page_json = parent_page.to_json()
-    page = page_class.from_json(parent_page_json)
-    slug = hashlib.sha224(base64.b64encode(str(time.time()).encode('utf-8'))).hexdigest()
-    page.slug = '%s-v%s' % (page.slug, slug[:6])
-    page.title = "%s (describe the variant)" % page.title
+
+    page = page_class(owner=request.user)
+
     edit_handler_class = page_class.get_edit_handler()
     form_class = edit_handler_class.get_form_class(page_class)
 
@@ -82,81 +82,30 @@ def create(request, content_type_app_name, content_type_model_name, parent_page_
 
         if form.is_valid():
             page = form.save(commit=False)
-
-            is_publishing = bool(request.POST.get('action-publish')) and parent_page_perms.can_publish_subpage()
-            is_submitting = bool(request.POST.get('action-submit'))
-
-            if not is_publishing:
-                page.live = False
-
             # Save page
             parent_page.add_child(instance=page)
-
             # Save revision
-            revision = page.save_revision(
+            page.save_revision(
                 user=request.user,
-                submitted_for_moderation=is_submitting,
+                submitted_for_moderation=False,
             )
 
-            # Publish
-            if is_publishing:
-                revision.publish()
-
             # Notifications
-            if is_publishing:
-                if page.go_live_at and page.go_live_at > timezone.now():
-                    messages.success(request, _("Page '{0}' created and scheduled for publishing.").format(
-                        page.get_admin_display_title()), buttons=[
-                        messages.button(reverse('experiments_oneyouvariant_edit', args=(page.id,)), _('Edit'))
-                    ])
-                else:
-                    messages.success(request,
-                                     _("Page '{0}' created and published.").format(page.get_admin_display_title()),
-                                     buttons=[
-                                         messages.button(page.url, _('View live'), new_window=True),
-                                         messages.button(reverse('experiments_oneyouvariant_edit',
-                                                                 args=(page.id,)), _('Edit'))
-                                     ])
-            elif is_submitting:
-                messages.success(
-                    request,
-                    _("Page '{0}' created and submitted for moderation.").format(page.get_admin_display_title()),
-                    buttons=[
-                        messages.button(
-                            reverse('wagtailadmin_pages:view_draft', args=(page.id,)),
-                            _('View draft'),
-                            new_window=True
-                        ),
-                        messages.button(
-                            reverse('experiments_oneyouvariant_edit', args=(page.id,)),
-                            _('Edit')
-                        )
-                    ]
-                )
-                if not send_notification(page.get_latest_revision().id, 'submitted', request.user.pk):
-                    messages.error(request, _("Failed to send notifications to moderators"))
-            else:
-                messages.success(request, _("Page '{0}' created.").format(page.get_admin_display_title()))
+            messages.success(request, _("Page '{0}' created.").format(page.get_admin_display_title()))
 
             for fn in hooks.get_hooks('after_create_page'):
                 result = fn(request, page)
                 if hasattr(result, 'status_code'):
                     return result
 
-            if is_publishing or is_submitting:
-                # we're done here
-                if next_url:
-                    # redirect back to 'next' url if present
-                    return redirect(next_url)
-                # redirect back to the explorer
-                return redirect('wagtailadmin_explore', page.get_parent().id)
-            else:
-                # Just saving - remain on edit page for further edits
-                target_url = reverse('experiments_oneyouvariant_edit', args=[page.id])
-                if next_url:
-                    # Ensure the 'next' url is passed through again if present
-                    target_url += '?next=%s' % urlquote(next_url)
-                return redirect(target_url)
+            # Just saving - remain on edit page for further edits
+            target_url = reverse('experiments_oneyouvariant_edit', args=[page.id])
+
+            if next_url:
+                # Ensure the 'next' url is passed through again if present
+                target_url += '?next=%s' % urlquote(next_url)
+            return redirect(target_url)
+
         else:
             messages.validation_error(
                 request, _("The page could not be created due to validation errors"), form
@@ -164,12 +113,19 @@ def create(request, content_type_app_name, content_type_model_name, parent_page_
             edit_handler = edit_handler_class(instance=page, form=form)
             has_unsaved_changes = True
     else:
+        # Copy content from parent page
+        parent_page_json = parent_page.to_json()
+        page = page_class.from_json(parent_page_json)
+        slug = hashlib.sha224(base64.b64encode(str(time.time()).encode('utf-8'))).hexdigest()
+        page.slug = '%s-v%s' % (page.slug, slug[:6])
+        page.title = "%s (describe the variant)" % page.title
+
         signals.init_new_page.send(sender=create, page=page, parent=parent_page)
         form = form_class(instance=page, parent_page=parent_page)
         edit_handler = edit_handler_class(instance=page, form=form)
         has_unsaved_changes = False
 
-    return render(request, 'wagtailadmin/pages/create.html', {
+    return render(request, 'wagtailadmin/custom_add_footer.html', {
         'content_type': content_type,
         'page_class': page_class,
         'parent_page': parent_page,
