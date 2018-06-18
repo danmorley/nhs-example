@@ -47,8 +47,15 @@ class CTABlock(blocks.StructBlock):
         return result
 
 
+
 class IDBlock(blocks.CharBlock):
+    def __init__(self, retain_case=False, *args, **kwargs):
+        self.retain_case = retain_case
+        super(IDBlock, self).__init__(*args, **kwargs)
+
     def get_api_representation(self, value, context=None):
+        if self.retain_case:
+            return value;
         return slugify(value)
 
 

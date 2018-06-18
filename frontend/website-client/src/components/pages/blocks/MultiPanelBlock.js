@@ -16,6 +16,7 @@ import AppTeaserPanel from '../../panels/AppTeaserPanel';
 import InformationPanel from '../../panels/InformationPanel';
 import SimpleTextPanel from '../../panels/SimpleTextPanel';
 import IconCardPanel from '../../panels/IconCardPanel';
+import InlineScriptPanel from '../../panels/InlineScriptPanel';
 
 class MultiPanelBlock extends Component {
   render() {
