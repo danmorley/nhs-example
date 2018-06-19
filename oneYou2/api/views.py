@@ -127,7 +127,16 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug=
             page = Page.objects.get(slug=page_slug)
             page_pk = page.pk
         except ObjectDoesNotExist:
-            return JsonResponse({'message': not_found_msg}, status=404)
+            try:
+                print("scenario 1")
+                if variant:  # Try and get parent page
+                    page = Page.objects.get(slug=page_slug[:-8])
+                    page_pk = page.pk
+                    variant = False
+                else:
+                    return JsonResponse({'message': not_found_msg}, status=404)
+            except ObjectDoesNotExist:
+                return JsonResponse({'message': not_found_msg}, status=404)
     else:  # If there is no slug it cannot be a variant
         variant = False
         not_found_msg = "Page Not Found"
@@ -143,10 +152,11 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug=
             experiments_content = ExperimentsContent.objects.first()
             if experiments_content:
                 if page.specific.is_live:
-                    pass
+                    page_content = experiments_content.get_content_for(page_pk)
                 else:
-                    raise KeyError
-                page_content = experiments_content.get_content_for(page_pk)
+                    # Get parent page content
+                    print("scenario 2")
+                    page_content = release.get_content_for(page.get_parent().id)
             else:
                 return JsonResponse({'message': "No content for any experiment found"}, status=500)
         except KeyError:

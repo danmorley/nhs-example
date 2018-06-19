@@ -4,6 +4,7 @@ from django.db.models.signals import pre_delete, post_save
 from django.dispatch import receiver
 from django.forms import CheckboxSelectMultiple
 from django.utils import timezone
+from django.utils.html import format_html
 from modelcluster.models import ClusterableModel
 from django.db import models
 
@@ -62,6 +63,27 @@ class OneYouVariant(OneYou2Page):
         else:
             return False
 
+    def html_parent_page_title(self):
+        return format_html(
+            '<a href="/admin/pages/{}/edit/">{}</span>',
+            self.get_parent().id,
+            self.get_parent().title
+        )
+
+    html_parent_page_title.short_description = 'Parent'
+
+    def html_clickable_variant_link(self):
+        if self.is_live:
+            return format_html(
+                '<a href="/oneyou{}">{}</span>',
+                self.url,
+                self.url
+            )
+        else:
+            return self.url
+
+    html_clickable_variant_link.short_description = 'URL'
+
 
 class ExperimentsContent(ClusterableModel):
     content = models.TextField(null=True, blank=True)
@@ -73,17 +95,15 @@ class ExperimentsContent(ClusterableModel):
 
 @receiver(post_save, sender=OneYouVariant, dispatch_uid='variant post save signal')
 def update_frozen_experiments_content(sender, instance, using, **kwargs):
-    experiments_content = ExperimentsContent.objects.all().first()
-    if not experiments_content:
-        experiments_content = ExperimentsContent(content=json.dumps({})).save()
     newest_revision = instance.get_latest_revision()
-    if experiments_content.content:
-        content = json.loads(experiments_content.content)
-    else:
-        content = {}
-    content[str(newest_revision.page_id)] = Release.generate_fixed_content(newest_revision)
-    experiments_content.content = json.dumps(content)
-    experiments_content.save()
+    if newest_revision:
+        experiments_content = ExperimentsContent.objects.all().first()
+        if not experiments_content:
+            experiments_content = ExperimentsContent(content=json.dumps({}))
+        content = json.loads(getattr(experiments_content, "content", json.dumps({})))
+        content[str(newest_revision.page_id)] = Release.generate_fixed_content(newest_revision)
+        experiments_content.content = json.dumps(content)
+        experiments_content.save()
 
 
 @receiver(pre_delete, sender=OneYouVariant, dispatch_uid='variant delete signal')
@@ -91,6 +111,6 @@ def delete_from_frozen_experiments_content(sender, instance, using, **kwargs):
     experiments_content = ExperimentsContent.objects.all().first()
     if experiments_content:
         content = json.loads(experiments_content.content)
-        if str(instance.id) in content:
-            del content[instance.id]
+        if str(instance.id) in content.keys():
+            del content[str(instance.id)]
     print("deleting...")

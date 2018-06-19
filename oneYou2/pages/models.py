@@ -371,7 +371,6 @@ class OneYou2Page(Page):
 
         if self.release:
             self.release = None
-
         super(OneYou2Page, self).save(*args, **kwargs)
         newest_revision = self.get_latest_revision()
 
@@ -407,7 +406,7 @@ class OneYou2Page(Page):
     def update_from_dict(self, obj_dict, default_excludes=None, excludes=None):
         if not default_excludes:
             default_excludes = ['id', 'path', 'depth', 'numchild', 'content_type_id', 'live_revision_id',
-                                'page_ptr_id', 'oneyou2page_ptr_id', 'release_id', 'live', 'locked']
+                                'page_ptr_id', 'oneyou2page_ptr_id', 'release_id', 'live', 'locked', 'url_path']
         if not excludes:
             excludes = []
 
