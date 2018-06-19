@@ -296,7 +296,9 @@ class PanelCarousel(blocks.StructBlock):
 
 class Grid(blocks.StructBlock):
     heading = blocks.CharBlock(required=False)
+    body = blocks.RichTextBlock(required=False)
     items = blocks.StreamBlock(GRID_PANELS, icon='arrow-left', label='Items')
+    background_image = BlobImageChooserBlock(required=False)
     shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
     rows_to_show = blocks.IntegerBlock(default=0, classname='dct-meta-field')
     meta_variant = blocks.ChoiceBlock(choices=GRID_VARIANT_CHOICES, label="Variant", classname='dct-meta-field')
