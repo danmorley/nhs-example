@@ -51,7 +51,7 @@ def create_test_page(title='Test page', path="1111", depth=0, theme=None):
 
     root_page = site.root_page
 
-    page = OneYou2Page(title=title, path=path, depth=depth, theme=theme)
+    page = OneYou2Page(title=title, path=path, depth=depth, theme=theme, live=True)
     root_page.add_child(instance=page)
     page.save_revision().publish()
     page.save()
