@@ -1,6 +1,5 @@
 import json
 
-from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models import Q
 from django.db.models.signals import pre_delete, post_save
@@ -17,20 +16,15 @@ from pages.models import OneYou2Page, RecipePage
 
 from release.models import Release
 
+ONEYOU_VARIANT_TYPE = 50
+RECIPE_VARIANT_TYPE = 52
+
 
 class Experiment(ClusterableModel):
     STATUS_CHOICES = [
         ('draft', "Draft"),
         ('live', "Live"),
         ('completed', "Completed"),
-    ]
-
-    ONEYOU_VARIANT_TYPE = ContentType.objects.get(model='oneyouvariant').id
-    RECIPE_VARIANT_TYPE = ContentType.objects.get(model='recipevariant').id
-
-    VARIANT_TYPE_IDS = [
-        ONEYOU_VARIANT_TYPE,
-        RECIPE_VARIANT_TYPE
     ]
 
     name = models.CharField(max_length=255)
