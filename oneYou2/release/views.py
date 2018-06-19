@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 from django.views.static import serve
 from django.conf import settings
 
-from release.utils import get_latest_release
+from release.utils import get_latest_release, get_latest_live_release
 from oneYou2.utils import get_protocol
 from frontendHandler.models import FrontendVersion
 from home.models import SiteSettings
@@ -43,7 +43,11 @@ def release_html(request, site_name):
     if release_id:
         release = Release.objects.get(uuid=release_id)
     else:
-        release = get_latest_release(site_id)
+        preview_page = request.GET.get('preview_page')
+        if preview_page:
+            release = get_latest_release(site_id)
+        else:
+            release = get_latest_live_release(site_id)
 
     if release:
         frontend_id = release.frontend_id
