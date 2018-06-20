@@ -1,7 +1,6 @@
 from django.template.defaultfilters import slugify
 from wagtail.wagtailcore import blocks
 from shelves.blocks import BlobImageChooserBlock
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel
 
 
 IMAGE_VARIANT_CHOICES = (

@@ -71,7 +71,8 @@ def parse_shelf(shelf, parent=None):
                 value = shelf['value'][key]
                 if type(value) is dict or type(value) is OrderedDict:
                     if parent:
-                        shelf['value'][key]['meta_rendition_key'] = "{}/{}/{}".format(shelf_type, parent['type'], parent['value']['meta_layout'])
+                        shelf['value'][key]['meta_rendition_key'] = \
+                            "{}/{}/{}".format(shelf_type, parent['type'], parent['value']['meta_layout'])
                     else:
                         shelf['value'][key]['meta_rendition_key'] = "{}/{}/{}".format(shelf_type, None, None)
 
