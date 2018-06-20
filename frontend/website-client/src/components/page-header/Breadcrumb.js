@@ -6,17 +6,22 @@ import './breadcrumb.css';
 class Breadcrumb extends Component {
   
   render() {
+    let links = [];
     let { breadcrumbs } = this.props;
-    if (!breadcrumbs) return null;
-
-    let links = breadcrumbs.map((item) => {
-      return (
-        <li key={item.id} className="breadcrumbs__item">
-          <Link to={item.url} key={item.id} className="breadcrumbs__link">{item.name}</Link>
-        </li> 
-      );
-    });
-
+    
+    if (!breadcrumbs) {
+      // do nothing;
+    }
+    else {
+      links = breadcrumbs.map((item) => {
+        return (
+          <li key={item.id} className="breadcrumbs__item">
+            <Link to={item.url} key={item.id} className="breadcrumbs__link">{item.name}</Link>
+          </li> 
+        );
+      });
+    }
+    
     return (
       <ul className="breadcrumbs">
         {links}
