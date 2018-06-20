@@ -366,6 +366,17 @@ class OneYou2Page(Page):
 
     api_fields = ['body', 'path', 'depth', 'numchild', 'live', 'page_theme']
 
+    @classmethod
+    def allowed_subpage_models(cls):
+        """
+        Returns the list of page types that this page type can have as subpages,
+        as a list of model classes
+        """
+        from experiments.models import OneYouVariant
+        return [
+            OneYou2Page, RecipePage, OneYouVariant
+        ]
+
     def save(self, *args, **kwargs):
         assigned_release = self.release
 
@@ -523,10 +534,16 @@ class RecipePage(OneYou2Page):
         ObjectList(Page.promote_panels, heading='Settings'),
     ])
 
-    # def __init__(self, *args, **kwargs):
-    #     super(RecipePage, self).__init__(*args, **kwargs)
-    #     print('recipepage init', self.__dict__)
-    #
+    @classmethod
+    def allowed_subpage_models(cls):
+        """
+        Returns the list of page types that this page type can have as subpages,
+        as a list of model classes
+        """
+        return [
+            OneYou2Page, RecipePage
+        ]
+
     def save(self, *args, **kwargs):
         assigned_release = self.release
 
