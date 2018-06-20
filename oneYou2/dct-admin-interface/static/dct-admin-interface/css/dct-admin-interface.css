@@ -96,3 +96,13 @@ li.dct-hidden-field {
   padding: 0px !important;
   overflow: hidden;
 }
+
+div.dct-meta-block {
+  padding-top: 0px !important;
+  margin-right: 14px;
+}
+
+div.dct-meta-block > .sequence-controls {
+  position: relative;
+  float: right;
+}
