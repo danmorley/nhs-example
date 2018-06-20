@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Shelf from '../shelves/Shelf';
 import CmsComponentRegistry from '../CmsComponentRegistry';
+import Text from '../Text';
 import './grid-shelf.css';
 import ShowMorePanel from '../shared/ShowMorePanel';
 import MultiPanelBlock from '../pages/blocks/MultiPanelBlock';
+import BackgroundImage from '../shared/BackgroundImage';
 
 
 /**
@@ -21,8 +23,8 @@ class GridShelf extends Component {
     let { id, content, classNamePrefix, layout, variant } = this.props;
     let metaVariant = content.meta_variant || variant;
     let metaLayout = content.meta_layout || layout;
-    let metaImageDisplay = content.meta_image_display;
     let gridHeading = content.heading || '';
+    let gridBody = content.body || '';
 
     const panelClass = ((metaLayout) => {
       switch(metaLayout) {
@@ -39,16 +41,19 @@ class GridShelf extends Component {
 
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
-        <div className={`shelf__container container image--${metaImageDisplay}`}>
-          {gridHeading !='' &&
-            <h2 className="shelf__header">{content.heading}</h2>
+        <BackgroundImage image={content.background_image} className="shelf__container container">
+          {gridHeading != '' &&
+            <Text tagName="h2" content={gridHeading} className="shelf__header" />
+          }
+          {gridBody != '' &&
+            <Text tagName="div" content={gridBody} className="shelf__body" format="richtext"/>
           }
           <div className="grid-container">
             <ShowMorePanel rowsToShow={content.rows_to_show}>
               <MultiPanelBlock items={content.items} panelClass={panelClass}/>
             </ShowMorePanel>
           </div>
-        </div>
+        </BackgroundImage>
       </Shelf>
     );
   }

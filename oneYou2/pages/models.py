@@ -21,7 +21,7 @@ from wagtailsnippetscopy.registry import snippet_copy_registry
 from modelcluster.models import get_all_child_relations, get_all_child_m2m_relations
 from modelcluster.fields import ParentalKey
 
-from .blocks import IDBlock, CTABlock, MenuItemPageBlock
+from .blocks import IDBlock, CTABlock, MenuItemPageBlock, ImageBlock
 from .utils import get_serializable_data_for_fields
 from home.models import SiteSettings
 from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppTeaserChooserBlock, \
@@ -298,7 +298,7 @@ class Grid(blocks.StructBlock):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     items = blocks.StreamBlock(GRID_PANELS, icon='arrow-left', label='Items')
-    background_image = BlobImageChooserBlock(required=False)
+    background_image = ImageBlock(required=False)
     shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
     rows_to_show = blocks.IntegerBlock(default=0, classname='dct-meta-field')
     meta_variant = blocks.ChoiceBlock(choices=GRID_VARIANT_CHOICES, label="Variant", classname='dct-meta-field')
