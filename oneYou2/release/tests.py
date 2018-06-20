@@ -474,7 +474,7 @@ class ReleaseUtilsTests(OneYouTests):
         A published release is one whose release_time is in the past.
         """
         release1_name = "Next release"
-        release1_date = timezone.now() + timedelta(days=+1)
+        release1_date = timezone.now() + timedelta(days=+2)
         release1 = create_test_release(release_name=release1_name, release_date=release1_date)
 
         release2_name = "Future release 1"
