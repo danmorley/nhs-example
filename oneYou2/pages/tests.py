@@ -53,7 +53,7 @@ class OneYou2PageModelTests(OneYouTests):
         child_page = create_test_child_page(parent_page)
         print(child_page.breadcrumbs)
 
-        self.assertEquals(len(child_page.breadcrumbs), 3)
+        self.assertEquals(len(child_page.breadcrumbs), 2)
         self.assertEquals(child_page.breadcrumbs[-1]['name'], parent_page.title)
         self.assertEquals(child_page.breadcrumbs[-1]['url'], parent_page.link_url)
 
