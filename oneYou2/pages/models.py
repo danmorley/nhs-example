@@ -477,7 +477,7 @@ class OneYou2Page(Page):
 
     @property
     def breadcrumbs(self):
-        ancestors = self.get_ancestors().live()
+        ancestors = self.get_ancestors().live()[1:]
         breadcrumbs = []
         for ancestor in ancestors:
             # If root page it doesn't have link url
