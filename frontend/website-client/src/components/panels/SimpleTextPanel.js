@@ -14,7 +14,7 @@ import Panel from './Panel';
  */
 class SimpleTextPanel extends Component {
   render() {
-    let { content, classNamePrefix } = this.props;
+    const { content, classNamePrefix } = this.props;
     if (!content) return null;
 
     return (
