@@ -6,7 +6,7 @@ import Text from '../Text';
 import './grid-shelf.css';
 import ShowMorePanel from '../shared/ShowMorePanel';
 import MultiPanelBlock from '../pages/blocks/MultiPanelBlock';
-import BackgroundImage from '../shared/BackgroundImage';
+import ResponsiveBackgroundImage from '../shared/ResponsiveBackgroundImage';
 
 
 /**
@@ -41,7 +41,7 @@ class GridShelf extends Component {
 
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
-        <BackgroundImage image={content.background_image} className="shelf__container container">
+        <ResponsiveBackgroundImage image={content.background_image} className="shelf__container container">
           {gridHeading != '' &&
             <Text tagName="h2" content={gridHeading} className="shelf__header" />
           }
@@ -53,7 +53,7 @@ class GridShelf extends Component {
               <MultiPanelBlock items={content.items} panelClass={panelClass}/>
             </ShowMorePanel>
           </div>
-        </BackgroundImage>
+        </ResponsiveBackgroundImage>
       </Shelf>
     );
   }
