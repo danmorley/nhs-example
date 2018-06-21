@@ -84,7 +84,13 @@ def parse_shelf(shelf, parent=None):
                 items = shelf['value'][key]
                 for item in items:
                     if type(item) is dict or type(item) is OrderedDict:
+                        # Item is a block, such as a grid item.
                         parse_shelf(item, parent=shelf)
+
+                    if type(item) is list:
+                        # Item is a row (eg. table row) that contains blocks.
+                        for subitem in item:
+                            parse_shelf(subitem, parent=shelf)
 
     return shelf
 
