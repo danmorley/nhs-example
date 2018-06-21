@@ -38,14 +38,15 @@ class ImageBlock(blocks.StructBlock):
         if image:
             if image.get('renditions'):
                 image_meta = result.get('meta_rendition_key')
+
                 if image_meta and value['meta_use_mobile_renditions']:
-                    mobile_rendition = image['renditions'][image_meta + '/mobile']
-                else:
+                    mobile_rendition = image['renditions'].get(image_meta + '/mobile')
+                if not mobile_rendition:
                     mobile_rendition = image['renditions']['original']
 
                 if image_meta and value['meta_use_desktop_renditions']:
-                    desktop_rendition = image['renditions'][image_meta + '/desktop']
-                else:
+                    desktop_rendition = image['renditions'].get(image_meta + '/desktop')
+                if not desktop_rendition:
                     desktop_rendition = image['renditions']['original']
 
                 result['image']['renditions'] = {
@@ -82,14 +83,15 @@ class CTABlock(blocks.StructBlock):
         if image_field in result:
             if result[image_field].get('renditions'):
                 image_meta = value.get('image_meta')
+
                 if image_meta and result['mobile_use_renditions']:
-                    mobile_rendition = result[image_field]['renditions'][image_meta + '/mobile']
-                else:
+                    mobile_rendition = result[image_field]['renditions'].get(image_meta + '/mobile')
+                if not mobile_rendition:
                     mobile_rendition = result[image_field]['renditions']['original']
 
                 if image_meta and result['desktop_use_renditions']:
-                    desktop_rendition = result[image_field]['renditions'][image_meta + '/desktop']
-                else:
+                    desktop_rendition = result[image_field]['renditions'].get(image_meta + '/desktop')
+                if not desktop_rendition:
                     desktop_rendition = result[image_field]['renditions']['original']
 
                 result[image_field]['renditions'] = {
