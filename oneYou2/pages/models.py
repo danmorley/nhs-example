@@ -52,7 +52,11 @@ ICON_CARD_LAYOUTS = (
     ('icon_on_left', 'Icon on Left'),
     ('icon_on_right', 'Icon on Right'),
     ('icon_heading_left', 'Icon Heading Left'),
+    ('icon_heading_right', 'Icon Heading Right'),
+    ('icon_body_left', 'Icon Body Left'),
     ('icon_body_right', 'Icon Body Right'),
+    ('icon_on_top', 'Icon on Top'),
+    ('icon_on_bottom', 'Icon on Bottom'),
 )
 
 ICON_CARD_VARIANTS = (
@@ -60,6 +64,7 @@ ICON_CARD_VARIANTS = (
     ('standard_heading_standard_body_grey_bg', 'Standard Heading, Standard Body Text, Grey Background'),
     ('large_green_heading_standard_body_grey_bg', 'Large Green Heading, Standard Body Text, Grey Background'),
     ('x_small_heading_large_body_no_bg', 'X Small Heading, Large Body Text, No Background'),
+    ('large_yellow_heading_standard_body_no_bg', 'Large yellow heading, standard body, no background (Active 10)'),
 )
 
 VIDEO_LAYOUTS = (

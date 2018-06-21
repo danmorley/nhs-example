@@ -1,4 +1,5 @@
 import testImage from '../../assets/images/test-image.jpg';
+import transparentImage from '../../assets/images/transparent.png';
 import testBackgroundImage from '../../assets/images/app-screen.jpg';
 
 /**
@@ -19,6 +20,10 @@ class ImageUtils {
 
   static placeholderImage() {
     return { link: testImage, title: 'Placeholder image' };
+  }
+
+  static transparentImage() {
+    return { link: transparentImage, title: '' };
   }
 
   static placeholderBackgroundImage() {
