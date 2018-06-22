@@ -118,20 +118,22 @@
 // theming
 .oneyou {
 
-  .video-teaser__info {
+  .text_on_right {
+    .video-teaser__info {
       background: $teal-blue;
-  }
-
-  .video-teaser__heading {
-    background-color: $teal-dark;
-    color: $white;
-  }
-
-  .video-teaser__text {
-    color: $white;
-
-    a {
-      color: $sunflower-yellow;
     }
-  }
+
+    .video-teaser__heading {
+      background-color: $teal-dark;
+      color: $white;
+    }
+
+    .video-teaser__text {
+      color: $white;
+
+      a {
+        color: $sunflower-yellow;
+      }
+    }
+   }
 }
