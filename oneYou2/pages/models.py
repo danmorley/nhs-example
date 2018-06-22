@@ -62,6 +62,11 @@ ICON_CARD_VARIANTS = (
     ('x_small_heading_large_body_no_bg', 'X Small Heading, Large Body Text, No Background'),
 )
 
+VIDEO_LAYOUTS = (
+    ('text_on_right', 'Video Left Text Right'),
+    ('text_on_top', 'Video Bottom Text Top'),
+)
+
 CONTENT_STATUS_PENDING = 0
 
 logger = logging.getLogger('wagtail.core')
@@ -155,6 +160,7 @@ class VideoTemplate(CTABlock):
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False)
     shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
+    meta_layout = blocks.ChoiceBlock(choices=VIDEO_LAYOUTS, label="Layout", classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-video-teaser-panel dct-meta-panel'
