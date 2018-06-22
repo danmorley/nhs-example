@@ -28,6 +28,10 @@ import VideoModal from '../VideoModal';
  *    }
  *  }
  */
+
+ const TEXT_ON_RIGHT = 'text_on_right'
+ const TEXT_ON_TOP = 'text_on_top'
+
 class VideoTeaserPanel extends Component {
   constructor(props) {
     super(props);
@@ -59,10 +63,8 @@ class VideoTeaserPanel extends Component {
     this.setImage();
   }
 
-  render() {
-    let { content, classNamePrefix } = this.props;
-    let backgroundTeaserImage = this.state.backgroundImageStyle;
-
+  renderTextRight(content, classNamePrefix, backgroundTeaserImage) {
+    classNamePrefix = TEXT_ON_RIGHT + ' ' + classNamePrefix;
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
         <div className={`${classNamePrefix}__image`} style={backgroundTeaserImage}>
@@ -79,11 +81,44 @@ class VideoTeaserPanel extends Component {
       </Panel>
     );
   }
+
+  renderTextTop(content, classNamePrefix, backgroundTeaserImage) {
+    classNamePrefix = TEXT_ON_TOP + ' ' + classNamePrefix;
+    return (
+      <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
+        <div className={`${classNamePrefix}__info`}>
+          <Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />
+          <div className={`${classNamePrefix}__text`}>
+            <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
+            <CtaLinks cta={content.cta} />
+          </div>
+        </div>
+        <div className={`${classNamePrefix}__image`} style={backgroundTeaserImage}>
+          <VideoModal video={content.video}>
+          </VideoModal>
+        </div>
+      </Panel>
+    );
+  }
+
+  render() {
+    let { content, classNamePrefix, layout } = this.props;
+    let backgroundTeaserImage = this.state.backgroundImageStyle;
+    const metaLayout = content.meta_layout || layout;
+
+    switch(metaLayout) {
+      case TEXT_ON_TOP:
+        return this.renderTextTop(content, classNamePrefix, backgroundTeaserImage);
+      default:
+        return this.renderTextRight(content, classNamePrefix, backgroundTeaserImage);
+    }
+  }
 }
 
 VideoTeaserPanel.propTypes = {
   content: PropTypes.object.isRequired,
   classNamePrefix: PropTypes.string.isRequired,
+  layout: PropTypes.object,
   id: PropTypes.string
 };
 
