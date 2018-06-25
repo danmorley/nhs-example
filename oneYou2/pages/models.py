@@ -21,7 +21,7 @@ from wagtailsnippetscopy.registry import snippet_copy_registry
 from modelcluster.models import get_all_child_relations, get_all_child_m2m_relations
 from modelcluster.fields import ParentalKey
 
-from .blocks import IDBlock, CTABlock, MenuItemPageBlock, ImageBlock
+from .blocks import IDBlock, CTABlock, MenuItemPageBlock, ImageBlock, SimpleCtaLinkBlock
 from .utils import get_serializable_data_for_fields
 from home.models import SiteSettings
 from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppTeaserChooserBlock, \
@@ -199,6 +199,9 @@ class IconCardPanel(CTABlock):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     image = BlobImageChooserBlock(required=False)
+    cta = blocks.StreamBlock([
+        ('simple_cta_link', SimpleCtaLinkBlock())
+    ], icon='arrow-left', label='CTA links', required=False)
     panel_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
     meta_variant = blocks.ChoiceBlock(choices=ICON_CARD_VARIANTS, label="Variant", classname='dct-meta-field')
     meta_layout = blocks.ChoiceBlock(choices=ICON_CARD_LAYOUTS, label="Layout", classname='dct-meta-field')
@@ -342,7 +345,7 @@ class RecipeGrid(blocks.StructBlock):
 
 
 class Table(blocks.StructBlock):
-    header = blocks.ListBlock(blocks.CharBlock(required=False), label='Column headings')
+    header = blocks.ListBlock(blocks.CharBlock(required=False), default=[], label='Column headings')
     display_header = blocks.BooleanBlock(label='Display the table header?',
                                          required=False)
     body_rows = blocks.ListBlock(blocks.StreamBlock([

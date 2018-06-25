@@ -134,3 +134,13 @@ class MenuItemPageBlock(blocks.PageChooserBlock):
                     }
         else:
             return {}
+
+
+class SimpleCtaLinkBlock(blocks.StructBlock):
+    link_text = blocks.CharBlock(required=False)
+    link_external = blocks.CharBlock(label='External link', required=False)
+    link_page = MenuItemPageBlock(required=False)
+
+    class Meta:
+        icon = 'link'
+        form_classname = 'dct-simple-cta-link-block dct-meta-block'
