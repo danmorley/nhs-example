@@ -2,6 +2,7 @@ import json
 import uuid
 
 from azure.storage.file import FileService
+from azure.common import AzureMissingResourceHttpError
 
 from datetime import datetime
 
@@ -62,8 +63,13 @@ class FrontendVersion:
             print('loading meta for ' + directory.name)
             properties = file_service.get_directory_properties(settings.AZURE_FILE_SHARE,
                                                                file_directory + '/' + directory.name)
-            release_tag = file_service.get_file_to_text(settings.AZURE_FILE_SHARE,
+            try:
+                release_tag = file_service.get_file_to_text(settings.AZURE_FILE_SHARE,
                                                         file_directory + '/' + directory.name, 'tag.txt')
+            except AzureMissingResourceHttpError:
+                print('Invalid front end ' + directory.name)
+                release_tag = 'Invalid front end ' + directory.name
+
             available_versions.append((directory.name, release_tag + ' - ' + properties['last-modified']))
 
         sorted_list = sorted(available_versions, key=lambda x: datetime.strptime(x[1].split(' - ')[1],
