@@ -65,7 +65,7 @@ class FrontendVersion:
                                                                file_directory + '/' + directory.name)
             try:
                 release_tag = file_service.get_file_to_text(settings.AZURE_FILE_SHARE,
-                                                        file_directory + '/' + directory.name, 'tag.txt')
+                                                            file_directory + '/' + directory.name, 'tag.txt')
             except AzureMissingResourceHttpError:
                 print('Invalid front end ' + directory.name)
                 release_tag = 'Invalid front end ' + directory.name
