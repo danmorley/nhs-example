@@ -198,13 +198,23 @@ class RichTextPanel(blocks.StructBlock):
     text = blocks.RichTextBlock(required=False)
 
 
+class InlineScriptPanel(blocks.StructBlock):
+    script = blocks.TextBlock(required=False, help_text="The javascript to be inserted")
+    src = blocks.CharBlock(required=False, help_text="URL of the javascript file")
+    field_id = IDBlock(required=False, label="Placeholder ID", retain_case=True)
+
+    class Meta:
+        form_classname = 'dct-inline-script-panel'
+
+
 GRID_PANELS = [
     ('oneyou1_teaser', BackwardsCompatibleContent(label="OneYou1 teaser", icon="folder-inverse")),
     ('video_teaser', VideoTemplate(icon="media")),
     ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
     ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
     ('information_panel', InformationPanel(target_model="shelves.AppTeaser", icon="image")),
-    ('icon_card_panel', IconCardPanel(icon="snippet"))
+    ('icon_card_panel', IconCardPanel(icon="snippet")),
+    ('inline_script_panel', InlineScriptPanel(icon="code"))
 ]
 
 
@@ -346,6 +356,7 @@ class OneYou2Page(Page):
         ('divider', Divider(label="Divider", icon='horizontalrule')),
         ('article_page_heading_shelf', ArticlePageHeadingShelf(label="Article Page Heading", icon='title')),
         ('table', Table(label="Table", icon='list-ul')),
+        ('script_shelf', InlineScriptPanel(label="Script shelf", icon='code')),
     ], null=True, blank=True)
 
     # Meta Fields
