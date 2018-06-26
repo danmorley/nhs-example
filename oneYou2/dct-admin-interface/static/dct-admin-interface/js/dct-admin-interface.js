@@ -43,7 +43,7 @@ function addSequenceControlsInfoButton(newElem) {
     var n = parentContainerEl.id.lastIndexOf('-');
     var rootId = parentContainerEl.id.substr(0, n);     // Strip container suffix.
     var buttonGroupEl = parentContainerEl.querySelector(".sequence-controls > .button-group");
-    console.log('buttonGroupEl is ', buttonGroupEl);
+    // console.log('buttonGroupEl is ', buttonGroupEl);
     // if (!buttonGroupEl) buttonGroupEl = addButtonGroup(el);
     addInfoButton(buttonGroupEl, rootId);
   });
@@ -56,10 +56,13 @@ function addMetaBlockInfoButton(newElem) {
     metaBlockElems = document.getElementsByClassName('dct-meta-block');
 
   Array.prototype.forEach.call(metaBlockElems, function(el, n) {
-    var rootId = uuidv4();
-    el.id = rootId + '-container';
-    var buttonGroupEl = addButtonGroup(el, rootId);
-    addInfoButton(buttonGroupEl, rootId);
+    var sequenceControlsElem = el.querySelector(".sequence-controls");
+    if (!sequenceControlsElem) {
+      var rootId = uuidv4();
+      el.id = rootId + '-container';
+      var buttonGroupEl = addButtonGroup(el, rootId);
+      addInfoButton(buttonGroupEl, rootId);
+    }
   });
 }
 
@@ -69,7 +72,7 @@ function addMetaBlockInfoButton(newElem) {
  *  unless needed.
  */
 function addInfoButton(buttonGroup, rootId) {
-  console.log('adding button to ', buttonGroup);
+  // console.log('adding button to ', buttonGroup);
   var buttonId = rootId + '-info';
   var existingButton = document.getElementById(buttonId);
   if (existingButton) return;
@@ -95,7 +98,7 @@ function addInfoButton(buttonGroup, rootId) {
  *  unless needed.
  */
 function addButtonGroup(el) {
-  console.log('Adding button group', el);
+  // console.log('Adding button group', el);
 
   var buttonGroup = document.createElement('div');
   buttonGroup.classList.add('sequence-controls');
