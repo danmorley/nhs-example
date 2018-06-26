@@ -366,7 +366,7 @@ class Table(blocks.StructBlock):
     shelf_id = IDBlock(required=False, label='ID', classname='dct-meta-field')
     meta_variant = blocks.ChoiceBlock(choices=TABLE_VARIANTS,
                                       default='standard',
-                                      label='Variant', 
+                                      label='Variant',
                                       classname='dct-meta-field')
 
     class Meta:
