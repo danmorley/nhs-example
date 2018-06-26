@@ -189,7 +189,7 @@ class ImageTeaserTemplate(CTABlock):
             ('light-bg', 'Light Background'),
             ('dark-bg', 'Dark Background')
         ],
-        label='Variant', classname='dct-meta-field')
+        default='light-bg', label='Variant', classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-panel-image-teaser dct-meta-panel'
@@ -203,8 +203,14 @@ class IconCardPanel(CTABlock):
         ('simple_cta_link', SimpleCtaLinkBlock())
     ], icon='arrow-left', label='CTA links', required=False)
     panel_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
-    meta_variant = blocks.ChoiceBlock(choices=ICON_CARD_VARIANTS, label="Variant", classname='dct-meta-field')
-    meta_layout = blocks.ChoiceBlock(choices=ICON_CARD_LAYOUTS, label="Layout", classname='dct-meta-field')
+    meta_variant = blocks.ChoiceBlock(choices=ICON_CARD_VARIANTS,
+                                      default='standard_grey_bg',
+                                      label="Variant",
+                                      classname='dct-meta-field')
+    meta_layout = blocks.ChoiceBlock(choices=ICON_CARD_LAYOUTS,
+                                     default='icon_on_left',
+                                     label="Layout",
+                                     classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-icon-card-panel dct-meta-panel'
@@ -315,8 +321,12 @@ class Grid(blocks.StructBlock):
     background_image = ImageBlock(required=False)
     shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
     rows_to_show = blocks.IntegerBlock(default=0, classname='dct-meta-field')
-    meta_variant = blocks.ChoiceBlock(choices=GRID_VARIANT_CHOICES, label="Variant", classname='dct-meta-field')
+    meta_variant = blocks.ChoiceBlock(choices=GRID_VARIANT_CHOICES,
+                                      default='standard',
+                                      label="Variant",
+                                      classname='dct-meta-field')
     meta_layout = blocks.ChoiceBlock(choices=GRID_LAYOUT_CHOICES,
+                                     default='full_width',
                                      label="Layout",
                                      help_text="Use this to select number of columns on desktop (only one column"
                                                " on mobile)", classname='dct-meta-field')
@@ -353,8 +363,11 @@ class Table(blocks.StructBlock):
         ('rich_text_panel', RichTextPanel(required=False)),
         ('icon_card_panel', IconCardPanel(required=False, icon="snippet"))
     ]))
-    shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
-    meta_variant = blocks.ChoiceBlock(choices=TABLE_VARIANTS, label="Variant", classname='dct-meta-field')
+    shelf_id = IDBlock(required=False, label='ID', classname='dct-meta-field')
+    meta_variant = blocks.ChoiceBlock(choices=TABLE_VARIANTS,
+                                      default='standard',
+                                      label='Variant', 
+                                      classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-table-shelf dct-meta-panel'
