@@ -64,7 +64,7 @@ $shelf-padding-extra: 2em;
   
   h2 {
     @include media-breakpoint-only(lg) {  
-        @include heading-h2()
+        @include heading-h2(oneyou)
     }
   }
 }
@@ -84,22 +84,7 @@ $shelf-padding-extra: 2em;
 
   .marker {
     font-family: $tertiary-brand-font;
-  }
-  
-  h2 {
-    @include heading-h1();
-  }
-}
-
-.promo-shelf h2 {
-  
-  @include media-breakpoint-down(sm) { 
-    font-size: 1.5em;
-  }
-  
-  @media (max-width: 365px) {
-    font-size: 1.4em;
-  }
+  } 
 }
 
 .page-heading-shelf {
@@ -132,7 +117,45 @@ $shelf-padding-extra: 2em;
 }
 
 //theming
-.oneyou { //theme
+.oneyou {
+  .promo-shelf, .page-heading-shelf, .banner-shelf {
+    h2 {
+      @include heading-h1(oneyou);
+    }
+  }
+  
+  .promo-shelf h2 {
+    
+    @include media-breakpoint-down(sm) { 
+      font-size: 1.5em;
+    }
+    
+    @media (max-width: 365px) {
+      font-size: 1.4em;
+    }
+  }
+}
+
+.campaign {
+  .promo-shelf, .page-heading-shelf, .banner-shelf {
+    h2 {
+      @include heading-h1(campaign);
+    }
+  }
+  
+  .promo-shelf h2 {
+    
+    @include media-breakpoint-down(sm) { 
+      font-size: 1.5em;
+    }
+    
+    @media (max-width: 365px) {
+      font-size: 1.4em;
+    }
+  }
+}
+
+.oneyou, .campaign {
 
   .promo-shelf, .page-heading-shelf, .banner-shelf {
     h1, h2, h3, h4, h5 {

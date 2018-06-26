@@ -38,7 +38,9 @@ class ImageBlock(blocks.StructBlock):
         if image:
             if image.get('renditions'):
                 image_meta = result.get('meta_rendition_key')
-
+                mobile_rendition = None;
+                desktop_rendition = None;
+                
                 if image_meta and value['meta_use_mobile_renditions']:
                     mobile_rendition = image['renditions'].get(image_meta + '/mobile')
                 if not mobile_rendition:
@@ -83,7 +85,9 @@ class CTABlock(blocks.StructBlock):
         if image_field in result:
             if result[image_field].get('renditions'):
                 image_meta = value.get('image_meta')
-
+                mobile_rendition = None;
+                desktop_rendition = None;
+                
                 if image_meta and result['mobile_use_renditions']:
                     mobile_rendition = result[image_field]['renditions'].get(image_meta + '/mobile')
                 if not mobile_rendition:

@@ -1,3 +1,6 @@
+@import "../../../../node_modules/bootstrap-4-grid/scss/grid";
+@import "../functions";
+
 //fonts
 $primary-brand-font: 'OneYouSansBold', Helvetica, Liberation Sans, Arial, sans-serif;
 $secondary-brand-font: 'OneYouSansRegular', Helvetica, Liberation Sans, Arial, sans-serif;
@@ -15,18 +18,49 @@ $h2: 1.25em;
 $h3: 1.15em;
 $h4: 1em;
 
-@mixin heading-h1() {
-  font-size: $h1;
+$h1-oneyou: 1.625em;
+$h1-campaign: 1.625em;
 
+$h2-oneyou: 1.25em;
+$h2-campaign: 2.5em;
+
+$headings: (
+  oneyou: (
+    heading-h1: (
+      mobile: $h1-oneyou,
+      desktop: $h1-oneyou*1.231
+    ),
+    heading-h2: (
+      mobile: $h2-oneyou,
+      desktop: $h2-oneyou*1.2
+    )
+  ),
+  campaign: (
+    heading-h1: (
+      mobile: $h1-campaign,
+      desktop: $h1-campaign*1.85
+    ),
+    heading-h2: (
+      mobile: $h2-campaign,
+      desktop: $h2-campaign*1.2
+    )
+  )
+);
+
+@mixin heading-h1($theme) {
+  
+  font-size: map-deep-get($headings, $theme, heading-h1, mobile);
+  
   @include media-breakpoint-up(sm) {
-    font-size: calc(1.25 * #{$h1});
+    font-size: map-deep-get($headings, $theme, heading-h1, desktop);
   }
 }
 
-@mixin heading-h2() {
-  font-size: $h2;
-
+@mixin heading-h2($theme) {
+  
+  font-size: map-deep-get($headings, $theme, heading-h2, mobile);
+  
   @include media-breakpoint-up(sm) {
-    font-size: calc(1.2 * #{$h2});
+    font-size: map-deep-get($headings, $theme, heading-h2, desktop);
   }
 }

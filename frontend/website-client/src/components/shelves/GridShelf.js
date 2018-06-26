@@ -7,7 +7,7 @@ import './grid-shelf.css';
 import ShowMorePanel from '../shared/ShowMorePanel';
 import MultiPanelBlock from '../pages/blocks/MultiPanelBlock';
 import ResponsiveBackgroundImage from '../shared/ResponsiveBackgroundImage';
-
+import ImageUtils from '../panels/ImageUtils';
 
 /**
  *  Grid Shelf is a simple shelf that can be used to display other
@@ -38,20 +38,22 @@ class GridShelf extends Component {
         return 'shelf__col col-sm-12';
       }
     })(metaLayout);
-
+    
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
-        <ResponsiveBackgroundImage image={content.background_image} className="shelf__container container">
-          {gridHeading != '' &&
-            <Text tagName="h2" content={gridHeading} className="shelf__header" />
-          }
-          {gridBody != '' &&
-            <Text tagName="div" content={gridBody} className="shelf__body" format="richtext"/>
-          }
-          <div className="grid-container">
-            <ShowMorePanel rowsToShow={content.rows_to_show}>
-              <MultiPanelBlock items={content.items} panelClass={panelClass}/>
-            </ShowMorePanel>
+        <ResponsiveBackgroundImage image={content.background_image} className={`shelf__container container-fluid child-image--${content.meta_image_display}`}>
+          <div className="container">
+            {gridHeading != '' &&
+              <Text tagName="h2" content={gridHeading} className="shelf__header" />
+            }
+            {gridBody != '' &&
+              <Text tagName="div" content={gridBody} className="shelf__body" format="richtext"/>
+            }
+            <div className="grid-container">
+              <ShowMorePanel rowsToShow={content.rows_to_show}>
+                <MultiPanelBlock items={content.items} panelClass={panelClass}/>
+              </ShowMorePanel>
+            </div>
           </div>
         </ResponsiveBackgroundImage>
       </Shelf>

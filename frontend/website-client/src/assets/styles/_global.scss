@@ -28,14 +28,6 @@ body {
   overflow-x: hidden;
 }
 
-h1 {
-  font-size: $h1;
-  
-  @include media-breakpoint-up(sm) {
-    font-size: calc(1.25 * #{$h1});
-  }
-}
-
 h2 {
   font-size: $h2;
   
@@ -200,7 +192,38 @@ ul.cta-list {
   }
 }
 
-.oneyou { //theme
+//theming
+.oneyou {
+
+  h1 {
+    font-size: map-deep-get($headings, oneyou, heading-h1, mobile);
+    
+    @include media-breakpoint-up(sm) {
+      font-size: map-deep-get($headings, oneyou, heading-h1, desktop);
+    }
+  }
+}
+
+.campaign {
+  
+  h1 {
+    font-size: map-deep-get($headings, campaign, heading-h1, mobile);
+    
+    @include media-breakpoint-up(sm) {
+      font-size: map-deep-get($headings, campaign, heading-h1, desktop);
+    }
+  }
+  
+  h2 {
+    font-size: map-deep-get($headings, campaign, heading-h2, mobile);
+    
+    @include media-breakpoint-up(sm) {
+      font-size: map-deep-get($headings, campaign, heading-h2, desktop);
+    }
+  }
+}
+
+.oneyou, .campaign { 
   .button-cta {
     background-color: $sunflower-yellow;
     color: $grey-brown;

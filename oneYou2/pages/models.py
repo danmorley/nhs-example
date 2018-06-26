@@ -67,6 +67,11 @@ ICON_CARD_VARIANTS = (
     ('large_yellow_heading_standard_body_no_bg', 'Large yellow heading, standard body, no background (Active 10)'),
 )
 
+INFO_PANEL_VARIANTS = (
+    ('mobile-image-top-text-right', 'Mobile image on top, Desktop image on left with text right'),
+    ('mobile-image-right', 'Mobile image on right, Desktop image on right')
+)
+
 VIDEO_LAYOUTS = (
     ('text_on_right', 'Video Left Text Right'),
     ('text_on_top', 'Video Bottom Text Top'),
@@ -140,6 +145,7 @@ class InformationPanel(CTABlock):
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False, verbose_name="cta")
     shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
+    meta_variant = blocks.ChoiceBlock(choices=INFO_PANEL_VARIANTS, label="Variant", classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-information-panel dct-meta-panel'

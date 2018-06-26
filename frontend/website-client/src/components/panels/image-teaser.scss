@@ -14,7 +14,7 @@
   background-position: center;
   background-repeat: no-repeat;
   
-  .image--contain & {
+  .child-image--contain & {
     background-size: contain;
     background-position: top left;
   }
@@ -104,7 +104,7 @@
 }
 
 // theming
-.oneyou {
+.oneyou, .campaign {
   
   .image-teaser--light-bg {
     
