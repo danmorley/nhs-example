@@ -52,10 +52,6 @@ def process_inline_hyperlinks(field):
 #   Processes inline tags in rich text fields to convert them to actual URLs.
 #
 def parse_shelf(shelf, parent=None):
-    # Decide whether this is a stream field (it is a dictionary with a) or a list block.
-
-    print("parse_shelf: type %s" % type(shelf))
-    print("parse_shelf: type %s" % shelf)
     if type(shelf['value']) is dict or type(shelf['value']) is OrderedDict:
         shelf_type = shelf['type']
 
@@ -85,17 +81,14 @@ def parse_shelf(shelf, parent=None):
             if type(shelf['value'][key]) is str:
                 shelf['value'][key] = process_inlines(shelf['value'][key])
             if type(shelf['value'][key]) is list:
-                print('Shelf value %s is %s' % (key, type(shelf['value'][key])))
                 items = shelf['value'][key]
                 for item in items:
                     if type(item) is dict or type(item) is OrderedDict:
                         # Item is a block, such as a grid item.
-                        print('aaaaaa')
                         parse_shelf(item, parent=shelf)
 
                     if type(item) is list:
                         # Item is a row (eg. table row) that contains blocks.
-                        print('bbbbbb')
                         for subitem in item:
                             parse_shelf(subitem, parent=shelf)
 
