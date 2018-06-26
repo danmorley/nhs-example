@@ -6,7 +6,7 @@
   display: flex;
   height: 100%;
 
-  .video-teaser__image {
+  .video-teaser--text_on_right__image {
     width: 35%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -32,22 +32,22 @@
     }
   }
 
-  .video-teaser__image > div {
+  .video-teaser--text_on_right__image > div {
     height: 100%;
     width: 100%;
   }
 
-  .video-teaser__info {
+  .video-teaser--text_on_right__info {
     display: flex;
     flex-direction: column;
     width: 65%;
   }
 
-  .video-teaser__heading {
+  .video-teaser--text_on_right__heading {
     padding: 1em;
   }
 
-  .video-teaser__text {
+  .video-teaser--text_on_right__text {
     display: flex;
     flex-direction: column;
     padding: 1em;
@@ -64,7 +64,7 @@
 }
 
 .video-teaser--text_on_top {
-  .video-teaser__image {
+  .video-teaser--text_on_top__image {
     width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -86,21 +86,21 @@
     }
   }
 
-  .video-teaser__image > div {
+  .video-teaser--text_on_top__image > div {
     height: 100%;
     width: 100%;
   }
 
-  .video-teaser__info {
+  .video-teaser--text_on_top__info {
     background-color: #4a4a4a;
     color: #FFFFFF;
   }
 
-  .video-teaser__heading {
+  .video-teaser--text_on_top__heading {
     padding: 1em;
   }
 
-  .video-teaser__text {
+  .video-teaser--text_on_top__text {
     p {
       margin-bottom: 1em;
     }
@@ -115,16 +115,16 @@
 .oneyou {
 
   .video-teaser--text_on_right {
-    .video-teaser__info {
+    .video-teaser--text_on_right__info {
       background: $teal-blue;
     }
 
-    .video-teaser__heading {
+    .video-teaser--text_on_right__heading {
       background-color: $teal-dark;
       color: $white;
     }
 
-    .video-teaser__text {
+    .video-teaser--text_on_right__text {
       color: $white;
 
       a {
