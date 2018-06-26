@@ -1,0 +1,65 @@
+@import '../../assets/styles/variables/variables';
+@import "../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+.icon-card-panel {
+  display: flex;
+  position: relative;
+
+  div {
+    max-width: 100%
+  }
+
+  &.icon-card-panel--standard_grey_bg {
+    .icon-card-panel__image img {
+      width: 80px;
+      height: 80px;
+    }
+
+    .icon-card-panel__body {
+      width: auto;
+    }
+
+    .icon-card-panel__heading {
+      font-size: 0.9em;
+      font-family: $secondary-brand-font;
+      color: $grey-brown-dark;
+      text-transform: uppercase;
+    }
+
+    .icon-card-panel__text {
+      font-size: 0.7em;
+      color: $grey-brown-dark;
+    }
+  }
+
+  &.icon-card-panel--x_small_heading_large_body_no_bg {
+    .icon-card-panel__image img {
+      width: 80px;
+      height: 80px;
+    }
+
+    .icon-card-panel__body {
+      width: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex: 1 1 auto;
+    }
+
+    .icon-card-panel__heading {
+      font-size: 0.6em;
+      font-family: $default-font;
+      font-weight: normal;
+      color: $grey-brown-dark;
+      margin-bottom: 0.7em;
+    }
+
+    .icon-card-panel__text {
+      font-size: 1.6em;
+      font-family: $secondary-brand-font;
+      text-transform: uppercase;
+      color: $grey-brown-dark;
+    }
+  }
+
+}

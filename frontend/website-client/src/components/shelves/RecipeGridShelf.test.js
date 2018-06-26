@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import RecipeGridShelf from './RecipeGridShelf';
+import {
+  MemoryRouter
+} from 'react-router-dom';
 
 const classNamePrefix = "recipe-grid-shelf";
 const content = {
@@ -49,12 +52,12 @@ const invalid_content = {
 
 it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<RecipeGridShelf classNamePrefix={classNamePrefix}
+    ReactDOM.render(<MemoryRouter><RecipeGridShelf classNamePrefix={classNamePrefix}
         content={content}
         id={id}
         layout={layout}
         site={site}
-        variant={variant} />, div);
+        variant={variant} /></MemoryRouter>, div);
 });
 
 it('renders without crashing with invalid panel type', () => {

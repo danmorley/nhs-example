@@ -61,7 +61,8 @@ def parse_shelf(shelf, parent=None):
             if type(shelf['value'][key]) is list:
                 items = shelf['value'][key]
                 for item in items:
-                    parse_shelf(item, parent=shelf)
+                    if type(item) is dict or type(item) is OrderedDict:
+                        parse_shelf(item, parent=shelf)
 
     return shelf
 

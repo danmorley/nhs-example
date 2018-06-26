@@ -61,7 +61,7 @@ class CtaUtils {
   }
 
   static isExternalCta(cta) {
-    return !CtaUtils.isInternalCta(cta);
+    return cta && !CtaUtils.isInternalCta(cta);
   }
 }
 

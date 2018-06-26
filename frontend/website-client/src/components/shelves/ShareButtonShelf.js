@@ -60,7 +60,7 @@ class ShareButtonShelf extends Component {
       break;
     case 'email':
       var link = "mailto:?"
-          + "&body=" + pageUrl;
+          + "body=" + pageUrl;
       evt.currentTarget.href=link;
       break;
     case 'whatsapp':
