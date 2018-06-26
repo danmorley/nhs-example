@@ -119,7 +119,7 @@ class FrontendVersion:
 
         version_directory = file_directory + "/" + unique_id
 
-        print('creating frontend version directory')
+        print('creating frontend version directory' + version_directory)
         file_service.create_directory(settings.AZURE_FILE_SHARE, version_directory)
         print('creating statics directory')
         file_service.create_directory(settings.AZURE_FILE_SHARE, version_directory + '/static')
