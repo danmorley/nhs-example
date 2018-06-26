@@ -64,7 +64,7 @@ class VideoTeaserPanel extends Component {
   }
 
   renderTextRight(content, classNamePrefix, backgroundTeaserImage) {
-    classNamePrefix = TEXT_ON_RIGHT + ' ' + classNamePrefix;
+    classNamePrefix = classNamePrefix + '--' + TEXT_ON_RIGHT;
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
         <div className={`${classNamePrefix}__image`} style={backgroundTeaserImage}>
@@ -83,7 +83,7 @@ class VideoTeaserPanel extends Component {
   }
 
   renderTextTop(content, classNamePrefix, backgroundTeaserImage) {
-    classNamePrefix = TEXT_ON_TOP + ' ' + classNamePrefix;
+    classNamePrefix = classNamePrefix + '--' + TEXT_ON_TOP;
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
         <div className={`${classNamePrefix}__info`}>
