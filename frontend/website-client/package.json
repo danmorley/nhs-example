@@ -1,6 +1,6 @@
 {
   "name": "website-client",
-  "version": "1.1.8",
+  "version": "1.1.15",
   "private": true,
   "dependencies": {
     "bootstrap-4-grid": "^2.3.0",
@@ -21,7 +21,25 @@
     "react-scripts": "1.1.0",
     "react-slick": "^0.18.1",
     "react-swipeable": "^4.2.1",
-    "slick-carousel": "^1.8.1"
+    "request": "^2.85.0",
+    "request-promise-native": "^1.0.5",
+    "slick-carousel": "^1.8.1",
+    "universal-cookie": "^2.1.2"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!src/registerServiceWorker.js",
+      "!src/components/shelves/GuidanceShelf.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 60,
+        "functions": 60,
+        "lines": 60,
+        "statements": 60
+      }
+    }
   },
   "scripts": {
     "start-js": "react-app-rewired start",
@@ -33,6 +51,8 @@
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive"
   },
   "devDependencies": {
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint-plugin-react": "^7.8.2",
     "react-app-rewire-eslint": "^0.2.3",
     "react-app-rewired": "^1.5.2"

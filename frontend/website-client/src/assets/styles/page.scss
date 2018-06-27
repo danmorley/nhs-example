@@ -12,7 +12,7 @@
   margin-right: auto;
   max-width: 1440px;
   position: relative;
-  
+
   @include media-breakpoint-down(md) {
     &.header-nav--open {
       left: 66%;
@@ -55,7 +55,7 @@
 
 @supports (stroke-color:transparent) {
   @supports (-webkit-appearance:none) {
-    @media not all and (min-resolution:.001dpcm) { 
+    @media not all and (min-resolution:.001dpcm) {
       .col-shrink-to-fit {
         @include media-breakpoint-down(sm) {
           flex-basis: 0;
@@ -63,17 +63,17 @@
       }
     }
   }
-} 
+}
 
 @supports (not (stroke-color:transparent)) {
  .col-shrink-to-fit {
    @include media-breakpoint-down(sm) {
      flex-basis: unset;
    }
- } 
+ }
 }
-  
-@media not all and (min-resolution:.001dpcm) { 
+
+@media not all and (min-resolution:.001dpcm) {
   .col-shrink-to-fit {
     @include media-breakpoint-down(sm) {
       flex-basis: unset;
@@ -81,7 +81,7 @@
   }
 }
 
-_:-ms-fullscreen, :root { 
+_:-ms-fullscreen, :root {
   // ie 11
   .col-shrink-to-fit {
     @include media-breakpoint-down(sm) {
@@ -91,7 +91,7 @@ _:-ms-fullscreen, :root {
 }
 
 .md-content-right {
-  
+
   @include media-breakpoint-up(md) {
     justify-content: flex-end;
   }

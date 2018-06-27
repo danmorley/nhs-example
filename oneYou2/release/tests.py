@@ -21,8 +21,9 @@ from pages.factories import create_test_page
 from pages.models import OneYou2Page
 
 from release.factories import create_test_release, create_test_release_page
+
 from release.models import Release, validate_in_future, query_set_to_dict
-from release.utils import get_release_object, get_latest_release, populate_release_if_required
+from release.utils import get_release_object, get_latest_live_release, get_latest_release, populate_release_if_required
 from release.views import release_html
 from release.wagtail_hooks import ReleaseButtonHelper, ReleaseAdmin
 
@@ -469,7 +470,7 @@ class ReleaseUtilsTests(OneYouTests):
         self.assertEqual(release.id, loaded_release.id)
         self.assertEqual(release.release_name, loaded_release.release_name)
 
-    def test_get_latest_release_returns_the_newest_published_release(self, mock_file_service):
+    def test_get_latest_live_release_returns_the_newest_published_release(self, mock_file_service):
         """
         A published release is one whose release_time is in the past.
         """
@@ -485,13 +486,56 @@ class ReleaseUtilsTests(OneYouTests):
         release3_date = timezone.now() + timedelta(days=+10)
         release3 = create_test_release(release_name=release3_name, release_date=release3_date)
 
-        current_release = get_latest_release(release1.site_id)
+        current_release = get_latest_live_release(release1.site_id)
 
         self.assertIsTrue(release1.release_date_has_passed())
         self.assertIsTrue(release2.release_date_has_passed())
         self.assertIsFalse(release3.release_date_has_passed())
 
         self.assertEqual(current_release.id, release2.id)
+
+    def test_get_latest_release_returns_the_newest_release_with_date(self, mock_file_service):
+        """
+        A published release is one whose release_time is in the past.
+        """
+        release1_name = "Next release"
+        release1_date = timezone.now() + timedelta(days=+1)
+        release1 = create_test_release(release_name=release1_name, release_date=release1_date)
+
+        release2_name = "Future release 1"
+        release2_date = None
+        release2 = create_test_release(release_name=release2_name, release_date=release2_date)
+
+        release3_name = "Future release 2"
+        release3_date = None
+        release3 = create_test_release(release_name=release3_name, release_date=release3_date)
+
+        latest_release = get_latest_release(release1.site_id)
+
+        self.assertIsFalse(release1.release_date_has_passed())
+        self.assertIsFalse(release2.release_date_has_passed())
+        self.assertIsFalse(release3.release_date_has_passed())
+
+        self.assertEqual(latest_release.id, release1.id)
+
+    def test_get_latest_release_returns_the_newest_release_with_no_date(self, mock_file_service):
+        """
+        A published release is one whose release_time is in the past.
+        """
+        release1_name = "Future release 1"
+        release1_date = None
+        release1 = create_test_release(release_name=release1_name, release_date=release1_date)
+
+        release2_name = "Future release 2"
+        release2_date = None
+        release2 = create_test_release(release_name=release2_name, release_date=release2_date)
+
+        latest_release = get_latest_release(release1.site_id)
+
+        self.assertIsFalse(release1.release_date_has_passed())
+        self.assertIsFalse(release2.release_date_has_passed())
+
+        self.assertEqual(latest_release.id, release1.id)
 
 
 @patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')

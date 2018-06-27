@@ -3,9 +3,9 @@ from wagtail.wagtailcore import blocks
 
 
 class CTABlock(blocks.StructBlock):
-    image_meta = blocks.TextBlock(required=False)
-    mobile_use_renditions = blocks.BooleanBlock(default=True, required=False)
-    desktop_use_renditions = blocks.BooleanBlock(default=True, required=False)
+    image_meta = blocks.TextBlock(required=False, classname='dct-meta-field')
+    mobile_use_renditions = blocks.BooleanBlock(default=True, required=False, classname='dct-meta-field')
+    desktop_use_renditions = blocks.BooleanBlock(default=True, required=False, classname='dct-meta-field')
 
     def get_api_representation(self, value, context=None):
         # TODO: This method could use the function in page utils
@@ -24,21 +24,20 @@ class CTABlock(blocks.StructBlock):
         if image_field in result:
             if result[image_field].get('renditions'):
                 image_meta = value.get('image_meta')
-                if image_meta:
-                    if result['mobile_use_renditions']:
-                        mobile_rendition = result[image_field]['renditions'][image_meta + '/mobile']
-                    else:
-                        mobile_rendition = result[image_field]['renditions']['original']
+                if image_meta and result['mobile_use_renditions']:
+                    mobile_rendition = result[image_field]['renditions'][image_meta + '/mobile']
+                else:
+                    mobile_rendition = result[image_field]['renditions']['original']
 
-                    if result['desktop_use_renditions']:
-                        desktop_rendition = result[image_field]['renditions'][image_meta + '/desktop']
-                    else:
-                        desktop_rendition = result[image_field]['renditions']['original']
+                if image_meta and result['desktop_use_renditions']:
+                    desktop_rendition = result[image_field]['renditions'][image_meta + '/desktop']
+                else:
+                    desktop_rendition = result[image_field]['renditions']['original']
 
-                    result[image_field]['renditions'] = {
-                        'mobile': mobile_rendition,
-                        'desktop': desktop_rendition
-                    }
+                result[image_field]['renditions'] = {
+                    'mobile': mobile_rendition,
+                    'desktop': desktop_rendition
+                }
 
         if 'cta' in result:
             cta_links = []
@@ -49,7 +48,13 @@ class CTABlock(blocks.StructBlock):
 
 
 class IDBlock(blocks.CharBlock):
+    def __init__(self, retain_case=False, *args, **kwargs):
+        self.retain_case = retain_case
+        super(IDBlock, self).__init__(*args, **kwargs)
+
     def get_api_representation(self, value, context=None):
+        if self.retain_case:
+            return value
         return slugify(value)
 
 
