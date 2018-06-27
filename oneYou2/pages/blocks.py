@@ -1,5 +1,66 @@
 from django.template.defaultfilters import slugify
 from wagtail.wagtailcore import blocks
+from shelves.blocks import BlobImageChooserBlock
+
+
+IMAGE_VARIANT_CHOICES = (
+    ('contain', 'Contain'),
+    ('cover', 'Cover'),
+    ('parent', 'Use parent')
+)
+
+
+class ImageBlock(blocks.StructBlock):
+    image = BlobImageChooserBlock(required=False)
+    meta_variant = blocks.ChoiceBlock(IMAGE_VARIANT_CHOICES,
+                                      label='Variant',
+                                      default='cover',
+                                      classname='dct-meta-field')
+    meta_rendition_key = blocks.CharBlock(required=False,
+                                          label='Rendition',
+                                          classname='dct-meta-field')
+    meta_use_mobile_renditions = blocks.BooleanBlock(default=True,
+                                                     label="Use mobile reditions",
+                                                     required=False,
+                                                     classname='dct-meta-field')
+    meta_use_desktop_renditions = blocks.BooleanBlock(default=True,
+                                                      label="Use desktop renditions",
+                                                      required=False,
+                                                      classname='dct-meta-field')
+
+    def get_api_representation(self, value, context=None):
+        # Convert value to plain dict.
+        result = blocks.StructBlock.get_api_representation(self, value, context)
+
+        # If image supplied, filter renditions list to leave just two renditions, one for
+        # desktop and one for mobile.
+        image = result['image']
+        if image:
+            if image.get('renditions'):
+                image_meta = result.get('meta_rendition_key')
+                mobile_rendition = None
+                desktop_rendition = None
+
+                if image_meta and value['meta_use_mobile_renditions']:
+                    mobile_rendition = image['renditions'].get(image_meta + '/mobile')
+                if not mobile_rendition:
+                    mobile_rendition = image['renditions']['original']
+
+                if image_meta and value['meta_use_desktop_renditions']:
+                    desktop_rendition = image['renditions'].get(image_meta + '/desktop')
+                if not desktop_rendition:
+                    desktop_rendition = image['renditions']['original']
+
+                result['image']['renditions'] = {
+                    'mobile': mobile_rendition,
+                    'desktop': desktop_rendition
+                }
+
+        return result
+
+    class Meta:
+        icon = 'image'
+        form_classname = 'dct-image-block dct-meta-block sequence-member'
 
 
 class CTABlock(blocks.StructBlock):
@@ -24,14 +85,17 @@ class CTABlock(blocks.StructBlock):
         if image_field in result:
             if result[image_field].get('renditions'):
                 image_meta = value.get('image_meta')
+                mobile_rendition = None
+                desktop_rendition = None
+
                 if image_meta and result['mobile_use_renditions']:
-                    mobile_rendition = result[image_field]['renditions'][image_meta + '/mobile']
-                else:
+                    mobile_rendition = result[image_field]['renditions'].get(image_meta + '/mobile')
+                if not mobile_rendition:
                     mobile_rendition = result[image_field]['renditions']['original']
 
                 if image_meta and result['desktop_use_renditions']:
-                    desktop_rendition = result[image_field]['renditions'][image_meta + '/desktop']
-                else:
+                    desktop_rendition = result[image_field]['renditions'].get(image_meta + '/desktop')
+                if not desktop_rendition:
                     desktop_rendition = result[image_field]['renditions']['original']
 
                 result[image_field]['renditions'] = {

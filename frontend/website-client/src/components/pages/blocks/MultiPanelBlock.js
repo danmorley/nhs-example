@@ -15,6 +15,7 @@ import Oneyou1TeaserPanel from '../../panels/Oneyou1TeaserPanel';
 import AppTeaserPanel from '../../panels/AppTeaserPanel';
 import InformationPanel from '../../panels/InformationPanel';
 import SimpleTextPanel from '../../panels/SimpleTextPanel';
+import RichTextPanel from '../../panels/RichTextPanel';
 import IconCardPanel from '../../panels/IconCardPanel';
 import InlineScriptPanel from '../../panels/InlineScriptPanel';
 

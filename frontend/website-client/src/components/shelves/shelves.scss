@@ -63,6 +63,14 @@ $shelf-padding-extra: 2em;
   }
 }
 
+.shelf__body {
+  
+  p {
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+  }
+}
+
 .shelf__header {
   font-family: $secondary-brand-font;
   font-weight: normal;
@@ -118,23 +126,6 @@ $shelf-padding-extra: 2em;
     padding-bottom:0;
   }
 }
-//theme
-.oneyou {
-
-  .shelf {
-    h2 {
-    color: $teal-blue;
-    }
-  }
-
-  h1, h2 {
-    .marker {
-      display: inline-block;
-      line-height: 0.9em;
-      border-bottom: 0.15em solid $white;
-    }
-  }
-}
 
 .guidance-shelf {
   background-color: #fcf4ba;
@@ -152,5 +143,30 @@ $shelf-padding-extra: 2em;
     width: 100%;
     text-align: center;
     line-height: 1.4em;
+  }
+}
+
+//theming
+.oneyou, .campaign {
+
+  .shelf {
+    h2 {
+      color: $teal-blue;
+    }
+  }
+
+  h1, h2 {
+    .marker {
+      display: inline-block;
+      line-height: 0.9em;
+      border-bottom: 0.15em solid $white;
+    }
+  }
+}
+
+.campaign {
+  .shelf__header {
+    font-family: $primary-brand-font;
+    @include heading-h2(campaign);
   }
 }

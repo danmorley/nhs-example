@@ -20,7 +20,7 @@
   background-position: center;
   min-height: 176px;
   
-  .image--contain & {
+  .child-image--contain & {
     background-size: contain;
     background-position: top left;
   }

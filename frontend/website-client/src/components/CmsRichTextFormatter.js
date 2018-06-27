@@ -18,7 +18,11 @@ class CmsRichTextFormatter  {
   }
 
   static renderLink(node) {
-    if (node.attribs && node.attribs.linktype !== 'page') {
+    if (node.attribs && node.attribs.linktype == 'page') {
+      // Internal link - use react router to prevent page refresh.
+      return (<Link to={node.attribs.href}>{domToReact(node.children, parserOptions)}</Link>);
+
+    } else {
       // Simply return children if href attribute not given.
       if (!node.attribs.href) return domToReact(node.children, parserOptions);
 

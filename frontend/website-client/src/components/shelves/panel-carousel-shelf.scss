@@ -195,7 +195,7 @@ $arrow-distance: 10%;
 }
 
 
-.oneyou {
+.oneyou, .campaign {
   
   .panel-carousel {
     
@@ -241,7 +241,7 @@ $arrow-distance: 10%;
       padding-right: 0;
 
       @include media-breakpoint-up(md) { 
-        @include heading-h2()
+        @include heading-h2(oneyou)
         padding-top: 1em;
         padding-bottom: 1em;
       } 

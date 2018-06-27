@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import Text from '../Text';
+import Panel from './Panel';
 
 /**
- *  SimpleTextPanel is a simple field that will output escaped text or
- *  raw HTML text.
+ *  RichTextPanel is a simple field that will output rich text originating from
+ *  a Wagtail rich text field.
  *
  *  It expects the following properties:
  *  - content
@@ -13,15 +14,24 @@ import Text from '../Text';
  */
 class RichTextPanel extends Component {
   render() {
-    let { content, ...rest } = this.props;
+    const { content, classNamePrefix } = this.props;
     if (!content) return null;
 
-    return (<Text tagName="div" content={content.text} format='richtext' className="simple-text" {...rest} />);
+    return (
+      <Panel id={content.panel_id || this.props.id}
+        classNamePrefix={classNamePrefix}
+        variant={content.meta_variant}
+        layout={content.meta_layout}>
+        <Text tagName="div" content={content.text} format="richtext" className="rich-text" />
+      </Panel>
+    );
   }
 }
 
 RichTextPanel.propTypes = {
   content: PropTypes.object.isRequired,
+  classNamePrefix: PropTypes.string.isRequired,
+  id: PropTypes.string
 };
 
 CmsComponentRegistry.register('rich_text_panel', RichTextPanel, 'rich-text-panel');

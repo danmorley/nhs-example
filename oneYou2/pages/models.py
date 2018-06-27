@@ -21,7 +21,7 @@ from wagtailsnippetscopy.registry import snippet_copy_registry
 from modelcluster.models import get_all_child_relations, get_all_child_m2m_relations
 from modelcluster.fields import ParentalKey
 
-from .blocks import IDBlock, CTABlock, MenuItemPageBlock
+from .blocks import IDBlock, CTABlock, MenuItemPageBlock, ImageBlock
 from .utils import get_serializable_data_for_fields
 from home.models import SiteSettings
 from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppTeaserChooserBlock, \
@@ -52,7 +52,11 @@ ICON_CARD_LAYOUTS = (
     ('icon_on_left', 'Icon on Left'),
     ('icon_on_right', 'Icon on Right'),
     ('icon_heading_left', 'Icon Heading Left'),
+    ('icon_heading_right', 'Icon Heading Right'),
+    ('icon_body_left', 'Icon Body Left'),
     ('icon_body_right', 'Icon Body Right'),
+    ('icon_on_top', 'Icon on Top'),
+    ('icon_on_bottom', 'Icon on Bottom'),
 )
 
 ICON_CARD_VARIANTS = (
@@ -60,6 +64,12 @@ ICON_CARD_VARIANTS = (
     ('standard_heading_standard_body_grey_bg', 'Standard Heading, Standard Body Text, Grey Background'),
     ('large_green_heading_standard_body_grey_bg', 'Large Green Heading, Standard Body Text, Grey Background'),
     ('x_small_heading_large_body_no_bg', 'X Small Heading, Large Body Text, No Background'),
+    ('large_yellow_heading_standard_body_no_bg', 'Large yellow heading, standard body, no background (Active 10)'),
+)
+
+INFO_PANEL_VARIANTS = (
+    ('mobile-image-top-text-right', 'Mobile image on top, Desktop image on left with text right'),
+    ('mobile-image-right', 'Mobile image on right, Desktop image on right')
 )
 
 VIDEO_LAYOUTS = (
@@ -135,6 +145,7 @@ class InformationPanel(CTABlock):
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False, verbose_name="cta")
     shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
+    meta_variant = blocks.ChoiceBlock(choices=INFO_PANEL_VARIANTS, label="Variant", classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-information-panel dct-meta-panel'
@@ -296,7 +307,9 @@ class PanelCarousel(blocks.StructBlock):
 
 class Grid(blocks.StructBlock):
     heading = blocks.CharBlock(required=False)
+    body = blocks.RichTextBlock(required=False)
     items = blocks.StreamBlock(GRID_PANELS, icon='arrow-left', label='Items')
+    background_image = ImageBlock(required=False)
     shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
     rows_to_show = blocks.IntegerBlock(default=0, classname='dct-meta-field')
     meta_variant = blocks.ChoiceBlock(choices=GRID_VARIANT_CHOICES, label="Variant", classname='dct-meta-field')

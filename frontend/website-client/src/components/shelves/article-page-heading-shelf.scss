@@ -4,7 +4,7 @@
 .article-page-heading-shelf {
 
   h1 {
-    @include heading-h2()
+    @include heading-h2(oneyou)
     text-transform: uppercase;
     font-family: $secondary-brand-font;
     font-weight: normal;

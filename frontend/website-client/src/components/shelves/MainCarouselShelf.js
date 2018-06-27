@@ -60,7 +60,7 @@ class MainCarouselShelf extends Component {
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix}>
         <div className="shelf__container container">
-          <h2 className="shelf__header">{content.heading}</h2>
+          {content.heading && <h2 className="shelf__header">{content.heading}</h2>}
         </div>
         <div className="container-fluid">
           <div className="row carousel__row">
