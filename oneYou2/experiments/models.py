@@ -48,6 +48,16 @@ class Experiment(ClusterableModel):
 class OneYouVariant(OneYou2Page):
 
     @classmethod
+    def allowed_parent_page_models(cls):
+        """
+        Returns the list of page types that this page type can be a subpage of,
+        as a list of model classes
+        """
+        return [
+            OneYou2Page
+        ]
+
+    @classmethod
     def from_page(cls, page):
         return cls(
             page.x

@@ -558,9 +558,53 @@ class ReleaseViewsTests(OneYouTests):
         self.assertIsFalse("/static/js/" in response_content_string)
         self.assertIsTrue("/version/js/" in response_content_string)
         self.assertIsFalse("%apiurl%" in response_content_string)
-        # self.assertIsTrue("http://phe.nhs.uk/api" in response_content_string)
         self.assertIsFalse("%releaseid%" in response_content_string)
         self.assertIsTrue(release.uuid in response_content_string)
+
+    def test_release_html_function_returns_404_for_unknown_site_names(self, mock_file_service, mock_index_file):
+        response = release_html(HttpRequest(), 'testsitename')
+        self.assertEqual(response.status_code, 404)
+
+    def test_release_html_function_doesnt_redirect_if_no_redirects_for_path_given(self, mock_file_service,
+                                                                                  mock_index_file):
+        site_settings = create_test_site_settings()
+        site_name = site_settings.uid
+        http_host = 'phe.nhs.uk.com'
+        request = HttpRequest()
+        request.META['HTTP_HOST'] = http_host
+        request.path = 'test'
+
+        response = release_html(request, site_name)
+        self.assertEquals(response.status_code, 200)
+
+    def test_release_html_sets_cache_timeout_to_15_seconds(self, mock_file_service, mock_index_file):
+        site_settings = create_test_site_settings()
+        site_name = site_settings.uid
+        http_host = 'phe.nhs.uk.com'
+        request = HttpRequest()
+        request.META['HTTP_HOST'] = http_host
+        request.path = 'test'
+        release = create_test_release(release_date=(timezone.now() + timezone.timedelta(days=-1)))
+        release.content_status = 1
+        release.save()
+
+        response = release_html(request, site_name)
+        self.assertEquals(response['Cache-Control'], 'max-age=900')
+
+    def test_release_html_sets_api_url_to_local_if_local_in_host_name(self, mock_file_service, mock_index_file):
+        site_settings = create_test_site_settings()
+        site_name = site_settings.uid
+        http_host = 'localhost:3000'
+        request = HttpRequest()
+        request.META['HTTP_HOST'] = http_host
+        request.path = 'test'
+        release = create_test_release(release_date=(timezone.now() + timezone.timedelta(days=-1)))
+        release.content_status = 1
+        release.save()
+
+        response = release_html(request, site_name)
+        response_content_string = response.content.decode("utf-8")
+        self.assertIsTrue(http_host + '/api' in response_content_string)
 
 
 @patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
