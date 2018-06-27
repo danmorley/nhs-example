@@ -3,6 +3,8 @@ from images.models import PHEImage
 
 from .models import OneYouVariant, Experiment
 
+from pages.factories import create_test_page
+
 
 def create_test_oneyou_variant(parent_page=None, title='Test page (variant)', path="11111111", depth=0, theme=None):
     if not parent_page:

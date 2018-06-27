@@ -13,7 +13,7 @@ from .views import VarientAdminURLHelper, create, edit
 from oneYou2.factories import create_test_user
 from oneYou2.test.utils import OneYouTests
 
-from pages.factories import create_test_page, create_test_recipe_page
+from pages.factories import create_test_recipe_page
 
 TEST_POST_CONTENT = QueryDict('csrfmiddlewaretoken=0hicVc5uV4hYXDnkzJljxKKhN5obLb1eEj6L77pXEMdOoRUPcoBUpYIpyZeHTpyd&'
                               'next=/admin/experiments/oneyouvariant/&titleContact Us (describe the variant)&'
