@@ -498,7 +498,6 @@ class OneYou2Page(Page):
 
         if self.release:
             self.release = None
-
         super(OneYou2Page, self).save(*args, **kwargs)
         newest_revision = self.get_latest_revision()
 
@@ -531,18 +530,17 @@ class OneYou2Page(Page):
 
         return obj
 
-    def update_from_dict(self, obj_dict):
-        self.title = obj_dict['title']
-        self.path = obj_dict['path']
-        self.depth = obj_dict['depth']
-        self.numchild = obj_dict['numchild']
-        self.slug = obj_dict['meta']['slug']
-        self.seo_title = obj_dict['meta']['seo_title']
-        self.show_in_menus = obj_dict['meta']['show_in_menus']
-        self.search_description = obj_dict['meta']['search_description']
-        self.first_published_at = obj_dict['meta']['first_published_at']
-        self.body = json.dumps(obj_dict['body'])
-        self.theme_id = obj_dict['page_theme']['id']
+    def update_from_dict(self, obj_dict, default_excludes=None, excludes=None):
+        if not default_excludes:
+            default_excludes = ['id', 'path', 'depth', 'numchild', 'content_type_id', 'live_revision_id',
+                                'page_ptr_id', 'oneyou2page_ptr_id', 'release_id', 'live', 'locked', 'url_path']
+        if not excludes:
+            excludes = []
+
+        excludes = default_excludes + excludes
+        for key, value in obj_dict.items():
+            if key not in excludes and not key.startswith('_'):
+                setattr(self, key, value)
         return self
 
     @classmethod

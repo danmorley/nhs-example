@@ -2,6 +2,7 @@ import json
 
 from datetime import timedelta
 
+from django.core.exceptions import ValidationError
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpRequest
 from django.utils import timezone
@@ -20,7 +21,8 @@ from pages.factories import create_test_page
 from pages.models import OneYou2Page
 
 from release.factories import create_test_release, create_test_release_page
-from release.models import Release
+
+from release.models import Release, validate_in_future, query_set_to_dict
 from release.utils import get_release_object, get_latest_live_release, get_latest_release, populate_release_if_required
 from release.views import release_html
 from release.wagtail_hooks import ReleaseButtonHelper, ReleaseAdmin
@@ -431,6 +433,29 @@ class ReleasePageModelTests(OneYouTests):
 
         self.assertEqual(type(revision), type(release_page.revision))
         self.assertEqual(type(release), type(release_page.release))
+
+
+@patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
+class ReleaseModelUtilFunctionsTests(OneYouTests):
+    def test_validate_in_future_returns_nothing_for_dates_in_the_future(self, mock_file_service):
+        response = validate_in_future(timezone.now() + timezone.timedelta(days=1))
+        self.assertEqual(response, None)
+
+    def test_validate_in_future_returns_validation_error_for_dates_in_the_past(self, mock_file_service):
+        error_thrown = False
+        try:
+            validate_in_future(timezone.now() + timezone.timedelta(days=-1))
+        except ValidationError:
+            error_thrown = True
+        self.assertIsTrue(error_thrown)
+
+    def test_query_set_to_dict_returns_an_array_of_dicts_for_objects(self, mock_file_service):
+        create_test_release()
+        create_test_release(release_name='Test release 2')
+        releases = Release.objects.all()
+        dicts = query_set_to_dict(releases)
+        self.assertEqual(len(releases), len(dicts))
+        self.assertEqual(type(dicts[0]), dict)
 
 
 @patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')

@@ -7,13 +7,17 @@ from django.http import HttpRequest
 from wagtail.contrib.modeladmin.views import IndexView
 from wagtail.wagtailcore.blocks.stream_block import StreamValue
 from wagtail.wagtailcore.blocks.struct_block import StructValue
+from wagtail.wagtailcore.models import Site
+
+from home.models import SiteSettings
 
 from images.models import PHEImage
 
 from oneYou2.factories import create_test_user
 from oneYou2.test.utils import OneYouTests
 
-from pages.factories import create_test_page, create_test_theme, create_test_menu
+from pages.factories import create_test_page, create_test_theme, create_test_menu, create_test_footer,\
+    create_test_header, create_test_recipe_page
 from pages.models import OneYou2Page, Theme
 from pages.utils import get_serializable_data_for_fields, process_inlines
 from pages.wagtail_hooks import MenuAdmin, MenuButtonHelper
@@ -36,6 +40,13 @@ class OneYou2PageModelTests(OneYouTests):
         self.assertIs(page.theme.label, test_label)
         self.assertIs(page.page_theme['label'], test_label)
         self.assertIs(page.page_theme['class_name'], test_class_name)
+
+    def test_page_link_url_property(self):
+        page = create_test_page()
+        site = Site.objects.first()
+        site_name = SiteSettings.objects.get(site_id=site.id).uid
+        expected_url = '/' + site_name + page.url_path
+        self.assertEqual(page.link_url, expected_url)
 
     def test_from_dict_page_builder(self):
         """
@@ -70,25 +81,27 @@ class OneYou2PageModelTests(OneYouTests):
                            show_in_menus=True, search_description='page-description', first_published_at='yesterday')
 
         obj_dict = {'title': 'Page title 2', 'path': '00002', 'depth': '1', 'numchild': '1',
-                    'body': '', 'page_theme': {'id': 2}, 'live': True,
-                    'meta': {'slug': 'page-path2', 'seo_title': 'page-name2',
-                             'show_in_menus': True, 'search_description': 'page-description2',
-                             'first_published_at': 'today'}
+                    'body': '', 'live': True,
+                    'slug': 'page-path2', 'seo_title': 'page-name2',
+                    'show_in_menus': True, 'search_description': 'page-description2',
+                    'first_published_at': 'today'
                     }
 
-        page = page.update_from_dict(obj_dict)
+        default_excludes = ['id', 'content_type_id', 'live_revision_id',
+                            'page_ptr_id', 'oneyou2page_ptr_id', 'release_id', 'live', 'locked']
+
+        page = page.update_from_dict(obj_dict, default_excludes=default_excludes)
 
         self.assertIs(page.title, obj_dict['title'])
         self.assertIs(page.path, obj_dict['path'])
         self.assertIs(page.depth, obj_dict['depth'])
         self.assertIs(page.numchild, obj_dict['numchild'])
-        self.assertIs(page.theme_id, obj_dict['page_theme']['id'])
         self.assertIs(page.live, obj_dict['live'])
-        self.assertIs(page.slug, obj_dict['meta']['slug'])
-        self.assertIs(page.seo_title, obj_dict['meta']['seo_title'])
-        self.assertIs(page.show_in_menus, obj_dict['meta']['show_in_menus'])
-        self.assertIs(page.search_description, obj_dict['meta']['search_description'])
-        self.assertIs(page.first_published_at, obj_dict['meta']['first_published_at'])
+        self.assertIs(page.slug, obj_dict['slug'])
+        self.assertIs(page.seo_title, obj_dict['seo_title'])
+        self.assertIs(page.show_in_menus, obj_dict['show_in_menus'])
+        self.assertIs(page.search_description, obj_dict['search_description'])
+        self.assertIs(page.first_published_at, obj_dict['first_published_at'])
 
     @patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
     def test_publishing_page_to_release_links_new_revision_to_release(self, mock_file_service):
@@ -176,8 +189,56 @@ class OneYou2PageModelTests(OneYouTests):
         self.assertIsTrue('shelf_id' in body_dict[1]['content'])
         self.assertEqual(body_dict[1]['content']['shelf_id'], shelf.shelf_id)
 
+    def test_page_preview_modes_function_returns_the_correct_options(self):
+        page = create_test_page()
+        self.assertEquals(page.preview_modes, OneYou2Page.DEFAULT_PREVIEW_MODES)
+
+    def test_page_default_preview_mode_returns_the_correct_option(self):
+        page = create_test_page()
+        default_preview_mode = 'react'
+        self.assertEquals(page.default_preview_mode, default_preview_mode)
+
+
+class RecipePageModelTests(OneYouTests):
+    def test_page_can_be_created(self):
+        page = create_test_recipe_page()
+        expected_title = 'Test Recipe page'
+        self.assertEquals(page.title, expected_title)
+        self.assertNotEquals(page.id, None)
+
+    @patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
+    def test_publishing_recipe_page_to_release_links_new_revision_to_release(self, mock_file_service):
+        page = create_test_recipe_page()
+
+        initial_revision = page.get_latest_revision()
+
+        release = create_test_release()
+
+        page.release = release
+        page.title = 'Updated page'
+        page.save_revision().publish()
+        page.save()
+
+        second_revision = page.get_latest_revision()
+
+        initial_revision_in_release = False
+        second_revision_in_release = False
+
+        content = json.loads(release.content.first().content)
+        if content[str(page.id)]['title'] == initial_revision.as_page_object().title:
+            initial_revision_in_release = True
+        if content[str(page.id)]['title'] == second_revision.as_page_object().title:
+            second_revision_in_release = True
+
+        self.assertTrue(second_revision_in_release)
+        self.assertIsFalse(initial_revision_in_release)
+
 
 class ThemeModelTests(OneYouTests):
+    def test_theme_string_method(self):
+        label = 'test_theme_label'
+        theme = create_test_theme(label=label)
+        self.assertEqual(theme.__str__(), label)
 
     def test_to_dict(self):
         """
@@ -189,6 +250,27 @@ class ThemeModelTests(OneYouTests):
         theme_dict = theme.to_dict()
         self.assertIs(theme_dict['label'], test_label)
         self.assertIs(theme_dict['class_name'], test_class_name)
+
+
+class MenuModelTests(OneYouTests):
+    def test_menu_string_method(self):
+        label = 'test_menu_label'
+        menu = create_test_menu(label=label)
+        self.assertEqual(menu.__str__(), label)
+
+
+class FooterModelTests(OneYouTests):
+    def test_footer_string_method(self):
+        label = 'test_footer_label'
+        footer = create_test_footer(label=label)
+        self.assertEqual(footer.__str__(), label)
+
+
+class HeaderModelTests(OneYouTests):
+    def test_header_string_method(self):
+        label = 'test_header_label'
+        header = create_test_header(label=label)
+        self.assertEqual(header.__str__(), label)
 
 
 class PagesUtilsTests(OneYouTests):
