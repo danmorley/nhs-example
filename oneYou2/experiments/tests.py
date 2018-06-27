@@ -1,8 +1,12 @@
+from datetime import timedelta
+
 from django.contrib.auth.models import User
 from django.contrib.messages.storage.fallback import FallbackStorage
 from django.core.exceptions import PermissionDenied
 from django.http import HttpRequest, Http404, QueryDict
+from django.utils import timezone
 
+from .factories import create_test_oneyou_variant, create_test_experiment
 from .models import OneYouVariant
 from .views import VarientAdminURLHelper, create, edit
 
@@ -138,3 +142,54 @@ class CreateExperimentsViewsTests(OneYouTests):
             permission_error_thrown = True
         self.assertIsTrue(permission_error_thrown)
 
+
+class EditExperimentsViewsTests(OneYouTests):
+
+    def test_edit_view_get(self):
+        request = HttpRequest()
+        page = create_test_oneyou_variant()
+        user = User.objects.first()
+        request.user = user
+        response = edit(request, page.id)
+        self.assertEquals(response.status_code, 200)
+
+    def test_create_view_post(self):
+        page = create_test_oneyou_variant()
+        request = HttpRequest()
+        setattr(request, 'session', 'session')
+        messages = FallbackStorage(request)
+        setattr(request, '_messages', messages)
+        user = User.objects.first()
+        request.user = user
+        request.method = 'POST'
+        request.POST = TEST_POST_CONTENT
+        response = edit(request, page.id)
+        self.assertEquals(response.status_code, 200)
+
+    def test_create_view_locks_live_experiments(self):
+        page = create_test_oneyou_variant()
+        experiment = create_test_experiment(start_date=timezone.now() + timedelta(days=-1),
+                                            end_date=timezone.now() + timedelta(days=1))
+        experiment.variants.add(page.id)
+        request = HttpRequest()
+        setattr(request, 'session', 'session')
+        messages = FallbackStorage(request)
+        setattr(request, '_messages', messages)
+        user = User.objects.first()
+        request.user = user
+        request.method = 'POST'
+        request.POST = TEST_POST_CONTENT
+        response = edit(request, page.id)
+        self.assertEquals(response.status_code, 200)
+
+    def test_edit_view_correctly_checks_permissions(self):
+        user = create_test_user()
+        page = create_test_oneyou_variant()
+        request = HttpRequest()
+        request.user = user
+        permission_error_thrown = False
+        try:
+            edit(request, page.id)
+        except PermissionDenied:
+            permission_error_thrown = True
+        self.assertIsTrue(permission_error_thrown)

@@ -19,6 +19,8 @@ from wagtail.wagtailadmin.views.pages import get_valid_next_url_from_request
 from wagtail.wagtailcore import hooks
 from wagtail.wagtailcore.models import Page
 
+from .models import OneYouVariant
+
 
 class VarientAdminURLHelper(PageAdminURLHelper):
     def get_action_url(self, action, *args, **kwargs):
