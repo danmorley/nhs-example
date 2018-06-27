@@ -60,7 +60,6 @@ class StandardPageLayout extends Component {
   renderPage(content, pageTheme, pageStyles, site, _page) {
     let { menu, header, footer } = site;
     let theme = (pageTheme && pageTheme.class_name) || 'oneyou';
-    //let useShareButton = page ? page.meta.use_share_button : false;
 
     return (
       <div className={`page-wrapper ${theme}`}>
