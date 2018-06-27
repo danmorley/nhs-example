@@ -7,6 +7,7 @@ import './icon-card-panel.css';
 import Panel from './Panel';
 import ImageUtils from './ImageUtils';
 import Image from '../Image';
+import CtaLinks from '../shared/CtaLinks';
 
 /**
  *  IconCard panel component displaying a panel in the form of a heading
@@ -209,6 +210,7 @@ class IconCardPanel extends Component {
     return (
       <div className={`${classNamePrefix}__text`}>
         <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
+        <CtaLinks cta={content.cta} variant="button" />
       </div>
     );
   }
