@@ -15,8 +15,11 @@ class ResponsiveBackgroundImage extends Component {
   }
 
   setImage() {
-    const style = ImageUtils.backgroundImageStyle(this.props.image.image, ImageUtils.placeholderBackgroundImage());
-    this.setState({ backgroundImageStyle: style });
+    const { image } = this.props;
+    if (image && image.image) {
+      const style = ImageUtils.backgroundImageStyle(this.props.image.image, ImageUtils.placeholderBackgroundImage());
+      this.setState({ backgroundImageStyle: style });
+    }
   }
 
   componentDidMount() {
@@ -39,9 +42,13 @@ class ResponsiveBackgroundImage extends Component {
   render() {
     const { image, variant, className, tagName } = this.props;
     const TagName = tagName;
-    const imageVariant = ImageUtils.isValid(image.image) ? variant || 'image--'+image.meta_variant || 'auto' : '';
-    const imageSet = ImageUtils.isValid(image.image) ? 'image-set' : 'image-not-set';
-    
+    let imageVariant = null, imageSet = null;
+
+    if (image && image.image) {
+      imageVariant = ImageUtils.isValid(image.image) ? variant || 'image--' + image.meta_variant || 'auto' : '';
+      imageSet = ImageUtils.isValid(image.image) ? 'image-set' : 'image-not-set';
+    }
+
     return (
       <TagName
         className={`${className} ${imageSet} ${imageVariant}`}
