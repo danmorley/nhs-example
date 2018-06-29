@@ -18,10 +18,10 @@ class StandardPageLayout extends Component {
       let { page_theme, page_styles } = page;
       const content = this.props.children;
       const meta = this.pageMetaData(page, site);
-
+    
       return (
         <DocumentMeta {...meta}>
-          {this.renderPage(content, page_theme, page_styles, site, page)}
+          {this.renderPage(content, page_theme, page_styles, site, page, meta.breadcrumbs)}
         </DocumentMeta>
       );
 
@@ -57,14 +57,14 @@ class StandardPageLayout extends Component {
     );
   }
 
-  renderPage(content, pageTheme, pageStyles, site, _page) {
+  renderPage(content, pageTheme, pageStyles, site, _page, breadcrumbs) {
     let { menu, header, footer } = site;
     let theme = (pageTheme && pageTheme.class_name) || 'oneyou';
 
     return (
       <div className={`page-wrapper ${theme}`}>
         <PageStyles content={pageStyles} />
-        <PageHeader navItems={menu.items} header={header}/>
+        <PageHeader navItems={menu.items} header={header} breadcrumbs={breadcrumbs}/>
         <div className="page-content-wrapper">
           <div id="page-content" className="page-content">
             {content}
@@ -77,9 +77,10 @@ class StandardPageLayout extends Component {
 
   pageMetaData(page, site) {
     const documentTitle = `${site.site_name} - ${page.meta.seo_title || page.title}`;
-
+    
     return {
       title: documentTitle,
+      breadcrumbs: page.meta.breadcrumbs,
       description: page.meta.search_description,
       meta: {
         property: {

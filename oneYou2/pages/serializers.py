@@ -24,6 +24,8 @@ class OneYouPageSerializer(serializers.ModelSerializer):
         for shelf in serialized_data['body']:
             determine_image_rendtions_for_shared_content_shelves(shelf)
 
+        serialized_data['meta']['breadcrumbs'] = data.breadcrumbs
+
         return serialized_data
 
     class Meta:
@@ -114,6 +116,8 @@ class RecipePageSerializer(serializers.ModelSerializer):
                 'desktop': renditions['banner_shelf/None/None/desktop'],
                 'mobile': renditions['banner_shelf/None/None/mobile']
             }
+
+        serialized_data['meta']['breadcrumbs'] = data.breadcrumbs
 
         return serialized_data
 

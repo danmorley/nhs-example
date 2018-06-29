@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Swipeable from 'react-swipeable';
 import SiteNav from '../header-nav/SiteNav';
+import Breadcrumb from './Breadcrumb';
 import Text from '../Text';
 import { Link } from 'react-router-dom';
 import './page-header.css';
@@ -10,7 +11,7 @@ import './page-header.css';
 class PageHeader extends Component {
   constructor (props) {
     super(props);
-    this.state = { navHeight: "0" }
+    this.state = { navHeight: "0" };
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -39,11 +40,12 @@ class PageHeader extends Component {
   }
 
   render() {
-    let { navItems, header } = this.props;
-
+    let { navItems, header, breadcrumbs } = this.props;
+    
     return (
       <div ref={(divElement) => this.divElement = divElement} className="container-fluid page-header">
-        <div className="container">
+        <div className= "container">
+          <Breadcrumb breadcrumbs={breadcrumbs}/>
           <div className="page-header__row">
             <div className="page-header__info">
               <button ref={(elem) => this.setBurgerElem(elem)} className="page-header__burger" onClick={this.handleClick}>
@@ -79,7 +81,8 @@ class PageHeader extends Component {
 
 PageHeader.propTypes = {
   navItems: PropTypes.object.isRequired,
-  header: PropTypes.object.isRequired
+  header: PropTypes.object.isRequired,
+  breadcrumbs: PropTypes.object.isRequired
 }
 
 export default PageHeader;
