@@ -75,10 +75,6 @@
 
   @include heading-h1(oneyou);
   margin: 0 auto;
-  
-  @include media-breakpoint-up(lg) {
-    padding-top: 1rem;
-  }
 
   span {
     display: inline-block;

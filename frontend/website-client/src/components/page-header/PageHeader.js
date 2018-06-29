@@ -19,7 +19,7 @@ class PageHeader extends Component {
     this.setState({
       navHeight: this.divElement.clientHeight
     });
-    document.querySelector('.page-wrapper').style.paddingTop = (this.divElement.clientHeight +'px');
+    document.querySelector('.page-wrapper').style.paddingTop = (this.divElement.clientHeight -26 +'px');
   }
 
   componentDidMount() {
