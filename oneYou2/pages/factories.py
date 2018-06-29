@@ -80,6 +80,11 @@ def create_test_recipe_page(title='Test Recipe page', path="1111", depth=0, them
     page = RecipePage(title=title, path=path, depth=depth, theme=theme)
     root_page.add_child(instance=page)
 
+    page.save_revision().publish()
+    page.save()
+
+    return page
+
 
 def create_test_child_page(parent, title='Test child page', path="11111111", depth=1, theme=None):
     if not theme:
