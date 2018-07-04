@@ -6,6 +6,12 @@
   overflow: hidden;
 }
 
+.nhsuk-cookie-banner {
+  position: absolute;
+  width: 100%;
+  z-index: 10000;
+}
+
 .page-wrapper {
   margin-left: auto;
   margin-right: auto;
