@@ -207,6 +207,7 @@ CORS_ORIGIN_REGEX_WHITELIST = (
     r'^(https?://)?([\w|-]+\.)+nhschoices\.net$',
     r'^(https?://)?([\w|-]+\.)+nhs\.uk$',
     r'^(http://)?localhost:(\d+)$',
+    r'^(http://)?vbhost:(\d+)$',
     )
 
 WAGTAILIMAGES_IMAGE_MODEL = 'images.PHEImage'
