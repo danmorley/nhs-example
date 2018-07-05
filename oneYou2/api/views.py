@@ -132,6 +132,7 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug=
 @require_safe
 def home_page_detail(request, site_identifier, release_uuid):
     """Because the home page lives on a hardcoded / url"""
+    # NOT SURE THIS IS USED ANYMORE
     return page_detail(request, site_identifier, release_uuid, page_slug="home")
 
 

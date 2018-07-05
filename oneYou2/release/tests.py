@@ -474,7 +474,7 @@ class ReleaseUtilsTests(OneYouTests):
         A published release is one whose release_time is in the past.
         """
         release1_name = "Next release"
-        release1_date = timezone.now() + timedelta(days=+2)
+        release1_date = None
         release1 = create_test_release(release_name=release1_name, release_date=release1_date)
 
         release2_name = "Future release 1"
@@ -482,7 +482,7 @@ class ReleaseUtilsTests(OneYouTests):
         release2 = create_test_release(release_name=release2_name, release_date=release2_date)
 
         release3_name = "Future release 2"
-        release3_date = None
+        release3_date = timezone.now() + timedelta(days=+2)
         release3 = create_test_release(release_name=release3_name, release_date=release3_date)
 
         latest_release = get_latest_release(release1.site_id)
@@ -491,7 +491,7 @@ class ReleaseUtilsTests(OneYouTests):
         self.assertIsFalse(release2.release_date_has_passed())
         self.assertIsFalse(release3.release_date_has_passed())
 
-        self.assertEqual(latest_release.id, release1.id)
+        self.assertEqual(latest_release.id, release3.id)
 
     def test_get_latest_release_returns_the_newest_release_with_no_date(self, mock_file_service):
         """
@@ -510,7 +510,7 @@ class ReleaseUtilsTests(OneYouTests):
         self.assertIsFalse(release1.release_date_has_passed())
         self.assertIsFalse(release2.release_date_has_passed())
 
-        self.assertEqual(latest_release.id, release1.id)
+        self.assertEqual(latest_release.id, release2.id)
 
 
 @patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')

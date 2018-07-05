@@ -1,3 +1,7 @@
+import factory
+from factory import fuzzy
+
+from pages.factories import SiteFactory
 from .models import Release, ReleaseContent, ReleasePage
 
 
@@ -17,3 +21,11 @@ def create_test_release_page(release, page):
     release_page = ReleasePage(release=release, revision=page)
     release_page.save()
     return release_page
+
+
+class ReleaseFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Release
+
+    release_name = fuzzy.FuzzyText()
+    site = factory.SubFactory(SiteFactory)
