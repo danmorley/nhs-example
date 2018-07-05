@@ -75,33 +75,33 @@ class CTABlock(blocks.StructBlock):
             (name, self.child_blocks[name].get_api_representation(val, context=context))
             for name, val in value.items()
         ])
+        image_fields = []
         if 'image' in result:
-            image_field = 'image'
-        elif 'background_image' in result:
-            image_field = 'background_image'
-        else:
-            image_field = None
+            image_fields.append('image')
+        if 'background_image' in result:
+            image_fields.append('background_image')
+            
+        for image_field in image_fields:
+            if image_field in result:
+                if result[image_field].get('renditions'):
+                    image_meta = value.get('image_meta')
+                    mobile_rendition = None
+                    desktop_rendition = None
 
-        if image_field in result:
-            if result[image_field].get('renditions'):
-                image_meta = value.get('image_meta')
-                mobile_rendition = None
-                desktop_rendition = None
+                    if image_meta and result['mobile_use_renditions']:
+                        mobile_rendition = result[image_field]['renditions'].get(image_meta + '/mobile')
+                    if not mobile_rendition:
+                        mobile_rendition = result[image_field]['renditions']['original']
 
-                if image_meta and result['mobile_use_renditions']:
-                    mobile_rendition = result[image_field]['renditions'].get(image_meta + '/mobile')
-                if not mobile_rendition:
-                    mobile_rendition = result[image_field]['renditions']['original']
+                    if image_meta and result['desktop_use_renditions']:
+                        desktop_rendition = result[image_field]['renditions'].get(image_meta + '/desktop')
+                    if not desktop_rendition:
+                        desktop_rendition = result[image_field]['renditions']['original']
 
-                if image_meta and result['desktop_use_renditions']:
-                    desktop_rendition = result[image_field]['renditions'].get(image_meta + '/desktop')
-                if not desktop_rendition:
-                    desktop_rendition = result[image_field]['renditions']['original']
-
-                result[image_field]['renditions'] = {
-                    'mobile': mobile_rendition,
-                    'desktop': desktop_rendition
-                }
+                    result[image_field]['renditions'] = {
+                        'mobile': mobile_rendition,
+                        'desktop': desktop_rendition
+                    }
 
         if 'cta' in result:
             cta_links = []
