@@ -77,6 +77,12 @@ VIDEO_LAYOUTS = (
     ('text_on_top', 'Video Bottom Text Top'),
 )
 
+PAGE_HEADING_LAYOUTS = (
+    ('shelf-image-position--bottom-left', 'Image bottom left'),
+    ('shelf-image-position--bottom-right', 'Image bottom right'),
+    ('shelf-image-position--top-right', 'Image top right'),
+)
+
 CONTENT_STATUS_PENDING = 0
 
 logger = logging.getLogger('wagtail.core')
@@ -111,14 +117,22 @@ class PageHeading(CTABlock):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     background_image = BlobImageChooserBlock(required=False)
+    image = BlobImageChooserBlock()
     shelf_id = IDBlock(required=False,
                        label="ID",
                        help_text="Not displayed in the front end",
                        classname='dct-meta-field')
+
     meta_gradient = blocks.BooleanBlock(label='Green gradient',
                                         required=False,
                                         default=False,
                                         classname='dct-meta-field')
+
+    meta_layout = blocks.ChoiceBlock(choices=PAGE_HEADING_LAYOUTS,
+                                     label="Variant",
+                                     classname='dct-meta-field',
+                                     required=False,
+                                     default=False)
 
     class Meta:
         form_classname = 'dct-page-heading-panel dct-meta-panel'
