@@ -144,35 +144,6 @@ $shelf-padding-extra: 2em;
     text-align: center;
     line-height: 1.4em;
   }
-}
-
-.shelf__container {
-  
-  &.image-position--top-right {
-    img {
-      position: absolute;
-      top: 0;
-      right: 0;
-    }
-  }
-  
-  &.image-position--bottom-left {
-    img {
-      position: relative;
-      float: left;
-      bottom: 0;
-      left: 0;
-    }
-  }
-  
-  &.image-position--bottom-right {
-    img {
-      position: relative;
-      float: right;
-      bottom: 0;
-      left: 0;
-    }
-  }
 } 
 
 //theming

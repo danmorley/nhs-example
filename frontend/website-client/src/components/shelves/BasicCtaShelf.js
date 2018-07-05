@@ -57,8 +57,8 @@ class BasicCtaShelf extends Component {
     this.setImage();
   }
 
-  renderImage(image) {
-    return (<Image image={image} />);
+  renderImage(image, classname) {
+    return (<Image image={image} class={classname} />);
   }
 
   renderHeadingBody(content, headingTagName) {
@@ -183,7 +183,7 @@ class BasicCtaShelf extends Component {
     else if (metaLayout === 'page_header') {
       return (
         <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
-          <div className={`shelf__container container-fluid image-position--bottom-right shelf__container-gradient--${gradient}`} style={shelfStyle}>
+          <div className={`shelf__container container-fluid shelf__container-gradient--${gradient}`} style={shelfStyle}>
             <div className="container">
               <div className="row">
                 <div className="shelf__col col-10 col-sm-8 col-md-7">
@@ -191,7 +191,7 @@ class BasicCtaShelf extends Component {
                   {this.renderCta(content.cta)}
                 </div>
               </div>
-              <img className="page_header__image" src="../../assets/images/app-store.png" />
+              {this.renderImage(content.image, `${classNamePrefix}__image`)}
             </div>
           </div>
         </Shelf>
