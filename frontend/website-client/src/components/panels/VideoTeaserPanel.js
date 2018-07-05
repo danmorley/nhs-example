@@ -68,7 +68,7 @@ class VideoTeaserPanel extends Component {
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
         <div className={`${classNamePrefix}__image`} style={backgroundTeaserImage}>
-          <VideoModal video={content.video}>
+          <VideoModal video={content.video} host={content.host}>
           </VideoModal>
         </div>
         <div className={`${classNamePrefix}__info`}>
@@ -84,6 +84,7 @@ class VideoTeaserPanel extends Component {
 
   renderTextTop(content, classNamePrefix, backgroundTeaserImage) {
     classNamePrefix = classNamePrefix + '--' + TEXT_ON_TOP;
+
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
         <div className={`${classNamePrefix}__info`}>
@@ -94,7 +95,7 @@ class VideoTeaserPanel extends Component {
           </div>
         </div>
         <div className={`${classNamePrefix}__image`} style={backgroundTeaserImage}>
-          <VideoModal video={content.video}>
+          <VideoModal video={content.video} host={content.host}>
           </VideoModal>
         </div>
       </Panel>
