@@ -80,7 +80,7 @@ class CTABlock(blocks.StructBlock):
             image_fields.append('image')
         if 'background_image' in result:
             image_fields.append('background_image')
-            
+
         for image_field in image_fields:
             if image_field in result:
                 if result[image_field].get('renditions'):
