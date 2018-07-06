@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 class WirewaxVideo extends Component {
   render() {
     let { video, ...rest } = this.props;
-    console.log(10)
     if (!video) return null;
 
     return (
