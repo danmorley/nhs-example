@@ -179,23 +179,6 @@ class BasicCtaShelf extends Component {
           </div>
         </Shelf>
       );
-    }
-    else if (metaLayout === 'page_header') {
-      return (
-        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
-          <div className={`shelf__container container-fluid shelf__container-gradient--${gradient}`} style={shelfStyle}>
-            <div className="container">
-              <div className="row">
-                <div className="shelf__col col-10 col-sm-8 col-md-7">
-                  {this.renderHeadingBody(content, headingTagName)}
-                  {this.renderCta(content.cta)}
-                </div>
-              </div>
-              {this.renderImage(content.image, `${classNamePrefix}__image`)}
-            </div>
-          </div>
-        </Shelf>
-      );
     } else if (metaLayout === 'section_heading') {
       return (
         <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
@@ -251,12 +234,5 @@ CmsComponentRegistry.register('banner_shelf', BasicCtaShelf, 'banner-shelf', 'ba
 // Layouts: cta_on_right, cta_on_left
 // Variants: promo
 CmsComponentRegistry.register('promo_shelf', BasicCtaShelf, 'promo-shelf', 'promo');
-
-//
-// Page Heading Shelf - used as the page heading on sub-pages, but also on the home page
-//
-// Layouts: page_header
-// Variants: home-page, sub-page
-CmsComponentRegistry.register('page_heading_shelf', BasicCtaShelf, 'page-heading-shelf', 'home-page', 'page_header');
 
 export default BasicCtaShelf;

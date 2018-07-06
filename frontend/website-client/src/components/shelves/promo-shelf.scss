@@ -123,17 +123,28 @@ $shelf-padding-extra: 2em;
 
 .page-heading-shelf__image {
   
-  .image-position--top-right & {
+  
+  height: 30px;
+
+  @include media-breakpoint-up(sm) {
+    height: 50px;
+  }
+  
+  @include media-breakpoint-up(md) {
+    height: auto;
+  }
+  
+  .shelf-image-position--top-right & {
     position: absolute;
     top: 0;
     right: 0;
   }
   
-  .image-position--bottom-left & {
+  .shelf-image-position--bottom-left & {
     margin-top: 1em;
   }
   
-  .image-position--bottom-right &{
+  .shelf-image-position--bottom-right &{
     margin-top: 1em;
     float: right;
     
