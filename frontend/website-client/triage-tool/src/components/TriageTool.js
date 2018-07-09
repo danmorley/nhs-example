@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import { TriageToolContainer } from "./styles"
 
 class TriageTool extends Component {
   constructor(props) {
@@ -12,15 +13,15 @@ class TriageTool extends Component {
 
   render() {
     return (
-      <div>
+      <TriageToolContainer>
         This is the tool
-      </div>
+      </TriageToolContainer>
     )
   }
 }
 
 TriageTool.propTypes = {
   config: PropTypes.object
-};
+}
 
 export default TriageTool
