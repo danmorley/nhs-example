@@ -1,0 +1,33 @@
+{
+  "name": "triage-tool",
+  "version": "1.0.0",
+  "description": "A tool to help smokers get advice on the best way to quit",
+  "main": "dist/main.js",
+  "scripts": {
+    "start": "npx webpack-serve --config ./webpack.config.js --mode development --open",
+    "build": "npx webpack --config ./webpack.config.js --mode production",
+    "test": "eslint src && jest"
+  },
+  "author": "NHS Digital",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-jest": "^23.2.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "eslint": "^5.1.0",
+    "jest": "^23.3.0",
+    "jest-cli": "^23.3.0",
+    "react-test-renderer": "^16.4.1",
+    "webpack": "^4.15.1",
+    "webpack-command": "^0.4.0",
+    "webpack-serve": "^1.0.4"
+  },
+  "dependencies": {
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "styled-components": "^3.3.3"
+  }
+}
