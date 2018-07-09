@@ -241,6 +241,15 @@ class InlineScriptPanel(blocks.StructBlock):
         form_classname = 'dct-inline-script-panel'
 
 
+class CtaPanel(blocks.StructBlock):
+    heading = blocks.CharBlock(required=False)
+    body = blocks.RichTextBlock(required=False)
+    cta = blocks.StreamBlock([
+        ('simple_cta_link', SimpleCtaLinkBlock())
+    ], icon='arrow-left', label='CTA links', required=False)
+    shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
+
+
 GRID_PANELS = [
     ('oneyou1_teaser', BackwardsCompatibleContent(label="OneYou1 teaser", icon="folder-inverse")),
     ('video_teaser', VideoTemplate(icon="media")),
@@ -248,6 +257,7 @@ GRID_PANELS = [
     ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
     ('information_panel', InformationPanel(target_model="shelves.AppTeaser", icon="image")),
     ('icon_card_panel', IconCardPanel(icon="snippet")),
+    ('cta_panel', CtaPanel(icon='plus')),
     ('inline_script_panel', InlineScriptPanel(icon="code"))
 ]
 
@@ -301,7 +311,6 @@ class Carousel(blocks.StructBlock):
         ('video_teaser', VideoTemplate(icon="media")),
         ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
         ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
-        ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
     ], icon='arrow-left', label='Items', required=False)
     shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
 
@@ -315,6 +324,7 @@ class PanelCarousel(blocks.StructBlock):
         ('video_teaser', VideoTemplate(icon="media")),
         ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
         ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
+        ('cta_panel', CtaPanel(icon='plus')),
     ], icon='arrow-left', label='Items', required=False)
     shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
 
