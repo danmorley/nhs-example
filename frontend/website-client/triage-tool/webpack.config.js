@@ -7,5 +7,6 @@ module.exports = {
         use: ["babel-loader"]
       }
     ]
-  }
+  },
+  mode: process.env.NODE_ENV || "development"
 }
