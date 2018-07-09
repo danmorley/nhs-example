@@ -64,13 +64,6 @@ def release_html(request, site_name):
     substituted_index = substituted_index.replace("/manifest", "/{}/public/manifest".format(site_name))
     substituted_index = substituted_index.replace("/favicon", "/{}/public/{}/favicon".format(site_name, frontend_id))
 
-    if settings.ENV == 'dev' or settings.ENV == 'staging':
-        substituted_index = substituted_index.replace("%ENABLE_GOOGLE_ANALYTICS_ON_TEST_ENVS%",
-                                                      '<script type="text/javascript">enableGoogleAnalytics();'
-                                                      ' console.log("Should not appear on live!");</script>')
-    else:
-        substituted_index = substituted_index.replace("%ENABLE_GOOGLE_ANALYTICS_ON_TEST_ENVS%", "")
-
     host = request.META['HTTP_HOST']
     if settings.CONTENT_STORE_ENDPOINT:
         content_store_endpoint = settings.CONTENT_STORE_ENDPOINT
