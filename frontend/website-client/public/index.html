@@ -22,7 +22,6 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    %ENABLE_GOOGLE_ANALYTICS_ON_TEST_ENVS%
     <title></title>
     <style>
       .center-center {
@@ -146,6 +145,7 @@
       }
 
       function enableWebtrends() {
+        console.log('Enabling webtrends');
         window.webtrendsAsyncInit = function() {
           var dcs = new Webtrends.dcs().init( {
             dcsid:"dcss9yzisf9xjyg74mgbihg8p_8d2u",
