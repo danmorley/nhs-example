@@ -8,11 +8,6 @@
     "build": "npx webpack --config ./webpack.config.js --mode production",
     "test": "eslint src && jest"
   },
-  "jest": {
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ]
-  },
   "author": "NHS Digital",
   "license": "MIT",
   "devDependencies": {
