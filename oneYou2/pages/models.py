@@ -77,6 +77,13 @@ VIDEO_LAYOUTS = (
     ('text_on_top', 'Video Bottom Text Top'),
 )
 
+BRIGHTCOVE_OPTION = ('brightcove', 'Brightcove')
+WIREWAX_OPTION = ('wirewax', 'Wirewax')
+VIDEO_HOSTS = (
+    BRIGHTCOVE_OPTION,
+    WIREWAX_OPTION,
+)
+
 CONTENT_STATUS_PENDING = 0
 
 logger = logging.getLogger('wagtail.core')
@@ -163,6 +170,7 @@ class FindOutMoreDropDown(CTABlock):
 
 
 class VideoTemplate(CTABlock):
+    host = blocks.ChoiceBlock(choices=VIDEO_HOSTS, label="Host", default=BRIGHTCOVE_OPTION)
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     image = BlobImageChooserBlock(help_text="Click this image plays the video")

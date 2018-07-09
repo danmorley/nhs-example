@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import PureModal from 'react-pure-modal';
 import BrightcoveVideo from './BrightcoveVideo';
+import WirewaxVideo from './WirewaxVideo';
 import 'react-pure-modal/dist/react-pure-modal.min.css';
 import './video-modal.css';
+
+const BRIGHTCOVE_HOST = 'brightcove';
+const WIREWAX_HOST = 'wirewax';
 
 class VideoModal extends Component {
   constructor(props) {
@@ -19,9 +23,15 @@ class VideoModal extends Component {
   handleClick = () => this.setState({isShowingModal: true})
   handleClose = () => this.setState({isShowingModal: false})
 
-  renderVideo(video) {
+  renderVideo(video, host) {
     if (!video) return null;
-    return (<BrightcoveVideo video={video} />);
+    if (host === BRIGHTCOVE_HOST) {
+      return (<BrightcoveVideo video={video} />);
+    } else if (host === WIREWAX_HOST) {
+      return (<WirewaxVideo video={video} />);
+    } else {
+      return null;
+    }
   }
 
   render() {
@@ -38,7 +48,7 @@ class VideoModal extends Component {
         replace={false}
         ref="modal"
       >
-        {this.renderVideo(this.props.video)}
+        {this.renderVideo(this.props.video, this.props.host)}
       </PureModal>
     ];
   }
@@ -46,7 +56,8 @@ class VideoModal extends Component {
 
 VideoModal.propTypes = {
   video: PropTypes.string.isRequired,
-  variant: PropTypes.string
+  variant: PropTypes.string,
+  host: PropTypes.string
 };
 
 export default VideoModal;
