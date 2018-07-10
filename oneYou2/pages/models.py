@@ -209,6 +209,11 @@ class ImageTeaserTemplate(CTABlock):
             ('desktop-image-left', 'Left'),
         ],
         default='desktop-image-default', label='Desktop Image Position', classname='dct-meta-field')
+    meta_cta_variant = blocks.ChoiceBlock(choices=[
+            ('cta-link', 'Link'),
+            ('cta-button', 'Button'),
+        ],
+        default='cta-link', label='CTA Style', classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-panel-image-teaser dct-meta-panel'
