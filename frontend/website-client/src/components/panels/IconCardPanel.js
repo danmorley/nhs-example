@@ -225,9 +225,9 @@ class IconCardPanel extends Component {
 IconCardPanel.propTypes = {
   content: PropTypes.object.isRequired,
   classNamePrefix: PropTypes.string.isRequired,
-  variant: PropTypes.object,
-  layout: PropTypes.object,
-  id: PropTypes.object
+  variant: PropTypes.string,
+  layout: PropTypes.string,
+  id: PropTypes.string
 };
 
 CmsComponentRegistry.register('icon_card_panel', IconCardPanel, 'icon-card-panel');

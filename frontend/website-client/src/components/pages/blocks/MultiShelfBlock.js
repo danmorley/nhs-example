@@ -51,7 +51,7 @@ class MultiShelfBlock extends Component {
 }
 
 MultiShelfBlock.propTypes = {
-  body: PropTypes.object.isRequired
+  body: PropTypes.array.isRequired
 }
 
 export default MultiShelfBlock;

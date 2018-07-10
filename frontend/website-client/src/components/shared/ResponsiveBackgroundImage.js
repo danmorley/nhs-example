@@ -66,7 +66,7 @@ ResponsiveBackgroundImage.defaultProps = {
 
 ResponsiveBackgroundImage.propTypes = {
   image: PropTypes.object.isRequired,   // API representation of ImageBlock.
-  variant: PropTypes.string.isRequired, // Expect 'contain', 'cover',or 'parent'.
+  variant: PropTypes.string,            // Expect 'contain', 'cover', or 'parent'.
   className: PropTypes.string,          // Any other classes to add to the container element.
   tagName: PropTypes.string             // HTML tag for the container element.
 };

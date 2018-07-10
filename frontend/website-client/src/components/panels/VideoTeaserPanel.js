@@ -29,8 +29,8 @@ import VideoModal from '../VideoModal';
  *  }
  */
 
- const TEXT_ON_RIGHT = 'text_on_right'
- const TEXT_ON_TOP = 'text_on_top'
+const TEXT_ON_RIGHT = 'text_on_right'
+const TEXT_ON_TOP = 'text_on_top'
 
 class VideoTeaserPanel extends Component {
   constructor(props) {
@@ -107,10 +107,10 @@ class VideoTeaserPanel extends Component {
     const metaLayout = content.meta_layout || layout;
 
     switch(metaLayout) {
-      case TEXT_ON_TOP:
-        return this.renderTextTop(content, classNamePrefix, backgroundTeaserImage);
-      default:
-        return this.renderTextRight(content, classNamePrefix, backgroundTeaserImage);
+    case TEXT_ON_TOP:
+      return this.renderTextTop(content, classNamePrefix, backgroundTeaserImage);
+    default:
+      return this.renderTextRight(content, classNamePrefix, backgroundTeaserImage);
     }
   }
 }

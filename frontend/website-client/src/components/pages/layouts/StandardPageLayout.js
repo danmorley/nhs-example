@@ -18,7 +18,7 @@ class StandardPageLayout extends Component {
       let { page_theme, page_styles } = page;
       const content = this.props.children;
       const meta = this.pageMetaData(page, site);
-    
+
       return (
         <DocumentMeta {...meta}>
           {this.renderPage(content, page_theme, page_styles, site, page, meta.breadcrumbs)}
@@ -77,7 +77,7 @@ class StandardPageLayout extends Component {
 
   pageMetaData(page, site) {
     const documentTitle = `${site.site_name} - ${page.meta.seo_title || page.title}`;
-    
+
     return {
       title: documentTitle,
       breadcrumbs: page.meta.breadcrumbs,
@@ -108,7 +108,7 @@ class StandardPageLayout extends Component {
 
 StandardPageLayout.propTypes = {
   site: PropTypes.object.isRequired,
-  page: PropTypes.object.isRequired
+  page: PropTypes.object
 }
 
 export default StandardPageLayout;

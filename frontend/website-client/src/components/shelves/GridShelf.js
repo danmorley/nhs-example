@@ -7,7 +7,6 @@ import './grid-shelf.css';
 import ShowMorePanel from '../shared/ShowMorePanel';
 import MultiPanelBlock from '../pages/blocks/MultiPanelBlock';
 import ResponsiveBackgroundImage from '../shared/ResponsiveBackgroundImage';
-import ImageUtils from '../panels/ImageUtils';
 
 /**
  *  Grid Shelf is a simple shelf that can be used to display other

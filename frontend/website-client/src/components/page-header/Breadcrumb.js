@@ -4,24 +4,24 @@ import { Link } from 'react-router-dom';
 import './breadcrumb.css';
 
 class Breadcrumb extends Component {
-  
+
   render() {
     let links = [];
     let { breadcrumbs } = this.props;
-    
+
     if (!breadcrumbs) {
       // do nothing;
     }
     else {
       links = breadcrumbs.map((item) => {
         return (
-          <li key={item.id} className="breadcrumbs__item">
+          <li key={item.url} className="breadcrumbs__item">
             <Link to={item.url} key={item.id} className="breadcrumbs__link">{item.name}</Link>
-          </li> 
+          </li>
         );
       });
     }
-    
+
     return (
       <ul className="breadcrumbs">
         {links}
@@ -31,7 +31,7 @@ class Breadcrumb extends Component {
 }
 
 Breadcrumb.propTypes = {
-  breadcrumbs: PropTypes.object.isRequired
+  breadcrumbs: PropTypes.array.isRequired
 }
 
 export default Breadcrumb;

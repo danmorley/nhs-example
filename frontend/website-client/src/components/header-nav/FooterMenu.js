@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import SimpleMenuItem from './SimpleMenuItem';
-import { Link } from 'react-router-dom';
 import './footer-menu.css';
 import chunk from 'lodash.chunk';
 
@@ -10,12 +9,12 @@ class FooterMenu extends Component {
   render() {
     if (!this.props.items) return null;
     // Render simple menu items only.
-    
+
     const siteMapLink = {
-      value: { 
+      value: {
         link_text: 'Sitemap',
-        link_external: global.rootUrl +"/sitemap", 
-        link_page: {} 
+        link_external: global.rootUrl +"/sitemap",
+        link_page: {}
       },
       type: "simple_menu_item"
     }
@@ -30,14 +29,14 @@ class FooterMenu extends Component {
               return <SimpleMenuItem key={j} item={item} classNamePrefix="footer" />;
             })}
           </ul>
-        })}      
+        })}
       </div>
     );
   }
 }
 
 FooterMenu.propTypes = {
-  items: PropTypes.object.isRequired
+  items: PropTypes.array.isRequired
 }
 
 export default FooterMenu;
