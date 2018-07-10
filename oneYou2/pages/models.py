@@ -30,7 +30,7 @@ from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppT
 
 GRID_VARIANT_CHOICES = (
     ('standard', 'Standard'),
-    ('grey_background', 'Grey Background'),
+    ('dark_background', 'Teal Background'),
 )
 
 GRID_LAYOUT_CHOICES = (

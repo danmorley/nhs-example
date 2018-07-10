@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Text from '../Text';
-import CtaLink from '../shared/CtaLinks';
+import CtaLinks from '../shared/CtaLinks';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import './cta-panel.css';
 import Panel from './Panel';
@@ -24,12 +24,12 @@ class CtaPanel extends Component {
 
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
-        <div className={`${classNamePrefix}__info`}>
+        <div className={`${classNamePrefix}__col`}>
           <Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />
-          <div className={`${classNamePrefix}__text`}>
-            <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
-            <CtaLink cta={content.cta} variant="button" />
-          </div>
+          <Text content={content.body} className={`${classNamePrefix}__text`} format="richtext"/>
+        </div>
+        <div className={`${classNamePrefix}__col`}>
+          <CtaLinks cta={content.cta} variant="button" />
         </div>
       </Panel>
     );
