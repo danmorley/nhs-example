@@ -6,76 +6,75 @@ import classNames from 'classnames';
 /**
  *  Show More Panel.
  *
- *  It expects the following Layouts:
+ *  Second improved show more panel that automatically refreshes when the window is resized.
  *
- *  responsive_2_col
- *  full_width
+ *  Also, it doesn't need to retain the number of chidren to show in state and it uses React
+ *  16.3 refs.
+ *
  */
 class ShowMorePanel extends Component {
   constructor (props) {
     super(props);
-    this.state = { isExpanded: false, childrenToView: 1 };
+    this.state = { isExpanded: false };
     this.doExpand = this.doExpand.bind(this);
     this.doContract = this.doContract.bind(this);
-    this.storageKey = `${this.props.id}_panelExpanded`;
+    this.storageKey = `${props.id}_panelExpanded`;
+    this.containerElem = React.createRef();
+    this.contentElem = React.createRef();
+  }
+
+  handleResize() {
+    this.forceUpdate();
   }
 
   componentDidMount() {
     // Load expanded state from session storage.
     const isExpanded = sessionStorage.getItem(this.storageKey) === 'Y';
-    this.setState({ isExpanded: isExpanded, childrenToView: this.childrenToView(isExpanded) });
+    this.setState({ isExpanded: isExpanded });
+    window.addEventListener('resize', this.handleResize.bind(this));
   }
 
   componentWillUnmount() {
-    // Save expanded state to session storage.
-    sessionStorage.setItem(this.storageKey, this.state.isExpanded ? 'Y' : 'N');
-  }
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    this.props = nextProps;
-    this.storageKey = `${this.props.id}_panelExpanded`;
-    const isExpanded = sessionStorage.getItem(this.storageKey) === 'Y';
-    this.setState({ isExpanded: isExpanded, childrenToView: this.childrenToView(isExpanded) });
+    window.removeEventListener('resize', this.setImage);
   }
 
   doExpand() {
-    this.setState({ isExpanded: true, childrenToView: this.childrenToView(true) });
+    this.setState({ isExpanded: true });
+    // Save expanded state to session storage.
+    sessionStorage.setItem(this.storageKey, 'Y');
+
   }
 
   doContract() {
-    this.setState({ isExpanded: false, childrenToView: this.childrenToView(false) });
-  }
-
-  setContainerElem(elem) {
-    // console.log('Container elem is', elem);
-    this.containerElem = elem;
-  }
-
-  setContentElem(elem) {
-    // console.log('Content elem is', elem);
-    this.contentElem = elem;
+    this.setState({ isExpanded: false });
+    // Save expanded state to session storage.
+    sessionStorage.setItem(this.storageKey, 'N');
   }
 
   childrenToView(isExpanded) {
-    let { rowsToShow, children } = this.props;
+    const { rowsToShow, children } = this.props;
 
     if (isExpanded || rowsToShow === 0) {
-      // console.log('childrenToView', children.length);
       return children.length;  // Display all children.
 
     } else {
-      if (this.contentElem) {
-        const childElems = this.contentElem.children;
+      if (this.contentElem.current) {
+        if (this.contentElem.current.childElementCount === 0) return 0; // No children to display.
+
+        // Get client width of first child.
+        const childElems = this.contentElem.current.children;
         const firstChild = childElems[0];
         const width = firstChild.clientWidth;
-        const availableWidth = this.contentElem.clientWidth * rowsToShow;
+
+        // Get client width of content container.
+        const availableWidth = this.contentElem.current.clientWidth * rowsToShow;
+
+        // Calculate the number of children to show.
         let childrenToView = availableWidth / width;
         if (childrenToView > children.length) childrenToView = children.length;
-        // console.log('Calculated children to view is', childrenToView);
         return childrenToView;
 
       } else {
-        // console.log('childrenToView', 1);
         return 1;
       }
     }
@@ -84,14 +83,13 @@ class ShowMorePanel extends Component {
   shouldShowMoreLessButton() {
     let { rowsToShow, children } = this.props;
     if (rowsToShow === 0) return false;
-
     const noOfChildrenWhenCollapsed = this.childrenToView(false);
     return children.length > noOfChildrenWhenCollapsed;
   }
 
-  renderChildren() {
+  renderChildren(childrenToView) {
     return React.Children.map(this.props.children, (child, i) => {
-      if (i < this.state.childrenToView) return child;
+      if (i < childrenToView) return child;
 
       // Return a hidden child.
       const classes = child.props.className;
@@ -102,10 +100,13 @@ class ShowMorePanel extends Component {
   }
 
   render() {
+    const childrenToView = this.childrenToView(this.state.isExpanded);
+    console.log('SMP.render:', 'displaying', childrenToView, 'of', this.props.children.length, 'child panels');
+
     const container =
-      <div key="1" ref={(elem) => this.setContainerElem (elem)} className="show-more-panel">
-        <div ref={elem => this.setContentElem(elem)} className="row show-more-content">
-          {this.renderChildren()}
+      <div key="1" ref={this.containerElem} className="show-more-panel">
+        <div ref={this.contentElem} className="row show-more-content">
+          {this.renderChildren(childrenToView)}
         </div>
       </div>
     ;
@@ -130,7 +131,7 @@ class ShowMorePanel extends Component {
 ShowMorePanel.propTypes = {
   rowsToShow: PropTypes.number.isRequired,
   childRowHeight: PropTypes.number,
-  id: PropTypes.string
+  id: PropTypes.string.isRequired
 };
 
 export default ShowMorePanel;

@@ -38,7 +38,7 @@ class GridShelf extends Component {
         return 'shelf__col col-sm-12';
       }
     })(metaLayout);
-    
+
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
         <ResponsiveBackgroundImage image={content.background_image} className={`shelf__container container-fluid child-image--${content.meta_image_display}`}>
@@ -50,8 +50,8 @@ class GridShelf extends Component {
               <Text tagName="div" content={gridBody} className="shelf__body" format="richtext"/>
             }
             <div className="grid-container">
-              <ShowMorePanel rowsToShow={content.rows_to_show}>
-                <MultiPanelBlock items={content.items} panelClass={panelClass}/>
+              <ShowMorePanel rowsToShow={content.rows_to_show} id={`${id}`}>
+                { MultiPanelBlock.renderItems(content.items, panelClass, 'div') }
               </ShowMorePanel>
             </div>
           </div>
