@@ -60,9 +60,13 @@ class ImageTeaserPanel extends Component {
   render() {
     let { content, classNamePrefix } = this.props;
     let backgroundTeaserImage = this.state.backgroundImageStyle;
+    let desktopLayout = content.meta_layout_desktop ? content.meta_layout_desktop : 'desktop-image-default';
+    let mobilLayout = content.meta_layout_mobile ? content.meta_layout_mobile : 'mobile-image-default';
+    let layout = content.meta_layout_desktop + '-' + content.meta_layout_mobile;
 
     return (
-      <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
+      <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}
+        layout={layout}>
         <div className={`${classNamePrefix}__image`} style={backgroundTeaserImage}>
         </div>
         <div className={`${classNamePrefix}__info`}>
