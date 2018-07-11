@@ -24,7 +24,7 @@ class TriageTool extends Component {
           backgroundColor={questionColors[index]}
           heading={ `Question ${ index + 1 } out of ${ questions.length }` }>
 
-          <Question questionText={ question.text }/>
+          <Question { ...question } />
 
         </AccordionPanel>
       )
@@ -36,7 +36,7 @@ class TriageTool extends Component {
           bigHeading={ true }
           open={ this.state.currentPanel == 0 } heading="Quit smoking now! Create your free plan">
           <AppIntro>
-            There's loads of support to help you quit.
+            { "There's loads of support to help you quit." }
             Find out what combination is right you and create your personalised quit plan in 3 easy steps.
           </AppIntro>
           <p><Button onClick={ () => this.setState({currentPanel: 1}) }>Start</Button></p>
@@ -80,5 +80,7 @@ class AccordionPanel extends Component {
 AccordionPanel.propTypes = {
   toggleOpen: PropTypes.func,
   open: PropTypes.bool,
-  heading: PropTypes.string
+  heading: PropTypes.string,
+  backgroundColor: PropTypes.string,
+  bigHeading: PropTypes.bool
 }
