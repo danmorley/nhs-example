@@ -63,6 +63,7 @@ class ImageTeaserPanel extends Component {
     let desktopLayout = content.meta_layout_desktop ? content.meta_layout_desktop : 'desktop-image-default';
     let mobilLayout = content.meta_layout_mobile ? content.meta_layout_mobile : 'mobile-image-default';
     let layout = content.meta_layout_desktop + '-' + content.meta_layout_mobile;
+    let ctaStyle = content.meta_cta_variant;
 
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}
@@ -73,7 +74,7 @@ class ImageTeaserPanel extends Component {
           <Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />
           <div className={`${classNamePrefix}__text`}>
             <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
-            <CtaLinks cta={content.cta} />
+            <CtaLinks cta={content.cta} variant={ctaStyle} />
           </div>
         </div>
       </Panel>
