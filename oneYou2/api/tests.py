@@ -1,6 +1,8 @@
-<<<<<<< HEAD
 from django.http import Http404
+from rest_framework.test import APIRequestFactory
 
+from pages.factories import SiteFactory, PageFactory
+from release.factories import ReleaseFactory
 from .utils import get_site_by_id_or_uuid, get_site_or_404
 
 from home.factories import create_test_site_settings
@@ -52,15 +54,6 @@ class ApiUtilsTests(OneYouTests):
         except Http404:
             error_is_thrown = True
         self.assertIsTrue(error_is_thrown)
-=======
-from oneYou2.test.utils import OneYouTests
-
-from pages.factories import PageFactory
-
-from release.factories import ReleaseFactory
-from rest_framework.test import APIRequestFactory
-
-from pages.factories import SiteFactory
 
 
 class SiteReleaseTests(OneYouTests):
@@ -89,5 +82,3 @@ class PageDetailTests(OneYouTests):
         new_page = PageFactory()
         self.assertEqual(1, 1)
 
-
->>>>>>> ak-test-branch

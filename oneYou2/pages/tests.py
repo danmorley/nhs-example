@@ -391,4 +391,7 @@ class PagesButtonHelperWagTailHooksTests(OneYouTests):
         self.assertIsTrue(copy_in_buttons)
 
 
-
+# class ImageBlockTest(OneYouTests):
+#     def test_image_block_response(self):
+#         page = create_test_page()
+#         self.assertEqual(1, 2)
