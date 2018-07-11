@@ -4,8 +4,8 @@
   "description": "A tool to help smokers get advice on the best way to quit",
   "main": "dist/main.js",
   "scripts": {
-    "start": "npx webpack-serve --config ./webpack.config.js --mode development --open",
-    "build": "npx webpack --config ./webpack.config.js --mode production",
+    "start": "NODE_ENV=development npx webpack-serve --config ./webpack.config.js --open",
+    "build": "NODE_ENV=production npx webpack --config ./webpack.config.js",
     "test": "eslint src && jest"
   },
   "author": "NHS Digital",
