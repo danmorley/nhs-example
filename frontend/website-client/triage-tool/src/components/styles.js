@@ -7,6 +7,10 @@ const colors = {
   white: "#fff"
 }
 
+const fonts = {
+  helvetica: "Helvetica, Liberation Sans, Arial, sans-serif"
+}
+
 const TriageToolContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -32,6 +36,7 @@ const Button = styled.button`
   border: 0;
   margin: 0 auto;
   font-size: 18px;
+  font-family: ${fonts.helvetica};
 
   &:hover, &:focus {
     cursor: pointer;
@@ -46,6 +51,7 @@ const AppHeader = styled.h1`
 const AppIntro = styled.p`
   color: ${colors.black}
   text-align: center;
+  font-family: ${fonts.helvetica}
 `
 
 export { TriageToolContainer, AppHeader, AppIntro, AccordionPanelContainer, Button }
