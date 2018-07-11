@@ -138,13 +138,6 @@ $arrow-distance: 10%;
       padding-bottom: 0;
       transform: scale(1); 
       transition: 0.3s all ease;
-      
-      @include media-breakpoint-up(lg) {
-        .image-teaser__info {
-          padding-top: 1.5em;
-          padding-bottom: 1.5em;
-        }
-      }
     }
   }
 
