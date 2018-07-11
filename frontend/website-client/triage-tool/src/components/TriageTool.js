@@ -15,11 +15,13 @@ class TriageTool extends Component {
 
   render() {
     const { questions } = this.props.config
+    const questionColors = ["#028586","#197271","#145b5b"]
     const questionList = questions.map((question, index) => {
       return (
         <AccordionPanel toggleOpen={ () => this.setState({currentPanel: (index + 1)}) }
           open={ this.state.currentPanel == (index + 1) }
           key={ index }
+          backgroundColor={questionColors[index]}
           heading={ `Question ${ index + 1 } out of ${ questions.length }` }>
 
           <Question questionText={ question.text }/>
@@ -37,7 +39,7 @@ class TriageTool extends Component {
             There's loads of support to help you quit.
             Find out what combination is right you and create your personalised quit plan in 3 easy steps.
           </AppIntro>
-          <Button onClick={ () => this.setState({currentPanel: 1}) }>Start</Button>
+          <p><Button onClick={ () => this.setState({currentPanel: 1}) }>Start</Button></p>
         </AccordionPanel>
 
         { questionList }
@@ -67,7 +69,7 @@ class AccordionPanel extends Component {
       <AppHeader>{ this.props.heading }</AppHeader>
     )
     return (
-      <AccordionPanelContainer>
+      <AccordionPanelContainer backgroundColor={this.props.backgroundColor}>
         <header onClick={ this.props.toggleOpen }>{ this.props.bigHeading ? bigHeader : this.props.heading }</header>
         { this.props.open ? this.props.children : "" }
       </AccordionPanelContainer>
