@@ -19,8 +19,8 @@ class ListItemPanel extends Component {
 
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix}>
-        <div className={`${classNamePrefix}__image`}>
-          {content.text}
+        <div className={`${classNamePrefix}__item`}>
+          <span className={`${classNamePrefix}__bullet`}></span>{content.text}
         </div>
       </Panel>
     );
