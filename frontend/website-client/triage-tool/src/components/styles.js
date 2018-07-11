@@ -2,7 +2,13 @@ import styled from "styled-components"
 
 const colors = {
   teal: "#138585",
-  white: "#FFF"
+  yellow: "#ffcc00",
+  black: "#000",
+  white: "#fff"
+}
+
+const fonts = {
+  helvetica: "Helvetica, Liberation Sans, Arial, sans-serif"
 }
 
 const TriageToolContainer = styled.div`
@@ -12,8 +18,9 @@ const TriageToolContainer = styled.div`
   width: 320px;
   min-height: 480px;
 
-  background-color: ${colors.teal};
+  background-color: ${colors.yellow};
   color: ${colors.white};
+  font-family: ${fonts.helvetica};
 `
 
 const AccordionPanelContainer = styled.div`
@@ -21,9 +28,30 @@ const AccordionPanelContainer = styled.div`
   padding: 1em;
 `
 
-const Button = styled.a`
-  padding: 0.5em;
-  border: 1px solid ${colors.white};
+const Button = styled.button`
+  color: ${colors.white}
+  text-align: center;
+  background-color: ${colors.teal}
+  padding: 10px 40px;
+  display: block;
+  border: 0;
+  margin: 0 auto;
+  font-size: 18px;
+
+  &:hover, &:focus {
+    cursor: pointer;
+  }
 `
 
-export { TriageToolContainer, AccordionPanelContainer, Button }
+const AppHeader = styled.h1`
+  color: ${colors.black}
+  text-align: center;
+`
+
+const AppIntro = styled.p`
+  color: ${colors.black}
+  text-align: center;
+  font-family: ${fonts.helvetica}
+`
+
+export { TriageToolContainer, AppHeader, AppIntro, AccordionPanelContainer, Button }

@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { TriageToolContainer, AccordionPanelContainer, Button } from "./styles"
+import { TriageToolContainer, AppHeader, AppIntro, AccordionPanelContainer, Button } from "./styles"
 
 import Question from "./Question"
 
@@ -30,16 +30,14 @@ class TriageTool extends Component {
 
     return (
       <TriageToolContainer>
-
         <AccordionPanel toggleOpen={ () => this.setState({currentPanel: 0}) }
-          open={ this.state.currentPanel == 0 }
-          heading="Triage Tool">
-          <div>
-            This is the header
-          </div>
-          <div>
-            <Button onClick={ () => this.setState({currentPanel: 1}) }>Start</Button>
-          </div>
+          bigHeading={ true }
+          open={ this.state.currentPanel == 0 } heading="Quit smoking now! Create your free plan">
+          <AppIntro>
+            There's loads of support to help you quit.
+            Find out what combination is right you and create your personalised quit plan in 3 easy steps.
+          </AppIntro>
+          <Button onClick={ () => this.setState({currentPanel: 1}) }>Start</Button>
         </AccordionPanel>
 
         { questionList }
@@ -65,9 +63,12 @@ export default TriageTool
 
 class AccordionPanel extends Component {
   render() {
+    const bigHeader = (
+      <AppHeader>{ this.props.heading }</AppHeader>
+    )
     return (
       <AccordionPanelContainer>
-        <header onClick={ this.props.toggleOpen }>{ this.props.heading }</header>
+        <header onClick={ this.props.toggleOpen }>{ this.props.bigHeading ? bigHeader : this.props.heading }</header>
         { this.props.open ? this.props.children : "" }
       </AccordionPanelContainer>
     )
