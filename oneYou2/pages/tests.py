@@ -389,3 +389,6 @@ class PagesButtonHelperWagTailHooksTests(OneYouTests):
                 copy_in_buttons = True
 
         self.assertIsTrue(copy_in_buttons)
+
+
+
