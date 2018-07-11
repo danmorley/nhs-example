@@ -20,6 +20,7 @@ const TriageToolContainer = styled.div`
 
   background-color: ${colors.yellow};
   color: ${colors.white};
+  font-family: ${fonts.helvetica};
 `
 
 const AccordionPanelContainer = styled.div`
@@ -36,7 +37,6 @@ const Button = styled.button`
   border: 0;
   margin: 0 auto;
   font-size: 18px;
-  font-family: ${fonts.helvetica};
 
   &:hover, &:focus {
     cursor: pointer;
