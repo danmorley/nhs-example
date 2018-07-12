@@ -29,7 +29,7 @@ const localStorageMock = (() => {
 global.localStorage = localStorageMock
 
 const sessionStorageMock = (() => {
-  let store = {}
+  let store = {basket: ""}
   return {
     getItem(key) {
       return store[key]
