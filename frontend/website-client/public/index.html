@@ -141,6 +141,7 @@
       function CookiebotCallback_OnAccept() {
         if(Cookiebot.consent.statistics) {
           enableWebtrends();
+          enableGoogleAnalytics();
         }
       }
 
@@ -168,6 +169,38 @@
             var s=document.createElement("script"); s.async=true; s.src="/oneyou/public/webtrends.min.js";
             var s2=document.getElementsByTagName("script")[0]; s2.parentNode.insertBefore(s,s2);
         }());
+      }
+
+      function enableGoogleAnalytics() {
+        console.log('enable GA for AB testing');
+        var script = document.createElement("script");
+        script.async=true;
+        script.src="https://www.googletagmanager.com/gtag/js?id=UA-120378767-1";
+
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+        gtag('config', 'UA-120378767-1', {'optimize_id': 'GTM-WKM3HGR'});
+
+        (function (a, s, y, n, c, h, i, d, e) {
+          s.className += ' ' + y;
+          h.start = 1 * new Date;
+          h.end = i = function () {
+            s.className = s.className.replace(RegExp(' ?' + y), '')
+          };
+
+          (a[n] = a[n] || []).hide = h;
+          setTimeout(function () {
+            i();
+            h.end = null
+          }, c);
+
+          h.timeout = c;
+        })(window, document.documentElement, 'async-hide', 'dataLayer', 4000, {'GTM-WKM3HGR': true});
       }
     </script>
   </head>
