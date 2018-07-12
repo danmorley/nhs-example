@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 
 class BackToTopButton extends Component {
@@ -12,7 +10,7 @@ class BackToTopButton extends Component {
       windowHeight : window.screen.height
     });
   }
-  
+
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll)
   }
@@ -20,23 +18,23 @@ class BackToTopButton extends Component {
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll)
   }
-  
+
   setBackToTopButton(elem) {
     this.backToTopButton = elem;
   }
-  
+
   scrollToTop() {
     if (document.body.scrollTop !== 0 || document.documentElement.scrollTop !== 0) {
       window.scrollBy(0, -50);
       requestAnimationFrame(this.scrollToTop);
     }
   }
-  
-  handleClick(e) {
+
+  handleClick() {
     this.scrollToTop();
   }
-   
-  handleScroll(event) {
+
+  handleScroll() {
     if (window.scrollY > (this.state.windowHeight + 10)) {
       this.backToTopButton.classList.add('back-to-top--show');
     }
@@ -44,12 +42,15 @@ class BackToTopButton extends Component {
       this.backToTopButton.classList.remove('back-to-top--show');
     }
   }
-  
+
   render() {
     return (
-      <button className="back-to-top" aria-label="back to top of page" ref={(elem) => this.setBackToTopButton(elem)} onClick={this.handleClick.bind(this)}></button>  
+      <button className="back-to-top" aria-label="back to top of page" ref={(elem) => this.setBackToTopButton(elem)} onClick={this.handleClick.bind(this)}></button>
     )
   }
+}
+
+BackToTopButton.propTypes = {
 }
 
 export default BackToTopButton;

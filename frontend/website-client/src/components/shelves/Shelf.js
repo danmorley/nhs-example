@@ -22,7 +22,6 @@ class Shelf extends Component {
 }
 
 Shelf.propTypes = {
-  content: PropTypes.object.isRequired,
   classNamePrefix: PropTypes.string.isRequired,
   variant: PropTypes.string,
   layout: PropTypes.string,
