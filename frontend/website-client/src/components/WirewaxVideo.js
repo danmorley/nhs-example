@@ -42,6 +42,8 @@ class WirewaxVideo extends Component {
     if (!video) return null;
     let basketCount = this.state.basketCount;
 
+    // TODO embedLoc needs to be updated to PHE location when we have PHE videos. Currently using different to get the add to cart to fire.
+
     return (
       <div {...rest}>
         <iframe className='video-js' src={`//embed.wirewax.com/${video}?embedLoc=footlocker`} frameBorder="0" id="video"></iframe>
