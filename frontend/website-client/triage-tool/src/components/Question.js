@@ -3,18 +3,20 @@ import PropTypes from "prop-types"
 
 class Question extends Component {
   render() {
-    const { inputType, text } = this.props
-    const optionList = this.props.options.map((option, index) => {
+    const { inputType, text, options } = this.props
+    const optionList = options.map((option, index) => {
       return (
-        <ul key={ index }>
-          <Option { ...option } inputType={ inputType } name={ text }></Option>
-        </ul>
+        <Option { ...option }
+          key={ index }
+          inputType={ inputType }
+          name={ text }>
+        </Option>
       )
     })
 
     return (
       <div>
-        { this.props.text }
+        { text }
         <ul>
           { optionList }
         </ul>
@@ -34,15 +36,16 @@ export default Question
 
 class Option extends Component {
   render() {
+    const { inputType, name, text } = this.props
     return (
       <li>
         <label>
           <input
-            type={ this.props.inputType }
-            name={ this.props.name }
-            value={ this.props.text }
+            type={ inputType }
+            name={ name }
+            value={ text }
           />
-          { this.props.text }
+          { text }
         </label>
       </li>
     )
