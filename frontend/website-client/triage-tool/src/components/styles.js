@@ -45,6 +45,7 @@ const AccordionPanelContainer = styled.div`
     padding-left: 0;
 
     li {
+      padding-bottom: 10px;
       label {
         display: block;
 
