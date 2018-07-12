@@ -19,7 +19,7 @@ class Question extends Component {
         { text }
         <ul>
           { optionList }
-        </ul>
+        </div>
       </div>
     )
   }
