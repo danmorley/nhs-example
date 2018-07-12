@@ -22,10 +22,10 @@ class WirewaxVideo extends Component {
   }
 
   storageToJSON() {
-    if (sessionStorage.getItem(BASKET_KEY) === '') {
-      return []
-    } else {
+    if (sessionStorage.getItem(BASKET_KEY) && sessionStorage.getItem(BASKET_KEY) !== '') {
       return JSON.parse(sessionStorage.getItem(BASKET_KEY))
+    } else {
+      return []
     }
   }
 
