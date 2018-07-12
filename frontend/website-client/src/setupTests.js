@@ -46,3 +46,16 @@ const sessionStorageMock = (() => {
 global.sessionStorage = sessionStorageMock
 
 global.rootUrl = 'oneyou.co.uk';
+
+window.wirewax = {
+  addEventListener: function(key, callback) {
+    console.log('adding listener for ' + key);
+  },
+
+  events: {
+    listeners: {
+      ADD_TO_CART: 'addToCart',
+      PLAYER_READY: 'playerReady'
+    }
+  }
+}
