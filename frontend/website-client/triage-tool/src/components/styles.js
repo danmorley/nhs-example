@@ -1,4 +1,5 @@
-import styled from "styled-components"
+import styled from "styled-components";
+import { device } from './device';
 
 const colors = {
   teal: "#138585",
@@ -15,8 +16,6 @@ const fonts = {
 const TriageToolContainer = styled.div`
   display: flex;
   flex-direction: column;
-
-  width: 320px;
   min-height: 480px;
 
   background-color: ${colors.yellow};
@@ -25,12 +24,39 @@ const TriageToolContainer = styled.div`
 `
 
 const AccordionPanelContainer = styled.div`
-  border-bottom: 1px solid ${colors.white};
   padding: 15px;
   background-color: ${props => props.backgroundColor};
 
   &:hover, &:focus {
     cursor: pointer;
+  }
+
+  header {
+    border-bottom: 1px solid ${colors.white};
+    padding-bottom: 10px;
+  }
+
+  div {
+    margin-top: 15px;
+  }
+
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+
+    li {
+      label {
+        display: block;
+
+        input {
+          margin-right: 5px;
+          position: relative;
+          top: -2px;
+          float: left;
+          margin-left: 0;
+        }
+      }
+    }
   }
 `
 
@@ -59,7 +85,7 @@ const AppHeader = styled.h1`
 const AppIntro = styled.p`
   color: ${colors.black}
   text-align: center;
-  font-family: ${fonts.helvetica}
+  font-family: ${fonts.helvetica};
 `
 
 export { TriageToolContainer, AppHeader, AppIntro, AccordionPanelContainer, Button }

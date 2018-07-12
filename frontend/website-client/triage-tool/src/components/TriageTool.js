@@ -33,7 +33,7 @@ class TriageTool extends Component {
     return (
       <TriageToolContainer>
         <AccordionPanel toggleOpen={ () => this.setState({currentPanel: 0}) }
-          bigHeading={ true }
+          appHeading={ true }
           open={ this.state.currentPanel == 0 } heading="Quit smoking now! Create your free plan">
           <AppIntro>
             { "There's loads of support to help you quit." }
@@ -70,7 +70,7 @@ class AccordionPanel extends Component {
     )
     return (
       <AccordionPanelContainer backgroundColor={this.props.backgroundColor}>
-        <header onClick={ this.props.toggleOpen }>{ this.props.bigHeading ? bigHeader : this.props.heading }</header>
+        <header onClick={ this.props.toggleOpen }>{ this.props.appHeading ? bigHeader : this.props.heading }</header>
         { this.props.open ? this.props.children : "" }
       </AccordionPanelContainer>
     )

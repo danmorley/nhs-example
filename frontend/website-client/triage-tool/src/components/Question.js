@@ -15,9 +15,9 @@ class Question extends Component {
     return (
       <div>
         { this.props.text }
-        <ul>
+        <div>
           { optionList }
-        </ul>
+        </div>
       </div>
     )
   }
