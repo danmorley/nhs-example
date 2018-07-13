@@ -64,6 +64,9 @@
 }
 
 .video-teaser--text_on_top {
+  display: flex;
+  flex-wrap: wrap;
+
   .video-teaser--text_on_top__image {
     width: 100%;
     background-repeat: no-repeat;
@@ -92,6 +95,7 @@
   }
 
   .video-teaser--text_on_top__info {
+    width: 100%;
     background-color: #4a4a4a;
     color: #FFFFFF;
   }
