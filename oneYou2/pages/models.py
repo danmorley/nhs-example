@@ -79,9 +79,9 @@ VIDEO_LAYOUTS = (
 
 
 PAGE_HEADING_LAYOUTS = (
-    ('shelf-image-position--bottom-left', 'Image bottom left'),
-    ('shelf-image-position--bottom-right', 'Image bottom right'),
-    ('shelf-image-position--top-right', 'Image top right'),
+    ('image_bottom_left', 'Image bottom left'),
+    ('image_bottom_right', 'Image bottom right'),
+    ('image_top_right', 'Image top right'),
 )
 
 BRIGHTCOVE_OPTION = ('brightcove', 'Brightcove')

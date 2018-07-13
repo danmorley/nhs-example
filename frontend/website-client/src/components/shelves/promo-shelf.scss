@@ -89,6 +89,10 @@ $shelf-padding-extra: 2em;
 
 .page-heading-shelf {
   
+  > .shelf__container {
+    overflow: hidden;
+  }
+  
   .container, .container-fluid {
     padding-top: 1.4em;
     padding-bottom: 0.6em;
@@ -113,6 +117,40 @@ $shelf-padding-extra: 2em;
       @include media-breakpoint-up(sm) {
         margin-bottom: 0.2em;
       }
+  }
+}
+
+
+.page-heading-shelf__image {
+  
+  
+  height: 30px;
+
+  @include media-breakpoint-up(sm) {
+    height: 50px;
+  }
+  
+  @include media-breakpoint-up(md) {
+    height: auto;
+  }
+  
+  .shelf-image-position--top-right & {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  
+  .shelf-image-position--bottom-left & {
+    margin-top: 1em;
+  }
+  
+  .shelf-image-position--bottom-right &{
+    margin-top: 1em;
+    float: right;
+    
+    @include media-breakpoint-up(md) {
+      margin-top: 0;
+    }
   }
 }
 
