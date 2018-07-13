@@ -115,6 +115,7 @@
   .information-panel__heading {
     font-weight: normal;
     margin-bottom: 0.5em;
+    font-family: $secondary-brand-font;
     
     em {
       font-style: normal;
@@ -139,16 +140,19 @@
   }
 }
 
-.oneyou, .stoptober {
-  
-  .information-panel__heading {
-    font-family: $secondary-brand-font;
-  }
+.oneyou {
   
   .shelf .information-panel__heading {
     color: $grey-brown-dark;
   }
 }
+
+.stoptober {
+  .shelf .information-panel__heading {
+    color: $black;
+  }
+}
+
 
 .campaign {
   

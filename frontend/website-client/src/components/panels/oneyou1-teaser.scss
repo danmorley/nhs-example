@@ -104,20 +104,13 @@
 
 // theming
 .oneyou, .stoptober {
-
-  .oneyou1-teaser__heading {
-    color: $grey-brown-dark;
-  }
-
-  .oneyou1-teaser__text {
-    color: $grey-brown-dark;
-  }
   
   .oneyou1-teaser {
     .cta-list {
       background-color: $teal-blue;
     }
   }
+  
   .oneyou1-teaser__cta-item {
     a {
       color: $teal-blue;
@@ -128,5 +121,27 @@
     a {
       color: $white;
     }
+  }
+}
+
+.oneyou {
+
+  .oneyou1-teaser__heading {
+    color: $grey-brown-dark;
+  }
+
+  .oneyou1-teaser__text {
+    color: $grey-brown-dark;
+  }
+}
+
+.stoptober {
+
+  .oneyou1-teaser__heading {
+    color: $black;
+  }
+
+  .oneyou1-teaser__text {
+    color: $black;
   }
 }

@@ -8,17 +8,23 @@
     height: auto;
   }
 
+  .icon-card-panel__heading {
+    color: $grey-brown-dark;
+  }
+  
+  .icon-card-panel__text { 
+    color: $grey-brown-dark;
+  }
+  
   &.icon-card-panel--standard_grey_bg {
     .icon-card-panel__heading {
       font-size: 0.9em;
       font-family: $secondary-brand-font;
-      color: $grey-brown-dark;
       text-transform: uppercase;
     }
 
     .icon-card-panel__text {
       font-size: 0.7em;
-      color: $grey-brown-dark;
     }
   }
 
@@ -27,7 +33,6 @@
       font-size: 0.6em;
       font-family: $default-font;
       font-weight: normal;
-      color: $grey-brown-dark;
       margin-bottom: 0.7em;
     }
 
@@ -35,8 +40,20 @@
       font-size: 1.6em;
       font-family: $secondary-brand-font;
       text-transform: uppercase;
-      color: $grey-brown-dark;
     }
   }
+}
 
+.stoptober { 
+  
+  .icon-card-panel {
+  
+    .icon-card-panel__heading {
+      color: $black;
+    }
+    
+    .icon-card-panel__text { 
+      color: $black;
+    }
+  }
 }

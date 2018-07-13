@@ -179,7 +179,6 @@ $shelf-padding-extra: 2em;
     font-weight: normal;
     text-align: center;
     color: $black;
-    @include heading-h2(stoptober);
   }
   
   .shelf__body {
@@ -189,5 +188,21 @@ $shelf-padding-extra: 2em;
      @include media-breakpoint-up(md) {
        padding: 0 5em;
      }
+  }
+  
+  .section-heading-shelf h2 {
+    font-family: $primary-brand-font;
+    font-weight: normal;
+    text-align: center;
+    color: $black;
+  }
+
+  .section-heading-shelf p {
+    text-align: center;
+    padding: 0 0.5em;
+    
+    @include media-breakpoint-up(md) {
+      padding: 0 5em;
+    }
   }
 }

@@ -28,18 +28,9 @@ body {
   overflow-x: hidden;
 }
 
-h2 {
-  font-size: $h2;
-  
-  @include media-breakpoint-up(sm) {
-    font-size: calc(1.2 * #{$h2});
-  }
-}
-
 .h1 {
   font-size: $h1 !important;
 }
-
 
 .h2 {
   font-size: $h2 !important;
@@ -202,6 +193,14 @@ ul.cta-list {
       font-size: map-deep-get($headings, oneyou, heading-h1, desktop);
     }
   }
+  
+  h2 {
+    font-size: map-deep-get($headings, oneyou, heading-h2, mobile);
+    
+    @include media-breakpoint-up(sm) {
+      font-size: map-deep-get($headings, oneyou, heading-h2, desktop);
+    }
+  }
 }
 
 .stoptober {
@@ -215,6 +214,18 @@ ul.cta-list {
       font-size: map-deep-get($headings, stoptober, heading-h1, desktop);
     }
   }
+  
+  h2 {
+    font-size: map-deep-get($headings, stoptober, heading-h2, mobile);
+    
+    @include media-breakpoint-up(sm) {
+      font-size: map-deep-get($headings, stoptober, heading-h2, desktop);
+    }
+  }
+  
+  html & {  
+    color: $black;
+  }
 }
 
 .oneyou, .stoptober { 
@@ -227,10 +238,4 @@ ul.cta-list {
       color: $white;
     }
   }
-}
-
-.stoptober {
-   html & {  
-     color: $black;
-   }
 }
