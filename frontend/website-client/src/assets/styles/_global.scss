@@ -204,26 +204,20 @@ ul.cta-list {
   }
 }
 
-.campaign {
-  
+.stoptober {
+
   h1 {
-    font-size: map-deep-get($headings, campaign, heading-h1, mobile);
+    font-size: map-deep-get($headings, stoptober, heading-h1, mobile);
+    font-weight: normal;
+    
     
     @include media-breakpoint-up(sm) {
-      font-size: map-deep-get($headings, campaign, heading-h1, desktop);
-    }
-  }
-  
-  h2 {
-    font-size: map-deep-get($headings, campaign, heading-h2, mobile);
-    
-    @include media-breakpoint-up(sm) {
-      font-size: map-deep-get($headings, campaign, heading-h2, desktop);
+      font-size: map-deep-get($headings, stoptober, heading-h1, desktop);
     }
   }
 }
 
-.oneyou, .campaign { 
+.oneyou, .stoptober { 
   .button-cta {
     background-color: $sunflower-yellow;
     color: $grey-brown;
@@ -233,4 +227,10 @@ ul.cta-list {
       color: $white;
     }
   }
+}
+
+.stoptober {
+   html & {  
+     color: $black;
+   }
 }

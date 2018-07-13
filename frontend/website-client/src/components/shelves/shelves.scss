@@ -147,13 +147,7 @@ $shelf-padding-extra: 2em;
 } 
 
 //theming
-.oneyou, .campaign {
-
-  .shelf {
-    h2 {
-      color: $teal-blue;
-    }
-  }
+.oneyou, .stoptober {
 
   h1, h2 {
     .marker {
@@ -164,9 +158,36 @@ $shelf-padding-extra: 2em;
   }
 }
 
-.campaign {
+.oneyou {
+  .shelf {
+    h2 {
+      color: $teal-blue;
+    }
+  }
+}
+
+.stoptober {
+  
+  .shelf {
+    h2 {
+      color: $black;
+    }
+  }
+  
   .shelf__header {
     font-family: $primary-brand-font;
-    @include heading-h2(campaign);
+    font-weight: normal;
+    text-align: center;
+    color: $black;
+    @include heading-h2(stoptober);
+  }
+  
+  .shelf__body {
+     text-align: center;
+     padding: 0 0.5em;
+     
+     @include media-breakpoint-up(md) {
+       padding: 0 5em;
+     }
   }
 }

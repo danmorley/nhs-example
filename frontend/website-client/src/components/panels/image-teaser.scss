@@ -104,18 +104,23 @@
 }
 
 // theming
-.oneyou, .campaign {
-
-  .image-teaser {
-    &.image-teaser--light-bg {
-
-      .image-teaser__heading {
-        text-transform: uppercase;
-        font-family: $secondary-brand-font;
-        font-weight: normal;
-        padding-top: 0;
-        padding-bottom: 0;
-      }
+.oneyou, .stoptober {
+  
+  .image-teaser--light-bg {
+    
+    .image-teaser__heading {
+      text-transform: uppercase;
+      font-family: $secondary-brand-font;
+      font-weight: normal;
+      padding-top: 0;
+      padding-bottom: 0;
+    }    
+  }
+  
+  .image-teaser--dark-bg {
+    
+    .image-teaser__info {
+        background: $teal-blue;
     }
 
     &.image-teaser--dark-bg {

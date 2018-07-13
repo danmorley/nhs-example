@@ -155,7 +155,7 @@ $shelf-padding-extra: 2em;
 }
 
 //theming
-.oneyou {
+.oneyou, .stoptober {
   .promo-shelf, .page-heading-shelf, .banner-shelf {
     h2 {
       @include heading-h1(oneyou);
@@ -174,26 +174,7 @@ $shelf-padding-extra: 2em;
   }
 }
 
-.campaign {
-  .promo-shelf, .page-heading-shelf, .banner-shelf {
-    h2 {
-      @include heading-h1(campaign);
-    }
-  }
-  
-  .promo-shelf h2 {
-    
-    @include media-breakpoint-down(sm) { 
-      font-size: 1.5em;
-    }
-    
-    @media (max-width: 365px) {
-      font-size: 1.4em;
-    }
-  }
-}
-
-.oneyou, .campaign {
+.oneyou, .stoptober {
 
   .promo-shelf, .page-heading-shelf, .banner-shelf {
     h1, h2, h3, h4, h5 {
@@ -228,6 +209,22 @@ $shelf-padding-extra: 2em;
         background: linear-gradient(91.54deg, #138585 0%, #138585 41.86%, rgba(0,164,166,0) 100%);
         opacity: 0.8;
         height:100%;
+      }
+    }
+  }
+}
+
+.stoptober {
+  
+  .page-heading-shelf {
+    
+    h1 {
+      font-weight: normal;
+      font-family: $secondary-brand-font;
+      
+      span {
+        font-family: $primary-brand-font;
+        color: $sunflower-yellow;
       }
     }
   }
