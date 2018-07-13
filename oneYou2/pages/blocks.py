@@ -1,3 +1,5 @@
+import json
+
 from django.template.defaultfilters import slugify
 from wagtail.wagtailcore import blocks
 from shelves.blocks import BlobImageChooserBlock
@@ -42,12 +44,23 @@ class ImageBlock(blocks.StructBlock):
                     mobile_rendition = None
                     desktop_rendition = None
 
-                    if image_meta and value['meta_use_mobile_renditions']:
+                    # This is a bit hacky but it's for the unit tests
+                    if type(value['meta_use_mobile_renditions']) == bool:
+                        use_mobile_renditions = value['meta_use_mobile_renditions']
+                    else:
+                        use_mobile_renditions = json.loads(value['meta_use_mobile_renditions'].lower())
+
+                    if type(value['meta_use_desktop_renditions']) == bool:
+                        use_desktop_rendtions = value['meta_use_desktop_renditions']
+                    else:
+                        use_desktop_rendtions = json.loads(value['meta_use_desktop_renditions'].lower())
+
+                    if image_meta and use_mobile_renditions:
                         mobile_rendition = image['renditions'].get(image_meta + '/mobile')
                     if not mobile_rendition:
                         mobile_rendition = image['renditions']['original']
 
-                    if image_meta and value['meta_use_desktop_renditions']:
+                    if image_meta and use_desktop_rendtions:
                         desktop_rendition = image['renditions'].get(image_meta + '/desktop')
                     if not desktop_rendition:
                         desktop_rendition = image['renditions']['original']

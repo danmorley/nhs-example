@@ -157,6 +157,3 @@ class SiteFactory(factory.django.DjangoModelFactory):
 
     site_name = fuzzy.FuzzyText()
     root_page = factory.SubFactory(PageFactory)
-
-
-

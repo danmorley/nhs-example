@@ -638,6 +638,7 @@ class OneYou2Page(Page):
         if mode_name == 'json':
             from .serializers import OneYouPageSerializer
             latest_revision_as_page = self.get_latest_revision_as_page()
+            print(latest_revision_as_page.body.stream_data)
             serialized_page = OneYouPageSerializer(instance=latest_revision_as_page)
             return JsonResponse(serialized_page.data)
 

@@ -1,8 +1,10 @@
 import json
+from collections import OrderedDict
 from unittest.mock import patch
 
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpRequest
+from rest_framework.utils.serializer_helpers import ReturnDict
 
 from wagtail.contrib.modeladmin.views import IndexView
 from wagtail.wagtailcore.blocks.stream_block import StreamValue
@@ -17,7 +19,7 @@ from oneYou2.factories import create_test_user
 from oneYou2.test.utils import OneYouTests
 
 from pages.factories import create_test_page, create_test_theme, create_test_menu, create_test_footer,\
-    create_test_header, create_test_recipe_page, create_test_child_page
+    create_test_header, create_test_recipe_page, create_test_child_page, PageFactory
 from pages.models import OneYou2Page, Theme, RecipePage
 from pages.utils import get_serializable_data_for_fields, process_inlines
 from pages.wagtail_hooks import MenuAdmin, MenuButtonHelper
@@ -25,6 +27,10 @@ from pages.wagtail_hooks import MenuAdmin, MenuButtonHelper
 from release.factories import create_test_release
 
 from shelves.factories import create_test_promo_shelf
+
+from pages.serializers import OneYouPageSerializer
+
+from oneYou2.images.factories import PHEImageFactory
 
 
 class OneYou2PageModelTests(OneYouTests):
@@ -391,7 +397,82 @@ class PagesButtonHelperWagTailHooksTests(OneYouTests):
         self.assertIsTrue(copy_in_buttons)
 
 
-# class ImageBlockTest(OneYouTests):
-#     def test_image_block_response(self):
-#         page = create_test_page()
-#         self.assertEqual(1, 2)
+class ImageBlockTest(OneYouTests):
+    def test_image_block_response(self):
+        page = PageFactory()
+        image = PHEImageFactory()
+        body_content_string = '[{"type": "page_heading_shelf", "value": {"heading": "This is the heading",' \
+                              ' "shelf_id": "1", "background_image": %d, "image": {"image": %d}},' \
+                              ' "id": "a2d5e2e8-ae9d-46ef-92e6-27745a85df8c"}]' % (image.id, image.id)
+
+        page.body = page._meta.fields[24].to_python(body_content_string)
+
+        page.save()
+        page.save_revision()
+        latest_revision_as_page = page.get_latest_revision_as_page()
+        serialized_page = OneYouPageSerializer(instance=latest_revision_as_page)
+        self.assertEqual(type(serialized_page.data), ReturnDict)
+        self.assertEqual(type(serialized_page.data['body']), list)
+        self.assertEqual(type(serialized_page.data['body'][0]), dict)
+        image_block = serialized_page.data['body'][0]['value']['image']
+        self.assertEqual(type(image_block), OrderedDict)
+        self.assertEqual(sorted(image_block.keys()), sorted(['title', 'renditions']))
+        self.assertEqual(image_block['title'], image.title)
+        self.assertEqual(sorted(image_block['renditions'].keys()), sorted(['mobile', 'desktop']))
+        self.assertEqual(type(image_block['renditions']['desktop']), str)
+        self.assertNotEqual(len(image_block['renditions']['desktop']), 0)
+        self.assertEqual(type(image_block['renditions']['mobile']), str)
+        self.assertNotEqual(len(image_block['renditions']['mobile']), 0)
+
+    def test_image_block_renditions_on(self):
+        page = PageFactory()
+        image = PHEImageFactory()
+        body_content_string = '[{"type": "page_heading_shelf", "value": {"heading": "This is the heading",' \
+                              ' "shelf_id": "1", "background_image": %d, "image": {' \
+                              ' "image": %d, "meta_use_desktop_renditions": "true", ' \
+                              ' "meta_use_mobile_renditions": "true"}},' \
+                              ' "id": "a2d5e2e8-ae9d-46ef-92e6-27745a85df8c"}]' % (image.id, image.id)
+
+        page.body = page._meta.fields[24].to_python(body_content_string)
+
+        page.save()
+        page.save_revision()
+        latest_revision_as_page = page.get_latest_revision_as_page()
+        serialized_page = OneYouPageSerializer(instance=latest_revision_as_page)
+        self.assertEqual(type(serialized_page.data), ReturnDict)
+        self.assertEqual(type(serialized_page.data['body']), list)
+        self.assertEqual(type(serialized_page.data['body'][0]), dict)
+        image_block = serialized_page.data['body'][0]['value']['image']
+        self.assertEqual(type(image_block), OrderedDict)
+        self.assertEqual(sorted(image_block.keys()), sorted(['title', 'renditions']))
+        self.assertEqual(image_block['title'], image.title)
+        self.assertEqual(sorted(image_block['renditions'].keys()), sorted(['mobile', 'desktop']))
+        self.assertEqual(type(image_block['renditions']['desktop']), str)
+        self.assertNotEqual(len(image_block['renditions']['desktop']), 0)
+        self.assertIn("fill-1440x240", image_block['renditions']['desktop'])
+        self.assertEqual(type(image_block['renditions']['mobile']), str)
+        self.assertNotEqual(len(image_block['renditions']['mobile']), 0)
+        self.assertIn("fill-375x143", image_block['renditions']['desktop'])
+
+    def test_image_block_renditions_off(self):
+        page = PageFactory()
+        image = PHEImageFactory()
+        body_content_string = '[{"type": "page_heading_shelf", "value": {"heading": "This is the heading",' \
+                              ' "shelf_id": "1", "background_image": %d, "image": {' \
+                              ' "image": %d, "meta_use_desktop_renditions": "false", ' \
+                              ' "meta_use_mobile_renditions": "false"}},' \
+                              ' "id": "a2d5e2e8-ae9d-46ef-92e6-27745a85df8c"}]' % (image.id, image.id)
+
+        page.body = page._meta.fields[24].to_python(body_content_string)
+
+        page.save()
+        page.save_revision()
+        latest_revision_as_page = page.get_latest_revision_as_page()
+        serialized_page = OneYouPageSerializer(instance=latest_revision_as_page)
+        image_block = serialized_page.data['body'][0]['value']['image']
+        self.assertEqual(type(image_block['renditions']['desktop']), str)
+        self.assertNotEqual(len(image_block['renditions']['desktop']), 0)
+        self.assertIn("original", image_block['renditions']['desktop'])
+        self.assertEqual(type(image_block['renditions']['mobile']), str)
+        self.assertNotEqual(len(image_block['renditions']['mobile']), 0)
+        self.assertIn("original", image_block['renditions']['mobile'])

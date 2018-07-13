@@ -7,6 +7,5 @@ def create_test_site_settings(title="Test Settings", uid="test_settings", site_i
     return site_settings
 
 
-class SiteSettingsFactory():
+class SiteSettingsFactory:
     pass
-
