@@ -15,10 +15,6 @@ import Panel from './Panel';
  */
 class CtaPanel extends Component {
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    this.props = nextProps;
-  }
-
   render() {
     let { content, classNamePrefix } = this.props;
 
