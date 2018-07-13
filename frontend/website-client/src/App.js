@@ -65,6 +65,10 @@ class App extends Component {
         this.setState({ currentPage: null });
       }
     });
+
+    // App is about to render for the first time. Remove the page spinner.
+    const pageSpinner = document.getElementById('pageSpinner');
+    pageSpinner.remove();
   }
 
   componentWillUnmount() {
