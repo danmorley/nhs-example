@@ -30,7 +30,7 @@ from shelves.factories import create_test_promo_shelf
 
 from pages.serializers import OneYouPageSerializer
 
-from oneYou2.images.factories import PHEImageFactory
+from images.factories import PHEImageFactory
 
 
 class OneYou2PageModelTests(OneYouTests):
