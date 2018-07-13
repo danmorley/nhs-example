@@ -1,26 +1,20 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { TriageToolContainer, AppHeader, AppIntro, AccordionPanelContainer, Button, OpenIndicator } from "./styles"
-import { ChevronDown, ChevronUp } from "styled-icons/octicons"
+//import { ChevronDown, ChevronUp } from "styled-icons/octicons"
+import { observer } from "mobx-react"
 
+import { TriageToolContainer, AppHeader, AppIntro, AccordionPanelContainer, Button, OpenIndicator } from "./styles"
 import Question from "./Question"
 
 class TriageTool extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      currentPanel: 0,
-      answers: []
-    }
-  }
-
   render() {
     const { questions } = this.props.config
+    const { currentPanel, changePanel } = this.props.store
     const questionColors = ["#028586","#197271","#145b5b"]
     const questionList = questions.map((question, index) => {
       return (
-        <AccordionPanel toggleOpen={ () => this.setState({currentPanel: (index + 1)}) }
-          open={ this.state.currentPanel == (index + 1) }
+        <AccordionPanel toggleOpen={ () => changePanel(index + 1) }
+          open={ currentPanel == (index + 1) }
           key={ index }
           backgroundColor={questionColors[index]}
           heading={ `Question ${ index + 1 } out of ${ questions.length }` }>
@@ -33,9 +27,9 @@ class TriageTool extends Component {
 
     return (
       <TriageToolContainer>
-        <AccordionPanel toggleOpen={ () => this.setState({currentPanel: 0}) }
+        <AccordionPanel toggleOpen={ () => changePanel(0) }
           appHeading={ true }
-          open={ this.state.currentPanel == 0 } heading="Quit smoking now! Create your free plan">
+          open={ currentPanel == 0 } heading="Quit smoking now! Create your free plan">
           <AppIntro>
             { "There's loads of support to help you quit." }
             Find out what combination is right you and create your personalised quit plan in 3 easy steps.
@@ -45,8 +39,8 @@ class TriageTool extends Component {
 
         { questionList }
 
-        <AccordionPanel toggleOpen={ () => this.setState({currentPanel: (questions.length + 1)}) }
-          open={ this.state.currentPanel == (questions.length + 1) }
+        <AccordionPanel toggleOpen={ () => changePanel(questions.length + 1) }
+          open={ currentPanel == (questions.length + 1) }
           heading="Feedback">
           This is the feedback section
         </AccordionPanel>
@@ -57,10 +51,11 @@ class TriageTool extends Component {
 }
 
 TriageTool.propTypes = {
-  config: PropTypes.object
+  config: PropTypes.object,
+  store: PropTypes.object
 }
 
-export default TriageTool
+export default observer(TriageTool)
 
 
 
@@ -72,7 +67,7 @@ class AccordionPanel extends Component {
     const smallHeader = (
       <div>
         { this.props.heading }
-        <OpenIndicator>{ this.props.open ? <ChevronUp size="30" /> : <ChevronDown size="30" />}</OpenIndicator>
+      {/* <OpenIndicator>{ this.props.open ? <ChevronUp size="30" /> : <ChevronDown size="30" />}</OpenIndicator> */}
       </div>
     )
     return (
