@@ -452,7 +452,7 @@ class ImageBlockTest(OneYouTests):
         self.assertIn("fill-1440x240", image_block['renditions']['desktop'])
         self.assertEqual(type(image_block['renditions']['mobile']), str)
         self.assertNotEqual(len(image_block['renditions']['mobile']), 0)
-        self.assertIn("fill-375x143", image_block['renditions']['desktop'])
+        self.assertIn("fill-375x143", image_block['renditions']['mobile'])
 
     def test_image_block_renditions_off(self):
         page = PageFactory()
