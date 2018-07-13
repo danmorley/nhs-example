@@ -18,6 +18,7 @@ import SimpleTextPanel from '../../panels/SimpleTextPanel';
 import RichTextPanel from '../../panels/RichTextPanel';
 import IconCardPanel from '../../panels/IconCardPanel';
 import InlineScriptPanel from '../../panels/InlineScriptPanel';
+import CtaPanel from '../../panels/CtaPanel';
 
 class MultiPanelBlock extends Component {
   render() {

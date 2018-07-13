@@ -41,12 +41,6 @@
       }
     }
   }
-
-  &.basic-grid-shelf--grey_background {
-    .grid-container {
-      background-color: $light-grey;
-    }
-  }
 }
 
 .basic-grid-shelf .image-set {
@@ -84,3 +78,20 @@
     @include heading-h2(campaign);
   }
 }
+
+.oneyou {  
+  
+  .basic-grid-shelf--dark_background {
+    
+    @include media-breakpoint-up(md) {
+      
+      padding: 2em 0 1.5em; 
+      background-color: $teal-blue;
+      
+      h2, h3, h4, p {
+        color: $white;
+      }
+    }
+  }
+}
+
