@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { device } from './device';
+import styled from "styled-components"
+import { device } from "./device"
 
 const colors = {
   teal: "#138585",
@@ -34,18 +34,41 @@ const AccordionPanelContainer = styled.div`
   header {
     border-bottom: 1px solid ${colors.white};
     padding-bottom: 10px;
+    position: relative;
+
+    div {
+      margin-top: 0;
+    }
   }
 
   div {
     margin-top: 15px;
   }
 
+  h2 {
+    text-align: center;
+    margin: 45px 0;
+  }
+
   ul {
-    list-style-type: none;
     padding-left: 0;
+    list-style-type: none;
+
+    @media ${device.desktop && device.tablet} {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 100%;
+      justify-content: center;
+    }
 
     li {
       padding-bottom: 10px;
+      
+      @media ${device.desktop && device.tablet} {
+        padding-right: 15px;
+      }
+
       label {
         display: block;
 
@@ -78,6 +101,12 @@ const Button = styled.a`
   }
 `
 
+const OpenIndicator = styled.span`
+  position: absolute;
+  right: 5px;
+  top: -5px;
+`
+
 const AppHeader = styled.h1`
   color: ${colors.black}
   text-align: center;
@@ -89,4 +118,4 @@ const AppIntro = styled.p`
   font-family: ${fonts.helvetica};
 `
 
-export { TriageToolContainer, AppHeader, AppIntro, AccordionPanelContainer, Button }
+export { TriageToolContainer, AppHeader, AppIntro, AccordionPanelContainer, Button, OpenIndicator }

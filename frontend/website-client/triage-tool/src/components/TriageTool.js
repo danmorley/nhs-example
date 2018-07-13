@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { TriageToolContainer, AppHeader, AppIntro, AccordionPanelContainer, Button } from "./styles"
+import { TriageToolContainer, AppHeader, AppIntro, AccordionPanelContainer, Button, OpenIndicator } from "./styles"
+import { ChevronDown, ChevronUp } from "styled-icons/octicons"
 
 import Question from "./Question"
 
@@ -68,9 +69,15 @@ class AccordionPanel extends Component {
     const bigHeader = (
       <AppHeader>{ this.props.heading }</AppHeader>
     )
+    const smallHeader = (
+      <div>
+        { this.props.heading }
+        <OpenIndicator>{ this.props.open ? <ChevronUp size="30" /> : <ChevronDown size="30" />}</OpenIndicator>
+      </div>
+    )
     return (
-      <AccordionPanelContainer backgroundColor={this.props.backgroundColor}>
-        <header onClick={ this.props.toggleOpen }>{ this.props.appHeading ? bigHeader : this.props.heading }</header>
+      <AccordionPanelContainer backgroundColor={this.props.backgroundColor} open={this.props.open}>
+        <header onClick={ this.props.toggleOpen }>{ this.props.appHeading ? bigHeader : smallHeader }</header>
         { this.props.open ? this.props.children : "" }
       </AccordionPanelContainer>
     )
@@ -80,7 +87,7 @@ class AccordionPanel extends Component {
 AccordionPanel.propTypes = {
   toggleOpen: PropTypes.func,
   open: PropTypes.bool,
+  appHeading: PropTypes.bool,
   heading: PropTypes.string,
-  backgroundColor: PropTypes.string,
-  bigHeading: PropTypes.bool
+  backgroundColor: PropTypes.string
 }

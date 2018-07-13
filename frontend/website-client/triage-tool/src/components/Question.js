@@ -16,7 +16,7 @@ class Question extends Component {
 
     return (
       <div>
-        { text }
+        <h2>{ text }</h2>
         <ul>
           { optionList }
         </ul>
