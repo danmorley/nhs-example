@@ -1,10 +1,14 @@
+import factory
+from django.template.defaultfilters import slugify
+from factory import fuzzy
 from wagtail.wagtailcore.models import Site
 
 from images.factories import create_default_test_image
-
+from images.factories import PHEImageFactory
 from images.models import PHEImage
 
 from home.models import SiteSettings
+
 from .models import OneYou2Page, Theme, Menu, Footer, Header, RecipePage
 
 
@@ -110,3 +114,46 @@ def create_test_child_page(parent, title='Test child page', path="11111111", dep
     page.save()
 
     return page
+
+
+class ThemeFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Theme
+
+    label = fuzzy.FuzzyText()
+    class_name = fuzzy.FuzzyText()
+
+
+class PageFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = OneYou2Page
+
+    title = fuzzy.FuzzyText()
+    depth = 0
+    path = "1111"
+    slug = slugify(title)
+    og_image_fk = factory.SubFactory(PHEImageFactory)
+    twitter_image_fk = factory.SubFactory(PHEImageFactory)
+    theme = factory.SubFactory(ThemeFactory)
+
+    @classmethod
+    def _create(cls, model_class, *args, **kwargs):
+        """Create an instance of a page, create a revision, and save them to the database."""
+        manager = cls._get_manager(model_class)
+
+        if cls._meta.django_get_or_create:
+            return cls._get_or_create(model_class, *args, **kwargs)
+
+        page = manager.create(*args, **kwargs)
+        page.save_revision()
+        page.save()
+
+        return page
+
+
+class SiteFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Site
+
+    site_name = fuzzy.FuzzyText()
+    root_page = factory.SubFactory(PageFactory)
