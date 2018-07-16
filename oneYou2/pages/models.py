@@ -82,6 +82,7 @@ PAGE_HEADING_LAYOUTS = (
     ('image_bottom_left', 'Image bottom left'),
     ('image_bottom_right', 'Image bottom right'),
     ('image_top_right', 'Image top right'),
+    ('image_top_left', 'Image top left'),
 )
 
 BRIGHTCOVE_OPTION = ('brightcove', 'Brightcove')
@@ -679,7 +680,6 @@ class OneYou2Page(Page):
         if mode_name == 'json':
             from .serializers import OneYouPageSerializer
             latest_revision_as_page = self.get_latest_revision_as_page()
-            print(latest_revision_as_page.body.stream_data)
             serialized_page = OneYouPageSerializer(instance=latest_revision_as_page)
             return JsonResponse(serialized_page.data)
 
