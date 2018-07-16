@@ -1,0 +1,46 @@
+@import '../../assets/styles/variables/variables';
+@import "../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+.list-item__item {
+  position: relative;
+  padding-left: 2em;
+  
+  @include media-breakpoint-up(sm) {
+    padding-left: 3em;
+  }
+}
+
+.list-item__bullet {
+  position: absolute;
+  left: 0;
+  top: -5px; 
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border: 7px solid transparent;
+  border-bottom-color: transparent;
+  border-bottom-color: $grey-brown-dark;
+  
+  @include media-breakpoint-up(sm) {
+    top: -17px; 
+    border-width: 14px;
+  }
+  
+  &:after {
+    
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 7px;
+    width: 0;
+    height: 0;
+    border: 7px solid transparent;
+    border-top-color: $grey-brown-dark;
+    
+    @include media-breakpoint-up(sm) {
+      border-width: 14px;
+      left: -14px;
+      top: 14px;
+    }
+  }
+}

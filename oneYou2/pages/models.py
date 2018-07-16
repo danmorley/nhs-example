@@ -264,6 +264,10 @@ class RichTextPanel(blocks.StructBlock):
     text = blocks.RichTextBlock(required=False)
 
 
+class ListItemPanel(blocks.StructBlock):
+    text = blocks.CharBlock(required=True)
+
+
 class InlineScriptPanel(blocks.StructBlock):
     script = blocks.TextBlock(required=False, help_text="The javascript to be inserted")
     src = blocks.CharBlock(required=False, help_text="URL of the javascript file")
@@ -290,7 +294,8 @@ GRID_PANELS = [
     ('information_panel', InformationPanel(target_model="shelves.AppTeaser", icon="image")),
     ('icon_card_panel', IconCardPanel(icon="snippet")),
     ('cta_panel', CtaPanel(icon='plus')),
-    ('inline_script_panel', InlineScriptPanel(icon="code"))
+    ('inline_script_panel', InlineScriptPanel(icon="code")),
+    ('list_item_panel', ListItemPanel(icon='list-ul'))
 ]
 
 
