@@ -373,6 +373,18 @@ class Table(blocks.StructBlock):
         form_classname = 'dct-table-shelf dct-meta-panel'
 
 
+class TriageToolShelf(blocks.StructBlock):
+    heading = blocks.CharBlock(required=False)
+    body = blocks.RichTextBlock(required=False)
+    shelf_id = IDBlock(required=False,
+                       label="ID",
+                       help_text="Used to uniquely identify the shelf on the page.",
+                       classname='dct-meta-field')
+
+    class Meta:
+        form_classname = 'dct-triage-tool-shelf dct-meta-panel'
+
+
 # Pages
 
 class OneYou2Page(Page):
@@ -392,6 +404,7 @@ class OneYou2Page(Page):
         ('article_page_heading_shelf', ArticlePageHeadingShelf(label="Article Page Heading", icon='title')),
         ('table', Table(label="Table", icon='list-ul')),
         ('script_shelf', InlineScriptPanel(label="Script shelf", icon='code')),
+        ('triage_tool_shelf', TriageToolShelf(label="Triage tool shelf", icon='cog')),
     ], null=True, blank=True)
 
     # Meta Fields
