@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-//import { ChevronDown, ChevronUp } from "styled-icons/octicons"
+import { GoChevronUp, GoChevronDown } from "react-icons/lib/go"
 import { observer } from "mobx-react"
 
 import { TriageToolContainer, AppHeader, AppIntro, AccordionPanelContainer, Button, OpenIndicator } from "./styles"
@@ -67,7 +67,7 @@ class AccordionPanel extends Component {
     const smallHeader = (
       <div>
         { this.props.heading }
-      {/* <OpenIndicator>{ this.props.open ? <ChevronUp size="30" /> : <ChevronDown size="30" />}</OpenIndicator> */}
+        <OpenIndicator>{ this.props.open ? <GoChevronUp size="30" /> : <GoChevronDown size="30" />}</OpenIndicator>
       </div>
     )
     return (
