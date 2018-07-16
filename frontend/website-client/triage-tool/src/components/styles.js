@@ -103,8 +103,8 @@ const Button = styled.a`
 
 const OpenIndicator = styled.span`
   position: absolute;
-  right: 5px;
-  top: -5px;
+  right: 0;
+  top: -10px;
 `
 
 const AppHeader = styled.h1`
