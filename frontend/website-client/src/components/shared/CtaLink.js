@@ -34,6 +34,9 @@ class CtaLink extends Component {
     else if (variant === 'googleplay') {
       linkClass = 'button-googleplay'
     }
+    else if (variant === 'link') {
+      linkClass = 'link-cta'
+    }
     else {
       linkClass = null;
     }

@@ -198,6 +198,22 @@ class ImageTeaserTemplate(CTABlock):
             ('dark-bg', 'Dark Background')
         ],
         default='light-bg', label='Variant', classname='dct-meta-field')
+    meta_layout_mobile = blocks.ChoiceBlock(choices=[
+            ('mobile-image-default', 'Default'),
+            ('mobile-image-top', 'Top'),
+            ('mobile-image-left', 'Left'),
+        ],
+        default='mobile-image-default', label='Mobile Image Position', classname='dct-meta-field')
+    meta_layout_desktop = blocks.ChoiceBlock(choices=[
+            ('desktop-image-default', 'Default'),
+            ('desktop-image-left', 'Left'),
+        ],
+        default='desktop-image-default', label='Desktop Image Position', classname='dct-meta-field')
+    meta_cta_variant = blocks.ChoiceBlock(choices=[
+            ('link', 'Link'),
+            ('button', 'Button'),
+        ],
+        default='link', label='CTA Style', classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-panel-image-teaser dct-meta-panel'
