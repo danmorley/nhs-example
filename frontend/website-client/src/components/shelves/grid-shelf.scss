@@ -65,6 +65,31 @@
     color: #fff;
   }
 }
+
+.basic-grid-shelf--teal_background {
+  
+  @include media-breakpoint-up(md) {  
+    padding: 2em 0 1.5em; 
+    background-color: $teal-blue;
+    
+    h2, h3, h4, p {
+      color: $white;
+    }
+  }
+}
+
+.basic-grid-shelf--yellow_background {
+  padding: 2em 0 1.5em; 
+  background-color: $sunflower-yellow;
+  border: 3px solid $red;
+  border-left: 0;
+  border-right: 0;
+  
+  h2, h3, h4, p {
+    color: $white;
+  }  
+}
+
 //theming
 .campaign {
   
@@ -76,22 +101,6 @@
 
   h2 {
     @include heading-h2(campaign);
-  }
-}
-
-.oneyou {  
-  
-  .basic-grid-shelf--dark_background {
-    
-    @include media-breakpoint-up(md) {
-      
-      padding: 2em 0 1.5em; 
-      background-color: $teal-blue;
-      
-      h2, h3, h4, p {
-        color: $white;
-      }
-    }
   }
 }
 
