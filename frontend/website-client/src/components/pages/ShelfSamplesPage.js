@@ -45,6 +45,40 @@ const sampleShelvesPage = {
       }
     },
     {
+      id: 'grid-shelf-1-2',
+      type: 'grid_shelf',
+      value: {
+        heading: 'Grid Shelf',
+        rows_to_show: 1,
+        items: [
+          {
+            id: 'cta-panel-1',
+            type: 'cta_panel',
+            value: {
+              heading: 'This is CTA Panel',
+              body: '<p>One You is all about finding that balance, and inspiring you with easy ways to help you feel great, every day.</p>',
+              cta: {
+                link_text: 'Find out more',
+                link_external: 'http://www.somewebsite.co.uk'
+              }
+            }
+          },
+          {
+            id: 'cta-panel-1',
+            type: 'cta_panel',
+            value: {
+              heading: 'This is CTA Panel',
+              body: '<p>One You is all about finding that balance, and inspiring you with easy ways to help you feel great, every day.</p>',
+              cta: {
+                link_text: 'Find out more',
+                link_external: 'http://www.somewebsite.co.uk'
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
       id: 'grid-shelf-1',
       type: 'grid_shelf',
       value: {
