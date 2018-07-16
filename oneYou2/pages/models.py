@@ -77,12 +77,20 @@ VIDEO_LAYOUTS = (
     ('text_on_top', 'Video Bottom Text Top'),
 )
 
+
+PAGE_HEADING_LAYOUTS = (
+    ('image_bottom_left', 'Image bottom left'),
+    ('image_bottom_right', 'Image bottom right'),
+    ('image_top_right', 'Image top right'),
+)
+
 BRIGHTCOVE_OPTION = ('brightcove', 'Brightcove')
 WIREWAX_OPTION = ('wirewax', 'Wirewax')
 VIDEO_HOSTS = (
     BRIGHTCOVE_OPTION,
     WIREWAX_OPTION,
 )
+
 
 CONTENT_STATUS_PENDING = 0
 
@@ -118,14 +126,22 @@ class PageHeading(CTABlock):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     background_image = BlobImageChooserBlock(required=False)
+    image = ImageBlock(required=False)
     shelf_id = IDBlock(required=False,
                        label="ID",
                        help_text="Not displayed in the front end",
                        classname='dct-meta-field')
+
     meta_gradient = blocks.BooleanBlock(label='Green gradient',
                                         required=False,
                                         default=False,
                                         classname='dct-meta-field')
+
+    meta_layout = blocks.ChoiceBlock(choices=PAGE_HEADING_LAYOUTS,
+                                     label="Variant",
+                                     classname='dct-meta-field',
+                                     required=False,
+                                     default=False)
 
     class Meta:
         form_classname = 'dct-page-heading-panel dct-meta-panel'
@@ -198,6 +214,22 @@ class ImageTeaserTemplate(CTABlock):
             ('dark-bg', 'Dark Background')
         ],
         default='light-bg', label='Variant', classname='dct-meta-field')
+    meta_layout_mobile = blocks.ChoiceBlock(choices=[
+            ('mobile-image-default', 'Default'),
+            ('mobile-image-top', 'Top'),
+            ('mobile-image-left', 'Left'),
+        ],
+        default='mobile-image-default', label='Mobile Image Position', classname='dct-meta-field')
+    meta_layout_desktop = blocks.ChoiceBlock(choices=[
+            ('desktop-image-default', 'Default'),
+            ('desktop-image-left', 'Left'),
+        ],
+        default='desktop-image-default', label='Desktop Image Position', classname='dct-meta-field')
+    meta_cta_variant = blocks.ChoiceBlock(choices=[
+            ('link', 'Link'),
+            ('button', 'Button'),
+        ],
+        default='link', label='CTA Style', classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-panel-image-teaser dct-meta-panel'
@@ -232,6 +264,10 @@ class RichTextPanel(blocks.StructBlock):
     text = blocks.RichTextBlock(required=False)
 
 
+class ListItemPanel(blocks.StructBlock):
+    text = blocks.CharBlock(required=True)
+
+
 class InlineScriptPanel(blocks.StructBlock):
     script = blocks.TextBlock(required=False, help_text="The javascript to be inserted")
     src = blocks.CharBlock(required=False, help_text="URL of the javascript file")
@@ -258,7 +294,8 @@ GRID_PANELS = [
     ('information_panel', InformationPanel(target_model="shelves.AppTeaser", icon="image")),
     ('icon_card_panel', IconCardPanel(icon="snippet")),
     ('cta_panel', CtaPanel(icon='plus')),
-    ('inline_script_panel', InlineScriptPanel(icon="code"))
+    ('inline_script_panel', InlineScriptPanel(icon="code")),
+    ('list_item_panel', ListItemPanel(icon='list-ul'))
 ]
 
 
@@ -642,6 +679,7 @@ class OneYou2Page(Page):
         if mode_name == 'json':
             from .serializers import OneYouPageSerializer
             latest_revision_as_page = self.get_latest_revision_as_page()
+            print(latest_revision_as_page.body.stream_data)
             serialized_page = OneYouPageSerializer(instance=latest_revision_as_page)
             return JsonResponse(serialized_page.data)
 
