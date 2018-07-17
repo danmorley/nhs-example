@@ -93,6 +93,9 @@ class PageHeadingShelf extends Component {
     else if (metaLayout === 'image_top_right') {
       imagePositionStyle = "shelf-image-position--top-right"
     }
+    else if (metaLayout === 'image_top_left') {
+      imagePositionStyle = "shelf-image-position--top-left"
+    }
 
     let headingTagName = (classNamePrefix === 'page-heading-shelf') ? 'h1' : 'h2';
 
@@ -106,7 +109,9 @@ class PageHeadingShelf extends Component {
                 {this.renderCta(content.cta)}
               </div>
             </div>
-            {this.renderImage(content.image, `${classNamePrefix}__image`)}
+            <div className={`${classNamePrefix}__image-container`}>
+              {this.renderImage(content.image, `${classNamePrefix}__image`)}
+            </div>
           </div>
         </div>
       </Shelf>
