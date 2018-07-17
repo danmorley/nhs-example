@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { device } from "./device"
+import "../fonts.scss"
 
 const colors = {
   teal: "#138585",
@@ -32,12 +33,15 @@ const AccordionPanelContainer = styled.div`
   }
 
   header {
-    border-bottom: 1px solid ${colors.white};
-    padding-bottom: 10px;
-    position: relative;
-
     div {
       margin-top: 0;
+
+      p {
+        border-bottom: 1px solid ${colors.white};
+        padding-bottom: 10px;
+        position: relative;
+        margin: 0;
+      }
     }
   }
 
@@ -110,6 +114,7 @@ const OpenIndicator = styled.span`
 const AppHeader = styled.h1`
   color: ${colors.black}
   text-align: center;
+  font-family: 'OneYouSansBold';
 `
 
 const AppIntro = styled.p`
