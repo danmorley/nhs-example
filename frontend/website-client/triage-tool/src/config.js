@@ -1,64 +1,83 @@
-export default {
-  "questions": [
-    {
-      "text": "After waking, how long before you first smoke a cigarette?",
-      "inputType": "radio",
-      "options": [
-        {
-          "text": "Within 5 minutes"
-        },
-        {
-          "text": "6-30 minutes"
-        },
-        {
-          "text": "More than 30 mins"
-        }
-      ]
-    },
-    {
-      "text": "How many cigarettes do you smoke per day?",
-      "inputType": "radio",
-      "options": [
-        {
-          "text": "0-10"
-        },
-        {
-          "text": "11-20"
-        },
-        {
-          "text": "21-30"
-        },
-        {
-          "text": "30+"
-        }
-      ]
-    },
-    {
-      "text": "What have you used when you've tried to quit before?",
-      "inputType": "checkbox",
-      "options": [
-        {
-          "text": "Face to face support"
-        },
-        {
-          "text": "E-cigarettes / vapes"
-        },
-        {
-          "text": "Nicotine replacement therapies (NRT) e.g. patches, gum, lozenges, spray"
-        },
-        {
-          "text": "Stop smoking medicines e.g. Champix, Zyban"
-        },
-        {
-          "text": "Quit with friends and family"
-        },
-        {
-          "text": "Willpower"
-        },
-        {
-          "text": "Never tried to quit before"
-        }
-      ]
-    }
-  ]
-}
+export default [
+  {
+    "text": "After waking, how long before you first smoke a cigarette?",
+    "inputType": "radio",
+    "options": [
+      {
+        "id": "1",
+        "text": "Within 5 minutes",
+        "dependence": 3
+      },
+      {
+        "id": "2",
+        "text": "6-30 minutes",
+        "dependence": 2
+      },
+      {
+        "id": "3",
+        "text": "More than 30 mins",
+        "dependence": 1
+      }
+    ]
+  },
+  {
+    "text": "How many cigarettes do you smoke per day?",
+    "inputType": "radio",
+    "options": [
+      {
+        "id": "4",
+        "text": "0-10",
+        "dependence": 0
+      },
+      {
+        "id": "5",
+        "text": "11-20",
+        "dependence": 1
+      },
+      {
+        "id": "6",
+        "text": "21-30",
+        "dependence": 2
+      },
+      {
+        "id": "7",
+        "text": "30+",
+        "dependence": 3
+      }
+    ]
+  },
+  {
+    "text": "What have you used when you've tried to quit before?",
+    "inputType": "checkbox",
+    "options": [
+      {
+        "id": "8",
+        "text": "Face to face support"
+      },
+      {
+        "id": "9",
+        "text": "E-cigarettes / vapes"
+      },
+      {
+        "id": "10",
+        "text": "Nicotine replacement therapies (NRT) e.g. patches, gum, lozenges, spray"
+      },
+      {
+        "id": "11",
+        "text": "Stop smoking medicines e.g. Champix, Zyban"
+      },
+      {
+        "id": "12",
+        "text": "Quit with friends and family"
+      },
+      {
+        "id": "13",
+        "text": "Willpower"
+      },
+      {
+        "id": "14",
+        "text": "Never tried to quit before"
+      }
+    ]
+  }
+]

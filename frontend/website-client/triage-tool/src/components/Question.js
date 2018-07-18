@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import { observer } from "mobx-react"
 
 class Question extends Component {
   render() {
@@ -7,7 +8,9 @@ class Question extends Component {
     const optionList = options.map((option, index) => {
       return (
         <Option { ...option }
+          store={ option }
           key={ index }
+          selected={ option.selected }
           inputType={ inputType }
           name={ text }>
         </Option>
@@ -31,12 +34,12 @@ Question.propTypes = {
   inputType: PropTypes.string
 }
 
-export default Question
+export default observer(Question)
 
 
 class Option extends Component {
   render() {
-    const { inputType, name, text } = this.props
+    const { inputType, name, text, selected, store } = this.props
     return (
       <li>
         <label>
@@ -44,6 +47,8 @@ class Option extends Component {
             type={ inputType }
             name={ name }
             value={ text }
+            onClick={ store.toggleSelect }
+            checked={ selected }
           />
           { text }
         </label>
@@ -55,5 +60,7 @@ class Option extends Component {
 Option.propTypes = {
   text: PropTypes.string,
   name: PropTypes.string,
-  inputType: PropTypes.string
+  inputType: PropTypes.string,
+  selected: PropTypes.bool,
+  store: PropTypes.object
 }

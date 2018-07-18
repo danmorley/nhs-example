@@ -9,7 +9,8 @@ import config from "../../config"
 import TriageStore from "../../triage-store"
 
 const triageStore = TriageStore.create({
-  currentPanel: 0
+  currentPanel: 0,
+  questions: config
 })
 
 
