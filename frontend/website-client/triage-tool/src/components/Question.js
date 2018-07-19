@@ -49,6 +49,7 @@ class Option extends Component {
             value={ text }
             onClick={ store.toggleSelect }
             checked={ selected }
+            readOnly={ true }
           />
           { text }
         </label>

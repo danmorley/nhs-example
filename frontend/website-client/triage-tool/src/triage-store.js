@@ -1,5 +1,5 @@
 import { types, getParent } from "mobx-state-tree"
-import { xor } from "lodash"
+import xor from "lodash/xor"
 
 const Option = types
   .model("Option", {
@@ -20,6 +20,7 @@ const Option = types
 
 const Question = types
   .model("Question", {
+    id: types.identifier(types.string),
     text: types.string,
     inputType: types.enumeration("inputType", ["radio", "checkbox"]),
     options: types.array(Option),
@@ -58,8 +59,8 @@ const TriageStore = types
     },
     get previousAttempts() {
       return self.questions
-        .reduce((acc, question) => acc.concat(question.selectedOptions), [])
-        .reduce((acc, option) => acc + option.text, [])
+        .find(q => q.id == "q3").selectedOptions
+        .map(option => option.text)
     }
   }))
 

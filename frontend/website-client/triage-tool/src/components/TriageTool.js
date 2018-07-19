@@ -23,6 +23,9 @@ class TriageTool extends Component {
         </AccordionPanel>
       )
     })
+    const attempts = previousAttempts.map((attempt, index) => {
+      return <p key={ index }>{ attempt }</p>
+    })
 
     return (
       <TriageToolContainer>
@@ -42,7 +45,7 @@ class TriageTool extends Component {
           open={ currentPanel == (questions.length + 1) }
           heading="Feedback">
           <p>Dependence: { dependence }</p>
-          <p>{ previousAttempts }</p>
+          { attempts }
         </AccordionPanel>
 
       </TriageToolContainer>
