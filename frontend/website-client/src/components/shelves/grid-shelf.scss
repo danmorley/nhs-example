@@ -90,17 +90,3 @@
   }  
 }
 
-//theming
-.campaign {
-  
-  .shelf-section:first-child {
-    h2 {
-      @include heading-h1(campaign);
-    }
-  }
-
-  h2 {
-    @include heading-h2(campaign);
-  }
-}
-
