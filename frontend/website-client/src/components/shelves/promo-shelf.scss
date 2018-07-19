@@ -118,12 +118,23 @@ $shelf-padding-extra: 2em;
         margin-bottom: 0.2em;
       }
   }
+  
+  .shelf-image-position--top-left {
+     > .container {
+    display: flex;
+    flex-direction: column-reverse;
+    }
+  
+    .page-heading-shelf__image-container {
+      
+      @include media-breakpoint-up(md) {
+        margin-bottom: 0.5em;
+      }
+    }
+  }
 }
 
-
 .page-heading-shelf__image {
-  
-  
   height: 30px;
 
   @include media-breakpoint-up(sm) {
