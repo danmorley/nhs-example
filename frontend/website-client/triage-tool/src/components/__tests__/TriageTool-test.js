@@ -47,6 +47,7 @@ describe("displaying questions", () => {
   test("hides the question text on another question selection", () => {
     const triageTool = mount(<TriageTool store={ triageStore } config={ config } />)
     triageTool.find({ heading: "Question 1 out of 3" }).find("header").simulate("click")
+    triageTool.find({ text: "Within 5 minutes" }).find("input").simulate("click")
     triageTool.find({ heading: "Question 2 out of 3" }).find("header").simulate("click")
 
     expect(triageTool.text()).not.toContain("After waking, how long before you first smoke a cigarette?")

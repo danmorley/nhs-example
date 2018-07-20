@@ -38,6 +38,14 @@ const Question = types
   .views(self => ({
     isSelected(option) {
       return self.selectedOptions.map(o => o.id).includes(option)
+    },
+    get locked() {
+      if (self.id == "q1") {
+        return false
+      } else {
+        const currentQuestionIndex = getParent(self).findIndex(q => q.id == self.id)
+        return getParent(self)[currentQuestionIndex - 1].selectedOptions.length == 0
+      }
     }
   }))
 
@@ -61,6 +69,10 @@ const TriageStore = types
       return self.questions
         .find(q => q.id == "q3").selectedOptions
         .map(option => option.text)
+    },
+    get allQuestionsAnswered() {
+      return self.questions
+        .every(q => q.selectedOptions.length > 0)
     }
   }))
 
