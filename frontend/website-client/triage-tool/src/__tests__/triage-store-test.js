@@ -12,7 +12,7 @@ const createStore = questions => {
 const buildQuestionsWithSelectedOptions = dependencyValues => {
   return dependencyValues.map((dependencyValue, index) => {
     return {
-      id: `q${index}`,
+      id: `q${index + 1}`,
       text: `question ${index}`,
       inputType: "radio",
       options: [
@@ -80,6 +80,45 @@ describe("checkbox based options", () => {
 
     question.options.find(o => o.id.toString() == "a").toggleSelect()
     expect(question.selectedOptions.map(o => o.id)).toEqual(["c"])
+  })
+})
+
+describe("question locking", () => {
+  test("question is locked if no option selected for previous question", () => {
+    const store = createStore(buildQuestionsWithSelectedOptions([0, 0, 0]))
+    const question1 = store.questions.find(q => q.id.toString() == "q1")
+    const question2 = store.questions.find(q => q.id.toString() == "q2")
+    const question3 = store.questions.find(q => q.id.toString() == "q3")
+
+    question1.options[0].toggleSelect()
+
+    expect(question1.locked).toEqual(false)
+    expect(question2.locked).toEqual(false)
+    expect(question3.locked).toEqual(true)
+  })
+})
+
+describe("all questions answered", () => {
+  test("returns false if any questions have no selected options", () => {
+    const store = createStore(buildQuestionsWithSelectedOptions([0, 0, 0]))
+    const question1 = store.questions.find(q => q.id.toString() == "q1")
+
+    question1.options[0].toggleSelect()
+
+    expect(store.allQuestionsAnswered).toEqual(false)
+  })
+
+  test("returns true if all questions have selected options", () => {
+    const store = createStore(buildQuestionsWithSelectedOptions([0, 0, 0]))
+    const question1 = store.questions.find(q => q.id.toString() == "q1")
+    const question2 = store.questions.find(q => q.id.toString() == "q2")
+    const question3 = store.questions.find(q => q.id.toString() == "q3")
+
+    question1.options[0].toggleSelect()
+    question2.options[0].toggleSelect()
+    question3.options[0].toggleSelect()
+
+    expect(store.allQuestionsAnswered).toEqual(true)
   })
 })
 

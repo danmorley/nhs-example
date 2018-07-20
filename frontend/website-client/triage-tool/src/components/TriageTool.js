@@ -8,11 +8,16 @@ import Question from "./Question"
 
 class TriageTool extends Component {
   render() {
-    const { questions, currentPanel, changePanel, dependence, previousAttempts } = this.props.store
+    const { questions, currentPanel, changePanel, dependence,
+      previousAttempts, allQuestionsAnswered } = this.props.store
     const questionColors = ["#028586","#197271","#145b5b"]
+
     const questionList = questions.map((question, index) => {
+      // TODO: Give some sort of feedback to user if panel is locked
+      const openIfNotLocked = () => !question.locked && changePanel(index + 1)
       return (
-        <AccordionPanel toggleOpen={ () => changePanel(index + 1) }
+        <AccordionPanel
+          toggleOpen={ openIfNotLocked }
           open={ currentPanel == (index + 1) }
           key={ index }
           backgroundColor={questionColors[index]}
@@ -23,6 +28,7 @@ class TriageTool extends Component {
         </AccordionPanel>
       )
     })
+
     const attempts = previousAttempts.map((attempt, index) => {
       return <p key={ index }>{ attempt }</p>
     })
@@ -41,7 +47,8 @@ class TriageTool extends Component {
 
         { questionList }
 
-        <AccordionPanel toggleOpen={ () => changePanel(questions.length + 1) }
+        <AccordionPanel
+          toggleOpen={ () => allQuestionsAnswered && changePanel(questions.length + 1) }
           open={ currentPanel == (questions.length + 1) }
           heading="Feedback">
           <p>Dependence: { dependence }</p>
