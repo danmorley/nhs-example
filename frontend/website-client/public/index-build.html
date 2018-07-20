@@ -24,26 +24,7 @@
     -->
     <title></title>
     <script type="text/javascript">
-      function abPageHider() {
-        console.log('Temporarily hide content for A/B test');
-        (function (a, s, y, n, c, h, i, d, e) {
-          s.className += ' ' + y;
-          h.start = 1 * new Date;
-          h.end = i = function () {
-            s.className = s.className.replace(RegExp(' ?' + y), '')
-          };
 
-          (a[n] = a[n] || []).hide = h;
-          setTimeout(function () {
-            i();
-            h.end = null
-          }, c);
-
-          h.timeout = c;
-        })(window, document.getElementById('root'), 'async-hide', 'dataLayer', 4000, {'GTM-WKM3HGR': true});
-      }
-
-      abPageHider();
     </script>
 
     <style>
@@ -148,12 +129,6 @@
                   transform: perspective(140px) rotateY(180deg);
           opacity: 0;
         }
-      }
-    </style>
-
-    <style>
-      .async-hide {
-        opacity: 0 !important
       }
     </style>
 

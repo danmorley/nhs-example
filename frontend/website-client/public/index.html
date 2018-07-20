@@ -23,27 +23,9 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title></title>
+
     <script type="text/javascript">
-      function abPageHider() {
-        console.log('Temporarily hide content for A/B test');
-        (function (a, s, y, n, c, h, i, d, e) {
-          s.className += ' ' + y;
-          h.start = 1 * new Date;
-          h.end = i = function () {
-            s.className = s.className.replace(RegExp(' ?' + y), '')
-          };
 
-          (a[n] = a[n] || []).hide = h;
-          setTimeout(function () {
-            i();
-            h.end = null
-          }, c);
-
-          h.timeout = c;
-        })(window, document.getElementById('root'), 'async-hide', 'dataLayer', 4000, {'GTM-WKM3HGR': true});
-      }
-
-      abPageHider();
     </script>
 
     <style>
@@ -151,12 +133,6 @@
       }
     </style>
 
-    <style>
-      .async-hide {
-        opacity: 0 !important
-      }
-    </style>
-
     <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="9d5293f5-cb06-4c3c-a81c-58ac270dec41"
             type="text/javascript" async></script>
 
@@ -164,7 +140,6 @@
       function CookiebotCallback_OnAccept() {
         if(Cookiebot.consent.statistics) {
           enableWebtrends();
-          enableGoogleAnalytics();
         }
       }
 
@@ -194,21 +169,6 @@
         }());
       }
 
-      function enableGoogleAnalytics() {
-        console.log('enable GA for AB testing');
-        var script = document.createElement("script");
-        script.async=true;
-        script.src="https://www.googletagmanager.com/gtag/js?id=UA-120378767-1";
-
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-          dataLayer.push(arguments);
-        }
-
-        gtag('js', new Date());
-        gtag('config', 'UA-120378767-1', {'optimize_id': 'GTM-WKM3HGR'});
-      }
     </script>
   </head>
 
