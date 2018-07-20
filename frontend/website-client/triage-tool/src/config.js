@@ -1,5 +1,6 @@
 export default [
   {
+    "id": "q1",
     "text": "After waking, how long before you first smoke a cigarette?",
     "inputType": "radio",
     "options": [
@@ -21,6 +22,7 @@ export default [
     ]
   },
   {
+    "id": "q2",
     "text": "How many cigarettes do you smoke per day?",
     "inputType": "radio",
     "options": [
@@ -47,6 +49,7 @@ export default [
     ]
   },
   {
+    "id": "q3",
     "text": "What have you used when you've tried to quit before?",
     "inputType": "checkbox",
     "options": [
