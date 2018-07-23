@@ -147,25 +147,23 @@ $shelf-padding-extra: 2em;
 } 
 
 //theming
-.oneyou, .stoptober {
 
-  h1, h2 {
-    .marker {
-      display: inline-block;
-      line-height: 0.9em;
-      border-bottom: 0.15em solid $white;
-    }
+//default theme (oneyou)
+h1, h2 {
+  .marker {
+    display: inline-block;
+    line-height: 0.9em;
+    border-bottom: 0.15em solid $white;
   }
 }
 
-.oneyou {
-  .shelf {
-    h2 {
-      color: $teal-blue;
-    }
+.shelf {
+  h2 {
+    color: $teal-blue;
   }
 }
 
+//stoptober
 .stoptober {
   
   .shelf {

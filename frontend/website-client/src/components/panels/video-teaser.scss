@@ -115,25 +115,25 @@
   }
 }
 
-// theming
-.oneyou, .stoptober {
+//theming
 
-  .video-teaser--text_on_right {
-    .video-teaser--text_on_right__info {
-      background: $teal-blue;
+//default theme (oneyou)
+.video-teaser--text_on_right {
+  .video-teaser--text_on_right__info {
+    background: $teal-blue;
+  }
+
+  .video-teaser--text_on_right__heading {
+    background-color: $teal-dark;
+    color: $white;
+  }
+
+  .video-teaser--text_on_right__text {
+    color: $white;
+
+    a {
+      color: $sunflower-yellow;
     }
-
-    .video-teaser--text_on_right__heading {
-      background-color: $teal-dark;
-      color: $white;
-    }
-
-    .video-teaser--text_on_right__text {
-      color: $white;
-
-      a {
-        color: $sunflower-yellow;
-      }
-    }
-   }
+  }
 }
+

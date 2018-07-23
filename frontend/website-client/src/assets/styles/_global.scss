@@ -184,25 +184,39 @@ ul.cta-list {
 }
 
 //theming
-.oneyou {
 
-  h1 {
-    font-size: map-deep-get($headings, oneyou, heading-h1, mobile);
-    
-    @include media-breakpoint-up(sm) {
-      font-size: map-deep-get($headings, oneyou, heading-h1, desktop);
-    }
-  }
+//default theme (oneyou)
+h1 {
+  font-size: map-deep-get($headings, oneyou, heading-h1, mobile);
   
-  h2 {
-    font-size: map-deep-get($headings, oneyou, heading-h2, mobile);
-    
-    @include media-breakpoint-up(sm) {
-      font-size: map-deep-get($headings, oneyou, heading-h2, desktop);
-    }
+  @include media-breakpoint-up(sm) {
+    font-size: map-deep-get($headings, oneyou, heading-h1, desktop);
   }
 }
 
+h2 {
+  font-size: map-deep-get($headings, oneyou, heading-h2, mobile);
+  
+  @include media-breakpoint-up(sm) {
+    font-size: map-deep-get($headings, oneyou, heading-h2, desktop);
+  }
+}
+
+.button-cta {
+  background-color: $sunflower-yellow;
+  color: $grey-brown;
+
+  &:active, &:visited {
+    color: $grey-brown;
+  }
+
+  &:hover {
+    background-color: $grey-brown;
+    color: $white;
+  }
+}
+
+//stoptober
 .stoptober {
 
   h1 {
@@ -228,14 +242,3 @@ ul.cta-list {
   }
 }
 
-.oneyou, .stoptober { 
-  .button-cta {
-    background-color: $sunflower-yellow;
-    color: $grey-brown;
-
-    &:hover {
-      background-color: $grey-brown;
-      color: $white;
-    }
-  }
-}
