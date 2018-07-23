@@ -35,6 +35,9 @@ $shelf-padding-extra: 2em;
   .video-js {
     height: 400px;
     width: 100%;
+
+    &.wirewax {
+      height: 80vh;
+    }
   }
 }
-
