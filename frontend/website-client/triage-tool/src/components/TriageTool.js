@@ -72,7 +72,7 @@ class AccordionPanel extends Component {
     const smallHeader = (
       <div>
         <p>{ this.props.heading }
-        <OpenIndicator>{ this.props.open ? <MdExpandLess size="40" /> : <MdExpandMore size="40" />}</OpenIndicator>
+          <OpenIndicator>{ this.props.open ? <MdExpandLess size="40" /> : <MdExpandMore size="40" />}</OpenIndicator>
         </p>
       </div>
     )

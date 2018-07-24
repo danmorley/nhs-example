@@ -7,20 +7,13 @@ module.exports = {
         use: ["babel-loader"]
       },
       {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader'
-      },
-      {
-        test: /\.scss$/,
-        loader: 'style-loader!css-loader!sass-loader'
-      },
-      {
-        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        // Match woff2 in addition to patterns like .woff?v=1.1.1.
+        test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
         use: [{
-          loader: 'file-loader',
+          loader: 'url-loader',
           options: {
-            name: '[name].[ext]',
-            outputPath: 'fonts/'
+            limit: 100000,
+            name: './fonts/[name].[ext]'
           }
         }]
       },

@@ -1,6 +1,6 @@
 import styled from "styled-components"
+import { injectGlobal } from "styled-components"
 import { device } from "./device"
-import "../fonts.scss"
 
 const colors = {
   teal: "#138585",
@@ -13,6 +13,33 @@ const colors = {
 const fonts = {
   helvetica: "Helvetica, Liberation Sans, Arial, sans-serif"
 }
+
+injectGlobal`
+    @font-face {
+      font-family: 'OneYouSansBold';
+      src: url('./fonts/one_you-sans-bold.woff2') format('woff2'),
+      url('./fonts/one_you-sans-bold.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'OneYouSansRegular';
+      src: url('./fonts/one_you-sans-regular.woff2') format('woff2'),
+      url('./fonts/one_you-sans-regular.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'OneYouScriptBold';
+      src: url('./fonts/one_you-script-bold.woff2') format('woff2'),
+      url('./fonts/one_you-script-bold.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  }
+`
 
 const TriageToolContainer = styled.div`
   display: flex;
