@@ -197,7 +197,16 @@ class VideoTemplate(CTABlock):
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False)
     shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
-    meta_layout = blocks.ChoiceBlock(choices=VIDEO_LAYOUTS, label="Layout", classname='dct-meta-field')
+    meta_layout_mobile = blocks.ChoiceBlock(choices=[
+        ('mobile-image-top', 'Top'),
+        ('mobile-image-left', 'Left'),
+    ],
+        default='mobile-image-left', label='Mobile Image Position', classname='dct-meta-field')
+    meta_layout_desktop = blocks.ChoiceBlock(choices=[
+        ('desktop-image-top', 'Top'),
+        ('desktop-image-left', 'Left'),
+    ],
+        default='desktop-image-left', label='Desktop Image Position', classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-video-teaser-panel dct-meta-panel'
