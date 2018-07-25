@@ -62,6 +62,8 @@ class VideoTeaserPanel extends Component {
     this.props = nextProps;
     this.setImage();
   }
+  
+  /**
 
   renderTextRight(content, classNamePrefix, backgroundTeaserImage) {
     classNamePrefix = classNamePrefix + '--' + TEXT_ON_RIGHT;
@@ -113,6 +115,28 @@ class VideoTeaserPanel extends Component {
       default:
         return this.renderTextRight(content, classNamePrefix, backgroundTeaserImage);
     }
+  }
+  */
+  
+  render() {
+    let { content, classNamePrefix } = this.props;
+    let backgroundTeaserImage = this.state.backgroundImageStyle;
+    
+    return (
+      <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
+        <div className={`${classNamePrefix}__image`} style={backgroundTeaserImage}>
+          <VideoModal video={content.video} host={content.host}>
+          </VideoModal>
+        </div>
+        <div className={`${classNamePrefix}__info`}>
+          <Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />
+          <div className={`${classNamePrefix}__text`}>
+            <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
+            <CtaLinks cta={content.cta} />
+          </div>
+        </div>
+      </Panel>
+    )
   }
 }
 
