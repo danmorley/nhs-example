@@ -1,0 +1,36 @@
+@import '../../assets/styles/variables/variables';
+@import "../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+.action-panel {
+  font-size: 20px;
+  margin-bottom: 1em;
+  display: flex;
+
+  @include media-breakpoint-down(sm) {
+    font-size: 16px;
+    margin-bottom: 0;
+    padding: 15px 34px 13px;
+    border-bottom: 1px solid #979797;
+  }
+
+  .action-panel--toggle {
+    height: 1em;
+    width: 1em;
+    border: 1px solid $teal-blue;
+    border-radius: 5px;
+    margin-right: 1.5em;
+
+    &.clicked {
+      background-color: $sunflower-yellow;
+      font-weight: bold;
+    }
+  }
+
+  .action-panel--title {
+    font-weight: light;
+
+    &.clicked {
+      font-weight: bold;
+    }
+  }
+}
