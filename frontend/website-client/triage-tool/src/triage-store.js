@@ -73,6 +73,20 @@ const TriageStore = types
     get allQuestionsAnswered() {
       return self.questions
         .every(q => q.selectedOptions.length > 0)
+    },
+    get dependenceGroup() {
+      if (self.dependence < 3) {
+        return "low"
+      } else if (self.dependence > 4) {
+        return "high"
+      } else {
+        return "medium"
+      }
+    },
+    get usedWillpowerAlone() {
+      return self.questions
+        .find(q => q.id == "q3").selectedOptions
+        .some(o => o.id == "13")
     }
   }))
 

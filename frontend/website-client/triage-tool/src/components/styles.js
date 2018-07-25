@@ -118,4 +118,13 @@ const AppIntro = styled.p`
   font-family: ${fonts.helvetica};
 `
 
-export { TriageToolContainer, AppHeader, AppIntro, AccordionPanelContainer, Button, OpenIndicator }
+const PlanContainer = styled.div`
+  color: ${colors.black}
+
+  h2 {
+    text-transform: uppercase;
+  }
+`
+
+export { TriageToolContainer, AppHeader, AppIntro, AccordionPanelContainer,
+  Button, OpenIndicator, PlanContainer }

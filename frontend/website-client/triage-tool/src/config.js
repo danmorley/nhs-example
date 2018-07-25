@@ -1,4 +1,4 @@
-export default [
+const questions = [
   {
     "id": "q1",
     "text": "After waking, how long before you first smoke a cigarette?",
@@ -84,3 +84,11 @@ export default [
     ]
   }
 ]
+
+// functions that take a copy of the mobx-state-tree store and return a string
+const planTemplates = {
+  planIntro: store =>
+    `You’re more likely to quit successfully with the right support. ${ store.usedWillpowerAlone ? "Using your willpower is important but you'll increase you're chances of success if you get some additional support. " : ""} Find out the best quit way for you to quit below.`,
+}
+
+export { questions, planTemplates }

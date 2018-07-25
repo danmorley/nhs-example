@@ -1,6 +1,7 @@
 /* eslint-disable no-undef, no-console */
 
 import TriageStore from "../triage-store"
+import { questions } from "../config"
 
 const createStore = questions => {
   return TriageStore.create({
@@ -149,5 +150,39 @@ describe("calculates dependence based on total from selected options", () => {
     })
 
     expect(store.dependence).toEqual(4)
+  })
+})
+
+describe("calculates dependence group based on dependence score", () => {
+  test("returns 'low' for dependence score of 1 to 2", () => {
+    const store = createStore(buildQuestionsWithSelectedOptions([1]))
+    store.questions[0].options[0].toggleSelect()
+
+    expect(store.dependenceGroup).toEqual("low")
+  })
+
+  test("returns 'medium' for dependence score of 3 to 4", () => {
+    const store = createStore(buildQuestionsWithSelectedOptions([3]))
+    store.questions[0].options[0].toggleSelect()
+
+    expect(store.dependenceGroup).toEqual("medium")
+  })
+
+  test("returns 'medium' for dependence score of 5 to 6", () => {
+    const store = createStore(buildQuestionsWithSelectedOptions([5]))
+    store.questions[0].options[0].toggleSelect()
+
+    expect(store.dependenceGroup).toEqual("high")
+  })
+})
+
+describe("usedWillpowerAlone", () => {
+  test("returns true if willpower option ticked", () => {
+    const store = createStore(questions)
+    const question3 = store.questions.find(q => q.id.toString() == "q3")
+
+    expect(store.usedWillpowerAlone).toEqual(false)
+    question3.options.find(o => o.id.toString() == "13").toggleSelect()
+    expect(store.usedWillpowerAlone).toEqual(true)
   })
 })
