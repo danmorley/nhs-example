@@ -430,8 +430,44 @@ class Table(blocks.StructBlock):
         form_classname = 'dct-table-shelf dct-meta-panel'
 
 
-# Pages
+class ActionPanel(blocks.StructBlock):
+    action_code = blocks.CharBlock(required=True, unique=True)
+    title = blocks.CharBlock(required=True)
+    rich_text_body = blocks.RichTextBlock(required=False)
+    cta = blocks.StreamBlock([
+        ('simple_menu_item', SimpleMenuItem())
+    ], icon='arrow-left', label='Items', required=False)
+    panel_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
 
+
+class ActionGroup(blocks.StructBlock):
+    title = blocks.CharBlock(required=True)
+    actions = blocks.StreamBlock([
+        ('action_panel', ActionPanel(required=False, icon="list-ul")),
+    ])
+    panel_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
+
+
+class ActionPlan(blocks.StructBlock):
+    action_groups = blocks.StreamBlock([
+        ('action_group', ActionGroup(required=False, icon="collapse-down")),
+    ])
+    cta = blocks.StreamBlock([
+        ('simple_menu_item', SimpleMenuItem())
+    ], icon='arrow-left', label='Items', required=False)
+    shelf_id = IDBlock(required=False, label='ID', classname='dct-meta-field')
+
+
+class ActionPlanDisplay(blocks.StructBlock):
+    shelf_id = IDBlock(required=False, label='ID', classname='dct-meta-field')
+    title = blocks.CharBlock(required=False)
+    body = blocks.RichTextBlock(required=False)
+    cta = blocks.StreamBlock([
+        ('simple_menu_item', SimpleMenuItem())
+    ], icon='arrow-left', label='Items', required=False)
+
+
+# Pages
 class OneYou2Page(Page):
     body = StreamField([
         ('page_heading_shelf', PageHeading(icon='title')),
@@ -449,6 +485,8 @@ class OneYou2Page(Page):
         ('article_page_heading_shelf', ArticlePageHeadingShelf(label="Article Page Heading", icon='title')),
         ('table', Table(label="Table", icon='list-ul')),
         ('script_shelf', InlineScriptPanel(label="Script shelf", icon='code')),
+        ('action_plan_shelf', ActionPlan(label="Action Plan Builder shelf", icon='form')),
+        ('action_plan_display_shelf', ActionPlanDisplay(label="Action Plan Display shelf", icon='form'))
     ], null=True, blank=True)
 
     # Meta Fields
