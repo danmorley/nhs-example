@@ -207,8 +207,8 @@ class VideoTemplate(CTABlock):
         ('desktop-image-left', 'Left'),
     ],
         default='desktop-image-left', label='Desktop Image Position', classname='dct-meta-field')
-    meta_use_play_button = blocks.BooleanBlock(label='Use play button', required=False, default=False, classname='dct-meta-field')
-    meta_play_button_text = blocks.CharBlock(default='Play', label='Play Button Text', classname='dct-meta-field')
+    meta_use_play_link = blocks.BooleanBlock(label='Use play video link', required=False, default=False, classname='dct-meta-field')
+    meta_play_link_text = blocks.CharBlock(default='Play', label='Play Video Link Text', classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-video-teaser-panel dct-meta-panel'
