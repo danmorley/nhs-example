@@ -8,5 +8,5 @@ it('renders without crashing', () => {
 });
 it('renders without crashing with content', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<BrightCoveVideo video={"video_source"} />, div);
+    ReactDOM.render(<BrightcoveVideo video={"video_source"} />, div);
 });
