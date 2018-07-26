@@ -7,6 +7,10 @@
   justify-content: flex-end;
 }
 
+.share-button-panel, .email-button-panel, .print-button-panel {
+  margin-left: 1em;
+}
+
 .share-button {
   background: $sunflower-yellow;
   border: 1px solid transparent;

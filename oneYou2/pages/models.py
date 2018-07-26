@@ -515,6 +515,8 @@ class OneYou2Page(Page):
                                                    " your health today")
 
     use_share_button = models.BooleanField(default=True)
+    use_email_button = models.BooleanField(default=False)
+    use_print_button = models.BooleanField(default=False)
 
     twitter_image_fk = models.ForeignKey(
         'images.PHEImage',
@@ -618,6 +620,8 @@ class OneYou2Page(Page):
         MultiFieldPanel(
             [
                 FieldPanel('use_share_button'),
+                FieldPanel('use_email_button'),
+                FieldPanel('use_print_button'),
             ],
             heading='Share buttons',
             classname='collapsible collapsed'),
