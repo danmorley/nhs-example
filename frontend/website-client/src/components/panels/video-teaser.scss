@@ -94,6 +94,7 @@
       
       .video-teaser__image {
         width: 35%;
+        height: auto;
         min-height: 176px; 
         
         @include media-breakpoint-up(sm) {
