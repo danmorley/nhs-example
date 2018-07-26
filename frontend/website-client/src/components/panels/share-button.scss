@@ -1,13 +1,7 @@
 @import '../../assets/styles/variables/variables';
 @import "../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
 
-
-.share-button-shelf--align-right {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.share-button-panel, .email-button-panel, .print-button-panel {
+.share-button-panel {
   margin-left: 1em;
 }
 
