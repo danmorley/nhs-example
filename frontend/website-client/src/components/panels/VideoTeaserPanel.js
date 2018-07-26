@@ -35,6 +35,8 @@ class VideoTeaserPanel extends Component {
     this.state = {
       backgroundImageStyle: null
     }
+    
+    this.video = React.createRef();
   }
 
   setImage() {
@@ -55,11 +57,13 @@ class VideoTeaserPanel extends Component {
     window.removeEventListener('resize', this.setImage);
   }
   
+  triggerModal = () => {
+    this.video.current.openModal();
+  }
+  
   render() {
     let { content, classNamePrefix } = this.props;
     let backgroundTeaserImage = this.state.backgroundImageStyle;
-     
-     
     let mobileImagePosition = "mobile-image-left";
     let desktopImagePosition = "desktop-image-left";
     
@@ -89,7 +93,7 @@ class VideoTeaserPanel extends Component {
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant} layout={layout}>
         <div className={`${classNamePrefix}__image`} style={backgroundTeaserImage}>
-          <VideoModal video={content.video} host={content.host}>
+          <VideoModal video={content.video} host={content.host} ref={this.video}>
           </VideoModal>
         </div>
         <div className={`${classNamePrefix}__info`}>
@@ -97,7 +101,7 @@ class VideoTeaserPanel extends Component {
           <div className={`${classNamePrefix}__text`}>
             <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
             {content.meta_use_play_link === true &&
-              <span role="button" className={`${classNamePrefix}__play-link`}>{content.meta_play_link_text}</span>
+              <span role="button" onClick={this.triggerModal.bind(this)} className={`${classNamePrefix}__play-link`}>{content.meta_play_link_text}</span>
             }
             <CtaLinks cta={content.cta} />
           </div>

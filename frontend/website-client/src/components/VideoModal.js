@@ -22,7 +22,11 @@ class VideoModal extends Component {
 
   handleClick = () => this.setState({isShowingModal: true})
   handleClose = () => this.setState({isShowingModal: false})
-
+  
+  openModal() {
+    this.divElement.click()
+  }
+  
   renderVideo(video, host) {
     if (!video) return null;
     if (host === BRIGHTCOVE_HOST) {
@@ -36,7 +40,7 @@ class VideoModal extends Component {
 
   render() {
     return [
-      <div key="1" onClick={() => this.refs.modal.open() }>{this.props.children}</div>,
+      <div key="1" ref={div => this.divElement = div} onClick={() => this.refs.modal.open() }>{this.props.children}</div>,
       <PureModal
         key = "2"
         header=""
