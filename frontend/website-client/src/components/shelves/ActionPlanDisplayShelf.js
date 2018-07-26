@@ -38,8 +38,8 @@ class ActionPlanDisplayShelf extends Component {
 
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix}>
-        <div className={`shelf__container container`}>
-          <div className={`${classNamePrefix}--lead`}>
+        <div className={`${classNamePrefix}--lead`}>
+          <div className='container'>
             {heading != '' &&
               <Text tagName="h2" content={heading} className={`${classNamePrefix}--title`} />
             }
@@ -47,7 +47,9 @@ class ActionPlanDisplayShelf extends Component {
               <Text tagName="div" content={contentBody} className={`${classNamePrefix}--body`} format="richtext"/>
             }
           </div>
+        </div>
 
+        <div className={`shelf__container container`}>
           <ul className={`${classNamePrefix}--action-list`}>
             { actionPlanKeys.map((actionCode, i) =>
               <div key={i} className={`${classNamePrefix}--action`}>
