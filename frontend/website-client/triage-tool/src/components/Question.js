@@ -20,6 +20,7 @@ class Question extends Component {
     return (
       <div>
         <h2>{ text }</h2>
+        <p>{inputType == "radio" ? "Pick one" : "Pick as many as you like"}</p>
         <ul>
           { optionList }
         </ul>
@@ -51,6 +52,7 @@ class Option extends Component {
             checked={ selected }
             readOnly={ true }
           />
+          <span className="checkmark"></span>
           { text }
         </label>
       </li>
