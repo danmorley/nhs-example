@@ -3,13 +3,15 @@ import PropTypes from "prop-types"
 import { MdExpandMore, MdExpandLess } from "react-icons/lib/md"
 import { observer } from "mobx-react"
 
-import { TriageToolContainer, AppHeader, AppIntro, AccordionPanelContainer, Button, OpenIndicator } from "./styles"
+import { TriageToolContainer, AppHeader, AppIntro, AccordionPanelContainer,
+  Button, OpenIndicator } from "./styles"
 import Question from "./Question"
+import Plan from "./Plan"
 
 class TriageTool extends Component {
   render() {
-    const { questions, currentPanel, changePanel, dependence,
-      previousAttempts, allQuestionsAnswered } = this.props.store
+    const { questions, currentPanel, changePanel, allQuestionsAnswered }
+      = this.props.store
     const questionColors = ["#028586","#197271","#145b5b"]
 
     const questionList = questions.map((question, index) => {
@@ -29,18 +31,13 @@ class TriageTool extends Component {
       )
     })
 
-    const attempts = previousAttempts.map((attempt, index) => {
-      return <p key={ index }>{ attempt }</p>
-    })
-
     return (
       <TriageToolContainer>
         <AccordionPanel toggleOpen={ () => changePanel(0) }
           appHeading={ true }
-          open={ currentPanel == 0 } heading="Quit smoking now! Create your free plan">
+          open={ currentPanel == 0 } heading="Stop smoking now with your free personal quitting plan!">
           <AppIntro>
-            { "There's loads of support to help you quit." }
-            Find out what combination is right you and create your personalised quit plan in 3 easy steps.
+            { "You’re more likely to quit with the right support – so find out the combination that’s right for you in just 3 easy steps." }
           </AppIntro>
           <p><Button onClick={ () => changePanel(1) }>Start</Button></p>
         </AccordionPanel>
@@ -50,9 +47,8 @@ class TriageTool extends Component {
         <AccordionPanel
           toggleOpen={ () => allQuestionsAnswered && changePanel(questions.length + 1) }
           open={ currentPanel == (questions.length + 1) }
-          heading="Feedback">
-          <p>Dependence: { dependence }</p>
-          { attempts }
+          heading="Your action plan - results">
+          <Plan store={ this.props.store }></Plan>
         </AccordionPanel>
 
       </TriageToolContainer>
