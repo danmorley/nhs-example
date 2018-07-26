@@ -49,6 +49,7 @@ class ActionPanel extends Component {
     }
     sessionStorage.setItem(BASKET_KEY, JSON.stringify(currentBasketContents));
     sessionStorage.setItem(ACTION_PLAN_KEY, JSON.stringify(currentActionPlanContents));
+    this.props.updateBasketLength();
   }
 
   render() {
@@ -71,7 +72,8 @@ class ActionPanel extends Component {
 ActionPanel.propTypes = {
   content: PropTypes.object.isRequired,
   classNamePrefix: PropTypes.string.isRequired,
-  id: PropTypes.string
+  id: PropTypes.string,
+  updateBasketLength: PropTypes.func.isRequired
 };
 
 CmsComponentRegistry.register('action_panel', ActionPanel, 'action-panel');

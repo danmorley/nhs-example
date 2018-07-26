@@ -58,7 +58,8 @@ class ActionGroupPanel extends Component {
             { content.actions.map((action, i) =>
               <div key={i} className='col-md-6'>
                 <ActionPanel id={action.panel_id} classNamePrefix={panelClassNamePrefix}
-                  variant={panelVariant} layout={panelLayout} content={action.value} />
+                  variant={panelVariant} layout={panelLayout} content={action.value}
+                  updateBasketLength={this.props.updateBasketLength} />
               </div>
             )}
           </div>
@@ -73,7 +74,8 @@ ActionGroupPanel.propTypes = {
   classNamePrefix: PropTypes.string.isRequired,
   id: PropTypes.string,
   setExpandedGroup: PropTypes.func.isRequired,
-  expandedGroup: PropTypes.object
+  expandedGroup: PropTypes.object,
+  updateBasketLength: PropTypes.func.isRequired
 };
 
 CmsComponentRegistry.register('action_group_panel', ActionGroupPanel, 'action-group-panel');
