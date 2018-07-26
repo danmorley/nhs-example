@@ -15,7 +15,6 @@ import CtaList from './CtaList';
  */
 class CtaLinks extends Component {
   render() {
-    console.log(this.props.disabled)
     const className = this.props.disabled ? 'disabled' : '';
 
     let { cta, variant } = this.props;

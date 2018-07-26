@@ -21,6 +21,14 @@ class ActionPanel extends Component {
     }
   }
 
+  UNSAFE_componentWillReceiveProps() {
+    if (this.storageToJSON(BASKET_KEY, []).includes(this.props.content.action_code)) {
+      this.setState({active: true});
+    } else {
+      this.setState({active: false});
+    }
+  }
+
   handleClick() {
     const currentActiveState = this.state.active;
     let newActiveState = !currentActiveState;

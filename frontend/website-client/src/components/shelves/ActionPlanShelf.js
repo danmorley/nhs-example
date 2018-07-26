@@ -7,6 +7,7 @@ import ActionGroupPanel from '../panels/ActionGroupPanel';
 import CtaLinks from '../shared/CtaLinks';
 
 const BASKET_KEY = 'basket';
+const ACTION_PLAN_KEY = 'action_plan';
 
 class ActionPlanShelf extends Component {
   constructor(props) {
@@ -37,11 +38,16 @@ class ActionPlanShelf extends Component {
     }
   }
 
+  clearBasket() {
+    sessionStorage.setItem(BASKET_KEY, JSON.stringify([]));
+    sessionStorage.setItem(ACTION_PLAN_KEY, JSON.stringify({}));
+    this.updateBasketLength();
+  }
+
   render() {
     let { id, classNamePrefix, content } = this.props;
     let actionGroups = content.action_groups;
     const ctaDisabled = this.state.actionPlanCount === 0;
-    console.log(ctaDisabled, this.state.actionPlanCount)
 
     const panelInfo = CmsComponentRegistry.components['action_group_panel'];
     const panelClassNamePrefix = panelInfo && panelInfo.classNamePrefix;
@@ -60,6 +66,10 @@ class ActionPlanShelf extends Component {
           )}
 
           <div className={`${classNamePrefix}--cta`}>
+            <div className='button-cta' onClick={this.clearBasket.bind(this)}>
+              Reset
+            </div>
+
             <CtaLinks disabled={ctaDisabled} cta={content.cta} variant='button' />
           </div>
         </div>
