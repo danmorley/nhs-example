@@ -208,7 +208,7 @@ class VideoTemplate(CTABlock):
     ],
         default='desktop_image_left', label='Desktop Image Position', classname='dct-meta-field')
     meta_use_play_link = blocks.BooleanBlock(label='Use play video link', required=False, default=False,
-        classname='dct-meta-field')
+                                             classname='dct-meta-field')
     meta_play_link_text = blocks.CharBlock(default='Play', label='Play Video Link Text', classname='dct-meta-field')
 
     class Meta:
