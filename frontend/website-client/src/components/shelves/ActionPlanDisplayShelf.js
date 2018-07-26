@@ -54,10 +54,6 @@ class ActionPlanDisplayShelf extends Component {
             { actionPlanKeys.map((actionCode, i) =>
               <div key={i} className={`${classNamePrefix}--action`}>
                 <li>{actionPlan[actionCode].title}</li>
-                <p>
-                  <Text tagName="div" content={actionPlan[actionCode].rich_text_body}
-                    className={`${classNamePrefix}--further-info`} format="richtext"/>
-                </p>
               </div>
             )}
           </ul>
