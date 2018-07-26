@@ -35,9 +35,10 @@ class TriageTool extends Component {
       <TriageToolContainer>
         <AccordionPanel toggleOpen={ () => changePanel(0) }
           appHeading={ true }
-          open={ currentPanel == 0 } heading="Stop smoking now with your free personal quitting plan!">
+          open={ currentPanel == 0 } heading="Quit smoking now! Create your free personal quitting plan">
           <AppIntro>
-            { "You’re more likely to quit with the right support – so find out the combination that’s right for you in just 3 easy steps." }
+            { "There's loads of support to help you quit. " }
+            Find out what combination is right you and create your personalised quit plan in 3 easy steps.
           </AppIntro>
           <p><Button onClick={ () => changePanel(1) }>Start</Button></p>
         </AccordionPanel>
