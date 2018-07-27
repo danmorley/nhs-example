@@ -1,9 +1,11 @@
 import json
 
+from django.core.exceptions import ValidationError
+from django.forms.utils import ErrorList
 from django.template.defaultfilters import slugify
 from wagtail.wagtailcore import blocks
 from shelves.blocks import BlobImageChooserBlock
-
+from wagtail.wagtailcore.blocks import StructValue
 
 IMAGE_VARIANT_CHOICES = (
     ('contain', 'Contain'),
@@ -13,7 +15,7 @@ IMAGE_VARIANT_CHOICES = (
 
 
 class ImageBlock(blocks.StructBlock):
-    image = BlobImageChooserBlock(required=False)
+    image = BlobImageChooserBlock(required=True)
     meta_variant = blocks.ChoiceBlock(IMAGE_VARIANT_CHOICES,
                                       label='Variant',
                                       default='cover',
@@ -26,6 +28,52 @@ class ImageBlock(blocks.StructBlock):
                                                       label="Use desktop renditions",
                                                       required=False,
                                                       classname='dct-meta-field')
+
+    def __init__(self, *args, **kwargs):
+        if kwargs:
+            self.max_width = kwargs.get("max_width", None)
+            self.max_height = kwargs.get("max_height", None)
+        super(ImageBlock, self).__init__(*args, **kwargs)
+
+    def clean(self, value):
+        # print("CLEANING")
+        # cleaned_data = super().clean(value)
+        # print(cleaned_data)
+        # if cleaned_data['image']:
+        #
+        #     # check size of image
+        #     image = cleaned_data['image']
+        #     if self.max_width:
+        #         if image.width > self.max_width:
+        #             raise ValidationError('Image size exceeds maximum width')
+        #     if self.max_height:
+        #         if image.height > self.max_height:
+        #             raise ValidationError('Image size exceeds maximum height')
+        result = []  # build up a list of (name, value) tuples to be passed to the StructValue constructor
+        errors = {}
+        for name, val in value.items():
+            try:
+                result.append((name, self.child_blocks[name].clean(val)))
+                if name == 'image':
+                    if self.max_width:
+                        if val.width > self.max_width:
+                            errors['image'] = ["Image size exceeds maximum width"]
+                    if self.max_height:
+                        if val.height > self.max_height:
+                            errors['image'] = ["Image size exceeds maximum height"]
+
+            except ValidationError as e:
+                errors[name] = ErrorList([e])
+
+
+        print(errors)
+        if errors:
+            # The message here is arbitrary - StructBlock.render_form will suppress it
+            # and delegate the errors contained in the 'params' dict to the child blocks instead
+            raise ValidationError('Validation error in StructBlock', params=errors)
+
+        return StructValue(self, result)
+
 
     def get_api_representation(self, value, context=None):
         # Convert value to plain dict.
