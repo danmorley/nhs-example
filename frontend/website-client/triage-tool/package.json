@@ -2,7 +2,7 @@
   "name": "triage-tool",
   "version": "1.0.0",
   "description": "A tool to help smokers get advice on the best way to quit",
-  "main": "dist/main.js",
+  "main": "dist/bundle.js",
   "scripts": {
     "start": "NODE_ENV=development npx webpack-serve --config ./webpack.config.js --open",
     "build": "NODE_ENV=production npx webpack --config ./webpack.config.js",

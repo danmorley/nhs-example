@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   module: {
     rules: [
@@ -18,6 +20,12 @@ module.exports = {
         }]
       },
     ]
+  },
+  entry: (process.env.NODE_ENV == "production" ? './src/index.js' : './src/dev.js'),
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+    libraryTarget: 'commonjs2'
   },
   mode: process.env.NODE_ENV || "development"
 }
