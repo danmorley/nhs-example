@@ -48,16 +48,22 @@ class Page extends Component {
     }
   }
 
+  hasShareButton(meta) {
+    return meta.use_share_button || meta.use_email_button || meta.use_print_button;
+  }
+
   renderPage(content, pageTheme, pageStyles, site, page) {
     // let { menu, header, footer } = site;
     // let theme = (pageTheme && pageTheme.class_name) || 'oneyou';
-    let useShareButton = page ? page.meta.use_share_button : false;
+    let useShareButton = page ? this.hasShareButton(page.meta) : false;
 
     return (
       <StandardPageLayout site={site} page={page}>
         {content}
         {useShareButton &&
-          <ShareButtonShelf />
+          <ShareButtonShelf showShareButton={page.meta.use_share_button}
+            showEmailButton={page.meta.use_email_button}
+            showPrintButton={page.meta.use_print_button} />
         }
         <BackToTopButton />
       </StandardPageLayout>

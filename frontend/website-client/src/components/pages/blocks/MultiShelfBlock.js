@@ -27,6 +27,8 @@ import ArticlePageHeadingShelf from '../../shelves/ArticlePageHeadingShelf';
 import RecipeGridShelf from '../../shelves/RecipeGridShelf';
 import ShareButtonShelf from '../../shelves/ShareButtonShelf';
 import TableShelf from '../../shelves/TableShelf';
+import ActionPlanShelf from '../../shelves/ActionPlanShelf';
+import ActionPlanDisplayShelf from '../../shelves/ActionPlanDisplayShelf';
 
 class MultiShelfBlock extends Component {
   render() {

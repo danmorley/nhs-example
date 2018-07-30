@@ -54,6 +54,6 @@ it('adds an item to the sessionStorage basket correctly in addToBasket', () => {
   component.addToBasket(eventData);
   expect(sessionStorage.getItem(BASKET_KEY)).not.toEqual('');
   expect(component.storageToJSON().length).toEqual(1);
-  expect(component.storageToJSON()[0]).toEqual(eventData.data.product);
+  expect(component.storageToJSON()[0]).toEqual(eventData.data.product.variantId);
   sessionStorage.setItem(BASKET_KEY, '');
 });
