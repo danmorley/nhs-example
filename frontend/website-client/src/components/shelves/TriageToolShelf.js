@@ -28,7 +28,6 @@ class TriageToolShelf extends Component {
           }
           <div className="row">
             <div className="shelf__col col-sm-12">
-              <p>&lt;THE TRIAGE TOOL WILL APPEAR HERE&gt;</p>
               <TriageTool></TriageTool>
             </div>
           </div>

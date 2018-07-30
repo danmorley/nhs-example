@@ -1,27 +1,29 @@
 const path = require('path');
 
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: ["babel-loader"]
-      },
-      {
-        // Match woff2 in addition to patterns like .woff?v=1.1.1.
-        test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [{
-          loader: 'url-loader',
-          options: {
-            limit: 100000,
-            name: './fonts/[name].[ext]'
-          }
-        }]
-      },
-    ]
+const rules = [
+  {
+    test: /\.(js|jsx)$/,
+    exclude: /node_modules/,
+    use: ["babel-loader"]
   },
-  entry: (process.env.NODE_ENV == "production" ? './src/index.js' : './src/dev.js'),
+  {
+    // Match woff2 in addition to patterns like .woff?v=1.1.1.
+    test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+    use: [{
+      loader: 'url-loader',
+      options: {
+        limit: 100000,
+        name: './fonts/[name].[ext]'
+      }
+    }]
+  }
+]
+
+const nodeConfig = {
+  module: {
+    rules: rules
+  },
+  entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -29,3 +31,17 @@ module.exports = {
   },
   mode: process.env.NODE_ENV || "development"
 }
+
+const devConfig = {
+  module: {
+    rules: rules
+  },
+  entry: './src/dev.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.dev.js'
+  },
+  mode: process.env.NODE_ENV || "development"
+}
+
+module.exports = [ nodeConfig, devConfig ]
