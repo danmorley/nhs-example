@@ -24,6 +24,7 @@
     "request": "^2.85.0",
     "request-promise-native": "^1.0.5",
     "slick-carousel": "^1.8.1",
+    "triage-tool": "file:triage-tool",
     "universal-cookie": "^2.1.2"
   },
   "jest": {
