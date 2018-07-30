@@ -72,6 +72,7 @@ def release_html(request, site_name):
 
     substituted_index = substituted_index.replace("%apiurl%", content_store_endpoint)
     substituted_index = substituted_index.replace("%releaseid%", uuid)
+    substituted_index = substituted_index.replace("%adobe_tracking_url%", settings.ADOBE_TRACKING_URL)
     http_response = HttpResponse(substituted_index)
     if release and release.content_status == 1:
         http_response['Cache-Control'] = 'max-age=900'
