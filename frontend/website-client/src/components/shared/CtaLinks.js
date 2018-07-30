@@ -15,24 +15,18 @@ import CtaList from './CtaList';
  */
 class CtaLinks extends Component {
   render() {
-    const className = this.props.disabled ? 'disabled' : '';
-
     let { cta, variant } = this.props;
     if (!cta) return null;
 
     if (cta instanceof Array) {
       // Return a list of cta links.
       return (
-        <div className={className}>
-          <CtaList items={cta} variant={variant} />
-        </div>
+        <CtaList items={cta} variant={variant} disabled={this.props.disabled} />
       );
     } else {
       // Return a single cta link.
       return (
-        <div className={className}>
-          <CtaLink className={className} cta={cta} variant={variant} />
-        </div>
+        <CtaLink cta={cta} variant={variant} disabled={this.props.disabled} />
       );
     }
   }

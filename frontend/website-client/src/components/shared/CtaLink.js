@@ -25,17 +25,19 @@ class CtaLink extends Component {
 
     var linkClass;
 
+    const disabledClass = this.props.disabled ? ' disabled' : '';
+
     if (variant === 'button') {
-      linkClass = 'button-cta'
+      linkClass = 'button-cta' + disabledClass;
     }
     else if (variant === 'appstore') {
-      linkClass = 'button-appstore'
+      linkClass = 'button-appstore' + disabledClass;
     }
     else if (variant === 'googleplay') {
-      linkClass = 'button-googleplay'
+      linkClass = 'button-googleplay' + disabledClass;
     }
     else if (variant === 'link') {
-      linkClass = 'link-cta'
+      linkClass = 'link-cta' + disabledClass;
     }
     else {
       linkClass = null;
@@ -60,6 +62,7 @@ class CtaLink extends Component {
 
 CtaLink.propTypes = {
   cta: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  disabled: PropTypes.bool.isRequired,
   variant: PropTypes.string
 };
 
