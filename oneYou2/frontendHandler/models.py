@@ -28,6 +28,7 @@ class FrontendVersion:
 
     @classmethod
     def get_available_versions(cls):
+        return []
         print('loading available versions')
 
         # TODO try to find a way to mock this function on server start
