@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 class Panel extends Component {
   panelClasses() {
-    const classNamePrefix = this.props.classNamePrefix;
+    const classNamePrefix = this.props.classNamePrefix || 'basic';
     const variantClass = this.props.variant && (classNamePrefix + '--' + this.props.variant) || '';
     const layoutClass = this.props.layout && (classNamePrefix + '--' + this.props.layout) || '';
     return `panel ${classNamePrefix} ${variantClass} ${layoutClass}`;

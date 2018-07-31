@@ -312,20 +312,20 @@ class ListItemPanel(blocks.StructBlock):
 class InlineScriptPanel(blocks.StructBlock):
     script = blocks.TextBlock(required=False, help_text="The javascript to be inserted")
     src = blocks.CharBlock(required=False, help_text="URL of the javascript file")
-    field_id = IDBlock(required=False, label="Placeholder ID", retain_case=True)
+    field_id = IDBlock(required=False, label="Placeholder ID", retain_case=True, classname='dct-meta-field')
 
     class Meta:
-        form_classname = 'dct-inline-script-panel'
+        form_classname = 'dct-inline-script-panel dct-meta-panel'
 
 
 class InlineSvgPanel(blocks.StructBlock):
     svg = blocks.TextBlock(required=True, label="SVG code", help_text="The SVG source")
     styles = blocks.TextBlock(required=False, help_text="CSS styling")
     script = blocks.TextBlock(required=False, label="Inline script code", help_text="Inline javascript to make the SVG interactive")
-    field_id = IDBlock(required=False, label="Placeholder ID", retain_case=True)
+    field_id = IDBlock(required=False, label="Placeholder ID", retain_case=True, classname='dct-meta-field')
 
     class Meta:
-        form_classname = 'dct-inline-svg-panel'
+        form_classname = 'dct-inline-svg-panel dct-meta-panel'
 
 
 class CtaPanel(blocks.StructBlock):
