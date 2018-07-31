@@ -96,16 +96,19 @@ class VideoTeaserPanel extends Component {
           <VideoModal video={content.video} host={content.host} ref={this.video}>
           </VideoModal>
         </div>
-        <div className={`${classNamePrefix}__info`}>
-          <Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />
-          <div className={`${classNamePrefix}__text`}>
-            <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
-            {content.meta_use_play_link === true &&
-              <span role="button" onClick={this.triggerModal.bind(this)} className={`${classNamePrefix}__play-link`}>{content.meta_play_link_text}</span>
-            }
-            <CtaLinks cta={content.cta} />
+        
+        {content.heading && content.body && 
+          <div className={`${classNamePrefix}__info`}>
+            <Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />
+            <div className={`${classNamePrefix}__text`}>
+              <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
+              {content.meta_use_play_link === true &&
+                <span role="button" onClick={this.triggerModal.bind(this)} className={`${classNamePrefix}__play-link`}>{content.meta_play_link_text}</span>
+              }
+              <CtaLinks cta={content.cta} />
+            </div>
           </div>
-        </div>
+        }
       </Panel>
     )
   }

@@ -85,7 +85,14 @@
   border-left: 0;
   border-right: 0;
   
-  h2, h3, h4, p {
+  .shelf__header {
     color: $black;
-  }  
+  }
+  
+  .shelf__body {
+    
+     h2, h3, h4, p {
+      color: $black;
+    }  
+  }
 }

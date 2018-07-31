@@ -161,7 +161,7 @@
       }
     }  
     
-    @include media-breakpoint-up(lg) {
+    @include media-breakpoint-up(md) {
       .video-teaser__image {
           min-height: 263px;
       }
