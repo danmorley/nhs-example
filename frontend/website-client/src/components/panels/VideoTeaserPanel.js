@@ -29,15 +29,14 @@ import VideoModal from '../VideoModal';
  *  }
  */
 
- const TEXT_ON_RIGHT = 'text_on_right'
- const TEXT_ON_TOP = 'text_on_top'
-
 class VideoTeaserPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
       backgroundImageStyle: null
     }
+    
+    this.video = React.createRef();
   }
 
   setImage() {
@@ -57,62 +56,58 @@ class VideoTeaserPanel extends Component {
   componentWillUnmount() {
     window.removeEventListener('resize', this.setImage);
   }
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    this.props = nextProps;
-    this.setImage();
+  
+  triggerModal = () => {
+    this.video.current.openModal();
   }
-
-  renderTextRight(content, classNamePrefix, backgroundTeaserImage) {
-    classNamePrefix = classNamePrefix + '--' + TEXT_ON_RIGHT;
-    return (
-      <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
-        <div className={`${classNamePrefix}__image`} style={backgroundTeaserImage}>
-          <VideoModal video={content.video} host={content.host}>
-          </VideoModal>
-        </div>
-        <div className={`${classNamePrefix}__info`}>
-          <Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />
-          <div className={`${classNamePrefix}__text`}>
-            <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
-            <CtaLinks cta={content.cta} />
-          </div>
-        </div>
-      </Panel>
-    );
-  }
-
-  renderTextTop(content, classNamePrefix, backgroundTeaserImage) {
-    classNamePrefix = classNamePrefix + '--' + TEXT_ON_TOP;
-
-    return (
-      <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
-        <div className={`${classNamePrefix}__info`}>
-          <Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />
-          <div className={`${classNamePrefix}__text`}>
-            <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
-            <CtaLinks cta={content.cta} />
-          </div>
-        </div>
-        <div className={`${classNamePrefix}__image`} style={backgroundTeaserImage}>
-          <VideoModal video={content.video} host={content.host}>
-          </VideoModal>
-        </div>
-      </Panel>
-    );
-  }
-
+  
   render() {
-    let { content, classNamePrefix, layout } = this.props;
+    let { content, classNamePrefix } = this.props;
     let backgroundTeaserImage = this.state.backgroundImageStyle;
-    const metaLayout = content.meta_layout || layout;
-
-    switch(metaLayout) {
-      case TEXT_ON_TOP:
-        return this.renderTextTop(content, classNamePrefix, backgroundTeaserImage);
-      default:
-        return this.renderTextRight(content, classNamePrefix, backgroundTeaserImage);
+    let mobileImagePosition = "mobile-image-left";
+    let desktopImagePosition = "desktop-image-left";
+    
+    if (content.meta_layout_desktop === 'desktop_image_left') {
+      desktopImagePosition = "desktop-image-left"
     }
+    else if (content.meta_layout_desktop === 'desktop_image_top') {
+      desktopImagePosition = "desktop-image-top"
+    }
+    
+    if (content.meta_layout_mobile === 'mobile_image_left') {
+      mobileImagePosition = "mobile-image-left"
+    }
+    else if (content.meta_layout_mobile === 'mobile_image_top') {
+      mobileImagePosition = "mobile-image-top"
+    }     
+     
+    let layout = mobileImagePosition + '-' +  desktopImagePosition;
+
+    if (content.meta_use_play_link === true){
+      layout += ' video-play-link-true';
+    } 
+    else {
+      layout += ' video-play-link-false';
+    }
+
+    return (
+      <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant} layout={layout}>
+        <div className={`${classNamePrefix}__image`} style={backgroundTeaserImage}>
+          <VideoModal video={content.video} host={content.host} ref={this.video}>
+          </VideoModal>
+        </div>
+        <div className={`${classNamePrefix}__info`}>
+          <Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />
+          <div className={`${classNamePrefix}__text`}>
+            <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
+            {content.meta_use_play_link === true &&
+              <span role="button" onClick={this.triggerModal.bind(this)} className={`${classNamePrefix}__play-link`}>{content.meta_play_link_text}</span>
+            }
+            <CtaLinks cta={content.cta} />
+          </div>
+        </div>
+      </Panel>
+    )
   }
 }
 

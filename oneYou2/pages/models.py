@@ -197,7 +197,19 @@ class VideoTemplate(CTABlock):
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False)
     shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
-    meta_layout = blocks.ChoiceBlock(choices=VIDEO_LAYOUTS, label="Layout", classname='dct-meta-field')
+    meta_layout_mobile = blocks.ChoiceBlock(choices=[
+        ('mobile_image_top', 'Top'),
+        ('mobile_image_left', 'Left'),
+    ],
+        default='mobile_image_left', label='Mobile Image Position', classname='dct-meta-field')
+    meta_layout_desktop = blocks.ChoiceBlock(choices=[
+        ('desktop_image_top', 'Top'),
+        ('desktop_image_left', 'Left'),
+    ],
+        default='desktop_image_left', label='Desktop Image Position', classname='dct-meta-field')
+    meta_use_play_link = blocks.BooleanBlock(label='Use play video link', required=False, default=False,
+                                             classname='dct-meta-field')
+    meta_play_link_text = blocks.CharBlock(default='Play', label='Play Video Link Text', classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-video-teaser-panel dct-meta-panel'
