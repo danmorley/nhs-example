@@ -19,7 +19,7 @@ Enzyme.configure({adapter: new Adapter()})
 test("TriageTool is rendered with text", () => {
   const triageTool = mount(<TriageTool store={ triageStore } />)
 
-  expect(triageTool.text()).toContain("Stop smoking now with your free personal quitting plan!")
+  expect(triageTool.text()).toContain("Quit smoking now!")
 })
 
 describe("displaying questions", () => {

@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { MdExpandMore, MdExpandLess } from "react-icons/lib/md"
+import MdExpandMore from "react-icons/lib/md/expand-more"
+import MdExpandLess from "react-icons/lib/md/expand-less"
 import { observer } from "mobx-react"
 
 import { TriageToolContainer, AppHeader, AppIntro, AccordionPanelContainer,
