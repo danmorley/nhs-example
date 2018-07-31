@@ -92,7 +92,7 @@ class VideoTeaserPanel extends Component {
 
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant} layout={layout}>
-        <VideoModal video={content.video} host={content.host} classNamePrefix={classNamePrefix} image={backgroundTeaserImage}>
+        <VideoModal video={content.video} host={content.host} classNamePrefix={classNamePrefix} image={backgroundTeaserImage} ref={this.video}>
         </VideoModal>
         
         {content.heading && content.body && 
