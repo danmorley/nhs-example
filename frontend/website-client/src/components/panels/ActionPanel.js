@@ -16,13 +16,13 @@ class ActionPanel extends Component {
   }
 
   componentDidMount() {
-    if (this.storageToJSON(BASKET_KEY, []).includes(this.props.content.action_code)) {
+    if (this.storageToJSON(BASKET_KEY, []).indexOf(this.props.content.action_code) !== -1) {
       this.setState({active: true});
     }
   }
 
   UNSAFE_componentWillReceiveProps() {
-    if (this.storageToJSON(BASKET_KEY, []).includes(this.props.content.action_code)) {
+    if (this.storageToJSON(BASKET_KEY, []).indexOf(this.props.content.action_code) !== -1) {
       this.setState({active: true});
     } else {
       this.setState({active: false});
