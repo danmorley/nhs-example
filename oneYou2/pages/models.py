@@ -442,6 +442,18 @@ class Table(blocks.StructBlock):
         form_classname = 'dct-table-shelf dct-meta-panel'
 
 
+class TriageToolShelf(blocks.StructBlock):
+    heading = blocks.CharBlock(required=False)
+    body = blocks.RichTextBlock(required=False)
+    shelf_id = IDBlock(required=False,
+                       label="ID",
+                       help_text="Used to uniquely identify the shelf on the page.",
+                       classname='dct-meta-field')
+
+    class Meta:
+        form_classname = 'dct-triage-tool-shelf dct-meta-panel'
+
+
 class ActionPanel(blocks.StructBlock):
     action_code = blocks.CharBlock(required=True, unique=True)
     title = blocks.CharBlock(required=True)
@@ -497,6 +509,7 @@ class OneYou2Page(Page):
         ('article_page_heading_shelf', ArticlePageHeadingShelf(label="Article Page Heading", icon='title')),
         ('table', Table(label="Table", icon='list-ul')),
         ('script_shelf', InlineScriptPanel(label="Script shelf", icon='code')),
+        ('triage_tool_shelf', TriageToolShelf(label="Triage tool shelf", icon='cog')),
         ('action_plan_shelf', ActionPlan(label="Action Plan Builder shelf", icon='form')),
         ('action_plan_display_shelf', ActionPlanDisplay(label="Action Plan Display shelf", icon='form'))
     ], null=True, blank=True)

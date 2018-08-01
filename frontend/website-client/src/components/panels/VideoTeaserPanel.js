@@ -29,6 +29,7 @@ import VideoModal from '../VideoModal';
  *  }
  */
 
+
 class VideoTeaserPanel extends Component {
   constructor(props) {
     super(props);

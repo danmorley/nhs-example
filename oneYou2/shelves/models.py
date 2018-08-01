@@ -241,6 +241,7 @@ class BannerShelf(ShelfAbstract):
         FieldPanel('body'),
         ImageChooserPanel('background_image'),
         FieldPanel('meta_gradient'),
+        FieldPanel('cta_text'),
         FieldPanel('cta_link'),
         PageChooserPanel('cta_page'),
     ]

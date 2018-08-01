@@ -40,7 +40,7 @@ class SiteNav extends Component {
 }
 
 SiteNav.propTypes = {
-  navItems: PropTypes.object.isRequired
+  navItems: PropTypes.array.isRequired
 };
 
 export default SiteNav;

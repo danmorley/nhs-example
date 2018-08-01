@@ -18,7 +18,7 @@ class DividerShelf extends Component {
     let { id } = this.props;
 
     return (
-      <Shelf id={id} layout={'no-padding'}>
+      <Shelf id={id} layout="no-padding" classNamePrefix="divider">
         <div className="container">
           <hr className="divider-shelf" />
         </div>

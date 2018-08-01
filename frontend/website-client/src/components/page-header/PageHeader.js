@@ -19,7 +19,7 @@ class PageHeader extends Component {
     this.setState({
       navHeight: this.divElement.clientHeight
     });
-    document.querySelector('.page-wrapper').style.paddingTop = (this.divElement.clientHeight -26 +'px');
+    document.querySelector('.page-wrapper').style.paddingTop = (this.divElement.clientHeight +'px');
   }
 
   componentDidMount() {
@@ -41,7 +41,7 @@ class PageHeader extends Component {
 
   render() {
     let { navItems, header, breadcrumbs } = this.props;
-    
+
     return (
       <div ref={(divElement) => this.divElement = divElement} className="container-fluid page-header">
         <div className= "container">
@@ -79,10 +79,15 @@ class PageHeader extends Component {
   }
 }
 
+PageHeader.defaultProps = {
+  navItems: [],
+  breadcrumbs: []
+};
+
 PageHeader.propTypes = {
-  navItems: PropTypes.object.isRequired,
+  navItems: PropTypes.array.isRequired,
   header: PropTypes.object.isRequired,
-  breadcrumbs: PropTypes.object.isRequired
+  breadcrumbs: PropTypes.array.isRequired
 }
 
 export default PageHeader;

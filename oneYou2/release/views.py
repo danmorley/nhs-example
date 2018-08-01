@@ -64,13 +64,6 @@ def release_html(request, site_name):
     substituted_index = substituted_index.replace("/manifest", "/{}/public/manifest".format(site_name))
     substituted_index = substituted_index.replace("/favicon", "/{}/public/{}/favicon".format(site_name, frontend_id))
 
-    if settings.ENV == 'dev' or settings.ENV == 'staging':
-        substituted_index = substituted_index.replace("%ENABLE_GOOGLE_ANALYTICS_ON_TEST_ENVS%",
-                                                      '<script type="text/javascript">enableGoogleAnalytics();'
-                                                      ' console.log("Should not appear on live!");</script>')
-    else:
-        substituted_index = substituted_index.replace("%ENABLE_GOOGLE_ANALYTICS_ON_TEST_ENVS%", "")
-
     host = request.META['HTTP_HOST']
     if settings.CONTENT_STORE_ENDPOINT:
         content_store_endpoint = settings.CONTENT_STORE_ENDPOINT
@@ -79,6 +72,7 @@ def release_html(request, site_name):
 
     substituted_index = substituted_index.replace("%apiurl%", content_store_endpoint)
     substituted_index = substituted_index.replace("%releaseid%", uuid)
+    substituted_index = substituted_index.replace("%adobe_tracking_url%", settings.ADOBE_TRACKING_URL)
     http_response = HttpResponse(substituted_index)
     if release and release.content_status == 1:
         http_response['Cache-Control'] = 'max-age=900'

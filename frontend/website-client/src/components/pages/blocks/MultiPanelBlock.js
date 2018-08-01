@@ -22,9 +22,9 @@ import CtaPanel from '../../panels/CtaPanel';
 import ListItemPanel from '../../panels/ListItemPanel';
 
 class MultiPanelBlock extends Component {
-  render() {
-    const { items, panelClass, containerTagName } = this.props;
-    const ContainerTag = containerTagName;
+  static renderItems(items, panelClass, containerTag) {
+    console.log('renderItems: rendering items');
+    const ContainerTag = containerTag;
 
     var panels = items.map((panel, i) => {
       const panelInfo = CmsComponentRegistry.components[panel.type];
@@ -43,6 +43,13 @@ class MultiPanelBlock extends Component {
     });
 
     return panels;
+  }
+
+  render() {
+    console.log('rendering MultiPanelBlock');
+    const { items, panelClass, containerTagName } = this.props;
+    const ContainerTag = containerTagName;
+    return MultiPanelBlock.renderItems(items, panelClass, containerTagName);
   }
 }
 

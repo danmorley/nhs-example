@@ -43,6 +43,13 @@ class FrontendVersion:
                                                             'current_tag.txt')
 
         deployed_status = frontend_deployed()
+        print('checking for initializer and deployed status')
+        print('initializer', settings.INITIALIZER)
+        print('deployed status', deployed_status)
+        print('checking current environment and latest tag')
+        print('environment', settings.ENV)
+        print('latest tag', latest_deployed_tag)
+        print('current tag', current_tag)
         if settings.INITIALIZER is not False and not deployed_status:
             if settings.ENV == 'dev':
                 print('running deploy for integration environment')

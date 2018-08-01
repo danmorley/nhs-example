@@ -127,7 +127,7 @@ class Page extends Component {
 
 Page.propTypes = {
   site: PropTypes.object.isRequired,
-  page: PropTypes.object.isRequired
+  page: PropTypes.object
 }
 
 export default Page;
