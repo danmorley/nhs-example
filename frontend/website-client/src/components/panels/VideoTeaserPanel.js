@@ -92,25 +92,26 @@ class VideoTeaserPanel extends Component {
 
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant} layout={layout}>
-        <div className={`${classNamePrefix}__image`} style={backgroundTeaserImage}>
-          <VideoModal video={content.video} host={content.host} ref={this.video}>
-          </VideoModal>
-        </div>
+        <VideoModal video={content.video} host={content.host} classNamePrefix={classNamePrefix} image={backgroundTeaserImage} ref={this.video}>
+        </VideoModal>
         
         {content.heading && content.body && 
           <div className={`${classNamePrefix}__info`}>
             <Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />
+
             <div className={`${classNamePrefix}__text`}>
               <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
+
               {content.meta_use_play_link === true &&
                 <span role="button" onClick={this.triggerModal.bind(this)} className={`${classNamePrefix}__play-link`}>{content.meta_play_link_text}</span>
               }
+
               <CtaLinks cta={content.cta} />
             </div>
           </div>
         }
       </Panel>
-    )
+    );
   }
 }
 

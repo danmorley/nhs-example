@@ -43,7 +43,7 @@ class VideoModal extends Component {
   render() {
     return (  
        [
-        <div key="1" ref={div => this.divElement = div} onClick={() => this.refs.modal.open() }>{this.props.children}</div>,
+        <div key="1" ref={div => this.divElement = div} onClick={() => this.refs.modal.open() } className={`${this.props.classNamePrefix}__image`} style={this.props.image}>{this.props.children}</div>,
         ReactDOM.createPortal(
           <PureModal
             key = "2"
@@ -68,7 +68,9 @@ class VideoModal extends Component {
 VideoModal.propTypes = {
   video: PropTypes.string.isRequired,
   variant: PropTypes.string,
-  host: PropTypes.string
+  host: PropTypes.string,
+  classNamePrefix: PropTypes.string,
+  image: PropTypes.string
 };
 
 export default VideoModal;
