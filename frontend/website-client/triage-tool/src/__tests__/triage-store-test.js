@@ -186,3 +186,14 @@ describe("usedWillpowerAlone", () => {
     expect(store.usedWillpowerAlone).toEqual(true)
   })
 })
+
+describe("usedEcigsOrVape", () => {
+  test("returns true if ecigs option ticked", () => {
+    const store = createStore(questions)
+    const question3 = store.questions.find(q => q.id.toString() == "q3")
+
+    expect(store.usedEcigsOrVape).toEqual(false)
+    question3.options.find(o => o.id.toString() == "9").toggleSelect()
+    expect(store.usedEcigsOrVape).toEqual(true)
+  })
+})

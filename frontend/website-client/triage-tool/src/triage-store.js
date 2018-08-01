@@ -30,6 +30,7 @@ const Question = types
     selectOption(option) {
       if (self.inputType == "radio") {
         self.selectedOptions = [option]
+        getParent(getParent(self)).nextPanel()
       } else {
         self.selectedOptions = xor(self.selectedOptions, [option])
       }
@@ -57,6 +58,9 @@ const TriageStore = types
   .actions(self => ({
     changePanel(panel) {
       self.currentPanel = panel
+    },
+    nextPanel() {
+      self.currentPanel += 1
     }
   }))
   .views(self => ({
@@ -87,6 +91,11 @@ const TriageStore = types
       return self.questions
         .find(q => q.id == "q3").selectedOptions
         .some(o => o.id == "13")
+    },
+    get usedEcigsOrVape() {
+      return self.questions
+        .find(q => q.id == "q3").selectedOptions
+        .some(o => o.id == "9")
     }
   }))
 
