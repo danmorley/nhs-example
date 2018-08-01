@@ -61,6 +61,15 @@ class VideoTeaserPanel extends Component {
     this.video.current.openModal();
   }
   
+  hasTextContent() {
+    if (this.props.content.heading || this.props.content.body) {
+      return true;
+    } 
+    else {
+      return false;
+    }
+  }
+  
   render() {
     let { content, classNamePrefix } = this.props;
     let backgroundTeaserImage = this.state.backgroundImageStyle;
@@ -95,7 +104,7 @@ class VideoTeaserPanel extends Component {
         <VideoModal video={content.video} host={content.host} classNamePrefix={classNamePrefix} image={backgroundTeaserImage} ref={this.video}>
         </VideoModal>
         
-        {content.heading && content.body && 
+        {this.hasTextContent() && 
           <div className={`${classNamePrefix}__info`}>
             <Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />
 
