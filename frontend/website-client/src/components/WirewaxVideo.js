@@ -32,7 +32,7 @@ class WirewaxVideo extends Component {
   addToBasket(eventData) {
     console.log('Adding to basket', eventData);
     let currentContents = this.storageToJSON();
-    if (!currentContents.includes(eventData.data.product.variantId)) {
+    if (currentContents.indexOf(eventData.data.product.variantId) === -1) {
       currentContents.push(eventData.data.product.variantId);
     }
     sessionStorage.setItem(BASKET_KEY, JSON.stringify(currentContents));
