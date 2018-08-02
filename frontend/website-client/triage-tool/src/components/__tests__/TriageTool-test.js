@@ -19,7 +19,7 @@ Enzyme.configure({adapter: new Adapter()})
 test("TriageTool is rendered with text", () => {
   const triageTool = mount(<TriageTool store={ triageStore } />)
 
-  expect(triageTool.text()).toContain("Quit smoking now!")
+  expect(triageTool.text()).toContain("Create your free personal quit plan")
 })
 
 describe("displaying questions", () => {
@@ -33,7 +33,7 @@ describe("displaying questions", () => {
   test("does not display the question text on initial load", () => {
     const triageTool = mount(<TriageTool store={ triageStore } />)
 
-    expect(triageTool.text()).not.toContain("After waking, how long before you first smoke a cigarette?")
+    expect(triageTool.text()).not.toContain("How soon after you wake up do you smoke your first cigarette?")
   })
 
   test("displays the question text on click", () => {
@@ -41,7 +41,7 @@ describe("displaying questions", () => {
     const questionAccordionPanel= triageTool.find({ heading: "Question 1 out of 3" }).find("header")
 
     questionAccordionPanel.simulate("click")
-    expect(triageTool.text()).toContain("After waking, how long before you first smoke a cigarette?")
+    expect(triageTool.text()).toContain("How soon after you wake up do you smoke your first cigarette?")
   })
 
   test("hides the question text on another question selection", () => {
@@ -50,7 +50,7 @@ describe("displaying questions", () => {
     triageTool.find({ text: "Within 5 minutes" }).find("input").simulate("click")
     triageTool.find({ heading: "Question 2 out of 3" }).find("header").simulate("click")
 
-    expect(triageTool.text()).not.toContain("After waking, how long before you first smoke a cigarette?")
+    expect(triageTool.text()).not.toContain("How soon after you wake up do you smoke your first cigarette?")
   })
 })
 
