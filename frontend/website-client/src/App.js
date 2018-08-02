@@ -68,7 +68,7 @@ class App extends Component {
 
     // App is about to render for the first time. Remove the page spinner.
     const pageSpinner = document.getElementById('pageSpinner');
-    pageSpinner.remove();
+    if (pageSpinner) pageSpinner.parentNode.removeChild(pageSpinner); // Works with IE too!
   }
 
   componentWillUnmount() {
