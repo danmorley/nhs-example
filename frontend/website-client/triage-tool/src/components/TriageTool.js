@@ -14,12 +14,14 @@ class TriageTool extends Component {
     const { questions, currentPanel, changePanel, allQuestionsAnswered }
       = this.props.store
     const questionColors = ["#028586","#197271","#145b5b"]
+    const getPlanButton = <p><Button onClick={ () => changePanel(questions.length + 1) }>Get your plan</Button></p>
 
     const questionList = questions.map((question, index) => {
       // TODO: Give some sort of feedback to user if panel is locked
       const openIfNotLocked = () => !question.locked && changePanel(index + 1)
       return (
         <AccordionPanel
+          hidden={ currentPanel == (questions.length + 1) }
           toggleOpen={ openIfNotLocked }
           open={ currentPanel == (index + 1) }
           key={ index }
@@ -27,6 +29,7 @@ class TriageTool extends Component {
           heading={ `Question ${ index + 1 } out of ${ questions.length }` }>
 
           <Question { ...question } store={ question } />
+          { (index == questions.length - 1) ? getPlanButton : ""}
 
         </AccordionPanel>
       )
@@ -35,6 +38,7 @@ class TriageTool extends Component {
     return (
       <TriageToolContainer>
         <AccordionPanel toggleOpen={ () => changePanel(0) }
+          hidden={ currentPanel == (questions.length + 1) }
           appHeading={ true }
           open={ currentPanel == 0 } heading="Create your free personal quit plan">
           <AppIntro>
@@ -47,9 +51,11 @@ class TriageTool extends Component {
         { questionList }
 
         <AccordionPanel
+          appHeading={true}
           toggleOpen={ () => allQuestionsAnswered && changePanel(questions.length + 1) }
           open={ currentPanel == (questions.length + 1) }
-          heading="Your personal quit plan">
+          heading="Your personal quit plan"
+          hidden={ currentPanel != (questions.length + 1) }>
           <Plan store={ this.props.store }></Plan>
         </AccordionPanel>
 
@@ -79,7 +85,7 @@ class AccordionPanel extends Component {
       </div>
     )
     return (
-      <AccordionPanelContainer backgroundColor={this.props.backgroundColor} open={this.props.open}>
+      <AccordionPanelContainer backgroundColor={this.props.backgroundColor} open={this.props.open} hidden={this.props.hidden}>
         <header onClick={ this.props.toggleOpen }>{ this.props.appHeading ? bigHeader : smallHeader }</header>
         { this.props.open ? this.props.children : "" }
       </AccordionPanelContainer>
@@ -92,5 +98,6 @@ AccordionPanel.propTypes = {
   open: PropTypes.bool,
   appHeading: PropTypes.bool,
   heading: PropTypes.string,
-  backgroundColor: PropTypes.string
+  backgroundColor: PropTypes.string,
+  hidden: PropTypes.bool
 }
