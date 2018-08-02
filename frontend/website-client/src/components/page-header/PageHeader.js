@@ -52,7 +52,7 @@ class PageHeader extends Component {
                 <i className="font-icon"></i>
               </button>
               <Link to={global.rootUrl} className="page-header__logo">
-                <Text content={header.title || 'html::One <span>You</span>'} tagName={"div"} />
+                <span>One <span>You</span></span>
               </Link>
             </div>
             <Swipeable
