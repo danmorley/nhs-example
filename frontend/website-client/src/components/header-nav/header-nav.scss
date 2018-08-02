@@ -151,6 +151,7 @@ $secondary-item-padding: 0.4em;
     padding: 0.3em 1em 0.5em;
     border-left: 2px solid $text-primary;
 
+    
     .header-nav__secondary-title,
    > .header-nav__link {
        top: 0.5em;
@@ -169,8 +170,16 @@ $secondary-item-padding: 0.4em;
 }
 
 .header-nav__items > .header-nav__item  {
-
+  
+  @include media-breakpoint-down(md) {
+    br {
+      display: none;
+    }
+  } 
+  
   @include media-breakpoint-up(lg) {
+
+    text-align: center;
 
     &:nth-child(2) {
       .header-nav__separator {
