@@ -7,7 +7,8 @@ const colors = {
   yellow: "#ffcc00",
   black: "#000",
   white: "#fff",
-  grey: "#4a4a4a"
+  grey: "#4a4a4a",
+  lightteal: "#028586"
 }
 
 const fonts = {
@@ -44,11 +45,16 @@ injectGlobal`
 const TriageToolContainer = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 480px;
+  min-height: 360px;
+
+  @media ${device.desktop && device.tablet} {
+    min-height: 450px;
+  }
 
   border: 5px solid ${colors.yellow};
   color: ${colors.white};
   font-family: ${fonts.helvetica};
+  background-color: ${colors.lightteal};
 
   @media ${device.desktop && device.tablet} {
     box-shadow: 5px 5px 10px rgba(153, 153, 153, 0.2); 
@@ -58,6 +64,7 @@ const TriageToolContainer = styled.div`
 `
 
 const AccordionPanelContainer = styled.div`
+  display: ${props => props.hidden ? "none" : "block"};
   padding: 15px;
   background-color: ${props => props.backgroundColor};
 
@@ -90,6 +97,7 @@ const AccordionPanelContainer = styled.div`
       border-bottom: 1px solid ${colors.white};
       padding-bottom: 15px;
       font-size: 18px;
+      color: ${colors.white};
 
       @media ${device.desktop && device.tablet} {
         width: 70%;
@@ -112,82 +120,6 @@ const AccordionPanelContainer = styled.div`
         padding-top: 0;
       }
     }
-
-    ul {
-      padding-left: 0;
-      list-style-type: none;
-      padding-top: 15px;
-
-      @media ${device.desktop && device.tablet} {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        width: 100%;
-        justify-content: center;
-        padding-top: 5px;
-      }
-
-      li {
-        padding-bottom: 30px;
-      
-        @media ${device.desktop && device.tablet} {
-          padding-right: 25px;
-          padding-bottom: 0;
-        }
-
-        label {
-          position: relative;
-          padding-left: 35px;
-          padding-top: 6px;
-
-          input {
-            margin-right: 5px;
-            position: relative;
-            top: -2px;
-            float: left;
-            margin-left: 0;
-          }
-
-          input[type=radio]{
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-          }
-
-          .checkmark {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 25px;
-            width: 25px;
-            border: 1px solid ${colors.white};
-            border-radius: 50%;
-
-            &:after {
-              content: "";
-              position: absolute;
-              display: none;
-            }
-          }
-
-          &:hover input ~ .checkmark {
-            background-color: ${colors.white};
-          }
-
-          &:hover, &:focus {
-            cursor: pointer;
-          }
-
-          input:checked ~ .checkmark {
-            background-color: ${colors.white};
-
-            &:after {
-              display: block;
-            }
-          }
-        }
-      }
-    }
   }
 `
 
@@ -195,13 +127,13 @@ const Button = styled.a`
   color: ${colors.black};
   text-align: center;
   background-color: ${colors.yellow};
-  padding: 10px;
+  padding: 10px 10px 5px;
   display: block;
   border: 0;
   margin: 0 auto;
-  font-size: 18px;
-  width: 200px;
-  font-family: 'OneYouSansRegular';
+  font-size: 21px;
+  width: 280px;
+  font-family: 'OneYouSansBold';
 
   &:hover, &:focus {
     cursor: pointer;
@@ -217,13 +149,13 @@ const OpenIndicator = styled.span`
 `
 
 const AppHeader = styled.h1`
-  color: ${colors.black}
+  color: ${colors.white}
   text-align: center;
   font-family: 'OneYouSansBold';
   font-size: 24px;
 
   @media ${device.desktop && device.tablet} {
-    width: 70%;
+    width: 40%;
     margin-left: auto;
     margin-right: auto;
     font-size: 32px;
@@ -231,26 +163,132 @@ const AppHeader = styled.h1`
 `
 
 const AppIntro = styled.p`
-  color: ${colors.black}
+  color: ${colors.white}
   text-align: center;
   font-family: ${fonts.helvetica};
   margin-bottom: 30px;
   line-height: 150%;
 
   @media ${device.desktop && device.tablet} {
-    width: 70%;
+    width: 40%;
     margin-left: auto;
     margin-right: auto;
   }
 `
 
 const PlanContainer = styled.div`
-  color: ${colors.black}
+  div {
+    border-top: 0;
 
-  h2 {
-    text-transform: uppercase;
+    h2 {
+      border-top: 0;
+      text-transform: uppercase;
+    }
   }
 `
 
+const sharedList = `
+  padding-left: 0;
+  list-style-type: none;
+  padding-top: 15px;
+
+  li {
+    label {
+      position: relative;
+      padding-left: 35px;
+      padding-top: 6px;
+
+      input {
+        margin-right: 5px;
+        position: relative;
+        top: -2px;
+        float: left;
+        margin-left: 0;
+      }
+
+      input[type=radio], input[type=checkbox] {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        border: 1px solid ${colors.white};
+        border-radius: 50%;
+
+        &:after {
+          content: "";
+          position: absolute;
+          display: none;
+        }
+      }
+
+      &:hover input ~ .checkmark {
+        background-color: ${colors.white};
+      }
+
+      &:hover, &:focus {
+        cursor: pointer;
+      }
+
+      input:checked ~ .checkmark {
+        background-color: ${colors.white};
+
+        &:after {
+          display: block;
+        }
+      }
+    }
+  }
+`
+
+const RadiobuttonList = styled.ul`
+  ${ sharedList }
+
+  @media ${device.desktop && device.tablet} {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    padding-top: 5px;
+  }
+
+  li {
+    padding-bottom: 30px;
+
+    @media ${device.desktop && device.tablet} {
+      padding-right: 25px;
+      padding-bottom: 0;
+    }
+  }
+`
+
+const CheckboxList = styled.ul`
+  ${ sharedList }
+  margin-bottom: 30px;
+
+  display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-auto-rows: minmax(10px, auto);
+    grid-gap: 10px;
+
+    li {
+      display: flex;
+      grid-column: span 2;
+      padding-bottom: 15px;
+
+      @media ${device.desktop && device.tablet} {
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+    }
+`
+
 export { TriageToolContainer, AppHeader, AppIntro, AccordionPanelContainer,
-  Button, OpenIndicator, PlanContainer }
+  Button, OpenIndicator, PlanContainer, CheckboxList, RadiobuttonList }
