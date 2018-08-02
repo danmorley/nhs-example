@@ -1,12 +1,12 @@
 const questions = [
   {
     "id": "q1",
-    "text": "After waking, how long before you first smoke a cigarette?",
+    "text": "How soon after you wake up do you smoke your first cigarette?",
     "inputType": "radio",
     "options": [
       {
         "id": "1",
-        "text": "Within 5 minutes",
+        "text": "Within 5 minutes", 
         "dependence": 3
       },
       {
@@ -23,7 +23,7 @@ const questions = [
   },
   {
     "id": "q2",
-    "text": "How many cigarettes do you smoke per day?",
+    "text": "How many cigarettes do you smoke in a day?",
     "inputType": "radio",
     "options": [
       {
@@ -55,30 +55,26 @@ const questions = [
     "options": [
       {
         "id": "8",
-        "text": "Face to face support"
+        "text": "Face to face support e.g GP, Pharmacist or your local stop smoking service"
       },
       {
         "id": "9",
-        "text": "E-cigarettes / vapes"
+        "text": "Vape / E-cigarettes"
       },
       {
         "id": "10",
-        "text": "Nicotine replacement therapies (NRT) e.g. patches, gum, lozenges, spray"
+        "text": "Patches, gum, lozenges, spray or any other form of nicotine replacement therapy"
       },
       {
         "id": "11",
-        "text": "Stop smoking medicines e.g. Champix, Zyban"
+        "text": "Champix, Zyban or any other prescription stop smoking medicines"
       },
       {
         "id": "12",
-        "text": "Quit with friends and family"
+        "text": "Willpower alone"
       },
       {
         "id": "13",
-        "text": "Willpower"
-      },
-      {
-        "id": "14",
         "text": "Never tried to quit before"
       }
     ]
