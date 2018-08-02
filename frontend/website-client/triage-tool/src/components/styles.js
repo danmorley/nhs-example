@@ -7,7 +7,8 @@ const colors = {
   yellow: "#ffcc00",
   black: "#000",
   white: "#fff",
-  grey: "#4a4a4a"
+  grey: "#4a4a4a",
+  lightteal: "#028586"
 }
 
 const fonts = {
@@ -49,6 +50,7 @@ const TriageToolContainer = styled.div`
   border: 5px solid ${colors.yellow};
   color: ${colors.white};
   font-family: ${fonts.helvetica};
+  background-color: ${colors.lightteal};
 
   @media ${device.desktop && device.tablet} {
     box-shadow: 5px 5px 10px rgba(153, 153, 153, 0.2); 
@@ -90,6 +92,7 @@ const AccordionPanelContainer = styled.div`
       border-bottom: 1px solid ${colors.white};
       padding-bottom: 15px;
       font-size: 18px;
+      color: ${colors.white};
 
       @media ${device.desktop && device.tablet} {
         width: 70%;
@@ -148,7 +151,7 @@ const AccordionPanelContainer = styled.div`
             margin-left: 0;
           }
 
-          input[type=radio]{
+          input[type=radio], input[type=checkbox] {
             position: absolute;
             opacity: 0;
             cursor: pointer;
@@ -195,13 +198,13 @@ const Button = styled.a`
   color: ${colors.black};
   text-align: center;
   background-color: ${colors.yellow};
-  padding: 10px;
+  padding: 10px 10px 5px;
   display: block;
   border: 0;
   margin: 0 auto;
-  font-size: 18px;
-  width: 200px;
-  font-family: 'OneYouSansRegular';
+  font-size: 21px;
+  width: 280px;
+  font-family: 'OneYouSansBold';
 
   &:hover, &:focus {
     cursor: pointer;
@@ -217,13 +220,13 @@ const OpenIndicator = styled.span`
 `
 
 const AppHeader = styled.h1`
-  color: ${colors.black}
+  color: ${colors.white}
   text-align: center;
   font-family: 'OneYouSansBold';
   font-size: 24px;
 
   @media ${device.desktop && device.tablet} {
-    width: 70%;
+    width: 40%;
     margin-left: auto;
     margin-right: auto;
     font-size: 32px;
@@ -231,14 +234,14 @@ const AppHeader = styled.h1`
 `
 
 const AppIntro = styled.p`
-  color: ${colors.black}
+  color: ${colors.white}
   text-align: center;
   font-family: ${fonts.helvetica};
   margin-bottom: 30px;
   line-height: 150%;
 
   @media ${device.desktop && device.tablet} {
-    width: 70%;
+    width: 40%;
     margin-left: auto;
     margin-right: auto;
   }
