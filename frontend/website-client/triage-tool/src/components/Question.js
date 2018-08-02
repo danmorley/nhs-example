@@ -2,6 +2,9 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { observer } from "mobx-react"
 
+import { CheckboxList, RadiobuttonList } from "./styles"
+
+
 class Question extends Component {
   render() {
     const { inputType, text, options } = this.props
@@ -17,13 +20,25 @@ class Question extends Component {
       )
     })
 
+    let optionListContainer = (
+      <RadiobuttonList>
+        { optionList }
+      </RadiobuttonList>
+    )
+
+    if (inputType == "checkbox") {
+      optionListContainer = (
+        <CheckboxList>
+          { optionList }
+        </CheckboxList>
+      )
+    }
+
     return (
       <div>
         <h2>{ text }</h2>
         <p>{inputType == "radio" ? "Pick one" : "Pick as many as you like"}</p>
-        <ul>
-          { optionList }
-        </ul>
+        { optionListContainer }
       </div>
     )
   }
