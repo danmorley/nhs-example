@@ -303,6 +303,7 @@ class CtaPanel(blocks.StructBlock):
 GRID_PANELS = [
     ('oneyou1_teaser', BackwardsCompatibleContent(label="OneYou1 teaser", icon="folder-inverse")),
     ('video_teaser', VideoTemplate(icon="media")),
+    ('rte_panel', RichTextPanel(icon="media")),
     ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
     ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
     ('information_panel', InformationPanel(target_model="shelves.AppTeaser", icon="image")),
