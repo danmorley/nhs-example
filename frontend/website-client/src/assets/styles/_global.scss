@@ -28,18 +28,9 @@ body {
   overflow-x: hidden;
 }
 
-h2 {
-  font-size: $h2;
-  
-  @include media-breakpoint-up(sm) {
-    font-size: calc(1.2 * #{$h2});
-  }
-}
-
 .h1 {
   font-size: $h1 !important;
 }
-
 
 .h2 {
   font-size: $h2 !important;
@@ -193,44 +184,61 @@ ul.cta-list {
 }
 
 //theming
-.oneyou {
 
-  h1 {
-    font-size: map-deep-get($headings, oneyou, heading-h1, mobile);
-    
-    @include media-breakpoint-up(sm) {
-      font-size: map-deep-get($headings, oneyou, heading-h1, desktop);
-    }
+//default theme (oneyou)
+h1 {
+  font-size: map-deep-get($headings, oneyou, heading-h1, mobile);
+  
+  @include media-breakpoint-up(sm) {
+    font-size: map-deep-get($headings, oneyou, heading-h1, desktop);
   }
 }
 
-.campaign {
+h2 {
+  font-size: map-deep-get($headings, oneyou, heading-h2, mobile);
   
+  @include media-breakpoint-up(sm) {
+    font-size: map-deep-get($headings, oneyou, heading-h2, desktop);
+  }
+}
+
+.button-cta {
+  background-color: $sunflower-yellow;
+  color: $grey-brown;
+
+  &:active, &:visited {
+    color: $grey-brown;
+  }
+
+  &:hover {
+    background-color: $grey-brown;
+    color: $white;
+  }
+}
+
+//stoptober
+.stoptober {
+
   h1 {
-    font-size: map-deep-get($headings, campaign, heading-h1, mobile);
+    font-size: map-deep-get($headings, stoptober, heading-h1, mobile);
+    font-weight: normal;
+    
     
     @include media-breakpoint-up(sm) {
-      font-size: map-deep-get($headings, campaign, heading-h1, desktop);
+      font-size: map-deep-get($headings, stoptober, heading-h1, desktop);
     }
   }
   
   h2 {
-    font-size: map-deep-get($headings, campaign, heading-h2, mobile);
+    font-size: map-deep-get($headings, stoptober, heading-h2, mobile);
     
     @include media-breakpoint-up(sm) {
-      font-size: map-deep-get($headings, campaign, heading-h2, desktop);
+      font-size: map-deep-get($headings, stoptober, heading-h2, desktop);
     }
+  }
+  
+  html & {  
+    color: $black;
   }
 }
 
-.oneyou, .campaign { 
-  .button-cta {
-    background-color: $sunflower-yellow;
-    color: $grey-brown;
-
-    &:hover {
-      background-color: $grey-brown;
-      color: $white;
-    }
-  }
-}

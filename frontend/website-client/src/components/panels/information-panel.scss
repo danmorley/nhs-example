@@ -105,51 +105,52 @@
   }
 }
 
-// theming
-.oneyou, .campaign {
+//theming
+
+//default theme (oneyou)
+.information-panel__info {
+    background: none;
+}
+
+.information-panel__heading {
+  font-weight: normal;
+  margin-bottom: 0.5em;
+  font-family: $secondary-brand-font;
   
-  .information-panel__info {
-      background: none;
-  }
-
-  .information-panel__heading {
-    font-weight: normal;
-    margin-bottom: 0.5em;
-    
-    em {
-      font-style: normal;
-      color: $black;
-    }
-    
-    .marker {
-      display: inline-block;
-      line-height: 0.9em;
-      border-bottom: 0.15em solid $black;
-      font-family: $tertiary-brand-font;
-      color: $teal-blue;
-    }
-  }
-
-  .information-panel__text {
+  em {
+    font-style: normal;
     color: $black;
-
-    a {
-      color: $sunflower-yellow;
-    }
+  }
+  
+  .marker {
+    display: inline-block;
+    line-height: 0.9em;
+    border-bottom: 0.15em solid $black;
+    font-family: $tertiary-brand-font;
+    color: $teal-blue;
   }
 }
 
-.oneyou {
-  
-  .information-panel__heading {
-    font-family: $secondary-brand-font;
+.information-panel__text {
+  color: $black;
+
+  a {
+    color: $sunflower-yellow;
   }
+}
   
+.shelf .information-panel__heading {
+  color: $grey-brown-dark;
+}
+
+//stoptober
+.stoptober {
   .shelf .information-panel__heading {
-    color: $grey-brown-dark;
+    color: $black;
   }
 }
 
+//campaign
 .campaign {
   
   .information-panel__heading {

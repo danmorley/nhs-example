@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './cta-links.css';
 import CtaLink from './CtaLink';
 import CtaList from './CtaList';
 
@@ -20,12 +21,12 @@ class CtaLinks extends Component {
     if (cta instanceof Array) {
       // Return a list of cta links.
       return (
-        <CtaList items={cta} variant={variant} />
+        <CtaList items={cta} variant={variant} disabled={this.props.disabled} />
       );
     } else {
       // Return a single cta link.
       return (
-        <CtaLink cta={cta} variant={variant} />
+        <CtaLink cta={cta} variant={variant} disabled={this.props.disabled} />
       );
     }
   }
@@ -33,6 +34,7 @@ class CtaLinks extends Component {
 
 CtaLinks.propTypes = {
   cta: PropTypes.oneOfType([PropTypes.object,PropTypes.array]),
+  disabled: PropTypes.bool.isRequired,
   variant: PropTypes.string
 };
 

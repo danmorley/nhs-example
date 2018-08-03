@@ -15,7 +15,7 @@ class Image extends Component {
     if (!image) return null;
 
     return (
-      <img src={image.link} alt={image.title} {...rest} />
+      <img src={image.link} alt={image.title} className={image.class} {...rest} />
     );
   }
 }

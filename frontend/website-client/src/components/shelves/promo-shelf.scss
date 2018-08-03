@@ -89,6 +89,10 @@ $shelf-padding-extra: 2em;
 
 .page-heading-shelf {
   
+  > .shelf__container {
+    overflow: hidden;
+  }
+  
   .container, .container-fluid {
     padding-top: 1.4em;
     padding-bottom: 0.6em;
@@ -114,82 +118,122 @@ $shelf-padding-extra: 2em;
         margin-bottom: 0.2em;
       }
   }
+  
+  .shelf-image-position--top-left {
+     > .container {
+    display: flex;
+    flex-direction: column-reverse;
+    }
+  
+    .page-heading-shelf__image-container {
+      
+      @include media-breakpoint-up(md) {
+        margin-bottom: 0.5em;
+      }
+    }
+  }
+}
+
+.page-heading-shelf__image {
+  height: 30px;
+
+  @include media-breakpoint-up(sm) {
+    height: 50px;
+  }
+  
+  @include media-breakpoint-up(md) {
+    height: auto;
+  }
+  
+  .shelf-image-position--top-right & {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  
+  .shelf-image-position--bottom-left & {
+    margin-top: 1em;
+  }
+  
+  .shelf-image-position--bottom-right &{
+    margin-top: 1em;
+    float: right;
+    
+    @include media-breakpoint-up(md) {
+      margin-top: 0;
+    }
+  }
 }
 
 //theming
-.oneyou {
-  .promo-shelf, .page-heading-shelf, .banner-shelf {
-    h2 {
-      @include heading-h1(oneyou);
-    }
+
+//default theme (oneyou)
+.promo-shelf, .page-heading-shelf, .banner-shelf {
+  h2 {
+    @include heading-h1(oneyou);
+  }
+}
+
+.promo-shelf h2 {
+  
+  @include media-breakpoint-down(sm) { 
+    font-size: 1.5em;
   }
   
-  .promo-shelf h2 {
+  @media (max-width: 365px) {
+    font-size: 1.4em;
+  }
+}
+
+.promo-shelf, .page-heading-shelf, .banner-shelf {
+  h1, h2, h3, h4, h5 {
+    color: $white;
+  }
+
+  p, ul, ol {
+    color: $white;
+  }
+  
+  a:not(.button-cta) { 
+   color: $white;
+ }
+
+  .marker {
+    color: $sunflower-yellow;
+  }
+
+  .shelf__container {
+    background-color: $teal-blue;
+  }
+  
+  > .shelf__container {
     
-    @include media-breakpoint-down(sm) { 
-      font-size: 1.5em;
-    }
-    
-    @media (max-width: 365px) {
-      font-size: 1.4em;
+    &.shelf__container-gradient--true:after {
+      width:100%;
+      content:'';
+      display:block;
+      position:absolute;
+      top:0;
+      left:0;
+      background: linear-gradient(91.54deg, #138585 0%, #138585 41.86%, rgba(0,164,166,0) 100%);
+      opacity: 0.8;
+      height:100%;
     }
   }
 }
 
-.campaign {
-  .promo-shelf, .page-heading-shelf, .banner-shelf {
-    h2 {
-      @include heading-h1(campaign);
-    }
-  }
+//stoptober
+.stoptober {
   
-  .promo-shelf h2 {
+  .page-heading-shelf {
     
-    @include media-breakpoint-down(sm) { 
-      font-size: 1.5em;
-    }
-    
-    @media (max-width: 365px) {
-      font-size: 1.4em;
-    }
-  }
-}
-
-.oneyou, .campaign {
-
-  .promo-shelf, .page-heading-shelf, .banner-shelf {
-    h1, h2, h3, h4, h5 {
-      color: $white;
-    }
-
-    p, ul, ol {
-      color: $white;
-    }
-    
-    a:not(.button-cta) { 
-     color: $white;
-   }
-
-    .marker {
-      color: $sunflower-yellow;
-    }
-
-    .shelf__container {
-      background-color: $teal-blue;
-    }
-    
-    > .shelf__container {
+    h1 {
+      font-weight: normal;
+      font-family: $secondary-brand-font;
       
-      &.shelf__container-gradient--true:after {
-        width:100%;
-        content:'';
-        display:block;
-        position:absolute;
-        top:0;
-        left:0;
-        background: linear-gradient(91.54deg, #138585 0%, #138585 41.86%, rgba(0,164,166,0) 100%);
-        opacity: 0.8;
-        height:100%;
+      span {
+        font-family: $primary-brand-font;
+        color: $sunflower-yellow;
       }
     }
   }

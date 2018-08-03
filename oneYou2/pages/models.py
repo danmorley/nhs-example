@@ -30,7 +30,8 @@ from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppT
 
 GRID_VARIANT_CHOICES = (
     ('standard', 'Standard'),
-    ('grey_background', 'Grey Background'),
+    ('teal_background', 'Teal Background on desktop, White Background on mobile'),
+    ('yellow_background', 'Yellow Background with Red Border'),
 )
 
 GRID_LAYOUT_CHOICES = (
@@ -77,6 +78,22 @@ VIDEO_LAYOUTS = (
     ('text_on_top', 'Video Bottom Text Top'),
 )
 
+
+PAGE_HEADING_LAYOUTS = (
+    ('image_bottom_left', 'Image bottom left'),
+    ('image_bottom_right', 'Image bottom right'),
+    ('image_top_right', 'Image top right'),
+    ('image_top_left', 'Image top left'),
+)
+
+BRIGHTCOVE_OPTION = ('brightcove', 'Brightcove')
+WIREWAX_OPTION = ('wirewax', 'Wirewax')
+VIDEO_HOSTS = (
+    BRIGHTCOVE_OPTION,
+    WIREWAX_OPTION,
+)
+
+
 CONTENT_STATUS_PENDING = 0
 
 logger = logging.getLogger('wagtail.core')
@@ -111,14 +128,22 @@ class PageHeading(CTABlock):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     background_image = BlobImageChooserBlock(required=False)
+    image = ImageBlock(required=False)
     shelf_id = IDBlock(required=False,
                        label="ID",
                        help_text="Not displayed in the front end",
                        classname='dct-meta-field')
+
     meta_gradient = blocks.BooleanBlock(label='Green gradient',
                                         required=False,
                                         default=False,
                                         classname='dct-meta-field')
+
+    meta_layout = blocks.ChoiceBlock(choices=PAGE_HEADING_LAYOUTS,
+                                     label="Variant",
+                                     classname='dct-meta-field',
+                                     required=False,
+                                     default=False)
 
     class Meta:
         form_classname = 'dct-page-heading-panel dct-meta-panel'
@@ -163,6 +188,7 @@ class FindOutMoreDropDown(CTABlock):
 
 
 class VideoTemplate(CTABlock):
+    host = blocks.ChoiceBlock(choices=VIDEO_HOSTS, label="Host", default=BRIGHTCOVE_OPTION)
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     image = BlobImageChooserBlock(help_text="Click this image plays the video")
@@ -171,7 +197,19 @@ class VideoTemplate(CTABlock):
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False)
     shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
-    meta_layout = blocks.ChoiceBlock(choices=VIDEO_LAYOUTS, label="Layout", classname='dct-meta-field')
+    meta_layout_mobile = blocks.ChoiceBlock(choices=[
+        ('mobile_image_top', 'Top'),
+        ('mobile_image_left', 'Left'),
+    ],
+        default='mobile_image_left', label='Mobile Image Position', classname='dct-meta-field')
+    meta_layout_desktop = blocks.ChoiceBlock(choices=[
+        ('desktop_image_top', 'Top'),
+        ('desktop_image_left', 'Left'),
+    ],
+        default='desktop_image_left', label='Desktop Image Position', classname='dct-meta-field')
+    meta_use_play_link = blocks.BooleanBlock(label='Use play video link', required=False, default=False,
+                                             classname='dct-meta-field')
+    meta_play_link_text = blocks.CharBlock(default='Play', label='Play Video Link Text', classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-video-teaser-panel dct-meta-panel'
@@ -190,6 +228,22 @@ class ImageTeaserTemplate(CTABlock):
             ('dark-bg', 'Dark Background')
         ],
         default='light-bg', label='Variant', classname='dct-meta-field')
+    meta_layout_mobile = blocks.ChoiceBlock(choices=[
+            ('mobile-image-default', 'Default'),
+            ('mobile-image-top', 'Top'),
+            ('mobile-image-left', 'Left'),
+        ],
+        default='mobile-image-default', label='Mobile Image Position', classname='dct-meta-field')
+    meta_layout_desktop = blocks.ChoiceBlock(choices=[
+            ('desktop-image-default', 'Default'),
+            ('desktop-image-left', 'Left'),
+        ],
+        default='desktop-image-default', label='Desktop Image Position', classname='dct-meta-field')
+    meta_cta_variant = blocks.ChoiceBlock(choices=[
+            ('link', 'Link'),
+            ('button', 'Button'),
+        ],
+        default='link', label='CTA Style', classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-panel-image-teaser dct-meta-panel'
@@ -224,6 +278,10 @@ class RichTextPanel(blocks.StructBlock):
     text = blocks.RichTextBlock(required=False)
 
 
+class ListItemPanel(blocks.StructBlock):
+    text = blocks.CharBlock(required=True)
+
+
 class InlineScriptPanel(blocks.StructBlock):
     script = blocks.TextBlock(required=False, help_text="The javascript to be inserted")
     src = blocks.CharBlock(required=False, help_text="URL of the javascript file")
@@ -233,6 +291,15 @@ class InlineScriptPanel(blocks.StructBlock):
         form_classname = 'dct-inline-script-panel'
 
 
+class CtaPanel(blocks.StructBlock):
+    heading = blocks.CharBlock(required=False)
+    body = blocks.RichTextBlock(required=False)
+    cta = blocks.StreamBlock([
+        ('simple_cta_link', SimpleCtaLinkBlock())
+    ], icon='arrow-left', label='CTA links', required=False)
+    shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
+
+
 GRID_PANELS = [
     ('oneyou1_teaser', BackwardsCompatibleContent(label="OneYou1 teaser", icon="folder-inverse")),
     ('video_teaser', VideoTemplate(icon="media")),
@@ -240,7 +307,9 @@ GRID_PANELS = [
     ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
     ('information_panel', InformationPanel(target_model="shelves.AppTeaser", icon="image")),
     ('icon_card_panel', IconCardPanel(icon="snippet")),
-    ('inline_script_panel', InlineScriptPanel(icon="code"))
+    ('cta_panel', CtaPanel(icon='plus')),
+    ('inline_script_panel', InlineScriptPanel(icon="code")),
+    ('list_item_panel', ListItemPanel(icon='list-ul'))
 ]
 
 
@@ -293,7 +362,6 @@ class Carousel(blocks.StructBlock):
         ('video_teaser', VideoTemplate(icon="media")),
         ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
         ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
-        ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
     ], icon='arrow-left', label='Items', required=False)
     shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
 
@@ -307,6 +375,7 @@ class PanelCarousel(blocks.StructBlock):
         ('video_teaser', VideoTemplate(icon="media")),
         ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
         ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
+        ('cta_panel', CtaPanel(icon='plus')),
     ], icon='arrow-left', label='Items', required=False)
     shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
 
@@ -385,8 +454,44 @@ class TriageToolShelf(blocks.StructBlock):
         form_classname = 'dct-triage-tool-shelf dct-meta-panel'
 
 
-# Pages
+class ActionPanel(blocks.StructBlock):
+    action_code = blocks.CharBlock(required=True, unique=True)
+    title = blocks.CharBlock(required=True)
+    rich_text_body = blocks.RichTextBlock(required=False)
+    cta = blocks.StreamBlock([
+        ('simple_menu_item', SimpleMenuItem())
+    ], icon='arrow-left', label='Items', required=False)
+    panel_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
 
+
+class ActionGroup(blocks.StructBlock):
+    title = blocks.CharBlock(required=True)
+    actions = blocks.StreamBlock([
+        ('action_panel', ActionPanel(required=False, icon="list-ul")),
+    ])
+    panel_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
+
+
+class ActionPlan(blocks.StructBlock):
+    action_groups = blocks.StreamBlock([
+        ('action_group', ActionGroup(required=False, icon="collapse-down")),
+    ])
+    cta = blocks.StreamBlock([
+        ('simple_menu_item', SimpleMenuItem())
+    ], icon='arrow-left', label='Items', required=False)
+    shelf_id = IDBlock(required=False, label='ID', classname='dct-meta-field')
+
+
+class ActionPlanDisplay(blocks.StructBlock):
+    shelf_id = IDBlock(required=False, label='ID', classname='dct-meta-field')
+    title = blocks.CharBlock(required=False)
+    body = blocks.RichTextBlock(required=False)
+    cta = blocks.StreamBlock([
+        ('simple_menu_item', SimpleMenuItem())
+    ], icon='arrow-left', label='Items', required=False)
+
+
+# Pages
 class OneYou2Page(Page):
     body = StreamField([
         ('page_heading_shelf', PageHeading(icon='title')),
@@ -405,6 +510,8 @@ class OneYou2Page(Page):
         ('table', Table(label="Table", icon='list-ul')),
         ('script_shelf', InlineScriptPanel(label="Script shelf", icon='code')),
         ('triage_tool_shelf', TriageToolShelf(label="Triage tool shelf", icon='cog')),
+        ('action_plan_shelf', ActionPlan(label="Action Plan Builder shelf", icon='form')),
+        ('action_plan_display_shelf', ActionPlanDisplay(label="Action Plan Display shelf", icon='form'))
     ], null=True, blank=True)
 
     # Meta Fields
@@ -433,6 +540,8 @@ class OneYou2Page(Page):
                                                    " your health today")
 
     use_share_button = models.BooleanField(default=True)
+    use_email_button = models.BooleanField(default=False)
+    use_print_button = models.BooleanField(default=False)
 
     twitter_image_fk = models.ForeignKey(
         'images.PHEImage',
@@ -536,6 +645,8 @@ class OneYou2Page(Page):
         MultiFieldPanel(
             [
                 FieldPanel('use_share_button'),
+                FieldPanel('use_email_button'),
+                FieldPanel('use_print_button'),
             ],
             heading='Share buttons',
             classname='collapsible collapsed'),

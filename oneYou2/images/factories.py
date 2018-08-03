@@ -1,4 +1,5 @@
 import factory
+from factory import fuzzy
 from images.models import PHEImage
 
 
@@ -13,5 +14,8 @@ class PHEImageFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = PHEImage
 
+    title = fuzzy.FuzzyText()
     file = factory.django.ImageField(color='blue')
+    width = 1200
+    height = 1200
     # factory.django.ImageField(color='blue')

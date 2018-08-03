@@ -138,13 +138,6 @@ $arrow-distance: 10%;
       padding-bottom: 0;
       transform: scale(1); 
       transition: 0.3s all ease;
-      
-      @include media-breakpoint-up(lg) {
-        .image-teaser__info {
-          padding-top: 1.5em;
-          padding-bottom: 1.5em;
-        }
-      }
     }
   }
 
@@ -190,102 +183,6 @@ $arrow-distance: 10%;
     @include media-breakpoint-up(xl) {
       padding-left: 1em;
       padding-right: 1em;
-    }
-  }
-}
-
-
-.oneyou, .campaign {
-  
-  .panel-carousel {
-    
-    .image-teaser {
-    
-      @include media-breakpoint-down(md) { 
-        flex-direction: column;
-      }
-    }
-    
-    .image-teaser__image {
-      
-      @include media-breakpoint-down(md) {
-        min-height: 120px;
-        height: 35%;
-        width: 100%;
-        background-position: top center;
-      }
-      
-      @include media-breakpoint-up(lg) {
-        min-height: 263px;
-      }
-    }
-    
-    .image-teaser__info {
-  
-      padding-left: 1em;
-      padding-right: 1em;
-      
-      @include media-breakpoint-down(md) { 
-        height: 65%;
-        width: 100%;
-        display: block;
-      }
-    }
-    
-    .image-teaser__heading {
-      padding-top: 0.9em;
-      padding-bottom: 0.9em;  
-      font-family: $secondary-brand-font;
-      font-weight: normal;
-      padding-left: 0;
-      padding-right: 0;
-
-      @include media-breakpoint-up(md) { 
-        @include heading-h2(oneyou)
-        padding-top: 1em;
-        padding-bottom: 1em;
-      } 
-    } 
-   
-    .image-teaser__text {  
-      padding-top: 0.7em;
-      padding-bottom: 0.9em; 
-      padding-left: 0;
-      padding-right: 0;
-     
-      @include media-breakpoint-up(sm) { 
-        padding-top: 1em;
-        padding-bottom: 1em; 
-      } 
-   
-      p { 
-        font-weight: normal !important; 
-      }   
-    }
-    
-    .image-teaser__heading {   
-      padding-bottom: 0; 
-      
-      @include media-breakpoint-down(sm) { 
-        font-size: 1em; 
-      } 
-    } 
-    
-    .image-teaser--light-bg { 
-     
-        .image-teaser__heading {   
-          
-          @include media-breakpoint-up(lg) {
-            padding-top: 0; 
-          }
-        } 
-    }
-    
-    .image-teaser--dark-bg {
-    
-      .image-teaser__heading { 
-        background-color: inherit;
-      }
     }
   }
 }

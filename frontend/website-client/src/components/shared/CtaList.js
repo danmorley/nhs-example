@@ -14,7 +14,7 @@ class CtaList extends Component {
     if (!items || items.length === 0) return null;
 
     let ctaItems = items.map((item, i) => {
-      return (<li className="cta-list__item" key={i}><CtaLink cta={item} variant={variant} /></li>);
+      return (<li className="cta-list__item" key={i}><CtaLink cta={item} variant={variant} disabled={this.props.disabled} /></li>);
     });
 
     return (
@@ -27,6 +27,7 @@ class CtaList extends Component {
 
 CtaList.propTypes = {
   items: PropTypes.array.isRequired,
+  disabled: PropTypes.bool.isRequired,
   variant: PropTypes.string
 };
 

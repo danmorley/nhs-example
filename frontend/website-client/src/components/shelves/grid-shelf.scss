@@ -41,12 +41,6 @@
       }
     }
   }
-
-  &.basic-grid-shelf--grey_background {
-    .grid-container {
-      background-color: $light-grey;
-    }
-  }
 }
 
 .basic-grid-shelf .image-set {
@@ -71,16 +65,34 @@
     color: #fff;
   }
 }
-//theming
-.campaign {
+
+.shelf.basic-grid-shelf--teal_background {
   
-  .shelf-section:first-child {
-    h2 {
-      @include heading-h1(campaign);
+  @include media-breakpoint-up(md) {  
+    padding: 2em 0 1.5em; 
+    background-color: $teal-blue;
+    
+    h2, h3, h4, p {
+      color: $white;
     }
   }
+}
 
-  h2 {
-    @include heading-h2(campaign);
+.shelf.basic-grid-shelf--yellow_background {
+  padding: 2em 0 1.5em; 
+  background-color: $sunflower-yellow;
+  border: 3px solid $red;
+  border-left: 0;
+  border-right: 0;
+  
+  .shelf__header {
+    color: $black;
+  }
+  
+  .shelf__body {
+    
+     h2, h3, h4, p {
+      color: $black;
+    }  
   }
 }

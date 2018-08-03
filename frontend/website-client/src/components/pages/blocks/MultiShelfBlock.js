@@ -12,6 +12,7 @@ import CmsComponentRegistry from '../../CmsComponentRegistry';
 import PlaceholderShelf from '../../shelves/PlaceholderShelf';
 import GeneralTextShelf from '../../shelves/GeneralTextShelf';
 import BasicCtaShelf from '../../shelves/BasicCtaShelf';
+import PageHeadingShelf from '../../shelves/PageHeadingShelf';
 import GuidanceShelf from '../../shelves/GuidanceShelf';
 import MainCarouselShelf from '../../shelves/MainCarouselShelf';
 import PanelCarouselShelf from '../../shelves/PanelCarouselShelf';
@@ -27,6 +28,9 @@ import RecipeGridShelf from '../../shelves/RecipeGridShelf';
 import ShareButtonShelf from '../../shelves/ShareButtonShelf';
 import TableShelf from '../../shelves/TableShelf';
 //import TriageToolShelf from '../../shelves/TriageToolShelf';
+import ActionPlanShelf from '../../shelves/ActionPlanShelf';
+import ActionPlanDisplayShelf from '../../shelves/ActionPlanDisplayShelf';
+
 
 class MultiShelfBlock extends Component {
   render() {

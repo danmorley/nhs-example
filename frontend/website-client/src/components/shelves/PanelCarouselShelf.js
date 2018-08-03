@@ -58,7 +58,7 @@ class PanelCarouselShelf extends Component {
       dots: true,
       infinite: true,
       speed: 500,
-      autoplay: true,
+      autoplay: false,
       autoplaySpeed: 12000,
       arrows: true,
       responsive: [

@@ -144,29 +144,63 @@ $shelf-padding-extra: 2em;
     text-align: center;
     line-height: 1.4em;
   }
-}
+} 
 
 //theming
-.oneyou, .campaign {
 
-  .shelf {
-    h2 {
-      color: $teal-blue;
-    }
-  }
-
-  h1, h2 {
-    .marker {
-      display: inline-block;
-      line-height: 0.9em;
-      border-bottom: 0.15em solid $white;
-    }
+//default theme (oneyou)
+h1, h2 {
+  .marker {
+    display: inline-block;
+    line-height: 0.9em;
+    border-bottom: 0.15em solid $white;
   }
 }
 
-.campaign {
+.shelf {
+  h2 {
+    color: $teal-blue;
+  }
+}
+
+//stoptober
+.stoptober {
+  
+  .basic-grid-shelf {
+    h2 {
+      color: $black;
+    }
+  }
+  
   .shelf__header {
     font-family: $primary-brand-font;
-    @include heading-h2(campaign);
+    font-weight: normal;
+    text-align: center;
+    color: $black;
+  }
+  
+  .shelf__body {
+     text-align: center;
+     padding: 0 0.5em;
+     
+     @include media-breakpoint-up(md) {
+       padding: 0 5em;
+     }
+  }
+  
+  .section-heading-shelf h2 {
+    font-family: $primary-brand-font;
+    font-weight: normal;
+    text-align: center;
+    color: $black;
+  }
+
+  .section-heading-shelf p {
+    text-align: center;
+    padding: 0 0.5em;
+    
+    @include media-breakpoint-up(md) {
+      padding: 0 5em;
+    }
   }
 }

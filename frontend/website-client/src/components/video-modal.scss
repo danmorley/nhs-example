@@ -18,6 +18,14 @@ $shelf-padding-extra: 2em;
       
   .pure-modal {
     width: 100%;
+
+    .panel-body {
+      @media screen and (orientation: landscape) {
+        @include media-breakpoint-down(md) {
+         padding: 0;
+        }
+      }
+    }
   }
   
   .panel-body {
@@ -30,11 +38,26 @@ $shelf-padding-extra: 2em;
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
+
+    @media screen and (orientation: landscape) {
+      @include media-breakpoint-down(md) {
+       padding: 0;
+      }
+    }
   }
   
   .video-js {
     height: 400px;
     width: 100%;
+
+    &.wirewax {
+      height: 80vh;
+
+      @media screen and (orientation: landscape) {
+        @include media-breakpoint-down(md) {
+          height: 100vh;
+        }
+      }
+    }
   }
 }
-

@@ -69,6 +69,8 @@ class OneYouPageSerializer(serializers.ModelSerializer):
             'twitter_image',
 
             'use_share_button',
+            'use_email_button',
+            'use_print_button',
         )
 
         fields = fields + meta_fields
@@ -166,6 +168,8 @@ class RecipePageSerializer(serializers.ModelSerializer):
             'twitter_image',
 
             'use_share_button',
+            'use_email_button',
+            'use_print_button',
         )
 
         fields = fields + meta_fields
