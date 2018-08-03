@@ -32,16 +32,16 @@ const nodeConfig = {
   mode: process.env.NODE_ENV || "development"
 }
 
-const devConfig = {
+const webConfig = {
   module: {
     rules: rules
   },
   entry: './src/dev.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.dev.js'
+    filename: 'triage-tool.js'
   },
   mode: process.env.NODE_ENV || "development"
 }
 
-module.exports = [ nodeConfig, devConfig ]
+module.exports = [ nodeConfig, webConfig ]
