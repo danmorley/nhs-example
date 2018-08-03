@@ -251,6 +251,40 @@ const sampleShelvesPage = {
         image_meta: "simple_page_heading_shelf/None/None"
       }
     },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Section Heading Shelf (No body text)',
+        body: 'Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b>, green gradient <b>N/A</b>, foreground image <b>N/A</b>'
+      }
+    },
+    {
+      id: "section-heading-shelf-1",
+      type: "section_heading_shelf",
+      value: {
+        heading: 'Section Heading Shelf',
+        shelf_id: "",
+        body: '',
+        image_meta: "section_heading_shelf/None/None"
+      }
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Section Heading Shelf',
+        body: 'Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b>, green gradient <b>N/A</b>, foreground image <b>N/A</b>'
+      }
+    },
+    {
+      id: "section-heading-shelf-2",
+      type: "section_heading_shelf",
+      value: {
+        heading: 'Section Heading Shelf',
+        shelf_id: "",
+        body: '<p>PBR&B authentic pickled gastropub, typewriter echo park poke swag pitchfork austin mustache yr photo booth lyft. Before they sold out mixtape next level wolf, truffaut squid ennui helvetica blog. Viral ramps yuccie fingerstache street art art party humblebrag. Tilde craft beer meggings green juice vice ramps pitchfork freegan. Umami migas forage, fingerstache raclette normcore blue bottle. Literally chicharrones twee, unicorn palo santo mustache iPhone biodiesel. Leggings 8-bit tacos actually.</p>',
+        image_meta: "section_heading_shelf/None/None"
+      }
+    },
 
 
     {
