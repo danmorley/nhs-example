@@ -217,6 +217,40 @@ const sampleShelvesPage = {
         meta_layout: "image_top_left"
       }
     },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Simple Page Heading Shelf (No body text)',
+        body: 'Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b>, green gradient <b>N/A</b>, foreground image <b>N/A</b>'
+      }
+    },
+    {
+      id: "simple-page-heading-shelf-1",
+      type: "simple_page_heading_shelf",
+      value: {
+        heading: "Simple Page Heading Shelf",
+        shelf_id: "",
+        body: "",
+        image_meta: "simple_page_heading_shelf/None/None"
+      }
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Simple Page Heading Shelf',
+        body: 'Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b>, green gradient <b>N/A</b>, foreground image <b>N/A</b>'
+      }
+    },
+    {
+      id: "simple-page-heading-shelf-2",
+      type: "simple_page_heading_shelf",
+      value: {
+        heading: "Simple Page Heading Shelf",
+        shelf_id: "",
+        body: 'Pickled tilde taxidermy, messenger bag synth fixie venmo. Pickled sartorial leggings biodiesel letterpress DIY. Lumbersexual glossier sartorial leggings, try-hard lo-fi trust fund.',
+        image_meta: "simple_page_heading_shelf/None/None"
+      }
+    },
 
 
     {
