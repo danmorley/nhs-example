@@ -59,7 +59,7 @@ const questions = [
       },
       {
         "id": "9",
-        "text": "Vape / E-cigarettes"
+        "text": "E-cigarettes / vapes"
       },
       {
         "id": "10",

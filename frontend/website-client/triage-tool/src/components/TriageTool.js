@@ -51,7 +51,7 @@ class TriageTool extends Component {
         { questionList }
 
         <AccordionPanel
-          appHeading={true}
+          appHeading={ true }
           toggleOpen={ () => allQuestionsAnswered && changePanel(questions.length + 1) }
           open={ currentPanel == (questions.length + 1) }
           heading="Your personal quit plan"
