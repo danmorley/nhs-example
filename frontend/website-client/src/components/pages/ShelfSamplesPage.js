@@ -1,10 +1,28 @@
 import Page from './Page';
 import withOwnContent from './withOwnContent';
+import ImageUtils from '../panels/ImageUtils';
+import testBackgroundImage from '../../assets/images/app-screen.jpg';
+import pheLogo from '../../assets/images/public-health-england-logo.png';
 
 /**
  *  Shelf Sample Page uses the withOwnContent higher order component to return a page
  *  but using local static content.
  */
+
+const backgroundImage = {
+  renditions: {
+    desktop: testBackgroundImage,
+    mobile: testBackgroundImage
+  },
+  title: 'Placeholder background image' };
+
+const pheLogoImage = {
+  renditions: {
+    desktop: pheLogo,
+    mobile: pheLogo
+  },
+  title: 'PHE logo image' };
+
 const sampleShelvesPage = {
   title: 'Shelf Samples',
   page_styles: '#panel-video-teaser-4 h3 { color: orange; }',
@@ -12,6 +30,195 @@ const sampleShelvesPage = {
     search_description: ''
   },
   body: [
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Page Heading Shelf (no body text)',
+        body: 'Layout <b>not given</b>, variant <b>N/A</b>, background image <b>not given</b>, green gradient <b>no</b>, foreground image <b>not given</b>'
+      }
+    },
+    {
+      id: 'page-heading-shelf-1',
+      type: 'page_heading_shelf',
+      value: {
+        heading: 'Page Heading shelf',
+        body: '',
+        desktop_use_renditions: true,
+        image_meta: "page_heading_shelf/None/None",
+        meta_gradient: false,
+        mobile_use_renditions: true,
+        background_image: null
+      }
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Page Heading Shelf',
+        body: 'Layout <b>not given</b>, variant <b>N/A</b>, background image <b>not given</b>, green gradient <b>no</b>, foreground image <b>not given</b>'
+      }
+    },
+    {
+      id: 'page-heading-shelf-2',
+      type: 'page_heading_shelf',
+      value: {
+        heading: 'Page Heading shelf',
+        body: 'Pickled tilde taxidermy, messenger bag synth fixie venmo. Pickled sartorial leggings biodiesel letterpress DIY. Lumbersexual glossier sartorial leggings, try-hard lo-fi trust fund.',
+        desktop_use_renditions: true,
+        image_meta: "page_heading_shelf/None/None",
+        meta_gradient: false,
+        mobile_use_renditions: true,
+        background_image: null
+      }
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Page Heading Shelf',
+        body: 'Layout <b>not given</b>, variant <b>N/A</b>, background image <b>given</b>, green gradient <b>no</b>, foreground image <b>not given</b>'
+      }
+    },
+    {
+      id: 'page-heading-shelf-3',
+      type: 'page_heading_shelf',
+      value: {
+        heading: 'Page Heading shelf',
+        body: 'Pickled tilde taxidermy, messenger bag synth fixie venmo. Pickled sartorial leggings biodiesel letterpress DIY. Lumbersexual glossier sartorial leggings, try-hard lo-fi trust fund.',
+        image_meta: "page_heading_shelf/None/None",
+        meta_gradient: false,
+        background_image: backgroundImage
+      }
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Page Heading Shelf',
+        body: 'Layout <b>not given</b>, variant <b>N/A</b>, background image <b>given</b>, green gradient <b>yes</b>, foreground image <b>not given</b>'
+      }
+    },
+    {
+      id: 'page-heading-shelf-4',
+      type: 'page_heading_shelf',
+      value: {
+        heading: 'Page Heading shelf',
+        body: 'Pickled tilde taxidermy, messenger bag synth fixie venmo. Pickled sartorial leggings biodiesel letterpress DIY. Lumbersexual glossier sartorial leggings, try-hard lo-fi trust fund.',
+        desktop_use_renditions: true,
+        image_meta: "page_heading_shelf/None/None",
+        meta_gradient: true,
+        mobile_use_renditions: true,
+        background_image: backgroundImage
+      }
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Page Heading Shelf',
+        body: 'Layout <b>not given</b>, variant <b>N/A</b>, background image <b>given</b>, green gradient <b>yes</b>, foreground image <b>given</b>'
+      }
+    },
+    {
+      id: 'page-heading-shelf-5',
+      type: 'page_heading_shelf',
+      value: {
+        heading: 'Page Heading shelf',
+        body: 'Pickled tilde taxidermy, messenger bag synth fixie venmo. Pickled sartorial leggings biodiesel letterpress DIY. Lumbersexual glossier sartorial leggings, try-hard lo-fi trust fund.',
+        desktop_use_renditions: true,
+        image_meta: "page_heading_shelf/None/None",
+        meta_gradient: true,
+        mobile_use_renditions: true,
+        background_image: backgroundImage,
+        image: pheLogoImage
+      }
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Page Heading Shelf',
+        body: 'Layout <b>image_bottom_left</b>, variant <b>N/A</b>, background image <b>given</b>, green gradient <b>yes</b>, foreground image <b>given</b>'
+      }
+    },
+    {
+      id: 'page-heading-shelf-6',
+      type: 'page_heading_shelf',
+      value: {
+        heading: 'Page Heading shelf',
+        body: 'Pickled tilde taxidermy, messenger bag synth fixie venmo. Pickled sartorial leggings biodiesel letterpress DIY. Lumbersexual glossier sartorial leggings, try-hard lo-fi trust fund.',
+        desktop_use_renditions: true,
+        image_meta: "page_heading_shelf/None/None",
+        meta_gradient: true,
+        mobile_use_renditions: true,
+        background_image: backgroundImage,
+        image: pheLogoImage,
+        meta_layout: "image_bottom_left"
+      }
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Page Heading Shelf',
+        body: 'Layout <b>image_bottom_right</b>, variant <b>N/A</b>, background image <b>given</b>, green gradient <b>yes</b>, foreground image <b>given</b>'
+      }
+    },
+    {
+      id: 'page-heading-shelf-7',
+      type: 'page_heading_shelf',
+      value: {
+        heading: 'Page Heading shelf',
+        body: 'Pickled tilde taxidermy, messenger bag synth fixie venmo. Pickled sartorial leggings biodiesel letterpress DIY. Lumbersexual glossier sartorial leggings, try-hard lo-fi trust fund.',
+        desktop_use_renditions: true,
+        image_meta: "page_heading_shelf/None/None",
+        meta_gradient: true,
+        mobile_use_renditions: true,
+        background_image: backgroundImage,
+        image: pheLogoImage,
+        meta_layout: "image_bottom_right"
+      }
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Page Heading Shelf',
+        body: 'Layout <b>image_top_right</b>, variant <b>N/A</b>, background image <b>given</b>, green gradient <b>yes</b>, foreground image <b>given</b>'
+      }
+    },
+    {
+      id: 'page-heading-shelf-8',
+      type: 'page_heading_shelf',
+      value: {
+        heading: 'Page Heading shelf',
+        body: 'Pickled tilde taxidermy, messenger bag synth fixie venmo. Pickled sartorial leggings biodiesel letterpress DIY. Lumbersexual glossier sartorial leggings, try-hard lo-fi trust fund.',
+        desktop_use_renditions: true,
+        image_meta: "page_heading_shelf/None/None",
+        meta_gradient: true,
+        mobile_use_renditions: true,
+        background_image: backgroundImage,
+        image: pheLogoImage,
+        meta_layout: "image_top_right"
+      }
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Page Heading Shelf',
+        body: 'Layout <b>image_top_left</b>, variant <b>N/A</b>, background image <b>given</b>, green gradient <b>yes</b>, foreground image <b>given</b>'
+      }
+    },
+    {
+      id: 'page-heading-shelf-9',
+      type: 'page_heading_shelf',
+      value: {
+        heading: 'Page Heading shelf',
+        body: 'Pickled tilde taxidermy, messenger bag synth fixie venmo. Pickled sartorial leggings biodiesel letterpress DIY. Lumbersexual glossier sartorial leggings, try-hard lo-fi trust fund.',
+        desktop_use_renditions: true,
+        image_meta: "page_heading_shelf/None/None",
+        meta_gradient: true,
+        mobile_use_renditions: true,
+        background_image: backgroundImage,
+        image: pheLogoImage,
+        meta_layout: "image_top_left"
+      }
+    },
+
+
     {
       type: 'guidance_shelf',
       value: {
@@ -434,43 +641,6 @@ const sampleShelvesPage = {
         heading: 'This is a section heading',
         body: '<p>Lorem ipsum dolor sit amet, <b>consectetur adipiscing</b> elit, sed do eiusmod tempor incididunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>',
         field_id: 'test-section-heading-2'
-      }
-    },
-    {
-      type: 'guidance_shelf',
-      value: {
-        heading: 'Page Heading Shelf with gradient (Jira Sub Page Heading Shelf ON2-90)',
-        body: '<p>Type <b>page_heading_shelf</b>, Layout <b>full_width</b>, variant <b>home-page</b></p><p>Used on sub-pages.</p>'
-      }
-    },
-    {
-      id: 'page-heading-shelf-1',
-      type: 'page_heading_shelf',
-      value: {
-        heading: 'Move More',
-        body: '<p>Moving is good for your body and mind. Try these easy ways to move more each day.</p>',
-        background_image: 'http://aaa.bbb.ccc/gb.png',
-        meta_layout: 'page_header',
-        meta_variant: 'home-page',
-        meta_gradient: true
-      }
-    },
-    {
-      type: 'guidance_shelf',
-      value: {
-        heading: 'Page Heading Shelf (No specific Jira story but will be needed on home page)',
-        body: '<p>Type <b>page_heading_shelf</b>, Layout <b>full_width</b>, variant <b>sub-page</b></p><p>Used on the home page so needs to be hidden or out of view.</p>'
-      }
-    },
-    {
-      id: 'page-heading-shelf-2',
-      type: 'page_heading_shelf',
-      value: {
-        heading: 'Move More',
-        body: '<p>Moving is good for your body and mind. Try these easy ways to move more each day.</p>',
-        background_image: 'http://aaa.bbb.ccc/gb.png',
-        meta_layout: 'page_header',
-        meta_variant: 'sub-page'
       }
     },
     {
