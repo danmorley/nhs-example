@@ -36,19 +36,6 @@ class ImageBlock(blocks.StructBlock):
         super(ImageBlock, self).__init__(*args, **kwargs)
 
     def clean(self, value):
-        # print("CLEANING")
-        # cleaned_data = super().clean(value)
-        # print(cleaned_data)
-        # if cleaned_data['image']:
-        #
-        #     # check size of image
-        #     image = cleaned_data['image']
-        #     if self.max_width:
-        #         if image.width > self.max_width:
-        #             raise ValidationError('Image size exceeds maximum width')
-        #     if self.max_height:
-        #         if image.height > self.max_height:
-        #             raise ValidationError('Image size exceeds maximum height')
         result = []  # build up a list of (name, value) tuples to be passed to the StructValue constructor
         errors = {}
         for name, val in value.items():
@@ -65,15 +52,12 @@ class ImageBlock(blocks.StructBlock):
             except ValidationError as e:
                 errors[name] = ErrorList([e])
 
-
-        print(errors)
         if errors:
             # The message here is arbitrary - StructBlock.render_form will suppress it
             # and delegate the errors contained in the 'params' dict to the child blocks instead
             raise ValidationError('Validation error in StructBlock', params=errors)
 
         return StructValue(self, result)
-
 
     def get_api_representation(self, value, context=None):
         # Convert value to plain dict.
