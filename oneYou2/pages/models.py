@@ -73,6 +73,11 @@ INFO_PANEL_VARIANTS = (
     ('mobile-image-right', 'Mobile image on right, Desktop image on right')
 )
 
+RICH_TEXT_PANEL_VARIANTS = (
+    ('crisis-card', 'Formatting for Route to Crisis cards'),
+    ('crisis-card-no-header', 'Formatting for Route to Crisis cards - no header H3'),
+)
+
 VIDEO_LAYOUTS = (
     ('text_on_right', 'Video Left Text Right'),
     ('text_on_top', 'Video Bottom Text Top'),
@@ -276,7 +281,14 @@ class SimpleTextPanel(blocks.StructBlock):
 
 class RichTextPanel(blocks.StructBlock):
     text = blocks.RichTextBlock(required=False)
-
+    meta_variant = blocks.ChoiceBlock(choices=RICH_TEXT_PANEL_VARIANTS,
+                                      default=False,
+                                      required=False,
+                                      label="Variant",
+                                      classname='dct-meta-field')
+    class Meta:
+        form_classname = 'dct-rich-text-panel dct-meta-panel'
+                  
 
 class ListItemPanel(blocks.StructBlock):
     text = blocks.CharBlock(required=True)
@@ -303,7 +315,7 @@ class CtaPanel(blocks.StructBlock):
 GRID_PANELS = [
     ('oneyou1_teaser', BackwardsCompatibleContent(label="OneYou1 teaser", icon="folder-inverse")),
     ('video_teaser', VideoTemplate(icon="media")),
-    ('rte_panel', RichTextPanel(icon="media")),
+    ('rich_text_panel', RichTextPanel(icon="title")),
     ('image_teaser', ImageTeaserTemplate(icon="pick", label="Inspiration teaser")),
     ('app_teaser', AppTeaserChooserBlock(target_model="shelves.AppTeaser", icon="image")),
     ('information_panel', InformationPanel(target_model="shelves.AppTeaser", icon="image")),
