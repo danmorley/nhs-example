@@ -15,7 +15,7 @@ IMAGE_VARIANT_CHOICES = (
 
 
 class ImageBlock(blocks.StructBlock):
-    image = BlobImageChooserBlock(required=True)
+    image = BlobImageChooserBlock(required=False)
     meta_variant = blocks.ChoiceBlock(IMAGE_VARIANT_CHOICES,
                                       label='Variant',
                                       default='cover',
@@ -33,6 +33,7 @@ class ImageBlock(blocks.StructBlock):
         if kwargs:
             self.max_width = kwargs.get("max_width", None)
             self.max_height = kwargs.get("max_height", None)
+            self.image_required = kwargs.get("required", None)
         super(ImageBlock, self).__init__(*args, **kwargs)
 
     def clean(self, value):
@@ -42,12 +43,16 @@ class ImageBlock(blocks.StructBlock):
             try:
                 result.append((name, self.child_blocks[name].clean(val)))
                 if name == 'image':
-                    if self.max_width:
-                        if val.width > self.max_width:
-                            errors['image'] = ["Image size exceeds maximum width"]
-                    if self.max_height:
-                        if val.height > self.max_height:
-                            errors['image'] = ["Image size exceeds maximum height"]
+                    if val:
+                        if self.max_width:
+                            if val.width > self.max_width:
+                                errors['image'] = ["Image size exceeds maximum width ({}px).format(self.max_width)" ]
+                        if self.max_height:
+                            if val.height > self.max_height:
+                                errors['image'] = ["Image size exceeds maximum height ({}px).format(self.max_height)"]
+                    else:
+                        if self.image_required:
+                            errors['image'] = ["This field is required."]
 
             except ValidationError as e:
                 errors[name] = ErrorList([e])
