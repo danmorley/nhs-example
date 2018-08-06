@@ -30,7 +30,6 @@ class ImageBlock(blocks.StructBlock):
                                                       classname='dct-meta-field')
 
     def __init__(self, *args, **kwargs):
-        print(args, kwargs)
         if kwargs:
             self.max_width = kwargs.get("max_width", None)
             self.max_height = kwargs.get("max_height", None)
@@ -42,26 +41,21 @@ class ImageBlock(blocks.StructBlock):
         errors = {}
         for name, val in value.items():
             try:
-                print(self.child_blocks[name])
-                if self.image_required:
-                    print(dir(val))
                 result.append((name, self.child_blocks[name].clean(val)))
                 if name == 'image':
                     if val:
                         if self.max_width:
                             if val.width > self.max_width:
-                                errors['image'] = ["Image size exceeds maximum width"]
+                                errors['image'] = ["Image size exceeds maximum width ({}px).format(self.max_width)" ]
                         if self.max_height:
                             if val.height > self.max_height:
-                                errors['image'] = ["Image size exceeds maximum height"]
+                                errors['image'] = ["Image size exceeds maximum height ({}px).format(self.max_height)"]
                     else:
                         if self.image_required:
                             errors['image'] = ["This field is required."]
 
             except ValidationError as e:
                 errors[name] = ErrorList([e])
-        print("CLEANING")
-        print(errors)
 
         if errors:
             # The message here is arbitrary - StructBlock.render_form will suppress it
