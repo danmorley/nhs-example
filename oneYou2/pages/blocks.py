@@ -46,10 +46,10 @@ class ImageBlock(blocks.StructBlock):
                     if val:
                         if self.max_width:
                             if val.width > self.max_width:
-                                errors['image'] = ["Image size exceeds maximum width ({}px).format(self.max_width)" ]
+                                errors['image'] = ["Image size exceeds maximum width ({}px)".format(self.max_width)]
                         if self.max_height:
                             if val.height > self.max_height:
-                                errors['image'] = ["Image size exceeds maximum height ({}px).format(self.max_height)"]
+                                errors['image'] = ["Image size exceeds maximum height ({}px)".format(self.max_height)]
                     else:
                         if self.image_required:
                             errors['image'] = ["This field is required."]
