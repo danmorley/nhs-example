@@ -6,7 +6,7 @@ const questions = [
     "options": [
       {
         "id": "1",
-        "text": "Within 5 minutes", 
+        "text": "Within 5 minutes",
         "dependence": 3
       },
       {

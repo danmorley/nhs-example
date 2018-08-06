@@ -28,7 +28,7 @@ class TriageTool extends Component {
           backgroundColor={questionColors[index]}
           heading={ `Question ${ index + 1 } out of ${ questions.length }` }>
 
-          <Question { ...question } store={ question } />
+          <Question store={ question } />
           { (index == questions.length - 1) ? getPlanButton : ""}
 
         </AccordionPanel>

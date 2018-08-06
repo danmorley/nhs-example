@@ -7,7 +7,7 @@ import { CheckboxList, RadiobuttonList } from "./styles"
 
 class Question extends Component {
   render() {
-    const { inputType, text, options } = this.props
+    const { inputType, text, options } = this.props.store
     const optionList = options.map((option, index) => {
       return (
         <Option { ...option }
@@ -45,9 +45,7 @@ class Question extends Component {
 }
 
 Question.propTypes = {
-  text: PropTypes.string,
-  options: PropTypes.array,
-  inputType: PropTypes.string
+  store: PropTypes.object
 }
 
 export default observer(Question)
