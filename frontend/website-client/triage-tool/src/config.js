@@ -5,17 +5,17 @@ const questions = [
     "inputType": "radio",
     "options": [
       {
-        "id": "1",
+        "id": "within5mins",
         "text": "Within 5 minutes",
         "dependence": 3
       },
       {
-        "id": "2",
+        "id": "6to30mins",
         "text": "6-30 minutes",
         "dependence": 2
       },
       {
-        "id": "3",
+        "id": "30plusmins",
         "text": "More than 30 mins",
         "dependence": 1
       }
@@ -27,22 +27,22 @@ const questions = [
     "inputType": "radio",
     "options": [
       {
-        "id": "4",
+        "id": "0to10cigs",
         "text": "0-10",
         "dependence": 0
       },
       {
-        "id": "5",
+        "id": "11to20cigs",
         "text": "11-20",
         "dependence": 1
       },
       {
-        "id": "6",
+        "id": "21to30cigs",
         "text": "21-30",
         "dependence": 2
       },
       {
-        "id": "7",
+        "id": "30pluscigs",
         "text": "30+",
         "dependence": 3
       }
@@ -54,27 +54,27 @@ const questions = [
     "inputType": "checkbox",
     "options": [
       {
-        "id": "8",
+        "id": "facetoface",
         "text": "Face to face support e.g GP, Pharmacist or your local stop smoking service"
       },
       {
-        "id": "9",
+        "id": "ecigs",
         "text": "E-cigarettes / vapes"
       },
       {
-        "id": "10",
+        "id": "patches",
         "text": "Patches, gum, lozenges, spray or any other form of nicotine replacement therapy"
       },
       {
-        "id": "11",
+        "id": "champix",
         "text": "Champix, Zyban or any other prescription stop smoking medicines"
       },
       {
-        "id": "12",
+        "id": "willpower",
         "text": "Willpower alone"
       },
       {
-        "id": "13",
+        "id": "nevertried",
         "text": "Never tried to quit before"
       }
     ]

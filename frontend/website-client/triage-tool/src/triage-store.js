@@ -93,17 +93,17 @@ const TriageStore = types
     get usedWillpowerAlone() {
       return self.questions
         .find(q => q.id == "q3").selectedOptions
-        .some(o => o.id == "13")
+        .some(o => o.id == "willpower")
     },
     get usedEcigsOrVape() {
       return self.questions
         .find(q => q.id == "q3").selectedOptions
-        .some(o => o.id == "9")
+        .some(o => o.id == "ecigs")
     },
     get usedNRT() {
       return self.questions
         .find(q => q.id == "q3").selectedOptions
-        .some(o => o.id == "10")
+        .some(o => o.id == "patches")
     }
   }))
 
