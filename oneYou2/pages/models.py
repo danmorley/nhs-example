@@ -283,12 +283,14 @@ class ListItemPanel(blocks.StructBlock):
 
 
 class InlineScriptPanel(blocks.StructBlock):
-    script = blocks.TextBlock(required=False, help_text="The javascript to be inserted")
-    src = blocks.CharBlock(required=False, help_text="URL of the javascript file")
-    field_id = IDBlock(required=False, label="Placeholder ID", retain_case=True)
+    script = blocks.TextBlock(required=False, help_text='The javascript to be inserted')
+    src = blocks.CharBlock(required=False, help_text='URL of the javascript file')
+    field_id = IDBlock(required=False, label='ID', retain_case=True, classname='dct-meta-field')
+    script_id = IDBlock(required=False, label='Script tag ID', retain_case=True, help_text='Optional ID of the script tag')
+    placeholder_id = IDBlock(required=False, label='Placeholder ID', retain_case=True, help_text='If given, an empty placeholder div will be added before the script tag')
 
     class Meta:
-        form_classname = 'dct-inline-script-panel'
+        form_classname = 'dct-inline-script-panel dct-meta-panel'
 
 
 class CtaPanel(blocks.StructBlock):
@@ -339,14 +341,18 @@ class ArticlePageHeadingShelf(blocks.StructBlock):
 
 
 class IFrameShelf(blocks.StructBlock):
-    heading = blocks.CharBlock(required=False)
-    src = blocks.CharBlock(required=True, label="Source URl")
+    heading = blocks.CharBlock(required=False, label='Shelf heading')
+    title = blocks.CharBlock(required=False, help_text='Title for accessibility')
+    src = blocks.CharBlock(required=True, label='Source URL')
     frame_border = blocks.IntegerBlock(default=0, required=False)
     scrolling = blocks.CharBlock(required=False)
-    width = blocks.IntegerBlock(default=100, required=False)
-    height = blocks.IntegerBlock(default=100, required=False)
+    width = blocks.CharBlock(default='100%', required=False, help_text='eg. 100%, 300px')
+    height = blocks.CharBlock(defaut='400px', required=False, help_text='eg. 300px, 20em')
     sandbox = blocks.CharBlock(required=False)
-    shelf_id = blocks.CharBlock(required=False, label="ID", classname='dct-meta-field')
+    shelf_id = blocks.CharBlock(required=False, label='ID', classname='dct-meta-field')
+    meta_iframe_id = blocks.CharBlock(required=False, label='Iframe ID', classname='dct-meta-field')
+    meta_wrapper_div_id = blocks.CharBlock(required=False, label='Wrapper div ID', classname='dct-meta-field')
+    meta_wrapper_div_class = blocks.CharBlock(required=False, label='Wrapper div class', classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-iframe-shelf dct-meta-panel'
