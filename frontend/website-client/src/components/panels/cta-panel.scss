@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  width: 100%;
   
   @include media-breakpoint-up(md) {
     flex-direction: row;
@@ -45,6 +46,7 @@
   
   &:first-child {
     flex-grow: 1;
+    min-width: 1px;
     
     @include media-breakpoint-up(md) {
       padding-right: 1em;
