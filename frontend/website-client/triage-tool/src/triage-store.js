@@ -51,6 +51,10 @@ const Question = types
     get dependence() {
       return self.selectedOptions
         .reduce((acc, option) => acc + option.dependence, 0)
+    },
+    get selectedOptionsIDs() {
+      return self.selectedOptions
+        .map(o => o.id)
     }
   }))
 
@@ -104,6 +108,10 @@ const TriageStore = types
       return self.questions
         .find(q => q.id == "q3").selectedOptions
         .some(o => o.id == "patches")
+    },
+    get planForExport() {
+      return { questions: self.questions
+        .map(q => { return { id: q.id, selectedOptions: q.selectedOptionsIDs }})}
     }
   }))
 
