@@ -4,7 +4,7 @@ import { observer } from "mobx-react"
 
 class CurbCravings extends Component {
   render() {
-    const { usedEcigsOrVape } = this.props.store
+    const { usedEcigsOrVape, dependenceGroup, usedNRT } = this.props.store
 
     let eCigs = <div></div>
     if (usedEcigsOrVape) {
@@ -31,7 +31,91 @@ class CurbCravings extends Component {
       )
     }
 
-    return eCigs
+    let nrt = <div></div>
+    switch (dependenceGroup) {
+    case "high":
+      if (usedNRT) {
+        nrt = (
+          <div>
+            <h2>Patches + Inhaler or Spray</h2>
+            <div>
+              <p>
+                { "You may have tried Nicotine Replacement Therapies [LINK TO NEW ARTICLE] before, they help you manage your nicotine cravings, but they are most effective when you combine them. It's important to use 2 different types of products as it will make it easier. Patches will deliver nicotine to your body throughout the day and an inhaler or spray will provide immediate relief from cravings." }
+              </p>
+            </div>
+          </div>
+        )
+      } else {
+        nrt = (
+          <div>
+            <h2>Patches + Inhaler or Spray</h2>
+            <div>
+              <p>
+                { "Nicotine Replacement Therapies [LINK TO NEW ARTICLE] will help you manage your nicotine cravings. They are most effective when you combine 2 different types of support. Patches will deliver nicotine to your body throughout the day and an inhaler or spray will provide immediate relief from cravings." }
+              </p>
+            </div>
+          </div>
+        )
+      }
+      break
+    case "medium":
+      if (usedNRT) {
+        nrt = (
+          <div>
+            <h2>Patches + Lozenge or Strips</h2>
+            <div>
+              <p>
+                { "You may have tried Nicotine Replacement Therapies [LINK TO NEW ARTICLE] before, they help you manage your nicotine cravings, but they are most effective when you combine them. It's important to use 2 different types of support as it will make it easier. Patches will deliver nicotine to your body throughout the day and lozenges or strips will provide immediate relief from cravings." }
+              </p>
+            </div>
+          </div>
+        )
+      } else {
+        nrt = (
+          <div>
+            <h2>Patches + Lozenge or Strips</h2>
+            <div>
+              <p>
+                { "Nicotine Replacement Therapies [LINK TO NEW ARTICLE] will help you manage your nicotine cravings. They are most effective when you combine 2 different types of support. Patches will deliver nicotine to your body throughout the day and an lozenges or strips will provide immediate relief from cravings." }
+              </p>
+            </div>
+          </div>
+        )
+      }
+      break
+    case "low":
+      if (usedNRT) {
+        nrt = (
+          <div>
+            <h2>Patches + gum</h2>
+            <div>
+              <p>
+                { "You may have tried Nicotine Replacement Therapies [LINK TO NEW ARTICLE] before, they help you manage your nicotine cravings, but they are most effective when you combine 2 different types of support.  Patches will deliver nicotine to your body throughout the day and gum will provide immediate relief from cravings." }
+              </p>
+            </div>
+          </div>
+        )
+      } else {
+        nrt = (
+          <div>
+            <h2>Patches + gum</h2>
+            <div>
+              <p>
+                { "Nicotine Replacement Therapies [LINK TO NEW ARTICLE] can help you quit. They help you manage your nicotine cravings, but they are most effective when you combine 2 different types of support. Patches will deliver nicotine to your body throughout the day and gum will provide immediate relief from cravings." }
+              </p>
+            </div>
+          </div>
+        )
+      }
+      break
+    }
+
+    return (
+      <div>
+        { eCigs }
+        { nrt }
+      </div>
+    )
   }
 }
 

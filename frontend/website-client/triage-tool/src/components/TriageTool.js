@@ -28,7 +28,7 @@ class TriageTool extends Component {
           backgroundColor={questionColors[index]}
           heading={ `Question ${ index + 1 } out of ${ questions.length }` }>
 
-          <Question { ...question } store={ question } />
+          <Question store={ question } />
           { (index == questions.length - 1) ? getPlanButton : ""}
 
         </AccordionPanel>
@@ -51,7 +51,7 @@ class TriageTool extends Component {
         { questionList }
 
         <AccordionPanel
-          appHeading={true}
+          appHeading={ true }
           toggleOpen={ () => allQuestionsAnswered && changePanel(questions.length + 1) }
           open={ currentPanel == (questions.length + 1) }
           heading="Your personal quit plan"

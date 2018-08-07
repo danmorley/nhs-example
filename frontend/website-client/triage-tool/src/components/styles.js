@@ -149,7 +149,7 @@ const OpenIndicator = styled.span`
 `
 
 const AppHeader = styled.h1`
-  color: ${colors.white}
+  color: ${colors.white};
   text-align: center;
   font-family: 'OneYouSansBold';
   font-size: 24px;

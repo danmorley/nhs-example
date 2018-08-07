@@ -182,7 +182,7 @@ describe("usedWillpowerAlone", () => {
     const question3 = store.questions.find(q => q.id.toString() == "q3")
 
     expect(store.usedWillpowerAlone).toEqual(false)
-    question3.options.find(o => o.id.toString() == "13").toggleSelect()
+    question3.options.find(o => o.id.toString() == "willpower").toggleSelect()
     expect(store.usedWillpowerAlone).toEqual(true)
   })
 })
@@ -193,7 +193,18 @@ describe("usedEcigsOrVape", () => {
     const question3 = store.questions.find(q => q.id.toString() == "q3")
 
     expect(store.usedEcigsOrVape).toEqual(false)
-    question3.options.find(o => o.id.toString() == "9").toggleSelect()
+    question3.options.find(o => o.id.toString() == "ecigs").toggleSelect()
     expect(store.usedEcigsOrVape).toEqual(true)
+  })
+})
+
+describe("usedNRT", () => {
+  test("returns true if NRT option ticked", () => {
+    const store = createStore(questions)
+    const question3 = store.questions.find(q => q.id.toString() == "q3")
+
+    expect(store.usedNRT).toEqual(false)
+    question3.options.find(o => o.id.toString() == "patches").toggleSelect()
+    expect(store.usedNRT).toEqual(true)
   })
 })

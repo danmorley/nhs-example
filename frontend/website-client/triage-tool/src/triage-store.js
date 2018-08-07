@@ -47,6 +47,10 @@ const Question = types
         const currentQuestionIndex = getParent(self).findIndex(q => q.id == self.id)
         return getParent(self)[currentQuestionIndex - 1].selectedOptions.length == 0
       }
+    },
+    get dependence() {
+      return self.selectedOptions
+        .reduce((acc, option) => acc + option.dependence, 0)
     }
   }))
 
@@ -66,8 +70,7 @@ const TriageStore = types
   .views(self => ({
     get dependence() {
       return self.questions
-        .reduce((acc, question) => acc.concat(question.selectedOptions), [])
-        .reduce((acc, option) => acc + option.dependence, 0)
+        .reduce((acc, question) => acc + question.dependence, 0)
     },
     get previousAttempts() {
       return self.questions
@@ -90,12 +93,17 @@ const TriageStore = types
     get usedWillpowerAlone() {
       return self.questions
         .find(q => q.id == "q3").selectedOptions
-        .some(o => o.id == "13")
+        .some(o => o.id == "willpower")
     },
     get usedEcigsOrVape() {
       return self.questions
         .find(q => q.id == "q3").selectedOptions
-        .some(o => o.id == "9")
+        .some(o => o.id == "ecigs")
+    },
+    get usedNRT() {
+      return self.questions
+        .find(q => q.id == "q3").selectedOptions
+        .some(o => o.id == "patches")
     }
   }))
 
