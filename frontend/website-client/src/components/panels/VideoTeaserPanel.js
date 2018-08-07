@@ -62,14 +62,9 @@ class VideoTeaserPanel extends Component {
   }
   
   hasTextContent() {
-    if (this.props.content.heading || this.props.content.body) {
-      return true;
-    } 
-    else {
-      return false;
-    }
+    return (this.props.content.heading || this.props.content.body)
   }
-  
+    
   render() {
     let { content, classNamePrefix } = this.props;
     let backgroundTeaserImage = this.state.backgroundImageStyle;
