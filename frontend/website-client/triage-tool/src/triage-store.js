@@ -1,6 +1,8 @@
 import { types, getParent } from "mobx-state-tree"
 import xor from "lodash/xor"
 
+import { planSteps } from "./config"
+
 const Option = types
   .model("Option", {
     id: types.identifier(types.string),
@@ -110,8 +112,52 @@ const TriageStore = types
         .some(o => o.id == "patches")
     },
     get planForExport() {
-      return { questions: self.questions
-        .map(q => { return { id: q.id, selectedOptions: q.selectedOptionsIDs }})}
+      return {
+        questions: self.questions
+          .map(q => { return { id: q.id, selectedOptions: q.selectedOptionsIDs }}),
+        steps: planSteps.map(ps => { return {
+          title: ps.title,
+          intro: ps.intro,
+          recommendations: self.filterRecommendations(ps.recommendations)
+        }})
+      }
+    },
+    get recommendations() {
+      let recList = ["app", "emailsupport", "facebook"]
+
+      if (self.dependenceGroup == "low") {
+        recList.push("medicalexpert")
+        if (self.usedNRT) {
+          recList.push("patchesusedlow")
+        } else {
+          recList.push("patchesnotusedlow")
+        }
+      } else if (self.dependenceGroup == "medium") {
+        recList.push("pharmacist")
+        if (self.usedNRT) {
+          recList.push("patchesusedmedium")
+        } else {
+          recList.push("patchesnotusedmedium")
+        }
+      } else {
+        recList.push("lsss")
+        if (self.usedNRT) {
+          recList.push("patchesusedhigh")
+        } else {
+          recList.push("patchesnotusedhigh")
+        }
+      }
+
+      if (self.usedEcigsOrVape) {
+        recList.push("ecigsused")
+      } else {
+        recList.push("ecigsnotused")
+      }
+
+      return recList
+    },
+    filterRecommendations(recommendations) {
+      return recommendations.filter(rec => self.recommendations.includes(rec.id))
     }
   }))
 
