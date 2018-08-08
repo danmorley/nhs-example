@@ -74,6 +74,7 @@ INFO_PANEL_VARIANTS = (
 )
 
 RICH_TEXT_PANEL_VARIANTS = (
+    ('standard', 'standard'),
     ('crisis-card', 'Formatting for Route to Crisis cards'),
     ('crisis-card-no-header', 'Formatting for Route to Crisis cards - no header H3'),
 )
@@ -282,8 +283,7 @@ class SimpleTextPanel(blocks.StructBlock):
 class RichTextPanel(blocks.StructBlock):
     text = blocks.RichTextBlock(required=False)
     meta_variant = blocks.ChoiceBlock(choices=RICH_TEXT_PANEL_VARIANTS,
-                                      default=False,
-                                      required=False,
+                                      default='standard',
                                       label="Variant",
                                       classname='dct-meta-field')
     class Meta:
