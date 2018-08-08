@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import Text from '../Text';
 import { Link } from 'react-router-dom';
 
 class SimpleMenuItem extends Component {
@@ -11,7 +11,7 @@ class SimpleMenuItem extends Component {
       <li className = {this.props.classNamePrefix+"-nav__item"}>
         <div className= {this.props.classNamePrefix+"-nav__separator"}>
           <Link onClick={this.handleClick} to={link_page.relative_path || link_external}  className = {this.props.classNamePrefix+"-nav__link"}>
-            <span dangerouslySetInnerHTML={{__html: link_text }} />
+            <Text tagName="span" content={link_text} />
           </Link>
         </div>
       </li>
