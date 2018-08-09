@@ -55,11 +55,11 @@ const questions = [
     "options": [
       {
         "id": "facetoface",
-        "text": "Face to face support e.g GP, Pharmacist or your local stop smoking service"
+        "text": "Face to face support e.g GP, pharmacist or your local stop smoking service"
       },
       {
         "id": "ecigs",
-        "text": "E-cigarettes / vapes"
+        "text": "E-cigarettes or vapes"
       },
       {
         "id": "patches",
@@ -67,7 +67,7 @@ const questions = [
       },
       {
         "id": "champix",
-        "text": "Champix, Zyban or any other prescription stop smoking medicines"
+        "text": "Champix or Zyban"
       },
       {
         "id": "willpower",
@@ -93,20 +93,20 @@ const planSteps = [
     recommendations: [
       {
         id: "lsss",
-        title: "Local stop smoking service and pharmacist",
-        body: "<p>Your local stop smoking service will give you encouragement and expert advice on how to stop smoking, including what prescription medicines might be right for you.</p><p>Your local pharmacist and your GP can also give you loads of tips and support to help you quit for good.</p><p>Find services near you now.</p>",
+        title: "Local stop smoking service",
+        body: "<p>The trained advisers at your local stop smoking service will give you expert support and advice, including what prescription medicines might be right for you.<p><p>Your local pharmacist and your GP can also give you loads of advice and support to help you quit.</p>",
         iconURL: ""
       },
       {
         id: "pharmacist",
         title: "Chat to your pharmacist",
-        body: "<p>Your local pharmacist can give you loads of advice and tips to help you quit for good. Find your nearest pharmacy.</p><p>Your local stop smoking service or GP can also give you loads of tips and support to help you quit for good, including what prescription medicines might be right for you.</p>",
+        body: "<p>Your local pharmacist can give you loads of advice and tips to help you quit for good, including what prescription medicines might be right for you. Your GP can also provide lots of support. Or, you could get expert help from a trained adviser at your local stop smoking service.</p>",
         iconURL: ""
       },
       {
         id: "medicalexpert",
-        title: "Talk to a medical expert",
-        body: "<p>There's a range of support available, from your local stop smoking service to your pharmacy and GP, who will all able to give you advice and tips, including advice on what the right prescription medicines are right for you.</p><p>Enter your postcode to find your local stop smoking service and pharmacy.</p>",
+        title: "Talk to a health professional",
+        body: "<p>Your pharmacist and GP can give you loads of advice and tips to help you quit, including what prescription medicines might be right for you. Or, you could get expert help from a trained adviser at your local stop smoking service.</p>",
         iconURL: ""
       }
     ]
@@ -117,50 +117,50 @@ const planSteps = [
     recommendations: [
       {
         id: "ecigsused",
-        title: "E-cigarettes / Vape",
+        title: "E-cigarettes or vapes",
         body: "<p>These are fast-acting and can really help you manage your nicotine cravings and they are at least 95% less harmful than cigarettes. As you've used these before, it might be worth adjusting your nicotine levels or trying a different model. Find out more about vapes/e-cigarettes [LINK TO NEW ARTICLE]. Your local specialist vape shop can find the right one for you. [Link to IBVA finder].</p>",
         iconURL: ""
       },
       {
         id: "ecigsnotused",
-        title: "E-cigarettes / Vape",
+        title: "E-cigarettes or vapes",
         body: "<p>These are fast-acting and can really help you manage your nicotine cravings and they are at least 95% less harmful than cigarettes. Find out more about vapes/e-cigarettes [LINK TO NEW ARTICLE]. Your local specialist vape shop can find the right one for you. [Link to IBVA finder].</p>",
         iconURL: ""
       },
       {
         id: "patchesusedhigh",
         title: "Patches + Inhaler or Spray",
-        body: "<p>You may have tried Nicotine Replacement Therapies [LINK TO NEW ARTICLE] before, they help you manage your nicotine cravings, but they are most effective when you combine them. It's important to use 2 different types of products as it will make it easier. Patches will deliver nicotine to your body throughout the day and an inhaler or spray will provide immediate relief from cravings.</p>",
+        body: "<p>You may have tried Nicotine Replacement Therapies [LINK TO NEW ARTICLE] before, they help you manage your nicotine cravings, but they are most effective when you combine them. It's important to use 2 different types of product as it will make it easier. Patches will deliver nicotine to your body throughout the day and an inhaler or spray will provide immediate relief from cravings.</p>",
         iconURL: ""
       },
       {
         id: "patchesnotusedhigh",
         title: "Patches + Inhaler or Spray",
-        body: "<p>Nicotine Replacement Therapies [LINK TO NEW ARTICLE] will help you manage your nicotine cravings. They are most effective when you combine 2 different types of support. Patches will deliver nicotine to your body throughout the day and an inhaler or spray will provide immediate relief from cravings.</p>",
+        body: "<p>Nicotine Replacement Therapies [LINK TO NEW ARTICLE] will help you manage your nicotine cravings. They are most effective when you combine 2 different types of product. Patches will deliver nicotine to your body throughout the day and an inhaler or spray will provide immediate relief from cravings.</p>",
         iconURL: ""
       },
       {
         id: "patchesusedmedium",
         title: "Patches + Lozenge or Strips",
-        body: "<p>You may have tried Nicotine Replacement Therapies [LINK TO NEW ARTICLE] before, they help you manage your nicotine cravings, but they are most effective when you combine them. It's important to use 2 different types of support as it will make it easier. Patches will deliver nicotine to your body throughout the day and lozenges or strips will provide immediate relief from cravings.</p>",
+        body: "<p>You may have tried Nicotine Replacement Therapies [LINK TO NEW ARTICLE] before, they help you manage your nicotine cravings, but they are most effective when you combine them. It's important to use 2 different types of product as it will make it easier. Patches will deliver nicotine to your body throughout the day and lozenges or strips will provide immediate relief from cravings.</p>",
         iconURL: ""
       },
       {
         id: "patchesnotusedmedium",
         title: "Patches + Lozenge or Strips",
-        body: "<p>Nicotine Replacement Therapies [LINK TO NEW ARTICLE] will help you manage your nicotine cravings. They are most effective when you combine 2 different types of support. Patches will deliver nicotine to your body throughout the day and an lozenges or strips will provide immediate relief from cravings.</p>",
+        body: "<p>Nicotine Replacement Therapies [LINK TO NEW ARTICLE] will help you manage your nicotine cravings. They are most effective when you combine 2 different types of product. Patches will deliver nicotine to your body throughout the day and lozenges or strips will provide immediate relief from cravings.</p>",
         iconURL: ""
       },
       {
         id: "patchesusedlow",
         title: "Patches + gum",
-        body: "<p>You may have tried Nicotine Replacement Therapies [LINK TO NEW ARTICLE] before, they help you manage your nicotine cravings, but they are most effective when you combine 2 different types of support.  Patches will deliver nicotine to your body throughout the day and gum will provide immediate relief from cravings.</p>",
+        body: "<p>You may have tried Nicotine Replacement Therapies [LINK TO NEW ARTICLE] before, they help you manage your nicotine cravings, but they are most effective when you combine 2 different types of product.  Patches will deliver nicotine to your body throughout the day and gum will provide immediate relief from cravings.</p>",
         iconURL: ""
       },
       {
         id: "patchesnotusedlow",
         title: "Patches + gum",
-        body: "<p>Nicotine Replacement Therapies [LINK TO NEW ARTICLE] can help you quit. They help you manage your nicotine cravings, but they are most effective when you combine 2 different types of support. Patches will deliver nicotine to your body throughout the day and gum will provide immediate relief from cravings.</p>",
+        body: "<p>Nicotine Replacement Therapies [LINK TO NEW ARTICLE] can help you quit. They help you manage your nicotine cravings, but they are most effective when you combine 2 different types of product. Patches will deliver nicotine to your body throughout the day and gum will provide immediate relief from cravings.</p>",
         iconURL: ""
       }
     ]
