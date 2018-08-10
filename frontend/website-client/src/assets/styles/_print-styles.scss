@@ -21,6 +21,12 @@
     padding-top: 20px !important;
   }
   
+  .page-heading-shelf .container, 
+  .page-heading-shelf .container-fluid {
+    min-height: auto !important;
+    padding: 1em 0 !important;
+  }
+  
   /* other shelves */
   .share-button-shelf,  
   .action-plan-shelf--cta,
