@@ -1,0 +1,34 @@
+@media print {
+  
+  /* global */
+  body * {
+    color: #000 !important;
+  }
+  
+  .header-nav,
+  .page-header__burger,
+  .breadcrumbs,
+  .page-footer {
+    display: none !important;
+  }
+  
+  .page-header {
+    position: relative !important;
+    box-shadow: 0px 0px 0px 0px !important;
+  }  
+  
+  .page-wrapper {
+    padding-top: 20px !important;
+  }
+  
+  /* other shelves */
+  .share-button-shelf,  
+  .action-plan-shelf--cta,
+  .action-group-panel .action-group-panel--heading:after {
+    display: none !important;
+  }
+  
+  .action-plan-display-shelf .action-plan-display-shelf--action-list {
+    margin-top: 10px !important;
+  }
+}
