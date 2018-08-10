@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import Text from '../Text';
 import Panel from './Panel';
+import './rich-text-panel.css';
 
 /**
  *  RichTextPanel is a simple field that will output rich text originating from
