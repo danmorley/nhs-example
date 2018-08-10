@@ -11,8 +11,8 @@ import Plan from "./Plan"
 
 class TriageTool extends Component {
   render() {
-    const { questions, currentPanel, changePanel, allQuestionsAnswered }
-      = this.props.store
+    const { questions, currentPanel, changePanel, allQuestionsAnswered,
+      reset } = this.props.store
     const questionColors = ["#028586","#197271","#145b5b"]
     const getPlanButton = <p><Button onClick={ () => changePanel(questions.length + 1) }>Get your plan</Button></p>
 
@@ -57,6 +57,7 @@ class TriageTool extends Component {
           heading="Your personal quit plan"
           hidden={ currentPanel != (questions.length + 1) }>
           <Plan store={ this.props.store }></Plan>
+          <p><Button secondary={ true } onClick={ reset }>Start again</Button></p>
         </AccordionPanel>
 
       </TriageToolContainer>
