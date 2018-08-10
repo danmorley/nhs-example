@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { observer } from "mobx-react"
@@ -12,6 +14,9 @@ class Plan extends Component {
     const steps = planSteps.map((step, i) => {
       return <PlanStep key={ i } step={ step } store={ store }></PlanStep>
     })
+
+    // TODO: log added for paragon devs, remove when integrated
+    console.dir(store.planForExport)
 
     return (
       <PlanContainer>

@@ -8,7 +8,6 @@ RUN npm install --prefix frontend/website-client \
     && cp -R frontend/website-client/build oneYou2/web \
     && rm -rf frontend/website-client/node_modules \
     && cp frontend/website-client/public/webtrends.min.js oneYou2/web \
-    && cp frontend/website-client/triage-tool/dist/triage-tool.js oneYou2/web \
     && pip install -r oneYou2/requirements.txt \
     && python oneYou2/manage.py collectstatic --noinput
 
