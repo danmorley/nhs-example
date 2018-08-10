@@ -8,7 +8,8 @@ const colors = {
   black: "#000",
   white: "#fff",
   grey: "#4a4a4a",
-  lightteal: "#028586"
+  lightteal: "#028586",
+  red: "#840018"
 }
 
 const fonts = {
@@ -124,9 +125,9 @@ const AccordionPanelContainer = styled.div`
 `
 
 const Button = styled.a`
-  color: ${colors.black};
+  color: ${ props => props.secondary ? colors.white : colors.black };
   text-align: center;
-  background-color: ${colors.yellow};
+  background-color: ${ props => props.secondary ? colors.red : colors.yellow };
   padding: 10px 10px 5px;
   display: block;
   border: 0;

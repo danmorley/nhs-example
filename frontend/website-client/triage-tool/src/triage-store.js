@@ -1,4 +1,4 @@
-import { types, getParent } from "mobx-state-tree"
+import { types, getParent, getSnapshot, applySnapshot } from "mobx-state-tree"
 import xor from "lodash/xor"
 
 import { planSteps } from "./config"
@@ -65,14 +65,23 @@ const TriageStore = types
     currentPanel: types.number,
     questions: types.array(Question)
   })
-  .actions(self => ({
-    changePanel(panel) {
-      self.currentPanel = panel
-    },
-    nextPanel() {
-      self.currentPanel += 1
+  .actions(self => {
+    let initialState = {}
+    return {
+      changePanel(panel) {
+        self.currentPanel = panel
+      },
+      nextPanel() {
+        self.currentPanel += 1
+      },
+      afterCreate() {
+        initialState = getSnapshot(self)
+      },
+      reset() {
+        applySnapshot(self, initialState)
+      }
     }
-  }))
+  })
   .views(self => ({
     get dependence() {
       return self.questions
