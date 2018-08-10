@@ -252,8 +252,8 @@ describe("planForExport", () => {
         recommendations: [
           {
             id: "lsss",
-            title: "Local stop smoking service and pharmacist",
-            body: "<p>Your local stop smoking service will give you encouragement and expert advice on how to stop smoking, including what prescription medicines might be right for you.</p><p>Your local pharmacist and your GP can also give you loads of tips and support to help you quit for good.</p><p>Find services near you now.</p>",
+            title: "Local stop smoking service",
+            body: "<p>The trained advisers at your local stop smoking service will give you expert support and advice, including what prescription medicines might be right for you.<p><p>Your local pharmacist and your GP can also give you loads of advice and support to help you quit.</p>",
             iconURL: ""
           }
         ]
@@ -264,14 +264,14 @@ describe("planForExport", () => {
         recommendations: [
           {
             id: "ecigsnotused",
-            title: "E-cigarettes / Vape",
+            title: "E-cigarettes or vapes",
             body: "<p>These are fast-acting and can really help you manage your nicotine cravings and they are at least 95% less harmful than cigarettes. Find out more about vapes/e-cigarettes [LINK TO NEW ARTICLE]. Your local specialist vape shop can find the right one for you. [Link to IBVA finder].</p>",
             iconURL: ""
           },
           {
             id: "patchesusedhigh",
             title: "Patches + Inhaler or Spray",
-            body: "<p>You may have tried Nicotine Replacement Therapies [LINK TO NEW ARTICLE] before, they help you manage your nicotine cravings, but they are most effective when you combine them. It's important to use 2 different types of products as it will make it easier. Patches will deliver nicotine to your body throughout the day and an inhaler or spray will provide immediate relief from cravings.</p>",
+            body: "<p>You may have tried Nicotine Replacement Therapies [LINK TO NEW ARTICLE] before, they help you manage your nicotine cravings, but they are most effective when you combine them. It's important to use 2 different types of product as it will make it easier. Patches will deliver nicotine to your body throughout the day and an inhaler or spray will provide immediate relief from cravings.</p>",
             iconURL: ""
           }
         ]
