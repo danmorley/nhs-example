@@ -59,7 +59,6 @@ class TriageTool extends Component {
           <Plan store={ this.props.store }></Plan>
           <p><Button secondary={ true } onClick={ reset }>Start again</Button></p>
         </AccordionPanel>
-
       </TriageToolContainer>
     )
   }

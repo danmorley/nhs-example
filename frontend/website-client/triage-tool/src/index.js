@@ -1,3 +1,4 @@
+import "babel-polyfill"
 import React, { Component } from "react"
 import TriageTool from "./components/TriageTool"
 import { questions } from "./config"
