@@ -63,7 +63,7 @@ const TriageToolContainer = styled.div`
     -moz-box-shadow: 5px 5px 10px rgba(153, 153, 153, 0.2); 
   } 
 
-  &.triage-tool {
+  .triage-tool {
     ul {
       list-style-type: none;
     }
