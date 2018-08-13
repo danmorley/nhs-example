@@ -62,6 +62,12 @@ const TriageToolContainer = styled.div`
     -webkit-box-shadow: 5px 5px 10px rgba(153, 153, 153, 0.2); 
     -moz-box-shadow: 5px 5px 10px rgba(153, 153, 153, 0.2); 
   } 
+
+  &.triage-tool {
+    ul {
+      list-style-type: none;
+    }
+  }
 `
 
 const AccordionPanelContainer = styled.div`
@@ -275,20 +281,24 @@ const CheckboxList = styled.ul`
   margin-bottom: 30px;
 
   display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    grid-auto-rows: minmax(10px, auto);
-    grid-gap: 10px;
+  display: -ms-grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  -ms-grid-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-auto-rows: minmax(10px, auto);
+  -ms-grid-rows: minmax(10px, auto);
+  grid-gap: 10px;
 
-    li {
-      display: flex;
-      grid-column: span 2;
-      padding-bottom: 15px;
+  li {
+    display: flex;
+    grid-column: span 2;
+    -ms-grid-column: span 2;
+    padding-bottom: 15px;
 
-      @media ${device.desktop && device.tablet} {
-        padding-left: 30px;
-        padding-right: 30px;
-      }
+    @media ${device.desktop && device.tablet} {
+      padding-left: 30px;
+      padding-right: 30px;
     }
+  }
 `
 
 export { TriageToolContainer, AppHeader, AppIntro, AccordionPanelContainer,
