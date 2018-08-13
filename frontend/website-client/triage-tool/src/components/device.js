@@ -10,4 +10,4 @@ export const device = {
   phone: `(min-width: ${size.phone})`
 }
 
-export const ie11 = `screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none)`
+export const ie11 = "screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none)"
