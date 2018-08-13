@@ -2,6 +2,7 @@ import { types, getParent, getSnapshot, applySnapshot } from "mobx-state-tree"
 import xor from "lodash/xor"
 
 import { planSteps } from "./config"
+import { resetLocalStorage } from "./index"
 
 const Option = types
   .model("Option", {
@@ -79,6 +80,7 @@ const TriageStore = types
       },
       reset() {
         applySnapshot(self, initialState)
+        resetLocalStorage()
       }
     }
   })
