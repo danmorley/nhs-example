@@ -17,6 +17,10 @@
     box-shadow: 0px 0px 0px 0px !important;
   }  
   
+  .page-heading-shelf .shelf__container {
+    background-color: #fff !important;
+  }
+  
   .page-wrapper {
     padding-top: 20px !important;
   }
@@ -25,6 +29,10 @@
   .page-heading-shelf .container-fluid {
     min-height: auto !important;
     padding: 1em 0 0 !important;
+  }
+  
+  .page-heading-shelf__image-container {
+    display: none !important;
   }
   
   /* other shelves */
@@ -36,5 +44,21 @@
   
   .action-plan-display-shelf .action-plan-display-shelf--action-list {
     margin-top: 10px !important;
+  }
+  
+  .action-plan-display-shelf .action-plan-display-shelf--lead {
+    background-color: #D3D3D3 !important;
+  }
+  
+  .action-plan-display-shelf .action-plan-display-shelf--action-list .action-plan-display-shelf--action {
+    background-color: #fff !important;
+  }
+  
+  .action-plan-display-shelf .action-plan-display-shelf--action-list .action-plan-display-shelf--action li {
+    list-style-type: disc !important; 
+    
+    &:before {
+      display: none;
+    }
   }
 }
