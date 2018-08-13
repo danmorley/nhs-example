@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { injectGlobal } from "styled-components"
-import { device } from "./device"
+import { device, ie11 } from "./device"
 
 const colors = {
   teal: "#138585",
@@ -48,6 +48,14 @@ const TriageToolContainer = styled.div`
   flex-direction: column;
   min-height: 360px;
 
+  @media ${ie11} {  
+   display: block;  
+  }
+
+  @media ${device.desktop} {
+    width: 875px;
+  }
+
   @media ${device.desktop && device.tablet} {
     min-height: 450px;
   }
@@ -62,12 +70,6 @@ const TriageToolContainer = styled.div`
     -webkit-box-shadow: 5px 5px 10px rgba(153, 153, 153, 0.2); 
     -moz-box-shadow: 5px 5px 10px rgba(153, 153, 153, 0.2); 
   } 
-
-  .triage-tool {
-    ul {
-      list-style-type: none;
-    }
-  }
 `
 
 const AccordionPanelContainer = styled.div`
@@ -196,14 +198,14 @@ const PlanContainer = styled.div`
 
 const sharedList = `
   padding-left: 0;
-  list-style-type: none;
+  list-style-type: none !important;
   padding-top: 15px;
 
   li {
     label {
       position: relative;
       padding-left: 35px;
-      padding-top: 6px;
+      padding-top: 4px;
 
       input {
         margin-right: 5px;
@@ -257,6 +259,10 @@ const sharedList = `
 const RadiobuttonList = styled.ul`
   ${ sharedList }
 
+  @media ${ie11} {  
+   display: block;  
+  }
+
   @media ${device.desktop && device.tablet} {
     display: flex;
     flex-direction: row;
@@ -280,23 +286,37 @@ const CheckboxList = styled.ul`
   ${ sharedList }
   margin-bottom: 30px;
 
-  display: grid;
-  display: -ms-grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  -ms-grid-columns: repeat(auto-fit, minmax(150px, 1fr));
-  grid-auto-rows: minmax(10px, auto);
-  -ms-grid-rows: minmax(10px, auto);
-  grid-gap: 10px;
+  @media ${ie11} {  
+   display: block;  
+  }
 
-  li {
+  @media ${device.desktop && device.tablet} {
     display: flex;
-    grid-column: span 2;
-    -ms-grid-column: span 2;
-    padding-bottom: 15px;
+    flex-wrap: wrap;
+    padding: 20px;
 
-    @media ${device.desktop && device.tablet} {
+    li {
+      flex: 1 0 25%;
       padding-left: 30px;
       padding-right: 30px;
+      line-height: 150%;
+      padding-bottom: 30px;
+      }
+    }
+  }
+
+  li {
+    padding-bottom: 30px;
+    display: flex;
+
+    @media ${ie11} {  
+      display: block;  
+    }
+
+    label {
+      @media ${ie11} {
+        display: inline-block;
+      }
     }
   }
 `

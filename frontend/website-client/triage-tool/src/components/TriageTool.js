@@ -36,7 +36,7 @@ class TriageTool extends Component {
     })
 
     return (
-      <TriageToolContainer className="triage-tool">
+      <TriageToolContainer>
         <AccordionPanel toggleOpen={ () => changePanel(0) }
           hidden={ currentPanel == (questions.length + 1) }
           appHeading={ true }
