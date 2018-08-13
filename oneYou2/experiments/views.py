@@ -12,12 +12,12 @@ from django.utils import timezone
 from django.utils.http import urlquote
 from django.utils.translation import ugettext as _
 from wagtail.contrib.modeladmin.helpers import PageAdminURLHelper
-from wagtail.wagtailadmin import messages, signals
-from wagtail.wagtailadmin.utils import (
+from wagtail.admin import messages, signals
+from wagtail.admin.utils import (
     send_notification)
-from wagtail.wagtailadmin.views.pages import get_valid_next_url_from_request
-from wagtail.wagtailcore import hooks
-from wagtail.wagtailcore.models import Page
+from wagtail.admin.views.pages import get_valid_next_url_from_request
+from wagtail.core import hooks
+from wagtail.core.models import Page
 
 
 class VarientAdminURLHelper(PageAdminURLHelper):

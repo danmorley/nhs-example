@@ -7,9 +7,9 @@ from django.http import HttpRequest
 from rest_framework.utils.serializer_helpers import ReturnDict
 
 from wagtail.contrib.modeladmin.views import IndexView
-from wagtail.wagtailcore.blocks.stream_block import StreamValue
-from wagtail.wagtailcore.blocks.struct_block import StructValue
-from wagtail.wagtailcore.models import Site
+from wagtail.core.blocks.stream_block import StreamValue
+from wagtail.core.blocks.struct_block import StructValue
+from wagtail.core.models import Site
 
 from home.models import SiteSettings
 

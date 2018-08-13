@@ -12,7 +12,7 @@ from release.utils import get_latest_live_release, get_release_object, populate_
 
 from pages.serializers import OneYouPageListSerializer, OneYouPageSerializer
 
-from wagtail.wagtailcore.models import Page, Site
+from wagtail.core.models import Page, Site
 
 from experiments.models import ExperimentsContent
 from .utils import get_site_or_404

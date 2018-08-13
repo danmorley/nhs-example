@@ -3,9 +3,9 @@ from django.shortcuts import get_object_or_404, redirect
 from django.utils.translation import ugettext as _
 from django.urls import reverse
 
-from wagtail.wagtailadmin import messages
-from wagtail.wagtailadmin.views.pages import get_valid_next_url_from_request
-from wagtail.wagtailcore.models import Page, UserPagePermissionsProxy
+from wagtail.admin import messages
+from wagtail.admin.views.pages import get_valid_next_url_from_request
+from wagtail.core.models import Page, UserPagePermissionsProxy
 
 
 def unpublish(request, page_id):

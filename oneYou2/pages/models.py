@@ -7,14 +7,14 @@ from django.forms.models import model_to_dict
 from django.http import JsonResponse
 from django.template.response import TemplateResponse, SimpleTemplateResponse
 
-from wagtail.wagtailcore import blocks
-from wagtail.wagtailcore.models import Page, Orderable
-from wagtail.wagtailcore.fields import StreamField, RichTextField
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, InlinePanel, ObjectList, TabbedInterface, \
+from wagtail.core import blocks
+from wagtail.core.models import Page, Orderable
+from wagtail.core.fields import StreamField, RichTextField
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, InlinePanel, ObjectList, TabbedInterface, \
     MultiFieldPanel
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
-from wagtail.wagtailsnippets.models import register_snippet
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
+from wagtail.snippets.models import register_snippet
 from wagtailsnippetscopy.models import SnippetCopyMixin
 from wagtailsnippetscopy.registry import snippet_copy_registry
 
@@ -677,6 +677,7 @@ class OneYou2Page(Page):
     ])
 
     api_fields = ['body', 'path', 'depth', 'numchild', 'live', 'page_theme']
+    exclude_fields_in_copy = ['release']
 
     @classmethod
     def allowed_subpage_models(cls):
@@ -690,6 +691,10 @@ class OneYou2Page(Page):
         ]
 
     def save(self, *args, **kwargs):
+        print(self._meta.get_fields())
+        print(self.slug)
+        print(self.theme)
+        print(self.body)
         assigned_release = self.release
 
         if self.release:

@@ -9,10 +9,10 @@ from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 from modelcluster.fields import ParentalKey
 
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, PageChooserPanel
-from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtailsnippets.models import register_snippet
+from wagtail.admin.edit_handlers import FieldPanel, PageChooserPanel
+from wagtail.core.fields import RichTextField
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.snippets.models import register_snippet
 from modelcluster.models import get_serializable_data_for_fields
 
 
