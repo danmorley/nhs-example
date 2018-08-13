@@ -42,8 +42,16 @@
     display: none !important;
   }
   
+  .action-group-panel .action-group-panel--action-list.hidden {
+    display: block !important;
+  }
+  
   .action-plan-display-shelf .action-plan-display-shelf--action-list {
     margin-top: 10px !important;
+  }
+  
+  .action-panel .action-panel--toggle.clicked {
+    background: #000 !important;
   }
   
   .action-plan-display-shelf .action-plan-display-shelf--lead {
