@@ -189,16 +189,38 @@ const PlanContainer = styled.div`
   background-color: ${colors.white};
   margin-left: -15px;
   margin-right: -15px;
-  color: ${colors.black};
+  color: ${colors.grey};
+
+  & > :first-child {
+    display: block;
+  }
+
+  @media ${device.desktop && device.tablet} {
+    & > div {
+      display: flex;
+      flex-direction: row;
+
+      h2 {
+        border-top: 0;
+        color: ${colors.white};
+        font-family: 'OneYouSansBold';
+        font-size: 24px;
+        background-color: ${colors.teal};
+        width: auto;
+      }
+    }
+  }
 
   div {
     border-top: 0;
 
-    h2 {
-      border-top: 0;
-      color: ${colors.black};
-      font-family: 'OneYouSansBold';
-      font-size: 24px;
+    p {
+      text-align: left;
+    }
+
+    h2, h3, p {
+      padding-left: 15px;
+      padding-right: 15px;
     }
   }
 `

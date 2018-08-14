@@ -83,7 +83,6 @@ const questions = [
 
 const planSteps = [
   {
-    title: "Great you're quitting!",
     intro: "You’re more likely to quit successfully with the right support. Using your willpower is important but you'll increase you're chances of success if you get some additional support.  Find out the best quit way for you to quit below.",
     recommendations: []
   },
@@ -118,13 +117,13 @@ const planSteps = [
       {
         id: "ecigsused",
         title: "E-cigarettes or vapes",
-        body: "<p>These are fast-acting and can really help you manage your nicotine cravings and they are at least 95% less harmful than cigarettes. As you've used these before, it might be worth adjusting your nicotine levels or trying a different model. Find out more about vapes/e-cigarettes [LINK TO NEW ARTICLE]. Your local specialist vape shop can find the right one for you. [Link to IBVA finder].</p>",
+        body: "<p>These are fast-acting and can really help you manage your nicotine cravings and they are at least 95% less harmful than cigarettes. As you've used these before, it might be worth adjusting your nicotine levels or trying a different model. Find out more about vapes or e-cigarettes [LINK TO NEW ARTICLE]. Your local specialist vape shop can find the right one for you. [Link to IBVA finder].</p>",
         iconURL: ""
       },
       {
         id: "ecigsnotused",
         title: "E-cigarettes or vapes",
-        body: "<p>These are fast-acting and can really help you manage your nicotine cravings and they are at least 95% less harmful than cigarettes. Find out more about vapes/e-cigarettes [LINK TO NEW ARTICLE]. Your local specialist vape shop can find the right one for you. [Link to IBVA finder].</p>",
+        body: "<p>These are fast-acting and can really help you manage your nicotine cravings and they are at least 95% less harmful than cigarettes. Find out more about vapes or e-cigarettes [LINK TO NEW ARTICLE]. Your local specialist vape shop can find the right one for you. [Link to IBVA finder].</p>",
         iconURL: ""
       },
       {
