@@ -4,7 +4,7 @@
   "description": "A tool to help smokers get advice on the best way to quit",
   "main": "dist/bundle.js",
   "scripts": {
-    "start": "NODE_ENV=development npx webpack-serve --config ./webpack.config.js --open",
+    "start": "NODE_ENV=development npx webpack-serve --config ./webpack.config.js --open --host 0.0.0.0",
     "build": "NODE_ENV=production npx webpack --config ./webpack.config.js",
     "test": "eslint src && jest"
   },
@@ -31,7 +31,7 @@
   "dependencies": {
     "lodash": "^4.17.10",
     "mobx": "^4.3.1",
-    "mobx-react": "^5.2.3",
+    "mobx-react": "5.2.3",
     "mobx-state-tree": "^2.2.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",

@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { injectGlobal } from "styled-components"
-import { device } from "./device"
+import { device, ie11 } from "./device"
 
 const colors = {
   teal: "#138585",
@@ -47,6 +47,14 @@ const TriageToolContainer = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 360px;
+
+  @media ${ie11} {  
+   display: block;  
+  }
+
+  @media ${device.desktop} {
+    width: 875px;
+  }
 
   @media ${device.desktop && device.tablet} {
     min-height: 450px;
@@ -164,7 +172,7 @@ const AppHeader = styled.h1`
 `
 
 const AppIntro = styled.p`
-  color: ${colors.white}
+  color: ${colors.white};
   text-align: center;
   font-family: ${fonts.helvetica};
   margin-bottom: 30px;
@@ -178,26 +186,33 @@ const AppIntro = styled.p`
 `
 
 const PlanContainer = styled.div`
+  background-color: ${colors.white};
+  margin-left: -15px;
+  margin-right: -15px;
+  color: ${colors.black};
+
   div {
     border-top: 0;
 
     h2 {
       border-top: 0;
-      text-transform: uppercase;
+      color: ${colors.black};
+      font-family: 'OneYouSansBold';
+      font-size: 24px;
     }
   }
 `
 
 const sharedList = `
   padding-left: 0;
-  list-style-type: none;
+  list-style-type: none !important;
   padding-top: 15px;
 
   li {
     label {
       position: relative;
       padding-left: 35px;
-      padding-top: 6px;
+      padding-top: 4px;
 
       input {
         margin-right: 5px;
@@ -251,6 +266,10 @@ const sharedList = `
 const RadiobuttonList = styled.ul`
   ${ sharedList }
 
+  @media ${ie11} {  
+   display: block;  
+  }
+
   @media ${device.desktop && device.tablet} {
     display: flex;
     flex-direction: row;
@@ -274,21 +293,39 @@ const CheckboxList = styled.ul`
   ${ sharedList }
   margin-bottom: 30px;
 
-  display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    grid-auto-rows: minmax(10px, auto);
-    grid-gap: 10px;
+  @media ${ie11} {  
+   display: block;  
+  }
+
+  @media ${device.desktop && device.tablet} {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
 
     li {
-      display: flex;
-      grid-column: span 2;
-      padding-bottom: 15px;
-
-      @media ${device.desktop && device.tablet} {
-        padding-left: 30px;
-        padding-right: 30px;
+      flex: 1 0 25%;
+      padding-left: 30px;
+      padding-right: 30px;
+      line-height: 150%;
+      padding-bottom: 30px;
       }
     }
+  }
+
+  li {
+    padding-bottom: 30px;
+    display: flex;
+
+    @media ${ie11} {  
+      display: block;  
+    }
+
+    label {
+      @media ${ie11} {
+        display: inline-block;
+      }
+    }
+  }
 `
 
 export { TriageToolContainer, AppHeader, AppIntro, AccordionPanelContainer,
