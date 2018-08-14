@@ -2,6 +2,7 @@ import Page from './Page';
 import withOwnContent from './withOwnContent';
 import ImageUtils from '../panels/ImageUtils';
 import testBackgroundImage from '../../assets/images/app-screen.jpg';
+import testImage from '../../assets/images/test-image.jpg';
 import pheLogo from '../../assets/images/public-health-england-logo.png';
 
 /**
@@ -15,6 +16,14 @@ const backgroundImage = {
     mobile: testBackgroundImage
   },
   title: 'Placeholder background image' };
+
+const altImage = {
+  renditions: {
+    desktop: testImage,
+    mobile: testImage
+  },
+  title: 'Alternate placeholder background image'
+};
 
 const pheLogoImage = {
   renditions: {
@@ -1219,6 +1228,190 @@ const sampleShelvesPage = {
       },
       id: "carousel-3"
     },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Carousel Shelf - App teaser',
+        body: 'Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b>, green gradient <b>N/A</b>, foreground image <b>N/A</b> <br/><i>(See panel bodies for panel variant details)</i>'
+      }
+    },
+    {
+      type: "carousel_shelf",
+      value: {
+        heading: "",
+        items: [
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: null
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "carousel-app-teaser-1"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>',
+              image: altImage,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: null
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "carousel-app-teaser-2"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>not given</b>',
+              image: altImage,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "carousel-app-teaser-3"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>given</b>',
+              image: altImage,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "carousel-app-teaser-4"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>not given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "carousel-app-teaser-5"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "carousel-app-teaser-6"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: null
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "carousel-app-teaser-7"
+          }
+        ],
+        shelf_id: "",
+        image_meta: "carousel_shelf/None/None"
+      },
+      id: "carousel-4"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Divider Shelf',
+        body: 'Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b>, green gradient <b>N/A</b>, foreground image <b>N/A</b>'
+      }
+    },
+    {
+      type: "divider",
+      value: {
+        shelf_id: "",
+        image_meta: "divider/None/None"
+      },
+      id: "divider-1"
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     {
@@ -1612,37 +1805,6 @@ const sampleShelvesPage = {
           link_external: 'http://www.edfs.co.uk'
         },
         meta_layout: 'full_to_half_width'
-      }
-    },
-    {
-      type: 'guidance_shelf',
-      value: {
-        heading: 'Section Heading Shelf',
-        body: 'Layout <b>not given</b>, variant <b>not given</b>'
-      }
-    },
-    {
-      id: 'section-heading-shelf-1',
-      type: 'section_heading_shelf',
-      value: {
-        heading: 'This is a section heading',
-        field_id: 'test-section-heading-1'
-      }
-    },
-    {
-      type: 'guidance_shelf',
-      value: {
-        heading: 'Section Heading Shelf (with body text)',
-        body: 'Layout <b>not given</b>, variant <b>not given</b>'
-      }
-    },
-    {
-      id: 'section-heading-shelf-2',
-      type: 'section_heading_shelf',
-      value: {
-        heading: 'This is a section heading',
-        body: '<p>Lorem ipsum dolor sit amet, <b>consectetur adipiscing</b> elit, sed do eiusmod tempor incididunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>',
-        field_id: 'test-section-heading-2'
       }
     },
     {
