@@ -172,7 +172,7 @@ const AppHeader = styled.h1`
 `
 
 const AppIntro = styled.p`
-  color: ${colors.white}
+  color: ${colors.white};
   text-align: center;
   font-family: ${fonts.helvetica};
   margin-bottom: 30px;
@@ -186,12 +186,19 @@ const AppIntro = styled.p`
 `
 
 const PlanContainer = styled.div`
+  background-color: ${colors.white};
+  margin-left: -15px;
+  margin-right: -15px;
+  color: ${colors.black};
+
   div {
     border-top: 0;
 
     h2 {
       border-top: 0;
-      text-transform: uppercase;
+      color: ${colors.black};
+      font-family: 'OneYouSansBold';
+      font-size: 24px;
     }
   }
 `
