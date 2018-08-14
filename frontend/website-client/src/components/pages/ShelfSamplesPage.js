@@ -285,6 +285,785 @@ const sampleShelvesPage = {
         image_meta: "section_heading_shelf/None/None"
       }
     },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Carousel Shelf - Video Teaser (Brightcove)',
+        body: 'Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b>, green gradient <b>N/A</b>, foreground image <b>N/A</b> <br/><i>(See panel bodies for panel variant details)</i>'
+      }
+    },
+    {
+      type: "carousel_shelf",
+      value: {
+        heading: "",
+        items: [
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "brightcove",
+              heading: "Video Teaser (Brightcove)",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Left</b>, Use play link <b>No</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-1-1"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "brightcove",
+              heading: "Video Teaser (Brightcove)",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Left</b>, Use play link <b>Yes</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-1-2"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "brightcove",
+              heading: "Video Teaser (Brightcove)",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Left</b>, Use play link <b>No</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-1-3"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "brightcove",
+              heading: "Video Teaser (Brightcove)",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Left</b>, Use play link <b>Yes</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-1-4"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "brightcove",
+              heading: "Video Teaser (Brightcove)",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Left</b>, Use play link <b>No</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-1-5"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "brightcove",
+              heading: "Video Teaser (Brightcove)",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Left</b>, Use play link <b>Yes</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-1-6"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "brightcove",
+              heading: "Video Teaser (Brightcove)",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Left</b>, Use play link <b>No</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-1-7"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "brightcove",
+              heading: "Video Teaser (Brightcove)",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Left</b>, Use play link <b>Yes</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-1-8"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "brightcove",
+              heading: "Video Teaser (Brightcove)",
+              body: 'Image Mobile <b>left</b>, Image Desktop <b>Top</b>, Use play link <b>No</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-1-9"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "brightcove",
+              heading: "Video Teaser (Brightcove)",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Top</b>, Use play link <b>Yes</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-1-10"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "brightcove",
+              heading: "Video Teaser (Brightcove)",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Top</b>, Use play link <b>No</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-1-11"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "brightcove",
+              heading: "Video Teaser (Brightcove)",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Top</b>, Use play link <b>Yes</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-1-12"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "brightcove",
+              heading: "Video Teaser (Brightcove)",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Top</b>, Use play link <b>No</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-1-13"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "brightcove",
+              heading: "Video Teaser (Brightcove)",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Top</b>, Use play link <b>Yes</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-1-14"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "brightcove",
+              heading: "Video Teaser (Brightcove)",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Top</b>, Use play link <b>No</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-1-15"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "brightcove",
+              heading: "Video Teaser (Brightcove)",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Top</b>, Use play link <b>Yes</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-1-16"
+          }
+        ],
+        shelf_id: "",
+        image_meta: "carousel_shelf/None/None"
+      },
+      id: "carousel-1"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Carousel Shelf - Video Teaser (Wirewax)',
+        body: 'Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b>, green gradient <b>N/A</b>, foreground image <b>N/A</b> <br/><i>(See panel bodies for panel variant details)</i>'
+      }
+    },
+    {
+      type: "carousel_shelf",
+      value: {
+        heading: "",
+        items: [
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser (Wirewax)",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Left</b>, Use play link <b>No</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-2-1"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser (Wirewax)",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Left</b>, Use play link <b>Yes</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-2-2"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser (Wirewax)",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Left</b>, Use play link <b>No</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-2-3"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser (Wirewax)",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Left</b>, Use play link <b>Yes</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-2-4"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser (Wirewax)",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Left</b>, Use play link <b>No</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-2-5"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser (Wirewax)",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Left</b>, Use play link <b>Yes</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-2-6"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser (Wirewax)",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Left</b>, Use play link <b>No</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-2-7"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser (Wirewax)",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Left</b>, Use play link <b>Yes</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-2-8"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser (Wirewax)",
+              body: 'Image Mobile <b>left</b>, Image Desktop <b>Top</b>, Use play link <b>No</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-2-9"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser (Wirewax)",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Top</b>, Use play link <b>Yes</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-2-10"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser (Wirewax)",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Top</b>, Use play link <b>No</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-2-11"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser (Wirewax)",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Top</b>, Use play link <b>Yes</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-2-12"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser (Wirewax)",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Top</b>, Use play link <b>No</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-2-13"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser (Wirewax)",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Top</b>, Use play link <b>Yes</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-2-14"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser (Wirewax)",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Top</b>, Use play link <b>No</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-2-15"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser (Wirewax)",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Top</b>, Use play link <b>Yes</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "carousel-video-teaser-2-16"
+          }
+        ],
+        shelf_id: "",
+        image_meta: "carousel_shelf/None/None"
+      },
+      id: "carousel-2"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Carousel Shelf - Banner shelf',
+        body: 'Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b>, green gradient <b>N/A</b>, foreground image <b>N/A</b> <br/><i>(See panel bodies for panel variant details)</i>'
+      }
+    },
 
 
     {
