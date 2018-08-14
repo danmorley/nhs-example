@@ -190,6 +190,7 @@ const PlanContainer = styled.div`
   margin-left: -15px;
   margin-right: -15px;
   color: ${colors.grey};
+  padding-bottom: 15px;
 
   & > :first-child {
     display: block;
@@ -201,13 +202,21 @@ const PlanContainer = styled.div`
       flex-direction: row;
 
       h2 {
-        border-top: 0;
-        color: ${colors.white};
-        font-family: 'OneYouSansBold';
-        font-size: 24px;
-        background-color: ${colors.teal};
-        width: auto;
+        min-height: 70px;
       }
+    }
+  }
+
+  & > div {
+    h2 {
+      border-top: 0;
+      color: ${colors.white};
+      font-family: 'OneYouSansBold';
+      font-size: 24px;
+      background-color: ${colors.teal};
+      width: auto;
+      padding-top: 10px;
+      padding-bottom: 5px;
     }
   }
 
@@ -216,11 +225,16 @@ const PlanContainer = styled.div`
 
     p {
       text-align: left;
+      line-height: 150%;
     }
 
     h2, h3, p {
       padding-left: 15px;
       padding-right: 15px;
+    }
+
+    h3 {
+      font-family: 'OneYouSansRegular';
     }
   }
 `
