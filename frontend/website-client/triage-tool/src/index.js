@@ -5,12 +5,11 @@ import { onSnapshot, applySnapshot } from "mobx-state-tree"
 import TriageTool from "./components/TriageTool"
 import { questions } from "./config"
 import TriageStore from "./triage-store"
+import { storageKey } from "./helpers"
 
 const triageStore = TriageStore.create({
   currentPanel: 0, questions: questions
 })
-
-const storageKey = "nhs-stoptober-triage-tool"
 
 if (storageKey in localStorage) {
   applySnapshot(triageStore,
@@ -20,10 +19,6 @@ if (storageKey in localStorage) {
 onSnapshot(triageStore, newSnapshot => {
   localStorage.setItem(storageKey, JSON.stringify(newSnapshot))
 })
-
-export function resetLocalStorage() {
-  localStorage.removeItem(storageKey)
-}
 
 export default class TriageToolWrapper extends Component {
   render() {
