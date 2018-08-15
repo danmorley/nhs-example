@@ -9,7 +9,8 @@ const colors = {
   white: "#fff",
   grey: "#4a4a4a",
   lightteal: "#028586",
-  red: "#840018"
+  red: "#840018",
+  bordergrey: "#ccc"
 }
 
 const fonts = {
@@ -386,6 +387,8 @@ const ServiceFinderContainer = styled.div`
     margin-right: 10px;
     font-size: 14px;
     width: 150px;
+    border: 1px solid ${colors.bordergrey};
+    padding-left: 5px;
   }
 
   a {
