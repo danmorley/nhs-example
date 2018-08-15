@@ -364,5 +364,10 @@ const CheckboxList = styled.ul`
   }
 `
 
+const ServiceFinderContainer = styled.div`
+  display: inline-flex;
+`
+
 export { TriageToolContainer, AppHeader, AppIntro, AccordionPanelContainer,
-  Button, OpenIndicator, PlanContainer, CheckboxList, RadiobuttonList }
+  Button, OpenIndicator, PlanContainer, CheckboxList, RadiobuttonList,
+  ServiceFinderContainer }

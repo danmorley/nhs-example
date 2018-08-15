@@ -1,4 +1,5 @@
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
 
 const rules = [
   {
@@ -23,6 +24,7 @@ const nodeConfig = {
   module: {
     rules: rules
   },
+  plugins: [ new Dotenv() ],
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -36,6 +38,7 @@ const webConfig = {
   module: {
     rules: rules
   },
+  plugins: [ new Dotenv() ],
   entry: './src/dev.js',
   output: {
     path: path.resolve(__dirname, 'dist'),

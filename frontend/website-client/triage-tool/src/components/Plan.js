@@ -11,8 +11,9 @@ import { PlanContainer } from "./styles"
 class Plan extends Component {
   render() {
     const store = this.props.store
-    const firstStep = <PlanStep step={ planSteps.shift() } store={ store }></PlanStep>
-    const remainingSteps = planSteps.map((step, i) => {
+    const [ firstStep, ...remainingSteps ] = planSteps
+    const introStep = <PlanStep step={ firstStep } store={ store }></PlanStep>
+    const mainSteps = remainingSteps.map((step, i) => {
       return <PlanStep key={ i } step={ step } store={ store }></PlanStep>
     })
 
@@ -21,8 +22,8 @@ class Plan extends Component {
 
     return (
       <PlanContainer>
-        <div>{firstStep}</div>
-        <div>{remainingSteps}</div>
+        <div>{ introStep }</div>
+        <div>{ mainSteps }</div>
       </PlanContainer>
     )
 
