@@ -5,7 +5,7 @@ import MdExpandLess from "react-icons/lib/md/expand-less"
 import { observer } from "mobx-react"
 
 import { TriageToolContainer, AppHeader, AppIntro, AccordionPanelContainer,
-  Button, OpenIndicator, EmailContainer } from "./styles"
+  Button, OpenIndicator, EmailContainer, EmailCta } from "./styles"
 import Question from "./Question"
 import Plan from "./Plan"
 
@@ -62,7 +62,10 @@ class TriageTool extends Component {
             <p>Join in on the 1st October - choosing a date is a great way to make a commitment to quit.<br/> 
             Get your plan straight to your inbox to help you stay on track!</p>
           </EmailContainer>
-          <p><Button secondary={ true } onClick={ reset }>Start again</Button></p>
+          <EmailCta>
+            <p><Button>Email me my plan</Button></p>
+            <p><Button secondary={ true } onClick={ reset }>Start again</Button></p>
+          </EmailCta>
         </AccordionPanel>
       </TriageToolContainer>
     )
