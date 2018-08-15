@@ -202,7 +202,7 @@ const PlanContainer = styled.div`
       flex-direction: row;
 
       h2 {
-        min-height: 70px;
+        min-height: 60px;
       }
     }
   }
@@ -211,8 +211,8 @@ const PlanContainer = styled.div`
     h2 {
       border-top: 0;
       color: ${colors.white};
-      font-family: 'OneYouSansBold';
-      font-size: 24px;
+      font-family: 'OneYouSansRegular';
+      font-size: 18px;
       background-color: ${colors.teal};
       width: auto;
       padding-top: 10px;
@@ -222,6 +222,7 @@ const PlanContainer = styled.div`
 
   div {
     border-top: 0;
+    margin-top: 0;
 
     p {
       text-align: left;
@@ -366,8 +367,44 @@ const CheckboxList = styled.ul`
 
 const ServiceFinderContainer = styled.div`
   display: inline-flex;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 30px !important;
+
+  input {
+    margin-right: 10px;
+    font-size: 14px;
+    width: 150px;
+  }
+
+  a {
+    width: auto;
+    font-family: 'OneYouSansRegular';
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+`
+
+const EmailContainer = styled.div`
+  border-top: 0 !important;
+
+  h2 {
+    color: ${colors.yellow} !important;
+    font-family: 'OneYouSansRegular';
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: left !important;
+    width: 100% !important;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+   p {
+    text-align: left !important;
+    line-height: 150%;
+   }
 `
 
 export { TriageToolContainer, AppHeader, AppIntro, AccordionPanelContainer,
   Button, OpenIndicator, PlanContainer, CheckboxList, RadiobuttonList,
-  ServiceFinderContainer }
+  ServiceFinderContainer, EmailContainer }
