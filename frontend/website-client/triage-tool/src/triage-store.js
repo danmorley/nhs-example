@@ -1,8 +1,9 @@
 import { types, getParent, getSnapshot, applySnapshot } from "mobx-state-tree"
 import xor from "lodash/xor"
+import uuidv4 from "uuid/v4"
 
 import { planSteps } from "./config"
-import { resetLocalStorage } from "./index"
+import { resetLocalStorage } from "./helpers"
 
 const Option = types
   .model("Option", {
@@ -63,6 +64,8 @@ const Question = types
 
 const TriageStore = types
   .model("TriageStore", {
+    id: types.optional(types.string, uuidv4()),
+    startedAt: types.optional(types.string, (new Date().toISOString())),
     currentPanel: types.number,
     questions: types.array(Question)
   })
@@ -124,6 +127,8 @@ const TriageStore = types
     },
     get planForExport() {
       return {
+        id: self.id,
+        startedAt: self.startedAt,
         questions: self.questions
           .map(q => { return { id: q.id, selectedOptions: q.selectedOptionsIDs }}),
         steps: planSteps.map(ps => { return {
