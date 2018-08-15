@@ -198,7 +198,7 @@ const PlanContainer = styled.div`
 
     @media ${device.desktop && device.tablet} {
       p {
-        width: 60%;
+        width: 70%;
       }
     }
   }
@@ -239,6 +239,15 @@ const PlanContainer = styled.div`
     p {
       text-align: left;
       line-height: 150%;
+
+      a {
+        color: ${colors.teal};
+        text-decoration: underline;
+
+        &:hover, &:focus {
+          text-decoration: none;
+        }
+      }
     }
 
     h2, h3, p {
