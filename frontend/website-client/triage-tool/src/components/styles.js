@@ -194,6 +194,12 @@ const PlanContainer = styled.div`
 
   & > :first-child {
     display: block;
+
+    @media ${device.desktop && device.tablet} {
+      p {
+        width: 60%;
+      }
+    }
   }
 
   @media ${device.desktop && device.tablet} {
@@ -214,9 +220,14 @@ const PlanContainer = styled.div`
       font-family: 'OneYouSansRegular';
       font-size: 18px;
       background-color: ${colors.teal};
-      width: auto;
       padding-top: 10px;
+      width: auto;
       padding-bottom: 5px;
+      text-align: left;
+
+      @media ${device.desktop && device.tablet} {
+        padding-top: 20px;
+      }
     }
   }
 
@@ -397,6 +408,8 @@ const EmailContainer = styled.div`
     width: 100% !important;
     margin-left: 0;
     margin-right: 0;
+    border-bottom: 0 !important;
+    padding-bottom: 0 !important;
   }
 
    p {
@@ -405,6 +418,22 @@ const EmailContainer = styled.div`
    }
 `
 
+const EmailCta = styled.div`
+border-top: 0 !important;
+
+  p {
+    display: inline-block;
+
+    a {
+      margin-right: 10px;
+      width: auto;
+      padding-left: 15px;
+      padding-right: 15px;
+      font-family: 'OneYouSansRegular';
+    }
+  }
+`
+
 export { TriageToolContainer, AppHeader, AppIntro, AccordionPanelContainer,
   Button, OpenIndicator, PlanContainer, CheckboxList, RadiobuttonList,
-  ServiceFinderContainer, EmailContainer }
+  ServiceFinderContainer, EmailContainer, EmailCta }

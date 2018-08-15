@@ -83,7 +83,7 @@ const questions = [
 
 const planSteps = [
   {
-    intro: "You’re more likely to quit successfully with the right support. Using your willpower is important but you'll increase you're chances of success if you get some additional support.  Find out the best quit way for you to quit below.",
+    intro: "You’re more likely to quit successfully with the right support. Using your willpower is important but you'll increase you're chances of success if you get some additional support. Find out the best quit way for you to quit below.",
     recommendations: []
   },
   {
