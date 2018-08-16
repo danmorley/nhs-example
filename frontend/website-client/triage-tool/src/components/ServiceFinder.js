@@ -102,6 +102,8 @@ class ServiceFinder extends Component {
   }
 
   render() {
+    const resultsFor = `Results for ${this.state.searchTerm}`
+
     return (
       <div>
         <ServiceFinderContainer>
@@ -120,7 +122,9 @@ class ServiceFinder extends Component {
           />
           <Button onClick={ this.findServices }>Find</Button>
         </ServiceFinderContainer>
-        <div>
+
+        <section>
+          <header>{ this.state.results.length ? resultsFor : "" }</header>
           {
             this.state.results.map((result, index) => {
               const delay = `${(index + 1) * 0.15}s`
@@ -131,7 +135,7 @@ class ServiceFinder extends Component {
               )
             })
           }
-        </div>
+        </section>
       </div>
     )
   }
