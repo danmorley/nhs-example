@@ -5,6 +5,7 @@ import PropTypes from "prop-types"
 import { observer } from "mobx-react"
 import Autocomplete from "react-autocomplete"
 import { FadeInDown } from "animate-css-styled-components"
+import { getDistance, convertUnit } from "geolib"
 
 import { Button, ServiceFinderContainer } from "./styles"
 
@@ -85,7 +86,9 @@ class ServiceFinder extends Component {
       response.json().then(data => {
         const services = data.value.map(service => {
           return {
-            name: service.OrganisationName
+            name: service.OrganisationName,
+            latitude: service.Geocode.coordinates[1],
+            longitude: service.Geocode.coordinates[0]
           }
         })
         this.setState({ results: services })
@@ -128,9 +131,13 @@ class ServiceFinder extends Component {
           {
             this.state.results.map((result, index) => {
               const delay = `${(index + 1) * 0.15}s`
+              const distanceInMeters = getDistance(result, this.state.searchLocation)
+              const distance = `${convertUnit("mi", distanceInMeters, 2)} miles away`
+
               return (
                 <FadeInDown key={ index } duration="0.8s" delay={ delay }>
                   <p>{ result.name }</p>
+                  <p>{ distance }</p>
                 </FadeInDown>
               )
             })
