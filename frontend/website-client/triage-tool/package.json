@@ -30,6 +30,7 @@
     "webpack-serve": "^1.0.4"
   },
   "dependencies": {
+    "animate-css-styled-components": "^1.0.0",
     "lodash": "^4.17.10",
     "mobx": "^4.3.1",
     "mobx-react": "5.2.3",

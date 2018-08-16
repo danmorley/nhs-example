@@ -4,6 +4,7 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { observer } from "mobx-react"
 import Autocomplete from "react-autocomplete"
+import { FadeInDown } from "animate-css-styled-components"
 
 import { Button, ServiceFinderContainer } from "./styles"
 
@@ -19,7 +20,8 @@ class ServiceFinder extends Component {
     this.state = {
       searchTerm: "",
       searchLocation: defaultLocation,
-      suggestions: []
+      suggestions: [],
+      results: []
     }
 
     this.suggestLocation = this.suggestLocation.bind(this)
@@ -54,17 +56,15 @@ class ServiceFinder extends Component {
             longitude: r.Longitude
           }
         })
-        console.dir(postcodes)
         this.setState({ suggestions: postcodes })
       })
     })
   }
 
   findServices() {
-    console.log(this.state.searchLocation)
     const { latitude, longitude } = this.state.searchLocation
 
-    const url = `https://nhsukpoc.search.windows.net/indexes/organisationlookup3-index/docs/search?api-version=2016-09-01`
+    const url = "https://nhsukpoc.search.windows.net/indexes/organisationlookup3-index/docs/search?api-version=2016-09-01"
     const requestOptions = {
       method: "POST",
       headers: {
@@ -76,14 +76,20 @@ class ServiceFinder extends Component {
         "search": "*",
         "filter": "ServicesProvided/any(p: p eq 'Stop smoking support services')",
         "orderby": `geo.distance(Geocode, geography'POINT(${longitude} ${latitude})')`,
-        "top": 20,
+        "top": 5,
         "count": true
       })
     }
 
     fetch(url, requestOptions).then(response => {
       response.json().then(data => {
-        console.dir(data)
+        const services = data.value.map(service => {
+          return {
+            name: service.OrganisationName
+          }
+        })
+        this.setState({ results: services })
+
       })
     })
   }
@@ -97,22 +103,36 @@ class ServiceFinder extends Component {
 
   render() {
     return (
-      <ServiceFinderContainer>
-        <Autocomplete
-          inputProps={{ placeholder: "Enter postcode" }}
-          onChange={ this.suggestLocation }
-          onSelect={ this.setLocation }
-          value={ this.state.searchTerm }
-          getItemValue={ item => item.label }
-          items={ this.state.suggestions }
-          renderItem={ (item, isHighlighted) =>
-            <div style={{ background: isHighlighted ? "lightgray" : "white" }}>
-              { item.label }
-            </div>
+      <div>
+        <ServiceFinderContainer>
+          <Autocomplete
+            inputProps={{ placeholder: "Enter postcode" }}
+            onChange={ this.suggestLocation }
+            onSelect={ this.setLocation }
+            value={ this.state.searchTerm }
+            getItemValue={ item => item.label }
+            items={ this.state.suggestions }
+            renderItem={ (item, isHighlighted) =>
+              <div style={{ background: isHighlighted ? "lightgray" : "white" }}>
+                { item.label }
+              </div>
+            }
+          />
+          <Button onClick={ this.findServices }>Find</Button>
+        </ServiceFinderContainer>
+        <div>
+          {
+            this.state.results.map((result, index) => {
+              const delay = `${(index + 1) * 0.15}s`
+              return (
+                <FadeInDown key={ index } duration="0.8s" delay={ delay }>
+                  <p>{ result.name }</p>
+                </FadeInDown>
+              )
+            })
           }
-        />
-        <Button onClick={ this.findServices }>Find</Button>
-      </ServiceFinderContainer>
+        </div>
+      </div>
     )
   }
 }
