@@ -3398,6 +3398,56 @@ const sampleShelvesPage = {
     {
       type: 'guidance_shelf',
       value: {
+        heading: 'Panel Carousel Shelf - CTA Panel',
+        body: 'Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b>, green gradient <b>N/A</b>, foreground image <b>N/A</b> <br/><i>(See panel bodies for panel variant details)</i>'
+      }
+    },
+    {
+      type: "panel_carousel_shelf",
+      value: {
+        heading: "",
+        items: [
+          {
+            type: "cta_panel",
+            value: {
+              heading: "CTA Panel",
+              body: "CTA <b>not given</b>",
+              cta: [],
+              shelf_id: "",
+              image_meta: "cta_panel/panel_carousel_shelf/None"
+            },
+            id: "panel-carousel-cta-panel-1"
+          },
+          {
+            type: "cta_panel",
+            value: {
+              heading: "CTA Panel",
+              body: "CTA <b>given</b>",
+              cta: [
+                {
+                  type: "simple_cta_link",
+                  value: {
+                    link_text: "Google",
+                    link_external: "www.google.co.uk",
+                    link_page: { }
+                  },
+                  id: "5725e643-0b0c-4662-a6d4-a0c6056f306f"
+                }
+              ],
+              shelf_id: "",
+              image_meta: "cta_panel/panel_carousel_shelf/None"
+            },
+            id: "panel-carousel-cta-panel-2"
+          }
+        ],
+        shelf_id: "",
+        image_meta: "panel_carousel_shelf/None/None"
+      },
+      id: "panel-carousel-5"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
         heading: 'Divider Shelf',
         body: 'Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b>, green gradient <b>N/A</b>, foreground image <b>N/A</b>'
       }
