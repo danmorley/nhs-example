@@ -3448,6 +3448,51 @@ const sampleShelvesPage = {
     {
       type: 'guidance_shelf',
       value: {
+        heading: 'Promo Shelf',
+        body: 'CTA <b>not given</b>, Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b>, green gradient <b>N/A</b>, foreground image <b>N/A</b>'
+      }
+    },
+    {
+      type: "promo_shelf",
+      value: {
+        heading: "Stoptober",
+        shelf_id: "stoptober",
+        meta_layout: "cta_on_right",
+        meta_variant: "how-are-you",
+        cta: {
+          link_text: null,
+          link_external: null
+        },
+        image_meta: "promo_shelf/None/None"
+      },
+      id: "promo-shelf-1"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Promo Shelf',
+        body: 'CTA <b>given</b>, Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b>, green gradient <b>N/A</b>, foreground image <b>N/A</b>'
+      }
+    },
+    {
+      type: "promo_shelf",
+      value: {
+        heading: "Stoptober",
+        shelf_id: "stoptober",
+        meta_layout: "cta_on_right",
+        meta_variant: "how-are-you",
+        cta: {
+          link_text: "Google",
+          link_external: "www.google.co.uk",
+          link_page: { }
+        },
+        image_meta: "promo_shelf/None/None"
+      },
+      id: "promo-shelf-2"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
         heading: 'Divider Shelf',
         body: 'Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b>, green gradient <b>N/A</b>, foreground image <b>N/A</b>'
       }
