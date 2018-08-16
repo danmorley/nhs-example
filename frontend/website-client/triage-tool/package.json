@@ -30,11 +30,13 @@
     "webpack-serve": "^1.0.4"
   },
   "dependencies": {
+    "animate-css-styled-components": "^1.0.0",
     "lodash": "^4.17.10",
     "mobx": "^4.3.1",
     "mobx-react": "5.2.3",
     "mobx-state-tree": "^2.2.0",
     "react": "^16.4.1",
+    "react-autocomplete": "^1.8.1",
     "react-dom": "^16.4.1",
     "react-icons": "^2.2.7",
     "styled-components": "^3.3.3",
