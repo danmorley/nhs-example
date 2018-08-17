@@ -3493,6 +3493,231 @@ const sampleShelvesPage = {
     {
       type: 'guidance_shelf',
       value: {
+        heading: 'Banner Shelf',
+        body: 'Body <b>not given</b>, Background Image <b>not given</b>, Green Gradient <b>no</b>, CTA <b>not given</b>'
+      }
+    },
+    {
+      type: "banner_shelf",
+      value: {
+        heading: "Banner Shelf",
+        body: '',
+        background_image: null,
+        meta_gradient: false,
+        shelf_id: "none",
+        meta_layout: "full_width",
+        meta_variant: "main-banner",
+        cta: {
+          link_text: null,
+          link_external: null
+        },
+        image_meta: "banner_shelf/carousel_shelf/None"
+      },
+      id: "banner-1"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Banner Shelf',
+        body: 'Body <b>given</b>, Background Image <b>not given</b>, Green Gradient <b>no</b>, CTA <b>not given</b>'
+      }
+    },
+    {
+      type: "banner_shelf",
+      value: {
+        heading: "Banner Shelf",
+        body: 'Pickled tilde taxidermy, messenger bag synth fixie venmo. Pickled sartorial leggings biodiesel letterpress DIY. Lumbersexual glossier sartorial leggings, try-hard lo-fi trust fund.',
+        background_image: null,
+        meta_gradient: false,
+        shelf_id: "none",
+        meta_layout: "full_width",
+        meta_variant: "main-banner",
+        cta: {
+          link_text: null,
+          link_external: null
+        },
+        image_meta: "banner_shelf/carousel_shelf/None"
+      },
+      id: "banner-2"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Banner Shelf',
+        body: 'Body <b>given</b>, Background Image <b>given</b>, Green Gradient <b>no</b>, CTA <b>not given</b>'
+      }
+    },
+    {
+      type: "banner_shelf",
+      value: {
+        heading: "Banner Shelf",
+        body: 'Pickled tilde taxidermy, messenger bag synth fixie venmo. Pickled sartorial leggings biodiesel letterpress DIY. Lumbersexual glossier sartorial leggings, try-hard lo-fi trust fund.',
+        background_image: backgroundImage,
+        meta_gradient: false,
+        shelf_id: "none",
+        meta_layout: "full_width",
+        meta_variant: "main-banner",
+        cta: {
+          link_text: null,
+          link_external: null
+        },
+        image_meta: "banner_shelf/carousel_shelf/None"
+      },
+      id: "banner-3"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Banner Shelf',
+        body: 'Body <b>given</b>, Background Image <b>given</b>, Green Gradient <b>yes</b>, CTA <b>not given</b>'
+      }
+    },
+    {
+      type: "banner_shelf",
+      value: {
+        heading: "Banner Shelf",
+        body: 'Pickled tilde taxidermy, messenger bag synth fixie venmo. Pickled sartorial leggings biodiesel letterpress DIY. Lumbersexual glossier sartorial leggings, try-hard lo-fi trust fund.',
+        background_image: backgroundImage,
+        meta_gradient: true,
+        shelf_id: "none",
+        meta_layout: "full_width",
+        meta_variant: "main-banner",
+        cta: {
+          link_text: null,
+          link_external: null
+        },
+        image_meta: "banner_shelf/carousel_shelf/None"
+      },
+      id: "banner-4"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Banner Shelf',
+        body: 'Body <b>given</b>, Background Image <b>given</b>, Green Gradient <b>no</b>, CTA <b>given</b>'
+      }
+    },
+    {
+      type: "banner_shelf",
+      value: {
+        heading: "Banner Shelf",
+        body: 'Pickled tilde taxidermy, messenger bag synth fixie venmo. Pickled sartorial leggings biodiesel letterpress DIY. Lumbersexual glossier sartorial leggings, try-hard lo-fi trust fund.',
+        background_image: backgroundImage,
+        meta_gradient: false,
+        shelf_id: "none",
+        meta_layout: "full_width",
+        meta_variant: "main-banner",
+        cta: {
+          link_text: "Google",
+          link_external: "www.google.co.uk"
+        },
+        image_meta: "banner_shelf/carousel_shelf/None"
+      },
+      id: "banner-5"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Banner Shelf',
+        body: 'Body <b>given</b>, Background Image <b>given</b>, Green Gradient <b>yes</b>, CTA <b>given</b>'
+      }
+    },
+    {
+      type: "banner_shelf",
+      value: {
+        heading: "Banner Shelf",
+        body: 'Pickled tilde taxidermy, messenger bag synth fixie venmo. Pickled sartorial leggings biodiesel letterpress DIY. Lumbersexual glossier sartorial leggings, try-hard lo-fi trust fund.',
+        background_image: backgroundImage,
+        meta_gradient: true,
+        shelf_id: "none",
+        meta_layout: "full_width",
+        meta_variant: "main-banner",
+        cta: {
+          link_text: "Google",
+          link_external: "www.google.co.uk"
+        },
+        image_meta: "banner_shelf/carousel_shelf/None"
+      },
+      id: "banner-6"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Banner Shelf',
+        body: 'Body <b>given</b>, Background Image <b>not given</b>, Green Gradient <b>given</b>, CTA <b>not given</b>'
+      }
+    },
+    {
+      type: "banner_shelf",
+      value: {
+        heading: "Banner Shelf",
+        body: 'Pickled tilde taxidermy, messenger bag synth fixie venmo. Pickled sartorial leggings biodiesel letterpress DIY. Lumbersexual glossier sartorial leggings, try-hard lo-fi trust fund.',
+        background_image: null,
+        meta_gradient: true,
+        shelf_id: "none",
+        meta_layout: "full_width",
+        meta_variant: "main-banner",
+        cta: {
+          link_text: null,
+          link_external: null
+        },
+        image_meta: "banner_shelf/carousel_shelf/None"
+      },
+      id: "banner-7"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Banner Shelf',
+        body: 'Body <b>given</b>, Background Image <b>not given</b>, Green Gradient <b>given</b>, CTA <b>given</b>'
+      }
+    },
+    {
+      type: "banner_shelf",
+      value: {
+        heading: "Banner Shelf",
+        body: 'Pickled tilde taxidermy, messenger bag synth fixie venmo. Pickled sartorial leggings biodiesel letterpress DIY. Lumbersexual glossier sartorial leggings, try-hard lo-fi trust fund.',
+        background_image: null,
+        meta_gradient: true,
+        shelf_id: "none",
+        meta_layout: "full_width",
+        meta_variant: "main-banner",
+        cta: {
+          link_text: "Google",
+          link_external: "www.google.co.uk"
+        },
+        image_meta: "banner_shelf/carousel_shelf/None"
+      },
+      id: "banner-8"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Banner Shelf',
+        body: 'Body <b>given</b>, Background Image <b>not given</b>, Green Gradient <b>not given</b>, CTA <b>given</b>'
+      }
+    },
+    {
+      type: "banner_shelf",
+      value: {
+        heading: "Banner Shelf",
+        body: 'Pickled tilde taxidermy, messenger bag synth fixie venmo. Pickled sartorial leggings biodiesel letterpress DIY. Lumbersexual glossier sartorial leggings, try-hard lo-fi trust fund.',
+        background_image: null,
+        meta_gradient: false,
+        shelf_id: "none",
+        meta_layout: "full_width",
+        meta_variant: "main-banner",
+        cta: {
+          link_text: "Google",
+          link_external: "www.google.co.uk"
+        },
+        image_meta: "banner_shelf/carousel_shelf/None"
+      },
+      id: "carousel-banner-8"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
         heading: 'Divider Shelf',
         body: 'Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b>, green gradient <b>N/A</b>, foreground image <b>N/A</b>'
       }
