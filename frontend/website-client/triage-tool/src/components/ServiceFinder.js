@@ -87,6 +87,7 @@ class ServiceFinder extends Component {
         const services = data.value.map(service => {
           return {
             name: service.OrganisationName,
+            address: encodeURI(`${service.Address1},${service.Address2},${service.Address3}`),
             latitude: service.Geocode.coordinates[1],
             longitude: service.Geocode.coordinates[0]
           }
@@ -133,11 +134,12 @@ class ServiceFinder extends Component {
               const delay = `${(index + 1) * 0.15}s`
               const distanceInMeters = getDistance(result, this.state.searchLocation)
               const distance = `${convertUnit("mi", distanceInMeters, 2)} miles away`
+              const mapsLink = `https://www.google.com/maps/dir/?api=1&origin=${this.state.searchTerm}&destination=${result.address}`
 
               return (
                 <FadeInDown key={ index } duration="0.8s" delay={ delay }>
                   <p>{ result.name }</p>
-                  <p>{ distance }</p>
+                  <a href={ mapsLink }>{ distance }</a>
                 </FadeInDown>
               )
             })
