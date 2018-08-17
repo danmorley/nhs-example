@@ -10,7 +10,9 @@ const colors = {
   grey: "#4a4a4a",
   lightteal: "#028586",
   red: "#840018",
-  bordergrey: "#ccc"
+  bordergrey: "#ccc",
+  lightgrey: "#f0f0f0",
+  tealtint: "#e1eeee"
 }
 
 const fonts = {
@@ -392,12 +394,35 @@ const ServiceFinderContainer = styled.div`
   padding-right: 15px;
   margin-top: 30px !important;
 
-  input {
-    margin-right: 10px;
-    font-size: 14px;
-    width: 150px;
-    border: 1px solid ${colors.bordergrey};
-    padding-left: 5px;
+  div {
+    input {
+      margin-right: 10px;
+      font-size: 14px;
+      width: 150px;
+      border: 1px solid ${colors.bordergrey};
+      padding: 11px 5px;
+    }
+
+    div {
+      z-index: 10000;
+      padding: 5px 10px;
+      min-width: 140px !important;
+      box-shadow: none !important;
+      
+      div {
+        border-left: 1px solid ${colors.bordergrey};
+        border-right: 1px solid ${colors.bordergrey};
+
+        &:first-child {
+          border-top: 1px solid ${colors.bordergrey};
+        }
+
+        &:last-child {
+          border-bottom: 1px solid ${colors.bordergrey};
+        }
+      }
+    }
+
   }
 
   a {
@@ -446,6 +471,29 @@ border-top: 0 !important;
   }
 `
 
+const ResultsContainer = styled.div `\
+  padding-left: 15px;
+  padding-right: 15px;
+
+  header {
+    padding: 15px 0;
+  }
+
+  & > div:first-of-type {
+    background-color: ${colors.tealtint};
+  }
+
+  div {    
+    background-color: ${colors.lightgrey};
+
+    p {
+      padding: 10px;
+      margin-top: 5px;
+      color: ${colors.teal};
+    }
+  }
+`
+
 export { TriageToolContainer, AppHeader, AppIntro, AccordionPanelContainer,
   Button, OpenIndicator, PlanContainer, CheckboxList, RadiobuttonList,
-  ServiceFinderContainer, EmailContainer, EmailCta }
+  ServiceFinderContainer, EmailContainer, EmailCta, ResultsContainer }
