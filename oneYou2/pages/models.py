@@ -25,7 +25,7 @@ from .blocks import IDBlock, CTABlock, MenuItemPageBlock, ImageBlock, SimpleCtaL
 from .utils import get_serializable_data_for_fields
 from home.models import SiteSettings
 from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppTeaserChooserBlock, \
-    BlobImageChooserBlock, RecipeTeaserChooserBlock
+    BlobImageChooserBlock, RecipeTeaserChooserBlock, ActionChooserBlock
 
 
 GRID_VARIANT_CHOICES = (
@@ -467,20 +467,10 @@ class TriageToolShelf(blocks.StructBlock):
         form_classname = 'dct-triage-tool-shelf dct-meta-panel'
 
 
-class ActionPanel(blocks.StructBlock):
-    action_code = blocks.CharBlock(required=True, unique=True)
-    title = blocks.CharBlock(required=True)
-    rich_text_body = blocks.RichTextBlock(required=False)
-    cta = blocks.StreamBlock([
-        ('simple_menu_item', SimpleMenuItem())
-    ], icon='arrow-left', label='Items', required=False)
-    panel_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
-
-
 class ActionGroup(blocks.StructBlock):
     title = blocks.CharBlock(required=True)
     actions = blocks.StreamBlock([
-        ('action_panel', ActionPanel(required=False, icon="list-ul")),
+        ('action_panel', ActionChooserBlock(target_model="shelves.ActionPanel", icon="list-ul")),
     ])
     panel_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
 
