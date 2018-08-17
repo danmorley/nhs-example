@@ -691,10 +691,6 @@ class OneYou2Page(Page):
         ]
 
     def save(self, *args, **kwargs):
-        print(self._meta.get_fields())
-        print(self.slug)
-        print(self.theme)
-        print(self.body)
         assigned_release = self.release
 
         if self.release:

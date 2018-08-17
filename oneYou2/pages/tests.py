@@ -57,7 +57,6 @@ class OneYou2PageModelTests(OneYouTests):
     def test_breadcrumbs_property(self):
         parent_page = create_test_page()
         child_page = create_test_child_page(parent_page)
-        print(child_page.breadcrumbs)
 
         self.assertEquals(len(child_page.breadcrumbs), 2)
         self.assertEquals(child_page.breadcrumbs[-1]['name'], parent_page.title)

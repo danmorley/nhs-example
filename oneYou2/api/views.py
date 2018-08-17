@@ -128,7 +128,6 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug=
             page_pk = page.pk
         except ObjectDoesNotExist:
             try:
-                print("scenario 1")
                 if variant:  # Try and get parent page
                     page = Page.objects.get(slug=page_slug[:-8])
                     page_pk = page.pk
