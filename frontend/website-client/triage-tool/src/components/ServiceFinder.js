@@ -7,7 +7,7 @@ import Autocomplete from "react-autocomplete"
 import { FadeInDown } from "animate-css-styled-components"
 import { getDistance, convertUnit } from "geolib"
 
-import { Button, ServiceFinderContainer } from "./styles"
+import { Button, ServiceFinderContainer, ResultsContainer } from "./styles"
 
 class ServiceFinder extends Component {
   constructor(props) {
@@ -77,7 +77,7 @@ class ServiceFinder extends Component {
         "search": "*",
         "filter": "ServicesProvided/any(p: p eq 'Stop smoking support services')",
         "orderby": `geo.distance(Geocode, geography'POINT(${longitude} ${latitude})')`,
-        "top": 5,
+        "top": 3,
         "count": true
       })
     }
@@ -106,7 +106,7 @@ class ServiceFinder extends Component {
   }
 
   render() {
-    const resultsFor = `Results for ${this.state.searchTerm}`
+    const resultsFor = `Search results for ${this.state.searchTerm}`
 
     return (
       <div>
@@ -127,7 +127,7 @@ class ServiceFinder extends Component {
           <Button onClick={ this.findServices }>Find</Button>
         </ServiceFinderContainer>
 
-        <section>
+        <ResultsContainer>
           <header>{ this.state.results.length ? resultsFor : "" }</header>
           {
             this.state.results.map((result, index) => {
@@ -144,7 +144,7 @@ class ServiceFinder extends Component {
               )
             })
           }
-        </section>
+        </ResultsContainer>
       </div>
     )
   }
