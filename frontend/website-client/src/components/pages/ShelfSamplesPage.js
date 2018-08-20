@@ -5334,6 +5334,162 @@ const sampleShelvesPage = {
               image_meta: "app_teaser/grid_shelf/None"
             },
             id: "full-grid-app-teaser-7"
+          },
+          {
+            type: "information_panel",
+            value: {
+              image_meta: "information_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Information Panel",
+              body: 'Image <b>not given</b>, CTA <b>not given</b>, Variant <b>mobile image top text right</b>',
+              image: {
+                title: null,
+                renditions: { }
+              },
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "mobile-image-top-text-right"
+            },
+            id: "full-grid-information-panel-1"
+          },
+          {
+            type: "information_panel",
+            value: {
+              image_meta: "information_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Information Panel",
+              body: 'Image <b>given</b>, CTA <b>not given</b>, Variant <b>mobile image top text right</b>',
+              image: altImage,
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "mobile-image-top-text-right"
+            },
+            id: "full-grid-information-panel-2"
+          },
+          {
+            type: "information_panel",
+            value: {
+              image_meta: "information_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Information Panel",
+              body: 'Image <b>not given</b>, CTA <b>given</b>, Variant <b>mobile image top text right</b>',
+              image: {
+                title: null,
+                renditions: { }
+              },
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "mobile-image-top-text-right"
+            },
+            id: "full-grid-information-panel-3"
+          },
+          {
+            type: "information_panel",
+            value: {
+              image_meta: "information_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Information Panel",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>mobile image top text right</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "mobile-image-top-text-right"
+            },
+            id: "full-grid-information-panel-4"
+          },
+          {
+            type: "information_panel",
+            value: {
+              image_meta: "information_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Information Panel",
+              body: 'Image <b>not given</b>, CTA <b>not given</b>, Variant <b>mobile image right</b>',
+              image: {
+                title: null,
+                renditions: { }
+              },
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "mobile-image-top-text-right"
+            },
+            id: "full-grid-information-panel-5"
+          },
+          {
+            type: "information_panel",
+            value: {
+              image_meta: "information_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Information Panel",
+              body: 'Image <b>given</b>, CTA <b>not given</b>, Variant <b>mobile image right</b>',
+              image: altImage,
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "mobile-image-top-text-right"
+            },
+            id: "full-grid-information-panel-6"
+          },
+          {
+            type: "information_panel",
+            value: {
+              image_meta: "information_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Information Panel",
+              body: 'Image <b>not given</b>, CTA <b>given</b>, Variant <b>mobile image right</b>',
+              image: {
+                title: null,
+                renditions: { }
+              },
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "mobile-image-top-text-right"
+            },
+            id: "full-grid-information-panel-7"
+          },
+          {
+            type: "information_panel",
+            value: {
+              image_meta: "information_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Information Panel",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>mobile image right</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "mobile-image-top-text-right"
+            },
+            id: "full-grid-information-panel-8"
           }
         ],
         background_image: {
@@ -6969,6 +7125,162 @@ const sampleShelvesPage = {
               image_meta: "app_teaser/grid_shelf/None"
             },
             id: "2-grid-app-teaser-7"
+          },
+          {
+            type: "information_panel",
+            value: {
+              image_meta: "information_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Information Panel",
+              body: 'Image <b>not given</b>, CTA <b>not given</b>, Variant <b>mobile image top text right</b>',
+              image: {
+                title: null,
+                renditions: { }
+              },
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "mobile-image-top-text-right"
+            },
+            id: "2-grid-information-panel-1"
+          },
+          {
+            type: "information_panel",
+            value: {
+              image_meta: "information_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Information Panel",
+              body: 'Image <b>given</b>, CTA <b>not given</b>, Variant <b>mobile image top text right</b>',
+              image: altImage,
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "mobile-image-top-text-right"
+            },
+            id: "2-grid-information-panel-2"
+          },
+          {
+            type: "information_panel",
+            value: {
+              image_meta: "information_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Information Panel",
+              body: 'Image <b>not given</b>, CTA <b>given</b>, Variant <b>mobile image top text right</b>',
+              image: {
+                title: null,
+                renditions: { }
+              },
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "mobile-image-top-text-right"
+            },
+            id: "2-grid-information-panel-3"
+          },
+          {
+            type: "information_panel",
+            value: {
+              image_meta: "information_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Information Panel",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>mobile image top text right</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "mobile-image-top-text-right"
+            },
+            id: "2-grid-information-panel-4"
+          },
+          {
+            type: "information_panel",
+            value: {
+              image_meta: "information_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Information Panel",
+              body: 'Image <b>not given</b>, CTA <b>not given</b>, Variant <b>mobile image right</b>',
+              image: {
+                title: null,
+                renditions: { }
+              },
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "mobile-image-top-text-right"
+            },
+            id: "2-grid-information-panel-5"
+          },
+          {
+            type: "information_panel",
+            value: {
+              image_meta: "information_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Information Panel",
+              body: 'Image <b>given</b>, CTA <b>not given</b>, Variant <b>mobile image right</b>',
+              image: altImage,
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "mobile-image-top-text-right"
+            },
+            id: "2-grid-information-panel-6"
+          },
+          {
+            type: "information_panel",
+            value: {
+              image_meta: "information_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Information Panel",
+              body: 'Image <b>not given</b>, CTA <b>given</b>, Variant <b>mobile image right</b>',
+              image: {
+                title: null,
+                renditions: { }
+              },
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "mobile-image-top-text-right"
+            },
+            id: "2-grid-information-panel-7"
+          },
+          {
+            type: "information_panel",
+            value: {
+              image_meta: "information_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Information Panel",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>mobile image right</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "mobile-image-top-text-right"
+            },
+            id: "2-grid-information-panel-8"
           }
         ],
         background_image: {
@@ -8604,6 +8916,162 @@ const sampleShelvesPage = {
               image_meta: "app_teaser/grid_shelf/None"
             },
             id: "3-grid-app-teaser-7"
+          },
+          {
+            type: "information_panel",
+            value: {
+              image_meta: "information_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Information Panel",
+              body: 'Image <b>not given</b>, CTA <b>not given</b>, Variant <b>mobile image top text right</b>',
+              image: {
+                title: null,
+                renditions: { }
+              },
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "mobile-image-top-text-right"
+            },
+            id: "3-grid-information-panel-1"
+          },
+          {
+            type: "information_panel",
+            value: {
+              image_meta: "information_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Information Panel",
+              body: 'Image <b>given</b>, CTA <b>not given</b>, Variant <b>mobile image top text right</b>',
+              image: altImage,
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "mobile-image-top-text-right"
+            },
+            id: "3-grid-information-panel-2"
+          },
+          {
+            type: "information_panel",
+            value: {
+              image_meta: "information_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Information Panel",
+              body: 'Image <b>not given</b>, CTA <b>given</b>, Variant <b>mobile image top text right</b>',
+              image: {
+                title: null,
+                renditions: { }
+              },
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "mobile-image-top-text-right"
+            },
+            id: "3-grid-information-panel-3"
+          },
+          {
+            type: "information_panel",
+            value: {
+              image_meta: "information_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Information Panel",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>mobile image top text right</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "mobile-image-top-text-right"
+            },
+            id: "3-grid-information-panel-4"
+          },
+          {
+            type: "information_panel",
+            value: {
+              image_meta: "information_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Information Panel",
+              body: 'Image <b>not given</b>, CTA <b>not given</b>, Variant <b>mobile image right</b>',
+              image: {
+                title: null,
+                renditions: { }
+              },
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "mobile-image-top-text-right"
+            },
+            id: "3-grid-information-panel-5"
+          },
+          {
+            type: "information_panel",
+            value: {
+              image_meta: "information_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Information Panel",
+              body: 'Image <b>given</b>, CTA <b>not given</b>, Variant <b>mobile image right</b>',
+              image: altImage,
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "mobile-image-top-text-right"
+            },
+            id: "3-grid-information-panel-6"
+          },
+          {
+            type: "information_panel",
+            value: {
+              image_meta: "information_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Information Panel",
+              body: 'Image <b>not given</b>, CTA <b>given</b>, Variant <b>mobile image right</b>',
+              image: {
+                title: null,
+                renditions: { }
+              },
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "mobile-image-top-text-right"
+            },
+            id: "3-grid-information-panel-7"
+          },
+          {
+            type: "information_panel",
+            value: {
+              image_meta: "information_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Information Panel",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>mobile image right</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "mobile-image-top-text-right"
+            },
+            id: "3-grid-information-panel-8"
           }
         ],
         background_image: {
