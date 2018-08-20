@@ -5201,6 +5201,139 @@ const sampleShelvesPage = {
               meta_cta_variant: "link"
             },
             id: "full-grid-image-panel-48"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: null
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/grid_shelf/None"
+            },
+            id: "full-grid-app-teaser-1"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>',
+              image: altImage,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: null
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/grid_shelf/None"
+            },
+            id: "full-grid-app-teaser-2"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>not given</b>',
+              image: altImage,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/grid_shelf/None"
+            },
+            id: "full-grid-app-teaser-3"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>given</b>',
+              image: altImage,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/grid_shelf/None"
+            },
+            id: "full-grid-app-teaser-4"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>not given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/grid_shelf/None"
+            },
+            id: "full-grid-app-teaser-5"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/grid_shelf/None"
+            },
+            id: "full-grid-app-teaser-6"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: null
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/grid_shelf/None"
+            },
+            id: "full-grid-app-teaser-7"
           }
         ],
         background_image: {
@@ -6703,6 +6836,139 @@ const sampleShelvesPage = {
               meta_cta_variant: "link"
             },
             id: "2-grid-image-panel-48"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: null
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/grid_shelf/None"
+            },
+            id: "2-grid-app-teaser-1"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>',
+              image: altImage,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: null
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/grid_shelf/None"
+            },
+            id: "2-grid-app-teaser-2"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>not given</b>',
+              image: altImage,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/grid_shelf/None"
+            },
+            id: "2-grid-app-teaser-3"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>given</b>',
+              image: altImage,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/grid_shelf/None"
+            },
+            id: "2-grid-app-teaser-4"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>not given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/grid_shelf/None"
+            },
+            id: "2-grid-app-teaser-5"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/grid_shelf/None"
+            },
+            id: "2-grid-app-teaser-6"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: null
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/grid_shelf/None"
+            },
+            id: "2-grid-app-teaser-7"
           }
         ],
         background_image: {
@@ -8205,6 +8471,139 @@ const sampleShelvesPage = {
               meta_cta_variant: "link"
             },
             id: "3-grid-image-panel-48"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: null
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/grid_shelf/None"
+            },
+            id: "3-grid-app-teaser-1"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>',
+              image: altImage,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: null
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/grid_shelf/None"
+            },
+            id: "3-grid-app-teaser-2"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>not given</b>',
+              image: altImage,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/grid_shelf/None"
+            },
+            id: "3-grid-app-teaser-3"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>given</b>',
+              image: altImage,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/grid_shelf/None"
+            },
+            id: "3-grid-app-teaser-4"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>not given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/grid_shelf/None"
+            },
+            id: "3-grid-app-teaser-5"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/grid_shelf/None"
+            },
+            id: "3-grid-app-teaser-6"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: null
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/grid_shelf/None"
+            },
+            id: "3-grid-app-teaser-7"
           }
         ],
         background_image: {
