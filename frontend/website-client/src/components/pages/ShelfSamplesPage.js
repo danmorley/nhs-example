@@ -3333,8 +3333,7 @@ const sampleShelvesPage = {
               meta_cta_variant: "link"
             },
             id: "panel-carousel-image-panel-46"
-          }
-          ,
+          },
           {
             type: "image_teaser",
             value: {
@@ -3711,9 +3710,4575 @@ const sampleShelvesPage = {
           link_text: "Google",
           link_external: "www.google.co.uk"
         },
-        image_meta: "banner_shelf/carousel_shelf/None"
+        image_meta: "banner_shelf/None/None"
       },
       id: "carousel-banner-8"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Grid Shelf',
+        body: 'Background Image <b>not given</b>, Variant <b>standard</b>, Layout <b>full width</b> Image display <b>stretch</b> <br/> <i>See individual panels for their settings</i>'
+      }
+    },
+    {
+      type: "grid_shelf",
+      value: {
+        heading: "",
+        body: '',
+        items: [
+          {
+            type: "oneyou1_teaser",
+            value: {
+              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "One you teaser",
+              body: 'Body <b>given</b>, CTA <b>not given</b>',
+              image: altImage,
+              cta: [ ],
+              shelf_id: ""
+            },
+            id: 'full-grid-one-you-1'
+          },
+          {
+            type: "oneyou1_teaser",
+            value: {
+              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "One you teaser",
+              body: 'Body <b>given</b>, CTA <b>given</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk"
+                }
+              ],
+              shelf_id: ""
+            },
+            id: 'full-grid-one-you-2'
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Left</b>, Use play link <b>No</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "full-grid-video-teaser-1"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Left</b>, Use play link <b>Yes</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "full-grid-video-teaser-2"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Left</b>, Use play link <b>No</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "full-grid-video-teaser-3"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Left</b>, Use play link <b>Yes</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "full-grid-video-teaser-4"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Left</b>, Use play link <b>No</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "full-grid-video-teaser-5"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Left</b>, Use play link <b>Yes</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "full-grid-video-teaser-6"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Left</b>, Use play link <b>No</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "full-grid-video-teaser-7"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Left</b>, Use play link <b>Yes</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "full-grid-video-teaser-8"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>left</b>, Image Desktop <b>Top</b>, Use play link <b>No</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "full-grid-video-teaser-9"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Top</b>, Use play link <b>Yes</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "full-grid-video-teaser-10"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Top</b>, Use play link <b>No</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "full-grid-video-teaser-11"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Top</b>, Use play link <b>Yes</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "full-grid-video-teaser-12"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Top</b>, Use play link <b>No</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "full-grid-video-teaser-13"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Top</b>, Use play link <b>Yes</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "full-grid-video-teaser-14"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Top</b>, Use play link <b>No</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "full-grid-video-teaser-15"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Top</b>, Use play link <b>Yes</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "full-grid-video-teaser-16"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-1"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-2"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-3"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>not given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-4"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-5"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-6"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-7"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-8"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-9"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-10"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-11"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>button</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "button"
+            },
+            id: "full-grid-image-panel-12"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-13"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-14"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-15"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>button</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "button"
+            },
+            id: "full-grid-image-panel-16"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-17"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-18"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>button</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "button"
+            },
+            id: "full-grid-image-panel-19"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>button</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "button"
+            },
+            id: "full-grid-image-panel-20"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>left</b>, CTA style <b>button</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "button"
+            },
+            id: "full-grid-image-panel-21"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>left</b>, CTA style <b>button</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "button"
+            },
+            id: "full-grid-image-panel-22"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-23"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-24"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-25"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-26"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-27"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>button</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "button"
+            },
+            id: "full-grid-image-panel-28"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-29"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-30"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-31"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>button</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "button"
+            },
+            id: "full-grid-image-panel-32"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-33"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-34"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>button</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "button"
+            },
+            id: "full-grid-image-panel-35"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>button</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "button"
+            },
+            id: "full-grid-image-panel-36"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>left</b>, CTA style <b>button</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "button"
+            },
+            id: "full-grid-image-panel-37"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>left</b>, CTA style <b>button</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "button"
+            },
+            id: "full-grid-image-panel-38"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-39"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-40"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-41"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-42"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-43"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-44"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-45"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>left</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-46"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-47"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>top</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-48"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "full-grid-image-panel-48"
+          }
+        ],
+        background_image: {
+          title: null,
+          renditions: { }
+        },
+        shelf_id: "",
+        rows_to_show: 0,
+        meta_variant: "standard",
+        meta_layout: "full_width",
+        meta_image_display: "cover",
+        image_meta: "grid_shelf/None/None"
+      },
+      id: 'grid-shelf-1'
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Grid Shelf',
+        body: 'Background Image <b>not given</b>, Variant <b>standard</b>, Layout <b>2 columns</b> Image display <b>stretch</b> <br/> <i>See individual panels for their settings</i>'
+      }
+    },
+    {
+      type: "grid_shelf",
+      value: {
+        heading: "",
+        body: '',
+        items: [
+          {
+            type: "oneyou1_teaser",
+            value: {
+              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "One you teaser",
+              body: 'Body <b>given</b>, CTA <b>not given</b>',
+              image: altImage,
+              cta: [ ],
+              shelf_id: ""
+            },
+            id: '2-grid-one-you-1'
+          },
+          {
+            type: "oneyou1_teaser",
+            value: {
+              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "One you teaser",
+              body: 'Body <b>given</b>, CTA <b>given</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk"
+                }
+              ],
+              shelf_id: ""
+            },
+            id: '2-grid-one-you-2'
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Left</b>, Use play link <b>No</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "2-grid-video-teaser-1"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Left</b>, Use play link <b>Yes</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "2-grid-video-teaser-2"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Left</b>, Use play link <b>No</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "2-grid-video-teaser-3"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Left</b>, Use play link <b>Yes</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "2-grid-video-teaser-4"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Left</b>, Use play link <b>No</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "2-grid-video-teaser-5"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Left</b>, Use play link <b>Yes</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "2-grid-video-teaser-6"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Left</b>, Use play link <b>No</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "2-grid-video-teaser-7"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Left</b>, Use play link <b>Yes</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "2-grid-video-teaser-8"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>left</b>, Image Desktop <b>Top</b>, Use play link <b>No</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "2-grid-video-teaser-9"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Top</b>, Use play link <b>Yes</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "2-grid-video-teaser-10"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Top</b>, Use play link <b>No</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "2-grid-video-teaser-11"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Top</b>, Use play link <b>Yes</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "2-grid-video-teaser-12"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Top</b>, Use play link <b>No</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "2-grid-video-teaser-13"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Top</b>, Use play link <b>Yes</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "2-grid-video-teaser-14"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Top</b>, Use play link <b>No</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "2-grid-video-teaser-15"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Top</b>, Use play link <b>Yes</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "2-grid-video-teaser-16"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-1"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-2"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-3"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>not given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-4"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-5"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-6"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-7"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-8"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-9"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-10"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-11"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>button</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "button"
+            },
+            id: "2-grid-image-panel-12"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-13"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-14"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-15"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>button</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "button"
+            },
+            id: "2-grid-image-panel-16"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-17"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-18"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>button</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "button"
+            },
+            id: "2-grid-image-panel-19"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>button</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "button"
+            },
+            id: "2-grid-image-panel-20"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>left</b>, CTA style <b>button</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "button"
+            },
+            id: "2-grid-image-panel-21"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>left</b>, CTA style <b>button</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "button"
+            },
+            id: "2-grid-image-panel-22"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-23"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-24"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-25"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-26"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-27"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>button</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "button"
+            },
+            id: "2-grid-image-panel-28"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-29"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-30"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-31"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>button</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "button"
+            },
+            id: "2-grid-image-panel-32"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-33"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-34"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>button</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "button"
+            },
+            id: "2-grid-image-panel-35"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>button</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "button"
+            },
+            id: "2-grid-image-panel-36"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>left</b>, CTA style <b>button</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "button"
+            },
+            id: "2-grid-image-panel-37"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>left</b>, CTA style <b>button</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "button"
+            },
+            id: "2-grid-image-panel-38"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-39"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-40"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-41"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-42"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-43"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-44"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-45"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>left</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-46"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-47"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>top</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-48"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "2-grid-image-panel-48"
+          }
+        ],
+        background_image: {
+          title: null,
+          renditions: { }
+        },
+        shelf_id: "",
+        rows_to_show: 0,
+        meta_variant: "standard",
+        meta_layout: "2_col_1_on_mobile",
+        meta_image_display: "cover",
+        image_meta: "grid_shelf/None/None"
+      },
+      id: 'grid-shelf-2'
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Grid Shelf',
+        body: 'Background Image <b>not given</b>, Variant <b>standard</b>, Layout <b>3 columns</b> Image display <b>stretch</b> <br/> <i>See individual panels for their settings</i>'
+      }
+    },
+    {
+      type: "grid_shelf",
+      value: {
+        heading: "",
+        body: '',
+        items: [
+          {
+            type: "oneyou1_teaser",
+            value: {
+              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "One you teaser",
+              body: 'Body <b>given</b>, CTA <b>not given</b>',
+              image: altImage,
+              cta: [ ],
+              shelf_id: ""
+            },
+            id: '3-grid-one-you-1'
+          },
+          {
+            type: "oneyou1_teaser",
+            value: {
+              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "One you teaser",
+              body: 'Body <b>given</b>, CTA <b>given</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk"
+                }
+              ],
+              shelf_id: ""
+            },
+            id: '3-grid-one-you-2'
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Left</b>, Use play link <b>No</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "3-grid-video-teaser-1"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Left</b>, Use play link <b>Yes</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "3-grid-video-teaser-2"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Left</b>, Use play link <b>No</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "3-grid-video-teaser-3"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Left</b>, Use play link <b>Yes</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "3-grid-video-teaser-4"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Left</b>, Use play link <b>No</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "3-grid-video-teaser-5"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Left</b>, Use play link <b>Yes</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "3-grid-video-teaser-6"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Left</b>, Use play link <b>No</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "3-grid-video-teaser-7"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Left</b>, Use play link <b>Yes</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_left",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "3-grid-video-teaser-8"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>left</b>, Image Desktop <b>Top</b>, Use play link <b>No</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "3-grid-video-teaser-9"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Top</b>, Use play link <b>Yes</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "3-grid-video-teaser-10"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Top</b>, Use play link <b>No</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "3-grid-video-teaser-11"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Left</b>, Image Desktop <b>Top</b>, Use play link <b>Yes</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_left",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "3-grid-video-teaser-12"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Top</b>, Use play link <b>No</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "3-grid-video-teaser-13"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Top</b>, Use play link <b>Yes</b>, CTA <b>not given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [ ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "3-grid-video-teaser-14"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Top</b>, Use play link <b>No</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: false,
+              meta_play_link_text: "Play"
+            },
+            id: "3-grid-video-teaser-15"
+          },
+          {
+            type: "video_teaser",
+            value: {
+              image_meta: "video_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              host: "wirewax",
+              heading: "Video Teaser",
+              body: 'Image Mobile <b>Top</b>, Image Desktop <b>Top</b>, Use play link <b>Yes</b>, CTA <b>given</b>',
+              image: backgroundImage,
+              video: "1234",
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_layout_mobile: "mobile_image_top",
+              meta_layout_desktop: "desktop_image_top",
+              meta_use_play_link: true,
+              meta_play_link_text: "Play"
+            },
+            id: "3-grid-video-teaser-16"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-1"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-2"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-3"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>not given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-4"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-5"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-6"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [ ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-7"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-8"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-9"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-10"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-11"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>button</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "button"
+            },
+            id: "3-grid-image-panel-12"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-13"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-14"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-15"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>button</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "button"
+            },
+            id: "3-grid-image-panel-16"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-17"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-18"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>button</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "button"
+            },
+            id: "3-grid-image-panel-19"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>button</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "button"
+            },
+            id: "3-grid-image-panel-20"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>left</b>, CTA style <b>button</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "button"
+            },
+            id: "3-grid-image-panel-21"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>left</b>, CTA style <b>button</b>",
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "button"
+            },
+            id: "3-grid-image-panel-22"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-23"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-24"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-25"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-26"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-27"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>button</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "button"
+            },
+            id: "3-grid-image-panel-28"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-29"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-30"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-31"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>button</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "button"
+            },
+            id: "3-grid-image-panel-32"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-33"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-34"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>button</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "button"
+            },
+            id: "3-grid-image-panel-35"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>button</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "button"
+            },
+            id: "3-grid-image-panel-36"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>left</b>, CTA style <b>button</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "button"
+            },
+            id: "3-grid-image-panel-37"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>left</b>, CTA style <b>button</b>",
+              image: null,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "button"
+            },
+            id: "3-grid-image-panel-38"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-39"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-40"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-41"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>dark background</b>, Mobile image position <b>default</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-42"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>dark background</b>, Mobile image position <b>left</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-43"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>dark background</b>, Mobile image position <b>top</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "dark-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-44"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>left</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-45"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>left</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-left",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-46"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>top</b>, Desktop image position <b>default</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-47"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>top</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-top",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-48"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/grid_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>left</b>, CTA style <b>link</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-left",
+              meta_cta_variant: "link"
+            },
+            id: "3-grid-image-panel-48"
+          }
+        ],
+        background_image: {
+          title: null,
+          renditions: { }
+        },
+        shelf_id: "",
+        rows_to_show: 0,
+        meta_variant: "standard",
+        meta_layout: "3_col_1_on_mobile",
+        meta_image_display: "cover",
+        image_meta: "grid_shelf/None/None"
+      },
+      id: 'grid-shelf-3'
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Grid Shelf',
+        body: 'Background Image <b>not given</b>, Variant <b>standard</b>, Layout <b>3 columns</b> Image display <b>stretch</b> <br/> <i>See individual panels for their settings</i>'
+      }
+    },
+    {
+      type: "grid_shelf",
+      value: {
+        heading: "",
+        body: '',
+        items: [
+          {
+            type: "oneyou1_teaser",
+            value: {
+              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "One you teaser",
+              body: 'Body <b>given</b>, CTA <b>not given</b>',
+              image: altImage,
+              cta: [ ],
+              shelf_id: ""
+            },
+            id: '3-grid-one-you-1'
+          },
+          {
+            type: "oneyou1_teaser",
+            value: {
+              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "One you teaser",
+              body: 'Body <b>given</b>, CTA <b>given</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk"
+                }
+              ],
+              shelf_id: ""
+            },
+            id: '3-grid-one-you-2'
+          }
+        ],
+        background_image: {
+          title: null,
+          renditions: { }
+        },
+        shelf_id: "",
+        rows_to_show: 0,
+        meta_variant: "standard",
+        meta_layout: "3_col_1_on_mobile",
+        meta_image_display: "cover",
+        image_meta: "grid_shelf/None/None"
+      },
+      id: 'grid-shelf-4'
     },
     {
       type: 'guidance_shelf',
