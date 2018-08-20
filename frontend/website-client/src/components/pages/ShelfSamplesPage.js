@@ -5490,6 +5490,330 @@ const sampleShelvesPage = {
               meta_variant: "mobile-image-top-text-right"
             },
             id: "full-grid-information-panel-8"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>not given</b>, CTA <b>not given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on left</b>',
+              image: {
+                title: null,
+                renditions: { }
+              },
+              cta: [ ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "full-grid-icon-card-1"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>not given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on left</b>',
+              image: altImage,
+              cta: [ ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "full-grid-icon-card-2"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>not given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on left</b>',
+              image: {
+                title: null,
+                renditions: { }
+              },
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "full-grid-icon-card-3"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on left</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "full-grid-icon-card-4"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on right</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_on_right"
+            },
+            id: "full-grid-icon-card-5"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon heading left</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_heading_left"
+            },
+            id: "full-grid-icon-card-6"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon heading right</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_heading_right"
+            },
+            id: "full-grid-icon-card-7"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon body left</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_body_left"
+            },
+            id: "full-grid-icon-card-8"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon body right</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_body_right"
+            },
+            id: "full-grid-icon-card-9"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on top</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_on_top"
+            },
+            id: "full-grid-icon-card-10"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on bottom</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_on_bottom"
+            },
+            id: "full-grid-icon-card-11"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard heading standard body grey background</b>, Layout <b>icon on left</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_heading_standard_body_grey_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "full-grid-icon-card-4"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>large green heading standard body grey background</b>, Layout <b>icon on left</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "large_green_heading_standard_body_grey_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "full-grid-icon-card-4"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>extra small heading large body no background</b>, Layout <b>icon on left</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "x_small_heading_large_body_no_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "full-grid-icon-card-4"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>large yellow heading standard body no background</b>, Layout <b>icon on left</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "large_yellow_heading_standard_body_no_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "full-grid-icon-card-4"
           }
         ],
         background_image: {
@@ -7281,6 +7605,330 @@ const sampleShelvesPage = {
               meta_variant: "mobile-image-top-text-right"
             },
             id: "2-grid-information-panel-8"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>not given</b>, CTA <b>not given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on left</b>',
+              image: {
+                title: null,
+                renditions: { }
+              },
+              cta: [ ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "2-grid-icon-card-1"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>not given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on left</b>',
+              image: altImage,
+              cta: [ ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "2-grid-icon-card-2"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>not given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on left</b>',
+              image: {
+                title: null,
+                renditions: { }
+              },
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "2-grid-icon-card-3"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on left</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "2-grid-icon-card-4"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on right</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_on_right"
+            },
+            id: "2-grid-icon-card-5"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon heading left</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_heading_left"
+            },
+            id: "2-grid-icon-card-6"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon heading right</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_heading_right"
+            },
+            id: "2-grid-icon-card-7"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon body left</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_body_left"
+            },
+            id: "2-grid-icon-card-8"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon body right</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_body_right"
+            },
+            id: "2-grid-icon-card-9"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on top</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_on_top"
+            },
+            id: "2-grid-icon-card-10"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on bottom</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_on_bottom"
+            },
+            id: "2-grid-icon-card-11"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard heading standard body grey background</b>, Layout <b>icon on left</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_heading_standard_body_grey_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "2-grid-icon-card-4"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>large green heading standard body grey background</b>, Layout <b>icon on left</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "large_green_heading_standard_body_grey_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "2-grid-icon-card-4"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>extra small heading large body no background</b>, Layout <b>icon on left</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "x_small_heading_large_body_no_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "2-grid-icon-card-4"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>large yellow heading standard body no background</b>, Layout <b>icon on left</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "large_yellow_heading_standard_body_no_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "2-grid-icon-card-4"
           }
         ],
         background_image: {
@@ -9072,6 +9720,330 @@ const sampleShelvesPage = {
               meta_variant: "mobile-image-top-text-right"
             },
             id: "3-grid-information-panel-8"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>not given</b>, CTA <b>not given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on left</b>',
+              image: {
+                title: null,
+                renditions: { }
+              },
+              cta: [ ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "3-icon-card-1"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>not given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on left</b>',
+              image: altImage,
+              cta: [ ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "3-icon-card-2"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>not given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on left</b>',
+              image: {
+                title: null,
+                renditions: { }
+              },
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "3-icon-card-3"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on left</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "3-icon-card-4"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on right</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_on_right"
+            },
+            id: "3-icon-card-5"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon heading left</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_heading_left"
+            },
+            id: "3-icon-card-6"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon heading right</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_heading_right"
+            },
+            id: "3-icon-card-7"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon body left</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_body_left"
+            },
+            id: "3-icon-card-8"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon body right</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_body_right"
+            },
+            id: "3-icon-card-9"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on top</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_on_top"
+            },
+            id: "3-icon-card-10"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on bottom</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_on_bottom"
+            },
+            id: "3-icon-card-11"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard heading standard body grey background</b>, Layout <b>icon on left</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "standard_heading_standard_body_grey_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "3-icon-card-4"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>large green heading standard body grey background</b>, Layout <b>icon on left</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "large_green_heading_standard_body_grey_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "3-icon-card-4"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>extra small heading large body no background</b>, Layout <b>icon on left</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "x_small_heading_large_body_no_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "3-icon-card-4"
+          },
+          {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>large yellow heading standard body no background</b>, Layout <b>icon on left</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              panel_id: "",
+              meta_variant: "large_yellow_heading_standard_body_no_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "3-icon-card-4"
           }
         ],
         background_image: {
