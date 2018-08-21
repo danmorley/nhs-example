@@ -10557,6 +10557,40 @@ const sampleShelvesPage = {
         image_meta: "divider/None/None"
       },
       id: "divider-1"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Article Page Heading',
+        body: 'Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b>, back button <b>not given</b>'
+      }
+    },
+    {
+      type: "article_page_heading_shelf",
+      value: {
+        heading: "Article Page Heading",
+        display_back_button: false,
+        back_button_label: null,
+        image_meta: "article_page_heading_shelf/None/None"
+      },
+      id: "article-page-heading-2"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Article Page Heading',
+        body: 'Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b>, back button <b>given</b>'
+      }
+    },
+    {
+      type: "article_page_heading_shelf",
+      value: {
+        heading: "Article Page Heading",
+        display_back_button: true,
+        back_button_label: "Back",
+        image_meta: "article_page_heading_shelf/None/None"
+      },
+      id: "article-page-heading-2"
     }
   ]
 };
