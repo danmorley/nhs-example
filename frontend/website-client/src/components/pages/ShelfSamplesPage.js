@@ -32,6 +32,18 @@ const pheLogoImage = {
   },
   title: 'PHE logo image' };
 
+const BASKET_KEY = 'basket';
+const ACTION_PLAN_KEY = 'action_plan';
+
+sessionStorage.setItem(BASKET_KEY, JSON.stringify(['action_1']));
+sessionStorage.setItem(ACTION_PLAN_KEY, JSON.stringify({"action_1": {
+                    action_code: "action_1",
+                    title: "Action 1",
+                    rich_text_body: "",
+                    cta: [ ],
+                    panel_id: ""
+                  }}));
+
 const sampleShelvesPage = {
   title: 'Shelf Samples',
   page_styles: '#panel-video-teaser-4 h3 { color: orange; }',
@@ -39,6 +51,13 @@ const sampleShelvesPage = {
     search_description: ''
   },
   body: [
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Note',
+        body: 'Viewing this page automatically adds an item to your action plan in order for the Action Plan display example to work. The reset button in the action plan builder example can be used to clear this.'
+      }
+    },
     {
       type: 'guidance_shelf',
       value: {
@@ -10719,6 +10738,105 @@ const sampleShelvesPage = {
         image_meta: "table/None/None"
       },
       id: "table-2"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Action Plan Builder',
+        body: 'Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b>'
+      }
+    },
+    {
+      type: "action_plan_shelf",
+      value: {
+        action_groups: [
+          {
+            type: "action_group",
+            value: {
+              title: "Action Group 1",
+              actions: [
+                {
+                  type: "action_panel",
+                  value: {
+                    action_code: "action_1",
+                    title: "Action 1",
+                    rich_text_body: "",
+                    cta: [ ],
+                    panel_id: ""
+                  },
+                  id: "action-1"
+                },
+                {
+                  type: "action_panel",
+                  value: {
+                    action_code: "action_2",
+                    title: "Action 2",
+                    rich_text_body: "",
+                    cta: [ ],
+                    panel_id: ""
+                  },
+                  id: "action-2"
+                }
+              ],
+              panel_id: ""
+            },
+            id: "action-group-1"
+          },
+          {
+            type: "action_group",
+            value: {
+              title: "Action Group 2",
+              actions: [
+                {
+                  type: "action_panel",
+                  value: {
+                    action_code: "action_3",
+                    title: "Action 3",
+                    rich_text_body: "",
+                    cta: [ ],
+                    panel_id: ""
+                  },
+                  id: "action-3"
+                }
+              ],
+              panel_id: ""
+            },
+            id: "action-group-2"
+          }
+        ],
+        cta: [
+          {
+            type: "simple_menu_item",
+            value: {
+              link_text: "Build Your Plan",
+              link_external: "www.google.co.uk",
+              link_page: null
+            },
+            id: "cta-link"
+          }
+        ],
+        shelf_id: "",
+        image_meta: "action_plan_shelf/None/None"
+      },
+      id: "action-plan-builder"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Action Plan Display',
+        body: 'Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b>'
+      }
+    },
+    {
+      type: "action_plan_display_shelf",
+      value: {
+        shelf_id: "",
+        title: "Action Plan Display",
+        body: "<p>Lorem ipsum dolor amet humblebrag tousled mixtape chia pop-up tbh DIY direct trade before they sold out kickstarter austin chicharrones pour-over ethical.</p>",
+        cta: [ ],
+        image_meta: "action_plan_display_shelf/None/None"
+      },
+      id: "cdc8117f-cdb1-41dd-a73a-589aa2c5f8d6"
     }
   ]
 };
