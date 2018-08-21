@@ -55,6 +55,7 @@ class VideoModal extends Component {
             isOpen={false}
             replace={false}
             ref="modal"
+            className ="video-modal"
           >
             {this.renderVideo(this.props.video, this.props.host)}
           </PureModal>

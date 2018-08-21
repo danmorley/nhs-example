@@ -1,0 +1,155 @@
+@import '../assets/styles/variables/variables';
+@import "../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+.actionplan-form {
+  section {
+    padding: 1em;
+    
+    @include media-breakpoint-up(sm) {
+      padding: 2em;
+    }
+  }
+  
+  h2 {
+    color: $teal-blue;
+    font-family: $secondary-brand-font;
+    font-weight: normal;
+    margin-bottom: 1em;
+
+    @include media-breakpoint-up(sm) {
+      margin-bottom: 1.5em;
+    }
+  }
+}
+
+.actionplan-form__page-closed {
+  display: none;
+}
+
+section.actionplan-form__field-section {
+  padding-bottom: 0.5em;
+}
+
+section.actionplan-form__opt-section {
+  background: $teal-dark;
+  color: $white;
+  padding-top: 1.5em;
+  
+  @include media-breakpoint-up(sm) {
+    padding-top: 2.5em;
+  }
+  
+  p {
+    font-size: smaller;
+  }
+}
+
+.actionplan-form__opt-section-col {
+  display: flex;
+  padding-bottom: 1em;
+}
+
+.actionplan-form__opt-section-text {
+  margin-bottom: 1em;
+  
+  @include media-breakpoint-up(sm) {
+    &:last-child {
+      margin-bottom: 2em;
+    }
+  }  
+}
+
+.actionplan-form__label {
+  text-transform: uppercase;
+  font-weight: normal;
+  font-family: $secondary-brand-font;
+  display: block;
+  margin-bottom: 0.2em;
+  
+  @include media-breakpoint-up(sm) {
+    margin-bottom: 0.5em;
+    font-size: larger;
+  }
+}
+
+.actionplan-form__input {
+  margin-bottom: 1.5em; 
+  border-width: 0 0 1px 0;
+  border-color: $medium-grey;
+  outline: none !important;
+  width: 100%;
+  
+  &::placeholder {
+    color: $pale-grey;
+  }  
+}
+
+.actionplan-form__checkbox {
+  display: none;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.actionplan-form__checkbox + label {
+  display: flex;
+  white-space: noWrap;
+  
+  span {
+    position: relative;
+    pointer-events: none;
+    top: 0;
+    border: 2px solid $white;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    
+    @include media-breakpoint-down(sm) {
+      top: -3px;
+    }
+  }
+  
+  + p {
+    margin-left: 2em;
+    
+    @include media-breakpoint-down(sm) {
+      margin-left: 1em;
+    }
+  }
+}
+
+.actionplan-form__checkbox:checked + label span {
+   border: 0;
+   
+   &:after {
+     @extend %icon-ticked-box;
+     position: relative;
+     font-size: 25px;
+     font-weight: bold;
+     z-index: 2;
+   }
+}
+
+section.actionplan-form__thankyou-content {
+  text-align: center;
+  padding: 5em 1em 4.5em;
+  
+  h2 {
+    margin-bottom: 1em;
+  }
+  
+  h3 {
+    font-family: $secondary-brand-font;
+    font-weight: normal;
+    
+    @include media-breakpoint-up(sm) {
+      font-size: larger;
+    }
+  }
+}
+
+section.actionplan-form__thankyou-footer {
+  background-color: $teal-dark;
+  padding-bottom: 5em;
+}
