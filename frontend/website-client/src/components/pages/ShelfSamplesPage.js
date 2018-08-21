@@ -10486,6 +10486,50 @@ const sampleShelvesPage = {
     {
       type: 'guidance_shelf',
       value: {
+        heading: 'Link Shelf',
+        body: 'CTA <b>not given</b>, Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b>, green gradient <b>N/A</b>, foreground image <b>N/A</b>'
+      }
+    },
+    {
+      type: "find_out_more_dropdown",
+      value: {
+        image_meta: "find_out_more_dropdown/None/None",
+        mobile_use_renditions: true,
+        desktop_use_renditions: true,
+        heading: "Link Dropdown",
+        cta: [ ],
+        shelf_id: ""
+      },
+      id: "ac27f961-2745-4990-8beb-ac6ab0d1be02"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Link Shelf',
+        body: 'CTA <b>given</b>, Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b>, green gradient <b>N/A</b>, foreground image <b>N/A</b>'
+      }
+    },
+    {
+      type: "find_out_more_dropdown",
+      value: {
+        image_meta: "find_out_more_dropdown/None/None",
+        mobile_use_renditions: true,
+        desktop_use_renditions: true,
+        heading: "Link Dropdown",
+        cta: [
+          {
+            link_text: "Google",
+            link_external: "www.google.co.uk",
+            link_page: { }
+          }
+        ],
+        shelf_id: ""
+      },
+      id: "ac27f961-2745-4990-8beb-ac6ab0d1be02"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
         heading: 'Divider Shelf',
         body: 'Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b>, green gradient <b>N/A</b>, foreground image <b>N/A</b>'
       }
