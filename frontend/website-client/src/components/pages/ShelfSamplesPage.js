@@ -10591,6 +10591,134 @@ const sampleShelvesPage = {
         image_meta: "article_page_heading_shelf/None/None"
       },
       id: "article-page-heading-2"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Table Shelf',
+        body: 'Layout <b>N/A</b>, variant <b>standard</b>, background image <b>N/A</b>, show headings <b>false</b>'
+      }
+    },
+    {
+      type: "table",
+      value: {
+        header: [
+          "Column 1",
+          "Column 2"
+        ],
+        display_header: false,
+        body_rows: [
+          [
+            {
+              type: "simple_text_panel",
+              value: {
+                text: "Table Shelf"
+              },
+              id: "table-2-simple-text-panel-1"
+            },
+            {
+              type: "simple_text_panel",
+              value: {
+                text: "Simple text Panel"
+              },
+              id: "table-2-simple-text-panel-2"
+            }
+          ],
+          [
+            {
+              type: "rich_text_panel",
+              value: {
+                text: "<p>Rich Text Panel</p>"
+              },
+              id: "table-2-rich-text-panel-1"
+            },
+            {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/table/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: "",
+              image: pheLogoImage,
+              cta: [ ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "table-2-icon-card-panel-1"
+            }
+          ]
+        ],
+        shelf_id: "",
+        meta_variant: "standard",
+        image_meta: "table/None/None"
+      },
+      id: "table-2"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Table Shelf',
+        body: 'Layout <b>N/A</b>, variant <b>standard</b>, background image <b>N/A</b>, show headings <b>true</b>'
+      }
+    },
+    {
+      type: "table",
+      value: {
+        header: [
+          "Column 1",
+          "Column 2"
+        ],
+        display_header: true,
+        body_rows: [
+          [
+            {
+              type: "simple_text_panel",
+              value: {
+                text: "Table Shelf"
+              },
+              id: "table-2-simple-text-panel-1"
+            },
+            {
+              type: "simple_text_panel",
+              value: {
+                text: "Simple text Panel"
+              },
+              id: "table-2-simple-text-panel-2"
+            }
+          ],
+          [
+            {
+              type: "rich_text_panel",
+              value: {
+                text: "<p>Rich Text Panel</p>"
+              },
+              id: "table-2-rich-text-panel-1"
+            },
+            {
+            type: "icon_card_panel",
+            value: {
+              image_meta: "icon_card_panel/table/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Icon card",
+              body: "",
+              image: pheLogoImage,
+              cta: [ ],
+              panel_id: "",
+              meta_variant: "standard_grey_bg",
+              meta_layout: "icon_on_left"
+            },
+            id: "table-2-icon-card-panel-1"
+            }
+          ]
+        ],
+        shelf_id: "",
+        meta_variant: "standard",
+        image_meta: "table/None/None"
+      },
+      id: "table-2"
     }
   ]
 };
