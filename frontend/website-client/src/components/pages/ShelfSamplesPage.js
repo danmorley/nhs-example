@@ -5814,6 +5814,34 @@ const sampleShelvesPage = {
               meta_layout: "icon_on_left"
             },
             id: "full-grid-icon-card-4"
+          },
+          {
+            type: "cta_panel",
+            value: {
+              heading: "CTA Panel",
+              body: 'CTA <b>not given</b>',
+              cta: [ ],
+              shelf_id: "",
+              image_meta: "cta_panel/grid_shelf/full_width"
+            },
+            id: "full-grid-cta-panel-1"
+          },
+          {
+            type: "cta_panel",
+            value: {
+              heading: "CTA Panel",
+              body: 'CTA <b>given</b>',
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              image_meta: "cta_panel/grid_shelf/full_width"
+            },
+            id: "full-grid-cta-panel-2"
           }
         ],
         background_image: {
@@ -7849,7 +7877,7 @@ const sampleShelvesPage = {
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "Icon card",
-              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard heading standard body grey background</b>, Layout <b>icon on left</b>',
+              body: 'Image <b>given</b>, CTA <b>given</b>,<br/> Variant <b>standard heading standard<br/> body grey background</b>,<br/> Layout <b>icon on left</b>',
               image: altImage,
               cta: [
                 {
@@ -7871,7 +7899,7 @@ const sampleShelvesPage = {
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "Icon card",
-              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>large green heading standard body grey background</b>, Layout <b>icon on left</b>',
+              body: 'Image <b>given</b>, CTA <b>given</b>,<br/> Variant <b>large green heading standard<br/> body grey background</b>,<br/> Layout <b>icon on left</b>',
               image: altImage,
               cta: [
                 {
@@ -7893,7 +7921,7 @@ const sampleShelvesPage = {
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "Icon card",
-              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>extra small heading large body no background</b>, Layout <b>icon on left</b>',
+              body: 'Image <b>given</b>, CTA <b>given</b>,<br/> Variant <b>extra small heading <br/>large body no background</b>,<br/> Layout <b>icon on left</b>',
               image: altImage,
               cta: [
                 {
@@ -7915,7 +7943,7 @@ const sampleShelvesPage = {
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "Icon card",
-              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>large yellow heading standard body no background</b>, Layout <b>icon on left</b>',
+              body: 'Image <b>given</b>, CTA <b>given</b>,<br/> Variant <b>large yellow heading <br/>standard body no background</b>,<br/> Layout <b>icon on left</b>',
               image: altImage,
               cta: [
                 {
@@ -7929,6 +7957,34 @@ const sampleShelvesPage = {
               meta_layout: "icon_on_left"
             },
             id: "2-grid-icon-card-4"
+          },
+          {
+            type: "cta_panel",
+            value: {
+              heading: "CTA Panel",
+              body: 'CTA <b>not given</b>',
+              cta: [ ],
+              shelf_id: "",
+              image_meta: "cta_panel/grid_shelf/full_width"
+            },
+            id: "2-grid-cta-panel-1"
+          },
+          {
+            type: "cta_panel",
+            value: {
+              heading: "CTA Panel",
+              body: 'CTA <b>given</b>',
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              image_meta: "cta_panel/grid_shelf/full_width"
+            },
+            id: "2-grid-cta-panel-2"
           }
         ],
         background_image: {
@@ -9728,7 +9784,7 @@ const sampleShelvesPage = {
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "Icon card",
-              body: 'Image <b>not given</b>, CTA <b>not given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on left</b>',
+              body: 'Image <b>not given</b>, CTA <b>not given</b>,<br/> Variant <b>standard on grey background</b>,<br/> Layout <b>icon on left</b>',
               image: {
                 title: null,
                 renditions: { }
@@ -9747,7 +9803,7 @@ const sampleShelvesPage = {
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "Icon card",
-              body: 'Image <b>given</b>, CTA <b>not given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on left</b>',
+              body: 'Image <b>given</b>, CTA <b>not given</b>,<br/> Variant <b>standard on grey background</b>,<br/> Layout <b>icon on left</b>',
               image: altImage,
               cta: [ ],
               panel_id: "",
@@ -9763,7 +9819,7 @@ const sampleShelvesPage = {
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "Icon card",
-              body: 'Image <b>not given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on left</b>',
+              body: 'Image <b>not given</b>, CTA <b>given</b>,<br/> Variant <b>standard on grey background</b>,<br/> Layout <b>icon on left</b>',
               image: {
                 title: null,
                 renditions: { }
@@ -9788,7 +9844,7 @@ const sampleShelvesPage = {
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "Icon card",
-              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on left</b>',
+              body: 'Image <b>given</b>, CTA <b>given</b>,<br/> Variant <b>standard on grey background</b>,<br/> Layout <b>icon on left</b>',
               image: altImage,
               cta: [
                 {
@@ -9810,7 +9866,7 @@ const sampleShelvesPage = {
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "Icon card",
-              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on right</b>',
+              body: 'Image <b>given</b>, CTA <b>given</b>,<br/> Variant <b>standard on grey background</b>,<br/> Layout <b>icon on right</b>',
               image: altImage,
               cta: [
                 {
@@ -9832,7 +9888,7 @@ const sampleShelvesPage = {
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "Icon card",
-              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon heading left</b>',
+              body: 'Image <b>given</b>, CTA <b>given</b>,<br/> Variant <b>standard on grey background</b>,<br/> Layout <b>icon heading left</b>',
               image: altImage,
               cta: [
                 {
@@ -9854,7 +9910,7 @@ const sampleShelvesPage = {
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "Icon card",
-              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon heading right</b>',
+              body: 'Image <b>given</b>, CTA <b>given</b>,<br/> Variant <b>standard on grey background</b>,<br/> Layout <b>icon heading right</b>',
               image: altImage,
               cta: [
                 {
@@ -9876,7 +9932,7 @@ const sampleShelvesPage = {
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "Icon card",
-              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon body left</b>',
+              body: 'Image <b>given</b>, CTA <b>given</b>,<br/> Variant <b>standard on grey background</b>,<br/> Layout <b>icon body left</b>',
               image: altImage,
               cta: [
                 {
@@ -9898,7 +9954,7 @@ const sampleShelvesPage = {
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "Icon card",
-              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon body right</b>',
+              body: 'Image <b>given</b>, CTA <b>given</b>,<br/> Variant <b>standard on grey background</b>,<br/> Layout <b>icon body right</b>',
               image: altImage,
               cta: [
                 {
@@ -9920,7 +9976,7 @@ const sampleShelvesPage = {
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "Icon card",
-              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on top</b>',
+              body: 'Image <b>given</b>, CTA <b>given</b>,<br/> Variant <b>standard on grey background</b>,<br/> Layout <b>icon on top</b>',
               image: altImage,
               cta: [
                 {
@@ -9942,7 +9998,7 @@ const sampleShelvesPage = {
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "Icon card",
-              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard on grey background</b>, Layout <b>icon on bottom</b>',
+              body: 'Image <b>given</b>, CTA <b>given</b>,<br/> Variant <b>standard on <br/>grey background</b>,<br/> Layout <b>icon on bottom</b>',
               image: altImage,
               cta: [
                 {
@@ -9964,7 +10020,7 @@ const sampleShelvesPage = {
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "Icon card",
-              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>standard heading standard body grey background</b>, Layout <b>icon on left</b>',
+              body: 'Image <b>given</b>, CTA <b>given</b>,<br/> Variant <b>standard heading<br/> standard body grey background</b>,<br/> Layout <b>icon on left</b>',
               image: altImage,
               cta: [
                 {
@@ -9986,7 +10042,7 @@ const sampleShelvesPage = {
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "Icon card",
-              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>large green heading standard body grey background</b>, Layout <b>icon on left</b>',
+              body: 'Image <b>given</b>, CTA <b>given</b>,<br/> Variant <b>large green heading <br/>standard body grey background</b>,<br/> Layout <b>icon on left</b>',
               image: altImage,
               cta: [
                 {
@@ -10008,7 +10064,7 @@ const sampleShelvesPage = {
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "Icon card",
-              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>extra small heading large body no background</b>, Layout <b>icon on left</b>',
+              body: 'Image <b>given</b>, CTA <b>given</b>,<br/> Variant <b>extra small heading <br/>large body no background</b>,<br/> Layout <b>icon on left</b>',
               image: altImage,
               cta: [
                 {
@@ -10030,7 +10086,7 @@ const sampleShelvesPage = {
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "Icon card",
-              body: 'Image <b>given</b>, CTA <b>given</b>, Variant <b>large yellow heading standard body no background</b>, Layout <b>icon on left</b>',
+              body: 'Image <b>given</b>, CTA <b>given</b>,<br/> Variant <b>large yellow heading <br/>standard body no background</b>,<br/> Layout <b>icon on left</b>',
               image: altImage,
               cta: [
                 {
@@ -10044,6 +10100,34 @@ const sampleShelvesPage = {
               meta_layout: "icon_on_left"
             },
             id: "3-icon-card-4"
+          },
+          {
+            type: "cta_panel",
+            value: {
+              heading: "CTA Panel",
+              body: 'CTA <b>not given</b>',
+              cta: [ ],
+              shelf_id: "",
+              image_meta: "cta_panel/grid_shelf/full_width"
+            },
+            id: "3-grid-cta-panel-1"
+          },
+          {
+            type: "cta_panel",
+            value: {
+              heading: "CTA Panel",
+              body: 'CTA <b>given</b>',
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk",
+                  link_page: { }
+                }
+              ],
+              shelf_id: "",
+              image_meta: "cta_panel/grid_shelf/full_width"
+            },
+            id: "3-grid-cta-panel-2"
           }
         ],
         background_image: {
