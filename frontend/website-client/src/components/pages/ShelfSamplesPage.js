@@ -5842,6 +5842,22 @@ const sampleShelvesPage = {
               image_meta: "cta_panel/grid_shelf/full_width"
             },
             id: "full-grid-cta-panel-2"
+          },
+          {
+            type: "list_item_panel",
+            value: {
+              text: "List Item Panel",
+              image_meta: "list_item_panel/grid_shelf/full_width"
+            },
+            id: "full-grid-list-panel-1"
+          },
+          {
+            type: "list_item_panel",
+            value: {
+              text: 'No configuration currently available',
+              image_meta: "list_item_panel/grid_shelf/full_width"
+            },
+            id: "full-grid-list-panel-2"
           }
         ],
         background_image: {
@@ -7985,6 +8001,22 @@ const sampleShelvesPage = {
               image_meta: "cta_panel/grid_shelf/full_width"
             },
             id: "2-grid-cta-panel-2"
+          },
+          {
+            type: "list_item_panel",
+            value: {
+              text: "List Item Panel",
+              image_meta: "list_item_panel/grid_shelf/full_width"
+            },
+            id: "2-grid-list-panel-1"
+          },
+          {
+            type: "list_item_panel",
+            value: {
+              text: 'No configuration currently available',
+              image_meta: "list_item_panel/grid_shelf/full_width"
+            },
+            id: "2-grid-list-panel-2"
           }
         ],
         background_image: {
@@ -10128,6 +10160,22 @@ const sampleShelvesPage = {
               image_meta: "cta_panel/grid_shelf/full_width"
             },
             id: "3-grid-cta-panel-2"
+          },
+          {
+            type: "list_item_panel",
+            value: {
+              text: "List Item Panel",
+              image_meta: "list_item_panel/grid_shelf/full_width"
+            },
+            id: "3-grid-list-panel-1"
+          },
+          {
+            type: "list_item_panel",
+            value: {
+              text: 'No configuration currently available',
+              image_meta: "list_item_panel/grid_shelf/full_width"
+            },
+            id: "3-grid-list-panel-2"
           }
         ],
         background_image: {
