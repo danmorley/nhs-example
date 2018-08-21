@@ -10195,7 +10195,7 @@ const sampleShelvesPage = {
       type: 'guidance_shelf',
       value: {
         heading: 'Grid Shelf',
-        body: 'Background Image <b>not given</b>, Variant <b>standard</b>, Layout <b>3 columns</b> Image display <b>stretch</b> <br/> <i>See individual panels for their settings</i>'
+        body: 'Background Image <b>given</b>, Variant <b>standard</b>, Layout <b>2 columns</b> Image display <b>stretch</b>'
       }
     },
     {
@@ -10216,7 +10216,7 @@ const sampleShelvesPage = {
               cta: [ ],
               shelf_id: ""
             },
-            id: '3-grid-one-you-1'
+            id: 'grid-4-panel-2'
           },
           {
             type: "oneyou1_teaser",
@@ -10235,21 +10235,253 @@ const sampleShelvesPage = {
               ],
               shelf_id: ""
             },
-            id: '3-grid-one-you-2'
+            id: 'grid-4-panel-2'
           }
         ],
-        background_image: {
-          title: null,
-          renditions: { }
-        },
+        background_image: backgroundImage,
         shelf_id: "",
         rows_to_show: 0,
         meta_variant: "standard",
-        meta_layout: "3_col_1_on_mobile",
+        meta_layout: "2_col_1_on_mobile",
         meta_image_display: "cover",
         image_meta: "grid_shelf/None/None"
       },
       id: 'grid-shelf-4'
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Grid Shelf',
+        body: 'Background Image <b>given</b>, Variant <b>standard</b>, Layout <b>2 columns</b> Image display <b>contain</b>'
+      }
+    },
+    {
+      type: "grid_shelf",
+      value: {
+        heading: "",
+        body: '',
+        items: [
+          {
+            type: "oneyou1_teaser",
+            value: {
+              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "One you teaser",
+              body: 'Body <b>given</b>, CTA <b>not given</b>',
+              image: altImage,
+              cta: [ ],
+              shelf_id: ""
+            },
+            id: 'grid-5-panel-2'
+          },
+          {
+            type: "oneyou1_teaser",
+            value: {
+              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "One you teaser",
+              body: 'Body <b>given</b>, CTA <b>given</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk"
+                }
+              ],
+              shelf_id: ""
+            },
+            id: 'grid-5-panel-2'
+          }
+        ],
+        background_image: backgroundImage,
+        shelf_id: "",
+        rows_to_show: 0,
+        meta_variant: "standard",
+        meta_layout: "2_col_1_on_mobile",
+        meta_image_display: "contain",
+        image_meta: "grid_shelf/None/None"
+      },
+      id: 'grid-shelf-5'
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Grid Shelf',
+        body: 'Background Image <b>not given</b>, Variant <b>teal background on desktop, white on mobile</b>, Layout <b>2 columns</b> Image display <b>stretch</b>'
+      }
+    },
+    {
+      type: "grid_shelf",
+      value: {
+        heading: "",
+        body: '',
+        items: [
+          {
+            type: "oneyou1_teaser",
+            value: {
+              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "One you teaser",
+              body: 'Body <b>given</b>, CTA <b>not given</b>',
+              image: altImage,
+              cta: [ ],
+              shelf_id: ""
+            },
+            id: 'grid-6-panel-2'
+          },
+          {
+            type: "oneyou1_teaser",
+            value: {
+              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "One you teaser",
+              body: 'Body <b>given</b>, CTA <b>given</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk"
+                }
+              ],
+              shelf_id: ""
+            },
+            id: 'grid-6-panel-2'
+          }
+        ],
+        background_image: null,
+        shelf_id: "",
+        rows_to_show: 0,
+        meta_variant: "teal_background",
+        meta_layout: "2_col_1_on_mobile",
+        meta_image_display: "cover",
+        image_meta: "grid_shelf/None/None"
+      },
+      id: 'grid-shelf-6'
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Grid Shelf',
+        body: 'Background Image <b>not given</b>, Variant <b>yellow background, red border</b>, Layout <b>2 columns</b> Image display <b>stretch</b>'
+      }
+    },
+    {
+      type: "grid_shelf",
+      value: {
+        heading: "",
+        body: '',
+        items: [
+          {
+            type: "oneyou1_teaser",
+            value: {
+              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "One you teaser",
+              body: 'Body <b>given</b>, CTA <b>not given</b>',
+              image: altImage,
+              cta: [ ],
+              shelf_id: ""
+            },
+            id: 'grid-7-panel-2'
+          },
+          {
+            type: "oneyou1_teaser",
+            value: {
+              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "One you teaser",
+              body: 'Body <b>given</b>, CTA <b>given</b>',
+              image: altImage,
+              cta: [
+                {
+                  link_text: "Google",
+                  link_external: "www.google.co.uk"
+                }
+              ],
+              shelf_id: ""
+            },
+            id: 'grid-7-panel-2'
+          }
+        ],
+        background_image: null,
+        shelf_id: "",
+        rows_to_show: 0,
+        meta_variant: "yellow_background",
+        meta_layout: "2_col_1_on_mobile",
+        meta_image_display: "cover",
+        image_meta: "grid_shelf/None/None"
+      },
+      id: 'grid-shelf-7'
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Recipe Grid Shelf',
+        body: 'Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b>, green gradient <b>N/A</b>, foreground image <b>N/A</b>'
+      }
+    },
+    {
+      type: "recipe_grid_shelf",
+      value: {
+        heading: "Recipe Grid",
+        items: [
+          {
+            type: "recipe_teaser",
+            value: {
+              heading: "Recipe Teaser - Background image given, link given",
+              page_link: "/oneyou/",
+              background_image: altImage,
+              shelf_id: null,
+              image_meta: "recipe_teaser/recipe_grid_shelf/None"
+            },
+            id: "recipe-grid-recipe-teaser-1"
+          },
+          {
+            type: "recipe_teaser",
+            value: {
+              heading: "Recipe Teaser - Background image not given, link given",
+              page_link: "/oneyou/",
+              background_image: null,
+              shelf_id: null,
+              image_meta: "recipe_teaser/recipe_grid_shelf/None"
+            },
+            id: "recipe-grid-recipe-teaser-2"
+          },
+          {
+            type: "recipe_teaser",
+            value: {
+              heading: "Recipe Teaser - Background image given, link not given",
+              page_link: null,
+              background_image: altImage,
+              shelf_id: null,
+              image_meta: "recipe_teaser/recipe_grid_shelf/None"
+            },
+            id: "recipe-grid-recipe-teaser-3"
+          },
+          {
+            type: "recipe_teaser",
+            value: {
+              heading: "Recipe Teaser - Background image not given, link not given",
+              page_link: null,
+              background_image: null,
+              shelf_id: null,
+              image_meta: "recipe_teaser/recipe_grid_shelf/None"
+            },
+            id: "recipe-grid-recipe-teaser-4"
+          }
+        ],
+        shelf_id: "",
+        rows_to_show: 0,
+        meta_image_display: "cover",
+        image_meta: "recipe_grid_shelf/None/None"
+      },
+      id: "recipe-grid-1"
     },
     {
       type: 'guidance_shelf',
