@@ -95,7 +95,7 @@ class ActionPlanContactForm extends Component {
                 <input onChange={this.handleChange} checked={this.state.optOneYou} type="checkbox" className="actionplan-form__checkbox" id="optOneYou" name="optOneYou" />
                 <label htmlFor="optOneYou">Opt in <span></span></label>
                 <p>
-                  to recieve emails from One You
+                  to receive emails from One You
                 </p>
               </div>
             </div>
