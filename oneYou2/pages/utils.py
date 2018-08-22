@@ -8,6 +8,8 @@ from django.conf import settings
 from django.utils import timezone
 from django.utils.encoding import is_protected_type
 
+from wagtail.wagtaildocs.models import Document
+
 from shelves.models import ShelfAbstract
 
 SHARED_CONTENT_TYPES = ['promo_shelf', 'banner_shelf', 'app_shelf']
@@ -225,5 +227,18 @@ def determine_image_rendtions_for_shared_content_shelves(shelf, parent=None):
         items = shelf['value'].get('items', [])
         for item in items:
             determine_image_rendtions_for_shared_content_shelves(item, parent=shelf)
+
+    return shelf
+
+
+def replace_document_ids_with_links_for_download(shelf):
+    if type(shelf['value']) is dict or type(shelf['value']) is OrderedDict:
+        ctas = shelf['value'].get('cta', [])
+        for cta in ctas:
+            if 'document' in cta:
+                cta['link_external'] = Document.objects.get(id=cta['document']).file.url
+        items = shelf['value'].get('items', [])
+        for item in items:
+            replace_document_ids_with_links_for_download(item)
 
     return shelf
