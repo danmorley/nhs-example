@@ -1,10 +1,8 @@
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
 
-from shelves.serializers import PromoShelfSerializer, BannerShelfSerializer, AppTeaserSerializer, \
-    RecipeTeaserSerializer, ActionSerializer
-
-from .serializers import ImageSerializer
+from .serializers import PromoShelfSerializer, BannerShelfSerializer, AppTeaserSerializer, \
+    RecipeTeaserSerializer, ActionSerializer, ImageSerializer
 
 
 class PromoShelfChooserBlock(SnippetChooserBlock):
