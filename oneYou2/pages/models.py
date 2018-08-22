@@ -12,6 +12,7 @@ from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, InlinePanel, ObjectList, TabbedInterface, \
     MultiFieldPanel
+from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
@@ -116,6 +117,11 @@ class MultiMenuItem(blocks.StructBlock):
     menu_items = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items')
+
+
+class DocumentDownloadItem(blocks.StructBlock):
+    link_text = blocks.CharBlock(required=True)
+    document = DocumentChooserBlock(label='Document', required=True)
 
 
 class SocialMediaFooterLink(blocks.StructBlock):
@@ -226,7 +232,8 @@ class ImageTeaserTemplate(CTABlock):
     body = blocks.RichTextBlock(required=False)
     image = BlobImageChooserBlock()
     cta = blocks.StreamBlock([
-        ('simple_menu_item', SimpleMenuItem())
+        ('simple_menu_item', SimpleMenuItem()),
+        ('document_download', DocumentDownloadItem())
     ], icon='arrow-left', label='Items', required=False)
     shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
     meta_variant = blocks.ChoiceBlock(choices=[
@@ -286,6 +293,7 @@ class RichTextPanel(blocks.StructBlock):
                                       default='standard',
                                       label="Variant",
                                       classname='dct-meta-field')
+
     class Meta:
         form_classname = 'dct-rich-text-panel dct-meta-panel'
                   
