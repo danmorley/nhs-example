@@ -149,7 +149,12 @@ section.actionplan-form__thankyou-content {
   }
 }
 
-section.actionplan-form__thankyou-footer {
-  background-color: $teal-dark;
-  padding-bottom: 5em;
+section.actionplan-form__thankyou-footer {  
+  display: none;
+
+  @include media-breakpoint-up(sm) {
+    display: block;
+    background-color: $teal-dark;
+    padding-bottom: 5em;
+  }
 }

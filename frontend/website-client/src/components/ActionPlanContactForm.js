@@ -31,26 +31,31 @@ class ActionPlanContactForm extends Component {
      });
   }
   
-  showConfirmation() {
-    let items = {
-      "name": this.state.username, 
-      "email": this.state.email, 
-      "postcode": this.state.postcode,
-      "optActionPlan": this.state.optActionPlan,
-      "optOneYou": this.state.optOneYou
-    };
+  showConfirmation(e) {  
+    let form = document.querySelector('#ap-form');
     
-    sessionStorage.setItem(APF_KEY, JSON.stringify(items));
-    
-    this.setState(prevState => ({
-      showSection: !prevState.showSection
-    }))
+    if (form.checkValidity()) {      
+      e.preventDefault() ;
+      let items = {
+        "name": this.state.username, 
+        "email": this.state.email, 
+        "postcode": this.state.postcode,
+        "optActionPlan": this.state.optActionPlan,
+        "optOneYou": this.state.optOneYou
+      };
+      
+      sessionStorage.setItem(APF_KEY, JSON.stringify(items));
+      
+      this.setState(prevState => ({
+        showSection: !prevState.showSection
+      }))
+    }
   }
   
   render() {
     return ( 
       <div className="actionplan-form">
-        <form className={classNames({"actionplan-form__page-closed":!this.state.showSection})}>
+        <form id="ap-form" className={classNames({"actionplan-form__page-closed":!this.state.showSection})}>
           <section className="actionplan-form__field-section">    
             <h2 className="actionplan-form__header">
               YOUR ACTION PLAN
@@ -59,13 +64,13 @@ class ActionPlanContactForm extends Component {
               <div className="col-sm-6">
                 <p>
                   <label className="actionplan-form__label" htmlFor="username">NAME</label>
-                  <input onChange={this.handleChange} value={this.state.username} className="actionplan-form__input" type="text" name="username" id="username" placeholder="Enter first name" />
+                  <input required onChange={this.handleChange} value={this.state.username} className="actionplan-form__input" type="text" name="username" id="username" placeholder="Enter first name" />
                 </p>
               </div>
               <div className="col-sm-6">
                 <p>
                   <label className="actionplan-form__label" htmlFor="email">EMAIL ADDRESS</label>
-                  <input onChange={this.handleChange} value={this.state.email}  className="actionplan-form__input" type="text" name="email" id="email" placeholder="Enter email" />
+                  <input required type="email" onChange={this.handleChange} value={this.state.email}  className="actionplan-form__input" name="email" id="email" placeholder="Enter email" />
                 </p>
               </div>
               <div className="col-sm-6">
@@ -105,7 +110,7 @@ class ActionPlanContactForm extends Component {
             </div>
             <div className="row">
               <div className="col push-right">
-                <button className="button-cta" type="button" disabled={!this.state.optActionPlan} onClick={this.showConfirmation} ><span>Confirm</span></button>
+                <button className="button-cta" type="submit" disabled={!this.state.optActionPlan} onClick={this.showConfirmation} ><span>Confirm</span></button>
               </div>
             </div>
           </section>
