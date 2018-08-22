@@ -53,7 +53,7 @@ class ActionPlanContactForm extends Component {
         <form className={classNames({"actionplan-form__page-closed":!this.state.showSection})}>
           <section className="actionplan-form__field-section">    
             <h2 className="actionplan-form__header">
-              ACTION PLAN FORM
+              YOUR ACTION PLAN
             </h2>
             <div className="row">
               <div className="col-sm-6">
@@ -83,7 +83,7 @@ class ActionPlanContactForm extends Component {
                 <input onChange={this.handleChange} checked={this.state.optActionPlan} className="actionplan-form__checkbox" id="option1" type="checkbox" name="optActionPlan" />
                 <label htmlFor="option1">Opt in <span></span></label>
                 <p>
-                  to recieve action plan and reminders via email
+                  to receive action plan and reminders via email
                 </p>
               </div>
               <div className="col-sm-6 actionplan-form__opt-section-col">
@@ -97,8 +97,9 @@ class ActionPlanContactForm extends Component {
             <div className="row">
               <div className="col">
                 <p className="actionplan-form__opt-section-text"> 
-                  Welcome to our website. lorun ipsum lorun ipsum lorun ipsum lorun ipsum lorun ipsum lorun ipsum
-                  lorun ipsum lorun ipsum lorun ipsum lorun ipsum lorun ipsum lorun ipsum lorun ipsum lorun ipsum
+                  Welcome to our website. If you continue to browse and use this website, you are agreeing 
+                  to comply with and be bound by the following terms and conditions of use, which together with
+                  our privacy policy govern GOV.co.uk{"'"}s relationship with you in relation to this website.  
                 </p>
               </div>
             </div>
