@@ -32,6 +32,7 @@ GRID_VARIANT_CHOICES = (
     ('standard', 'Standard'),
     ('teal_background', 'Teal Background on desktop, White Background on mobile'),
     ('yellow_background', 'Yellow Background with Red Border'),
+    ('light_blue_background', 'Light blue background'),
 )
 
 GRID_LAYOUT_CHOICES = (
@@ -70,7 +71,8 @@ ICON_CARD_VARIANTS = (
 
 INFO_PANEL_VARIANTS = (
     ('mobile-image-top-text-right', 'Mobile image on top, Desktop image on left with text right'),
-    ('mobile-image-right', 'Mobile image on right, Desktop image on right')
+    ('mobile-image-right', 'Mobile image on right, Desktop image on right'),
+    ('plain_background', 'Plain background')
 )
 
 VIDEO_LAYOUTS = (

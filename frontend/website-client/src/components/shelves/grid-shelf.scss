@@ -96,3 +96,31 @@
     }  
   }
 }
+
+.shelf.basic-grid-shelf--light_blue_background {
+  padding: 0 0 1.5em;
+  margin-bottom: -2em;
+
+  .grid-container {
+    background-color: $light-blue;
+    margin-left: -1.5em;
+    margin-right: -1.5em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+  }
+  
+  .shelf__col {
+    padding-bottom: 0 !important;
+  }
+
+  .shelf__header {
+    color: $black;
+  }
+  
+  .shelf__body {
+    
+     h2, h3, h4, p {
+      color: $black;
+    }  
+  }
+}
