@@ -5,7 +5,6 @@ import Shelf from '../shelves/Shelf';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import Text from '../Text';
 import './triage-tool-shelf.css';
-import TriageTool from 'triage-tool';
 
 
 /**

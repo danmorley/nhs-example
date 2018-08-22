@@ -105,6 +105,41 @@
   }
 }
 
+.information-panel--plain_background {
+  padding-top: 1em;
+  padding-bottom: 1em;
+
+  @include media-breakpoint-down(sm) {
+    flex-direction: column-reverse;
+  }
+
+  .information-panel__heading {
+    color: $teal-blue !important;
+  }
+
+  .information-panel__info {
+    @include media-breakpoint-down(sm) {
+      width: 100%;
+    }
+  }
+
+  .information-panel__image {
+    margin-top: -1.5em;
+    margin-bottom: -1em;
+    position: relative;
+    left: 1.5em;
+
+    @include media-breakpoint-down(sm) {
+      position: static;
+      min-width: 600px;
+      margin-left: -1.5em;
+      margin-right: -1.5em;
+      margin-bottom: 1em;
+    }  
+  }
+}
+
+
 //theming
 
 //default theme (oneyou)
