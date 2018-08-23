@@ -110,11 +110,26 @@ class AppTeaserSerializer(HyperlinkedModelSerializer):
                 'link_text': "",
                 'link_external': cta_googleplay,
             }
+
+        cta_text = representation.pop('cta_text')
+        cta_link = representation.pop('cta_link')
+        cta_page = representation.pop('cta_page')
+        representation['cta'] = {
+            'link_text': cta_text,
+            'link_external': cta_link,
+        }
+        if cta_page:
+            representation['cta']['link_page'] = {
+                "id": cta_page.get('id'),
+                "slug": cta_page.get('slug'),
+                "relative_path": cta_page.get('relative_path'),
+            }
         return representation
 
     class Meta:
         model = AppTeaser
-        fields = ['heading', 'body', 'image', 'cta_googleplay', 'cta_appstore', 'shelf_id']
+        fields = ['heading', 'body', 'image', 'cta_googleplay', 'cta_appstore', 'shelf_id', 'cta_text', 'cta_link',
+                  'cta_page']
 
 
 class RecipeTeaserSerializer(HyperlinkedModelSerializer):
