@@ -66,6 +66,11 @@ class AppTeaserPanel extends Component {
                 <CtaLink cta={content.cta_googleplay} variant="googleplay"/>
               </li>
             </ul>
+            <ul className="panel__button-list">
+              <li>
+                <CtaLink cta={content.cta} variant="button" />
+              </li>
+            </ul>
           </div>
         </div>
       </Panel>
