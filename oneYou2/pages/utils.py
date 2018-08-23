@@ -237,6 +237,7 @@ def replace_document_ids_with_links_for_download(shelf):
         for cta in ctas:
             if 'document' in cta:
                 cta['link_external'] = Document.objects.get(id=cta['document']).file.url
+                cta['document'] = True
         items = shelf['value'].get('items', [])
         for item in items:
             replace_document_ids_with_links_for_download(item)
