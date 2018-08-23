@@ -44,13 +44,19 @@ class CtaLink extends Component {
     }
 
     const href = CtaUtils.getCtaPath(cta);
-
+console.log(cta)
     // Render the link.
     if (UrlUtils.isExternalLink(href)) {
       // External link - use normal <a> tag.
-      return (
-        <a className={linkClass} href={href}><Text tagName="span" content={cta.link_text} /></a>
-      );
+      if (cta.document) {
+        return (
+          <a className={linkClass} href={href} download={href}><Text tagName="span" content={cta.link_text} /></a>
+        );
+      } else {
+        return (
+          <a className={linkClass} href={href}><Text tagName="span" content={cta.link_text} /></a>
+        );
+      }
     } else {
       // Internal link - use react router to prevent page refresh.
       return (
