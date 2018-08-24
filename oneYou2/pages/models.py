@@ -39,11 +39,20 @@ GRID_LAYOUT_CHOICES = (
     ('full_width', 'Full Width'),
     ('2_col_1_on_mobile', 'Responsive (2 columns on desktop)'),
     ('3_col_1_on_mobile', 'Responsive (3 columns on desktop)'),
+    ('4_col_1_on_mobile', 'Responsive (4 columns on desktop, 1 on mobile)'),
+    ('4_col_2_tablet_1_on_mobile', 'Responsive (4 columns on desktop, 2 tablet, 1 mobile)'),
 )
 
 GRID_IMAGE_CHOICES = (
     ('contain', 'Contain'),
     ('cover', 'Stretch'),
+)
+
+GRID_GUTTER_CHOICES = (
+    ('gutter-unset', 'Unset'),
+    ('gutter-sm', 'Small'),
+    ('gutter-md', 'Medium'),
+    ('gutter-lg', 'Large'),
 )
 
 TABLE_VARIANTS = (
@@ -67,6 +76,11 @@ ICON_CARD_VARIANTS = (
     ('large_green_heading_standard_body_grey_bg', 'Large Green Heading, Standard Body Text, Grey Background'),
     ('x_small_heading_large_body_no_bg', 'X Small Heading, Large Body Text, No Background'),
     ('large_yellow_heading_standard_body_no_bg', 'Large yellow heading, standard body, no background (Active 10)'),
+)
+
+IMAGE_PANEL_VARIANTS = (
+    ('normal', 'Normal'),
+    ('stretch', 'Stretch'),
 )
 
 INFO_PANEL_VARIANTS = (
@@ -272,6 +286,19 @@ class IconCardPanel(CTABlock):
         form_classname = 'dct-icon-card-panel dct-meta-panel'
 
 
+class SimpleImagePanel(CTABlock):
+    image = BlobImageChooserBlock(required=False)
+    image_cta = SimpleCtaLinkBlock(required=False)
+    panel_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
+    meta_variant = blocks.ChoiceBlock(choices=IMAGE_PANEL_VARIANTS,
+                                      default='normal',
+                                      label="Variant",
+                                      classname='dct-meta-field')
+
+    class Meta:
+        form_classname = 'dct-simple-image-panel dct-meta-panel'
+
+
 class SimpleTextPanel(blocks.StructBlock):
     text = blocks.CharBlock(required=False)
 
@@ -313,7 +340,8 @@ GRID_PANELS = [
     ('icon_card_panel', IconCardPanel(icon="snippet")),
     ('cta_panel', CtaPanel(icon='plus')),
     ('inline_script_panel', InlineScriptPanel(icon="code")),
-    ('list_item_panel', ListItemPanel(icon='list-ul'))
+    ('list_item_panel', ListItemPanel(icon='list-ul')),
+    ('simple_image_panel', SimpleImagePanel(icon="image"))
 ]
 
 
@@ -408,8 +436,12 @@ class Grid(blocks.StructBlock):
                                      help_text="Use this to select number of columns on desktop (only one column"
                                                " on mobile)", classname='dct-meta-field')
     meta_image_display = blocks.ChoiceBlock(GRID_IMAGE_CHOICES,
-                                            label='Teaser Image Display',
-                                            default="cover",
+                                            label='Teaser image display',
+                                            default='cover',
+                                            classname='dct-meta-field')
+    meta_gutter_size = blocks.ChoiceBlock(GRID_GUTTER_CHOICES,
+                                            label='Gutter size',
+                                            default='gutter-unset',
                                             classname='dct-meta-field')
 
     class Meta:

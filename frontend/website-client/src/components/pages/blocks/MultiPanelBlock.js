@@ -20,6 +20,7 @@ import IconCardPanel from '../../panels/IconCardPanel';
 import InlineScriptPanel from '../../panels/InlineScriptPanel';
 import CtaPanel from '../../panels/CtaPanel';
 import ListItemPanel from '../../panels/ListItemPanel';
+import SimpleImagePanel from '../../panels/SimpleImagePanel';
 
 class MultiPanelBlock extends Component {
   static renderItems(items, panelClass, containerTag) {
