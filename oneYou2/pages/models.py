@@ -499,6 +499,10 @@ class ActionPlanDisplay(blocks.StructBlock):
     shelf_id = IDBlock(required=False, label='ID', classname='dct-meta-field')
     title = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
+    opt_in_1_text = blocks.CharBlock(required=True)
+    opt_in_2_text = blocks.CharBlock(required=True)
+    ts_and_cs_statement = blocks.RichTextBlock()
+
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False)
