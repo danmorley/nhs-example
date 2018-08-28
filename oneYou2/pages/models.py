@@ -22,7 +22,7 @@ from wagtailsnippetscopy.registry import snippet_copy_registry
 from modelcluster.models import get_all_child_relations, get_all_child_m2m_relations
 from modelcluster.fields import ParentalKey
 
-from .blocks import IDBlock, CTABlock, MenuItemPageBlock, ImageBlock, SimpleCtaLinkBlock
+from .blocks import IDBlock, CTABlock, MenuItemPageBlock, ImageBlock, SimpleCtaLinkBlock, MediaChooserBlock
 from .utils import get_serializable_data_for_fields
 from home.models import SiteSettings
 from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppTeaserChooserBlock, \
@@ -231,6 +231,7 @@ class ImageTeaserTemplate(CTABlock):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     image = BlobImageChooserBlock()
+    audio = MediaChooserBlock(icon='media')
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem()),
         ('document_download', DocumentDownloadItem())

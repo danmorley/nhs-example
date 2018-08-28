@@ -3,9 +3,14 @@ import json
 from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
 from django.template.defaultfilters import slugify
+from django.utils.html import format_html
+
 from wagtail.wagtailcore import blocks
-from shelves.blocks import BlobImageChooserBlock
 from wagtail.wagtailcore.blocks import StructValue
+from wagtailmedia.blocks import AbstractMediaChooserBlock
+
+from shelves.blocks import BlobImageChooserBlock
+
 
 IMAGE_VARIANT_CHOICES = (
     ('contain', 'Contain'),
@@ -200,3 +205,30 @@ class SimpleCtaLinkBlock(blocks.StructBlock):
     class Meta:
         icon = 'link'
         form_classname = 'dct-simple-cta-link-block dct-meta-block'
+
+
+class MediaChooserBlock(AbstractMediaChooserBlock):
+    def render_basic(self, value, context=None):
+        if not value:
+            return ''
+
+        if value.type == 'video':
+            player_code = '''
+            <div>
+                <video width="320" height="240" controls>
+                    <source src="{0}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            '''
+        else:
+            player_code = '''
+            <div>
+                <audio controls>
+                    <source src="{0}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+            '''
+
+        return format_html(player_code, value.file.url)
