@@ -9,6 +9,7 @@ from django.utils import timezone
 from django.utils.encoding import is_protected_type
 
 from wagtail.wagtaildocs.models import Document
+from wagtailmedia.models import Media
 
 from shelves.models import ShelfAbstract
 
@@ -231,15 +232,18 @@ def determine_image_rendtions_for_shared_content_shelves(shelf, parent=None):
     return shelf
 
 
-def replace_document_ids_with_links_for_download(shelf):
+def replace_resource_ids_with_links_for_download(shelf):
     if type(shelf['value']) is dict or type(shelf['value']) is OrderedDict:
         ctas = shelf['value'].get('cta', [])
         for cta in ctas:
             if 'document' in cta:
                 cta['link_external'] = Document.objects.get(id=cta['document']).file.url
                 cta['document'] = True
+        if 'audio' in shelf['value']:
+            print('found audio key in', shelf)
+            shelf['value']['audio'] = Media.objects.get(id=shelf['value']['audio']).file.url
         items = shelf['value'].get('items', [])
         for item in items:
-            replace_document_ids_with_links_for_download(item)
+            replace_resource_ids_with_links_for_download(item)
 
     return shelf

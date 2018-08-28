@@ -231,7 +231,7 @@ class ImageTeaserTemplate(CTABlock):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     image = BlobImageChooserBlock()
-    audio = MediaChooserBlock(icon='media')
+    audio = MediaChooserBlock()
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem()),
         ('document_download', DocumentDownloadItem())
