@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import './action-plan-form.css';
 import { signUpForActionPlan } from '../services/RequestHandler';
@@ -63,6 +64,10 @@ class ActionPlanContactForm extends Component {
   }
   
   render() {
+    const tsAndCs = this.props.tsAndCs;
+    const opt1 = this.props.opt1;
+    const opt2 = this.props.opt2;
+    
     return ( 
       <div className="actionplan-form">
         <form id="ap-form" className={classNames({"actionplan-form__page-closed":!this.state.showSection})}>
@@ -98,23 +103,21 @@ class ActionPlanContactForm extends Component {
                 <input onChange={this.handleChange} checked={this.state.optActionPlan} className="actionplan-form__checkbox" id="option1" type="checkbox" name="optActionPlan" />
                 <label htmlFor="option1">Opt in <span></span></label>
                 <p>
-                  to receive action plan and reminders via email
+                  {opt1}
                 </p>
               </div>
               <div className="col-sm-6 actionplan-form__opt-section-col">
                 <input onChange={this.handleChange} checked={this.state.optOneYou} type="checkbox" className="actionplan-form__checkbox" id="optOneYou" name="optOneYou" />
                 <label htmlFor="optOneYou">Opt in <span></span></label>
                 <p>
-                  to receive emails from One You
+                  {opt2}
                 </p>
               </div>
             </div>
             <div className="row">
               <div className="col">
                 <p className="actionplan-form__opt-section-text"> 
-                  Welcome to our website. If you continue to browse and use this website, you are agreeing 
-                  to comply with and be bound by the following terms and conditions of use, which together with
-                  our privacy policy govern GOV.co.uk{"'"}s relationship with you in relation to this website.  
+                  {tsAndCs}
                 </p>
               </div>
             </div>
@@ -140,5 +143,11 @@ class ActionPlanContactForm extends Component {
     )
   } 
 }
+
+ActionPlanContactForm.propTypes = {
+  opt1: PropTypes.string.isRequired,
+  opt2: PropTypes.bool.isRequired,
+  tsAndCs: PropTypes.bool.isRequired
+};
 
 export default ActionPlanContactForm;

@@ -22,7 +22,7 @@ class ShareButtonShelf extends Component {
           }
 
           { useEmailButton &&
-            <EmailButtonPanel />
+            <EmailButtonPanel {...this.props} />
           }
 
           { usePrintButton &&

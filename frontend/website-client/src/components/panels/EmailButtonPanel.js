@@ -23,7 +23,7 @@ class EmailButtonPanel extends Component {
         <div onClick={this.triggerModal.bind(this)} className="email-button">
           <span className="email-button__title">Email</span>
         </div>
-        <StandardModal content = {<ActionPlanContactForm />}  ref={this.modal}/>
+        <StandardModal content = {<ActionPlanContactForm {...this.props} />}  ref={this.modal}/>
       </Panel>
     );
   }
