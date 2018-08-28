@@ -3406,6 +3406,25 @@ const sampleShelvesPage = {
               meta_cta_variant: "link"
             },
             id: "panel-carousel-image-panel-48"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/panel_carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>, Audio <b>given</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link",
+              audio: "http://soundbible.com/mp3/Tyrannosaurus%20Rex%20Roar-SoundBible.com-807702404.mp3"
+            },
+            id: "panel-carousel-image-panel-49"
           }
         ],
         shelf_id: "",
@@ -5220,6 +5239,25 @@ const sampleShelvesPage = {
               meta_cta_variant: "link"
             },
             id: "full-grid-image-panel-48"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/panel_carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>, Audio <b>given</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link",
+              audio: "http://soundbible.com/mp3/Tyrannosaurus%20Rex%20Roar-SoundBible.com-807702404.mp3"
+            },
+            id: "full-grid-image-panel-49"
           },
           {
             type: "app_teaser",
@@ -7381,6 +7419,25 @@ const sampleShelvesPage = {
             id: "2-grid-image-panel-48"
           },
           {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/panel_carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>, Audio <b>given</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link",
+              audio: "http://soundbible.com/mp3/Tyrannosaurus%20Rex%20Roar-SoundBible.com-807702404.mp3"
+            },
+            id: "2-grid-image-panel-49"
+          },
+          {
             type: "app_teaser",
             value: {
               heading: "App teaser",
@@ -9538,6 +9595,25 @@ const sampleShelvesPage = {
               meta_cta_variant: "link"
             },
             id: "3-grid-image-panel-48"
+          },
+          {
+            type: "image_teaser",
+            value: {
+              image_meta: "image_teaser/panel_carousel_shelf/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Inspiration Teaser",
+              body: "Image <b>not given</b>, CTA <b>not given</b>, Variant <b>light background</b>, Mobile image position <b>default</b>, Desktop image position <b>default</b>, CTA style <b>link</b>, Audio <b>given</b>",
+              image: null,
+              cta: [],
+              shelf_id: "",
+              meta_variant: "light-bg",
+              meta_layout_mobile: "mobile-image-default",
+              meta_layout_desktop: "desktop-image-default",
+              meta_cta_variant: "link",
+              audio: "http://soundbible.com/mp3/Tyrannosaurus%20Rex%20Roar-SoundBible.com-807702404.mp3"
+            },
+            id: "3-grid-image-panel-49"
           },
           {
             type: "app_teaser",
