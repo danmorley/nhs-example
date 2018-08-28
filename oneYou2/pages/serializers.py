@@ -71,6 +71,10 @@ class OneYouPageSerializer(serializers.ModelSerializer):
             'use_share_button',
             'use_email_button',
             'use_print_button',
+
+            'opt_in_1_text',
+            'opt_in_2_text',
+            'ts_and_cs_statement'
         )
 
         fields = fields + meta_fields
