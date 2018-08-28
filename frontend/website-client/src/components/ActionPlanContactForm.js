@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import './action-plan-form.css';
+import { signUpForActionPlan } from '../services/RequestHandler';
 
 const APF_KEY = 'apf_contact';
 class ActionPlanContactForm extends Component {
@@ -37,18 +38,27 @@ class ActionPlanContactForm extends Component {
     if (form.checkValidity()) {      
       e.preventDefault() ;
       let items = {
-        "name": this.state.username, 
-        "email": this.state.email, 
-        "postcode": this.state.postcode,
-        "optActionPlan": this.state.optActionPlan,
-        "optOneYou": this.state.optOneYou
+        "Firstname": this.state.username.split(' ')[0],
+        "Lastname": this.state.username.split(' ')[0],
+        "Email": this.state.email,
+        "Postcode": this.state.postcode,
+        "ActionPlanOptIn": this.state.optActionPlan,
+        "OneYouEmailOptIn": this.state.optOneYou
       };
       
       sessionStorage.setItem(APF_KEY, JSON.stringify(items));
-      
-      this.setState(prevState => ({
-        showSection: !prevState.showSection
-      }))
+
+      let that = this;
+
+      signUpForActionPlan()
+        .then((response) => {
+          that.setState(prevState => ({
+            showSection: !prevState.showSection
+          }))
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
   }
   
