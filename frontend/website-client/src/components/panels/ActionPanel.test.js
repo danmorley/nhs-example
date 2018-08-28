@@ -55,7 +55,7 @@ describe('ActionPanel', () => {
   it('adds the action to the storage when updateActionPlan is called when active', () => {
     sessionStorage.setItem(BASKET_KEY, '');
     const div = document.createElement('div');
-    let component = ReactDOM.render(<ActionPanel content={content} classNamePrefix={classNamePrefix}/>, div)
+    let component = ReactDOM.render(<ActionPanel content={content} classNamePrefix={classNamePrefix} updateBasketLength={function() {}} />, div)
     const defaultValue = []
     expect(component.storageToJSON(BASKET_KEY, defaultValue)).toEqual(defaultValue);
     component.updateActionPlan(true);
@@ -63,14 +63,14 @@ describe('ActionPanel', () => {
     expect(component.storageToJSON(ACTION_PLAN_KEY, defaultValue)[content.action_code]).toEqual(content);
   });
 
-  it('removes the action to the storage when updateActionPlan is called when active', () => {
+  it('removes the action from the storage when updateActionPlan is called when not active', () => {
     let updatedBasket = [content.action_code];
     let updatedActionPlan = {}
     updatedActionPlan[content.action_code] = content;
     sessionStorage.setItem(BASKET_KEY, JSON.stringify(updatedBasket));
     sessionStorage.setItem(ACTION_PLAN_KEY, JSON.stringify(updatedActionPlan));
     const div = document.createElement('div');
-    let component = ReactDOM.render(<ActionPanel content={content} classNamePrefix={classNamePrefix}/>, div)
+    let component = ReactDOM.render(<ActionPanel content={content} classNamePrefix={classNamePrefix} updateBasketLength={function() {}} />, div)
     const defaultValue = []
     expect(component.state.active).toBeTruthy();
     component.updateActionPlan(false);
@@ -82,7 +82,7 @@ describe('ActionPanel', () => {
     sessionStorage.setItem(BASKET_KEY, '');
     sessionStorage.setItem(ACTION_PLAN_KEY, '');
     const div = document.createElement('div');
-    let component = ReactDOM.render(<ActionPanel content={content} classNamePrefix={classNamePrefix}/>, div)
+    let component = ReactDOM.render(<ActionPanel content={content} classNamePrefix={classNamePrefix} updateBasketLength={function() {}} />, div)
     const defaultValue = []
     expect(component.state.active).toBeFalsy();
     expect(component.storageToJSON(BASKET_KEY, defaultValue).includes(content.action_code)).toBeFalsy();

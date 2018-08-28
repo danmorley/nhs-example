@@ -258,6 +258,13 @@ class AppTeaser(ShelfAbstract):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    cta_text = models.CharField(max_length=255, null=True, blank=True)
+    cta_link = models.CharField(max_length=255, null=True, blank=True)
+    cta_page = ParentalKey('wagtailcore.Page',
+                           on_delete=models.SET_NULL,
+                           related_name='app_teaser_links',
+                           null=True,
+                           blank=True)
     cta_googleplay = models.CharField(max_length=255, null=True, blank=True)
     cta_appstore = models.CharField(max_length=255, null=True, blank=True)
 
@@ -266,6 +273,9 @@ class AppTeaser(ShelfAbstract):
         FieldPanel('heading'),
         FieldPanel('body'),
         ImageChooserPanel('image'),
+        FieldPanel('cta_text'),
+        FieldPanel('cta_link'),
+        PageChooserPanel('cta_page'),
         FieldPanel('cta_googleplay'),
         FieldPanel('cta_appstore'),
     ]

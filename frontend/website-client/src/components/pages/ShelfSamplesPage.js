@@ -1263,7 +1263,7 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>',
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>, External link <b>not given</b>',
               image: null,
               shelf_id: null,
               cta_appstore: {
@@ -1271,6 +1271,10 @@ const sampleShelvesPage = {
                 link_external: null
               },
               cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              cta: {
                 link_text: "",
                 link_external: null
               },
@@ -1282,7 +1286,7 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>',
+              body: 'Image <b>given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>, External link <b>not given</b>',
               image: altImage,
               shelf_id: null,
               cta_appstore: {
@@ -1290,6 +1294,10 @@ const sampleShelvesPage = {
                 link_external: null
               },
               cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              cta: {
                 link_text: "",
                 link_external: null
               },
@@ -1301,7 +1309,7 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>not given</b>',
+              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>not given</b>, External link <b>not given</b>',
               image: altImage,
               shelf_id: null,
               cta_appstore: {
@@ -1309,6 +1317,10 @@ const sampleShelvesPage = {
                 link_external: "www.google.co.uk"
               },
               cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              cta: {
                 link_text: "",
                 link_external: null
               },
@@ -1320,7 +1332,7 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>given</b>',
+              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>given</b>, External link <b>not given</b>',
               image: altImage,
               shelf_id: null,
               cta_appstore: {
@@ -1331,6 +1343,10 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: "www.google.co.uk"
               },
+              cta: {
+                link_text: "",
+                link_external: null
+              },
               image_meta: "app_teaser/carousel_shelf/None"
             },
             id: "carousel-app-teaser-4"
@@ -1339,8 +1355,8 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>not given</b>',
-              image: null,
+              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>given</b>, External link <b>given</b>',
+              image: altImage,
               shelf_id: null,
               cta_appstore: {
                 link_text: "",
@@ -1348,7 +1364,11 @@ const sampleShelvesPage = {
               },
               cta_googleplay: {
                 link_text: "",
-                link_external: null
+                link_external: "www.google.co.uk"
+              },
+              cta: {
+                link_text: "Get App Now",
+                link_external: "www.google.co.uk"
               },
               image_meta: "app_teaser/carousel_shelf/None"
             },
@@ -1358,7 +1378,30 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>given</b>',
+              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>not given</b>, External link <b>not given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "carousel-app-teaser-6"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>given</b>, External link <b>not given</b>',
               image: null,
               shelf_id: null,
               cta_appstore: {
@@ -1369,15 +1412,42 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: "www.google.co.uk"
               },
+              cta: {
+                link_text: "",
+                link_external: null
+              },
               image_meta: "app_teaser/carousel_shelf/None"
             },
-            id: "carousel-app-teaser-6"
+            id: "carousel-app-teaser-7"
           },
           {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>given</b>',
+              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>given</b>, External link <b>given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta: {
+                link_text: "Get App Now",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "carousel-app-teaser-8"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>given</b>, External link <b>not given</b>',
               image: null,
               shelf_id: null,
               cta_appstore: {
@@ -1388,9 +1458,59 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: "www.google.co.uk"
               },
+              cta: {
+                link_text: "",
+                link_external: null
+              },
               image_meta: "app_teaser/carousel_shelf/None"
             },
-            id: "carousel-app-teaser-7"
+            id: "carousel-app-teaser-9"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>given</b>, External link <b>given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: null
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta: {
+                link_text: "Get App Now",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "carousel-app-teaser-10"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>, External link <b>given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: null
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              cta: {
+                link_text: "Get App Now",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "carousel-app-teaser-11"
           }
         ],
         shelf_id: "",
@@ -2186,7 +2306,7 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>',
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>, External link <b>not given</b>',
               image: null,
               shelf_id: null,
               cta_appstore: {
@@ -2197,7 +2317,11 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: null
               },
-              image_meta: "app_teaser/panel_carousel_shelf/None"
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
             id: "panel-carousel-app-teaser-1"
           },
@@ -2205,7 +2329,7 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>',
+              body: 'Image <b>given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>, External link <b>not given</b>',
               image: altImage,
               shelf_id: null,
               cta_appstore: {
@@ -2216,7 +2340,11 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: null
               },
-              image_meta: "app_teaser/panel_carousel_shelf/None"
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
             id: "panel-carousel-app-teaser-2"
           },
@@ -2224,7 +2352,7 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>not given</b>',
+              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>not given</b>, External link <b>not given</b>',
               image: altImage,
               shelf_id: null,
               cta_appstore: {
@@ -2235,7 +2363,11 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: null
               },
-              image_meta: "app_teaser/panel_carousel_shelf/None"
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
             id: "panel-carousel-app-teaser-3"
           },
@@ -2243,7 +2375,7 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>given</b>',
+              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>given</b>, External link <b>not given</b>',
               image: altImage,
               shelf_id: null,
               cta_appstore: {
@@ -2254,7 +2386,11 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: "www.google.co.uk"
               },
-              image_meta: "app_teaser/panel_carousel_shelf/None"
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
             id: "panel-carousel-app-teaser-4"
           },
@@ -2262,8 +2398,8 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>not given</b>',
-              image: null,
+              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>given</b>, External link <b>given</b>',
+              image: altImage,
               shelf_id: null,
               cta_appstore: {
                 link_text: "",
@@ -2271,9 +2407,13 @@ const sampleShelvesPage = {
               },
               cta_googleplay: {
                 link_text: "",
-                link_external: null
+                link_external: "www.google.co.uk"
               },
-              image_meta: "app_teaser/panel_carousel_shelf/None"
+              cta: {
+                link_text: "Get App Now",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
             id: "panel-carousel-app-teaser-5"
           },
@@ -2281,7 +2421,30 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>given</b>',
+              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>not given</b>, External link <b>not given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "panel-carousel-app-teaser-6"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>given</b>, External link <b>not given</b>',
               image: null,
               shelf_id: null,
               cta_appstore: {
@@ -2292,15 +2455,42 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: "www.google.co.uk"
               },
-              image_meta: "app_teaser/panel_carousel_shelf/None"
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
-            id: "panel-carousel-app-teaser-6"
+            id: "panel-carousel-app-teaser-7"
           },
           {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>given</b>',
+              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>given</b>, External link <b>given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta: {
+                link_text: "Get App Now",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "panel-carousel-app-teaser-8"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>given</b>, External link <b>not given</b>',
               image: null,
               shelf_id: null,
               cta_appstore: {
@@ -2311,9 +2501,59 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: "www.google.co.uk"
               },
-              image_meta: "app_teaser/panel_carousel_shelf/None"
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
-            id: "panel-carousel-app-teaser-7"
+            id: "panel-carousel-app-teaser-9"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>given</b>, External link <b>given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: null
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta: {
+                link_text: "Get App Now",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "panel-carousel-app-teaser-10"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>, External link <b>given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: null
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              cta: {
+                link_text: "Get App Now",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "panel-carousel-app-teaser-11"
           }
         ],
         shelf_id: "",
@@ -5225,7 +5465,7 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>',
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>, External link <b>not given</b>',
               image: null,
               shelf_id: null,
               cta_appstore: {
@@ -5236,7 +5476,11 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: null
               },
-              image_meta: "app_teaser/grid_shelf/None"
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
             id: "full-grid-app-teaser-1"
           },
@@ -5244,7 +5488,7 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>',
+              body: 'Image <b>given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>, External link <b>not given</b>',
               image: altImage,
               shelf_id: null,
               cta_appstore: {
@@ -5255,7 +5499,11 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: null
               },
-              image_meta: "app_teaser/grid_shelf/None"
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
             id: "full-grid-app-teaser-2"
           },
@@ -5263,7 +5511,7 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>not given</b>',
+              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>not given</b>, External link <b>not given</b>',
               image: altImage,
               shelf_id: null,
               cta_appstore: {
@@ -5274,7 +5522,11 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: null
               },
-              image_meta: "app_teaser/grid_shelf/None"
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
             id: "full-grid-app-teaser-3"
           },
@@ -5282,7 +5534,7 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>given</b>',
+              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>given</b>, External link <b>not given</b>',
               image: altImage,
               shelf_id: null,
               cta_appstore: {
@@ -5293,7 +5545,11 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: "www.google.co.uk"
               },
-              image_meta: "app_teaser/grid_shelf/None"
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
             id: "full-grid-app-teaser-4"
           },
@@ -5301,8 +5557,8 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>not given</b>',
-              image: null,
+              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>given</b>, External link <b>given</b>',
+              image: altImage,
               shelf_id: null,
               cta_appstore: {
                 link_text: "",
@@ -5310,9 +5566,13 @@ const sampleShelvesPage = {
               },
               cta_googleplay: {
                 link_text: "",
-                link_external: null
+                link_external: "www.google.co.uk"
               },
-              image_meta: "app_teaser/grid_shelf/None"
+              cta: {
+                link_text: "Get App Now",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
             id: "full-grid-app-teaser-5"
           },
@@ -5320,7 +5580,30 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>given</b>',
+              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>not given</b>, External link <b>not given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "full-grid-app-teaser-6"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>given</b>, External link <b>not given</b>',
               image: null,
               shelf_id: null,
               cta_appstore: {
@@ -5331,15 +5614,42 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: "www.google.co.uk"
               },
-              image_meta: "app_teaser/grid_shelf/None"
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
-            id: "full-grid-app-teaser-6"
+            id: "full-grid-app-teaser-7"
           },
           {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>given</b>',
+              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>given</b>, External link <b>given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta: {
+                link_text: "Get App Now",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "full-grid-app-teaser-8"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>given</b>, External link <b>not given</b>',
               image: null,
               shelf_id: null,
               cta_appstore: {
@@ -5350,9 +5660,59 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: "www.google.co.uk"
               },
-              image_meta: "app_teaser/grid_shelf/None"
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
-            id: "full-grid-app-teaser-7"
+            id: "full-grid-app-teaser-9"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>given</b>, External link <b>given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: null
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta: {
+                link_text: "Get App Now",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "full-grid-app-teaser-10"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>, External link <b>given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: null
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              cta: {
+                link_text: "Get App Now",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "full-grid-app-teaser-11"
           },
           {
             type: "information_panel",
@@ -7384,7 +7744,7 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>',
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>, External link <b>not given</b>',
               image: null,
               shelf_id: null,
               cta_appstore: {
@@ -7395,7 +7755,11 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: null
               },
-              image_meta: "app_teaser/grid_shelf/None"
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
             id: "2-grid-app-teaser-1"
           },
@@ -7403,7 +7767,7 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>',
+              body: 'Image <b>given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>, External link <b>not given</b>',
               image: altImage,
               shelf_id: null,
               cta_appstore: {
@@ -7414,7 +7778,11 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: null
               },
-              image_meta: "app_teaser/grid_shelf/None"
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
             id: "2-grid-app-teaser-2"
           },
@@ -7422,7 +7790,7 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>not given</b>',
+              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>not given</b>, External link <b>not given</b>',
               image: altImage,
               shelf_id: null,
               cta_appstore: {
@@ -7433,7 +7801,11 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: null
               },
-              image_meta: "app_teaser/grid_shelf/None"
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
             id: "2-grid-app-teaser-3"
           },
@@ -7441,7 +7813,7 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>given</b>',
+              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>given</b>, External link <b>not given</b>',
               image: altImage,
               shelf_id: null,
               cta_appstore: {
@@ -7452,7 +7824,11 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: "www.google.co.uk"
               },
-              image_meta: "app_teaser/grid_shelf/None"
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
             id: "2-grid-app-teaser-4"
           },
@@ -7460,8 +7836,8 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>not given</b>',
-              image: null,
+              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>given</b>, External link <b>given</b>',
+              image: altImage,
               shelf_id: null,
               cta_appstore: {
                 link_text: "",
@@ -7469,9 +7845,13 @@ const sampleShelvesPage = {
               },
               cta_googleplay: {
                 link_text: "",
-                link_external: null
+                link_external: "www.google.co.uk"
               },
-              image_meta: "app_teaser/grid_shelf/None"
+              cta: {
+                link_text: "Get App Now",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
             id: "2-grid-app-teaser-5"
           },
@@ -7479,7 +7859,30 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>given</b>',
+              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>not given</b>, External link <b>not given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "2-grid-app-teaser-6"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>given</b>, External link <b>not given</b>',
               image: null,
               shelf_id: null,
               cta_appstore: {
@@ -7490,15 +7893,42 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: "www.google.co.uk"
               },
-              image_meta: "app_teaser/grid_shelf/None"
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
-            id: "2-grid-app-teaser-6"
+            id: "2-grid-app-teaser-7"
           },
           {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>given</b>',
+              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>given</b>, External link <b>given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta: {
+                link_text: "Get App Now",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "2-grid-app-teaser-8"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>given</b>, External link <b>not given</b>',
               image: null,
               shelf_id: null,
               cta_appstore: {
@@ -7509,9 +7939,59 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: "www.google.co.uk"
               },
-              image_meta: "app_teaser/grid_shelf/None"
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
-            id: "2-grid-app-teaser-7"
+            id: "2-grid-app-teaser-9"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>given</b>, External link <b>given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: null
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta: {
+                link_text: "Get App Now",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "2-grid-app-teaser-10"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>, External link <b>given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: null
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              cta: {
+                link_text: "Get App Now",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "2-grid-app-teaser-11"
           },
           {
             type: "information_panel",
@@ -9543,7 +10023,7 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>',
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>, External link <b>not given</b>',
               image: null,
               shelf_id: null,
               cta_appstore: {
@@ -9554,7 +10034,11 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: null
               },
-              image_meta: "app_teaser/grid_shelf/None"
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
             id: "3-grid-app-teaser-1"
           },
@@ -9562,7 +10046,7 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>',
+              body: 'Image <b>given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>, External link <b>not given</b>',
               image: altImage,
               shelf_id: null,
               cta_appstore: {
@@ -9573,7 +10057,11 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: null
               },
-              image_meta: "app_teaser/grid_shelf/None"
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
             id: "3-grid-app-teaser-2"
           },
@@ -9581,7 +10069,7 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>not given</b>',
+              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>not given</b>, External link <b>not given</b>',
               image: altImage,
               shelf_id: null,
               cta_appstore: {
@@ -9592,7 +10080,11 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: null
               },
-              image_meta: "app_teaser/grid_shelf/None"
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
             id: "3-grid-app-teaser-3"
           },
@@ -9600,7 +10092,7 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>given</b>',
+              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>given</b>, External link <b>not given</b>',
               image: altImage,
               shelf_id: null,
               cta_appstore: {
@@ -9611,7 +10103,11 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: "www.google.co.uk"
               },
-              image_meta: "app_teaser/grid_shelf/None"
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
             id: "3-grid-app-teaser-4"
           },
@@ -9619,8 +10115,8 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>not given</b>',
-              image: null,
+              body: 'Image <b>given</b>, App store link <b>given</b>, Google Play link <b>given</b>, External link <b>given</b>',
+              image: altImage,
               shelf_id: null,
               cta_appstore: {
                 link_text: "",
@@ -9628,9 +10124,13 @@ const sampleShelvesPage = {
               },
               cta_googleplay: {
                 link_text: "",
-                link_external: null
+                link_external: "www.google.co.uk"
               },
-              image_meta: "app_teaser/grid_shelf/None"
+              cta: {
+                link_text: "Get App Now",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
             id: "3-grid-app-teaser-5"
           },
@@ -9638,7 +10138,30 @@ const sampleShelvesPage = {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>given</b>',
+              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>not given</b>, External link <b>not given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "3-grid-app-teaser-6"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>given</b>, External link <b>not given</b>',
               image: null,
               shelf_id: null,
               cta_appstore: {
@@ -9649,15 +10172,42 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: "www.google.co.uk"
               },
-              image_meta: "app_teaser/grid_shelf/None"
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
-            id: "3-grid-app-teaser-6"
+            id: "3-grid-app-teaser-7"
           },
           {
             type: "app_teaser",
             value: {
               heading: "App teaser",
-              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>given</b>',
+              body: 'Image <b>not given</b>, App store link <b>given</b>, Google Play link <b>given</b>, External link <b>given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta: {
+                link_text: "Get App Now",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "3-grid-app-teaser-8"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>given</b>, External link <b>not given</b>',
               image: null,
               shelf_id: null,
               cta_appstore: {
@@ -9668,9 +10218,59 @@ const sampleShelvesPage = {
                 link_text: "",
                 link_external: "www.google.co.uk"
               },
-              image_meta: "app_teaser/grid_shelf/None"
+              cta: {
+                link_text: "",
+                link_external: null
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
             },
-            id: "3-grid-app-teaser-7"
+            id: "3-grid-app-teaser-9"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>given</b>, External link <b>given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: null
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: "www.google.co.uk"
+              },
+              cta: {
+                link_text: "Get App Now",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "3-grid-app-teaser-10"
+          },
+          {
+            type: "app_teaser",
+            value: {
+              heading: "App teaser",
+              body: 'Image <b>not given</b>, App store link <b>not given</b>, Google Play link <b>not given</b>, External link <b>given</b>',
+              image: null,
+              shelf_id: null,
+              cta_appstore: {
+                link_text: "",
+                link_external: null
+              },
+              cta_googleplay: {
+                link_text: "",
+                link_external: null
+              },
+              cta: {
+                link_text: "Get App Now",
+                link_external: "www.google.co.uk"
+              },
+              image_meta: "app_teaser/carousel_shelf/None"
+            },
+            id: "3-grid-app-teaser-11"
           },
           {
             type: "information_panel",
