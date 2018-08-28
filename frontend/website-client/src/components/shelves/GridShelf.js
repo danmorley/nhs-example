@@ -22,6 +22,7 @@ class GridShelf extends Component {
     let { id, content, classNamePrefix, layout, variant } = this.props;
     let metaVariant = content.meta_variant || variant;
     let metaLayout = content.meta_layout || layout;
+    let gutterSize = content.meta_gutter_size || 'gutter-unset';
     let gridHeading = content.heading || '';
     let gridBody = content.body || '';
 
@@ -33,6 +34,10 @@ class GridShelf extends Component {
         return 'shelf__col col-sm-12 col-md-6';
       case '3_col_1_on_mobile':
         return'shelf__col col-sm-12 col-md-4';
+      case '4_col_1_on_mobile':
+        return'shelf__col col-sm-12 col-md-3';
+      case '4_col_2_tablet_1_on_mobile':
+        return'shelf__col col-sm-12 col-md-6 col-lg-3';
       default:
         return 'shelf__col col-sm-12';
       }
@@ -50,7 +55,7 @@ class GridShelf extends Component {
             }
             <div className="grid-container">
               <ShowMorePanel rowsToShow={content.rows_to_show} id={`${id}`}>
-                { MultiPanelBlock.renderItems(content.items, panelClass, 'div') }
+                { MultiPanelBlock.renderItems(content.items, `${panelClass} ${gutterSize}`, 'div') }
               </ShowMorePanel>
             </div>
           </div>

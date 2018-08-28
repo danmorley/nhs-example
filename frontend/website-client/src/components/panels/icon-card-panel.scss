@@ -53,10 +53,30 @@
   
     .icon-card-panel__heading {
       color: $black;
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+    }
+
+    .icon-card-panel__image img {
+      width: 5em;
     }
     
     .icon-card-panel__text { 
       color: $black;
+      line-height: 1.2em;
+      padding: 0px 0.5em;
+
+      @include media-breakpoint-down(sm) {
+        padding: 0px 4em;
+      }
+    }
+
+    @include media-breakpoint-down(sm) {
+      padding-bottom: 1em;
     }
   }
+}
+
+.icon-card-panel--icon_on_top {
+  text-align: center;
 }

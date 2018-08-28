@@ -199,4 +199,4 @@ class SimpleCtaLinkBlock(blocks.StructBlock):
 
     class Meta:
         icon = 'link'
-        form_classname = 'dct-simple-cta-link-block dct-meta-block'
+        form_classname = 'dct-simple-cta-link-block dct-block'
