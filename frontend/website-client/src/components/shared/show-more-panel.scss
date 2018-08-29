@@ -22,6 +22,8 @@
     font-size: 1.2em;
     text-decoration: underline;
     position: relative;
+    padding-right: 35px;
+    cursor: pointer;  
     
     &:after {
       position: absolute;
@@ -29,11 +31,11 @@
       font-weight: normal;
       font-size: 40px;
       top: -4px;
-      right: -32px;
+      right: 0;
     }
   }
 
-  a.see-more {
+  a.see-more {  
     &:after {
       @extend %icon-chevron-down;
     }
