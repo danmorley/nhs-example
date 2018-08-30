@@ -352,7 +352,7 @@ class ActionShelf(ShelfAbstract):
             if not self.cta1_text:
                 validation_errors['cta2_link'] = _('CTA 2 cannot be populated before CTA 1')
 
-            if not self.cta_2_text:
+            if not self.cta2_text:
                 validation_errors['cta2_link'] = _('CTA link cannot be blank if CTA button text is set')
 
         if validation_errors:
@@ -390,6 +390,10 @@ class ActionShelf(ShelfAbstract):
             print(r.status_code, r.content)
             print(data)
             raise ConnectionError("Could not push action to paragon")
+
+    class Meta:
+        verbose_name = 'Action'
+        verbose_name_plural = 'Actions'
 
     def __str__(self):
         return self.title
