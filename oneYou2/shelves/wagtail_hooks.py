@@ -1,7 +1,7 @@
 from wagtail.contrib.modeladmin.options import (
     ModelAdmin, ModelAdminGroup, modeladmin_register)
 
-from .models import PromoShelf, BannerShelf, AppTeaser, RecipeTeaser, ActionPanel
+from .models import PromoShelf, BannerShelf, AppTeaser, RecipeTeaser, ActionShelf
 
 
 class PromoshelfAdmin(ModelAdmin):
@@ -52,8 +52,8 @@ class RecipeshelfAdmin(ModelAdmin):
     search_fields = ('shelf_id',)
 
 
-class ActionpanelAdmin(ModelAdmin):
-    model = ActionPanel
+class ActionshelfAdmin(ModelAdmin):
+    model = ActionShelf
     menu_label = 'Actions'
     menu_icon = 'form'
     menu_order = 600
@@ -68,7 +68,7 @@ class ShelfAdminGroup(ModelAdminGroup):
     menu_label = 'Shared'
     menu_icon = 'folder-open-inverse'  # change as required
     menu_order = 200  # will put in 3rd place (000 being 1st, 100 2nd)
-    items = (PromoshelfAdmin, BannershelfAdmin, AppshelfAdmin, RecipeshelfAdmin, ActionpanelAdmin)
+    items = (PromoshelfAdmin, BannershelfAdmin, AppshelfAdmin, RecipeshelfAdmin, ActionshelfAdmin)
 
 
 modeladmin_register(ShelfAdminGroup)

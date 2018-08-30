@@ -226,3 +226,5 @@ ENV = os.environ.get('CMS_ENV', 'local')
 INITIALIZER = os.environ.get('INITIALIZER', False)
 
 # INTERNAL_IPS = ('127.0.0.1', 'localhost', '172.18.0.1')
+
+PARAGON_AUTH_HEADER = "cGFyYWdvbi1jYzo5RjRGMkNGQi1ENUE4LTQyQTEtQTA2OC1GNkE0MTc0MEE4RUU="

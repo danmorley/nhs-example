@@ -478,7 +478,7 @@ class TriageToolShelf(blocks.StructBlock):
 class ActionGroup(blocks.StructBlock):
     title = blocks.CharBlock(required=True)
     actions = blocks.StreamBlock([
-        ('action_panel', ActionChooserBlock(target_model="shelves.ActionPanel", icon="list-ul")),
+        ('action_panel', ActionChooserBlock(target_model="shelves.ActionShelf", icon="list-ul")),
     ])
     panel_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
 
