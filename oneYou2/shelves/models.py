@@ -292,12 +292,39 @@ class AppTeaser(ShelfAbstract):
 
 
 @register_snippet
-class ActionShelf(ShelfAbstract):
-    paragon_id = models.IntegerField(null=False, blank=False, unique=True)
-    paragon_action_code = models.CharField(max_length=255, null=False, blank=False)
-    category = models.CharField(max_length=255, null=False, blank=False)
-    position = models.IntegerField(null=False, blank=False, unique=True)
+class ActionPanel(ShelfAbstract):
     action_code = models.CharField(max_length=255, null=False, blank=False, unique=True)
+    title = models.CharField(max_length=255, null=False, blank=False)
+    rich_text_body = RichTextField(blank=True, null=True)
+    cta = models.CharField(max_length=255, null=True, blank=True)
+    cta_googleplay = models.CharField(max_length=255, null=True, blank=True)
+    cta_appstore = models.CharField(max_length=255, null=True, blank=True)
+
+    panels = [
+        FieldPanel('shelf_id'),
+        FieldPanel('action_code'),
+        FieldPanel('title'),
+        FieldPanel('rich_text_body'),
+        FieldPanel('cta'),
+        FieldPanel('cta_googleplay'),
+        FieldPanel('cta_appstore'),
+    ]
+
+    def __str__(self):
+        return self.title
+
+
+@register_snippet
+class ActionShelf(ShelfAbstract):
+    paragon_id = models.IntegerField(null=False, blank=False, unique=True, help_text="Matches with the UID at paragon")
+    paragon_action_code = models.CharField(max_length=255, null=False, blank=False, unique=True,
+                                           help_text="Must be unique, used by paragon. Designed to be a slug of title")
+    category = models.CharField(max_length=255, null=False, blank=False, help_text="Used by Paragon, can by anything.")
+    position = models.IntegerField(null=False, blank=False, unique=True, help_text="Must be unique, this determines the"
+                                                                                   "order paragon will return actions"
+                                                                                   "in the email.")
+    action_code = models.CharField(max_length=255, null=False, blank=False, unique=True,
+                                   help_text="Wirewax action code")
     title = models.CharField(max_length=255, null=False, blank=False)
     rich_text_body = models.TextField(blank=True, null=True)
     cta_type = models.CharField(max_length=255, null=True, blank=True, choices=CTA_TYPES, default="direct_app")
