@@ -15,6 +15,14 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 from modelcluster.models import get_serializable_data_for_fields
 
+CTA_TYPES = (
+    ('direct_app', 'PHE App'),
+    ('other_app', 'Other App'),
+    ('one_link', 'One Link'),
+    ('two_link', 'Two Links'),
+    ('info_only', 'Info only'),
+)
+
 
 def get_default_shelf_content_type():
     """
@@ -289,6 +297,38 @@ class ActionPanel(ShelfAbstract):
     cta = models.CharField(max_length=255, null=True, blank=True)
     cta_googleplay = models.CharField(max_length=255, null=True, blank=True)
     cta_appstore = models.CharField(max_length=255, null=True, blank=True)
+
+    panels = [
+        FieldPanel('shelf_id'),
+        FieldPanel('action_code'),
+        FieldPanel('title'),
+        FieldPanel('rich_text_body'),
+        FieldPanel('cta'),
+        FieldPanel('cta_googleplay'),
+        FieldPanel('cta_appstore'),
+    ]
+
+    def __str__(self):
+        return self.title
+
+
+@register_snippet
+class ActionSelf(ShelfAbstract):
+    paragon_id = models.IntegerField(null=False, blank=False, unique=True)
+    paragon_action_code = models.CharField(max_length=255, null=False, blank=False)
+    category = models.CharField(max_length=255, null=False, blank=False)
+    position = models.IntegerField(null=False, blank=False, unique=True)
+    action_code = models.CharField(max_length=255, null=False, blank=False, unique=True)
+    title = models.CharField(max_length=255, null=False, blank=False)
+    rich_text_body = models.TextField(blank=True, null=True)
+    cta_type = models.CharField(max_length=255, null=True, blank=True, choices=CTA_TYPES, default="direct_app")
+    cta1_text = models.CharField(max_length=255, null=True, blank=True)
+    cta1_link = models.CharField(max_length=255, null=True, blank=True)
+    cta2_text = models.CharField(max_length=255, null=True, blank=True)
+    cta2_link = models.CharField(max_length=255, null=True, blank=True)
+    cta_googleplay = models.CharField(max_length=255, null=True, blank=True)
+    cta_appstore = models.CharField(max_length=255, null=True, blank=True)
+    active = models.BooleanField(max_length=255, default=True)
 
     panels = [
         FieldPanel('shelf_id'),
