@@ -2,7 +2,7 @@ from django.utils.text import slugify
 
 from rest_framework import serializers
 from rest_framework.serializers import HyperlinkedModelSerializer
-from shelves.models import PromoShelf, BannerShelf, AppTeaser, RecipeTeaser, ActionPanel
+from shelves.models import PromoShelf, BannerShelf, AppTeaser, RecipeTeaser, ActionShelf
 
 
 # TODO: Remove this, use the one in image.serializers. This exists due to circular imports.
@@ -155,5 +155,5 @@ class ActionSerializer(HyperlinkedModelSerializer):
         return representation
 
     class Meta:
-        model = ActionPanel
+        model = ActionShelf
         fields = ['action_code', 'title', 'rich_text_body', 'cta', 'cta_googleplay', 'cta_appstore', 'shelf_id']

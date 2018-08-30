@@ -292,29 +292,6 @@ class AppTeaser(ShelfAbstract):
 
 
 @register_snippet
-class ActionPanel(ShelfAbstract):
-    action_code = models.CharField(max_length=255, null=False, blank=False, unique=True)
-    title = models.CharField(max_length=255, null=False, blank=False)
-    rich_text_body = RichTextField(blank=True, null=True)
-    cta = models.CharField(max_length=255, null=True, blank=True)
-    cta_googleplay = models.CharField(max_length=255, null=True, blank=True)
-    cta_appstore = models.CharField(max_length=255, null=True, blank=True)
-
-    panels = [
-        FieldPanel('shelf_id'),
-        FieldPanel('action_code'),
-        FieldPanel('title'),
-        FieldPanel('rich_text_body'),
-        FieldPanel('cta'),
-        FieldPanel('cta_googleplay'),
-        FieldPanel('cta_appstore'),
-    ]
-
-    def __str__(self):
-        return self.title
-
-
-@register_snippet
 class ActionShelf(ShelfAbstract):
     paragon_id = models.IntegerField(null=False, blank=False, unique=True)
     paragon_action_code = models.CharField(max_length=255, null=False, blank=False)
@@ -382,7 +359,7 @@ class ActionShelf(ShelfAbstract):
             raise ValidationError(validation_errors)
 
     def save(self, *args, **kwargs):
-        super(ShelfAbstract, self).save(*args, **kwargs)
+        super(ActionShelf, self).save(*args, **kwargs)
 
         url = 'https://api-test-mentalhealth.cc-testing.co.uk/api/Actions/UpdateAction'
 
