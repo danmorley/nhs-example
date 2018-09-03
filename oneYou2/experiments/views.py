@@ -127,8 +127,8 @@ def create(request, content_type_app_name, content_type_model_name, parent_page_
     })
 
 
-
 def edit(request, page_id):
+    print("EDIT")
     real_page_record = get_object_or_404(Page, id=page_id)
     latest_revision = real_page_record.get_latest_revision()
     page = real_page_record.get_latest_revision_as_page()
@@ -161,6 +161,7 @@ def edit(request, page_id):
                           parent_page=parent)
 
         print(request.POST)
+        print(dir(request.POST))
 
         if form.is_valid() and not page.locked and not page.specific.is_live:
             page = form.save(commit=False)
