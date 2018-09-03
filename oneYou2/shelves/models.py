@@ -258,6 +258,13 @@ class AppTeaser(ShelfAbstract):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    cta_text = models.CharField(max_length=255, null=True, blank=True)
+    cta_link = models.CharField(max_length=255, null=True, blank=True)
+    cta_page = ParentalKey('wagtailcore.Page',
+                           on_delete=models.SET_NULL,
+                           related_name='app_teaser_links',
+                           null=True,
+                           blank=True)
     cta_googleplay = models.CharField(max_length=255, null=True, blank=True)
     cta_appstore = models.CharField(max_length=255, null=True, blank=True)
 
@@ -266,9 +273,35 @@ class AppTeaser(ShelfAbstract):
         FieldPanel('heading'),
         FieldPanel('body'),
         ImageChooserPanel('image'),
+        FieldPanel('cta_text'),
+        FieldPanel('cta_link'),
+        PageChooserPanel('cta_page'),
         FieldPanel('cta_googleplay'),
         FieldPanel('cta_appstore'),
     ]
+
+
+@register_snippet
+class ActionPanel(ShelfAbstract):
+    action_code = models.CharField(max_length=255, null=False, blank=False, unique=True)
+    title = models.CharField(max_length=255, null=False, blank=False)
+    rich_text_body = RichTextField(blank=True, null=True)
+    cta = models.CharField(max_length=255, null=True, blank=True)
+    cta_googleplay = models.CharField(max_length=255, null=True, blank=True)
+    cta_appstore = models.CharField(max_length=255, null=True, blank=True)
+
+    panels = [
+        FieldPanel('shelf_id'),
+        FieldPanel('action_code'),
+        FieldPanel('title'),
+        FieldPanel('rich_text_body'),
+        FieldPanel('cta'),
+        FieldPanel('cta_googleplay'),
+        FieldPanel('cta_appstore'),
+    ]
+
+    def __str__(self):
+        return self.title
 
 
 @register_snippet

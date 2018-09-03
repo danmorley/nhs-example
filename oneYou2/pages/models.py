@@ -15,17 +15,19 @@ from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, InlinePane
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.snippets.models import register_snippet
+from wagtail.docs.blocks import DocumentChooserBlock
+
 from wagtailsnippetscopy.models import SnippetCopyMixin
 from wagtailsnippetscopy.registry import snippet_copy_registry
 
 from modelcluster.models import get_all_child_relations, get_all_child_m2m_relations
 from modelcluster.fields import ParentalKey
 
-from .blocks import IDBlock, CTABlock, MenuItemPageBlock, ImageBlock, SimpleCtaLinkBlock
+from .blocks import IDBlock, CTABlock, MenuItemPageBlock, ImageBlock, SimpleCtaLinkBlock, MediaChooserBlock
 from .utils import get_serializable_data_for_fields
 from home.models import SiteSettings
 from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppTeaserChooserBlock, \
-    BlobImageChooserBlock, RecipeTeaserChooserBlock
+    BlobImageChooserBlock, RecipeTeaserChooserBlock, ActionChooserBlock
 
 
 GRID_VARIANT_CHOICES = (
@@ -116,6 +118,11 @@ class MultiMenuItem(blocks.StructBlock):
     menu_items = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items')
+
+
+class DocumentDownloadItem(blocks.StructBlock):
+    link_text = blocks.CharBlock(required=True)
+    document = DocumentChooserBlock(label='Document', required=True)
 
 
 class SocialMediaFooterLink(blocks.StructBlock):
@@ -225,8 +232,10 @@ class ImageTeaserTemplate(CTABlock):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     image = BlobImageChooserBlock()
+    audio = MediaChooserBlock(required=False)
     cta = blocks.StreamBlock([
-        ('simple_menu_item', SimpleMenuItem())
+        ('simple_menu_item', SimpleMenuItem()),
+        ('document_download', DocumentDownloadItem())
     ], icon='arrow-left', label='Items', required=False)
     shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
     meta_variant = blocks.ChoiceBlock(choices=[
@@ -286,6 +295,7 @@ class RichTextPanel(blocks.StructBlock):
                                       default='standard',
                                       label="Variant",
                                       classname='dct-meta-field')
+
     class Meta:
         form_classname = 'dct-rich-text-panel dct-meta-panel'
                   
@@ -467,20 +477,10 @@ class TriageToolShelf(blocks.StructBlock):
         form_classname = 'dct-triage-tool-shelf dct-meta-panel'
 
 
-class ActionPanel(blocks.StructBlock):
-    action_code = blocks.CharBlock(required=True, unique=True)
-    title = blocks.CharBlock(required=True)
-    rich_text_body = blocks.RichTextBlock(required=False)
-    cta = blocks.StreamBlock([
-        ('simple_menu_item', SimpleMenuItem())
-    ], icon='arrow-left', label='Items', required=False)
-    panel_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
-
-
 class ActionGroup(blocks.StructBlock):
     title = blocks.CharBlock(required=True)
     actions = blocks.StreamBlock([
-        ('action_panel', ActionPanel(required=False, icon="list-ul")),
+        ('action_panel', ActionChooserBlock(target_model="shelves.ActionPanel", icon="list-ul")),
     ])
     panel_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
 

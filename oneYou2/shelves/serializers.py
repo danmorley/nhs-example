@@ -2,7 +2,7 @@ from django.utils.text import slugify
 
 from rest_framework import serializers
 from rest_framework.serializers import HyperlinkedModelSerializer
-from shelves.models import PromoShelf, BannerShelf, AppTeaser, RecipeTeaser
+from shelves.models import PromoShelf, BannerShelf, AppTeaser, RecipeTeaser, ActionPanel
 
 
 # TODO: Remove this, use the one in image.serializers. This exists due to circular imports.
@@ -115,11 +115,26 @@ class AppTeaserSerializer(HyperlinkedModelSerializer):
                 'link_text': "",
                 'link_external': cta_googleplay,
             }
+
+        cta_text = representation.pop('cta_text')
+        cta_link = representation.pop('cta_link')
+        cta_page = representation.pop('cta_page')
+        representation['cta'] = {
+            'link_text': cta_text,
+            'link_external': cta_link,
+        }
+        if cta_page:
+            representation['cta']['link_page'] = {
+                "id": cta_page.get('id'),
+                "slug": cta_page.get('slug'),
+                "relative_path": cta_page.get('relative_path'),
+            }
         return representation
 
     class Meta:
         model = AppTeaser
-        fields = ['heading', 'body', 'image', 'cta_googleplay', 'cta_appstore', 'shelf_id']
+        fields = ['heading', 'body', 'image', 'cta_googleplay', 'cta_appstore', 'shelf_id', 'cta_text', 'cta_link',
+                  'cta_page']
 
 
 class RecipeTeaserSerializer(HyperlinkedModelSerializer):
@@ -136,3 +151,14 @@ class RecipeTeaserSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = RecipeTeaser
         fields = ['heading', 'page_link', 'background_image', 'shelf_id']
+
+
+class ActionSerializer(HyperlinkedModelSerializer):
+
+    def to_representation(self, obj):
+        representation = super().to_representation(obj)
+        return representation
+
+    class Meta:
+        model = ActionPanel
+        fields = ['action_code', 'title', 'rich_text_body', 'cta', 'cta_googleplay', 'cta_appstore', 'shelf_id']
