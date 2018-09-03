@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 import django.db.models.deletion
-import wagtail.wagtailcore.fields
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('shelfabstract_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='shelves.ShelfAbstract')),
                 ('action_code', models.CharField(max_length=255, unique=True)),
                 ('title', models.CharField(max_length=255)),
-                ('rich_text_body', wagtail.wagtailcore.fields.RichTextField(blank=True, null=True)),
+                ('rich_text_body', wagtail.core.fields.RichTextField(blank=True, null=True)),
                 ('cta', models.CharField(blank=True, max_length=255, null=True)),
                 ('cta_googleplay', models.CharField(blank=True, max_length=255, null=True)),
                 ('cta_appstore', models.CharField(blank=True, max_length=255, null=True)),
