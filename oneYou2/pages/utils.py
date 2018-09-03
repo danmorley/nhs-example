@@ -8,7 +8,7 @@ from django.conf import settings
 from django.utils import timezone
 from django.utils.encoding import is_protected_type
 
-from wagtail.wagtaildocs.models import Document
+from wagtail.docs.models import Document
 from wagtailmedia.models import Media
 
 from shelves.models import ShelfAbstract
