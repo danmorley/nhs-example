@@ -28,6 +28,7 @@ urlpatterns = [
 
     url(r'^admin/custom/pages/', include(pages_urls, namespace="oneyou_pages")),
     url(r'^admin/experiments/', include(experiment_urls)),
+    url(r'^admin/pages/', include(pages_urls)),
 
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),

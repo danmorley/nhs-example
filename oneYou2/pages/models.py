@@ -695,6 +695,7 @@ class OneYou2Page(Page):
 
         if self.release:
             self.release = None
+
         super(OneYou2Page, self).save(*args, **kwargs)
         newest_revision = self.get_latest_revision()
 
