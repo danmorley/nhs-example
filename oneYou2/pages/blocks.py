@@ -5,7 +5,7 @@ from django.forms.utils import ErrorList
 from django.template.defaultfilters import slugify
 from wagtail.core import blocks
 from wagtail.core.blocks import StructValue
-from wagtail.media.blocks import AbstractMediaChooserBlock
+from wagtailmedia.blocks import AbstractMediaChooserBlock
 from django.utils.html import format_html
 from shelves.blocks import BlobImageChooserBlock
 
