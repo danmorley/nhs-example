@@ -110,6 +110,15 @@ def create(request, content_type_app_name, content_type_model_name, parent_page_
                                                          request=request)
             has_unsaved_changes = True
     else:
+        parent_page_json = parent_page.to_json()
+        page = page_class.from_json(parent_page_json)
+        slug = hashlib.sha224(base64.b64encode(str(time.time()).encode('utf-8'))).hexdigest()
+        page.slug = '%s-v%s' % (page.slug, slug[:6])
+        page.title = "%s (describe the variant)" % page.title
+
+        print(parent_page_json, type(parent_page_json))
+        print(page, type(page))
+
         signals.init_new_page.send(sender=create, page=page, parent=parent_page)
         form = form_class(instance=page, parent_page=parent_page)
         edit_handler = edit_handler.bind_to_instance(instance=page, form=form, request=request)
