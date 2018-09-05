@@ -3,6 +3,7 @@ import Parser from 'html-react-parser';
 import domToReact from 'html-react-parser/lib/dom-to-react';
 import { Link } from 'react-router-dom';
 import UrlUtils from './shared/UrlUtils';
+import './cms-richtext-formatter.css';
 
 /**
  * Helper class to process rich text 'body' fields according to a number of rules:
@@ -48,13 +49,14 @@ class CmsRichTextFormatter  {
   static renderSeeMore(node) {
     if (node.children) {
       return (
-        <div>
+        <div className="rich-text-see-more">
           <input />
-          <label>
+          <label></label>
+          <p>
             {node.children.map((child) =>
               child.data
             )}
-          </label>
+          </p>
         </div>
       )
     }
