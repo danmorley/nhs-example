@@ -15,6 +15,13 @@ IMAGE_VARIANT_CHOICES = (
     ('parent', 'Use parent')
 )
 
+PAGE_HEADING_LAYOUTS = (
+    ('image_bottom_left', 'Image bottom left'),
+    ('image_bottom_right', 'Image bottom right'),
+    ('image_top_right', 'Image top right'),
+    ('image_top_left', 'Image top left'),
+)
+
 
 class ImageBlock(blocks.StructBlock):
     image = BlobImageChooserBlock(required=False)
@@ -30,6 +37,11 @@ class ImageBlock(blocks.StructBlock):
                                                       label="Use desktop renditions",
                                                       required=False,
                                                       classname='dct-meta-field')
+    meta_layout = blocks.ChoiceBlock(choices=PAGE_HEADING_LAYOUTS,
+                                     label="Variant",
+                                     classname='dct-meta-field',
+                                     required=False,
+                                     default=False)
 
     def __init__(self, *args, **kwargs):
         if kwargs:
@@ -78,6 +90,7 @@ class ImageBlock(blocks.StructBlock):
         if image_meta:
 
             image = result['image']
+            image['layout'] = result['meta_layout']
             if image:
                 if image.get('renditions'):
                     mobile_rendition = None
