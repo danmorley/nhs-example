@@ -1,3 +1,40 @@
-.rich-text-see-more {
-  position: relative;
+@import '../assets/styles/variables/variables';
+
+.rich-text-see-more__input {
+  display: none;
+}
+
+.rich-text-see-more__label {
+  display: inline-block;
+  text-decoration: underline;
+  color: $teal-blue;
+  cursor: pointer;
+}
+
+.rich-text-see-more__label::before {
+  content: 'see more';
+  display: inline;
+  position: relative;  
+  transition:  0.5s cubic-bezier(0, 1.05, 0, 1);
+}
+
+.rich-text-see-more__input:checked + .rich-text-see-more__label {
+  position: absolute;
+  display: block;
+  top: 100%;
+}
+
+.rich-text-see-more__input:checked + .rich-text-see-more__label::before {
+  content: 'see less';
+}
+
+.rich-text-see-more__label + p {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 1.5s cubic-bezier(0, 1.05, 0, 1);
+}
+
+.rich-text-see-more__input:checked + .rich-text-see-more__label + p {
+  transition: max-height 2s ease;
+  max-height: 400px;
 }

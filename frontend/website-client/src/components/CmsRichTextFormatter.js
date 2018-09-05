@@ -1,6 +1,7 @@
 import React from 'react';
 import Parser from 'html-react-parser';
 import domToReact from 'html-react-parser/lib/dom-to-react';
+import uniqueId from 'lodash.uniqueid';
 import { Link } from 'react-router-dom';
 import UrlUtils from './shared/UrlUtils';
 import './cms-richtext-formatter.css';
@@ -48,16 +49,17 @@ class CmsRichTextFormatter  {
 
   static renderSeeMore(node) {
     if (node.children) {
+      const id = uniqueId("rt-see-more-id-");
       return (
-        <div className="rich-text-see-more">
-          <input />
-          <label></label>
+        <span className="rich-text-see-more">
+          <input id={id} className="rich-text-see-more__input" type="checkbox" />
+          <label htmlFor={id} className="rich-text-see-more__label"></label>
           <p>
             {node.children.map((child) =>
               child.data
             )}
           </p>
-        </div>
+        </span>
       )
     }
   }
