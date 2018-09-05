@@ -8,7 +8,7 @@ from django.utils.translation import ugettext as _
 from .models import Menu, Theme
 
 import wagtail.admin.rich_text.editors.draftail.features as draftail_features
-from wagtail.admin.rich_text.converters.html_to_contentstate import BlockElementHandler
+from wagtail.admin.rich_text.converters.html_to_contentstate import InlineStyleElementHandler
 from wagtail.core import hooks
 
 
@@ -25,11 +25,11 @@ def register_strikethrough_feature(features):
     }
 
     features.register_editor_plugin(
-        'draftail', feature_name, draftail_features.BlockFeature(control)
+        'draftail', feature_name, draftail_features.InlineStyleFeature(control)
     )
 
     db_conversion = {
-        'from_database_format': {tag: BlockElementHandler(type_)},
+        'from_database_format': {tag: InlineStyleElementHandler(type_)},
         'to_database_format': {'style_map': {type_: tag}},
     }
 
