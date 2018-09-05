@@ -44,6 +44,21 @@ class CmsRichTextFormatter  {
       return <span dangerouslySetInnerHTML={{__html: translatedText}} />;
     }
   }
+
+  static renderSeeMore(node) {
+    if (node.children) {
+      return (
+        <div>
+          <input />
+          <label>
+            {node.children.map((child) =>
+              child.data
+            )}
+          </label>
+        </div>
+      )
+    }
+  }
 }
 
 const parserOptions = {
@@ -54,6 +69,10 @@ const parserOptions = {
 
     if (node.type === 'text') {
       return CmsRichTextFormatter.renderText(node);
+    }
+
+    if (node.type === 'tag' && node.name === 'seemore') {
+      return CmsRichTextFormatter.renderSeeMore(node);
     }
   }
 };
