@@ -3,8 +3,8 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
+import wagtail.core.blocks
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             name='Menu',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('menu_items', wagtail.wagtailcore.fields.StreamField((('menu_item', wagtail.wagtailcore.blocks.CharBlock(classname='menu_item')),))),
+                ('menu_items', wagtail.core.fields.StreamField((('menu_item', wagtail.core.blocks.CharBlock(classname='menu_item')),))),
             ],
         ),
         migrations.DeleteModel(

@@ -3,14 +3,11 @@ import json
 from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
 from django.template.defaultfilters import slugify
-from django.utils.html import format_html
-
-from wagtail.wagtailcore import blocks
-from wagtail.wagtailcore.blocks import StructValue
+from wagtail.core import blocks
+from wagtail.core.blocks import StructValue
 from wagtailmedia.blocks import AbstractMediaChooserBlock
-
+from django.utils.html import format_html
 from shelves.blocks import BlobImageChooserBlock
-
 
 IMAGE_VARIANT_CHOICES = (
     ('contain', 'Contain'),

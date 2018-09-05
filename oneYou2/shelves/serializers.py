@@ -10,6 +10,11 @@ class ImageSerializer(serializers.Serializer):
     title = serializers.CharField()
 
     def to_representation(self, data):
+        if not data:
+            return {
+                'title': "",
+                'renditions': {}
+            }
         serialized_data = super(ImageSerializer, self).to_representation(data)
         if data:
             serialized_data['renditions'] = data.generate_or_get_all_renditions()

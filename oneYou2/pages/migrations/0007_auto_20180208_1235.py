@@ -3,8 +3,8 @@
 from __future__ import unicode_literals
 
 from django.db import migrations
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
+import wagtail.core.blocks
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -17,6 +17,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='footer',
             name='follow_us',
-            field=wagtail.wagtailcore.fields.StreamField((('social_media_link', wagtail.wagtailcore.blocks.StructBlock((('label', wagtail.wagtailcore.blocks.CharBlock(required=True)), ('type', wagtail.wagtailcore.blocks.ChoiceBlock(choices=[('twitter', 'Twitter'), ('facebook', 'Facebook')])), ('link', wagtail.wagtailcore.blocks.URLBlock(label='External link', required=False))))),)),
+            field=wagtail.core.fields.StreamField((('social_media_link', wagtail.core.blocks.StructBlock((('label', wagtail.core.blocks.CharBlock(required=True)), ('type', wagtail.core.blocks.ChoiceBlock(choices=[('twitter', 'Twitter'), ('facebook', 'Facebook')])), ('link', wagtail.core.blocks.URLBlock(label='External link', required=False))))),)),
         ),
     ]

@@ -13,7 +13,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 
-from wagtail.wagtailadmin.edit_handlers import FieldPanel
+from wagtail.admin.edit_handlers import FieldPanel
 
 from oneYou2.panels import ReadOnlyPanel
 

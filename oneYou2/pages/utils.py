@@ -8,7 +8,7 @@ from django.conf import settings
 from django.utils import timezone
 from django.utils.encoding import is_protected_type
 
-from wagtail.wagtaildocs.models import Document
+from wagtail.documents.models import Document
 from wagtailmedia.models import Media
 
 from shelves.models import ShelfAbstract
@@ -37,7 +37,7 @@ def process_inline_images(field):
 
 
 def process_inline_hyperlinks(field):
-    from wagtail.wagtailcore.models import Page
+    from wagtail.core.models import Page
     soup = BeautifulSoup(field, "html.parser")
     a_tags = soup.findAll("a", {"linktype": "page"})
     for a_tag in a_tags:

@@ -1,9 +1,8 @@
 Django==1.11.5
 django-pyodbc
 django-pyodbc-azure==1.11.0.0
-wagtail>=1.13,<1.14
+wagtail==2.2.2
 python-crontab
-wagtailsnippetscopy==0.1.0
 wagtailmedia
 django-cors-headers==2.1.0
 django-storages==1.6.5
@@ -16,3 +15,4 @@ beautifulsoup4==4.6.0
 django-axes==4.3.1
 factory-boy==2.10.0
 psycopg2==2.7.4
+git+git://github.com/andrew-thox/wagtailsnippetscopy@master

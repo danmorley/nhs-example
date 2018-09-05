@@ -3,8 +3,8 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
+import wagtail.core.blocks
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -23,6 +23,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='menu',
             name='menu_items',
-            field=wagtail.wagtailcore.fields.StreamField((('simple_menu_item', wagtail.wagtailcore.blocks.StructBlock((('link_text', wagtail.wagtailcore.blocks.CharBlock(required=True)), ('link_external', wagtail.wagtailcore.blocks.URLBlock(label='External link', required=False)), ('link_page', wagtail.wagtailcore.blocks.PageChooserBlock(required=False))))), ('multi_menu_item', wagtail.wagtailcore.blocks.StructBlock((('label', wagtail.wagtailcore.blocks.CharBlock(required=True)), ('menu_items', wagtail.wagtailcore.blocks.StreamBlock((('simple_menu_item', wagtail.wagtailcore.blocks.StructBlock((('link_text', wagtail.wagtailcore.blocks.CharBlock(required=True)), ('link_external', wagtail.wagtailcore.blocks.URLBlock(label='External link', required=False)), ('link_page', wagtail.wagtailcore.blocks.PageChooserBlock(required=False))))),), icon='arrow-left', label='Items'))))))),
+            field=wagtail.core.fields.StreamField((('simple_menu_item', wagtail.core.blocks.StructBlock((('link_text', wagtail.core.blocks.CharBlock(required=True)), ('link_external', wagtail.core.blocks.URLBlock(label='External link', required=False)), ('link_page', wagtail.core.blocks.PageChooserBlock(required=False))))), ('multi_menu_item', wagtail.core.blocks.StructBlock((('label', wagtail.core.blocks.CharBlock(required=True)), ('menu_items', wagtail.core.blocks.StreamBlock((('simple_menu_item', wagtail.core.blocks.StructBlock((('link_text', wagtail.core.blocks.CharBlock(required=True)), ('link_external', wagtail.core.blocks.URLBlock(label='External link', required=False)), ('link_page', wagtail.core.blocks.PageChooserBlock(required=False))))),), icon='arrow-left', label='Items'))))))),
         ),
     ]
