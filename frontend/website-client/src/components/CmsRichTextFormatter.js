@@ -54,11 +54,11 @@ class CmsRichTextFormatter  {
         <span className="rich-text-see-more">
           <input id={id} className="rich-text-see-more__input" type="checkbox" />
           <label htmlFor={id} className="rich-text-see-more__label"></label>
-          <p>
+          <div>
             {node.children.map((child) =>
               child.data
             )}
-          </p>
+          </div>
         </span>
       )
     }
