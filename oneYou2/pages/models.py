@@ -773,6 +773,8 @@ class OneYou2Page(Page):
 
         if mode_name == 'react':
             host = request.META['HTTP_HOST']
+            if settings.ENV == 'local':
+                host = host + ':8000'
             if settings.CONTENT_STORE_ENDPOINT:
                 content_store_endpoint = settings.CONTENT_STORE_ENDPOINT
             else:
