@@ -218,11 +218,13 @@ class VideoTemplate(CTABlock):
     meta_layout_mobile = blocks.ChoiceBlock(choices=[
         ('mobile_image_top', 'Top'),
         ('mobile_image_left', 'Left'),
+        ('mobile_image_only', 'Image only'),
     ],
         default='mobile_image_left', label='Mobile Image Position', classname='dct-meta-field')
     meta_layout_desktop = blocks.ChoiceBlock(choices=[
         ('desktop_image_top', 'Top'),
         ('desktop_image_left', 'Left'),
+        ('desktop_image_only', 'Image only'),
     ],
         default='desktop_image_left', label='Desktop Image Position', classname='dct-meta-field')
     meta_use_play_link = blocks.BooleanBlock(label='Use play video link', required=False, default=False,
