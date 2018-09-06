@@ -31,7 +31,7 @@ from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppT
 GRID_VARIANT_CHOICES = (
     ('standard', 'Standard'),
     ('teal_background', 'Teal Background on desktop, White Background on mobile'),
-    ('yellow_background', 'Yellow Background with Red Border'),
+    ('yellow_background', 'Yellow background'),
     ('light_blue_background', 'Light blue background'),
 )
 
@@ -40,6 +40,7 @@ GRID_LAYOUT_CHOICES = (
     ('2_col_1_on_mobile', 'Responsive (2 columns on desktop)'),
     ('3_col_1_on_mobile', 'Responsive (3 columns on desktop)'),
     ('4_col_1_on_mobile', 'Responsive (4 columns on desktop, 1 on mobile)'),
+    ('4_col_2_on_mobile', 'Responsive (4 columns on desktop, 2 on mobile)'),
     ('4_col_2_tablet_1_on_mobile', 'Responsive (4 columns on desktop, 2 tablet, 1 mobile)'),
 )
 
@@ -341,7 +342,9 @@ GRID_PANELS = [
     ('cta_panel', CtaPanel(icon='plus')),
     ('inline_script_panel', InlineScriptPanel(icon="code")),
     ('list_item_panel', ListItemPanel(icon='list-ul')),
-    ('simple_image_panel', SimpleImagePanel(icon="image"))
+    ('simple_image_panel', SimpleImagePanel(icon="image")),
+    ('rich_text_panel', RichTextPanel(required=False)),
+    ('simple_text_panel', SimpleTextPanel(required=False))
 ]
 
 
