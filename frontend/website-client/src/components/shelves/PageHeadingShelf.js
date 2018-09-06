@@ -109,9 +109,11 @@ class PageHeadingShelf extends Component {
                 {this.renderCta(content.cta)}
               </div>
             </div>
-            <div className={`${classNamePrefix}__image-container`}>
-              {this.renderImage(content.image, `${classNamePrefix}__image`)}
-            </div>
+            { content.image.link &&
+              <div className={`${classNamePrefix}__image-container`}>
+                {this.renderImage(content.image, `${classNamePrefix}__image`)}
+              </div>
+            }
           </div>
         </div>
       </Shelf>
