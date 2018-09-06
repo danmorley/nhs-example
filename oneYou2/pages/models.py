@@ -37,6 +37,7 @@ GRID_VARIANT_CHOICES = (
 
 GRID_LAYOUT_CHOICES = (
     ('full_width', 'Full Width'),
+    ('article_full_width', 'Article Full Width'),
     ('2_col_1_on_mobile', 'Responsive (2 columns on desktop)'),
     ('3_col_1_on_mobile', 'Responsive (3 columns on desktop)'),
     ('4_col_1_on_mobile', 'Responsive (4 columns on desktop, 1 on mobile)'),

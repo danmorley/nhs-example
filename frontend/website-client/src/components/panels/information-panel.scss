@@ -109,7 +109,7 @@
   padding-top: 1em;
   padding-bottom: 1em;
 
-  @include media-breakpoint-down(sm) {
+  @include media-breakpoint-down(md) {
     flex-direction: column-reverse;
   }
 
@@ -118,7 +118,7 @@
   }
 
   .information-panel__info {
-    @include media-breakpoint-down(sm) {
+    @include media-breakpoint-down(md) {
       width: 100%;
     }
   }
@@ -128,14 +128,22 @@
     margin-bottom: -1em;
     position: relative;
     left: 1.5em;
+    min-width: 600px;
 
-    @include media-breakpoint-down(sm) {
+    @include media-breakpoint-down(md) {
       position: static;
-      min-width: 600px;
       margin-left: -1.5em;
       margin-right: -1.5em;
       margin-bottom: 1em;
-    }  
+    }
+
+    @include media-breakpoint-up(md) {
+      min-width: 780px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      min-width: 300px;
+    }
   }
 }
 
