@@ -1,6 +1,7 @@
 import json
 import logging
 
+from django.conf import settings
 from django.db import models
 from django.db.models import DateField, TextField
 from django.forms.models import model_to_dict
@@ -25,7 +26,11 @@ from modelcluster.fields import ParentalKey
 
 from .blocks import IDBlock, CTABlock, MenuItemPageBlock, ImageBlock, SimpleCtaLinkBlock, MediaChooserBlock
 from .utils import get_serializable_data_for_fields
+
 from home.models import SiteSettings
+
+from oneYou2.utils import get_protocol
+
 from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppTeaserChooserBlock, \
     BlobImageChooserBlock, RecipeTeaserChooserBlock, ActionChooserBlock
 
@@ -767,8 +772,14 @@ class OneYou2Page(Page):
             return JsonResponse(serialized_page.data)
 
         if mode_name == 'react':
+            host = request.META['HTTP_HOST']
+            if settings.CONTENT_STORE_ENDPOINT:
+                content_store_endpoint = settings.CONTENT_STORE_ENDPOINT
+            else:
+                content_store_endpoint = get_protocol() + host + "/api"
             context = {
-                'preview_url': '/oneyou{}?preview_page={}'.format(self.get_url(), self.slug)
+                'preview_url': '/oneyou{}?preview_page={}&cms={}'.format(self.get_url(), self.slug,
+                                                                         content_store_endpoint)
             }
             return SimpleTemplateResponse(template='preview_wrapper.html', context=context)
 
