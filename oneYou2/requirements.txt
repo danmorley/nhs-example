@@ -5,7 +5,7 @@ wagtail>=1.13,<1.14
 python-crontab
 wagtailsnippetscopy==0.1.0
 django-cors-headers==2.1.0
-django-storages
+django-storages==1.6.5
 azure==1.0.0
 coverage==4.5.1
 gunicorn==19.6.0
