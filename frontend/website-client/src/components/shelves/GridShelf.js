@@ -29,15 +29,18 @@ class GridShelf extends Component {
     const panelClass = ((metaLayout) => {
       switch(metaLayout) {
       case 'full_width':
+      case 'article_full_width':
         return 'shelf__col col-sm-12';
       case '2_col_1_on_mobile':
         return 'shelf__col col-sm-12 col-md-6';
       case '3_col_1_on_mobile':
-        return'shelf__col col-sm-12 col-md-4';
+        return 'shelf__col col-sm-12 col-md-4';
       case '4_col_1_on_mobile':
-        return'shelf__col col-sm-12 col-md-3';
+        return 'shelf__col col-sm-12 col-md-3';
+      case '4_col_2_on_mobile':
+        return 'shelf__col col-6 col-md-3';
       case '4_col_2_tablet_1_on_mobile':
-        return'shelf__col col-sm-12 col-md-6 col-lg-3';
+        return 'shelf__col col-sm-12 col-md-6 col-lg-3';
       default:
         return 'shelf__col col-sm-12';
       }

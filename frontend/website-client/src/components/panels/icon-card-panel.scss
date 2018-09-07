@@ -18,13 +18,17 @@
   
   &.icon-card-panel--standard_grey_bg {
     .icon-card-panel__heading {
-      font-size: 0.9em;
+      font-size: 1.15em;
       font-family: $secondary-brand-font;
       text-transform: uppercase;
     }
 
     .icon-card-panel__text {
-      font-size: 0.7em;
+      font-size: 0.8em;
+
+      @include media-breakpoint-down(sm) {
+        font-size: 0.9em;
+      }
     }
   }
 
@@ -59,6 +63,10 @@
 
     .icon-card-panel__image img {
       width: 5em;
+
+      @include media-breakpoint-down(sm) {
+        width: 7.5em;
+      }
     }
     
     .icon-card-panel__text { 

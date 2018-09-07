@@ -242,6 +242,14 @@ $shelf-padding-extra: 2em;
       }
     }
   }
+
+  .page-heading-shelf__image {
+    height: 3em;
+
+    @include media-breakpoint-up(sm) {
+      height: 5em;
+    }
+  }
 }
 
 //variants
