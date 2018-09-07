@@ -32,9 +32,15 @@
   overflow: hidden;
   max-height: 0;
   transition: max-height 1.5s cubic-bezier(0, 1.05, 0, 1);
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
 }
 
 .rich-text-see-more__input:checked + .rich-text-see-more__label ~ .toggled-area {
   transition: max-height 2s ease;
-  max-height: 400px;
+  max-height: 800px;
+  position: relative;
+  top: unset;
+  left: unset;
 }
