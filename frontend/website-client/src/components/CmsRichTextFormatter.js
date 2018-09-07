@@ -50,17 +50,33 @@ class CmsRichTextFormatter  {
   static renderSeeMore(node) {
     if (node.children) {
       const id = uniqueId("rt-see-more-id-");
-      return (
-        <span className="rich-text-see-more">
-          <input id={id} className="rich-text-see-more__input" type="checkbox" />
-          <label htmlFor={id} className="rich-text-see-more__label"></label>
+      if (node.next && node.next.name === 'div') {
+        return (
           <div>
             {node.children.map((child) =>
               child.data
             )}
           </div>
-        </span>
-      )
+        )
+      } else {
+        CmsRichTextFormatter.addClassToTogglableAreas(node)
+        return (
+          <React.Fragment>
+            {node.children.map((child) =>
+              child.data
+            )}
+            <input key='see-more-input' id={id} className="rich-text-see-more__input" type="checkbox" />
+            <label key='see-more-label' htmlFor={id} className="rich-text-see-more__label"></label>
+          </React.Fragment>
+        )
+      }
+    }
+  }
+
+  static addClassToTogglableAreas(node) {
+    if (node.next) {
+      node.next.attribs['class'] = 'toggled-area';
+      CmsRichTextFormatter.addClassToTogglableAreas(node.next);
     }
   }
 }
@@ -75,7 +91,7 @@ const parserOptions = {
       return CmsRichTextFormatter.renderText(node);
     }
 
-    if (node.type === 'tag' && node.name === 'seemore') {
+    if (node.type === 'tag' && node.name === 'div') {
       return CmsRichTextFormatter.renderSeeMore(node);
     }
   }

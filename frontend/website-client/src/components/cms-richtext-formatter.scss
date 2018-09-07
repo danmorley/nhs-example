@@ -28,13 +28,13 @@
   content: 'see less';
 }
 
-.rich-text-see-more__label + div {
+.rich-text-see-more__label ~ .toggled-area {
   overflow: hidden;
   max-height: 0;
   transition: max-height 1.5s cubic-bezier(0, 1.05, 0, 1);
 }
 
-.rich-text-see-more__input:checked + .rich-text-see-more__label + div {
+.rich-text-see-more__input:checked + .rich-text-see-more__label ~ .toggled-area {
   transition: max-height 2s ease;
   max-height: 400px;
 }
