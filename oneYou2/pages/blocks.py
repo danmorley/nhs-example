@@ -16,10 +16,8 @@ IMAGE_VARIANT_CHOICES = (
 )
 
 PAGE_HEADING_LAYOUTS = (
-    ('image_bottom_left', 'Image bottom left'),
-    ('image_bottom_right', 'Image bottom right'),
-    ('image_top_right', 'Image top right'),
-    ('image_top_left', 'Image top left'),
+    ('top', 'Image top'),
+    ('bottom', 'Image bottom'),
 )
 
 

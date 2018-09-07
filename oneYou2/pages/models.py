@@ -133,8 +133,8 @@ class PageHeading(CTABlock):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     background_image = BlobImageChooserBlock(required=False)
-    logo_1 = ImageBlock(required=False, max_width=250, max_height=250)
-    logo_2 = ImageBlock(required=False, max_width=250, max_height=250)
+    image_left = ImageBlock(required=False)  # max_width=250, max_height=250)
+    image_right = ImageBlock(required=False)  # max_width=250, max_height=250)
     shelf_id = IDBlock(required=False,
                        label="ID",
                        help_text="Not displayed in the front end",
