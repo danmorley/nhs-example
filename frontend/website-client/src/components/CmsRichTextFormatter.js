@@ -53,8 +53,8 @@ class CmsRichTextFormatter  {
       if (node.next && node.next.name === 'div') {
         return (
           <div>
-            {node.children.map((child) =>
-              child.data
+            {node.children.map((child, i) =>
+              <p key={i}>{child.data}</p>
             )}
           </div>
         )
@@ -62,8 +62,8 @@ class CmsRichTextFormatter  {
         CmsRichTextFormatter.addClassToTogglableAreas(node)
         return (
           <React.Fragment>
-            {node.children.map((child) =>
-              child.data
+            {node.children.map((child, i) =>
+              <p key={i}>{child.data}</p>
             )}
             <input key='see-more-input' id={id} className="rich-text-see-more__input" type="checkbox" />
             <label key='see-more-label' htmlFor={id} className="rich-text-see-more__label"></label>
