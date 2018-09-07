@@ -30,8 +30,7 @@ class PageHeadingShelf extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      backgroundImageStyle: null,
-      firstImage: null
+      backgroundImageStyle: null
     }
   }
 
@@ -41,8 +40,8 @@ class PageHeadingShelf extends Component {
         this.props.content.background_image,
         ImageUtils.placeholderBackgroundImage()
       ),
-      firstImage: ImageUtils.isValid(this.props.content.logo_1) ? ImageUtils.deviceImage(this.props.content.logo_1) : null,
-      secondImage: ImageUtils.isValid(this.props.content.logo_2) ? ImageUtils.deviceImage(this.props.content.logo_2) : null
+      firstImage: ImageUtils.isValid(this.props.content.image_left) ? ImageUtils.deviceImage(this.props.content.image_left) : null,
+      secondImage: ImageUtils.isValid(this.props.content.image_right) ? ImageUtils.deviceImage(this.props.content.image_right) : null
     })
   }
 
@@ -83,41 +82,23 @@ class PageHeadingShelf extends Component {
   render() {
     let { id, content, classNamePrefix, variant } = this.props;
     let metaVariant = content.meta_variant || variant;
-    let firstImageLayout = content.logo_1.layout || '';
-    let secondImageLayout = content.logo_2.layout || '';
+    let firstImageLayout = content.image_left.layout || '';
+    let secondImageLayout = content.image_right.layout || '';
     let gradient = content.meta_gradient || false;
     let backgroundColourShelfStyle = {};
 
     let shelfStyle = (ImageUtils.isValid(content.background_image)) ?
       this.state.backgroundImageStyle : backgroundColourShelfStyle;
 
-    let firstLogoStyle = '';
-    let secondLogoStyle = '';
+    let firstLogoStyle = "left-image--top";
+    let secondLogoStyle = "right-image--bottom";
     
-    if (firstImageLayout === 'image_bottom_right') {
-      firstLogoStyle = "image-position--bottom-right"
-    }
-    else if (firstImageLayout === 'image_top_right') {
-      firstLogoStyle = "image-position--top-right"
-    }
-    else if (firstImageLayout === 'image_top_left') {
-      firstLogoStyle = "image-position--top-left"
-    }
-    else if (firstImageLayout === 'image_bottom_left') {
-      firstLogoStyle = "image-position--bottom-left"
+    if (firstImageLayout === 'bottom') {
+      firstLogoStyle = "left-image--bottom"
     }
     
-    if (secondImageLayout === 'image_bottom_right') {
-      secondLogoStyle = "image-position--bottom-right"
-    }
-    else if (secondImageLayout === 'image_bottom_left') {
-      secondLogoStyle = "image-position--bottom-left";
-    }
-    else if (secondImageLayout === 'image_top_right') {
-      secondLogoStyle = "image-position--top-right";
-    }
-    else if (secondImageLayout === 'image_top_left') {
-      secondLogoStyle = "image-position--top-left"
+    if (secondImageLayout === 'top') {
+      secondLogoStyle = "right-image--top"
     }
 
     let headingTagName = (classNamePrefix === 'page-heading-shelf') ? 'h1' : 'h2';
@@ -126,22 +107,26 @@ class PageHeadingShelf extends Component {
       <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
         <div className={`shelf__container container-fluid shelf-${firstLogoStyle} shelf-${secondLogoStyle} shelf__container-gradient--${gradient}`} style={shelfStyle}>
           <div className="container">
-            <div className="row">
-              <div className="shelf__col col-10 col-sm-8 col-md-7">
-                {this.renderHeadingBody(content, headingTagName)}
-                {this.renderCta(content.cta)}
-              </div>
-            </div>
-            { this.state.firstImage &&
-              <div className={`${classNamePrefix}__${firstLogoStyle}`}>
-                {this.renderImage1(content.logo_1, `${classNamePrefix}__image`)}
-              </div> 
-            }  
-            { this.state.secondImage &&
-              <div className={`${classNamePrefix}__${secondLogoStyle}`}>
-                {this.renderImage2(content.logo_2, `${classNamePrefix}__image`)}
-              </div>
-            }
+              <div className={`${classNamePrefix}__container-left`}>
+                <div className="row">
+                  <div className="shelf__col col-10 col-sm-8 col-md-7">
+                    {this.renderHeadingBody(content, headingTagName)}
+                    {this.renderCta(content.cta)}
+                  </div>
+                </div>
+                { this.state.firstImage &&
+                  <div className={`${classNamePrefix}__${firstLogoStyle}`}>
+                    {this.renderImage1(content.image_left, `${classNamePrefix}__image`)}
+                  </div> 
+                }  
+              </div>  
+              <div className={`${classNamePrefix}__container-right`}>
+                { this.state.secondImage &&
+                  <div className={`${classNamePrefix}__${secondLogoStyle}`}>
+                    {this.renderImage2(content.image_right, `${classNamePrefix}__image`)}
+                  </div>
+                }
+              </div>      
           </div>
         </div>
       </Shelf>
