@@ -145,6 +145,12 @@
       min-width: 300px;
     }
   }
+
+  .information-panel__text {  
+    a {
+      color: $sunflower-yellow;
+    }
+  }
 }
 
 
@@ -176,10 +182,6 @@
 
 .information-panel__text {
   color: $grey-brown-dark;
-
-  a {
-    color: $sunflower-yellow;
-  }
 }
   
 .shelf .information-panel__heading {
