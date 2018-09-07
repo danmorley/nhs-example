@@ -161,4 +161,6 @@ class ActionSerializer(HyperlinkedModelSerializer):
 
     class Meta:
         model = ActionShelf
-        fields = ['action_code', 'title', 'rich_text_body', 'cta', 'cta_googleplay', 'cta_appstore', 'shelf_id']
+        fields = ['paragon_id', 'action_code', 'title', 'rich_text_body', 'cta_googleplay', 'cta_appstore',
+                  'shelf_id', 'position', 'paragon_action_code', 'category', 'cta_type', 'cta1_text', 'cta1_link',
+                  'cta2_text', 'cta2_link', 'active']

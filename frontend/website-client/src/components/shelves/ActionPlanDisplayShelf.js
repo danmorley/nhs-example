@@ -8,17 +8,22 @@ import ActionGroupPanel from '../panels/ActionGroupPanel';
 import CtaLinks from '../shared/CtaLinks';
 
 const ACTION_PLAN_KEY = 'action_plan';
+const BASKET_KEY = 'basket';
 
 class ActionPlanDisplayShelf extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      actionPlan: {}
+      actionPlan: {},
+      basket: []
     }
   }
 
   componentDidMount() {
-    this.setState({actionPlan: this.storageToJSON(ACTION_PLAN_KEY, {})});
+    this.setState({
+      actionPlan: this.storageToJSON(ACTION_PLAN_KEY, {}),
+      basket: this.storageToJSON(BASKET_KEY, {})
+    });
   }
 
   storageToJSON(key, defaultValue) {
@@ -32,7 +37,7 @@ class ActionPlanDisplayShelf extends Component {
   render() {
     let { id, classNamePrefix, content } = this.props;
     let actionPlan = this.state.actionPlan;
-    let actionPlanKeys = Object.keys(actionPlan);
+    let actionPlanKeys = this.state.basket;
     let heading = content.title || '';
     let contentBody = content.body || '';
 
