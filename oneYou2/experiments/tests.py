@@ -182,7 +182,7 @@ class EditExperimentsViewsTests(OneYouTests):
         request.META = REQUEST_META
         request.POST = TEST_POST_CONTENT
         response = edit(request, page.id)
-        self.assertEquals(response.status_code, 302)
+        self.assertEquals(response.status_code, 200)
 
     def test_create_view_locks_live_experiments(self):
         page = create_test_oneyou_variant()
