@@ -11,6 +11,10 @@
   cursor: pointer;
 }
 
+.rich-text-see-more__inline {
+  display: inline;
+}
+
 .rich-text-see-more__label::before {
   content: 'see more';
   display: inline;
