@@ -504,6 +504,7 @@ class ActionPlanDisplay(blocks.StructBlock):
     shelf_id = IDBlock(required=False, label='ID', classname='dct-meta-field')
     title = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
+
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False)
@@ -560,6 +561,10 @@ class OneYou2Page(Page):
     use_share_button = models.BooleanField(default=True)
     use_email_button = models.BooleanField(default=False)
     use_print_button = models.BooleanField(default=False)
+
+    opt_in_1_text = models.CharField(max_length=255, blank=True, null=True)
+    opt_in_2_text = models.CharField(max_length=255, blank=True, null=True)
+    ts_and_cs_statement = models.TextField(blank=True, null=True)
 
     twitter_image_fk = models.ForeignKey(
         'images.PHEImage',
@@ -667,6 +672,15 @@ class OneYou2Page(Page):
                 FieldPanel('use_print_button'),
             ],
             heading='Share buttons',
+            classname='collapsible collapsed'),
+        MultiFieldPanel(
+            [
+
+                FieldPanel('opt_in_1_text'),
+                FieldPanel('opt_in_2_text'),
+                FieldPanel('ts_and_cs_statement'),
+            ],
+            heading='Action plan terms and conditions',
             classname='collapsible collapsed'),
     ]
 
