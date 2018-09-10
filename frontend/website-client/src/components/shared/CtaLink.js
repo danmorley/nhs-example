@@ -44,7 +44,7 @@ class CtaLink extends Component {
     }
 
     const href = CtaUtils.getCtaPath(cta);
-console.log(cta)
+
     // Render the link.
     if (UrlUtils.isExternalLink(href)) {
       // External link - use normal <a> tag.

@@ -75,7 +75,8 @@ const sampleShelvesPage = {
         image_meta: "page_heading_shelf/None/None",
         meta_gradient: false,
         mobile_use_renditions: true,
-        background_image: null
+        background_image: {},
+        image: {}
       }
     },
     {
@@ -95,7 +96,8 @@ const sampleShelvesPage = {
         image_meta: "page_heading_shelf/None/None",
         meta_gradient: false,
         mobile_use_renditions: true,
-        background_image: null
+        background_image: {},
+        image: {}
       }
     },
     {
@@ -113,7 +115,8 @@ const sampleShelvesPage = {
         body: 'Pickled tilde taxidermy, messenger bag synth fixie venmo. Pickled sartorial leggings biodiesel letterpress DIY. Lumbersexual glossier sartorial leggings, try-hard lo-fi trust fund.',
         image_meta: "page_heading_shelf/None/None",
         meta_gradient: false,
-        background_image: backgroundImage
+        background_image: backgroundImage,
+        image: {}
       }
     },
     {
@@ -133,7 +136,8 @@ const sampleShelvesPage = {
         image_meta: "page_heading_shelf/None/None",
         meta_gradient: true,
         mobile_use_renditions: true,
-        background_image: backgroundImage
+        background_image: backgroundImage,
+        image: {}
       }
     },
     {
