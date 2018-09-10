@@ -764,7 +764,6 @@ class OneYou2Page(Page):
     def serve_preview(self, request, mode_name):
         request.is_preview = True
         print("SERVE PREVIEW")
-        print('Preview request', request.__dict__)
 
         if mode_name == 'json':
             from .serializers import OneYouPageSerializer
@@ -773,16 +772,8 @@ class OneYou2Page(Page):
             return JsonResponse(serialized_page.data)
 
         if mode_name == 'react':
-            host = request.META['HTTP_HOST']
-            if settings.ENV == 'local':
-                host = host + ':8000'
-            if settings.CONTENT_STORE_ENDPOINT:
-                content_store_endpoint = settings.CONTENT_STORE_ENDPOINT
-            else:
-                content_store_endpoint = get_protocol() + host + "/api"
             context = {
-                'preview_url': '/oneyou{}?preview_page={}&cms={}'.format(self.get_url(), self.slug,
-                                                                         content_store_endpoint)
+                'preview_url': '/oneyou{}?preview_page={}'.format(self.get_url(), self.slug)
             }
             return SimpleTemplateResponse(template='preview_wrapper.html', context=context)
 
