@@ -55,7 +55,7 @@ class ActionPlanShelf extends Component {
     const panelLayout = panelInfo && panelInfo.layout;
 
     return (
-      <Shelf id={id} classNamePrefix={classNamePrefix}>
+      <Shelf id={id} classNamePrefix={classNamePrefix} trackingGroup={content.tracking_group}>
         <div className={`shelf__container container`}>
           { actionGroups.map((group, i) =>
             <ActionGroupPanel key={i} id={group.panel_id} classNamePrefix={panelClassNamePrefix}

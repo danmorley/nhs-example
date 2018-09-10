@@ -12,6 +12,7 @@ class Shelf extends Component {
 
   handleClick(e) {
     e.preventDefault();
+    // console.log('Tracking click', this.props.trackingGroup, this.props.id);
     if (this.props.trackingGroup) TrackingUtils.trackEvent(e.target, this.props.trackingGroup, 'Click', this.props.id);
   }
 
@@ -21,12 +22,12 @@ class Shelf extends Component {
   }
 
   render() {
-    const { id, layout, style, onMouseDown, children } = this.props;
+    const { id, layout, style, trackingGroup, children } = this.props;
     let sectionStyle = (layout) ? "shelf-section shelf-" + layout : "shelf-section";
 
     return (
       <section className={sectionStyle}>
-        <div id={id} className={this.shelfClasses()} style={style} onMouseDown={this.handleClick}>
+        <div id={id} className={this.shelfClasses()} style={style} data-tracking-group={trackingGroup} onMouseDown={this.handleClick}>
           {children}
         </div>
       </section>

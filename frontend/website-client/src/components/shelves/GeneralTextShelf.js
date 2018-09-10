@@ -21,7 +21,7 @@ class GeneralTextShelf extends Component {
     let { id, content, classNamePrefix } = this.props;
 
     return (
-      <Shelf id={id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
+      <Shelf id={id} classNamePrefix={classNamePrefix} variant={content.meta_variant} trackingGroup={content.tracking_group}>
         <div className="shelf__container container">
           <div className="row">
             <div className="shelf__col col-12 col-vertical-center">

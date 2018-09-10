@@ -56,7 +56,7 @@ class ShelfAbstract(models.Model):
         editable=False)
 
     is_creatable = False
-    tracking_group = blocks.CharBlock(required=False, classname='dct-meta-field', help_text='The tracking group, eg. EMM or OY')
+    tracking_group = models.CharField(null=True, blank=True, max_length=20, help_text='The tracking group, eg. EMM or OY')
 
     content_panels = []
     promote_panels = []

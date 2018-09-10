@@ -42,7 +42,7 @@ class ActionPlanDisplayShelf extends Component {
     let contentBody = content.body || '';
 
     return (
-      <Shelf id={id} classNamePrefix={classNamePrefix}>
+      <Shelf id={id} classNamePrefix={classNamePrefix} trackingGroup={content.tracking_group}>
         <div className={`${classNamePrefix}--lead`}>
           <div className='container'>
             {heading != '' &&

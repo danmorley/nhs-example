@@ -6,6 +6,7 @@
     "bootstrap-4-grid": "^2.3.0",
     "html-react-parser": "^0.4.3",
     "lodash.chunk": "^4.2.0",
+    "lodash.snakecase": "^4.1.1",
     "lodash.startswith": "^4.2.1",
     "lodash.uniqueid": "^4.0.1",
     "node-sass-chokidar": "0.0.3",

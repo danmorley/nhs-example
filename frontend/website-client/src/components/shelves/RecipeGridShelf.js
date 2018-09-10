@@ -38,7 +38,7 @@ class RecipeGridShelf extends Component {
     });
 
     return (
-      <Shelf id={id} classNamePrefix={classNamePrefix}>
+      <Shelf id={id} classNamePrefix={classNamePrefix} trackingGroup={content.tracking_group}>
         <div className={`shelf__container container image--${metaImageDisplay}`}>
           <h2 className="shelf__header">{content.heading}</h2>
           <ShowMorePanel rowsToShow={content.rows_to_show}>

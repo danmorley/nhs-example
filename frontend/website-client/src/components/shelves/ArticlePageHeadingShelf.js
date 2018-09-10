@@ -31,7 +31,7 @@ class ArticlePageHeadingShelf extends Component {
     const parentPath = UrlUtils.parentPath(window.location.pathname);
 
     return (
-      <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+      <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group}>
         <div className="shelf__container container">
           <div className="row justify-content-center align-items-center">
             <div className="shelf__col col-12">

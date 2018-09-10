@@ -58,7 +58,7 @@ class MainCarouselShelf extends Component {
     });
 
     return (
-      <Shelf id={id} classNamePrefix={classNamePrefix}>
+      <Shelf id={id} classNamePrefix={classNamePrefix} trackingGroup={content.tracking_group}>
         <div className="shelf__container container">
           {content.heading && <h2 className="shelf__header">{content.heading}</h2>}
         </div>
