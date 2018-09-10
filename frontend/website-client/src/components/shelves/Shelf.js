@@ -1,20 +1,33 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import TrackingUtils from '../shared/TrackingUtils';
 import './shelves.css';
 
 class Shelf extends Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+    if (this.props.trackingGroup) TrackingUtils.trackEvent(e.target, this.props.trackingGroup, 'Click', this.props.id);
+  }
+
   shelfClasses() {
     let classNamePrefix = this.props.classNamePrefix || 'basic';
     return this.props.variant ? `shelf ${classNamePrefix} ${classNamePrefix}--${this.props.variant}` : `shelf ${classNamePrefix}`;
   }
 
   render() {
-    let sectionStyle = (this.props.layout) ? "shelf-section shelf-"+this.props.layout : "shelf-section";
+    const { id, layout, style, onMouseDown, children } = this.props;
+    let sectionStyle = (layout) ? "shelf-section shelf-" + layout : "shelf-section";
+
     return (
       <section className={sectionStyle}>
-        <div id={this.props.id} className={this.shelfClasses()} style={this.props.style}>
-          {this.props.children}
+        <div id={id} className={this.shelfClasses()} style={style} onMouseDown={this.handleClick}>
+          {children}
         </div>
       </section>
     );
@@ -26,6 +39,7 @@ Shelf.propTypes = {
   variant: PropTypes.string,
   layout: PropTypes.string,
   style: PropTypes.object,
+  trackingGroup: PropTypes.string,
   id: PropTypes.string
 }
 

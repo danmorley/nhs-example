@@ -50,17 +50,17 @@ class CtaLink extends Component {
       // External link - use normal <a> tag.
       if (cta.document) {
         return (
-          <a className={linkClass} href={href} download={href}><Text tagName="span" content={cta.link_text} /></a>
+          <a className={linkClass} href={href} download={href} data-name={cta.link_id}><Text tagName="span" content={cta.link_text} /></a>
         );
       } else {
         return (
-          <a className={linkClass} href={href}><Text tagName="span" content={cta.link_text} /></a>
+          <a className={linkClass} href={href} data-name={cta.link_id}><Text tagName="span" content={cta.link_text} /></a>
         );
       }
     } else {
       // Internal link - use react router to prevent page refresh.
       return (
-        <Link className={linkClass} to={href}><Text tagName="span" content={cta.link_text} /></Link>
+        <Link className={linkClass} to={href} data-name={cta.link_id}><Text tagName="span" content={cta.link_text} /></Link>
       );
     }
   }
