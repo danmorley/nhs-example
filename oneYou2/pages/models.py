@@ -91,14 +91,6 @@ VIDEO_LAYOUTS = (
     ('text_on_top', 'Video Bottom Text Top'),
 )
 
-
-PAGE_HEADING_LAYOUTS = (
-    ('image_bottom_left', 'Image bottom left'),
-    ('image_bottom_right', 'Image bottom right'),
-    ('image_top_right', 'Image top right'),
-    ('image_top_left', 'Image top left'),
-)
-
 BRIGHTCOVE_OPTION = ('brightcove', 'Brightcove')
 WIREWAX_OPTION = ('wirewax', 'Wirewax')
 VIDEO_HOSTS = (
@@ -151,7 +143,8 @@ class PageHeading(CTABlock):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     background_image = BlobImageChooserBlock(required=False)
-    image = ImageBlock(required=False, max_width=250, max_height=250)
+    image_left = ImageBlock(required=False)  # max_width=250, max_height=250)
+    image_right = ImageBlock(required=False)  # max_width=250, max_height=250)
     shelf_id = IDBlock(required=False,
                        label="ID",
                        help_text="Not displayed in the front end",
@@ -161,12 +154,6 @@ class PageHeading(CTABlock):
                                         required=False,
                                         default=False,
                                         classname='dct-meta-field')
-
-    meta_layout = blocks.ChoiceBlock(choices=PAGE_HEADING_LAYOUTS,
-                                     label="Variant",
-                                     classname='dct-meta-field',
-                                     required=False,
-                                     default=False)
 
     class Meta:
         form_classname = 'dct-page-heading-panel dct-meta-panel'
