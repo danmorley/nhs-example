@@ -198,6 +198,7 @@ class SimpleCtaLinkBlock(blocks.StructBlock):
     link_text = blocks.CharBlock(required=False)
     link_external = blocks.CharBlock(label='External link', required=False)
     link_page = MenuItemPageBlock(required=False)
+    link_id = IDBlock(required=False, label='ID', classname='dct-meta-field', help_text='Uniquely identify the CTA. Often used for tracking')
 
     class Meta:
         icon = 'link'

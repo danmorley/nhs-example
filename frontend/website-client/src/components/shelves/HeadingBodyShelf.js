@@ -29,7 +29,7 @@ class HeadingBodyShelf extends Component {
     // let metaLayout = content.meta_layout || layout;
 
     return (
-      <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+      <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group}>
         <div className="shelf__container container">
           <div className="row">
             <div className="col shelf__col">

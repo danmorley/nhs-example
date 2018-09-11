@@ -116,6 +116,11 @@ class SimpleMenuItem(blocks.StructBlock):
     link_text = blocks.CharBlock(required=False)
     link_external = blocks.CharBlock(label='External link', required=False)
     link_page = MenuItemPageBlock(required=False)
+    link_id = IDBlock(required=False, label="ID", classname='dct-meta-field', help_text="Uniquely identify the CTA. Often used for tracking")
+
+    class Meta:
+        icon = 'link'
+        form_classname = 'dct-simple-menu-item dct-meta-panel'
 
 
 class MultiMenuItem(blocks.StructBlock):
@@ -343,6 +348,10 @@ GRID_PANELS = [
 
 # Shelves
 
+class Shelf(blocks.StructBlock):
+    tracking_group = blocks.CharBlock(required=False, classname='dct-meta-field', help_text='The tracking group, eg. EMM or OY')
+
+
 class SectionHeading(blocks.StructBlock):
     heading = blocks.CharBlock(required=False)
     shelf_id = IDBlock(required=False,
@@ -384,7 +393,7 @@ class Divider(blocks.StructBlock):
     shelf_id = IDBlock(required=False, label="ID", help_text="Not displayed in the front end")
 
 
-class Carousel(blocks.StructBlock):
+class Carousel(Shelf):
     heading = blocks.CharBlock(required=False)
     items = blocks.StreamBlock([
         ('video_teaser', VideoTemplate(icon="media")),
@@ -397,7 +406,7 @@ class Carousel(blocks.StructBlock):
         form_classname = 'dct-carousel-shelf dct-meta-panel'
 
 
-class PanelCarousel(blocks.StructBlock):
+class PanelCarousel(Shelf):
     heading = blocks.CharBlock(required=False)
     items = blocks.StreamBlock([
         ('video_teaser', VideoTemplate(icon="media")),
@@ -411,7 +420,7 @@ class PanelCarousel(blocks.StructBlock):
         form_classname = 'dct-panel-carousel-shelf dct-meta-panel'
 
 
-class Grid(blocks.StructBlock):
+class Grid(Shelf):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     items = blocks.StreamBlock(GRID_PANELS, icon='arrow-left', label='Items')
@@ -436,7 +445,7 @@ class Grid(blocks.StructBlock):
         form_classname = 'dct-grid-shelf dct-meta-panel'
 
 
-class RecipeGrid(blocks.StructBlock):
+class RecipeGrid(Shelf):
     heading = blocks.CharBlock(required=False)
     items = blocks.StreamBlock([
         ('recipe_teaser', RecipeTeaserChooserBlock(target_model="shelves.RecipeTeaser", icon="image"))
@@ -451,7 +460,7 @@ class RecipeGrid(blocks.StructBlock):
         form_classname = 'dct-recipe-grid-shelf dct-meta-panel'
 
 
-class Table(blocks.StructBlock):
+class Table(Shelf):
     header = blocks.ListBlock(blocks.CharBlock(required=False), default=[], label='Column headings')
     display_header = blocks.BooleanBlock(label='Display the table header?',
                                          required=False)
@@ -470,7 +479,7 @@ class Table(blocks.StructBlock):
         form_classname = 'dct-table-shelf dct-meta-panel'
 
 
-class TriageToolShelf(blocks.StructBlock):
+class TriageToolShelf(Shelf):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     shelf_id = IDBlock(required=False,
@@ -482,7 +491,7 @@ class TriageToolShelf(blocks.StructBlock):
         form_classname = 'dct-triage-tool-shelf dct-meta-panel'
 
 
-class ActionGroup(blocks.StructBlock):
+class ActionGroup(Shelf):
     title = blocks.CharBlock(required=True)
     actions = blocks.StreamBlock([
         ('action_panel', ActionChooserBlock(target_model="shelves.ActionShelf", icon="list-ul")),
@@ -490,7 +499,7 @@ class ActionGroup(blocks.StructBlock):
     panel_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
 
 
-class ActionPlan(blocks.StructBlock):
+class ActionPlan(Shelf):
     action_groups = blocks.StreamBlock([
         ('action_group', ActionGroup(required=False, icon="collapse-down")),
     ])
@@ -500,7 +509,7 @@ class ActionPlan(blocks.StructBlock):
     shelf_id = IDBlock(required=False, label='ID', classname='dct-meta-field')
 
 
-class ActionPlanDisplay(blocks.StructBlock):
+class ActionPlanDisplay(Shelf):
     shelf_id = IDBlock(required=False, label='ID', classname='dct-meta-field')
     title = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)

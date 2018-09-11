@@ -36,7 +36,7 @@ class TableShelf extends Component {
     let metaLayout = content.meta_layout || layout;
 
     return (
-      <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} layout={metaLayout}>
+      <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} layout={metaLayout} trackingGroup={content.tracking_group}>
         <div className="shelf__container container">
           {content.heading && <h2 className="shelf__header">{content.heading}</h2>}
           <div className="row">
