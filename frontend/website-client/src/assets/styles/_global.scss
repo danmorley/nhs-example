@@ -21,6 +21,10 @@ html {
 
   @include media-breakpoint-up(sm) {
     font-size: $font-default-desktop;
+
+    p, li {
+      line-height: 1.3em;
+    }
   }
 }
 

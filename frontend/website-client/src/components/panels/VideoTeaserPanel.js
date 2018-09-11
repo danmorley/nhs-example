@@ -78,12 +78,18 @@ class VideoTeaserPanel extends Component {
     else if (content.meta_layout_desktop === 'desktop_image_top') {
       desktopImagePosition = "desktop-image-top"
     }
+    else if (content.meta_layout_desktop === 'desktop_image_only') {
+      desktopImagePosition = "desktop-image-only"
+    }
     
     if (content.meta_layout_mobile === 'mobile_image_left') {
       mobileImagePosition = "mobile-image-left"
     }
     else if (content.meta_layout_mobile === 'mobile_image_top') {
       mobileImagePosition = "mobile-image-top"
+    }     
+    else if (content.meta_layout_mobile === 'mobile_image_only') {
+      mobileImagePosition = "mobile-image-only"
     }     
      
     let layout = mobileImagePosition + '-' +  desktopImagePosition;

@@ -106,3 +106,9 @@ div.dct-meta-block > .sequence-controls {
   position: relative;
   float: right;
 }
+
+div.dct-block ul.fields, div.dct-panel ul.fields {
+  border: 1px solid #d4d4d4;
+  padding: 8px;
+}
+

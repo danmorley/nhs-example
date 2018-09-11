@@ -29,6 +29,7 @@ ONEYOU_RENDITIONS = [
     ('oneyou1_teaser', 'grid_shelf', '3_col_1_on_mobile',  {'desktop': '364x220', 'mobile': '345x160'}),
 
     ('information_panel', 'grid_shelf', 'full_width', {'desktop': '460x336', 'mobile': '138x176'}),
+    ('information_panel', 'grid_shelf', 'article_full_width', {'desktop': '650x450', 'mobile': '345x160'}),
     ('information_panel', 'grid_shelf', '2_col_1_on_mobile', {'desktop': '224x336', 'mobile': '138x176'}),
     ('information_panel', 'grid_shelf', '3_col_1_on_mobile', {'desktop': '146x336', 'mobile': '138x176'}),
 

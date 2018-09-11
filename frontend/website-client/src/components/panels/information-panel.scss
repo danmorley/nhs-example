@@ -105,6 +105,55 @@
   }
 }
 
+.information-panel--plain_background {
+  padding-top: 1em;
+  padding-bottom: 1em;
+
+  @include media-breakpoint-down(md) {
+    flex-direction: column-reverse;
+  }
+
+  .information-panel__heading {
+    color: $teal-blue !important;
+  }
+
+  .information-panel__info {
+    @include media-breakpoint-down(md) {
+      width: 100%;
+    }
+  }
+
+  .information-panel__image {
+    margin-top: -1.5em;
+    margin-bottom: -1em;
+    position: relative;
+    left: 1.5em;
+    min-width: 600px;
+
+    @include media-breakpoint-down(md) {
+      position: static;
+      margin-left: -1.5em;
+      margin-right: -1.5em;
+      margin-bottom: 1em;
+    }
+
+    @include media-breakpoint-up(md) {
+      min-width: 780px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      min-width: 300px;
+    }
+  }
+
+  .information-panel__text {  
+    a {
+      color: $sunflower-yellow;
+    }
+  }
+}
+
+
 //theming
 
 //default theme (oneyou)
@@ -132,11 +181,7 @@
 }
 
 .information-panel__text {
-  color: $black;
-
-  a {
-    color: $sunflower-yellow;
-  }
+  color: $grey-brown-dark;
 }
   
 .shelf .information-panel__heading {

@@ -38,18 +38,30 @@ from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppT
 GRID_VARIANT_CHOICES = (
     ('standard', 'Standard'),
     ('teal_background', 'Teal Background on desktop, White Background on mobile'),
-    ('yellow_background', 'Yellow Background with Red Border'),
+    ('yellow_background', 'Yellow background'),
+    ('light_blue_background', 'Light blue background'),
 )
 
 GRID_LAYOUT_CHOICES = (
     ('full_width', 'Full Width'),
+    ('article_full_width', 'Article Full Width'),
     ('2_col_1_on_mobile', 'Responsive (2 columns on desktop)'),
     ('3_col_1_on_mobile', 'Responsive (3 columns on desktop)'),
+    ('4_col_1_on_mobile', 'Responsive (4 columns on desktop, 1 on mobile)'),
+    ('4_col_2_on_mobile', 'Responsive (4 columns on desktop, 2 on mobile)'),
+    ('4_col_2_tablet_1_on_mobile', 'Responsive (4 columns on desktop, 2 tablet, 1 mobile)'),
 )
 
 GRID_IMAGE_CHOICES = (
     ('contain', 'Contain'),
     ('cover', 'Stretch'),
+)
+
+GRID_GUTTER_CHOICES = (
+    ('gutter-unset', 'Unset'),
+    ('gutter-sm', 'Small'),
+    ('gutter-md', 'Medium'),
+    ('gutter-lg', 'Large'),
 )
 
 TABLE_VARIANTS = (
@@ -75,9 +87,15 @@ ICON_CARD_VARIANTS = (
     ('large_yellow_heading_standard_body_no_bg', 'Large yellow heading, standard body, no background (Active 10)'),
 )
 
+IMAGE_PANEL_VARIANTS = (
+    ('normal', 'Normal'),
+    ('stretch', 'Stretch'),
+)
+
 INFO_PANEL_VARIANTS = (
     ('mobile-image-top-text-right', 'Mobile image on top, Desktop image on left with text right'),
-    ('mobile-image-right', 'Mobile image on right, Desktop image on right')
+    ('mobile-image-right', 'Mobile image on right, Desktop image on right'),
+    ('plain_background', 'Plain background')
 )
 
 RICH_TEXT_PANEL_VARIANTS = (
@@ -210,11 +228,13 @@ class VideoTemplate(CTABlock):
     meta_layout_mobile = blocks.ChoiceBlock(choices=[
         ('mobile_image_top', 'Top'),
         ('mobile_image_left', 'Left'),
+        ('mobile_image_only', 'Image only'),
     ],
         default='mobile_image_left', label='Mobile Image Position', classname='dct-meta-field')
     meta_layout_desktop = blocks.ChoiceBlock(choices=[
         ('desktop_image_top', 'Top'),
         ('desktop_image_left', 'Left'),
+        ('desktop_image_only', 'Image only'),
     ],
         default='desktop_image_left', label='Desktop Image Position', classname='dct-meta-field')
     meta_use_play_link = blocks.BooleanBlock(label='Use play video link', required=False, default=False,
@@ -282,6 +302,19 @@ class IconCardPanel(CTABlock):
         form_classname = 'dct-icon-card-panel dct-meta-panel'
 
 
+class SimpleImagePanel(CTABlock):
+    image = BlobImageChooserBlock(required=False)
+    image_cta = SimpleCtaLinkBlock(required=False)
+    panel_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
+    meta_variant = blocks.ChoiceBlock(choices=IMAGE_PANEL_VARIANTS,
+                                      default='normal',
+                                      label="Variant",
+                                      classname='dct-meta-field')
+
+    class Meta:
+        form_classname = 'dct-simple-image-panel dct-meta-panel'
+
+
 class SimpleTextPanel(blocks.StructBlock):
     text = blocks.CharBlock(required=False)
 
@@ -304,7 +337,11 @@ class ListItemPanel(blocks.StructBlock):
 class InlineScriptPanel(blocks.StructBlock):
     script = blocks.TextBlock(required=False, help_text="The javascript to be inserted")
     src = blocks.CharBlock(required=False, help_text="URL of the javascript file")
-    field_id = IDBlock(required=False, label="Placeholder ID", retain_case=True, classname='dct-meta-field')
+    field_id = IDBlock(required=False, label="ID", retain_case=True, classname='dct-meta-field')
+    script_id = IDBlock(required=False, label='Script tag ID', retain_case=True,
+                        help_text='Optional ID of the script tag')
+    placeholder_id = IDBlock(required=False, label='Placeholder ID', retain_case=True,
+                             help_text='If given, an empty placeholder div will be added before the script tag')
 
     class Meta:
         form_classname = 'dct-inline-script-panel dct-meta-panel'
@@ -340,7 +377,10 @@ GRID_PANELS = [
     ('cta_panel', CtaPanel(icon='plus')),
     ('inline_script_panel', InlineScriptPanel(icon="code")),
     ('inline_svg_panel', InlineSvgPanel(icon="snippet")),
-    ('list_item_panel', ListItemPanel(icon='list-ul'))
+    ('list_item_panel', ListItemPanel(icon='list-ul')),
+    ('simple_image_panel', SimpleImagePanel(icon="image")),
+    ('rich_text_panel', RichTextPanel(required=False)),
+    ('simple_text_panel', SimpleTextPanel(required=False))
 ]
 
 
@@ -374,14 +414,18 @@ class ArticlePageHeadingShelf(blocks.StructBlock):
 
 
 class IFrameShelf(blocks.StructBlock):
-    heading = blocks.CharBlock(required=False)
-    src = blocks.CharBlock(required=True, label="Source URl")
+    heading = blocks.CharBlock(required=False, label='Shelf heading')
+    title = blocks.CharBlock(required=False, help_text='Title for accessibility')
+    src = blocks.CharBlock(required=True, label='Source URL')
     frame_border = blocks.IntegerBlock(default=0, required=False)
     scrolling = blocks.CharBlock(required=False)
-    width = blocks.IntegerBlock(default=100, required=False)
-    height = blocks.IntegerBlock(default=100, required=False)
+    width = blocks.CharBlock(default='100%', required=False, help_text='eg. 100%, 300px')
+    height = blocks.CharBlock(defaut='400px', required=False, help_text='eg. 300px, 20em')
     sandbox = blocks.CharBlock(required=False)
-    shelf_id = blocks.CharBlock(required=False, label="ID", classname='dct-meta-field')
+    shelf_id = blocks.CharBlock(required=False, label='ID', classname='dct-meta-field')
+    meta_iframe_id = blocks.CharBlock(required=False, label='Iframe ID', classname='dct-meta-field')
+    meta_wrapper_div_id = blocks.CharBlock(required=False, label='Wrapper div ID', classname='dct-meta-field')
+    meta_wrapper_div_class = blocks.CharBlock(required=False, label='Wrapper div class', classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-iframe-shelf dct-meta-panel'
@@ -435,8 +479,12 @@ class Grid(Shelf):
                                      help_text="Use this to select number of columns on desktop (only one column"
                                                " on mobile)", classname='dct-meta-field')
     meta_image_display = blocks.ChoiceBlock(GRID_IMAGE_CHOICES,
-                                            label='Teaser Image Display',
-                                            default="cover",
+                                            label='Teaser image display',
+                                            default='cover',
+                                            classname='dct-meta-field')
+    meta_gutter_size = blocks.ChoiceBlock(GRID_GUTTER_CHOICES,
+                                            label='Gutter size',
+                                            default='gutter-unset',
                                             classname='dct-meta-field')
 
     class Meta:

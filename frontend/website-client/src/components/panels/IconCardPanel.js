@@ -202,7 +202,7 @@ class IconCardPanel extends Component {
 
   renderHeading(content, classNamePrefix) {
     return (
-      <Text tagName="h2" content={content.heading} className={`${classNamePrefix}__heading`} />
+      <Text tagName="h3" content={content.heading} className={`${classNamePrefix}__heading`} />
     );
   }
 

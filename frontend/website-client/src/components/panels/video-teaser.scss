@@ -168,6 +168,18 @@
       }
     }
   }
+
+  &[class*="desktop-image-only"], &[class*="mobile-image-only"]{
+    .video-teaser__image {
+      width: 100%;
+      height: auto;
+      min-height: 176px; 
+      
+      @include media-breakpoint-up(sm) {
+        min-height: 263px;
+      }  
+    }
+  }
 }
 
 /* hero size video full width */

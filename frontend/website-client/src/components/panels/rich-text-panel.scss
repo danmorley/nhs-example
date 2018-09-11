@@ -1,6 +1,7 @@
 @import '../../assets/styles/variables/variables';
 @import "../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
 
+
 .rich-text-panel--crisis-card,
 .rich-text-panel--crisis-card-no-header {
 
@@ -28,5 +29,11 @@
   
   .rich-text {
     margin-top: auto;
+  }
+}
+
+.rich-text-panel {
+  p {
+    margin-bottom: 1em;
   }
 }

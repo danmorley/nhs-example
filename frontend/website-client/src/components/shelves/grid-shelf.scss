@@ -40,6 +40,18 @@
         padding-bottom: 0.5em;
       }
     }
+
+    &.gutter-sm {
+      padding: 4px;
+    }
+
+    &.gutter-md {
+      padding: 12px;
+    }
+
+    &.gutter-lg {
+      padding: 20px;
+    }
   }
 }
 
@@ -81,10 +93,42 @@
 .shelf.basic-grid-shelf--yellow_background {
   padding: 2em 0 1.5em; 
   background-color: $sunflower-yellow;
-  border: 3px solid $red;
   border-left: 0;
   border-right: 0;
   
+  .shelf__header {
+    color: $black;
+  }
+  
+  .shelf__body {
+    
+     h2, h3, h4, p {
+      color: $black;
+    }  
+  }
+}
+
+.shelf.basic-grid-shelf--light_blue_background {
+  padding: 0 0 1.5em;
+  margin-bottom: -2em;
+  margin-top: 0;
+
+  @include media-breakpoint-down(vsm) {
+    margin-top: 1em;
+  }
+
+  .grid-container {
+    background-color: $light-blue;
+    margin-left: -1.5em;
+    margin-right: -1.5em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+  }
+  
+  .shelf__col {
+    padding-bottom: 0 !important;
+  }
+
   .shelf__header {
     color: $black;
   }
