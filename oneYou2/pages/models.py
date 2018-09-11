@@ -1,6 +1,7 @@
 import json
 import logging
 
+from django.conf import settings
 from django.db import models
 from django.db.models import DateField, TextField
 from django.forms.models import model_to_dict
@@ -25,7 +26,11 @@ from modelcluster.fields import ParentalKey
 
 from .blocks import IDBlock, CTABlock, MenuItemPageBlock, ImageBlock, SimpleCtaLinkBlock, MediaChooserBlock
 from .utils import get_serializable_data_for_fields
+
 from home.models import SiteSettings
+
+from oneYou2.utils import get_protocol
+
 from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppTeaserChooserBlock, \
     BlobImageChooserBlock, RecipeTeaserChooserBlock, ActionChooserBlock
 
@@ -103,6 +108,11 @@ class SimpleMenuItem(blocks.StructBlock):
     link_text = blocks.CharBlock(required=False)
     link_external = blocks.CharBlock(label='External link', required=False)
     link_page = MenuItemPageBlock(required=False)
+    link_id = IDBlock(required=False, label="ID", classname='dct-meta-field', help_text="Uniquely identify the CTA. Often used for tracking")
+
+    class Meta:
+        icon = 'link'
+        form_classname = 'dct-simple-menu-item dct-meta-panel'
 
 
 class MultiMenuItem(blocks.StructBlock):
@@ -294,10 +304,20 @@ class ListItemPanel(blocks.StructBlock):
 class InlineScriptPanel(blocks.StructBlock):
     script = blocks.TextBlock(required=False, help_text="The javascript to be inserted")
     src = blocks.CharBlock(required=False, help_text="URL of the javascript file")
-    field_id = IDBlock(required=False, label="Placeholder ID", retain_case=True)
+    field_id = IDBlock(required=False, label="Placeholder ID", retain_case=True, classname='dct-meta-field')
 
     class Meta:
-        form_classname = 'dct-inline-script-panel'
+        form_classname = 'dct-inline-script-panel dct-meta-panel'
+
+
+class InlineSvgPanel(blocks.StructBlock):
+    svg = blocks.TextBlock(required=True, label="SVG code", help_text="The SVG source")
+    styles = blocks.TextBlock(required=False, help_text="CSS styling")
+    script = blocks.TextBlock(required=False, label="Inline script code", help_text="Inline javascript to make the SVG interactive")
+    field_id = IDBlock(required=False, label="Placeholder ID", retain_case=True, classname='dct-meta-field')
+
+    class Meta:
+        form_classname = 'dct-inline-svg-panel dct-meta-panel'
 
 
 class CtaPanel(blocks.StructBlock):
@@ -319,11 +339,16 @@ GRID_PANELS = [
     ('icon_card_panel', IconCardPanel(icon="snippet")),
     ('cta_panel', CtaPanel(icon='plus')),
     ('inline_script_panel', InlineScriptPanel(icon="code")),
+    ('inline_svg_panel', InlineSvgPanel(icon="snippet")),
     ('list_item_panel', ListItemPanel(icon='list-ul'))
 ]
 
 
 # Shelves
+
+class Shelf(blocks.StructBlock):
+    tracking_group = blocks.CharBlock(required=False, classname='dct-meta-field', help_text='The tracking group, eg. EMM or OY')
+
 
 class SectionHeading(blocks.StructBlock):
     heading = blocks.CharBlock(required=False)
@@ -366,7 +391,7 @@ class Divider(blocks.StructBlock):
     shelf_id = IDBlock(required=False, label="ID", help_text="Not displayed in the front end")
 
 
-class Carousel(blocks.StructBlock):
+class Carousel(Shelf):
     heading = blocks.CharBlock(required=False)
     items = blocks.StreamBlock([
         ('video_teaser', VideoTemplate(icon="media")),
@@ -379,7 +404,7 @@ class Carousel(blocks.StructBlock):
         form_classname = 'dct-carousel-shelf dct-meta-panel'
 
 
-class PanelCarousel(blocks.StructBlock):
+class PanelCarousel(Shelf):
     heading = blocks.CharBlock(required=False)
     items = blocks.StreamBlock([
         ('video_teaser', VideoTemplate(icon="media")),
@@ -393,7 +418,7 @@ class PanelCarousel(blocks.StructBlock):
         form_classname = 'dct-panel-carousel-shelf dct-meta-panel'
 
 
-class Grid(blocks.StructBlock):
+class Grid(Shelf):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     items = blocks.StreamBlock(GRID_PANELS, icon='arrow-left', label='Items')
@@ -418,7 +443,7 @@ class Grid(blocks.StructBlock):
         form_classname = 'dct-grid-shelf dct-meta-panel'
 
 
-class RecipeGrid(blocks.StructBlock):
+class RecipeGrid(Shelf):
     heading = blocks.CharBlock(required=False)
     items = blocks.StreamBlock([
         ('recipe_teaser', RecipeTeaserChooserBlock(target_model="shelves.RecipeTeaser", icon="image"))
@@ -433,7 +458,7 @@ class RecipeGrid(blocks.StructBlock):
         form_classname = 'dct-recipe-grid-shelf dct-meta-panel'
 
 
-class Table(blocks.StructBlock):
+class Table(Shelf):
     header = blocks.ListBlock(blocks.CharBlock(required=False), default=[], label='Column headings')
     display_header = blocks.BooleanBlock(label='Display the table header?',
                                          required=False)
@@ -452,7 +477,7 @@ class Table(blocks.StructBlock):
         form_classname = 'dct-table-shelf dct-meta-panel'
 
 
-class TriageToolShelf(blocks.StructBlock):
+class TriageToolShelf(Shelf):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     shelf_id = IDBlock(required=False,
@@ -464,7 +489,7 @@ class TriageToolShelf(blocks.StructBlock):
         form_classname = 'dct-triage-tool-shelf dct-meta-panel'
 
 
-class ActionGroup(blocks.StructBlock):
+class ActionGroup(Shelf):
     title = blocks.CharBlock(required=True)
     actions = blocks.StreamBlock([
         ('action_panel', ActionChooserBlock(target_model="shelves.ActionShelf", icon="list-ul")),
@@ -472,7 +497,7 @@ class ActionGroup(blocks.StructBlock):
     panel_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
 
 
-class ActionPlan(blocks.StructBlock):
+class ActionPlan(Shelf):
     action_groups = blocks.StreamBlock([
         ('action_group', ActionGroup(required=False, icon="collapse-down")),
     ])
@@ -482,10 +507,11 @@ class ActionPlan(blocks.StructBlock):
     shelf_id = IDBlock(required=False, label='ID', classname='dct-meta-field')
 
 
-class ActionPlanDisplay(blocks.StructBlock):
+class ActionPlanDisplay(Shelf):
     shelf_id = IDBlock(required=False, label='ID', classname='dct-meta-field')
     title = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
+
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False)
@@ -510,6 +536,7 @@ class OneYou2Page(Page):
         ('table', Table(label="Table", icon='list-ul')),
         ('script_shelf', InlineScriptPanel(label="Script shelf", icon='code')),
         ('triage_tool_shelf', TriageToolShelf(label="Triage tool shelf", icon='cog')),
+        ('svg_shelf', InlineSvgPanel(label="SVG shelf", icon='snippet')),
         ('action_plan_shelf', ActionPlan(label="Action Plan Builder shelf", icon='form')),
         ('action_plan_display_shelf', ActionPlanDisplay(label="Action Plan Display shelf", icon='form'))
     ], null=True, blank=True)
@@ -542,6 +569,10 @@ class OneYou2Page(Page):
     use_share_button = models.BooleanField(default=True)
     use_email_button = models.BooleanField(default=False)
     use_print_button = models.BooleanField(default=False)
+
+    opt_in_1_text = models.CharField(max_length=255, blank=True, null=True)
+    opt_in_2_text = models.CharField(max_length=255, blank=True, null=True)
+    ts_and_cs_statement = models.TextField(blank=True, null=True)
 
     twitter_image_fk = models.ForeignKey(
         'images.PHEImage',
@@ -649,6 +680,15 @@ class OneYou2Page(Page):
                 FieldPanel('use_print_button'),
             ],
             heading='Share buttons',
+            classname='collapsible collapsed'),
+        MultiFieldPanel(
+            [
+
+                FieldPanel('opt_in_1_text'),
+                FieldPanel('opt_in_2_text'),
+                FieldPanel('ts_and_cs_statement'),
+            ],
+            heading='Action plan terms and conditions',
             classname='collapsible collapsed'),
     ]
 

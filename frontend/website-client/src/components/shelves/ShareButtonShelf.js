@@ -10,22 +10,20 @@ import PrintButtonPanel from '../panels/PrintButtonPanel';
 
 class ShareButtonShelf extends Component {
   render() {
-    const useShareButton = this.props.showShareButton;
-    const useEmailButton = this.props.showEmailButton;
-    const usePrintButton = this.props.showPrintButton;
+    const { showShareButton, showEmailButton, showPrintButton, trackingGroup } = this.props;
 
     return (
       <div className="shelf__container container">
-        <Shelf classNamePrefix="share-button-shelf" variant="align-right">
-          { useShareButton &&
+        <Shelf classNamePrefix="share-button-shelf" variant="align-right" trackingGroup={trackingGroup}>
+          { showShareButton &&
             <ShareButtonPanel />
           }
 
-          { useEmailButton &&
-            <EmailButtonPanel />
+          { showEmailButton &&
+            <EmailButtonPanel {...this.props} />
           }
 
-          { usePrintButton &&
+          { showPrintButton &&
             <PrintButtonPanel />
           }
         </Shelf>
@@ -37,7 +35,8 @@ class ShareButtonShelf extends Component {
 ShareButtonShelf.propTypes = {
   showShareButton: PropTypes.bool.isRequired,
   showEmailButton: PropTypes.bool.isRequired,
-  showPrintButton: PropTypes.bool.isRequired
+  showPrintButton: PropTypes.bool.isRequired,
+  trackingGroup: PropTypes.string
 };
 
 CmsComponentRegistry.register('share_button_panel', ShareButtonShelf, 'share-button-panel');

@@ -63,7 +63,11 @@ class Page extends Component {
         {useShareButton &&
           <ShareButtonShelf showShareButton={page.meta.use_share_button}
             showEmailButton={page.meta.use_email_button}
-            showPrintButton={page.meta.use_print_button} />
+            showPrintButton={page.meta.use_print_button}
+            opt1={page.meta.opt_in_1_text} 
+            opt2={page.meta.opt_in_2_text}
+            tsAndCs ={page.meta.ts_and_cs_statement}
+          />
         }
         <BackToTopButton />
       </StandardPageLayout>

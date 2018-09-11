@@ -239,7 +239,7 @@ def replace_resource_ids_with_links_for_download(shelf):
             if 'document' in cta:
                 cta['link_external'] = Document.objects.get(id=cta['document']).file.url
                 cta['document'] = True
-        if 'audio' in shelf['value']:
+        if 'audio' in shelf['value'] and not shelf['value']['audio'] is None:
             print('found audio key in', shelf)
             shelf['value']['audio'] = Media.objects.get(id=shelf['value']['audio']).file.url
         items = shelf['value'].get('items', [])

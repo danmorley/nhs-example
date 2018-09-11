@@ -87,7 +87,7 @@ class BasicCtaShelf extends Component {
 
     if (metaLayout === 'image_on_left') {
       return (
-        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group}>
           <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
               <div className="shelf__col col">

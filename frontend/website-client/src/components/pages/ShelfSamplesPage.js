@@ -95,7 +95,8 @@ const sampleShelvesPage = {
         image_meta: "page_heading_shelf/None/None",
         meta_gradient: false,
         mobile_use_renditions: true,
-        background_image: null
+        background_image: {},
+        image: {}
       }
     },
     {
@@ -115,7 +116,8 @@ const sampleShelvesPage = {
         image_meta: "page_heading_shelf/None/None",
         meta_gradient: false,
         mobile_use_renditions: true,
-        background_image: null
+        background_image: {},
+        image: {}
       }
     },
     {
@@ -133,7 +135,8 @@ const sampleShelvesPage = {
         body: 'Pickled tilde taxidermy, messenger bag synth fixie venmo. Pickled sartorial leggings biodiesel letterpress DIY. Lumbersexual glossier sartorial leggings, try-hard lo-fi trust fund.',
         image_meta: "page_heading_shelf/None/None",
         meta_gradient: false,
-        background_image: backgroundImage
+        background_image: backgroundImage,
+        image: {}
       }
     },
     {
@@ -153,7 +156,8 @@ const sampleShelvesPage = {
         image_meta: "page_heading_shelf/None/None",
         meta_gradient: true,
         mobile_use_renditions: true,
-        background_image: backgroundImage
+        background_image: backgroundImage,
+        image: {}
       }
     },
     {
@@ -329,6 +333,16 @@ const sampleShelvesPage = {
         heading: 'Section Heading Shelf',
         shelf_id: "",
         body: '',
+        image_meta: "section_heading_shelf/None/None"
+      }
+    },
+    {
+      id: "section-heading-shelf-2",
+      type: "section_heading_shelf",
+      value: {
+        heading: 'Section Heading Shelf with see more panel',
+        shelf_id: "",
+        body: "<p><span>this text you can see this text you can see this text you can see this text you can see this text you can see this text you can see this text you can see this tex</span></p><p class=\u0027rich-text-see-more__inline\u0027>you can see this text you can seev this text you can see this text you can see you  </p><input id=\u0027rt-see-more-id-2\u0027 class=\u0027rich-text-see-more__input\u0027 type=\u0027checkbox\u0027><label for=\u0027rt-see-more-id-2\u0027 class=\u0027rich-text-see-more__label\u0027></label><ul class=\u0027toggled-area\u0027><li><span>eeee</span></li><li><span>rrrrr</span></li><li><span>rrrr</span></li></ul><p class=\u0027toggled-area \u0027> <span>test test test test test</span></p>",
         image_meta: "section_heading_shelf/None/None"
       }
     },
@@ -11423,7 +11437,7 @@ const sampleShelvesPage = {
             {
               type: "rich_text_panel",
               value: {
-                text: "<p>Rich Text Panel</p>"
+                text: "<p>Rich Text Panel</p>" 
               },
               id: "table-2-rich-text-panel-1"
             },

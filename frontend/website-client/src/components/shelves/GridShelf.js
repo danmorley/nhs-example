@@ -39,7 +39,7 @@ class GridShelf extends Component {
     })(metaLayout);
 
     return (
-      <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+      <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group}>
         <ResponsiveBackgroundImage image={content.background_image} className={`shelf__container container-fluid child-image--${content.meta_image_display}`}>
           <div className="container">
             {gridHeading != '' &&
