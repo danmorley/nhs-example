@@ -21,11 +21,14 @@
   
   .panel-heading {
     .close {
-      visibility: hidden;
+      
+      color: $white;
+      background-color: $white;
+      width: 0;
+      height: 0;
       
       &:after {
         @extend %icon-close-button;
-        visibility: visible;
         position: absolute;
         top: 0;
         right: 0;
