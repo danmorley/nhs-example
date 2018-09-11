@@ -301,6 +301,16 @@ const sampleShelvesPage = {
       }
     },
     {
+      id: "section-heading-shelf-2",
+      type: "section_heading_shelf",
+      value: {
+        heading: 'Section Heading Shelf with see more panel',
+        shelf_id: "",
+        body: "<p><span>this text you can see this text you can see this text you can see this text you can see this text you can see this text you can see this text you can see this tex</span></p><p class=\u0027rich-text-see-more__inline\u0027>you can see this text you can seev this text you can see this text you can see you  </p><input id=\u0027rt-see-more-id-2\u0027 class=\u0027rich-text-see-more__input\u0027 type=\u0027checkbox\u0027><label for=\u0027rt-see-more-id-2\u0027 class=\u0027rich-text-see-more__label\u0027></label><ul class=\u0027toggled-area\u0027><li><span>eeee</span></li><li><span>rrrrr</span></li><li><span>rrrr</span></li></ul><p class=\u0027toggled-area \u0027> <span>test test test test test</span></p>",
+        image_meta: "section_heading_shelf/None/None"
+      }
+    },
+    {
       type: 'guidance_shelf',
       value: {
         heading: 'Section Heading Shelf',
@@ -11391,7 +11401,7 @@ const sampleShelvesPage = {
             {
               type: "rich_text_panel",
               value: {
-                text: "<p>Rich Text Panel</p>"
+                text: "<p>Rich Text Panel</p>" 
               },
               id: "table-2-rich-text-panel-1"
             },
