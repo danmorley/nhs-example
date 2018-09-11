@@ -91,7 +91,8 @@ class ShelfAbstract(models.Model):
     @classmethod
     def from_dict(cls, obj_dict):
         if isinstance(obj_dict, str):
-            obj_dict = json.loads(obj_dict.replace("'", "\""))
+            s = obj_dict.replace("'", "\"").replace('None', 'null')
+            obj_dict = json.loads(s)
         newObj = cls()
         for key in obj_dict:
             newObj.__setattr__(key, obj_dict[key])
