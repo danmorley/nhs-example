@@ -317,10 +317,20 @@ class ListItemPanel(blocks.StructBlock):
 class InlineScriptPanel(blocks.StructBlock):
     script = blocks.TextBlock(required=False, help_text="The javascript to be inserted")
     src = blocks.CharBlock(required=False, help_text="URL of the javascript file")
-    field_id = IDBlock(required=False, label="Placeholder ID", retain_case=True)
+    field_id = IDBlock(required=False, label="Placeholder ID", retain_case=True, classname='dct-meta-field')
 
     class Meta:
-        form_classname = 'dct-inline-script-panel'
+        form_classname = 'dct-inline-script-panel dct-meta-panel'
+
+
+class InlineSvgPanel(blocks.StructBlock):
+    svg = blocks.TextBlock(required=True, label="SVG code", help_text="The SVG source")
+    styles = blocks.TextBlock(required=False, help_text="CSS styling")
+    script = blocks.TextBlock(required=False, label="Inline script code", help_text="Inline javascript to make the SVG interactive")
+    field_id = IDBlock(required=False, label="Placeholder ID", retain_case=True, classname='dct-meta-field')
+
+    class Meta:
+        form_classname = 'dct-inline-svg-panel dct-meta-panel'
 
 
 class CtaPanel(blocks.StructBlock):
@@ -342,6 +352,7 @@ GRID_PANELS = [
     ('icon_card_panel', IconCardPanel(icon="snippet")),
     ('cta_panel', CtaPanel(icon='plus')),
     ('inline_script_panel', InlineScriptPanel(icon="code")),
+    ('inline_svg_panel', InlineSvgPanel(icon="snippet")),
     ('list_item_panel', ListItemPanel(icon='list-ul'))
 ]
 
@@ -538,6 +549,7 @@ class OneYou2Page(Page):
         ('table', Table(label="Table", icon='list-ul')),
         ('script_shelf', InlineScriptPanel(label="Script shelf", icon='code')),
         ('triage_tool_shelf', TriageToolShelf(label="Triage tool shelf", icon='cog')),
+        ('svg_shelf', InlineSvgPanel(label="SVG shelf", icon='snippet')),
         ('action_plan_shelf', ActionPlan(label="Action Plan Builder shelf", icon='form')),
         ('action_plan_display_shelf', ActionPlanDisplay(label="Action Plan Display shelf", icon='form'))
     ], null=True, blank=True)

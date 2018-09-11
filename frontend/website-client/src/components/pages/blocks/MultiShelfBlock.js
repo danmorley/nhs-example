@@ -21,6 +21,7 @@ import HeadingBodyShelf from '../../shelves/HeadingBodyShelf';
 import NoticeShelf from '../../shelves/NoticeShelf';
 import IframeShelf from '../../shelves/IframeShelf';
 import ScriptShelf from '../../shelves/ScriptShelf';
+import SvgShelf from '../../shelves/SvgShelf';
 import SiteMapShelf from '../../shelves/SiteMapShelf';
 import DividerShelf from '../../shelves/DividerShelf';
 import ArticlePageHeadingShelf from '../../shelves/ArticlePageHeadingShelf';
