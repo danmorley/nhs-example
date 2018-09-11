@@ -11,7 +11,6 @@ class Shelf extends Component {
   }
 
   handleClick(e) {
-    e.preventDefault();
     // console.log('Tracking click', this.props.trackingGroup, this.props.id);
     if (this.props.trackingGroup) TrackingUtils.trackEvent(e.target, this.props.trackingGroup, 'Click', this.props.id);
   }
