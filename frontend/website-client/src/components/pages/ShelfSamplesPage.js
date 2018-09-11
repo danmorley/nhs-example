@@ -4,6 +4,8 @@ import ImageUtils from '../panels/ImageUtils';
 import testBackgroundImage from '../../assets/images/app-screen.jpg';
 import testImage from '../../assets/images/test-image.jpg';
 import pheLogo from '../../assets/images/public-health-england-logo.png';
+import img100x40 from '../../assets/images/100x40.jpg';
+import img105x75 from '../../assets/images/105x75.jpg';
 
 /**
  *  Shelf Sample Page uses the withOwnContent higher order component to return a page
@@ -31,6 +33,24 @@ const pheLogoImage = {
     mobile: pheLogo
   },
   title: 'PHE logo image' };
+
+const image_left = {
+    renditions: {
+        desktop: img105x75,
+        mobile: img105x75
+    },
+    layout: "bottom",
+    title: 'Img left bottom'
+};
+
+const image_right = {
+    renditions: {
+        desktop: img100x40,
+        mobile: img100x40
+    },
+    layout: "top",
+    title: 'Img right top'
+};
 
 const BASKET_KEY = 'basket';
 const ACTION_PLAN_KEY = 'action_plan';
@@ -252,6 +272,22 @@ const sampleShelvesPage = {
         body: 'Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b>, green gradient <b>N/A</b>, foreground image <b>N/A</b>'
       }
     },
+      {
+          type: "page_heading_shelf",
+          value: {
+              image_meta: "page_heading_shelf/None/None",
+              mobile_use_renditions: true,
+              desktop_use_renditions: true,
+              heading: "Contact Us",
+              body: "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit amet feugiat libero. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean tristique orci dui, quis hendrerit metus pretium in.</p>",
+              background_image: {"title": "", "renditions": {}},
+              image_left: image_left,
+              image_right: image_right,
+              shelf_id: "",
+              meta_gradient: false
+          },
+          id: "edba5592-cb70-4b5c-8a95-a1fcc00a9c7b"
+      },
     {
       id: "simple-page-heading-shelf-1",
       type: "simple_page_heading_shelf",
