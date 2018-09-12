@@ -88,7 +88,8 @@ IMAGE_PANEL_VARIANTS = (
 INFO_PANEL_VARIANTS = (
     ('mobile-image-top-text-right', 'Mobile image on top, Desktop image on left with text right'),
     ('mobile-image-right', 'Mobile image on right, Desktop image on right'),
-    ('plain_background', 'Plain background')
+    ('light_background', 'Light background'),
+    ('dark_background', 'Dark background')
 )
 
 VIDEO_LAYOUTS = (
