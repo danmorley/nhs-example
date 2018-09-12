@@ -55,15 +55,6 @@ const image_right = {
 const BASKET_KEY = 'basket';
 const ACTION_PLAN_KEY = 'action_plan';
 
-sessionStorage.setItem(BASKET_KEY, JSON.stringify(['action_1']));
-sessionStorage.setItem(ACTION_PLAN_KEY, JSON.stringify({"action_1": {
-                    action_code: "action_1",
-                    title: "Action 1",
-                    rich_text_body: "",
-                    cta: [ ],
-                    panel_id: ""
-                  }}));
-
 const sampleShelvesPage = {
   title: 'Shelf Samples',
   page_styles: '#panel-video-teaser-4 h3 { color: orange; }',
@@ -71,13 +62,6 @@ const sampleShelvesPage = {
     search_description: ''
   },
   body: [
-    {
-      type: 'guidance_shelf',
-      value: {
-        heading: 'Note',
-        body: 'Viewing this page automatically adds an item to your action plan in order for the Action Plan display example to work. The reset button in the action plan builder example can be used to clear this.'
-      }
-    },
     {
       type: 'guidance_shelf',
       value: {
@@ -11550,7 +11534,7 @@ const sampleShelvesPage = {
       type: 'guidance_shelf',
       value: {
         heading: 'Action Plan Display',
-        body: 'Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b>'
+        body: 'Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b><br/><i>Actions will be listed below the body in the order they are picked in</i>'
       }
     },
     {
