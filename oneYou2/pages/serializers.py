@@ -4,7 +4,7 @@ from django.apps import apps
 from wagtail.api.v2.serializers import StreamField
 
 from images.models import PHEImage
-from .utils import determine_image_rendtions_for_shared_content_shelves
+from .utils import determine_image_rendtions_for_shared_content_shelves, replace_resource_ids_with_links_for_download
 
 
 class OneYouPageSerializer(serializers.ModelSerializer):
@@ -23,6 +23,7 @@ class OneYouPageSerializer(serializers.ModelSerializer):
         serialized_data['meta']['type'] = 'oneyou_page'
         for shelf in serialized_data['body']:
             determine_image_rendtions_for_shared_content_shelves(shelf)
+            replace_resource_ids_with_links_for_download(shelf)
 
         serialized_data['meta']['breadcrumbs'] = data.breadcrumbs
 
@@ -71,6 +72,10 @@ class OneYouPageSerializer(serializers.ModelSerializer):
             'use_share_button',
             'use_email_button',
             'use_print_button',
+
+            'opt_in_1_text',
+            'opt_in_2_text',
+            'ts_and_cs_statement'
         )
 
         fields = fields + meta_fields

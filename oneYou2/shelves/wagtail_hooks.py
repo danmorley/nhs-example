@@ -1,7 +1,7 @@
 from wagtail.contrib.modeladmin.options import (
     ModelAdmin, ModelAdminGroup, modeladmin_register)
 
-from .models import PromoShelf, BannerShelf, AppTeaser, RecipeTeaser
+from .models import PromoShelf, BannerShelf, AppTeaser, RecipeTeaser, ActionShelf
 
 
 class PromoshelfAdmin(ModelAdmin):
@@ -52,11 +52,23 @@ class RecipeshelfAdmin(ModelAdmin):
     search_fields = ('shelf_id',)
 
 
+class ActionshelfAdmin(ModelAdmin):
+    model = ActionShelf
+    menu_label = 'Actions'
+    menu_icon = 'form'
+    menu_order = 600
+    add_to_settings_menu = False  # or True to add your model to the Settings sub-menu
+    exclude_from_explorer = False  # or True to exclude pages of this type from Wagtail's explorer view
+    list_display = ('paragon_id', 'title', 'paragon_action_code', 'position', 'active')
+    list_filter = ('cta_type',)
+    search_fields = ('title',)
+
+
 class ShelfAdminGroup(ModelAdminGroup):
     menu_label = 'Shared'
     menu_icon = 'folder-open-inverse'  # change as required
     menu_order = 200  # will put in 3rd place (000 being 1st, 100 2nd)
-    items = (PromoshelfAdmin, BannershelfAdmin, AppshelfAdmin, RecipeshelfAdmin)
+    items = (PromoshelfAdmin, BannershelfAdmin, AppshelfAdmin, RecipeshelfAdmin, ActionshelfAdmin)
 
 
 modeladmin_register(ShelfAdminGroup)

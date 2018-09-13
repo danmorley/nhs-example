@@ -3,14 +3,21 @@ import json
 from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
 from django.template.defaultfilters import slugify
-from wagtail.wagtailcore import blocks
+from wagtail.core import blocks
+from wagtail.core.blocks import StructValue
+from wagtailmedia.blocks import AbstractMediaChooserBlock
+from django.utils.html import format_html
 from shelves.blocks import BlobImageChooserBlock
-from wagtail.wagtailcore.blocks import StructValue
 
 IMAGE_VARIANT_CHOICES = (
     ('contain', 'Contain'),
     ('cover', 'Cover'),
     ('parent', 'Use parent')
+)
+
+PAGE_HEADING_LAYOUTS = (
+    ('top', 'Image top'),
+    ('bottom', 'Image bottom'),
 )
 
 
@@ -28,6 +35,11 @@ class ImageBlock(blocks.StructBlock):
                                                       label="Use desktop renditions",
                                                       required=False,
                                                       classname='dct-meta-field')
+    meta_layout = blocks.ChoiceBlock(choices=PAGE_HEADING_LAYOUTS,
+                                     label="Variant",
+                                     classname='dct-meta-field',
+                                     required=False,
+                                     default=False)
 
     def __init__(self, *args, **kwargs):
         if kwargs:
@@ -76,6 +88,7 @@ class ImageBlock(blocks.StructBlock):
         if image_meta:
 
             image = result['image']
+            image['layout'] = result['meta_layout']
             if image:
                 if image.get('renditions'):
                     mobile_rendition = None
@@ -196,7 +209,35 @@ class SimpleCtaLinkBlock(blocks.StructBlock):
     link_text = blocks.CharBlock(required=False)
     link_external = blocks.CharBlock(label='External link', required=False)
     link_page = MenuItemPageBlock(required=False)
+    link_id = IDBlock(required=False, label='ID', classname='dct-meta-field', help_text='Uniquely identify the CTA. Often used for tracking')
 
     class Meta:
         icon = 'link'
-        form_classname = 'dct-simple-cta-link-block dct-block'
+        form_classname = 'dct-simple-cta-link-block dct-meta-block'
+
+
+class MediaChooserBlock(AbstractMediaChooserBlock):
+    def render_basic(self, value, context=None):
+        if not value:
+            return ''
+
+        if value.type == 'video':
+            player_code = '''
+            <div>
+                <video width="320" height="240" controls>
+                    <source src="{0}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            '''
+        else:
+            player_code = '''
+            <div>
+                <audio controls>
+                    <source src="{0}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+            '''
+
+        return format_html(player_code, value.file.url)

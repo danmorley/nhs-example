@@ -10,7 +10,7 @@ from release.utils import get_latest_release, get_latest_live_release
 from oneYou2.utils import get_protocol
 from frontendHandler.models import FrontendVersion
 from home.models import SiteSettings
-from wagtail.wagtailredirects.models import Redirect
+from wagtail.contrib.redirects.models import Redirect
 
 from .models import Release
 

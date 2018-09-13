@@ -1,13 +1,10 @@
 @import '../assets/styles/variables/variables';
 @import "../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
 
-$shelf-padding-standard: 1em;
-$shelf-padding-extra: 2em;
-
-
-.pure-modal-backdrop {
+.pure-modal-backdrop .video-modal {  
+  width: 100%;
   
-  .pure-modal .panel-heading .close {
+  .panel-heading .close {
     top: 15px;
     right: 15px;
     line-height: 30px;
@@ -15,25 +12,19 @@ $shelf-padding-extra: 2em;
     background-color: #fff;
     opacity: 1;
   } 
-      
-  .pure-modal {
-    width: 100%;
-
-    .panel-body {
-      @media screen and (orientation: landscape) {
-        @include media-breakpoint-down(md) {
-         padding: 0;
-        }
-      }
-    }
-  }
   
   .panel-body {
     padding-right: 30px;  
     background: #000;
+    
+    @media screen and (orientation: landscape) {
+      @include media-breakpoint-down(md) {
+       padding: 0;
+      }
+    }
   }
   
-  .pure-modal .panel-default {
+  .panel-default {
     padding: 1em;
     width: 100%;
     max-width: 1400px;

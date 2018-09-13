@@ -30,7 +30,7 @@ import './panel-carousel-shelf.css';
  *          "heading": "Need Inspiration",
  *          "body": "<p>Then read this text to find out more.<br/></p>",
  *          "image": {
-   *          "title": "10msu banner",
+ *          "title": "10msu banner",
  *            "link": "https://campaignstorage.blob.core.windows.net/oneyou-cms-integration/original_images/2f86b9dd5ae29f46db9c66e3c89dfab1.jpg"
  *          },
  *          "meta_variant": "dark-bg",
@@ -43,7 +43,6 @@ import './panel-carousel-shelf.css';
  *  }
  */
 class PanelCarouselShelf extends Component {
-
   getNodes(equalizerComponent, equalizerElement) {
     return equalizerElement.querySelectorAll(".slick-slide");
   }
@@ -90,7 +89,7 @@ class PanelCarouselShelf extends Component {
     });
 
     return (
-      <Shelf id={id} classNamePrefix={classNamePrefix}>
+      <Shelf id={id} classNamePrefix={classNamePrefix} trackingGroup={content.tracking_group}>
         <div className="shelf__container container">
           <h2 className="shelf__header">{content.heading}</h2>
         </div>

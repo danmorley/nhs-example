@@ -4,8 +4,8 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 import django.db.models.deletion
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
+import wagtail.core.blocks
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -21,8 +21,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('label', models.CharField(max_length=255)),
-                ('menu_items', wagtail.wagtailcore.fields.StreamField((('simple_menu_item', wagtail.wagtailcore.blocks.StructBlock((('link_text', wagtail.wagtailcore.blocks.CharBlock(required=True)), ('link_external', wagtail.wagtailcore.blocks.URLBlock(label='External link', required=False)), ('link_page', wagtail.wagtailcore.blocks.PageChooserBlock(required=False))))),))),
-                ('follow_us', wagtail.wagtailcore.fields.StreamField((('social_media_link', wagtail.wagtailcore.blocks.StructBlock((('label', wagtail.wagtailcore.blocks.CharBlock(required=True)), ('type', wagtail.wagtailcore.blocks.ChoiceBlock(choices=[])), ('link', wagtail.wagtailcore.blocks.URLBlock(label='External link', required=False))))),))),
+                ('menu_items', wagtail.core.fields.StreamField((('simple_menu_item', wagtail.core.blocks.StructBlock((('link_text', wagtail.core.blocks.CharBlock(required=True)), ('link_external', wagtail.core.blocks.URLBlock(label='External link', required=False)), ('link_page', wagtail.core.blocks.PageChooserBlock(required=False))))),))),
+                ('follow_us', wagtail.core.fields.StreamField((('social_media_link', wagtail.core.blocks.StructBlock((('label', wagtail.core.blocks.CharBlock(required=True)), ('type', wagtail.core.blocks.ChoiceBlock(choices=[])), ('link', wagtail.core.blocks.URLBlock(label='External link', required=False))))),))),
                 ('image', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='wagtailimages.Image')),
             ],
         ),

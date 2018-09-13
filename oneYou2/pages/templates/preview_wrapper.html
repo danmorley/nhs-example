@@ -52,6 +52,20 @@ li a:hover:not(.active) {
     background-color: #4CAF50;
 }
 </style>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+<script>
+    (function ($) {
+        function init() {
+            console.log(10)
+            $('iframe')[0].src = $('iframe')[0].src + '&cms=' + window.location.origin + '/api';
+        }
+
+        $(document).on('page:load', init);
+        $(init)
+    })(jQuery)
+</script>
 </head>
 <body>
 

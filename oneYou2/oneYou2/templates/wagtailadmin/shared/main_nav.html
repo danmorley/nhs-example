@@ -1,17 +1,34 @@
-{% load gravatar wagtailadmin_tags %}
+{% load wagtailadmin_tags %}
 {% load i18n %}
+
+{% block extra_js %}
+  <script type="text/javascript" charset="utf-8">
+    (function($) {
+      function init(){
+        console.log($('#examples-page')[0].href)
+        var href = $('#examples-page')[0].href;
+        href = href + '?cms=' + window.location.origin + '/api'
+        $('#examples-page')[0].href = href
+      }
+
+      $(document).on('page:load', init);
+      $(init)
+    })(jQuery)
+  </script>
+{% endblock %}
+
 <nav class="nav-main">
     <ul>
         {{ menu_html }}
 
         <li class="menu-item">
-            <a href="/oneyou/shelf-samples/" target="_blank" class="icon icon-image">Example Shelves</a>
+            <a id="examples-page" href="/oneyou/shelf-samples/" target="_blank" class="icon icon-image">Example Shelves</a>
         </li>
 
         <li class="footer" id="footer">
             <div class="account" id="account-settings" title="{% trans 'Edit your account' %}">
                 <span class="avatar square avatar-on-dark">
-                    <img src="{% gravatar_url request.user.email 25 %}" />
+                    <img src="{% avatar_url request.user size=50 %}" />
                 </span>
                 <em class="icon icon-arrow-up-after">{{ request.user.first_name|default:request.user.get_username }}</em>
             </div>

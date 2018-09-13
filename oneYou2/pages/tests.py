@@ -7,9 +7,9 @@ from django.http import HttpRequest
 from rest_framework.utils.serializer_helpers import ReturnDict
 
 from wagtail.contrib.modeladmin.views import IndexView
-from wagtail.wagtailcore.blocks.stream_block import StreamValue
-from wagtail.wagtailcore.blocks.struct_block import StructValue
-from wagtail.wagtailcore.models import Site
+from wagtail.core.blocks.stream_block import StreamValue
+from wagtail.core.blocks.struct_block import StructValue
+from wagtail.core.models import Site
 
 from home.models import SiteSettings
 
@@ -57,7 +57,6 @@ class OneYou2PageModelTests(OneYouTests):
     def test_breadcrumbs_property(self):
         parent_page = create_test_page()
         child_page = create_test_child_page(parent_page)
-        print(child_page.breadcrumbs)
 
         self.assertEquals(len(child_page.breadcrumbs), 2)
         self.assertEquals(child_page.breadcrumbs[-1]['name'], parent_page.title)
@@ -402,7 +401,7 @@ class ImageBlockTest(OneYouTests):
         page = PageFactory()
         image = PHEImageFactory()
         body_content_string = '[{"type": "page_heading_shelf", "value": {"heading": "This is the heading",' \
-                              ' "shelf_id": "1", "background_image": %d, "image": {"image": %d}},' \
+                              ' "shelf_id": "1", "background_image": %d, "image_right": {"image": %d}},' \
                               ' "id": "a2d5e2e8-ae9d-46ef-92e6-27745a85df8c"}]' % (image.id, image.id)
 
         page.body = page._meta.fields[24].to_python(body_content_string)
@@ -414,9 +413,9 @@ class ImageBlockTest(OneYouTests):
         self.assertEqual(type(serialized_page.data), ReturnDict)
         self.assertEqual(type(serialized_page.data['body']), list)
         self.assertEqual(type(serialized_page.data['body'][0]), dict)
-        image_block = serialized_page.data['body'][0]['value']['image']
+        image_block = serialized_page.data['body'][0]['value']['image_right']
         self.assertEqual(type(image_block), OrderedDict)
-        self.assertEqual(sorted(image_block.keys()), sorted(['title', 'renditions']))
+        self.assertEqual(sorted(image_block.keys()), sorted(['layout', 'title', 'renditions']))
         self.assertEqual(image_block['title'], image.title)
         self.assertEqual(sorted(image_block['renditions'].keys()), sorted(['mobile', 'desktop']))
         self.assertEqual(type(image_block['renditions']['desktop']), str)
@@ -428,7 +427,7 @@ class ImageBlockTest(OneYouTests):
         page = PageFactory()
         image = PHEImageFactory()
         body_content_string = '[{"type": "page_heading_shelf", "value": {"heading": "This is the heading",' \
-                              ' "shelf_id": "1", "background_image": %d, "image": {' \
+                              ' "shelf_id": "1", "background_image": %d, "image_right": {' \
                               ' "image": %d, "meta_use_desktop_renditions": "true", ' \
                               ' "meta_use_mobile_renditions": "true"}},' \
                               ' "id": "a2d5e2e8-ae9d-46ef-92e6-27745a85df8c"}]' % (image.id, image.id)
@@ -442,9 +441,9 @@ class ImageBlockTest(OneYouTests):
         self.assertEqual(type(serialized_page.data), ReturnDict)
         self.assertEqual(type(serialized_page.data['body']), list)
         self.assertEqual(type(serialized_page.data['body'][0]), dict)
-        image_block = serialized_page.data['body'][0]['value']['image']
+        image_block = serialized_page.data['body'][0]['value']['image_right']
         self.assertEqual(type(image_block), OrderedDict)
-        self.assertEqual(sorted(image_block.keys()), sorted(['title', 'renditions']))
+        self.assertEqual(sorted(image_block.keys()), sorted(['layout', 'title', 'renditions']))
         self.assertEqual(image_block['title'], image.title)
         self.assertEqual(sorted(image_block['renditions'].keys()), sorted(['mobile', 'desktop']))
         self.assertEqual(type(image_block['renditions']['desktop']), str)
@@ -458,7 +457,7 @@ class ImageBlockTest(OneYouTests):
         page = PageFactory()
         image = PHEImageFactory()
         body_content_string = '[{"type": "page_heading_shelf", "value": {"heading": "This is the heading",' \
-                              ' "shelf_id": "1", "background_image": %d, "image": {' \
+                              ' "shelf_id": "1", "background_image": %d, "image_right": {' \
                               ' "image": %d, "meta_use_desktop_renditions": "false", ' \
                               ' "meta_use_mobile_renditions": "false"}},' \
                               ' "id": "a2d5e2e8-ae9d-46ef-92e6-27745a85df8c"}]' % (image.id, image.id)
@@ -469,7 +468,7 @@ class ImageBlockTest(OneYouTests):
         page.save_revision()
         latest_revision_as_page = page.get_latest_revision_as_page()
         serialized_page = OneYouPageSerializer(instance=latest_revision_as_page)
-        image_block = serialized_page.data['body'][0]['value']['image']
+        image_block = serialized_page.data['body'][0]['value']['image_right']
         self.assertEqual(type(image_block['renditions']['desktop']), str)
         self.assertNotEqual(len(image_block['renditions']['desktop']), 0)
         self.assertIn("original", image_block['renditions']['desktop'])

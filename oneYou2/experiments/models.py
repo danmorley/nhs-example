@@ -10,7 +10,7 @@ from django.utils.html import format_html
 
 from modelcluster.models import ClusterableModel
 
-from wagtail.wagtailadmin.edit_handlers import FieldPanel
+from wagtail.admin.edit_handlers import FieldPanel
 
 from pages.models import OneYou2Page, RecipePage
 

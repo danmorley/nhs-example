@@ -56,6 +56,12 @@ button {
   border: none;
   outline: none;
   background: none;
+  font-family: $default-font;
+  
+  &:disabled {
+    opacity: 0.7;
+    pointer-events: none;    
+  }
 }
 
 .button-cta {
@@ -187,6 +193,9 @@ ul.cta-list {
   }
 }
 
+.richTextEditor  {
+  position: relative;
+}
 //theming
 
 //default theme (oneyou)

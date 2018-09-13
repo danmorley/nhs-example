@@ -15,18 +15,34 @@ from oneYou2.test.utils import OneYouTests
 
 from pages.factories import create_test_recipe_page
 
-TEST_POST_CONTENT = QueryDict('csrfmiddlewaretoken=0hicVc5uV4hYXDnkzJljxKKhN5obLb1eEj6L77pXEMdOoRUPcoBUpYIpyZeHTpyd&'
-                              'next=/admin/experiments/oneyouvariant/&titleContact Us (describe the variant)&'
-                              'body-count=1&body-0-deleted=&body-0-order=0&body-0-type=simple_page_heading_shelf&'
-                              'body-0-id=&body-0-value-heading=Test page&body-0-value-shelf_id&body-0-value-body=&'
-                              'release=&theme=1&change_history-TOTAL_FORMS=0&change_history-INITIAL_FORMS=0&'
-                              'change_history-MIN_NUM_FORMS=0&change_history-MAX_NUM_FORMS=1000&'
-                              'og_title=One You - Home&og_description=Start the fight back to a healthier you!&'
-                              'og_url=&og_image_fk=1&og_type=website&twitter_url=&twitter_card=summary&'
-                              'twitter_site=@OneYouPHE&twitter_title=One You - Home&'
-                              'twitter_description=Start the fight back to a healthier you!&'
-                              'twitter_image_fk=1&use_share_button=on&slug=contact-us-v9bfb68&'
-                              'seo_title=&search_description=&next=')
+TEST_POST_CONTENT = QueryDict('csrfmiddlewaretoken=Rr2jKQfBjWRU85VE2JSabVjhYNuyrxYWZH3keFXELWABv8XIKAda7ybCYxpOkaq2'
+                              '&next=%2Fadmin%2Fexperiments%2Foneyouvariant%2F&title=SMALL+SOMETHING&body-count=1'
+                              '&body-0-deleted=&body-0-order=0&body-0-type=page_heading_shelf&body-0-id=57980e63-8932'
+                              '-4b1f-8692-290157896db0&body-0-value-image_meta=page_heading_shelf%2FNone%2FNone&body'
+                              '-0-value-mobile_use_renditions=on&body-0-value-desktop_use_renditions=on&body-0-value'
+                              '-heading=Hello&body-0-value-body=%7B%0D%0A++++%22blocks%22%3A+%5B%0D%0A++++++++%7B%0D'
+                              '%0A++++++++++++%22key%22%3A+%22k1868%22%2C%0D%0A++++++++++++%22type%22%3A+%22unstyled'
+                              '%22%2C%0D%0A++++++++++++%22depth%22%3A+0%2C%0D%0A++++++++++++%22text%22%3A+%22This+is'
+                              '+the+body%22%2C%0D%0A++++++++++++%22inlineStyleRanges%22%3A+%5B%0D%0A'
+                              '++++++++++++++++%7B%0D%0A++++++++++++++++++++%22offset%22%3A+0%2C%0D%0A'
+                              '++++++++++++++++++++%22length%22%3A+16%2C%0D%0A++++++++++++++++++++%22style%22%3A'
+                              '+%22BOLD%22%0D%0A++++++++++++++++%7D%0D%0A++++++++++++%5D%2C%0D%0A'
+                              '++++++++++++%22entityRanges%22%3A+%5B%5D%0D%0A++++++++%7D%0D%0A++++%5D%2C%0D%0A'
+                              '++++%22entityMap%22%3A+%7B%7D%0D%0A%7D&body-0-value-background_image=&body-0-value'
+                              '-image-image=&body-0-value-image-meta_variant=cover&body-0-value-image'
+                              '-meta_use_mobile_renditions=on&body-0-value-image-meta_use_desktop_renditions=on&body'
+                              '-0-value-shelf_id=&body-0-value-meta_layout=&release=&theme=1&change_history'
+                              '-TOTAL_FORMS=0&change_history-INITIAL_FORMS=0&change_history-MIN_NUM_FORMS=0'
+                              '&change_history-MAX_NUM_FORMS=1000&og_title=One+You+-+Home&og_description=Start+the'
+                              '+fight+back+to+a+healthier+you%21+One+You+is+packed+with+practical+tips%2C+tools+and'
+                              '+free+apps+to+help+you+improve+your+health+today&og_url=&og_image_fk=1&og_type=website'
+                              '&twitter_url=&twitter_card=summary&twitter_site=%40OneYouPHE&twitter_title=One+You'
+                              '+-+Home&twitter_description=Start+the+fight+back+to+a+healthier+you%21+One+You+is'
+                              '+packed+with+practical+tips%2C+tools+and+free+apps+to+help+you+improve+your+health'
+                              '+today&twitter_image_fk=1&use_share_button=on&slug=small-something&seo_title'
+                              '=&search_description=')
+
+REQUEST_META = {'SERVER_NAME': 'localhost', 'SERVER_PORT': 8000}
 
 
 class VarientAdminURLHelperViewsTests(OneYouTests):
@@ -69,6 +85,7 @@ class CreateExperimentsViewsTests(OneYouTests):
         user = User.objects.first()
         request.user = user
         request.method = 'POST'
+        request.META = REQUEST_META
         request.POST = TEST_POST_CONTENT
         app_name = 'experiments'
         model_name = 'oneyouvariant'
@@ -162,6 +179,7 @@ class EditExperimentsViewsTests(OneYouTests):
         user = User.objects.first()
         request.user = user
         request.method = 'POST'
+        request.META = REQUEST_META
         request.POST = TEST_POST_CONTENT
         response = edit(request, page.id)
         self.assertEquals(response.status_code, 200)
@@ -177,6 +195,7 @@ class EditExperimentsViewsTests(OneYouTests):
         setattr(request, '_messages', messages)
         user = User.objects.first()
         request.user = user
+        request.META = REQUEST_META
         request.method = 'POST'
         request.POST = TEST_POST_CONTENT
         response = edit(request, page.id)

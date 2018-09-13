@@ -1,8 +1,10 @@
 import React from 'react';
 import Parser from 'html-react-parser';
 import domToReact from 'html-react-parser/lib/dom-to-react';
+import uniqueId from 'lodash.uniqueid';
 import { Link } from 'react-router-dom';
 import UrlUtils from './shared/UrlUtils';
+import './cms-richtext-formatter.css';
 
 /**
  * Helper class to process rich text 'body' fields according to a number of rules:
@@ -44,6 +46,39 @@ class CmsRichTextFormatter  {
       return <span dangerouslySetInnerHTML={{__html: translatedText}} />;
     }
   }
+
+  static renderSeeMore(node) {
+    if (node.children) {
+      const id = uniqueId("rt-see-more-id-");
+      if (node.next && node.next.name === 'div') {
+        return (
+          <div>
+            {node.children.map((child, i) =>
+              <p key={i}>{child.data}</p>
+            )}
+          </div>
+        )
+      } else {
+        CmsRichTextFormatter.addClassToTogglableAreas(node)
+        return (
+          <React.Fragment>
+            {node.children.map((child, i) =>
+              <p key={i} className={i === node.children.length - 1 ? 'rich-text-see-more__inline' : ''}>{child.data} </p>
+            )}
+            <input key='see-more-input' id={id} className="rich-text-see-more__input" type="checkbox" />
+            <label key='see-more-label' htmlFor={id} className="rich-text-see-more__label"></label>
+          </React.Fragment>
+        )
+      }
+    }
+  }
+
+  static addClassToTogglableAreas(node) {
+    if (node.next) {
+      node.next.attribs['class'] = 'toggled-area';
+      CmsRichTextFormatter.addClassToTogglableAreas(node.next);
+    }
+  }
 }
 
 const parserOptions = {
@@ -54,6 +89,10 @@ const parserOptions = {
 
     if (node.type === 'text') {
       return CmsRichTextFormatter.renderText(node);
+    }
+
+    if (node.type === 'tag' && node.name === 'div') {
+      return CmsRichTextFormatter.renderSeeMore(node);
     }
   }
 };

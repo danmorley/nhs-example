@@ -9,7 +9,8 @@ import './video-modal.css';
 
 const BRIGHTCOVE_HOST = 'brightcove';
 const WIREWAX_HOST = 'wirewax';
-const portalContainer = document.getElementById('root');
+//createElement is used for testing, as the root element does not exist.
+const portalContainer = document.getElementById('root') ? document.getElementById('root') : document.createElement('div');
 
 class VideoModal extends Component {
   constructor(props) {
@@ -55,6 +56,7 @@ class VideoModal extends Component {
             isOpen={false}
             replace={false}
             ref="modal"
+            className ="video-modal"
           >
             {this.renderVideo(this.props.video, this.props.host)}
           </PureModal>

@@ -6,11 +6,11 @@ from django.contrib import admin
 from django.http import HttpResponse
 from django.views.static import serve
 
-from wagtail.wagtailadmin import urls as wagtailadmin_urls
-from wagtail.wagtailcore import urls as wagtail_urls
-from wagtail.wagtaildocs import urls as wagtaildocs_urls
+from wagtail.admin import urls as wagtailadmin_urls
+from wagtail.core import urls as wagtail_urls
+from wagtail.documents import urls as wagtaildocs_urls
 
-from wagtail.contrib.wagtailsitemaps.views import sitemap
+from wagtail.contrib.sitemaps.views import sitemap
 
 from .utils import get_release_version
 
@@ -28,6 +28,7 @@ urlpatterns = [
 
     url(r'^admin/custom/pages/', include(pages_urls, namespace="oneyou_pages")),
     url(r'^admin/experiments/', include(experiment_urls)),
+    url(r'^admin/pages/', include(pages_urls)),
 
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),

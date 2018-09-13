@@ -1,7 +1,7 @@
 import factory
 from django.template.defaultfilters import slugify
 from factory import fuzzy
-from wagtail.wagtailcore.models import Site
+from wagtail.core.models import Site
 
 from images.factories import create_default_test_image
 from images.factories import PHEImageFactory

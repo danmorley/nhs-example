@@ -18,6 +18,7 @@ import SimpleTextPanel from '../../panels/SimpleTextPanel';
 import RichTextPanel from '../../panels/RichTextPanel';
 import IconCardPanel from '../../panels/IconCardPanel';
 import InlineScriptPanel from '../../panels/InlineScriptPanel';
+import InlineSvgPanel from '../../panels/InlineSvgPanel';
 import CtaPanel from '../../panels/CtaPanel';
 import ListItemPanel from '../../panels/ListItemPanel';
 import SimpleImagePanel from '../../panels/SimpleImagePanel';

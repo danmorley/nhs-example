@@ -8,17 +8,22 @@ import ActionGroupPanel from '../panels/ActionGroupPanel';
 import CtaLinks from '../shared/CtaLinks';
 
 const ACTION_PLAN_KEY = 'action_plan';
+const BASKET_KEY = 'basket';
 
 class ActionPlanDisplayShelf extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      actionPlan: {}
+      actionPlan: {},
+      basket: []
     }
   }
 
   componentDidMount() {
-    this.setState({actionPlan: this.storageToJSON(ACTION_PLAN_KEY, {})});
+    this.setState({
+      actionPlan: this.storageToJSON(ACTION_PLAN_KEY, {}),
+      basket: this.storageToJSON(BASKET_KEY, {})
+    });
   }
 
   storageToJSON(key, defaultValue) {
@@ -32,12 +37,12 @@ class ActionPlanDisplayShelf extends Component {
   render() {
     let { id, classNamePrefix, content } = this.props;
     let actionPlan = this.state.actionPlan;
-    let actionPlanKeys = Object.keys(actionPlan);
+    let actionPlanKeys = this.state.basket;
     let heading = content.title || '';
     let contentBody = content.body || '';
 
     return (
-      <Shelf id={id} classNamePrefix={classNamePrefix}>
+      <Shelf id={id} classNamePrefix={classNamePrefix} trackingGroup={content.tracking_group}>
         <div className={`${classNamePrefix}--lead`}>
           <div className='container'>
             {heading != '' &&
@@ -52,9 +57,11 @@ class ActionPlanDisplayShelf extends Component {
         <div className={`shelf__container container`}>
           <ul className={`${classNamePrefix}--action-list`}>
             { actionPlanKeys.map((actionCode, i) =>
-              <div key={i} className={`${classNamePrefix}--action col-sm-12 col-md-6`}>
-                <li>{actionPlan[actionCode].title}</li>
-              </div>
+              <li key={i} className="col-sm-12 col-md-6">
+                <div className={`${classNamePrefix}--action`}>
+                  <div>{actionPlan[actionCode].title}</div>
+                </div>
+              </li>
             )}
           </ul>
         </div>

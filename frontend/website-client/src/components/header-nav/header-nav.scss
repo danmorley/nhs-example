@@ -148,12 +148,16 @@ $secondary-item-padding: 0.4em;
 .header-nav__separator {
 
   @include media-breakpoint-up(lg) {
-    padding: 0.3em 1em 0.5em;
+    padding: 0 1em;
     border-left: 2px solid $text-primary;
-
+    display: flex;
+    height: 100%;
+    
     .header-nav__secondary-title,
    > .header-nav__link {
        top: 0.5em;
+       display: flex;
+       align-items: center;
    }
 
     &:hover {
@@ -169,8 +173,16 @@ $secondary-item-padding: 0.4em;
 }
 
 .header-nav__items > .header-nav__item  {
-
+  
+  @include media-breakpoint-down(md) {
+    br {
+      display: none;
+    }
+  } 
+  
   @include media-breakpoint-up(lg) {
+
+    text-align: center;
 
     &:nth-child(2) {
       .header-nav__separator {
@@ -286,7 +298,7 @@ $secondary-item-padding: 0.4em;
     position: absolute;
     padding: 1.1em 0 0.5em 0;
     z-index: 2;
-    top: 117px;
+    top: 125px;
     left: 0;
     right: 0;
     width: 100%;
@@ -300,7 +312,8 @@ $secondary-item-padding: 0.4em;
     @include media-breakpoint-up(lg) {
       padding: 0 1em 0;
       margin: 6px 0;
-
+      text-align: left;
+      
       &:first-child {
         margin-right: initial;
       }

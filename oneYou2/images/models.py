@@ -7,8 +7,8 @@ from django.dispatch import receiver
 
 from functools import reduce
 
-from wagtail.wagtailcore.models import PageRevision
-from wagtail.wagtailimages.models import Image, AbstractImage, AbstractRendition
+from wagtail.core.models import PageRevision
+from wagtail.images.models import Image, AbstractImage, AbstractRendition
 
 from pages.models import OneYou2Page
 

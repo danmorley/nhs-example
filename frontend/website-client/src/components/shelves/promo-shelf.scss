@@ -88,6 +88,10 @@ $shelf-padding-extra: 2em;
 }
 
 .page-heading-shelf {
+    
+  img {
+    display: block;
+  }
   
   > .shelf__container {
     overflow: hidden;
@@ -124,48 +128,85 @@ $shelf-padding-extra: 2em;
       }
   }
   
-  .shelf-image-position--top-left {
-     > .container {
-    display: flex;
-    flex-direction: column-reverse;
+  .shelf-left-image--top {
+    
+    .page-heading-shelf__container-left {
+      display: flex;
+      flex-direction: column-reverse;
     }
+  }
   
-    .page-heading-shelf__image-container {
+  .shelf-left-image--bottom {
+    
+    &.shelf-right-image--bottom {
       
-      @include media-breakpoint-up(md) {
-        margin-bottom: 0.5em;
+      .page-heading-shelf__container-right {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        
+        .page-heading-shelf__right-image--bottom {
+          margin-bottom: 0;
+        }
       }
     }
   }
 }
 
-.page-heading-shelf__image {
-  height: 30px;
+.page-heading-shelf__container-right {
+  float: right;
+}
 
-  @include media-breakpoint-up(sm) {
-    height: 50px;
-  }
+.page-heading-shelf__left-image--top {
   
-  @include media-breakpoint-up(md) {
-    height: auto;
-  }
+  margin-bottom: 1em; 
   
-  .shelf-image-position--top-right & {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-  
-  .shelf-image-position--bottom-left & {
-    margin-top: 1em;
-  }
-  
-  .shelf-image-position--bottom-right &{
-    margin-top: 1em;
-    float: right;
+  img {
     
-    @include media-breakpoint-up(md) {
-      margin-top: 0;
+    @include media-breakpoint-down(sm) {
+      height: 40px;
+    }
+  }
+}
+
+.page-heading-shelf__left-image--bottom {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  
+  img {
+    
+    @include media-breakpoint-down(sm) {
+      height: 50px;
+    }
+  }
+}
+
+.page-heading-shelf__right-image--top {
+  position: absolute;
+  top: 0.5em;
+  right: 0;
+  
+  img {
+    
+    @include media-breakpoint-down(sm) {
+      height: 30px;
+    }
+  }
+}
+
+.page-heading-shelf__right-image--bottom {
+  float: right;
+  margin-top: 1em;
+  margin-bottom: 1em;
+
+  @include media-breakpoint-up(md) {
+    margin-top: 0;
+  }
+  
+  img {
+    
+    @include media-breakpoint-down(sm) {
+      height: 50px;
     }
   }
 }

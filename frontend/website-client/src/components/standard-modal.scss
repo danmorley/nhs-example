@@ -1,0 +1,48 @@
+@import '../assets/styles/variables/variables';
+@import "../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+.pure-modal-backdrop .standard-modal {
+
+  width: 90%;
+  
+  @include media-breakpoint-up(md) {
+    width: 80%;
+  }
+  
+  .panel-default {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .panel-body {
+    background: $white;
+    padding: 2em 0 0;
+  }
+  
+  .panel-heading {
+    .close {
+      
+      color: $white;
+      background-color: $white;
+      width: 0;
+      height: 0;
+      
+      &:after {
+        @extend %icon-close-button;
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 25px;
+        font-weight: bold;
+        z-index: 2;
+        color: $dark;
+        
+        @include media-breakpoint-up(sm) {
+          top: 0.5em;
+          right: 0.5em;
+          font-size: 30px;
+        }
+      }
+    }
+  }
+}

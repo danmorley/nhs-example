@@ -30,8 +30,7 @@ class PageHeadingShelf extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      backgroundImageStyle: null,
-      image: null
+      backgroundImageStyle: null
     }
   }
 
@@ -41,7 +40,8 @@ class PageHeadingShelf extends Component {
         this.props.content.background_image,
         ImageUtils.placeholderBackgroundImage()
       ),
-      image: ImageUtils.isValid(this.props.content.image) ? ImageUtils.deviceImage(this.props.content.image) : null
+      firstImage: ImageUtils.isValid(this.props.content.image_left) ? ImageUtils.deviceImage(this.props.content.image_left) : null,
+      secondImage: ImageUtils.isValid(this.props.content.image_right) ? ImageUtils.deviceImage(this.props.content.image_right) : null
     })
   }
 
@@ -59,7 +59,11 @@ class PageHeadingShelf extends Component {
     this.setImage();
   }
 
-  renderImage(image, classname) {
+  renderImage1(image, classname) {
+    return (<Image image={image} class={classname} />);
+  }
+  
+  renderImage2(image, classname) {
     return (<Image image={image} class={classname} />);
   }
 
@@ -76,42 +80,53 @@ class PageHeadingShelf extends Component {
   }
 
   render() {
-    let { id, content, classNamePrefix, variant, layout } = this.props;
+    let { id, content, classNamePrefix, variant } = this.props;
     let metaVariant = content.meta_variant || variant;
-    let metaLayout = content.meta_layout || layout;
+    let firstImageLayout = content.image_left.layout || '';
+    let secondImageLayout = content.image_right.layout || '';
     let gradient = content.meta_gradient || false;
     let backgroundColourShelfStyle = {};
 
     let shelfStyle = (ImageUtils.isValid(content.background_image)) ?
       this.state.backgroundImageStyle : backgroundColourShelfStyle;
 
-    let imagePositionStyle = "shelf-image-position--bottom-left";
+    let firstLogoStyle = "left-image--top";
+    let secondLogoStyle = "right-image--bottom";
     
-    if (metaLayout === 'image_bottom_right') {
-      imagePositionStyle = "shelf-image-position--bottom-right"
+    if (firstImageLayout === 'bottom') {
+      firstLogoStyle = "left-image--bottom"
     }
-    else if (metaLayout === 'image_top_right') {
-      imagePositionStyle = "shelf-image-position--top-right"
-    }
-    else if (metaLayout === 'image_top_left') {
-      imagePositionStyle = "shelf-image-position--top-left"
+    
+    if (secondImageLayout === 'top') {
+      secondLogoStyle = "right-image--top"
     }
 
     let headingTagName = (classNamePrefix === 'page-heading-shelf') ? 'h1' : 'h2';
 
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
-        <div className={`shelf__container container-fluid ${imagePositionStyle} shelf__container-gradient--${gradient}`} style={shelfStyle}>
+        <div className={`shelf__container container-fluid shelf-${firstLogoStyle} shelf-${secondLogoStyle} shelf__container-gradient--${gradient}`} style={shelfStyle}>
           <div className="container">
-            <div className="row">
-              <div className="shelf__col col-10 col-sm-8 col-md-7">
-                {this.renderHeadingBody(content, headingTagName)}
-                {this.renderCta(content.cta)}
-              </div>
-            </div>
-            <div className={`${classNamePrefix}__image-container`}>
-              {this.renderImage(content.image, `${classNamePrefix}__image`)}
-            </div>
+              <div className={`${classNamePrefix}__container-left`}>
+                <div className="row">
+                  <div className="shelf__col col-10 col-sm-8 col-md-7">
+                    {this.renderHeadingBody(content, headingTagName)}
+                    {this.renderCta(content.cta)}
+                  </div>
+                </div>
+                { this.state.firstImage &&
+                  <div className={`${classNamePrefix}__${firstLogoStyle}`}>
+                    {this.renderImage1(content.image_left, `${classNamePrefix}__image`)}
+                  </div> 
+                }  
+              </div>  
+              <div className={`${classNamePrefix}__container-right`}>
+                { this.state.secondImage &&
+                  <div className={`${classNamePrefix}__${secondLogoStyle}`}>
+                    {this.renderImage2(content.image_right, `${classNamePrefix}__image`)}
+                  </div>
+                }
+              </div>      
           </div>
         </div>
       </Shelf>
@@ -123,7 +138,8 @@ PageHeadingShelf.propTypes = {
   content: PropTypes.object.isRequired,
   classNamePrefix: PropTypes.string.isRequired,
   variant: PropTypes.string,
-  layout: PropTypes.string,
+  firstImageLayout: PropTypes.string,
+  secondImageLayout: PropTypes.string,
   id: PropTypes.string
 }
 
