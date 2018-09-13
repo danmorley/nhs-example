@@ -108,10 +108,11 @@ class FrontendVersion:
 
     @classmethod
     def load_static(cls, path, file_name):
-        print(path, file_name)
+        print("load_static, path is %s, file is %s" % (path, file_name))
         file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
         file_directory = settings.ENV if settings.ENV != 'local' else 'dev'
         directory_name = file_directory + '/' + path
+        print("load_static, get_file dir %s, file %s to ./web" % (directory_name, file_name))
         return file_service.get_file_to_path(settings.AZURE_FILE_SHARE, directory_name, file_name, './web/' + file_name)
 
     @classmethod
@@ -153,6 +154,10 @@ class FrontendVersion:
         print('uploading favicon')
         file_service.put_file_from_path(settings.AZURE_FILE_SHARE, version_directory, 'favicon.ico',
                                         './web/favicon.ico')
+
+        print('uploading webtrends.min.js')
+        file_service.put_file_from_path(settings.AZURE_FILE_SHARE, version_directory, 'webtrends.min.js',
+                                        './web/webtrends.min.js')
 
         release_tag = get_release_version()
         print('adding tag meta to the version directory')

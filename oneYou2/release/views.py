@@ -98,10 +98,12 @@ def cms_statics(request, path):
 
 
 def web_statics(request, site_name, path):
+    print("Serving web static %s" % path)
     return serve(request, path, document_root='./web/static/')
 
 
 def statics(request, site_name, path):
+    print("Serving static %s" % path)
     path_components = path.split('/')
     file_name = path_components.pop()
     FrontendVersion.load_static('/'.join(path_components), file_name)
