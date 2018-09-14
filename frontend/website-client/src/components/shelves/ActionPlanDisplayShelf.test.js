@@ -4,19 +4,16 @@ import ActionPlanDisplayShelf from './ActionPlanDisplayShelf';
 import { shallow } from 'enzyme';
 
 const ACTION_PLAN_KEY = 'action_plan';
+const BASKET_KEY = 'basket';
 
 describe('ActionPlanDisplayShelf', () => {
   let content = {
+    action_code: 'test_code',
     title: 'A test action plan',
     body: 'More details about your test action plan'
   };
 
   let emptyContent = {};
-
-  let action = {
-    title: 'Test Action',
-    action_code: 'test_code'
-  };
 
   let classNamePrefix = 'action-plan-shelf';
 
@@ -32,23 +29,19 @@ describe('ActionPlanDisplayShelf', () => {
 
   it('renders without crashing with values in the sessionStorage', () => {
     let updatedActionPlan = {}
+    let updatedBasket = []
     updatedActionPlan[content.action_code] = content;
+    updatedBasket.push(content.action_code)
     sessionStorage.setItem(ACTION_PLAN_KEY, JSON.stringify(updatedActionPlan));
+    sessionStorage.setItem(BASKET_KEY, JSON.stringify(updatedBasket));
     const div = document.createElement('div');
     let component = ReactDOM.render(<ActionPlanDisplayShelf content={content} classNamePrefix={classNamePrefix}/>, div);
     expect(component.state.actionPlan).toEqual(updatedActionPlan);
   });
 
-  it('returns the default value from storageToJson if the requested item is not in the storage', () => {
-    sessionStorage.removeItem(ACTION_PLAN_KEY);
-    const div = document.createElement('div');
-    let component = ReactDOM.render(<ActionPlanDisplayShelf content={content} classNamePrefix={classNamePrefix}/>, div)
-    const defaultValue = {}
-    expect(component.storageToJSON(ACTION_PLAN_KEY, defaultValue)).toEqual(defaultValue);
-  });
-
   it('returns the default value from storageToJson if the requested item in the storage is empty', () => {
-    sessionStorage.setItem(ACTION_PLAN_KEY, '');
+    sessionStorage.setItem(BASKET_KEY, '[]');
+    sessionStorage.setItem(ACTION_PLAN_KEY, '{}');
     const div = document.createElement('div');
     let component = ReactDOM.render(<ActionPlanDisplayShelf content={content} classNamePrefix={classNamePrefix}/>, div)
     const defaultValue = {}

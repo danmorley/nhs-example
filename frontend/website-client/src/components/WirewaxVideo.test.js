@@ -32,28 +32,28 @@ it('renders without crashing with content', () => {
 it('returns an empty array from storageToJson when there is an empty basket', () => {
   const div = document.createElement('div');
   let component = ReactDOM.render(<WirewaxVideo video={"video_source"} />, div);
-  expect(sessionStorage.getItem(BASKET_KEY)).toEqual('');
+  expect(sessionStorage.getItem(BASKET_KEY)).toEqual('[]');
   expect(component.storageToJSON().length).toEqual(0);
 });
 
 it('returns an array containing the stored data from storageToJson when there is something in basket', () => {
-  expect(sessionStorage.getItem(BASKET_KEY)).toEqual('');
+  expect(sessionStorage.getItem(BASKET_KEY)).toEqual('[]');
   const div = document.createElement('div');
   let component = ReactDOM.render(<WirewaxVideo video={"video_source"} />, div);
   sessionStorage.setItem(BASKET_KEY, JSON.stringify([eventData]));
   expect(sessionStorage.getItem(BASKET_KEY)).not.toEqual('');
   expect(component.storageToJSON().length).toEqual(1);
   expect(component.storageToJSON()[0]).toEqual(eventData);
-  sessionStorage.setItem(BASKET_KEY, '');
+  sessionStorage.setItem(BASKET_KEY, '[]');
 });
 
 it('adds an item to the sessionStorage basket correctly in addToBasket', () => {
-  expect(sessionStorage.getItem(BASKET_KEY)).toEqual('');
+  expect(sessionStorage.getItem(BASKET_KEY)).toEqual('[]');
   const div = document.createElement('div');
   let component = ReactDOM.render(<WirewaxVideo video={"video_source"} />, div);
   component.addToBasket(eventData);
   expect(sessionStorage.getItem(BASKET_KEY)).not.toEqual('');
   expect(component.storageToJSON().length).toEqual(1);
   expect(component.storageToJSON()[0]).toEqual(eventData.data.product.variantId);
-  sessionStorage.setItem(BASKET_KEY, '');
+  sessionStorage.setItem(BASKET_KEY, '[]');
 });
