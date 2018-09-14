@@ -11546,7 +11546,35 @@ const sampleShelvesPage = {
         cta: [ ],
         image_meta: "action_plan_display_shelf/None/None"
       },
-      id: "cdc8117f-cdb1-41dd-a73a-589aa2c5f8d6"
+      id: "action-plan-display"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Accordion Shelf',
+        body: 'Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b'
+      }
+    },
+    {
+      type: "accordion_shelf",
+      value: {
+        tracking_group: "",
+        heading: "Accordion Shelf",
+        items: [
+          {
+            type: "rich_text_panel",
+            value: {
+              text: "<p>Rich Text Panel in the accordion</p>",
+              meta_variant: "standard",
+              image_meta: "rich_text_panel/accordion_shelf/None"
+            },
+            id: "accordion-rich-text-field"
+          }
+        ],
+        shelf_id: "",
+        image_meta: "accordion_shelf/None/None"
+      },
+      id: "accordion-shelf"
     }
   ]
 };
