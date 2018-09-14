@@ -27,12 +27,9 @@ class AccordionShelf extends Component {
 
   handleClick() {
     if (this.state.expanded) {
-      console.log('removing hash', this.state.hash)
       removeHash();
-      console.log(window.location.hash);
       this.setState({expanded: false});
     } else {
-      console.log('adding hash', this.state.hash);
       window.location.hash = this.state.hash;
     }
   }
@@ -40,9 +37,7 @@ class AccordionShelf extends Component {
   checkIfExpanded() {
     console.log('running check on ' + this.state.hash, window.location.hash);
     if (this.state.hash === window.location.hash && !this.state.expanded) {
-      console.log('check', window.location.hash);
       this.setState({expanded: true});
-
     } else if (this.state.hash !== window.location.hash && this.state.expanded) {
       this.setState({expanded: false});
     }
