@@ -21,6 +21,7 @@ from api import urls as api_urls
 from pages import urls as pages_urls
 from api.wagtail import api_router
 from api import views as api_views
+from shelves.views import upload_actions
 
 
 urlpatterns = [
@@ -29,6 +30,7 @@ urlpatterns = [
     url(r'^admin/custom/pages/', include(pages_urls, namespace="oneyou_pages")),
     url(r'^admin/experiments/', include(experiment_urls)),
     url(r'^admin/pages/', include(pages_urls)),
+    url(r'^admin/actions/upload/', upload_actions, name='upload_actions'),
 
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
