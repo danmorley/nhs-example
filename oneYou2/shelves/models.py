@@ -29,10 +29,10 @@ ACTION_CATEGORY = (
     ('Be more active', 'Be more active'),
     ('Stay connected', 'Stay connected'),
     ('Reframing unhelpful thoughts', 'Reframing unhelpful thoughts'),
-    ('Being in the present ', 'Being in the present '),
+    ('Being in the present ', 'Being in the present'),
     ('Get good sleep', 'Get good sleep'),
-    ('Take control', 'Take control '),
-    ('Healthy living', 'Healthy living '),
+    ('Take control', 'Take control'),
+    ('Healthy living', 'Healthy living'),
     ('Take action on my worries', 'Take action on my worries'),
     ('Do something for myself', 'Do something for myself'),
     ('Get help and support', 'Get help and support'),
@@ -336,10 +336,10 @@ class ActionShelf(ShelfAbstract):
     paragon_action_code = models.CharField(max_length=255, null=False, blank=False, unique=True,
                                            help_text="Must be unique, used by paragon. Designed to be a slug of title")
     category = models.CharField(max_length=255, null=False, blank=False, choices=ACTION_CATEGORY)
-    position = models.IntegerField(null=False, blank=False, unique=True, help_text="Must be unique, this determines the"
-                                                                                   "order paragon will return actions"
-                                                                                   "in the email.")
-    action_code = models.CharField(max_length=255, null=False, blank=False, unique=True,
+    position = models.IntegerField(null=False, blank=False, help_text="Must be unique, this determines the"
+                                                                      "order paragon will return actions"
+                                                                      "in the email.")
+    action_code = models.CharField(max_length=255, null=True, blank=True,
                                    help_text="Wirewax action code")
     title = models.CharField(max_length=255, null=False, blank=False)
     rich_text_body = models.TextField(blank=True, null=True)
@@ -437,6 +437,7 @@ class ActionShelf(ShelfAbstract):
     class Meta:
         verbose_name = 'Action'
         verbose_name_plural = 'Actions'
+        unique_together = (("category", "position"),)
 
     def __str__(self):
         return self.title

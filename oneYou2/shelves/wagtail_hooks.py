@@ -59,7 +59,7 @@ class ActionshelfAdmin(ModelAdmin):
     menu_order = 600
     add_to_settings_menu = False  # or True to add your model to the Settings sub-menu
     exclude_from_explorer = False  # or True to exclude pages of this type from Wagtail's explorer view
-    list_display = ('paragon_id', 'title', 'paragon_action_code', 'position', 'active')
+    list_display = ('paragon_id', 'title', 'category', 'position', 'active')
     list_filter = ('cta_type',)
     search_fields = ('title',)
 

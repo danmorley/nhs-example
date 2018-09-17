@@ -53,7 +53,6 @@ def upload_actions(request):
                 for key in keys_to_delete:
                     del row_dict[key]
 
-                print(row_dict)
                 try:
                     action_shelf = ActionShelf.objects.get(paragon_id=row_dict['paragon_id'])
                     action_shelf.save(update_fields=row_dict)
@@ -61,11 +60,7 @@ def upload_actions(request):
                     action_shelf = ActionShelf(**row_dict)
                     action_shelf.save()
 
-
-                #action, created = ActionShelf.objects.get_or_create(**row_dict)
-
-            return
-            #return HttpResponseRedirect('/success/url/')
+            return HttpResponseRedirect('/admin/shelves/actionshelf/')
     else:
         form = PopulateActionForm()
     return render(request, 'action_upload.html', {'form': form})
