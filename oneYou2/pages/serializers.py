@@ -11,6 +11,7 @@ class OneYouPageSerializer(serializers.ModelSerializer):
     body = StreamField()
 
     def to_representation(self, data):
+        print(data.id)
         meta_fields = getattr(self.Meta, 'meta_fields')
         serialized_data = super(OneYouPageSerializer, self).to_representation(data)
         serialized_data['meta'] = {}
@@ -24,6 +25,9 @@ class OneYouPageSerializer(serializers.ModelSerializer):
         for shelf in serialized_data['body']:
             determine_image_rendtions_for_shared_content_shelves(shelf)
             replace_resource_ids_with_links_for_download(shelf)
+            shelf_id = shelf.get('id', None)
+            if shelf_id:
+                shelf['id'] = "p%s-%s" % (data.id, shelf_id)
 
         serialized_data['meta']['breadcrumbs'] = data.breadcrumbs
 
