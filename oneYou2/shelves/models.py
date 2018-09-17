@@ -307,13 +307,20 @@ class AppTeaser(ShelfAbstract):
     def clean(self):
         super(ShelfAbstract, self).clean()
         validation_errors = {}
-        if self.cta_text:
+        if self.cta_text and self.cta_link:
             if self.cta_googleplay:
                 validation_errors['cta_googleplay'] = _('Cannot enter a Google play link and a CTA button')
             if self.cta_appstore:
                 validation_errors['cta_appstore'] = _('Cannot enter a App store link and a CTA button')
-            if not self.cta_link and not self.cta_page:
-                validation_errors['cta_text'] = _('Cannot enter CTA button text without a link or page.')
+
+        if self.cta_text and self.cta_page:
+            if self.cta_googleplay:
+                validation_errors['cta_googleplay'] = _('Cannot enter a Google play link and a CTA button')
+            if self.cta_appstore:
+                validation_errors['cta_appstore'] = _('Cannot enter a App store link and a CTA button')
+
+        if self.cta_text and not self.cta_link and not self.cta_page:
+            validation_errors['cta_text'] = _('Cannot enter CTA button text without a link or page.')
 
         if self.cta_link:
             if not self.cta_text:
