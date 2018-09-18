@@ -31,7 +31,7 @@ import TableShelf from '../../shelves/TableShelf';
 //import TriageToolShelf from '../../shelves/TriageToolShelf';
 import ActionPlanShelf from '../../shelves/ActionPlanShelf';
 import ActionPlanDisplayShelf from '../../shelves/ActionPlanDisplayShelf';
-import AccordionShelf from '../../shelves/AccordionShelf';
+import AccordionGroup from '../../shelves/AccordionGroup';
 
 
 class MultiShelfBlock extends Component {

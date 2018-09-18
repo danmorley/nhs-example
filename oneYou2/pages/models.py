@@ -570,13 +570,19 @@ class ActionPlanDisplay(Shelf):
     ], icon='arrow-left', label='Items', required=False)
 
 
-class AccordionShelf(Shelf):
+class AccordionPanel(Shelf):
     heading = blocks.CharBlock(required=False)
     items = blocks.StreamBlock(ACCORDION_PANELS, icon='arrow-left', label='Items')
     shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-table-shelf dct-meta-panel'
+
+
+class AccordionGroup(Shelf):
+    accordions = blocks.StreamBlock([
+        ('accordion_panel', AccordionPanel(required=True, icon='collapse-down'))
+    ])
 
 
 # Pages
@@ -599,7 +605,7 @@ class OneYou2Page(Page):
         ('script_shelf', InlineScriptPanel(label="Script shelf", icon='code')),
         ('triage_tool_shelf', TriageToolShelf(label="Triage tool shelf", icon='cog')),
         ('svg_shelf', InlineSvgPanel(label="SVG shelf", icon='snippet')),
-        ('accordion_shelf', AccordionShelf(label="Accordion Shelf", icon='collapse-down')),
+        ('accordion_group', AccordionGroup(label="Accordion Group", icon='form')),
         ('action_plan_shelf', ActionPlan(label="Action Plan Builder shelf", icon='form')),
         ('action_plan_display_shelf', ActionPlanDisplay(label="Action Plan Display shelf", icon='form'))
     ], null=True, blank=True)
