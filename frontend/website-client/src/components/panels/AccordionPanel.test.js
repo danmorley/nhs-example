@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AccordionShelf from './AccordionShelf';
+import AccordionPanel from './AccordionPanel';
 
-describe('AccordionShelf', () => {
+describe('AccordionPanel', () => {
   let content = {
     tracking_group: "",
     heading: "Accordion 1",
@@ -25,6 +25,6 @@ describe('AccordionShelf', () => {
 
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<AccordionShelf content={content} classNamePrefix={classNamePrefix}/>, div);
+    ReactDOM.render(<AccordionPanel content={content} classNamePrefix={classNamePrefix}/>, div);
   });
 })
