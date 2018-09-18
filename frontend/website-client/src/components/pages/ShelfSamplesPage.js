@@ -11551,30 +11551,38 @@ const sampleShelvesPage = {
     {
       type: 'guidance_shelf',
       value: {
-        heading: 'Accordion Shelf',
+        heading: 'Accordion Panel',
         body: 'Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b'
       }
     },
     {
-      type: "accordion_shelf",
+      type: "accordion_group",
       value: {
         tracking_group: "",
-        heading: "Accordion Shelf",
-        items: [
+        accordions: [
           {
-            type: "rich_text_panel",
+            type: "accordion_panel",
             value: {
-              text: "<p>Rich Text Panel in the accordion</p>",
-              meta_variant: "standard",
-              image_meta: "rich_text_panel/accordion_shelf/None"
+              tracking_group: "",
+              heading: "Accordion Panel",
+              items: [
+                {
+                  type: "rich_text_panel",
+                  value: {
+                    text: "<p>Lorem ipsum dolor amet humblebrag tousled mixtape chia pop-up tbh DIY direct trade before they sold out kickstarter austin chicharrones pour-over ethical.</p>",
+                    meta_variant: "standard"
+                  },
+                  id: "accordion-panel-rich-text-panel"
+                }
+              ],
+              shelf_id: ""
             },
-            id: "accordion-rich-text-field"
+            id: "accordion-panel"
           }
         ],
-        shelf_id: "",
-        image_meta: "accordion_shelf/None/None"
+        image_meta: "accordion_group/None/None"
       },
-      id: "accordion-shelf"
+      id: "accordion-group"
     }
   ]
 };
