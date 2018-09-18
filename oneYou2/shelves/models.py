@@ -330,7 +330,8 @@ class AppTeaser(ShelfAbstract):
             if not self.cta_text:
                 validation_errors['cta_page'] = _('CTA button needs a text label')
 
-        if not self.cta_text and not self.cta_googleplay and not self.cta_appstore:
+        if not self.cta_text and not self.cta_googleplay and not self.cta_appstore and not self.cta_link and \
+                not self.cta_page:
             validation_errors['cta_text'] = _('App teaser requires a type of CTA button')
             validation_errors['cta_googleplay'] = _('App teaser requires a type of CTA button')
             validation_errors['cta_appstore'] = _('App teaser requires a type of CTA button')
