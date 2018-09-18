@@ -404,14 +404,12 @@ class ActionShelf(ShelfAbstract):
     def save(self, *args, **kwargs):
         super(ActionShelf, self).save(*args, **kwargs)
 
-        url = 'https://api-test-mentalhealth.cc-testing.co.uk/api/Actions/UpdateAction'
-
         headers = {
-            "Authorization": settings.PARAGON_AUTH_HEADER,
+            "Authorization": settings.PARAGON_ACTION_API_AUTH_HEADER,
             "Content-Type": "application/json",
         }
         data = {
-            "ProductToken": "3D149395-F755-4586-BA8A-E4F915B023AD",
+            "ProductToken": settings.PARAGON_ACTION_API_PRODUCT_TOKEN,
             "ActionId": self.paragon_id,
             "ActionCategory": self.category,
             "ActionPosition": self.position,
@@ -428,7 +426,7 @@ class ActionShelf(ShelfAbstract):
             "ActionActive": self.active,
             "ActionSource": "webInput",
         }
-        r = requests.post(url, headers=headers, data=json.dumps(data))
+        r = requests.post(settings.PARAGON_ACTION_API_URL, headers=headers, data=json.dumps(data))
         if r.status_code != 200:
             print(r.status_code, r.content)
             print(data)
