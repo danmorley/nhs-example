@@ -14,23 +14,24 @@ import img105x75 from '../../assets/images/105x75.jpg';
 
 const backgroundImage = {
   renditions: {
-    desktop: testBackgroundImage,
-    mobile: testBackgroundImage
+    desktop: '/web' + testBackgroundImage,
+    mobile: '/web' + testBackgroundImage
   },
   title: 'Placeholder background image' };
 
+
 const altImage = {
   renditions: {
-    desktop: testImage,
-    mobile: testImage
+    desktop: '/web' + testImage,
+    mobile: '/web' + testImage
   },
   title: 'Alternate placeholder background image'
 };
 
 const pheLogoImage = {
   renditions: {
-    desktop: pheLogo,
-    mobile: pheLogo
+    desktop: '/web' + pheLogo,
+    mobile: '/web' + pheLogo
   },
   title: 'PHE logo image' };
 
