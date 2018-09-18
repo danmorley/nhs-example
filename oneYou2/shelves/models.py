@@ -29,7 +29,7 @@ ACTION_CATEGORY = (
     ('Be more active', 'Be more active'),
     ('Stay connected', 'Stay connected'),
     ('Reframing unhelpful thoughts', 'Reframing unhelpful thoughts'),
-    ('Being in the present ', 'Being in the present'),
+    ('Being in the present', 'Being in the present'),
     ('Get good sleep', 'Get good sleep'),
     ('Take control', 'Take control'),
     ('Healthy living', 'Healthy living'),
