@@ -23,11 +23,11 @@ class AccordionGroup extends Component {
 
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} trackingGroup={content.tracking_group}>
-        <div className={`shelf__container container`}>
+        <div className={`shelf__container container-fluid ${classNamePrefix}__container`}>
           { content.accordions && content.accordions.map((accordion, i) =>
             <AccordionPanel key={i}
              id={accordion.id}
-             classNamePrefix={accordion.type}
+             classNamePrefix={'accordion-panel'}
              content={accordion.value}
              expanded={this.state.expandedGroup === accordion.id}
              setExpandedGroup={this.setExpandedGroup} />

@@ -54,11 +54,12 @@ class AccordionPanel extends Component {
     return (
       <Panel id={id} classNamePrefix={classNamePrefix}>
         <div ref={ (div) => { this.Accordion = div; } }>
-          <h2 onClick={this.handleClick}>
-            {content.heading}
-          </h2>
-
-          <div className={expansionClassName}>
+          <div className={`${classNamePrefix}__header ${classNamePrefix}__header--${expansionClassName}`}>
+            <h2 onClick={this.handleClick} className={`container ${classNamePrefix}__sub-container`}>
+              {content.heading}
+            </h2>
+          </div>
+          <div className={`${classNamePrefix}__body ${classNamePrefix}__body--${expansionClassName} container ${classNamePrefix}__sub-container`}>
             { MultiPanelBlock.renderItems(content.items, '', 'div') }
           </div>
         </div>
