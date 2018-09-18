@@ -11,7 +11,6 @@ class OneYouPageSerializer(serializers.ModelSerializer):
     body = StreamField()
 
     def to_representation(self, data):
-        print(data.id)
         meta_fields = getattr(self.Meta, 'meta_fields')
         serialized_data = super(OneYouPageSerializer, self).to_representation(data)
         serialized_data['meta'] = {}
