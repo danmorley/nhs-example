@@ -14,23 +14,24 @@ import img105x75 from '../../assets/images/105x75.jpg';
 
 const backgroundImage = {
   renditions: {
-    desktop: testBackgroundImage,
-    mobile: testBackgroundImage
+    desktop: '/web' + testBackgroundImage,
+    mobile: '/web' + testBackgroundImage
   },
   title: 'Placeholder background image' };
 
+
 const altImage = {
   renditions: {
-    desktop: testImage,
-    mobile: testImage
+    desktop: '/web' + testImage,
+    mobile: '/web' + testImage
   },
   title: 'Alternate placeholder background image'
 };
 
 const pheLogoImage = {
   renditions: {
-    desktop: pheLogo,
-    mobile: pheLogo
+    desktop: '/web' + pheLogo,
+    mobile: '/web' + pheLogo
   },
   title: 'PHE logo image' };
 
@@ -11546,7 +11547,43 @@ const sampleShelvesPage = {
         cta: [ ],
         image_meta: "action_plan_display_shelf/None/None"
       },
-      id: "cdc8117f-cdb1-41dd-a73a-589aa2c5f8d6"
+      id: "action-plan-display"
+    },
+    {
+      type: 'guidance_shelf',
+      value: {
+        heading: 'Accordion Panel',
+        body: 'Layout <b>N/A</b>, variant <b>N/A</b>, background image <b>N/A</b'
+      }
+    },
+    {
+      type: "accordion_group",
+      value: {
+        tracking_group: "",
+        accordions: [
+          {
+            type: "accordion_panel",
+            value: {
+              tracking_group: "",
+              heading: "Accordion Panel",
+              items: [
+                {
+                  type: "rich_text_panel",
+                  value: {
+                    text: "<p>Lorem ipsum dolor amet humblebrag tousled mixtape chia pop-up tbh DIY direct trade before they sold out kickstarter austin chicharrones pour-over ethical.</p>",
+                    meta_variant: "standard"
+                  },
+                  id: "accordion-panel-rich-text-panel"
+                }
+              ],
+              shelf_id: ""
+            },
+            id: "accordion-panel"
+          }
+        ],
+        image_meta: "accordion_group/None/None"
+      },
+      id: "accordion-group"
     }
   ]
 };

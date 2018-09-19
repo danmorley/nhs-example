@@ -82,8 +82,8 @@ class PageHeadingShelf extends Component {
   render() {
     let { id, content, classNamePrefix, variant } = this.props;
     let metaVariant = content.meta_variant || variant;
-    let firstImageLayout = content.image_left.layout || '';
-    let secondImageLayout = content.image_right.layout || '';
+    let firstImageLayout = content.image_left ?  content.image_left.layout : '';
+    let secondImageLayout = content.image_right ? content.image_right.layout : '';
     let gradient = content.meta_gradient || false;
     let backgroundColourShelfStyle = {};
 
