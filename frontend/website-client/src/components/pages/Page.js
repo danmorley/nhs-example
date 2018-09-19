@@ -67,9 +67,10 @@ class Page extends Component {
             opt1={page.meta.opt_in_1_text} 
             opt2={page.meta.opt_in_2_text}
             tsAndCs ={page.meta.ts_and_cs_statement}
+            trackingGroup={page.meta.tracking_group}
           />
         }
-        <BackToTopButton />
+        { page && <BackToTopButton trackingGroup={page.meta.tracking_group} />}
       </StandardPageLayout>
     );
   }

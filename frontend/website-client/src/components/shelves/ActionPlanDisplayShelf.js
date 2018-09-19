@@ -56,7 +56,7 @@ class ActionPlanDisplayShelf extends Component {
 
         <div className={`shelf__container container`}>
           <ul className={`${classNamePrefix}--action-list`}>
-            { actionPlanKeys.map((actionCode, i) =>
+            { Array.isArray(actionPlanKeys) && actionPlanKeys.map((actionCode, i) =>
               <li key={i} className="col-sm-12 col-md-6">
                 <div className={`${classNamePrefix}--action`}>
                   <div>{actionPlan[actionCode].title}</div>
