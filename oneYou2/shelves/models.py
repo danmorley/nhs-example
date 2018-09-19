@@ -283,14 +283,14 @@ class AppTeaser(ShelfAbstract):
         related_name='+'
     )
     cta_text = models.CharField(max_length=255, null=True, blank=True)
-    cta_link = models.CharField(max_length=255, null=True, blank=True)
+    cta_link = models.URLField(max_length=255, null=True, blank=True)
     cta_page = ParentalKey('wagtailcore.Page',
                            on_delete=models.SET_NULL,
                            related_name='app_teaser_links',
                            null=True,
                            blank=True)
-    cta_googleplay = models.CharField(max_length=255, null=True, blank=True)
-    cta_appstore = models.CharField(max_length=255, null=True, blank=True)
+    cta_googleplay = models.URLField(max_length=255, null=True, blank=True)
+    cta_appstore = models.URLField(max_length=255, null=True, blank=True)
 
     panels = [
         FieldPanel('shelf_id'),
@@ -303,6 +303,41 @@ class AppTeaser(ShelfAbstract):
         FieldPanel('cta_googleplay'),
         FieldPanel('cta_appstore'),
     ]
+
+    def clean(self):
+        super(ShelfAbstract, self).clean()
+        validation_errors = {}
+        if self.cta_text and self.cta_link:
+            if self.cta_googleplay:
+                validation_errors['cta_googleplay'] = _('Cannot enter a Google play link and a CTA button')
+            if self.cta_appstore:
+                validation_errors['cta_appstore'] = _('Cannot enter a App store link and a CTA button')
+
+        if self.cta_text and self.cta_page:
+            if self.cta_googleplay:
+                validation_errors['cta_googleplay'] = _('Cannot enter a Google play link and a CTA button')
+            if self.cta_appstore:
+                validation_errors['cta_appstore'] = _('Cannot enter a App store link and a CTA button')
+
+        if self.cta_text and not self.cta_link and not self.cta_page:
+            validation_errors['cta_text'] = _('Cannot enter CTA button text without a link or page.')
+
+        if self.cta_link:
+            if not self.cta_text:
+                validation_errors['cta_link'] = _('CTA button needs a text label')
+
+        if self.cta_page:
+            if not self.cta_text:
+                validation_errors['cta_page'] = _('CTA button needs a text label')
+
+        if not self.cta_text and not self.cta_googleplay and not self.cta_appstore and not self.cta_link and \
+                not self.cta_page:
+            validation_errors['cta_text'] = _('App teaser requires a type of CTA button')
+            validation_errors['cta_googleplay'] = _('App teaser requires a type of CTA button')
+            validation_errors['cta_appstore'] = _('App teaser requires a type of CTA button')
+
+        if validation_errors:
+            raise ValidationError(validation_errors)
 
 
 @register_snippet
