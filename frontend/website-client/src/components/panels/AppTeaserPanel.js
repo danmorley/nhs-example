@@ -49,6 +49,10 @@ class AppTeaserPanel extends Component {
     let { content, classNamePrefix } = this.props;
     let backgroundTeaserImage = this.state.backgroundImageStyle;
 
+    // Set button text for accessibility and tracking.
+    content.cta_appstore.link_text = 'Download from the Appstore';
+    content.cta_googleplay.link_text = 'Gert it on Google Play';
+
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
         <div className={`${classNamePrefix}__image`} style={backgroundTeaserImage}>
