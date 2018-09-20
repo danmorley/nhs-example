@@ -20,7 +20,7 @@ class EmailButtonPanel extends Component {
   render() {
     return (
       <Panel classNamePrefix="email-button-panel" variant="align-right">
-        <div onClick={this.triggerModal.bind(this)} className="email-button">
+        <div onClick={this.triggerModal.bind(this)} className="email-button"  data-name="email-button">
           <span className="email-button__title">Email</span>
         </div>
         <StandardModal content = {<ActionPlanContactForm {...this.props} />}  ref={this.modal}/>
