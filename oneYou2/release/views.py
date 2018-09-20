@@ -63,6 +63,7 @@ def release_html(request, site_name):
                                                   "/{}/version/js/{}/?file_name=".format(site_name, frontend_id))
     substituted_index = substituted_index.replace("/manifest", "/{}/public/manifest".format(site_name))
     substituted_index = substituted_index.replace("/favicon", "/{}/public/{}/favicon".format(site_name, frontend_id))
+    substituted_index = substituted_index.replace("/webtrends.min.js", "/{}/public/{}/webtrends.min.js".format(site_name, frontend_id))
 
     host = request.META['HTTP_HOST']
     if settings.CONTENT_STORE_ENDPOINT:

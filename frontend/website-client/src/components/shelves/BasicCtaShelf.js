@@ -103,7 +103,7 @@ class BasicCtaShelf extends Component {
       );
     } else if (metaLayout === 'image_on_right') {
       return (
-        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group}>
           <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
               <div className="shelf__col col">
@@ -119,7 +119,7 @@ class BasicCtaShelf extends Component {
       );
     } else if (metaLayout === 'cta_on_left') {
       return (
-        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group}>
           <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
               <div className="shelf__col col col-vertical-center col-shrink-to-fit">
@@ -134,7 +134,7 @@ class BasicCtaShelf extends Component {
       );
     } else if (metaLayout === 'cta_on_right') {
       return (
-        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group}>
           <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
               <div className="shelf__col col col-vertical-center">
@@ -149,7 +149,7 @@ class BasicCtaShelf extends Component {
       );
     } else if (metaLayout === 'full_width') {
       return (
-        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group}>
           <div className={`shelf__container container-fluid shelf__container-gradient--${gradient}`}  style={shelfStyle}>
             <div className="container">
               <div className="row">
@@ -164,7 +164,7 @@ class BasicCtaShelf extends Component {
       );
     } else if (metaLayout === 'full_to_half_width') {
       return (
-        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} layout={metaLayout}>
+        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} layout={metaLayout} trackingGroup={content.tracking_group}>
           <div className="container full-to-half-width">
             <div className="shelf__container container" style={shelfStyle}>
               <div className="row">
@@ -181,7 +181,7 @@ class BasicCtaShelf extends Component {
       );
     } else if (metaLayout === 'section_heading') {
       return (
-        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group}>
           <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
               <div className="col shelf__col">
@@ -194,7 +194,7 @@ class BasicCtaShelf extends Component {
     } else {
       // Default layout: ???
       return (
-        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group}>
           <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
               <div className="shelf__col col-12 col-vertical-center">
