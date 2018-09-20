@@ -46,13 +46,13 @@ class BackToTopButton extends Component {
   }
 
   handleMouseDown(e) {
-    console.log('Tracking click', this.props.trackingGroup, 'back-to-top');
-    if (this.props.trackingGroup) TrackingUtils.trackEvent(e.target, this.props.trackingGroup, 'Click', 'back-to-top');
+    // console.log('Tracking click', this.props.trackingGroup, 'back-to-top');
+    if (this.props.trackingGroup) TrackingUtils.trackEvent(e.target, this.props.trackingGroup, 'Click', 'page');
   }
 
   render() {
     return (
-      <button className="back-to-top" aria-label="back to top of page" ref={(elem) => this.setBackToTopButton(elem)} onClick={this.handleClick.bind(this)} onMouseDown={this.handleMouseDown}></button>
+      <button className="back-to-top" aria-label="back to top of page" ref={(elem) => this.setBackToTopButton(elem)} onClick={this.handleClick.bind(this)} onMouseDown={this.handleMouseDown} data-name="back-to-top"></button>
     )
   }
 }
