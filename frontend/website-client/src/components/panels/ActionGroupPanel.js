@@ -47,7 +47,7 @@ class ActionGroupPanel extends Component {
 
     return (
       <Panel id={id} classNamePrefix={classNamePrefix}>
-        <div className={`${classNamePrefix}--heading ${headingClass}`} onClick={this.toggle.bind(this)}>
+        <div className={`${classNamePrefix}--heading ${headingClass}`} onClick={this.toggle.bind(this)} data-name={`Dropdown-${content.title}`}>
           <h2 className={`${classNamePrefix}--title`}>
             { content.title }
           </h2>

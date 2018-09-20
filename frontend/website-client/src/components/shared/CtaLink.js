@@ -12,7 +12,7 @@ import UrlUtils from "./UrlUtils";
  */
 class CtaLink extends Component {
   render() {
-    let { cta, variant } = this.props;
+    let { cta, variant, dataName } = this.props;
 
     if (!cta) return null;
 
@@ -50,17 +50,17 @@ class CtaLink extends Component {
       // External link - use normal <a> tag.
       if (cta.document) {
         return (
-          <a className={linkClass} href={href} download={href} data-name={cta.link_id}><Text tagName="span" content={cta.link_text} /></a>
+          <a className={linkClass} href={href} download={href} data-name={dataName || cta.link_id}><Text tagName="span" content={cta.link_text} /></a>
         );
       } else {
         return (
-          <a className={linkClass} href={href} data-name={cta.link_id}><Text tagName="span" content={cta.link_text} /></a>
+          <a className={linkClass} href={href} data-name={dataName || cta.link_id}><Text tagName="span" content={cta.link_text} /></a>
         );
       }
     } else {
       // Internal link - use react router to prevent page refresh.
       return (
-        <Link className={linkClass} to={href} data-name={cta.link_id}><Text tagName="span" content={cta.link_text} /></Link>
+        <Link className={linkClass} to={href} data-name={dataName || cta.link_id}><Text tagName="span" content={cta.link_text} /></Link>
       );
     }
   }
@@ -69,7 +69,8 @@ class CtaLink extends Component {
 CtaLink.propTypes = {
   cta: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   disabled: PropTypes.bool.isRequired,
-  variant: PropTypes.string
+  variant: PropTypes.string,
+  dataName: PropTypes.string
 };
 
 export default CtaLink;

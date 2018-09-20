@@ -549,6 +549,9 @@ class ActionGroup(Shelf):
     ])
     panel_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
 
+    class Meta:
+        form_classname = 'dct-action-group-shelf dct-meta-panel'
+
 
 class ActionPlan(Shelf):
     action_groups = blocks.StreamBlock([
@@ -559,6 +562,9 @@ class ActionPlan(Shelf):
     ], icon='arrow-left', label='Items', required=False)
     shelf_id = IDBlock(required=False, label='ID', classname='dct-meta-field')
 
+    class Meta:
+        form_classname = 'dct-action-plan-shelf dct-meta-panel'
+
 
 class ActionPlanDisplay(Shelf):
     shelf_id = IDBlock(required=False, label='ID', classname='dct-meta-field')
@@ -568,6 +574,9 @@ class ActionPlanDisplay(Shelf):
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False)
+
+    class Meta:
+        form_classname = 'dct-action-plan-display-shelf dct-meta-panel'
 
 
 class AccordionPanel(Shelf):
@@ -642,6 +651,7 @@ class OneYou2Page(Page):
     opt_in_1_text = models.CharField(max_length=255, blank=True, null=True)
     opt_in_2_text = models.CharField(max_length=255, blank=True, null=True)
     ts_and_cs_statement = models.TextField(blank=True, null=True)
+    tracking_group = models.CharField(max_length=20, blank=True, null=True)
 
     twitter_image_fk = models.ForeignKey(
         'images.PHEImage',
@@ -752,12 +762,17 @@ class OneYou2Page(Page):
             classname='collapsible collapsed'),
         MultiFieldPanel(
             [
-
                 FieldPanel('opt_in_1_text'),
                 FieldPanel('opt_in_2_text'),
                 FieldPanel('ts_and_cs_statement'),
             ],
             heading='Action plan terms and conditions',
+            classname='collapsible collapsed'),
+        MultiFieldPanel(
+            [
+                FieldPanel('tracking_group'),
+            ],
+            heading='Tracking',
             classname='collapsible collapsed'),
     ]
 

@@ -61,10 +61,10 @@ class AppTeaserPanel extends Component {
             { (content.cta_appstore || content.cta_googleplay) &&
               <ul className="panel__button-list">
                 <li>
-                  <CtaLink cta={content.cta_appstore} variant="appstore"/>
+                  <CtaLink cta={content.cta_appstore} variant="appstore" dataName={`appstore-${content.heading}`} /> 
                 </li>
                 <li>
-                  <CtaLink cta={content.cta_googleplay} variant="googleplay"/>
+                  <CtaLink cta={content.cta_googleplay} variant="googleplay" dataName={`googleplay-${content.heading}`} />
                 </li>
               </ul>
             }
