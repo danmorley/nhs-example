@@ -99,15 +99,15 @@ class ActionPlanContactForm extends Component {
           
           <section className="actionplan-form__opt-section">
             <div className="row">
-              <div className="col-sm-6 actionplan-form__opt-section-col">
-                <input onChange={this.handleChange} checked={this.state.optActionPlan} className="actionplan-form__checkbox" id="option1" type="checkbox" name="optActionPlan" data-name="contact-form-optin-action-plan" />
+              <div className="col-sm-6 actionplan-form__opt-section-col" data-name="contact-form-optin-action-plan">
+                <input onChange={this.handleChange} checked={this.state.optActionPlan} className="actionplan-form__checkbox" id="option1" type="checkbox" name="optActionPlan" />
                 <label htmlFor="option1">Opt in <span></span></label>
                 <p>
                   {opt1}
                 </p>
               </div>
-              <div className="col-sm-6 actionplan-form__opt-section-col">
-                <input onChange={this.handleChange} checked={this.state.optOneYou} type="checkbox" className="actionplan-form__checkbox" id="optOneYou" name="optOneYou" data-name="contact-form-optin-one-you" />
+              <div className="col-sm-6 actionplan-form__opt-section-col" data-name="contact-form-optin-one-you">
+                <input onChange={this.handleChange} checked={this.state.optOneYou} type="checkbox" className="actionplan-form__checkbox" id="optOneYou" name="optOneYou" />
                 <label htmlFor="optOneYou">Opt in <span></span></label>
                 <p>
                   {opt2}
