@@ -15,9 +15,9 @@ class TrackingUtils {
     if (name) {
       const key = `DCSext.${trackingGroup}${TrackingUtils.eventFromElem(elem) || eventName}`;
       const value = `${shelfId}-${snakecase(name)}`;
-      // console.log('Tracking:', key, ',', value);
 
       if (window.dcsMultiTrack) {
+        // console.log('Tracking:', key, ',', value);
         window.dcsMultiTrack(key, value, 'WT.dl', '121');
       }
     }
