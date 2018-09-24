@@ -49,9 +49,6 @@ class WirewaxVideo extends Component {
     return (
       <div {...rest}>
         <iframe className='video-js wirewax' src={`//embed.wirewax.com/${video}?embedLoc=footlocker`} frameBorder="0" id="video"></iframe>
-        <div className='basket'>
-          { basketCount }
-        </div>
       </div>
     );
   }
