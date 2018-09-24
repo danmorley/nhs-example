@@ -63,7 +63,7 @@ class VideoTeaserPanel extends Component {
   }
   
   hasTextContent() {
-    return (this.props.content.heading || this.props.content.body)
+    return (this.props.content.heading || ( this.props.content.body && this.props.content.body !== '<p></p>' ) );
   }
     
   render() {
@@ -106,7 +106,7 @@ class VideoTeaserPanel extends Component {
         <VideoModal video={content.video} host={content.host} classNamePrefix={classNamePrefix} image={backgroundTeaserImage} ref={this.video}>
         </VideoModal>
         
-        {this.hasTextContent() && 
+        { this.hasTextContent()  &&
           <div className={`${classNamePrefix}__info`}>
             <Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />
 
