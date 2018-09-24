@@ -50,8 +50,12 @@ class AppTeaserPanel extends Component {
     let backgroundTeaserImage = this.state.backgroundImageStyle;
 
     // Set button text for accessibility and tracking.
-    content.cta_appstore.link_text = 'Download from the Appstore';
-    content.cta_googleplay.link_text = 'Gert it on Google Play';
+    if (content.cta_appstore) {
+      content.cta_appstore.link_text = 'Download from the Appstore';
+    }
+    if (content.cta_googleplay) {
+      content.cta_googleplay.link_text = 'Gert it on Google Play';
+    }
 
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
