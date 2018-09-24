@@ -36,7 +36,7 @@ $shelf-padding-extra: 2em;
   }
 
   &.shelf-no-padding {
-    padding: 0px;
+    padding: 0;
   }
 
   &.hidden {
@@ -48,13 +48,13 @@ $shelf-padding-extra: 2em;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
 
-  h1 + div > p,
-  h2 + div > p {
+  h1 + div .richTextEditor > p,
+  h2 + div .richTextEditor > p {
     margin-top: 0.5em;
     margin-bottom: 1em;
   }
 
-  div > p:last-child {
+  div > .richTextEditor > p:last-child {
     margin-bottom: 0;
   }
 
