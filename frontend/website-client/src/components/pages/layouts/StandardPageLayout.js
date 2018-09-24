@@ -8,7 +8,7 @@ import PageHeader from '../../page-header/PageHeader';
 import PageStyles from '../../PageStyles';
 import DocumentMeta from 'react-document-meta';
 import NoticeShelf from '../../shelves/NoticeShelf';
-
+import UrlUtils from '../../shared/UrlUtils';
 
 class StandardPageLayout extends Component {
   render() {
@@ -76,7 +76,7 @@ class StandardPageLayout extends Component {
   }
 
   pageMetaData(page, site) {
-    const documentTitle = `${site.site_name} - ${page.meta.seo_title || page.title}`;
+    const documentTitle = (UrlUtils.isSiteHomePage())? site.site_name : `${page.meta.seo_title || page.title} | ${site.site_name}`;
 
     return {
       title: documentTitle,
