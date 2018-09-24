@@ -102,7 +102,7 @@ class Page extends Component {
   }
 
   pageMetaData(page, site) {
-    const documentTitle = (UrlUtils.isSiteHomePage())? site.site_name : `${page.meta.seo_title || page.title} | ${site.site_name}`;
+    const documentTitle = (UrlUtils.isSiteHomePage()) ? site.site_name : `${page.meta.seo_title || page.title} | ${site.site_name}`;
 
     return {
       title: documentTitle,
