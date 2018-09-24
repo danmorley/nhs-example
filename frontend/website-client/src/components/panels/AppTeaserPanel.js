@@ -54,7 +54,7 @@ class AppTeaserPanel extends Component {
       content.cta_appstore.link_text = 'Download from the Appstore';
     }
     if (content.cta_googleplay) {
-      content.cta_googleplay.link_text = 'Gert it on Google Play';
+      content.cta_googleplay.link_text = 'Get it on Google Play';
     }
 
     return (
