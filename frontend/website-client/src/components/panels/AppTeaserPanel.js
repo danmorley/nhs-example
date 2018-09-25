@@ -67,7 +67,7 @@ class AppTeaserPanel extends Component {
           <div className={`${classNamePrefix}__text`}>
             <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
             { (content.cta_appstore || content.cta_googleplay) &&
-              <ul className="panel__button-list">
+              <ul className={`${classNamePrefix}__app-button-list`}>
                 <li>
                   <CtaLink cta={content.cta_appstore} variant="appstore" dataName={`appstore-${content.heading}`} /> 
                 </li>
@@ -76,8 +76,8 @@ class AppTeaserPanel extends Component {
                 </li>
               </ul>
             }
-            { content.cta &&
-              <ul className="panel__button-list">
+            { content.cta.link_text &&
+              <ul className={`${classNamePrefix}__button-list`}>
                 <li>
                   <CtaLink cta={content.cta} variant="button" />
                 </li>
