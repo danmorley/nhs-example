@@ -143,6 +143,9 @@
         }
     </style>
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120378767-1"></script>
+
     <script type="text/javascript">
         function enableWebtrends() {
             console.log('Enabling webtrends');
@@ -158,10 +161,7 @@
                     download: true,
                     downloadtypes: "xls,doc,pdf,txt,csv,zip,docx,xlsx,rar,gzip",
                     onsitedoms: "nhs.uk",
-                    fpcdom: ".www.nhs.uk",
-                    plugins: {
-                        id_migrate: {src: "//s.webtrends.com/js/webtrends.idmigrate.js", waitForCallback: true}
-                    }
+                    fpcdom: ".www.nhs.uk"
                 }).track();
             };
 
@@ -173,52 +173,46 @@
                 s2.parentNode.insertBefore(s, s2);
             }());
         }
-    </script>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120378767-1"></script>
-    <script type="text/javascript">
-      function enableGoogleAnalytics() {
-        window.dataLayer = window.dataLayer || [];
+        function enableGoogleAnalytics() {
+          console.log('Enabling GA');
+          window.dataLayer = window.dataLayer || [];
 
-        function gtag() {
+          function gtag() {
             dataLayer.push(arguments);
-        }
+          }
 
-        gtag('js', new Date());
-        gtag('config', 'UA-119038613-1', {'optimize_id': 'GTM-NQPC6C'});
-      </script>
-      <style>.async-hide {
-        opacity: 0 !important
-      } </style>
-      <script>(function (a, s, y, n, c, h, i, d, e) {
-        console.log("ASYNC HIDE");
-        s.className += ' ' + y;
-        h.start = 1 * new Date;
-        h.end = i = function () {
-            s.className = s.className.replace(RegExp(' ?' + y), '')
-        };
-        (a[n] = a[n] || []).hide = h;
-        setTimeout(function () {
-            i();
-            h.end = null
-        }, c);
-        h.timeout = c;
-      })(window, document.documentElement, 'async-hide', 'dataLayer', 4000,
-        {'GTM-NQPC6C': true});     
-      }
+          gtag('js', new Date());
+          gtag('config', 'UA-119038613-1', {'optimize_id': 'GTM-NQPC6C'});
+
+          (function (a, s, y, n, c, h, i, d, e) {
+            console.log("ASYNC HIDE");
+            s.className += ' ' + y;
+            h.start = 1 * new Date;
+            h.end = i = function () {
+                s.className = s.className.replace(RegExp(' ?' + y), '')
+            };
+            (a[n] = a[n] || []).hide = h;
+            setTimeout(function () {
+                i();
+                h.end = null
+            }, c);
+            h.timeout = c;
+          })(window, document.documentElement, 'async-hide', 'dataLayer', 4000,
+          {'GTM-NQPC6C': true});    
+        }
     </script>
 
     <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="9d5293f5-cb06-4c3c-a81c-58ac270dec41"
             type="text/javascript" async></script>
 
     <script type="text/javascript">
-        function CookiebotCallback_OnAccept() {
-            if (Cookiebot.consent.statistics) {
-                enableWebtrends();
-                enableGoogleAnalytics();
-            }
+      function CookiebotCallback_OnAccept() {
+        if (Cookiebot.consent.statistics) {
+          enableWebtrends();
+          enableGoogleAnalytics();
         }
+      }
     </script>
 
     <!-- Google Tag Manager -->
