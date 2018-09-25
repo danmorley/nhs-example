@@ -185,4 +185,5 @@ class ReleaseContent(models.Model):
 
     def get_content_for(self, key):
         content_dict = json.loads(self.content)
+        print(content_dict.keys())
         return content_dict[key]
