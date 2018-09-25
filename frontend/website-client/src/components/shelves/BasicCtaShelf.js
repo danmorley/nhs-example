@@ -75,6 +75,17 @@ class BasicCtaShelf extends Component {
 
   render() {
     let { id, content, classNamePrefix, variant, layout } = this.props;
+    if (content.promo) {
+      // Cater for shared content within a shelf.
+      //
+      // NOTE: Temporary solution until promo_panel (v1) can be removed.
+      content.heading = content.promo.heading;
+      content.shelf_id = content.promo.shelf_id;
+      content.meta_variant = content.promo.meta_variant;
+      content.meta_layout = content.promo.meta_layout;
+      content.cta = content.promo.cta;
+    }
+
     let metaVariant = content.meta_variant || variant;
     let metaLayout = content.meta_layout || layout;
     let gradient = content.meta_gradient || false;
@@ -84,6 +95,7 @@ class BasicCtaShelf extends Component {
       this.state.backgroundImageStyle : backgroundColourShelfStyle;
 
     let headingTagName = (classNamePrefix === 'page-heading-shelf') ? 'h1' : 'h2';
+    let cta = content.cta || content.promo.cta;
 
     if (metaLayout === 'image_on_left') {
       return (
@@ -95,7 +107,7 @@ class BasicCtaShelf extends Component {
               </div>
               <div className="shelf__col col">
                 {this.renderHeadingBody(content, headingTagName)}
-                {this.renderCta(content.cta)}
+                {this.renderCta(cta)}
               </div>
             </div>
           </div>
@@ -108,7 +120,7 @@ class BasicCtaShelf extends Component {
             <div className="row">
               <div className="shelf__col col">
                 {this.renderHeadingBody(content, headingTagName)}
-                {this.renderCta(content.cta)}
+                {this.renderCta(cta)}
               </div>
               <div className="shelf__col col">
                 {this.renderImage(this.state.image)}
@@ -123,7 +135,7 @@ class BasicCtaShelf extends Component {
           <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
               <div className="shelf__col col col-vertical-center col-shrink-to-fit">
-                {this.renderCta(content.cta)}
+                {this.renderCta(cta)}
               </div>
               <div className="shelf__col col col-vertical-center md-content-right">
                 {this.renderHeadingBody(content, headingTagName)}
@@ -141,7 +153,7 @@ class BasicCtaShelf extends Component {
                 {this.renderHeadingBody(content, headingTagName)}
               </div>
               <div className="shelf__col col col-vertical-center md-content-right col-shrink-to-fit">
-                {this.renderCta(content.cta)}
+                {this.renderCta(cta)}
               </div>
             </div>
           </div>
@@ -155,7 +167,7 @@ class BasicCtaShelf extends Component {
               <div className="row">
                 <div className="shelf__col col-10 col-sm-10 col-md-7">
                   {this.renderHeadingBody(content, headingTagName)}
-                  {this.renderCta(content.cta)}
+                  {this.renderCta(cta)}
                 </div>
               </div>
             </div>
@@ -172,7 +184,7 @@ class BasicCtaShelf extends Component {
                   {this.renderHeadingBody(content, headingTagName)}
                 </div>
                 <div className="shelf__col col col-vertical-center md-content-right">
-                  {this.renderCta(content.cta)}
+                  {this.renderCta(cta)}
                 </div>
               </div>
             </div>
@@ -199,7 +211,7 @@ class BasicCtaShelf extends Component {
             <div className="row">
               <div className="shelf__col col-12 col-vertical-center">
                 {this.renderHeadingBody(content, headingTagName)}
-                {this.renderCta(content.cta)}
+                {this.renderCta(cta)}
               </div>
             </div>
           </div>
@@ -234,5 +246,6 @@ CmsComponentRegistry.register('banner_shelf', BasicCtaShelf, 'banner-shelf', 'ba
 // Layouts: cta_on_right, cta_on_left
 // Variants: promo
 CmsComponentRegistry.register('promo_shelf', BasicCtaShelf, 'promo-shelf', 'promo');
+CmsComponentRegistry.register('promo_shelf_v2', BasicCtaShelf, 'promo-shelf', 'promo');
 
 export default BasicCtaShelf;

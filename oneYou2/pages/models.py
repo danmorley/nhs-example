@@ -594,6 +594,17 @@ class AccordionGroup(Shelf):
     ])
 
 
+class PromoShelf(Shelf):
+    promo = PromoShelfChooserBlock(target_model="shelves.PromoShelf", icon="image")
+    shelf_id = IDBlock(required=False,
+                       label="ID",
+                       help_text="Used to uniquely identify the shelf on the page.",
+                       classname='dct-meta-field')
+
+    class Meta:
+        form_classname = 'dct-promo-shelf dct-meta-panel'
+
+
 # Pages
 class OneYou2Page(Page):
     body = StreamField([
@@ -603,6 +614,7 @@ class OneYou2Page(Page):
         ('carousel_shelf', Carousel(icon="repeat")),
         ('panel_carousel_shelf', PanelCarousel(icon="repeat")),
         ('promo_shelf', PromoShelfChooserBlock(target_model="shelves.PromoShelf", icon="image")),
+        ('promo_shelf_v2', PromoShelf(icon="title")),
         ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
         ('grid_shelf', Grid(icon="form")),
         ('recipe_grid_shelf', RecipeGrid(icon="form")),
