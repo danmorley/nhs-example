@@ -9,6 +9,8 @@ from wagtailmedia.blocks import AbstractMediaChooserBlock
 from django.utils.html import format_html
 from shelves.blocks import BlobImageChooserBlock
 
+from home.models import SiteSettings
+
 IMAGE_VARIANT_CHOICES = (
     ('contain', 'Contain'),
     ('cover', 'Cover'),
@@ -194,7 +196,10 @@ class IDBlock(blocks.CharBlock):
 class MenuItemPageBlock(blocks.PageChooserBlock):
     def get_api_representation(self, value, context=None):
         if value:
-            site_name = value.get_site().site_name
+            site = value.get_site()
+            site_settings = SiteSettings.objects.get(site=site)
+            site_name = site_settings.uid
+
             url_parts = value.get_url_parts()
 
             return {'id': value.id,
