@@ -75,6 +75,17 @@ class BasicCtaShelf extends Component {
 
   render() {
     let { id, content, classNamePrefix, variant, layout } = this.props;
+    if (content.promo) {
+      // Cater for shared content within a shelf.
+      //
+      // NOTE: Temporary solution until promo_panel (v1) can be removed.
+      content.heading = content.promo.heading;
+      content.shelf_id = content.promo.shelf_id;
+      content.meta_variant = content.promo.meta_variant;
+      content.meta_layout = content.promo.meta_layout;
+      content.cta = content.promo.cta;
+    }
+
     let metaVariant = content.meta_variant || variant;
     let metaLayout = content.meta_layout || layout;
     let gradient = content.meta_gradient || false;
@@ -234,5 +245,6 @@ CmsComponentRegistry.register('banner_shelf', BasicCtaShelf, 'banner-shelf', 'ba
 // Layouts: cta_on_right, cta_on_left
 // Variants: promo
 CmsComponentRegistry.register('promo_shelf', BasicCtaShelf, 'promo-shelf', 'promo');
+CmsComponentRegistry.register('promo_shelf_v2', BasicCtaShelf, 'promo-shelf', 'promo');
 
 export default BasicCtaShelf;
