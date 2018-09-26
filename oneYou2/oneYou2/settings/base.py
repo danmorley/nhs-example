@@ -230,7 +230,7 @@ INITIALIZER = os.environ.get('INITIALIZER', False)
 
 if ENV == 'prod':
     PARAGON_ACTION_API_URL = "https://api-live-mentalhealth.paragon-cc.co.uk/api/Actions/UpdateAction"
-    PARAGON_ACTION_API_AUTH_HEADER = "24EE3A12-03E8-4996-BB09-C33573E5E9EA"
+    PARAGON_ACTION_API_AUTH_HEADER = "cGFyYWdvbi1jYzoyNEVFM0ExMi0wM0U4LTQ5OTYtQkIwOS1DMzM1NzNFNUU5RUE="
     PARAGON_ACTION_API_PRODUCT_TOKEN = "3D149395-F755-4586-BA8A-E4F915B023AD"
 else:
     PARAGON_ACTION_API_URL = "https://api-test-mentalhealth.cc-testing.co.uk/api/Actions/UpdateAction"
