@@ -112,3 +112,6 @@ div.dct-block ul.fields, div.dct-panel ul.fields {
   padding: 8px;
 }
 
+.dct-inline-svg-panel textarea {
+  max-height: 300px;
+}

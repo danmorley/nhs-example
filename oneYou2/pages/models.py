@@ -350,6 +350,7 @@ class InlineScriptPanel(blocks.StructBlock):
 
 class InlineSvgPanel(blocks.StructBlock):
     svg = blocks.TextBlock(required=True, label="SVG code", help_text="The SVG source")
+    svg_mob = blocks.TextBlock(required=False, label="SVG code for mobile", help_text="The SVG source for display on mobile devises")
     styles = blocks.TextBlock(required=False, help_text="CSS styling")
     script = blocks.TextBlock(required=False, label="Inline script code", help_text="Inline javascript to make the SVG interactive")
     field_id = IDBlock(required=False, label="Placeholder ID", retain_case=True, classname='dct-meta-field')
