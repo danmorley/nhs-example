@@ -12,7 +12,7 @@ class PrintButtonPanel extends Component {
   render() {
     return (
       <Panel classNamePrefix="print-button-panel" variant="align-right">
-        <div className="print-button" onClick={(e) => this.handleClick(e)}>
+        <div className="print-button" onClick={(e) => this.handleClick(e)} data-name="print-button">
           <span className="print-button__title">Print</span>
         </div>
       </Panel>

@@ -11,6 +11,7 @@ import NoticeShelf from '../shelves/NoticeShelf';
 import GeneralPageContent from './GeneralPageContent';
 import RecipePageContent from './RecipePageContent';
 import BackToTopButton from '../BackToTopButton';
+import UrlUtils from '../shared/UrlUtils';
 
 /**
  *  Component responsible for rendering the header, footer and content of all
@@ -67,9 +68,10 @@ class Page extends Component {
             opt1={page.meta.opt_in_1_text} 
             opt2={page.meta.opt_in_2_text}
             tsAndCs ={page.meta.ts_and_cs_statement}
+            trackingGroup={page.meta.tracking_group}
           />
         }
-        <BackToTopButton />
+        { page && <BackToTopButton trackingGroup={page.meta.tracking_group} />}
       </StandardPageLayout>
     );
   }
@@ -100,7 +102,7 @@ class Page extends Component {
   }
 
   pageMetaData(page, site) {
-    const documentTitle = `${site.site_name} - ${page.meta.seo_title || page.title}`;
+    const documentTitle = (UrlUtils.isSiteHomePage()) ? site.site_name : `${page.meta.seo_title || page.title} | ${site.site_name}`;
 
     return {
       title: documentTitle,

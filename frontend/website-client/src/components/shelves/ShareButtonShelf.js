@@ -14,7 +14,7 @@ class ShareButtonShelf extends Component {
 
     return (
       <div className="shelf__container container">
-        <Shelf classNamePrefix="share-button-shelf" variant="align-right" trackingGroup={trackingGroup}>
+        <Shelf classNamePrefix="share-button-shelf" variant="align-right" trackingGroup={trackingGroup} id="share-button-shelf">
           { showShareButton &&
             <ShareButtonPanel />
           }

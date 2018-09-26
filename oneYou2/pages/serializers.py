@@ -78,7 +78,9 @@ class OneYouPageSerializer(serializers.ModelSerializer):
 
             'opt_in_1_text',
             'opt_in_2_text',
-            'ts_and_cs_statement'
+            'ts_and_cs_statement',
+
+            'tracking_group'
         )
 
         fields = fields + meta_fields

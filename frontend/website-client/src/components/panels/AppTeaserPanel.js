@@ -49,6 +49,14 @@ class AppTeaserPanel extends Component {
     let { content, classNamePrefix } = this.props;
     let backgroundTeaserImage = this.state.backgroundImageStyle;
 
+    // Set button text for accessibility and tracking.
+    if (content.cta_appstore) {
+      content.cta_appstore.link_text = 'Download from the Appstore';
+    }
+    if (content.cta_googleplay) {
+      content.cta_googleplay.link_text = 'Get it on Google Play';
+    }
+
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
         <div className={`${classNamePrefix}__image`} style={backgroundTeaserImage}>
@@ -59,17 +67,17 @@ class AppTeaserPanel extends Component {
           <div className={`${classNamePrefix}__text`}>
             <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
             { (content.cta_appstore || content.cta_googleplay) &&
-              <ul className="panel__button-list">
+              <ul className={`${classNamePrefix}__app-button-list`}>
                 <li>
-                  <CtaLink cta={content.cta_appstore} variant="appstore"/>
+                  <CtaLink cta={content.cta_appstore} variant="appstore" dataName={`appstore-${content.heading}`} /> 
                 </li>
                 <li>
-                  <CtaLink cta={content.cta_googleplay} variant="googleplay"/>
+                  <CtaLink cta={content.cta_googleplay} variant="googleplay" dataName={`googleplay-${content.heading}`} />
                 </li>
               </ul>
             }
-            { content.cta &&
-              <ul className="panel__button-list">
+            { content.cta.link_text &&
+              <ul className={`${classNamePrefix}__button-list`}>
                 <li>
                   <CtaLink cta={content.cta} variant="button" />
                 </li>

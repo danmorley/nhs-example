@@ -350,6 +350,7 @@ class InlineScriptPanel(blocks.StructBlock):
 
 class InlineSvgPanel(blocks.StructBlock):
     svg = blocks.TextBlock(required=True, label="SVG code", help_text="The SVG source")
+    svg_mob = blocks.TextBlock(required=False, label="SVG code for mobile", help_text="The SVG source for display on mobile devises")
     styles = blocks.TextBlock(required=False, help_text="CSS styling")
     script = blocks.TextBlock(required=False, label="Inline script code", help_text="Inline javascript to make the SVG interactive")
     field_id = IDBlock(required=False, label="Placeholder ID", retain_case=True, classname='dct-meta-field')
@@ -549,6 +550,9 @@ class ActionGroup(Shelf):
     ])
     panel_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
 
+    class Meta:
+        form_classname = 'dct-action-group-shelf dct-meta-panel'
+
 
 class ActionPlan(Shelf):
     action_groups = blocks.StreamBlock([
@@ -559,6 +563,9 @@ class ActionPlan(Shelf):
     ], icon='arrow-left', label='Items', required=False)
     shelf_id = IDBlock(required=False, label='ID', classname='dct-meta-field')
 
+    class Meta:
+        form_classname = 'dct-action-plan-shelf dct-meta-panel'
+
 
 class ActionPlanDisplay(Shelf):
     shelf_id = IDBlock(required=False, label='ID', classname='dct-meta-field')
@@ -568,6 +575,9 @@ class ActionPlanDisplay(Shelf):
     cta = blocks.StreamBlock([
         ('simple_menu_item', SimpleMenuItem())
     ], icon='arrow-left', label='Items', required=False)
+
+    class Meta:
+        form_classname = 'dct-action-plan-display-shelf dct-meta-panel'
 
 
 class AccordionPanel(Shelf):
@@ -585,6 +595,17 @@ class AccordionGroup(Shelf):
     ])
 
 
+class PromoShelf(Shelf):
+    promo = PromoShelfChooserBlock(target_model="shelves.PromoShelf", icon="image")
+    shelf_id = IDBlock(required=False,
+                       label="ID",
+                       help_text="Used to uniquely identify the shelf on the page.",
+                       classname='dct-meta-field')
+
+    class Meta:
+        form_classname = 'dct-promo-shelf dct-meta-panel'
+
+
 # Pages
 class OneYou2Page(Page):
     body = StreamField([
@@ -594,6 +615,7 @@ class OneYou2Page(Page):
         ('carousel_shelf', Carousel(icon="repeat")),
         ('panel_carousel_shelf', PanelCarousel(icon="repeat")),
         ('promo_shelf', PromoShelfChooserBlock(target_model="shelves.PromoShelf", icon="image")),
+        ('promo_shelf_v2', PromoShelf(icon="title")),
         ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
         ('grid_shelf', Grid(icon="form")),
         ('recipe_grid_shelf', RecipeGrid(icon="form")),
@@ -642,6 +664,7 @@ class OneYou2Page(Page):
     opt_in_1_text = models.CharField(max_length=255, blank=True, null=True)
     opt_in_2_text = models.CharField(max_length=255, blank=True, null=True)
     ts_and_cs_statement = models.TextField(blank=True, null=True)
+    tracking_group = models.CharField(max_length=20, blank=True, null=True)
 
     twitter_image_fk = models.ForeignKey(
         'images.PHEImage',
@@ -752,12 +775,17 @@ class OneYou2Page(Page):
             classname='collapsible collapsed'),
         MultiFieldPanel(
             [
-
                 FieldPanel('opt_in_1_text'),
                 FieldPanel('opt_in_2_text'),
                 FieldPanel('ts_and_cs_statement'),
             ],
             heading='Action plan terms and conditions',
+            classname='collapsible collapsed'),
+        MultiFieldPanel(
+            [
+                FieldPanel('tracking_group'),
+            ],
+            heading='Tracking',
             classname='collapsible collapsed'),
     ]
 

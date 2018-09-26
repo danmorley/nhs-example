@@ -67,7 +67,7 @@ class ActionPanel extends Component {
     return (
       <Panel id={id} classNamePrefix={classNamePrefix}>
         <div>
-          <div className={`${classNamePrefix}--toggle ${className}`} onClick={this.handleClick.bind(this)} >
+          <div className={`${classNamePrefix}--toggle ${className}`} onClick={this.handleClick.bind(this)} data-name={`Action-${content.title}`} data-tracking-event="ActionClick" >
           </div>
         </div>
 

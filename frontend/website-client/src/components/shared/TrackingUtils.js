@@ -13,11 +13,11 @@ class TrackingUtils {
     if (!name) name = TrackingUtils.nameFromSlickCarouselElem(elem);
 
     if (name) {
-      const key = `DCSext.${trackingGroup}${eventName}`;
+      const key = `DCSext.${trackingGroup}${TrackingUtils.eventFromElem(elem) || eventName}`;
       const value = `${shelfId}-${snakecase(name)}`;
-      console.log('Tracking:', key, ',', value);
 
       if (window.dcsMultiTrack) {
+        // console.log('Tracking:', key, ',', value);
         window.dcsMultiTrack(key, value, 'WT.dl', '121');
       }
     }
@@ -39,6 +39,15 @@ class TrackingUtils {
       if (elem.parentNode) name = elem.parentNode.getAttribute('data-name');
     }
     return name;
+  }
+
+  static eventFromElem(elem) {
+    let event = elem.getAttribute('data-tracking-event');
+    if (!event) {
+      // Try parent.
+      if (elem.parentNode) event = elem.parentNode.getAttribute('data-tracking-event');
+    }
+    return event;
   }
 
   static nameFromInlineLinkElem(elem) {

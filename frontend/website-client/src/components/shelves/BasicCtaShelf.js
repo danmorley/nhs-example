@@ -75,6 +75,17 @@ class BasicCtaShelf extends Component {
 
   render() {
     let { id, content, classNamePrefix, variant, layout } = this.props;
+    if (content.promo) {
+      // Cater for shared content within a shelf.
+      //
+      // NOTE: Temporary solution until promo_panel (v1) can be removed.
+      content.heading = content.promo.heading;
+      content.shelf_id = content.promo.shelf_id;
+      content.meta_variant = content.promo.meta_variant;
+      content.meta_layout = content.promo.meta_layout;
+      content.cta = content.promo.cta;
+    }
+
     let metaVariant = content.meta_variant || variant;
     let metaLayout = content.meta_layout || layout;
     let gradient = content.meta_gradient || false;
@@ -103,7 +114,7 @@ class BasicCtaShelf extends Component {
       );
     } else if (metaLayout === 'image_on_right') {
       return (
-        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group}>
           <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
               <div className="shelf__col col">
@@ -119,7 +130,7 @@ class BasicCtaShelf extends Component {
       );
     } else if (metaLayout === 'cta_on_left') {
       return (
-        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group}>
           <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
               <div className="shelf__col col col-vertical-center col-shrink-to-fit">
@@ -134,7 +145,7 @@ class BasicCtaShelf extends Component {
       );
     } else if (metaLayout === 'cta_on_right') {
       return (
-        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group}>
           <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
               <div className="shelf__col col col-vertical-center">
@@ -149,7 +160,7 @@ class BasicCtaShelf extends Component {
       );
     } else if (metaLayout === 'full_width') {
       return (
-        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group}>
           <div className={`shelf__container container-fluid shelf__container-gradient--${gradient}`}  style={shelfStyle}>
             <div className="container">
               <div className="row">
@@ -164,7 +175,7 @@ class BasicCtaShelf extends Component {
       );
     } else if (metaLayout === 'full_to_half_width') {
       return (
-        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} layout={metaLayout}>
+        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} layout={metaLayout} trackingGroup={content.tracking_group}>
           <div className="container full-to-half-width">
             <div className="shelf__container container" style={shelfStyle}>
               <div className="row">
@@ -181,7 +192,7 @@ class BasicCtaShelf extends Component {
       );
     } else if (metaLayout === 'section_heading') {
       return (
-        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group}>
           <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
               <div className="col shelf__col">
@@ -194,7 +205,7 @@ class BasicCtaShelf extends Component {
     } else {
       // Default layout: ???
       return (
-        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+        <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group}>
           <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
               <div className="shelf__col col-12 col-vertical-center">
@@ -234,5 +245,6 @@ CmsComponentRegistry.register('banner_shelf', BasicCtaShelf, 'banner-shelf', 'ba
 // Layouts: cta_on_right, cta_on_left
 // Variants: promo
 CmsComponentRegistry.register('promo_shelf', BasicCtaShelf, 'promo-shelf', 'promo');
+CmsComponentRegistry.register('promo_shelf_v2', BasicCtaShelf, 'promo-shelf', 'promo');
 
 export default BasicCtaShelf;

@@ -84,11 +84,15 @@ a.button-cta {
 a.button-appstore {
   display: inline-block;
   background-image: url('../images/app-store.png');
+  font-size: 1px;
+  color: transparent;
 }
 
 a.button-googleplay {
   display: inline-block;
   background-image: url('../images/google-play.png');
+  font-size: 1px;
+  color: transparent;
 }
 
 .shelf-section ul {
