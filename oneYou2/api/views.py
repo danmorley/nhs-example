@@ -54,12 +54,11 @@ def release_view(request, site_identifier, release_uuid):
         release_object = get_release_object(release_uuid)
         if not release_object:
             return JsonResponse({'message': "Release not found"}, status=404)
-        else:
-            return JsonResponse(release_object.get_content_for("site_json"))
 
     serialized_site_data = SiteSerializer(site).data
     json_response = JsonResponse(serialized_site_data)
     if release_object.content_status == 1:
+        json_response = JsonResponse(release_object.get_content_for("site_json"))
         json_response['Cache-Control'] = 'max-age=3600'
     return json_response
 
