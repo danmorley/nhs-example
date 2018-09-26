@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import Panel from './Panel';
+import ImageUtils from './ImageUtils';
 
 /**
  *  Inline SVG Panel is a simple panel that can be used to
@@ -30,15 +31,25 @@ class InlineSvgPanel extends Component {
     s.innerHTML = content.script || '';
 
     if (this.instance) this.instance.appendChild(s);
+    window.addEventListener('resize', this.handleResize.bind(this));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.setImage);
+  }
+
+  handleResize() {
+    this.forceUpdate();
   }
 
   render() {
     let { content, classNamePrefix } = this.props;
+    const svgCode = (ImageUtils.screenSize() === 'mobile' && content.svg_mob)? content.svg_mob : content.svg;
 
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix}>
         <style type="text/css" scoped={true} dangerouslySetInnerHTML={{__html: content.styles}} />
-        <div className="svg-graphic" ref={el => (this.instance = el)} dangerouslySetInnerHTML={{__html: content.svg}} />
+        <div className="svg-graphic" ref={el => (this.instance = el)} dangerouslySetInnerHTML={{__html: svgCode}} />
       </Panel>
     )
   }
