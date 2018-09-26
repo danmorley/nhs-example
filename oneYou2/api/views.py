@@ -54,7 +54,8 @@ def release_view(request, site_identifier, release_uuid):
         release_object = get_release_object(release_uuid)
         if not release_object:
             return JsonResponse({'message': "Release not found"}, status=404)
-
+        
+    setattr(site, 'release_uuid', release_uuid)
     serialized_site_data = SiteSerializer(site).data
     json_response = JsonResponse(serialized_site_data)
     if release_object.content_status == 1:
