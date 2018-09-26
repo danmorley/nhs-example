@@ -39,7 +39,7 @@ class InlineSvgPanel extends Component {
   }
 
   handleResize() {
-    this.forceUpdate();
+    this.forceUpdate(); // OK to use forceUpdate for a resize.
   }
 
   render() {
