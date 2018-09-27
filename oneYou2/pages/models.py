@@ -158,25 +158,6 @@ class SocialMediaFooterLink(blocks.StructBlock):
 
 # Panels
 
-class PageHeading(CTABlock):
-    heading = blocks.CharBlock(required=False)
-    body = blocks.RichTextBlock(required=False)
-    background_image = BlobImageChooserBlock(required=False)
-    image_left = ImageBlock(required=False)  # max_width=250, max_height=250)
-    image_right = ImageBlock(required=False)  # max_width=250, max_height=250)
-    shelf_id = IDBlock(required=False,
-                       label="ID",
-                       help_text="Not displayed in the front end",
-                       classname='dct-meta-field')
-
-    meta_gradient = blocks.BooleanBlock(label='Green gradient',
-                                        required=False,
-                                        default=False,
-                                        classname='dct-meta-field')
-
-    class Meta:
-        form_classname = 'dct-page-heading-panel dct-meta-panel'
-
 
 class BackwardsCompatibleContent(CTABlock):
     heading = blocks.CharBlock(required=False)
@@ -396,7 +377,27 @@ class Shelf(blocks.StructBlock):
     tracking_group = blocks.CharBlock(required=False, classname='dct-meta-field', help_text='The tracking group, eg. EMM or OY')
 
 
-class SectionHeading(blocks.StructBlock):
+class PageHeading(CTABlock, Shelf):
+    heading = blocks.CharBlock(required=False)
+    body = blocks.RichTextBlock(required=False)
+    background_image = BlobImageChooserBlock(required=False)
+    image_left = ImageBlock(required=False)  # max_width=250, max_height=250)
+    image_right = ImageBlock(required=False)  # max_width=250, max_height=250)
+    shelf_id = IDBlock(required=False,
+                       label="ID",
+                       help_text="Not displayed in the front end",
+                       classname='dct-meta-field')
+
+    meta_gradient = blocks.BooleanBlock(label='Green gradient',
+                                        required=False,
+                                        default=False,
+                                        classname='dct-meta-field')
+
+    class Meta:
+        form_classname = 'dct-page-heading-shelf dct-meta-panel'
+
+
+class SectionHeading(Shelf):
     heading = blocks.CharBlock(required=False)
     shelf_id = IDBlock(required=False,
                        label="ID",
@@ -413,10 +414,14 @@ class SimplePageHeading(SectionHeading):
     pass
 
 
-class ArticlePageHeadingShelf(blocks.StructBlock):
+class ArticlePageHeadingShelf(Shelf):
     heading = blocks.CharBlock(required=False)
     display_back_button = blocks.BooleanBlock(label='Display a back button', required=False, default=True)
     back_button_label = blocks.CharBlock(required=False)
+    shelf_id = IDBlock(required=False, label="ID", help_text="Not displayed in the front end", classname='dct-meta-field')
+
+    class Meta:
+        form_classname = 'dct-article-page-heading-shelf dct-meta-panel'
 
 
 class IFrameShelf(blocks.StructBlock):

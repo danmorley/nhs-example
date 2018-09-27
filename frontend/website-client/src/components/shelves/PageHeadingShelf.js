@@ -104,7 +104,7 @@ class PageHeadingShelf extends Component {
     let headingTagName = (classNamePrefix === 'page-heading-shelf') ? 'h1' : 'h2';
 
     return (
-      <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
+      <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group}>
         <div className={`shelf__container container-fluid shelf-${firstLogoStyle} shelf-${secondLogoStyle} shelf__container-gradient--${gradient}`} style={shelfStyle}>
           <div className="container">
               <div className={`${classNamePrefix}__container-left`}>
