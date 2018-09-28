@@ -16,7 +16,7 @@ class AccordionPanel extends Component {
   }
 
   componentDidMount() {
-    const hash = '#' + this.props.content.id;
+    const hash = '#' + this.props.content.shelf_id;
     if (hash === window.location.hash && !this.state.expanded) {
       this.props.setExpandedGroup(this.props.id);
       this.removeHash();
