@@ -414,6 +414,16 @@ $secondary-item-padding: 0.4em;
   }
 }
 
+.header-nav-multi__item .header-nav__secondary-title {
+  span  {
+    pointer-events: none;
+  }
+  
+  @include media-breakpoint-up(lg) {
+    pointer-events: none;
+  }  
+}
+
 .header-nav-multi__item:hover {
 
   > .header-nav__separator
