@@ -7,7 +7,6 @@ class SimpleMenuItem extends Component {
   render() {
     let { link_page, link_external, link_text } = this.props.item.value;
     if (link_page.relative_path) {
-      console.log(link_page);
         return (
             <li className={this.props.classNamePrefix + "-nav__item"}>
                 <div className={this.props.classNamePrefix + "-nav__separator"}>
@@ -19,7 +18,6 @@ class SimpleMenuItem extends Component {
             </li>
         );
     } else {
-      console.log(link_external);
       return (
             <li className={this.props.classNamePrefix + "-nav__item"}>
                 <div className={this.props.classNamePrefix + "-nav__separator"}>
