@@ -52,7 +52,7 @@ class AccordionPanel extends Component {
     let expansionClassName = this.props.expanded ? 'expanded' : 'collapsed';
 
     return (
-      <Panel id={id} classNamePrefix={classNamePrefix}>
+      <Panel id={content.shelf_id} classNamePrefix={classNamePrefix}>
         <div ref={ (div) => { this.Accordion = div; } }>
           <div className={`${classNamePrefix}__header ${classNamePrefix}__header--${expansionClassName}`}>
             <h2 onClick={this.handleClick} className={`container ${classNamePrefix}__sub-container`}>
