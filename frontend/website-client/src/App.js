@@ -188,7 +188,7 @@ class App extends Component {
         let scrollTarget = document.getElementById(hash.substring(1));
         if (scrollTarget) {
           scrollTarget.scrollIntoView();
-          window.scrollBy(0, -100);
+          window.scrollBy(0, -125);
         }
       }
     } else {
