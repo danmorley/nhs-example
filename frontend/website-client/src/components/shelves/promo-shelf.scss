@@ -268,16 +268,6 @@ $shelf-padding-extra: 2em;
   }
 }
 
-.section-heading-shelf {
-  .shelf__col {
-    width: 100%;
-
-    @include media-breakpoint-up(lg) {
-      max-width: 66%;
-    } 
-  }
-}
-
 //stoptober
 .stoptober {
   
