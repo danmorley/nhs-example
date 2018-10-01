@@ -13,6 +13,14 @@ describe('SimpleMenuItem', () => {
     }
   };
 
+  let link_page_item = {
+    value: {
+      link_page: {relative_path: '/test.com'},
+      link_external: 'test',
+      link_text: 'test'
+    }
+  };
+
   it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(
@@ -21,4 +29,11 @@ describe('SimpleMenuItem', () => {
       </StaticRouter>, div)
   });
 
+  it('renders without crashing with a link page relative path', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(
+      <StaticRouter>
+        <SimpleMenuItem item={link_page_item}/>
+      </StaticRouter>, div)
+  });
 })
