@@ -186,9 +186,10 @@ class App extends Component {
       const hash = window.location.hash;
       if (hash) {
         let scrollTarget = document.getElementById(hash.substring(1));
+        let offset = document.querySelector('.page-header').clientHeight;
         if (scrollTarget) {
           scrollTarget.scrollIntoView();
-          window.scrollBy(0, -125);
+          window.scrollBy(0, -offset);
         }
       }
     } else {
