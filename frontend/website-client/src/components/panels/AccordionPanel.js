@@ -16,7 +16,7 @@ class AccordionPanel extends Component {
   }
 
   componentDidMount() {
-    const hash = '#' + this.props.id;
+    const hash = '#' + this.props.content.shelf_id;
     if (hash === window.location.hash && !this.state.expanded) {
       this.props.setExpandedGroup(this.props.id);
       this.removeHash();
@@ -52,7 +52,7 @@ class AccordionPanel extends Component {
     let expansionClassName = this.props.expanded ? 'expanded' : 'collapsed';
 
     return (
-      <Panel id={id} classNamePrefix={classNamePrefix}>
+      <Panel id={content.shelf_id} classNamePrefix={classNamePrefix}>
         <div ref={ (div) => { this.Accordion = div; } }>
           <div className={`${classNamePrefix}__header ${classNamePrefix}__header--${expansionClassName}`}>
             <h2 onClick={this.handleClick} className={`container ${classNamePrefix}__sub-container`}>
