@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import Text from '../Text';
 import SimpleMenuItem from './SimpleMenuItem';
 
 class MultiMenuItem extends Component {
@@ -21,7 +21,7 @@ class MultiMenuItem extends Component {
         <div className= {this.props.classNamePrefix+"-nav__separator"}>
           <span className={classNamePrefix+"-nav__secondary-title"}
             onClick={this.handleClick.bind(this)}>
-            {item.value.label}
+            <Text tagName="span" content={item.value.label} />
           </span>
 
           <div className={classNamePrefix+"-nav__secondary-nav"}>
