@@ -6,16 +6,29 @@ import { Link } from 'react-router-dom';
 class SimpleMenuItem extends Component {
   render() {
     let { link_page, link_external, link_text } = this.props.item.value;
-    
-    return (
-      <li className = {this.props.classNamePrefix+"-nav__item"}>
-        <div className= {this.props.classNamePrefix+"-nav__separator"}>
-          <Link onClick={this.handleClick} to={link_page.relative_path || link_external}  className = {this.props.classNamePrefix+"-nav__link"}>
-            <Text tagName="span" content={link_text} />
-          </Link>
-        </div>
-      </li>
-    );
+    if (link_page.relative_path) {
+        return (
+            <li className={this.props.classNamePrefix + "-nav__item"}>
+                <div className={this.props.classNamePrefix + "-nav__separator"}>
+                    <Link onClick={this.handleClick} to={link_page.relative_path}
+                          className={this.props.classNamePrefix + "-nav__link"}>
+                        <Text tagName="span" content={link_text}/>
+                    </Link>
+                </div>
+            </li>
+        );
+    } else {
+      return (
+            <li className={this.props.classNamePrefix + "-nav__item"}>
+                <div className={this.props.classNamePrefix + "-nav__separator"}>
+                    <a onClick={this.handleClick} href={link_external}
+                          className={this.props.classNamePrefix + "-nav__link"}>
+                        <Text tagName="span" content={link_text}/>
+                    </a>
+                </div>
+            </li>
+        );
+    }
   }
 
   handleClick(event) {

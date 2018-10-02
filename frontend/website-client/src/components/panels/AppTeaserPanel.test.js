@@ -6,6 +6,7 @@ import { shallow } from 'enzyme';
 describe('AppTeaserPanel', () => {
   let content = {
     image: 'test',
+    cta: {}
   };
 
   let content_update = {
