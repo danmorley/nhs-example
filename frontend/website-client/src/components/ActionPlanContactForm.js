@@ -43,8 +43,8 @@ class ActionPlanContactForm extends Component {
         "Lastname": this.state.username.split(' ')[0],
         "Email": this.state.email,
         "Postcode": this.state.postcode,
-        "ActionPlanOptIn": this.state.optActionPlan,
-        "OneYouEmailOptIn": this.state.optOneYou
+        "ActionPlanOptIn": this.state.optActionPlan ? '1' : '0',
+        "OneYouEmailOptIn": this.state.optOneYou ? '1' : '0'
       };
       
       sessionStorage.setItem(APF_KEY, JSON.stringify(items));
