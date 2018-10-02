@@ -26,8 +26,9 @@ class AccordionPanel extends Component {
   componentDidUpdate() {
     // importing package here to get round server-side bug that causes test to fail
     const scrollToComponent = require('react-scroll-to-component');
+    const offset = document.querySelector('.page-header').clientHeight + 5;
     if (this.props.expanded) {
-      scrollToComponent(this.Accordion, { offset: -100, align: 'top', duration: 500, ease:'inCirc'});
+      scrollToComponent(this.Accordion, { offset: -offset, align: 'top', duration: 500, ease:'inCirc'});
     }
   }
 
