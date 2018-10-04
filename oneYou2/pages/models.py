@@ -655,7 +655,6 @@ class OneYou2Page(Page):
         ('two_column_shelf', TwoColumnShelf(label="Two Column Shelf", icon='grip')),
     ], null=True, blank=True)
 
-
     # Meta Fields
     og_title = models.CharField(max_length=255, default="One You - Home",)
     og_description = models.CharField(max_length=255, default="Start the fight back to a healthier you! One You is"
