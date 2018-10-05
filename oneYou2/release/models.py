@@ -103,6 +103,7 @@ class Release(ClusterableModel):
                 live_pages = OneYou2Page.objects.live()
                 for page in live_pages:
                     content[str(page.id)] = Release.generate_fixed_content(page.get_latest_revision())
+                    ReleasePage(release=self, revision=page.live_revision).save()
             ReleaseContent(release=self, content=json.dumps(content)).save()
         return self
 
@@ -126,6 +127,11 @@ class Release(ClusterableModel):
         content[str(new_revision.page_id)] = Release.generate_fixed_content(new_revision)
         release_content.content = json.dumps(content)
         release_content.save()
+        try:
+            ReleasePage.objects.get(release=self, revision__page=new_revision.page_id).delete()
+        except ReleasePage.DoesNotExist:
+            pass
+        ReleasePage(release=self, revision=new_revision).save()
 
     def remove_page(self, page_id):
         release_content = self.content.first()
@@ -134,6 +140,10 @@ class Release(ClusterableModel):
             del content[str(page_id)]
         release_content.content = json.dumps(content)
         release_content.save()
+        try:
+            ReleasePage.objects.get(release=self, revision__page=page_id).delete()
+        except ReleasePage.DoesNotExist:
+            pass
 
     @classmethod
     def generate_fixed_content(cls, revision):
@@ -172,6 +182,14 @@ class ReleasePage(models.Model):
         blank=False,
         null=False,
         on_delete=models.CASCADE)
+    
+    def get_page_detail_dict(self, status=None):
+        return {
+            'title': self.revision.page.title,
+            'slug': self.revision.page.slug,
+            'created_at': self.revision.created_at,
+            'status': status,
+        }
 
 
 class ReleaseContent(models.Model):
