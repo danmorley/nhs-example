@@ -1,10 +1,11 @@
 import ServerError from './ServerError';
 
-function ContentStore(contentStoreEndpoint, site, release, is_preview) {
+function ContentStore(contentStoreEndpoint, site, release, is_preview, preview_revision) {
   this.contentStoreEndpoint = contentStoreEndpoint;
   this.site = site;
   this.release = release;
-  this.is_preview = is_preview
+  this.is_preview = is_preview;
+  this.preview_revision = preview_revision;
 }
 
 ContentStore.prototype.getSite = async function() {
@@ -14,7 +15,7 @@ ContentStore.prototype.getSite = async function() {
 ContentStore.prototype.getPage = async function(pageId) {
   if (this.is_preview) {
     console.log("PREVIEW");
-    return await _getPreviewPage(this.contentStoreEndpoint, this.site, pageId);
+    return await _getPreviewPage(this.contentStoreEndpoint, this.site, pageId, this.preview_revision);
   } else {
     return await _getPage(this.contentStoreEndpoint, this.site, this.release, pageId);
   }
@@ -66,8 +67,8 @@ async function _getPage(contentStoreEndpoint, site, release, pageId) {
   }
 }
 
-async function _getPreviewPage(contentStoreEndpoint, site, pageId) {
-  let pageUrl = `${contentStoreEndpoint}/preview/sites/${site}/pages/${pageId}/`;
+async function _getPreviewPage(contentStoreEndpoint, site, pageId, previewRevision) {
+  let pageUrl = `${contentStoreEndpoint}/preview/pages/${pageId}/revisions/${previewRevision}/`;
 
   try {
     const response = await _getRequest(pageUrl);

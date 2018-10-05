@@ -901,6 +901,8 @@ class GeneralShelvePage(Page):
 
     def serve_preview(self, request, mode_name, model_name):
         request.is_preview = True
+        if not revision_id:
+            revision_id = 'latest'
 
         if mode_name == 'json':
             Serializer = self.__class__.get_serializer()
@@ -911,12 +913,12 @@ class GeneralShelvePage(Page):
         if mode_name == 'react':
             path = self.get_url_parts(request)[2] if self.get_url_parts(request) is not None else '/home'
             context = {
-                'preview_url': '/{}{}?is_preview'.format(model_name, path),
-
+                'preview_url': '/{}{}?is_preview&revision={}'.format(model_name, path, revision_id)
             }
             return SimpleTemplateResponse(template='preview_wrapper.html', context=context)
 
         return self.serve(request)
+
 
     def serializable_data(self):
         obj = get_serializable_data_for_fields(self)
@@ -935,6 +937,7 @@ class GeneralShelvePage(Page):
             obj[field.name] = [child.pk for child in children]
 
         return obj
+
 
     def serve(self, request, *args, **kwargs):
         request.is_preview = getattr(request, 'is_preview', False)

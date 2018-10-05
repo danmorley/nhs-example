@@ -13,7 +13,7 @@ from release.utils import get_latest_live_release, get_release_object, populate_
 
 from pages.serializers import OneYouPageListSerializer
 
-from wagtail.core.models import Page, Site
+from wagtail.core.models import Page, PageRevision, Site
 
 from experiments.models import ExperimentsContent
 from home.models import SiteSettings
@@ -68,7 +68,7 @@ def release_view(request, site_identifier, release_uuid):
 
 
 @require_safe
-def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug_path=None, is_preview=False):
+def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug_path=None, is_preview=False, page_revision=None):
     """RETURN PAGE DETAILS IN API"""
     # Match variants, a variant's slug should end with -v and then a truncated hash of 6 characters
     variant_regex = re.compile(r'-v[a-zA-Z0-9]{6}$')
@@ -116,8 +116,26 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug_
     get_site_or_404(site_identifier)
 
     if is_preview:
+        content_to_serialize = None
+        if page_revision and page_revision != 'latest':
+            revision = PageRevision.objects.get(id=page_revision)
+            content_to_serialize = revision.as_page_object()
+        else:
+            content_to_serialize = page.specific.get_latest_revision_as_page()
+
+    #         pages = Page.objects.filter(slug=page_slug)
+    #     page = pages.first()
+    #     if page_revision == 'latest':
+    #         print('LATEST')
+    #         serialized_page = OneYouPageSerializer(instance=page.specific.get_latest_revision_as_page())
+    #     else:
+    #         revision = PageRevision.objects.get(id=page_revision)
+    #         serialized_page = OneYouPageSerializer(instance=revision.as_page_object())
+
+    # return JsonResponse(serialized_page.data)
+
         Serializer = page.specific.__class__.get_serializer()
-        serialized_page = Serializer(instance=page.specific.get_latest_revision_as_page())
+        serialized_page = Serializer(instance=content_to_serialize)
         json_response = JsonResponse(serialized_page.data)
     else:
         release = get_release_object(release_uuid)
@@ -154,8 +172,8 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug_
 
 
 @require_safe
-def page_preview(request, site_identifier, page_slug_path=None):
-    return page_detail(request, site_identifier, None, None, page_slug_path, True)
+def page_preview(request, site_identifier, page_slug_path=None, page_revision=None):
+    return page_detail(request, site_identifier, None, None, page_slug_path, True, page_revision)
 
 
 @require_safe
