@@ -27,8 +27,7 @@ class ReleaseButtonHelper(ButtonHelper):
             'title': _(title),
         }
 
-
-    def preview_button(self, pk, label, title, classnames_add=None, classnames_exclude=None):
+    def preview_button(self, pk, classnames_add=None, classnames_exclude=None):
         release = Release.objects.get(id=pk)
 
         # Build preview URL
@@ -37,20 +36,18 @@ class ReleaseButtonHelper(ButtonHelper):
         if api_host:
             preview_url += '&cms={0}{1}/api'.format(get_protocol(), api_host)
 
-        return self.create_button(pk, label, title, preview_url, classnames_add, classnames_exclude)
+        return self.create_button(pk, 'preview', 'Preview this release', preview_url, classnames_add, classnames_exclude)
 
-    
-    def detail_revision_button(self, pk, label, title, classnames_add=None, classnames_exclude=None):
+    def detail_revision_button(self, pk, classnames_add=None, classnames_exclude=None):
         preview_url = reverse('release_view', kwargs={'release_id': pk})
-        return self.create_button(pk, label, title, preview_url, classnames_add, classnames_exclude)
-
+        return self.create_button(pk, 'detail', 'Detail updated pages for this release', preview_url, classnames_add, classnames_exclude)
 
     def get_buttons_for_obj(self, obj, exclude=None, classnames_add=None,
                             classnames_exclude=None):
         btns = ButtonHelper.get_buttons_for_obj(self, obj, exclude=None, classnames_add=None, classnames_exclude=None)
         pk = getattr(obj, self.opts.pk.attname)
-        btns.insert(1, self.preview_button(pk, 'preview', 'Preview this release', ['button'], classnames_exclude))
-        btns.insert(2, self.detail_revision_button(pk, 'detail', 'Detail updated pages for this release', ['button'], classnames_exclude))
+        btns.insert(1, self.preview_button(pk, ['button'], classnames_exclude))
+        btns.insert(2, self.detail_revision_button(pk, ['button'], classnames_exclude))
         return btns
 
 
