@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.views.static import serve
 from django.conf import settings
 
@@ -12,7 +12,7 @@ from frontendHandler.models import FrontendVersion
 from home.models import SiteSettings
 from wagtail.contrib.redirects.models import Redirect
 
-from .models import Release
+from .models import Release, ReleaseContent
 
 
 def release_html(request, site_name):
@@ -117,3 +117,25 @@ def open_releases(request):
     for release in releases:
         response_obj.append({"id": release.id, "name": release.release_name})
     return JsonResponse({"releases": response_obj})
+
+
+
+def release_view(request, release_id):
+    error_msg = ''
+
+    release = Release.objects.get(id=release_id)
+    release_content = ReleaseContent.objects.get(release=release)
+
+    # get live release content
+    try:
+        live_release = get_latest_live_release(release.site.id)
+        live_release_content = ReleaseContent.objects.get(release=live_release)
+    except (Release.DoesNotExist, ReleaseContent.DoesNotExist) as e:
+        error_msg = 'No live release'
+    
+    # TODO: Compare release with live release
+
+    return render(request, 'wagtailadmin/release/detail.html', {
+        'release': release,
+        'error_msg': error_msg,
+    })
