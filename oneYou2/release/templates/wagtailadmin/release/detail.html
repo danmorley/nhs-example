@@ -1,10 +1,27 @@
 {% extends "wagtailadmin/base.html" %}
 {% load i18n %}
 
-{% block titletag %}{% blocktrans with title=release.get_admin_display_title %}Release: {{ release.release_name }}{% endblocktrans %}{% endblock %}
+{% block titletag %}{% blocktrans with title=release.release_name %}Release detail: {{ title }}{% endblocktrans %}{% endblock %}
+
+{% block extra_css %}
+    {{ block.super }}
+    <style>
+        #revision-results table td.updated {
+            background: #FFFBB2;
+        }
+
+        #revision-results table td.new {
+            background: #B6EDC8;
+        }
+
+        #revision-results table td.removed {
+            background: #EAB4BA;
+        }
+    </style>
+{% endblock %}
 
 {% block content %}
-    {% trans "Release of" as revisions_str %}
+    {% trans "Release: "|add:release.release_name as revisions_str %}
     {% include "wagtailadmin/shared/header.html" with title=revisions_str subtitle=release.get_admin_display_title icon="doc-empty-inverse" %}
 
     <div class="nice-padding">
@@ -23,11 +40,11 @@
                             {% for page in pages.values %}
                                 {% if page.status != "unchanged" %}
                                     <tr>
-                                        <td class="title">
+                                        <td class="title {{ page.status }}">
                                             <h2>
-                                                <span>{{ page.title }}</span>
-                                                <span>{{ page.created_at }}</span>
-                                                <span>{{ page.status }}</span>
+                                                <a href="{% url 'wagtailadmin_pages:edit' page.id %}">{{ page.title }}</span>
+                                                <span class="unbold">{{ page.created_at }}</span>
+                                                <span class="unbold">({{ page.status }})</span>
                                                 {% comment %}
                                                 <span class="unbold">
                                                     {% trans 'by' context 'points to a user who created a revision' %}<span class="avatar small"><img src="{% avatar_url revision.user size=25 %}" /></span>{{ revision.user }}

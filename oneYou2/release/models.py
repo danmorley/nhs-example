@@ -185,6 +185,7 @@ class ReleasePage(models.Model):
     
     def get_page_detail_dict(self, status=None):
         return {
+            'id': self.revision.page.id,
             'title': self.revision.page.title,
             'slug': self.revision.page.slug,
             'created_at': self.revision.created_at,
