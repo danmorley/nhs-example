@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpRequest
 from django.utils import timezone
+from django.test import Client
 
 from unittest.mock import patch
 
@@ -605,6 +606,57 @@ class ReleaseViewsTests(OneYouTests):
         response = release_html(request, site_name)
         response_content_string = response.content.decode("utf-8")
         self.assertIsTrue(http_host + '/api' in response_content_string)
+
+    def test_release_view_incorrect_release_id(self, mock_file_service, mock_index_file):
+        c = Client()
+        response = c.get('/admin/release/release/view/1/')
+
+        self.assertIsTrue(response.context.get('release') is None)
+        self.assertIsTrue(response.context.get('pages') == {})
+        self.assertIsTrue(response.context.get('error_msg') == 'This release id 1 doesn\'t exist')
+
+    def test_release_view_no_live_release(self, mock_file_service, mock_index_file):
+        release = create_test_release()
+        c = Client()
+        response = c.get('/admin/release/release/view/{}/'.format(release.id))
+
+        self.assertIsTrue(response.context.get('error_msg') == 'No live release')
+
+    def test_release_view_compare_to_live_release(self, mock_file_service, mock_index_file):
+        # Create a live release with 2 pages
+        live_release = create_test_release("Live release", release_date=(timezone.now() + timezone.timedelta(days=-1)))
+        test_live_page1 = create_test_page()
+        test_live_page1.release = live_release
+        test_live_page1.live_revision = test_live_page1.save_revision()
+        test_live_page1.save()
+        
+        test_live_page2 = create_test_page()
+        test_live_page2.release = live_release
+        test_live_page2.live_revision = test_live_page2.save_revision()
+        test_live_page2.save()
+
+        # Create current release edit page1 from live release, remove a page2 live release
+        # and create a new page3
+        current_release = create_test_release()
+        test_live_page1.release = current_release
+        test_live_page1.live_revision = test_live_page1.save_revision()
+        test_live_page1.save()
+
+        current_release.remove_page(test_live_page2.id)
+
+        test_live_page3 = create_test_page()
+        test_live_page3.release = current_release
+        test_live_page3.live_revision = test_live_page3.save_revision()
+        test_live_page3.save()
+
+        c = Client()
+        response = c.get('/admin/release/release/view/{}/'.format(current_release.id))
+
+        self.assertIsTrue(response.context.get('release') == current_release)
+        self.assertIsTrue(response.context.get('error_msg') == '')
+        self.assertIsTrue(response.context.get('pages')[test_live_page1.id]['status'] == 'updated')
+        self.assertIsTrue(response.context.get('pages')[test_live_page2.id]['status'] == 'removed')
+        self.assertIsTrue(response.context.get('pages')[test_live_page3.id]['status'] == 'new')
 
 
 @patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')

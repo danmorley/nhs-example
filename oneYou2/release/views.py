@@ -139,7 +139,7 @@ def release_view(request, release_id):
         try:
             live_release = get_latest_live_release(release.site.id)
             live_pages_release = ReleasePage.objects.filter(release__id=live_release.id)
-        except Release.DoesNotExist:
+        except (Release.DoesNotExist, AttributeError) as e:
             error_msg = 'No live release'
         
         # Compare release with live release
