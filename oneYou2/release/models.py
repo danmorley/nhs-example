@@ -103,7 +103,8 @@ class Release(ClusterableModel):
                 live_pages = OneYou2Page.objects.live()
                 for page in live_pages:
                     content[str(page.id)] = Release.generate_fixed_content(page.get_latest_revision())
-                    ReleasePage(release=self, revision=page.live_revision).save()
+                    if page.live_revision:
+                        ReleasePage(release=self, revision=page.live_revision).save()
             ReleaseContent(release=self, content=json.dumps(content)).save()
         return self
 

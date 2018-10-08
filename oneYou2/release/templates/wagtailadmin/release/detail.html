@@ -1,7 +1,7 @@
 {% extends "wagtailadmin/base.html" %}
 {% load i18n %}
 
-{% block titletag %}{% blocktrans with title=release.release_name %}Release detail: {{ title }}{% endblocktrans %}{% endblock %}
+{% block titletag %}{% if release %}{% blocktrans with title=release.release_name %}Release detail: {{ title }}{% endblocktrans %}{% else %}{% blocktrans %}Incorrect Release{% endblocktrans %}{% endif %}{% endblock %}
 
 {% block extra_css %}
     {{ block.super }}
@@ -21,7 +21,10 @@
 {% endblock %}
 
 {% block content %}
-    {% trans "Release: "|add:release.release_name as revisions_str %}
+    {% trans "Incorrect Release" as revisions_str %}
+    {% if release %}
+        {% trans "Release: "|add:release.release_name as revisions_str %}
+    {% endif %}
     {% include "wagtailadmin/shared/header.html" with title=revisions_str subtitle=release.get_admin_display_title icon="doc-empty-inverse" %}
 
     <div class="nice-padding">
