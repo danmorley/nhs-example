@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^admin/experiments/', include(experiment_urls)),
     url(r'^admin/pages/', include(pages_urls)),
     url(r'^admin/actions/upload/', upload_actions, name='upload_actions'),
+    url(r'^admin/release/release/view/(?P<release_id>\d+)/$', views.release_view, name='release_view'),
 
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),

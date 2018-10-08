@@ -1,8 +1,9 @@
 from __future__ import unicode_literals
+import json
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.views.static import serve
 from django.conf import settings
 
@@ -12,7 +13,7 @@ from frontendHandler.models import FrontendVersion
 from home.models import SiteSettings
 from wagtail.contrib.redirects.models import Redirect
 
-from .models import Release
+from .models import Release, ReleasePage
 
 
 def release_html(request, site_name):
@@ -117,3 +118,58 @@ def open_releases(request):
     for release in releases:
         response_obj.append({"id": release.id, "name": release.release_name})
     return JsonResponse({"releases": response_obj})
+
+
+
+def release_view(request, release_id):
+    release = None
+    error_msg = ''
+    pages = {}
+
+    try:
+        release = Release.objects.get(id=release_id)
+    except Release.DoesNotExist:
+        error_msg = 'This release id {} doesn\'t exist'.format(release_id)
+
+    if release:
+        pages_release = ReleasePage.objects.filter(release__id=release_id)
+
+        # get live release content
+        live_release, live_pages_release = None, None
+        try:
+            live_release = get_latest_live_release(release.site.id)
+            live_pages_release = ReleasePage.objects.filter(release__id=live_release.id)
+        except (Release.DoesNotExist, AttributeError) as e:
+            error_msg = 'No live release'
+        
+        # Compare release with live release
+        for page_release in pages_release:
+            page_detail = page_release.get_page_detail_dict('new')
+
+            if live_release:
+                try:
+                    live_page_release =  ReleasePage.objects.get(
+                        release__id=live_release.id,
+                        revision__page=page_release.revision.page)
+                    if live_page_release.revision.id != page_release.revision.id:
+                        page_detail['status'] = 'updated'
+                    else:
+                        page_detail['status'] = 'unchanged'
+                except ReleasePage.DoesNotExist:
+                    pass
+            
+            pages.update({page_release.revision.page.id: page_detail})
+        
+        # Check if pages have been removed from live release
+        if live_pages_release:
+            for live_page_release in live_pages_release:
+                if live_page_release.revision.page.id not in pages:
+                    pages.update({
+                        live_page_release.revision.page.id: live_page_release.get_page_detail_dict('removed')
+                    })
+
+    return render(request, 'wagtailadmin/release/detail.html', {
+        'release': release,
+        'pages': pages,
+        'error_msg': error_msg,
+    })

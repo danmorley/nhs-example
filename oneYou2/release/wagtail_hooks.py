@@ -1,4 +1,5 @@
 from django.utils.translation import ugettext as _
+from django.urls import reverse
 
 from wagtail.contrib.modeladmin.helpers import ButtonHelper
 from wagtail.contrib.modeladmin.options import (
@@ -11,34 +12,43 @@ class ReleaseButtonHelper(ButtonHelper):
     def __init__(self, view, request):
         super(ReleaseButtonHelper, self).__init__(view, request)
 
-    def preview_button(self, pk, classnames_add=None, classnames_exclude=None):
+    def create_button(self, pk, label, title, url, classnames_add=None, classnames_exclude=None):
         if classnames_add is None:
             classnames_add = []
         if classnames_exclude is None:
             classnames_exclude = []
         classnames = self.edit_button_classnames + classnames_add
         cn = self.finalise_classname(classnames, classnames_exclude)
+
+        return {
+            'url': url,
+            'label': _(label),
+            'classname': cn,
+            'title': _(title),
+        }
+
+    def preview_button(self, pk, classnames_add=None, classnames_exclude=None):
         release = Release.objects.get(id=pk)
 
         # Build preview URL
-        preview_url = release.site.sitesettings.uid + '/?id=' + release.uuid
+        preview_url = '/{}/?id={}'.format(release.site.sitesettings.uid, release.uuid)
         api_host = self.request.META.get('HTTP_HOST')
         if api_host:
-            content_store_endpoint = get_protocol() + api_host + '/api'
-            preview_url += '&cms=' + content_store_endpoint
+            preview_url += '&cms={0}{1}/api'.format(get_protocol(), api_host)
 
-        return {
-            'url': '/' + preview_url,
-            'label': _('preview'),
-            'classname': cn,
-            'title': _('Preview this release'),
-        }
+        return self.create_button(pk, 'preview', 'Preview this release', preview_url, classnames_add, classnames_exclude)
+
+    def detail_revision_button(self, pk, classnames_add=None, classnames_exclude=None):
+        preview_url = reverse('release_view', kwargs={'release_id': pk})
+        return self.create_button(pk, 'detail', 'Detail updated pages for this release', preview_url, classnames_add, classnames_exclude)
 
     def get_buttons_for_obj(self, obj, exclude=None, classnames_add=None,
                             classnames_exclude=None):
         btns = ButtonHelper.get_buttons_for_obj(self, obj, exclude=None, classnames_add=None, classnames_exclude=None)
         pk = getattr(obj, self.opts.pk.attname)
         btns.insert(1, self.preview_button(pk, ['button'], classnames_exclude))
+        if not obj.release_date_has_passed():
+            btns.insert(2, self.detail_revision_button(pk, ['button'], classnames_exclude))
         return btns
 
 

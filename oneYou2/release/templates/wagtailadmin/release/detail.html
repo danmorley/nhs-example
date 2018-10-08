@@ -1,0 +1,66 @@
+{% extends "wagtailadmin/base.html" %}
+{% load i18n wagtailadmin_tags %}
+
+{% block titletag %}{% if release %}{% blocktrans with title=release.release_name %}Release detail: {{ title }}{% endblocktrans %}{% else %}{% blocktrans %}Incorrect Release{% endblocktrans %}{% endif %}{% endblock %}
+
+{% block extra_css %}
+    {{ block.super }}
+    <style>
+        #revision-results table td.updated {
+            background: #FFFBB2;
+        }
+
+        #revision-results table td.new {
+            background: #B6EDC8;
+        }
+
+        #revision-results table td.removed {
+            background: #EAB4BA;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    {% trans "Incorrect Release" as revisions_str %}
+    {% if release %}
+        {% trans "Release: "|add:release.release_name as revisions_str %}
+    {% endif %}
+    {% include "wagtailadmin/shared/header.html" with title=revisions_str subtitle=release.get_admin_display_title icon="doc-empty-inverse" %}
+
+    <div class="nice-padding">
+        <div id="revision-results" class="revisions">
+            <table class="listing">
+                    <col width="100%" />
+                    {% comment %}
+                    <thead>
+                        <tr>
+                            <th><a href="{% url 'wagtailadmin_pages:revisions_index' page.id %}?ordering={% if ordering == "created_at" %}-{% endif %}created_at" class="icon icon-arrow-{% if ordering == "created_at" %}up-after{% elif ordering == "-created_at" %}down-after{% else %}down-after{% endif %} {% if ordering == "created_at" or ordering == "-created_at" %}teal{% endif %}">{% trans 'Revision date' %}</a></th>
+                        </tr>
+                    </thead>
+                    {% endcomment %}
+                    <tbody>
+                        {% if release %}
+                            {% for page in pages.values %}
+                                {% if page.status != "unchanged" %}
+                                    <tr>
+                                        <td class="title {{ page.status }}">
+                                            <h2>
+                                                <a href="{% url 'wagtailadmin_pages:edit' page.id %}">{{ page.title }}</span>
+                                                <span class="unbold">{{ page.created_at }}</span>
+                                                <span class="unbold">
+                                                    {% trans 'by' context 'points to a user who created a revision' %}<span class="avatar small"><img src="{% avatar_url page.revision_user size=25 %}" /></span>{{ page.revision_user }}
+                                                </span>
+                                                <span class="unbold">({{ page.status }})</span>
+                                            </h2>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            {% block no_results %}<tr><td class="no-results-message"><p>{% trans error_msg %}</p></td></tr>{% endblock %}
+                        {% endif %}
+                    </tbody>
+                </table>
+        </div>
+    </div>
+{% endblock %}
