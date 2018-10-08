@@ -1,5 +1,5 @@
 {% extends "wagtailadmin/base.html" %}
-{% load i18n %}
+{% load i18n wagtailadmin_tags %}
 
 {% block titletag %}{% if release %}{% blocktrans with title=release.release_name %}Release detail: {{ title }}{% endblocktrans %}{% else %}{% blocktrans %}Incorrect Release{% endblocktrans %}{% endif %}{% endblock %}
 
@@ -47,12 +47,10 @@
                                             <h2>
                                                 <a href="{% url 'wagtailadmin_pages:edit' page.id %}">{{ page.title }}</span>
                                                 <span class="unbold">{{ page.created_at }}</span>
-                                                <span class="unbold">({{ page.status }})</span>
-                                                {% comment %}
                                                 <span class="unbold">
-                                                    {% trans 'by' context 'points to a user who created a revision' %}<span class="avatar small"><img src="{% avatar_url revision.user size=25 %}" /></span>{{ revision.user }}
+                                                    {% trans 'by' context 'points to a user who created a revision' %}<span class="avatar small"><img src="{% avatar_url page.revision_user size=25 %}" /></span>{{ page.revision_user }}
                                                 </span>
-                                                {% endcomment %}
+                                                <span class="unbold">({{ page.status }})</span>
                                             </h2>
                                         </td>
                                     </tr>

@@ -190,6 +190,7 @@ class ReleasePage(models.Model):
             'title': self.revision.page.title,
             'slug': self.revision.page.slug,
             'created_at': self.revision.created_at,
+            'revision_user': self.revision.user,
             'status': status,
         }
 
