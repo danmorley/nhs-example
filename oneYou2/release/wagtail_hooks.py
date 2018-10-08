@@ -47,7 +47,8 @@ class ReleaseButtonHelper(ButtonHelper):
         btns = ButtonHelper.get_buttons_for_obj(self, obj, exclude=None, classnames_add=None, classnames_exclude=None)
         pk = getattr(obj, self.opts.pk.attname)
         btns.insert(1, self.preview_button(pk, ['button'], classnames_exclude))
-        btns.insert(2, self.detail_revision_button(pk, ['button'], classnames_exclude))
+        if not obj.release_date_has_passed():
+            btns.insert(2, self.detail_revision_button(pk, ['button'], classnames_exclude))
         return btns
 
 
