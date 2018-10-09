@@ -33,6 +33,105 @@
     </style>
 {% endblock %}
 
+{% block content %}
+    {% page_permissions page as page_perms %}
+    <header class="merged tab-merged">
+        {% explorer_breadcrumb page %}
+
+        <div class="row row-flush">
+            <div class="left col9 header-title">
+                <h1 class="icon icon-doc-empty-inverse">
+                {% blocktrans with title=page.get_admin_display_title page_type=content_type.model_class.get_verbose_name %}Editing {{ page_type }} <span>{{ title }}</span>{% endblocktrans %}</h1>
+            </div>
+            <div class="right col3">
+                {% trans "Status" %}
+                {% include "wagtailadmin/shared/page_status_tag.html" with page=page_for_status %}
+
+
+            </div>
+        </div>
+    </header>
+
+    <form id="page-edit-form" action="{% url 'wagtailadmin_pages:edit' page.id %}" method="POST" novalidate{% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
+        {% csrf_token %}
+
+        <input type="hidden" name="next" value="{{ next }}">
+        {{ edit_handler.render_form_content }}
+
+        {% if is_revision %}
+            <input type="hidden" name="revision" value="{{ revision.id|unlocalize }}" />
+        {% endif %}
+
+        <footer>
+            <ul>
+                <li class="actions">
+                    <div class="dropdown dropup dropdown-button match-width {% if is_revision %}warning{% endif %}">
+                        <button type="submit" class="button action-save button-longrunning {% if is_revision %}warning{% endif %}" tabindex="3" data-clicked-text="{% trans 'Saving…' %}" {% if page.locked %}disabled {% endif %}><span class="icon icon-spinner"></span><em>{% if page.locked %}{% trans 'Page locked' %}{% else %}{% if is_revision %}{% trans 'Replace current draft' %}{% else %}{% trans 'Save draft' %}{% endif %}{% endif %}</em></button>
+
+                        {% if not page.locked %}
+                            <div class="dropdown-toggle icon icon-arrow-up"></div>
+                            <ul role="menu">
+                                {% if not is_revision and page_perms.can_unpublish %}
+                                    <li>
+                                        <!--<a href="{% url 'wagtailadmin_pages:unpublish' page.id %}">{% trans 'Unpublish' %}</a>-->
+                                        <button id="release-picker-unpublish-toggle" type="submit" name="action-unpublish" value="action-unpublish" class="button {% if is_revision %}warning{% endif %}" tabindex="3" {% if page.locked %}disabled {% endif %}>{% if is_revision %}{% trans 'Unpublish this revision' %}{% else %}{% trans 'Unpublish' %}{% endif %}</button>
+                                    </li>
+                                {% endif %}
+                                {% if not is_revision and page_perms.can_delete %}
+                                    <li><a href="{% url 'wagtailadmin_pages:delete' page.id %}" class="shortcut">{% trans 'Delete' %}</a></li>
+                                {% endif %}
+                                {% if page_perms.can_publish %}
+                                    <li>
+                                        <button id="release-picker-publish-toggle" type="submit" name="action-publish" value="action-publish" class="button {% if is_revision %}warning{% endif %}" tabindex="3" {% if page.locked %}disabled {% endif %}>{% if is_revision %}{% trans 'Publish this revision' %}{% else %}{% trans 'Publish' %}{% endif %}</button>
+                                    </li>
+                                {% endif %}
+                                {% if not is_revision %}
+                                    <li><input type="submit" name="action-submit" value="{% trans 'Submit for moderation' %}" class="button" /></li>
+                                {% endif %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </li>
+
+                <li class="preview">
+                    {% trans 'Preview' as preview_label %}
+                    {% if preview_modes|length > 1 %}
+                        <div class="dropdown dropup dropdown-button match-width">
+                            {% include "wagtailadmin/pages/_preview_button_on_edit.html" with label=preview_label icon=1 %}
+                            <div class="dropdown-toggle icon icon-arrow-up"></div>
+                            <ul role="menu">
+                                {% for mode_name, mode_display_name in preview_modes %}
+                                    <li>
+                                        {% include "wagtailadmin/pages/_preview_button_on_edit.html" with mode=mode_name label=mode_display_name %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% else %}
+                        {% include "wagtailadmin/pages/_preview_button_on_edit.html" with label=preview_label icon=1 %}
+                    {% endif %}
+                </li>
+
+                <li class="meta">
+                    <p class="modified">
+                        {% if page.get_latest_revision %}
+                            {% blocktrans with last_mod=page.get_latest_revision.created_at %}Last modified: {{ last_mod }}{% endblocktrans %}
+                            {% if page.get_latest_revision.user %}
+                                {% blocktrans with modified_by=page.get_latest_revision.user.get_full_name|default:page.get_latest_revision.user.get_username %}by {{ modified_by }}{% endblocktrans %}
+                                <span class="avatar small"><img src="{% avatar_url page.get_latest_revision.user size=25 %}" /></span>
+                            {% endif %}
+                            <a href="{% url 'wagtailadmin_pages:revisions_index' page.id %}" class="underlined">{% trans 'Revisions' %}</a>
+                        {% endif %}
+                    </p>
+                </li>
+                {% block extra_footer_actions %}
+                {% endblock %}
+            </ul>
+        </footer>
+    </form>
+
+{% endblock %}
+
 {% block extra_js %}
     {{ block.super }}
 
@@ -63,43 +162,58 @@
         });
     </script>
 
-    <script type="text/javascript" charset="utf-8">
-        (function ($) {
-            function startPopUpToggleWatcher() {
-                $('button[name="action-publish"]').attr('id', 'release-picker-toggle');
+<script type="text/javascript" charset="utf-8">
+    (function ($) {
+        function startPopUpToggleWatcher() {
 
-                $('#release-picker-toggle').click(function (e) {
-                    e.preventDefault();
-                    $('.popup-cover').show();
-                })
-            }
 
-            function startCancelWatcher(popUp) {
-                popUp.append('<button id="cancel-btn" class="button no">Close</button>');
-                $('#cancel-btn').click(function (e) {
-                    e.preventDefault();
-                    $('.popup-cover').hide();
-                })
-            }
+            $('#release-picker-publish-toggle').click(function (e) {
+                e.preventDefault();
+                $('.popup').children('button[name="action-publish"]').first().show();
+                $('.popup').children('button[name="action-unpublish"]').first().hide();
+                $('.popup-cover').show();
 
-            function setUpReleaseSelectorPopUp() {
-                var releasePicker = $('#id_release').closest('.object.model_choice_field');
-                releasePicker.wrap('<div class="popup-cover"><div class="popup"></div></div>');
-                var releasePopUp = releasePicker.parent();
-                $('button[name="action-publish"]').clone().appendTo(releasePopUp);
-                releasePopUp.find('button[name="action-publish"]').attr('id', 'publish-page');
-                startCancelWatcher(releasePopUp)
-            }
+            });
 
-            function init() {
-                startPopUpToggleWatcher();
+            $('#release-picker-unpublish-toggle').click(function (e) {
+                e.preventDefault();
+                $('.popup').children('button[name="action-unpublish"]').first().show();
+                $('.popup').children('button[name="action-publish"]').first().hide();
+                $('.popup-cover').show();
+            });
+        }
 
-                setUpReleaseSelectorPopUp();
-            }
+        function startCancelWatcher(popUp) {
+            popUp.append('<button id="cancel-btn" class="button no">Close</button>');
+            $('#cancel-btn').click(function (e) {
+                e.preventDefault();
+                $('.popup-cover').hide();
+            })
+        }
 
-            $(document).on('page:load', init);
-            $(init)
-        })(jQuery)
-    </script>
+        function setUpReleaseSelectorPopUp() {
+            var releasePicker = $('#id_release').closest('.object.model_choice_field');
+            releasePicker.wrap('<div class="popup-cover"><div class="popup"></div></div>');
+            var releasePopUp = releasePicker.parent();
+
+            $('button[name="action-publish"]').clone().appendTo(releasePopUp);
+            releasePopUp.find('button[name="action-publish"]').attr('id', 'publish-page');
+            $('button[name="action-unpublish"]').clone().appendTo(releasePopUp);
+            releasePopUp.find('button[name="action-unpublish"]').attr('id', 'unpublish-page');
+
+
+            startCancelWatcher(releasePopUp)
+        }
+
+        function init() {
+            startPopUpToggleWatcher();
+
+            setUpReleaseSelectorPopUp();
+        }
+
+        $(document).on('page:load', init);
+        $(init)
+    })(jQuery)
+</script>
 {% endblock %}
 
