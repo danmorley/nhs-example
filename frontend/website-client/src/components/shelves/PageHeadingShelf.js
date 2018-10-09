@@ -109,7 +109,7 @@ class PageHeadingShelf extends Component {
           <div className="container">
               <div className={`${classNamePrefix}__container-left`}>
                 <div className="row">
-                  <div className="shelf__col col-10 col-sm-8 col-md-7">
+                  <div className="shelf__col col-9 col-sm-8 col-md-7">
                     {this.renderHeadingBody(content, headingTagName)}
                     {this.renderCta(content.cta)}
                   </div>
