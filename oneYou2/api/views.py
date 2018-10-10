@@ -15,6 +15,8 @@ from pages.serializers import OneYouPageListSerializer, GeneralShelvePageSeriali
 from wagtail.core.models import Page, Site
 
 from experiments.models import ExperimentsContent
+from home.models import SiteSettings
+
 from .utils import get_site_or_404
 
 
@@ -177,11 +179,14 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug=
 def home_page_detail(request, site_identifier, release_uuid):
     """Because the home page lives on a hardcoded / url"""
     # NOT SURE THIS IS USED ANYMORE
-    return page_detail(request, site_identifier, release_uuid, page_slug="home")
+    homepage_slug = SiteSettings.objects.get(uid=site_identifier).site.root_page.slug
+    return page_detail(request, site_identifier, release_uuid, page_slug=homepage_slug)
 
 
 @require_safe
 def page_preview(request, site_identifier, page_slug):
+    if page_slug == 'home':
+        page_slug = SiteSettings.objects.get(uid=site_identifier).site.root_page.slug
     site = Site.objects.get(site_name=site_identifier)
     pages = Page.objects.filter(slug=page_slug)
     page = [p for p in pages if p.get_site().pk == site.id][0]

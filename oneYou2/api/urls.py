@@ -25,7 +25,7 @@ urlpatterns = [
         views.page_list,
         name='page-list'),
 
-    url(r'^sites/(?P<site_identifier>[\w\-]+)/(?P<release_uuid>[\w\-]+)/pages//$',
+    url(r'^sites/(?P<site_identifier>[\w\-]+)/(?P<release_uuid>[\w\-]+)/pages/home/$',
         views.home_page_detail,
         name='home-page-detail'),
 
