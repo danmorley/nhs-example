@@ -232,6 +232,7 @@ def edit(request, page_id):
                         )
                     ])
 
+
                 else:
                     # Page is being published now
 
