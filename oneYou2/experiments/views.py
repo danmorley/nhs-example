@@ -116,9 +116,6 @@ def create(request, content_type_app_name, content_type_model_name, parent_page_
         page.slug = '%s-v%s' % (page.slug, slug[:6])
         page.title = "%s (describe the variant)" % page.title
 
-        print(parent_page_json, type(parent_page_json))
-        print(page, type(page))
-
         signals.init_new_page.send(sender=create, page=page, parent=parent_page)
         form = form_class(instance=page, parent_page=parent_page)
         edit_handler = edit_handler.bind_to_instance(instance=page, form=form, request=request)
@@ -137,7 +134,6 @@ def create(request, content_type_app_name, content_type_model_name, parent_page_
 
 
 def edit(request, page_id):
-    print("EDIT")
     real_page_record = get_object_or_404(Page, id=page_id)
     latest_revision = real_page_record.get_latest_revision()
     page = real_page_record.get_latest_revision_as_page()
@@ -168,9 +164,6 @@ def edit(request, page_id):
     if request.method == 'POST':
         form = form_class(request.POST, request.FILES, instance=page,
                           parent_page=parent)
-
-        print(request.POST)
-        print(dir(request.POST))
 
         if form.is_valid() and not page.locked and not page.specific.is_live:
             page = form.save(commit=False)

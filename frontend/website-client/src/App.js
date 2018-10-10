@@ -34,12 +34,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    let path = this.checkForRedirect() || this.pagePathToRender(window.location.pathname);
+    let path = this.pagePathToRender(window.location.pathname);
     console.log('First time load of page for path ' + path);
     if (!AppRouteRegistry.routeIsLocal(path)) {
       console.log('Loading cms page', path);
-      let key = this.pageSlug(path);
-
+      let key = path.substring(1, path.length-1);
       this.loadPageForKey(key);
     } else {
       console.log('Loading app page', path);
@@ -56,7 +55,7 @@ class App extends Component {
       if (!AppRouteRegistry.routeIsLocal(path)) {
         path = path.replace(global.rootUrl, '');
         console.log('Loading cms page', path);
-        let key = this.pageSlug(path);
+        let key = path.substring(1, path.length-1);
         this.loadPageForKey(key);
       } else {
         path = path.replace(global.rootUrl, '');
@@ -82,7 +81,8 @@ class App extends Component {
    *  a re-render of the new page.
    */
   loadPageForKey(key) {
-    if (!key) key = 'home';
+    if (!key || key == '/') key = 'home';
+    key = key.replace(/\//g, '|');
     console.log('Loading page for key', key);
     App.setContentVisibile(false);
 

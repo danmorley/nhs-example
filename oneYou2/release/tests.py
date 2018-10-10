@@ -29,9 +29,9 @@ from release.views import release_html
 from release.wagtail_hooks import ReleaseButtonHelper, ReleaseAdmin
 
 
-index_file = '<head><link href="/oneyou/public/static/css/main.da59b65b.css" rel="stylesheet"></head><body>' \
-             '<div id="root" data-content-store-endpoint="%apiurl%" data-site="oneyou" data-release="%releaseid%">' \
-             '</div><script type="text/javascript" src="/oneyou/public/static/js/main.c6e8367e.js"></script></body>'
+index_file = '<head><body>' \
+             '<div id="root" data-content-store-endpoint="{{ api_url }}" data-site="{{ site_setting.uid }}" data-release="{{ release_id }}">' \
+             '</div></body>'
 
 
 @patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
@@ -554,12 +554,9 @@ class ReleaseViewsTests(OneYouTests):
         response = release_html(request, site_name)
         response_content_string = response.content.decode("utf-8")
 
-        self.assertIsFalse("/static/css/" in response_content_string)
-        self.assertIsTrue("/version/css/" in response_content_string)
-        self.assertIsFalse("/static/js/" in response_content_string)
-        self.assertIsTrue("/version/js/" in response_content_string)
-        self.assertIsFalse("%apiurl%" in response_content_string)
-        self.assertIsFalse("%releaseid%" in response_content_string)
+        self.assertIsFalse("{{ api_url }}" in response_content_string)
+        self.assertIsFalse("{{ site_setting.uid }}" in response_content_string)
+        self.assertIsFalse("{{ release_id }}" in response_content_string)
         self.assertIsTrue(release.uuid in response_content_string)
 
     def test_release_html_function_returns_404_for_unknown_site_names(self, mock_file_service, mock_index_file):

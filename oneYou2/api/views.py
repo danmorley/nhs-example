@@ -1,6 +1,7 @@
 import json
 
 import re
+from urllib.parse import unquote
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
 from django.template.response import TemplateResponse
@@ -109,13 +110,13 @@ def full_page_list(request, site_identifier):
 
 
 @require_safe
-def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug=None):
+def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug_path=None):
     """RETURN PAGE DETAILS IN API"""
     # Match variants, a variant's slug should end with -v and then a truncated hash of 6 characters
     variant_regex = re.compile(r"-v[a-zA-Z0-9]{6}$")
 
-    if page_slug:
-        if variant_regex.search(page_slug):
+    if page_slug_path:
+        if variant_regex.search(page_slug_path):
             variant = True
             not_found_msg = "Variant Not Found"
         else:
@@ -126,12 +127,16 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug=
             # This somewhat defeats the point of freezing content
             # TODO: Fix this, you can do this by freezing content with slug keys
             # You would then only need to get the page object for variants
-            page = Page.objects.get(slug=page_slug)
-            page_pk = page.pk
+            homepage = SiteSettings.objects.get(uid=site_identifier).site.root_page
+            page_pk = homepage.pk
+            if homepage.url_path != page_slug_path:
+                path = '/{}/{}/'.format(homepage.slug, unquote(page_slug_path).replace('|', '/'))
+                page = Page.objects.get(url_path=path)
+                page_pk = page.pk
         except ObjectDoesNotExist:
             try:
                 if variant:  # Try and get parent page
-                    page = Page.objects.get(slug=page_slug[:-8])
+                    page = Page.objects.get(slug=page_slug_path[:-8])
                     page_pk = page.pk
                     variant = False
                 else:
@@ -179,16 +184,16 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug=
 def home_page_detail(request, site_identifier, release_uuid):
     """Because the home page lives on a hardcoded / url"""
     # NOT SURE THIS IS USED ANYMORE
-    homepage_slug = SiteSettings.objects.get(uid=site_identifier).site.root_page.slug
-    return page_detail(request, site_identifier, release_uuid, page_slug=homepage_slug)
+    homepage = SiteSettings.objects.get(uid=site_identifier).site.root_page
+    return page_detail(request, site_identifier, release_uuid, page_slug_path=homepage.url_path)
 
 
 @require_safe
-def page_preview(request, site_identifier, page_slug):
-    if page_slug == 'home':
-        page_slug = SiteSettings.objects.get(uid=site_identifier).site.root_page.slug
+def page_preview(request, site_identifier, page_slug_path=None):
+    if page_slug_path == 'home':
+        page_slug_path = SiteSettings.objects.get(uid=site_identifier).site.root_page.slug
     site = Site.objects.get(site_name=site_identifier)
-    pages = Page.objects.filter(slug=page_slug)
+    pages = Page.objects.filter(slug=page_slug_path)
     page = [p for p in pages if p.get_site().pk == site.id][0]
     serialized_page = GeneralShelvePageSerializer(instance=page.specific.get_latest_revision_as_page())
     return JsonResponse(serialized_page.data)

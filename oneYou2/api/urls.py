@@ -5,7 +5,7 @@ from release import views as release_views
 
 app_name = 'react_api'
 urlpatterns = [
-    url(r'^preview/sites/(?P<site_identifier>[\w\-]+)/pages/(?P<page_slug>[\w\-]+)/$',
+    url(r'^preview/sites/(?P<site_identifier>[\w\-]+)/pages/(?P<page_slug_path>[\w|\W]+)/$',
         views.page_preview,
         name='page-preview'),
 
@@ -29,11 +29,7 @@ urlpatterns = [
         views.home_page_detail,
         name='home-page-detail'),
 
-    url(r'^sites/(?P<site_identifier>[\w\-]+)/(?P<release_uuid>[\w\-]+)/pages/(?P<page_pk>\d+)/$',
-        views.page_detail,
-        name='page-detail-by-pk'),
-
-    url(r'^sites/(?P<site_identifier>[\w\-]+)/(?P<release_uuid>[\w\-]+)/pages/(?P<page_slug>[\w\-]+)/$',
+    url(r'^sites/(?P<site_identifier>[\w\-]+)/(?P<release_uuid>[\w\-]+)/pages/(?P<page_slug_path>[\w|\W]+)/$',
         views.page_detail,
         name='page-detail-by-slug'),
     url(r'^open-releases/$', release_views.open_releases, name='open-release-list')

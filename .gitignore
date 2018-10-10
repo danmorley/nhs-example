@@ -109,6 +109,9 @@ db.sqlite3
 #IDE files
 .idea/*
 
+# index.html generate from index-build.html
+/frontend/website-client/public/index.html
+
 #local media files
 media/
 web/

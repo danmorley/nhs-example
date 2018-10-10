@@ -22,7 +22,6 @@ services:
       AZURE_CONTAINER: ${AZURE_CONTAINER}
       AZURE_FILE_SHARE: ${AZURE_FILE_SHARE}
       CONTENT_STORE_ENDPOINT: ${CONTENT_STORE_ENDPOINT}
-      ADOBE_TRACKING_URL: ${ADOBE_TRACKING_URL}
       CMS_ENV: ${CMS_ENV}
     build: .
     command: bash -c "./bin/wait-for-it.sh db:1433 -- python3 ./manage.py migrate && ./manage.py populate_default_images && python3 ./manage.py populate_pages ./oneYou2/fixtures/fixture.json && python3 ./manage.py runserver 0.0.0.0:8000"

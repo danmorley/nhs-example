@@ -1,24 +1,27 @@
 from __future__ import unicode_literals
 import json
 
+from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
+from django.template import Context, Template
 from django.views.static import serve
-from django.conf import settings
 
-from release.utils import get_latest_release, get_latest_live_release
-from oneYou2.utils import get_protocol
+from wagtail.contrib.redirects.models import Redirect
+
 from frontendHandler.models import FrontendVersion
 from home.models import SiteSettings
-from wagtail.contrib.redirects.models import Redirect
+from oneYou2.utils import get_protocol
+from release.utils import get_latest_release, get_latest_live_release
 
 from .models import Release, ReleasePage
 
 
 def release_html(request, site_name):
     try:
-        site_id = SiteSettings.objects.get(uid=site_name).site.id
+        site_setting = SiteSettings.objects.get(uid=site_name)
+        site_id = site_setting.site.id
     except ObjectDoesNotExist:
         return HttpResponse("Page Not Found", status=404)
 
@@ -33,7 +36,7 @@ def release_html(request, site_name):
 
         if wagtail_redirect:
             if wagtail_redirect.redirect_page:
-                redirect_path = '/oneyou{}'.format(wagtail_redirect.redirect_page.url)
+                redirect_path = '/{}{}'.format(site_name, wagtail_redirect.redirect_page.url)
             else:
                 redirect_path = wagtail_redirect.redirect_link
 
@@ -58,24 +61,26 @@ def release_html(request, site_name):
         frontend_id = FrontendVersion.get_current_version()
         uuid = 'current'
 
-    index = FrontendVersion.get_html_for_version(frontend_id)
-    substituted_index = index.replace("/static/css/", "/{}/version/css/{}/?file_name=".format(site_name, frontend_id))
-    substituted_index = substituted_index.replace("/static/js/",
-                                                  "/{}/version/js/{}/?file_name=".format(site_name, frontend_id))
-    substituted_index = substituted_index.replace("/manifest", "/{}/public/manifest".format(site_name))
-    substituted_index = substituted_index.replace("/favicon", "/{}/public/{}/favicon".format(site_name, frontend_id))
-    substituted_index = substituted_index.replace("/webtrends.min.js", "/{}/public/{}/webtrends.min.js".format(site_name, frontend_id))
-
     host = request.META['HTTP_HOST']
     if settings.CONTENT_STORE_ENDPOINT:
         content_store_endpoint = settings.CONTENT_STORE_ENDPOINT
     else:
         content_store_endpoint = get_protocol() + host + "/api"
 
-    substituted_index = substituted_index.replace("%apiurl%", content_store_endpoint)
-    substituted_index = substituted_index.replace("%releaseid%", uuid)
-    substituted_index = substituted_index.replace("%adobe_tracking_url%", settings.ADOBE_TRACKING_URL)
-    http_response = HttpResponse(substituted_index)
+    template = Template(FrontendVersion.get_html_for_version(frontend_id))
+
+    context = Context({
+        'site_setting': site_setting,
+        'api_url': content_store_endpoint,
+        'release_id': uuid,
+        'public_url': '/{}/public/{}'.format(site_name, frontend_id),
+    })
+
+    if settings.ENV == 'local':
+        context['public_url'] = '/static'
+
+    http_response = HttpResponse(template.render(context))
+
     if release and release.content_status == 1:
         http_response['Cache-Control'] = 'max-age=900'
     return http_response
@@ -100,12 +105,10 @@ def cms_statics(request, path):
 
 
 def web_statics(request, site_name, path):
-    # print("Serving web static %s" % path)
     return serve(request, path, document_root='./web/static/')
 
 
 def statics(request, site_name, path):
-    # print("Serving static %s" % path)
     path_components = path.split('/')
     file_name = path_components.pop()
     FrontendVersion.load_static('/'.join(path_components), file_name)

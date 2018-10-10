@@ -47,7 +47,8 @@
   "scripts": {
     "start-js": "react-app-rewired start",
     "start": "npm-run-all -p watch-css start-js",
-    "build": "mv public/index-build.html public/index.html && npm run build-css && react-app-rewired build && node bin/postbuild.js",
+    "build": "cp public/index-build.html public/index.html && npm run build-css && react-app-rewired build && node bin/postbuild.js",
+    "build-local": "npm run build && cd ./build && cp ./favicon.ico ./static/favicon.ico && cp ./manifest.json ./static/manifest.json && cp ./webtrends.min.js ./static/webtrends.min.js",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
@@ -58,6 +59,7 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint-plugin-react": "^7.8.2",
     "react-app-rewire-eslint": "^0.2.3",
-    "react-app-rewired": "^1.5.2"
+    "react-app-rewired": "^1.5.2",
+    "swig-templates": "^2.0.3"
   }
 }
