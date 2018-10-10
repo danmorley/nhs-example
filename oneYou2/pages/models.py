@@ -1160,3 +1160,7 @@ class Theme(models.Model):
 
     def to_dict(self):
         return model_to_dict(self)
+
+
+# Disable variant from page creation
+Page.subpage_types = [OneYou2Page, RecipePage]

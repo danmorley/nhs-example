@@ -1,4 +1,5 @@
 from wagtail.core.fields import StreamField
+from wagtail.core.models import Page
 
 from modelcluster.models import get_all_child_relations, get_all_child_m2m_relations
 
@@ -80,3 +81,6 @@ SexHealthPage._meta.get_field('twitter_site').default = "@OneYouPHE"
 SexHealthPage._meta.get_field('twitter_title').default = "Sexual Health - Home"
 SexHealthPage._meta.get_field('twitter_description').default = "Description"
 
+
+# Add SexHealthPage from page creation
+Page.subpage_types.append(SexHealthPage)
