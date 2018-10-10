@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'home',
     'search',
     'pages',
+    'sexhealth',
     'release',
     'shelves',
     'images',
@@ -69,7 +70,6 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'axes',
     'experiments',
-
 ]
 
 MIDDLEWARE = [
