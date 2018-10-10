@@ -628,6 +628,14 @@ class PromoShelf(Shelf):
         form_classname = 'dct-promo-shelf dct-meta-panel'
 
 
+class BannerShelf(Shelf):
+    banner = BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")
+    shelf_id = IDBlock(required=False,
+                       label="ID",
+                       help_text="Used to uniquely identify the shelf on the page.",
+                       classname='dct-meta-field')
+
+
 # Pages
 class GeneralShelvePage(Page):
     # Meta Fields

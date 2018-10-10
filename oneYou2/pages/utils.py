@@ -180,8 +180,8 @@ def determine_image_rendtions_for_shared_content_shelves(shelf, parent=None):
 
         # TODO: MERGE THE TWO IF STATEMENTS BELOW
 
-        if 'banner_shelf' in shelf_type:
-            background_image = shelf['value']['background_image']
+        if 'banner_shelf_v2' in shelf_type:
+            background_image = shelf['value']['banner']['background_image']
             if background_image:
                 rendition_shelf_type = 'banner_shelf'
                 if parent:
