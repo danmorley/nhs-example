@@ -10,7 +10,7 @@ from oneYou2.serializers import SiteSerializer
 
 from release.utils import get_latest_live_release, get_release_object, populate_release_if_required
 
-from pages.serializers import OneYouPageListSerializer, OneYouPageSerializer
+from pages.serializers import OneYouPageListSerializer, GeneralShelvePageSerializer
 
 from wagtail.core.models import Page, Site
 
@@ -185,7 +185,7 @@ def page_preview(request, site_identifier, page_slug):
     site = Site.objects.get(site_name=site_identifier)
     pages = Page.objects.filter(slug=page_slug)
     page = [p for p in pages if p.get_site().pk == site.id][0]
-    serialized_page = OneYouPageSerializer(instance=page.specific.get_latest_revision_as_page())
+    serialized_page = GeneralShelvePageSerializer(instance=page.specific.get_latest_revision_as_page())
     return JsonResponse(serialized_page.data)
 
 

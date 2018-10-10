@@ -7,12 +7,12 @@ from images.models import PHEImage
 from .utils import determine_image_rendtions_for_shared_content_shelves, replace_resource_ids_with_links_for_download
 
 
-class OneYouPageSerializer(serializers.ModelSerializer):
+class GeneralShelvePageSerializer(serializers.ModelSerializer):
     body = StreamField()
 
     def to_representation(self, data):
         meta_fields = getattr(self.Meta, 'meta_fields')
-        serialized_data = super(OneYouPageSerializer, self).to_representation(data)
+        serialized_data = super(GeneralShelvePageSerializer, self).to_representation(data)
         serialized_data['meta'] = {}
         for meta_field in meta_fields:
             try:

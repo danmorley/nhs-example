@@ -28,7 +28,7 @@ from release.factories import create_test_release
 
 from shelves.factories import create_test_promo_shelf
 
-from pages.serializers import OneYouPageSerializer
+from pages.serializers import GeneralShelvePageSerializer
 
 from images.factories import PHEImageFactory
 
@@ -409,7 +409,7 @@ class ImageBlockTest(OneYouTests):
         page.save()
         page.save_revision()
         latest_revision_as_page = page.get_latest_revision_as_page()
-        serialized_page = OneYouPageSerializer(instance=latest_revision_as_page)
+        serialized_page = GeneralShelvePageSerializer(instance=latest_revision_as_page)
         self.assertEqual(type(serialized_page.data), ReturnDict)
         self.assertEqual(type(serialized_page.data['body']), list)
         self.assertEqual(type(serialized_page.data['body'][0]), dict)
@@ -437,7 +437,7 @@ class ImageBlockTest(OneYouTests):
         page.save()
         page.save_revision()
         latest_revision_as_page = page.get_latest_revision_as_page()
-        serialized_page = OneYouPageSerializer(instance=latest_revision_as_page)
+        serialized_page = GeneralShelvePageSerializer(instance=latest_revision_as_page)
         self.assertEqual(type(serialized_page.data), ReturnDict)
         self.assertEqual(type(serialized_page.data['body']), list)
         self.assertEqual(type(serialized_page.data['body'][0]), dict)
@@ -467,7 +467,7 @@ class ImageBlockTest(OneYouTests):
         page.save()
         page.save_revision()
         latest_revision_as_page = page.get_latest_revision_as_page()
-        serialized_page = OneYouPageSerializer(instance=latest_revision_as_page)
+        serialized_page = GeneralShelvePageSerializer(instance=latest_revision_as_page)
         image_block = serialized_page.data['body'][0]['value']['image_right']
         self.assertEqual(type(image_block['renditions']['desktop']), str)
         self.assertNotEqual(len(image_block['renditions']['desktop']), 0)
