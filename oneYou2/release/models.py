@@ -110,9 +110,12 @@ class Release(ClusterableModel):
 
     def dict(self):
         self_dict = obj_to_dict(self)
-        self_dict['pages'] = []
-        for page in self.pages.all():
-            self_dict['pages'].append(page.id)
+        attr = self.__class__.__dict__.keys()
+        page_attributes = [key for key in attr if key.endswith('_pages')]
+        for page_attr in page_attributes:
+            self_dict[page_attr] = []
+            for page in getattr(self, page_attr).all():
+                self_dict[page_attr].append(page.id)
         return self_dict
 
     def __str__(self):
@@ -148,11 +151,11 @@ class Release(ClusterableModel):
 
     @classmethod
     def generate_fixed_content(cls, revision):
-        from pages.serializers import OneYouPageSerializer, RecipePageSerializer
+        from pages.serializers import GeneralShelvePageSerializer, RecipePageSerializer
         page = revision.as_page_object()
         if isinstance(page, RecipePage):
             return RecipePageSerializer(page).data
-        return OneYouPageSerializer(page).data
+        return GeneralShelvePageSerializer(page).data
 
     def generate_fixed_site_meta(self):
         from oneYou2.serializers import SiteSerializer

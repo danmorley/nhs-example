@@ -629,37 +629,10 @@ class PromoShelf(Shelf):
 
 
 # Pages
-class OneYou2Page(Page):
-    body = StreamField([
-        ('page_heading_shelf', PageHeading(icon='title')),
-        ('simple_page_heading_shelf', SimplePageHeading(icon='title')),
-        ('section_heading_shelf', SectionHeading(classname="full title", icon='title')),
-        ('carousel_shelf', Carousel(icon="repeat")),
-        ('panel_carousel_shelf', PanelCarousel(icon="repeat")),
-        ('promo_shelf', PromoShelfChooserBlock(target_model="shelves.PromoShelf", icon="image")),
-        ('promo_shelf_v2', PromoShelf(icon="title")),
-        ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
-        ('grid_shelf', Grid(icon="form")),
-        ('recipe_grid_shelf', RecipeGrid(icon="form")),
-        ('find_out_more_dropdown', FindOutMoreDropDown(label="Link dropdown", icon="order-down")),
-        ('iframe_shelf', IFrameShelf(label="IFrame", icon='placeholder')),
-        ('divider', Divider(label="Divider", icon='horizontalrule')),
-        ('article_page_heading_shelf', ArticlePageHeadingShelf(label="Article Page Heading", icon='title')),
-        ('table', Table(label="Table", icon='list-ul')),
-        ('script_shelf', InlineScriptPanel(label="Script shelf", icon='code')),
-        ('triage_tool_shelf', TriageToolShelf(label="Triage tool shelf", icon='cog')),
-        ('svg_shelf', InlineSvgPanel(label="SVG shelf", icon='snippet')),
-        ('accordion_group', AccordionGroup(label="Accordion Group", icon='form')),
-        ('action_plan_shelf', ActionPlan(label="Action Plan Builder shelf", icon='form')),
-        ('action_plan_display_shelf', ActionPlanDisplay(label="Action Plan Display shelf", icon='form')),
-        ('two_column_shelf', TwoColumnShelf(label="Two Column Shelf", icon='grip')),
-    ], null=True, blank=True)
-
+class GeneralShelvePage(Page):
     # Meta Fields
-    og_title = models.CharField(max_length=255, default="One You - Home",)
-    og_description = models.CharField(max_length=255, default="Start the fight back to a healthier you! One You is"
-                                                              " packed with practical tips, tools and free apps"
-                                                              " to help you improve your health today")
+    og_title = models.CharField(max_length=255, default="Home",)
+    og_description = models.CharField(max_length=255, default="Description")
     og_url = models.CharField(max_length=255, blank=True)
     og_image_fk = models.ForeignKey(
         'images.PHEImage',
@@ -673,12 +646,9 @@ class OneYou2Page(Page):
     og_type = models.CharField(max_length=255, default="website")
     twitter_url = models.CharField(max_length=255, blank=True)
     twitter_card = models.CharField(max_length=255, default="summary")
-    twitter_site = models.CharField(max_length=255, default="@OneYouPHE")
-    twitter_title = models.CharField(max_length=255, default="One You - Home")
-    twitter_description = models.CharField(max_length=255,
-                                           default="Start the fight back to a healthier you! One You is packed with"
-                                                   " practical tips, tools and free apps to help you improve"
-                                                   " your health today")
+    twitter_site = models.CharField(max_length=255, default="@TwitterUser")
+    twitter_title = models.CharField(max_length=255, default="Home")
+    twitter_description = models.CharField(max_length=255, default="Description")
 
     use_share_button = models.BooleanField(default=True)
     use_email_button = models.BooleanField(default=False)
@@ -700,7 +670,7 @@ class OneYou2Page(Page):
     )
     release = models.ForeignKey(
         'release.Release',
-        related_name='pages',
+        related_name='%(class)s_pages',
         blank=True,
         null=True,
         default=None,
@@ -709,7 +679,7 @@ class OneYou2Page(Page):
 
     theme = models.ForeignKey(
         'pages.Theme',
-        related_name='pages',
+        related_name='%(class)s_pages',
         null=True,
         on_delete=models.SET_NULL)
 
@@ -755,7 +725,7 @@ class OneYou2Page(Page):
                 site_name = SiteSettings.objects.get(site_id=self.get_site().id).uid
                 breadcrumbs.append({"name": ancestor.specific.title, "url": '/' + site_name})
         return breadcrumbs
-
+        
     content_panels = Page.content_panels + [
         StreamFieldPanel('body'),
         FieldPanel('release'),
@@ -826,24 +796,13 @@ class OneYou2Page(Page):
     api_fields = ['body', 'path', 'depth', 'numchild', 'live', 'page_theme']
     exclude_fields_in_copy = ['release']
 
-    @classmethod
-    def allowed_subpage_models(cls):
-        """
-        Returns the list of page types that this page type can have as subpages,
-        as a list of model classes
-        """
-        from experiments.models import OneYouVariant
-        return [
-            OneYou2Page, RecipePage, OneYouVariant
-        ]
-
     def save(self, *args, **kwargs):
         assigned_release = self.release
 
         if self.release:
             self.release = None
 
-        super(OneYou2Page, self).save(*args, **kwargs)
+        super(GeneralShelvePage, self).save(*args, **kwargs)
         newest_revision = self.get_latest_revision()
 
         if assigned_release:
@@ -854,8 +813,24 @@ class OneYou2Page(Page):
 
         return self
 
-    def __init__(self, *args, **kwargs):
-        super(OneYou2Page, self).__init__(*args, **kwargs)
+    def serve_preview(self, request, mode_name, model_name):
+        request.is_preview = True
+        print("SERVE PREVIEW")
+
+        if mode_name == 'json':
+            from .serializers import GeneralShelvePageSerializer
+            latest_revision_as_page = self.get_latest_revision_as_page()
+            serialized_page = GeneralShelvePageSerializer(instance=latest_revision_as_page)
+            return JsonResponse(serialized_page.data)
+
+        if mode_name == 'react':
+            path = self.get_url_parts(request)[2] if self.get_url_parts(request) is not None else '/home'
+            context = {
+                'preview_url': '/{}{}?preview_page={}'.format(model_name, path, self.slug)
+            }
+            return SimpleTemplateResponse(template='preview_wrapper.html', context=context)
+
+        return self.serve(request)
 
     def serializable_data(self):
         obj = get_serializable_data_for_fields(self)
@@ -874,52 +849,6 @@ class OneYou2Page(Page):
             obj[field.name] = [child.pk for child in children]
 
         return obj
-
-    def update_from_dict(self, obj_dict, default_excludes=None, excludes=None):
-        if not default_excludes:
-            default_excludes = ['id', 'path', 'depth', 'numchild', 'content_type_id', 'live_revision_id',
-                                'page_ptr_id', 'oneyou2page_ptr_id', 'release_id', 'live', 'locked', 'url_path']
-        if not excludes:
-            excludes = []
-
-        excludes = default_excludes + excludes
-        for key, value in obj_dict.items():
-            if key not in excludes and not key.startswith('_'):
-                setattr(self, key, value)
-        return self
-
-    @classmethod
-    def create_from_dict(cls, obj_dict):
-        return cls(title=obj_dict['title'],
-                   path=obj_dict['path'],
-                   depth=obj_dict['depth'],
-                   numchild=obj_dict['numchild'],
-                   slug=obj_dict['meta']['slug'],
-                   seo_title=obj_dict['meta']['seo_title'],
-                   show_in_menus=obj_dict['meta']['show_in_menus'],
-                   search_description=obj_dict['meta']['search_description'],
-                   first_published_at=obj_dict['meta']['first_published_at'],
-                   body=json.dumps(obj_dict['body']),
-                   live=obj_dict['live'],
-                   theme_id=obj_dict['page_theme']['id'])
-
-    def serve_preview(self, request, mode_name):
-        request.is_preview = True
-        print("SERVE PREVIEW")
-
-        if mode_name == 'json':
-            from .serializers import OneYouPageSerializer
-            latest_revision_as_page = self.get_latest_revision_as_page()
-            serialized_page = OneYouPageSerializer(instance=latest_revision_as_page)
-            return JsonResponse(serialized_page.data)
-
-        if mode_name == 'react':
-            context = {
-                'preview_url': '/oneyou{}?preview_page={}'.format(self.get_url(), self.slug)
-            }
-            return SimpleTemplateResponse(template='preview_wrapper.html', context=context)
-
-        return self.serve(request)
 
     def serve(self, request, *args, **kwargs):
         request.is_preview = getattr(request, 'is_preview', False)
@@ -950,6 +879,89 @@ class OneYou2Page(Page):
     @property
     def default_preview_mode(self):
         return self.preview_modes[0][0]
+
+    class Meta:
+        abstract = True
+
+
+class OneYou2Page(GeneralShelvePage):
+    body = StreamField([
+        ('page_heading_shelf', PageHeading(icon='title')),
+        ('simple_page_heading_shelf', SimplePageHeading(icon='title')),
+        ('section_heading_shelf', SectionHeading(classname="full title", icon='title')),
+        ('carousel_shelf', Carousel(icon="repeat")),
+        ('panel_carousel_shelf', PanelCarousel(icon="repeat")),
+        ('promo_shelf', PromoShelfChooserBlock(target_model="shelves.PromoShelf", icon="image")),
+        ('promo_shelf_v2', PromoShelf(icon="title")),
+        ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
+        ('grid_shelf', Grid(icon="form")),
+        ('recipe_grid_shelf', RecipeGrid(icon="form")),
+        ('find_out_more_dropdown', FindOutMoreDropDown(label="Link dropdown", icon="order-down")),
+        ('iframe_shelf', IFrameShelf(label="IFrame", icon='placeholder')),
+        ('divider', Divider(label="Divider", icon='horizontalrule')),
+        ('article_page_heading_shelf', ArticlePageHeadingShelf(label="Article Page Heading", icon='title')),
+        ('table', Table(label="Table", icon='list-ul')),
+        ('script_shelf', InlineScriptPanel(label="Script shelf", icon='code')),
+        ('triage_tool_shelf', TriageToolShelf(label="Triage tool shelf", icon='cog')),
+        ('svg_shelf', InlineSvgPanel(label="SVG shelf", icon='snippet')),
+        ('accordion_group', AccordionGroup(label="Accordion Group", icon='form')),
+        ('action_plan_shelf', ActionPlan(label="Action Plan Builder shelf", icon='form')),
+        ('action_plan_display_shelf', ActionPlanDisplay(label="Action Plan Display shelf", icon='form')),
+        ('two_column_shelf', TwoColumnShelf(label="Two Column Shelf", icon='grip')),
+    ], null=True, blank=True)
+
+    @classmethod
+    def allowed_subpage_models(cls):
+        """
+        Returns the list of page types that this page type can have as subpages,
+        as a list of model classes
+        """
+        from experiments.models import OneYouVariant
+        return [
+            OneYou2Page, RecipePage, OneYouVariant
+        ]
+
+    def update_from_dict(self, obj_dict, default_excludes=None, excludes=None):
+        if not default_excludes:
+            default_excludes = ['id', 'path', 'depth', 'numchild', 'content_type_id', 'live_revision_id',
+                                'page_ptr_id', 'oneyou2page_ptr_id', 'release_id', 'live', 'locked', 'url_path']
+        if not excludes:
+            excludes = []
+
+        excludes = default_excludes + excludes
+        for key, value in obj_dict.items():
+            if key not in excludes and not key.startswith('_'):
+                setattr(self, key, value)
+        return self
+
+    def serve_preview(self, request, mode_name):
+        return super(OneYou2Page, self).serve_preview(request, mode_name, 'oneyou')
+
+    @classmethod
+    def create_from_dict(cls, obj_dict):
+        return cls(title=obj_dict['title'],
+                   path=obj_dict['path'],
+                   depth=obj_dict['depth'],
+                   numchild=obj_dict['numchild'],
+                   slug=obj_dict['meta']['slug'],
+                   seo_title=obj_dict['meta']['seo_title'],
+                   show_in_menus=obj_dict['meta']['show_in_menus'],
+                   search_description=obj_dict['meta']['search_description'],
+                   first_published_at=obj_dict['meta']['first_published_at'],
+                   body=json.dumps(obj_dict['body']),
+                   live=obj_dict['live'],
+                   theme_id=obj_dict['page_theme']['id'])
+
+
+OneYou2Page._meta.get_field('og_title').default = "One You - Home"
+OneYou2Page._meta.get_field('og_description').default = ("Start the fight back to a healthier you! One You is"
+                                                         " packed with practical tips, tools and free apps"
+                                                         " to help you improve your health today")
+OneYou2Page._meta.get_field('twitter_site').default = "@OneYouPHE"
+OneYou2Page._meta.get_field('twitter_title').default = "One You - Home"
+OneYou2Page._meta.get_field('twitter_description').default = ("Start the fight back to a healthier you! One You is packed with"
+                                                        " practical tips, tools and free apps to help you improve"
+                                                        " your health today")
 
 
 class RecipePage(OneYou2Page):
@@ -1043,7 +1055,7 @@ class RecipePage(OneYou2Page):
 # Orderables
 
 class ChangeHistory(Orderable):
-    page = ParentalKey(OneYou2Page, related_name='change_history')
+    page = ParentalKey(Page, related_name='change_history')
     date_of_change = DateField(blank=False, verbose_name='Date')
     comment = TextField(blank=False)
 
