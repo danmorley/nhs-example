@@ -1,0 +1,30 @@
+@import '../../../assets/styles/variables/variables';
+@import "../../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+.print-button-panel {
+  margin-left: 1em;
+
+  @include media-breakpoint-down(sm) {
+    display: none;
+  }
+}
+
+.print-button {
+  background: $sunflower-yellow;
+  border: 1px solid transparent;
+  position: relative;
+  padding: 1em;
+  font-weight: bold;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-decoration: none;
+  display: inline-block;
+  height: auto;
+  cursor: pointer;
+
+  .print-button__title {
+    position: relative;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}

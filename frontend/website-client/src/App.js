@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 import 'normalize.css';
 import './assets/styles/fonts.css';
-import AppRouteRegistry from './components/AppRouteRegistry';
-import Page from './components/pages/Page';
-import ShelfSamplesPage from './components/pages/ShelfSamplesPage';
-import siteMapPage from './components/pages/SiteMapPage';
-import CookieDeclarationPage from './components/pages/CookieDeclarationPage';
+import AppRouteRegistry from './components/base/AppRouteRegistry';
+import Page from './components/oneyou/pages/Page';
+import ShelfSamplesPage from './components/oneyou/pages/ShelfSamplesPage';
+import siteMapPage from './components/oneyou/pages/SiteMapPage';
+import CookieDeclarationPage from './components/oneyou/pages/CookieDeclarationPage';
 import { notFoundPage, serverErrorPage } from './data/exceptionPages';
 import createHistory from 'history/createBrowserHistory';
 import startsWith from 'lodash.startswith';

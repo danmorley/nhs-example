@@ -1,0 +1,50 @@
+@import '../../assets/styles/variables/variables';
+
+.rich-text-see-more__input {
+  display: none;
+}
+
+.rich-text-see-more__label {
+  display: inline-block;
+  text-decoration: underline;
+  color: $teal-blue;
+  cursor: pointer;
+}
+
+.rich-text-see-more__inline {
+  display: inline;
+}
+
+.rich-text-see-more__label::before {
+  content: 'See more';
+  display: inline;
+  position: relative;  
+  transition:  0.5s cubic-bezier(0, 1.05, 0, 1);
+}
+
+.rich-text-see-more__input:checked + .rich-text-see-more__label {
+  position: absolute;
+  display: block;
+  top: 100%;
+}
+
+.rich-text-see-more__input:checked + .rich-text-see-more__label::before {
+  content: 'See less';
+}
+
+.rich-text-see-more__label ~ .toggled-area {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 1.5s cubic-bezier(0, 1.05, 0, 1);
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+.rich-text-see-more__input:checked + .rich-text-see-more__label ~ .toggled-area {
+  transition: max-height 2s ease;
+  max-height: 800px;
+  position: relative;
+  top: auto;
+  left: auto;
+}
