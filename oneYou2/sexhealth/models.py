@@ -4,7 +4,8 @@ from wagtail.core.models import Page
 from modelcluster.models import get_all_child_relations, get_all_child_m2m_relations
 
 from pages.models import (GeneralShelvePage, PageHeading, BannerShelf, Grid, AccordionGroup, SimplePageHeading,
-    SectionHeading, PromoShelf, Carousel, PanelCarousel, IFrameShelf, Divider, InlineScriptPanel, InlineSvgPanel)
+    SectionHeading, PromoShelf, Carousel, PanelCarousel, IFrameShelf, Divider, InlineScriptPanel, InlineSvgPanel,
+    TwoColumnShelf)
 from pages.utils import get_serializable_data_for_fields
 
 
@@ -23,6 +24,7 @@ class SexHealthPage(GeneralShelvePage):
         ('divider', Divider(label="Divider", icon='horizontalrule')),
         ('script_shelf', InlineScriptPanel(label="Script shelf", icon='code')),
         ('svg_shelf', InlineSvgPanel(label="SVG shelf", icon='snippet')),
+        ('two_column_shelf', TwoColumnShelf(label="Two Column Shelf", icon='grip')),
     ], null=True, blank=True)
 
     @classmethod

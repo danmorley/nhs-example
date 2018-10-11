@@ -392,7 +392,8 @@ GRID_PANELS = [
     ('list_item_panel', ListItemPanel(icon='list-ul')),
     ('simple_image_panel', SimpleImagePanel(icon="image")),
     ('rich_text_panel', RichTextPanel(required=False)),
-    ('simple_text_panel', SimpleTextPanel(required=False))
+    ('simple_text_panel', SimpleTextPanel(required=False)),
+    ('accordion_panel', AccordionPanel(required=False, icon='form')),
 ]
 
 
@@ -629,7 +630,7 @@ class ActionPlanDisplay(Shelf):
 
 class AccordionGroup(Shelf):
     accordions = blocks.StreamBlock([
-        ('accordion_panel', AccordionPanel(required=True, icon='collapse-down'))
+        ('accordion_panel', AccordionItem(required=True, icon='collapse-down'))
     ])
 
 
