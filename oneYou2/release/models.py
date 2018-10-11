@@ -19,7 +19,7 @@ from oneYou2.panels import ReadOnlyPanel
 
 from frontendHandler.models import FrontendVersion
 
-from pages.models import OneYou2Page, RecipePage
+from pages.models import RecipePage
 
 CONTENT_STATUS = (
     (0, "PENDING"),
@@ -100,11 +100,14 @@ class Release(ClusterableModel):
             if self.base_release:
                 content = json.loads(self.base_release.content.first().content)
             else:
-                live_pages = OneYou2Page.objects.live()
-                for page in live_pages:
-                    content[str(page.id)] = Release.generate_fixed_content(page.get_latest_revision())
-                    if page.live_revision:
-                        ReleasePage(release=self, revision=page.live_revision).save()
+                from home.models import SiteSettings
+                from django.apps import apps
+                site = SiteSettings.objects.get(site=self.site)
+                for page_type in site.page_types.all():
+                    PageModel = apps.get_model(app_label='pages', model_name=page_type.label)
+                    live_pages = PageModel.objects.live()
+                    for page in live_pages:
+                        content[str(page.id)] = Release.generate_fixed_content(page.get_latest_revision())
             ReleaseContent(release=self, content=json.dumps(content)).save()
         return self
 

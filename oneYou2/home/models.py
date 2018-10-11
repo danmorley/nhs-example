@@ -14,6 +14,13 @@ from wagtail.documents.models import Document
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
 
+class PageType(models.Model):
+    label = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.label
+
+
 class HomePage(Page):
     pass
 
@@ -23,6 +30,8 @@ class SiteSettings(BaseSetting):
     title = models.CharField(max_length=255)
     uid = models.SlugField(unique=True, verbose_name="Site name", help_text="An id which can be used to lookup the site"
                                                                             " in the API")
+    page_types = models.ManyToManyField(PageType, blank=True)
+
     menu = models.ForeignKey(
         'pages.Menu',
         null=True,
@@ -63,6 +72,7 @@ class SiteSettings(BaseSetting):
     general_panels = [
         FieldPanel('title'),
         FieldPanel('uid'),
+        FieldPanel('page_types', widget=forms.CheckboxSelectMultiple),
     ]
 
     theme_panels = [
