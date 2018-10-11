@@ -350,6 +350,26 @@ class CtaPanel(blocks.StructBlock):
     shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
 
 
+ACCORDION_ITEMS = [
+    ('rich_text_panel', RichTextPanel(required=False)),
+]
+
+
+class AccordionItem(blocks.StructBlock):
+    heading = blocks.CharBlock(required=False)
+    items = blocks.StreamBlock(ACCORDION_ITEMS, icon='arrow-left', label='Items')
+    shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
+
+    class Meta:
+        form_classname = 'dct-table-shelf dct-meta-panel'
+
+
+class AccordionPanel(blocks.StructBlock):
+    accordions = blocks.StreamBlock([
+        ('accordion_item', AccordionItem(required=True, icon='collapse-down'))
+    ])
+
+
 GRID_PANELS = [
     ('oneyou1_teaser', BackwardsCompatibleContent(label="OneYou1 teaser", icon="folder-inverse")),
     ('video_teaser', VideoTemplate(icon="media")),
@@ -365,10 +385,6 @@ GRID_PANELS = [
     ('simple_image_panel', SimpleImagePanel(icon="image")),
     ('rich_text_panel', RichTextPanel(required=False)),
     ('simple_text_panel', SimpleTextPanel(required=False))
-]
-
-ACCORDION_PANELS = [
-    ('rich_text_panel', RichTextPanel(required=False)),
 ]
 
 
@@ -601,15 +617,6 @@ class ActionPlanDisplay(Shelf):
 
     class Meta:
         form_classname = 'dct-action-plan-display-shelf dct-meta-panel'
-
-
-class AccordionPanel(Shelf):
-    heading = blocks.CharBlock(required=False)
-    items = blocks.StreamBlock(ACCORDION_PANELS, icon='arrow-left', label='Items')
-    shelf_id = IDBlock(required=False, label="ID", classname='dct-meta-field')
-
-    class Meta:
-        form_classname = 'dct-table-shelf dct-meta-panel'
 
 
 class AccordionGroup(Shelf):

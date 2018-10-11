@@ -186,7 +186,8 @@ class App extends Component {
       const hash = window.location.hash;
       if (hash) {
         let scrollTarget = document.getElementById(hash.substring(1));
-        let offset = document.querySelector('.page-header').clientHeight;
+        const pageHeaderElem = document.querySelector('.page-header');
+        const offset = (pageHeaderElem)? pageHeaderElem.clientHeight : 0;
         if (scrollTarget) {
           scrollTarget.scrollIntoView();
           window.scrollBy(0, -offset);
