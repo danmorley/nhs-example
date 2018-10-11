@@ -1182,8 +1182,7 @@ class Theme(models.Model):
 def get_subclasses(cls):
     for subclass in cls.__subclasses__():
         yield from get_subclasses(subclass)
-        if cls.__name__ == 'GeneralShelvePage':
-            yield subclass
+        yield subclass
 
 
 @receiver(pre_save, sender=Site)
@@ -1191,6 +1190,7 @@ def store_page_type(sender, instance, *args, **kwargs):
     for cls_item in get_subclasses(GeneralShelvePage):
         obj, created = PageType.objects.get_or_create(
             label=cls_item.__name__,
+            app=cls_item.__module__.rsplit('.', 1)[0]
         )
 
 

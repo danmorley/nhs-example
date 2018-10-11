@@ -15,10 +15,14 @@ from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
 
 class PageType(models.Model):
+    app = models.CharField(max_length=255, default='pages')
     label = models.CharField(max_length=255)
 
     def __str__(self):
         return self.label
+    
+    class Meta:
+        unique_together = ('app', 'label',)
 
 
 class HomePage(Page):

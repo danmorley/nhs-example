@@ -1,15 +1,17 @@
-import factory
 from django.template.defaultfilters import slugify
-from factory import fuzzy
+
 from wagtail.core.models import Site
+
+import factory
+from factory import fuzzy
 
 from images.factories import create_default_test_image
 from images.factories import PHEImageFactory
 from images.models import PHEImage
 
-from home.models import SiteSettings
+from home.models import PageType, SiteSettings
 
-from .models import OneYou2Page, Theme, Menu, Footer, Header, RecipePage
+from .models import OneYou2Page, Theme, Menu, Footer, Header, RecipePage, store_page_type
 
 
 def create_test_menu(label="menu_label"):
@@ -47,10 +49,15 @@ def create_test_page(title='Test page', path="1111", depth=0, theme=None):
         site.site_name = 'oneyoutest'
         site.save()
 
+    store_page_type(None, None)
+    page_types = PageType.objects.all()
     site_settings = SiteSettings.objects.filter(site_id=site.id).first()
     if not site_settings:
         site_settings = SiteSettings(site_id=site.id)
     site_settings.menu = create_test_menu()
+    site_settings.save()
+
+    site_settings.page_types = [page_type.id for page_type in page_types]
     site_settings.save()
 
     root_page = site.root_page
@@ -74,11 +81,17 @@ def create_test_recipe_page(title='Test Recipe page', path="1111", depth=0, them
         site.site_name = 'oneyoutest'
         site.save()
 
+    store_page_type(None, None)
+    page_types = PageType.objects.all()
     site_settings = SiteSettings.objects.filter(site_id=site.id).first()
     if not site_settings:
         site_settings = SiteSettings(site_id=site.id)
     site_settings.menu = create_test_menu()
     site_settings.save()
+
+    site_settings.page_types = [page_type.id for page_type in page_types]
+    site_settings.save()
+
     root_page = site.root_page
 
     page = RecipePage(title=title, path=path, depth=depth, theme=theme)

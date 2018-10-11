@@ -102,12 +102,15 @@ class Release(ClusterableModel):
             else:
                 from home.models import SiteSettings
                 from django.apps import apps
-                site = SiteSettings.objects.get(site=self.site)
-                for page_type in site.page_types.all():
-                    PageModel = apps.get_model(app_label='pages', model_name=page_type.label)
-                    live_pages = PageModel.objects.live()
-                    for page in live_pages:
-                        content[str(page.id)] = Release.generate_fixed_content(page.get_latest_revision())
+                try:
+                    site = SiteSettings.objects.get(site=self.site)
+                    for page_type in site.page_types.all():
+                        PageModel = apps.get_model(app_label=page_type.app, model_name=page_type.label)
+                        live_pages = PageModel.objects.live()
+                        for page in live_pages:
+                            content[str(page.id)] = Release.generate_fixed_content(page.get_latest_revision())
+                except SiteSettings.DoesNotExist:
+                    pass
             ReleaseContent(release=self, content=json.dumps(content)).save()
         return self
 
