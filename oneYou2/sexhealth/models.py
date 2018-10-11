@@ -3,16 +3,26 @@ from wagtail.core.models import Page
 
 from modelcluster.models import get_all_child_relations, get_all_child_m2m_relations
 
-from pages.models import GeneralShelvePage, PageHeading, BannerShelf, Grid, AccordionGroup
+from pages.models import (GeneralShelvePage, PageHeading, BannerShelf, Grid, AccordionGroup, SimplePageHeading,
+    SectionHeading, PromoShelf, Carousel, PanelCarousel, IFrameShelf, Divider, InlineScriptPanel, InlineSvgPanel)
 from pages.utils import get_serializable_data_for_fields
 
 
 class SexHealthPage(GeneralShelvePage):
     body = StreamField([
         ('page_heading_shelf', PageHeading(icon='title')),
+        ('simple_page_heading_shelf', SimplePageHeading(icon='title')),
+        ('section_heading_shelf', SectionHeading(classname="full title", icon='title')),
+        ('promo_shelf_v2', PromoShelf(icon="title")),
         ('banner_shelf_v2', BannerShelf(icon="title")),
         ('grid_shelf', Grid(icon="form")),
         ('accordion_group', AccordionGroup(label="Accordion Group", icon='form')),
+        ('carousel_shelf', Carousel(icon="repeat")),
+        ('panel_carousel_shelf', PanelCarousel(icon="repeat")),
+        ('iframe_shelf', IFrameShelf(label="IFrame", icon='placeholder')),
+        ('divider', Divider(label="Divider", icon='horizontalrule')),
+        ('script_shelf', InlineScriptPanel(label="Script shelf", icon='code')),
+        ('svg_shelf', InlineSvgPanel(label="SVG shelf", icon='snippet')),
     ], null=True, blank=True)
 
     @classmethod
