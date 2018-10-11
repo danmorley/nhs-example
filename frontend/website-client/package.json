@@ -46,7 +46,7 @@
   },
   "scripts": {
     "start-js": "react-app-rewired start",
-    "start": "npm-run-all -p watch-css start-js",
+    "start": "node bin/template-rendering.js && npm-run-all -p watch-css start-js",
     "build": "cp public/index-build.html public/index.html && npm run build-css && react-app-rewired build && node bin/postbuild.js",
     "build-local": "npm run build && cd ./build && cp ./favicon.ico ./static/favicon.ico && cp ./manifest.json ./static/manifest.json && cp ./webtrends.min.js ./static/webtrends.min.js",
     "test": "react-app-rewired test --env=jsdom",

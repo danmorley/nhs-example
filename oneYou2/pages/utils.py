@@ -12,6 +12,8 @@ from wagtail.documents.models import Document
 from wagtailmedia.models import Media
 
 from shelves.models import ShelfAbstract
+from home.models import SiteSettings
+
 
 SHARED_CONTENT_TYPES = ['promo_shelf', 'banner_shelf', 'app_shelf']
 
@@ -42,9 +44,9 @@ def process_inline_hyperlinks(field):
     a_tags = soup.findAll("a", {"linktype": "page"})
     for a_tag in a_tags:
         page = Page.objects.get(id=a_tag['id'])
-        site_name = page.get_site().site_name
+        site_settings = SiteSettings.objects.get(site=page.get_site())
         url_parts = page.get_url_parts()
-        a_tag['href'] = '/{}{}'.format(site_name.lower(), url_parts[2])
+        a_tag['href'] = '/{}{}'.format(site_settings.uid.lower(), url_parts[2])
     return html.unescape(str(soup)).replace(';=', '=')
 
 
