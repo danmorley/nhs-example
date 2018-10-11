@@ -65,6 +65,14 @@ GRID_GUTTER_CHOICES = (
     ('gutter-lg', 'Large'),
 )
 
+TWO_COLUMNS_LAYOUT_CHOICES = (
+    ('50_50', '50%, 50%'),
+    ('67_33', '67%, 33%'),
+    ('33_67', '33%, 67%'),
+    ('75_25', '75%, 25%'),
+    ('25_75', '25%, 75%'),
+)
+
 TABLE_VARIANTS = (
     ('standard', 'Standard'),
 )
@@ -581,7 +589,7 @@ class TwoColumnShelf(Shelf):
     column_1_items = blocks.StreamBlock(GRID_PANELS, icon='arrow-left', label='Column 1 Content')
     column_2_heading = blocks.CharBlock(required=False)
     column_2_items = blocks.StreamBlock(GRID_PANELS, icon='arrow-left', label='Column 2 Content')
-    meta_variant = blocks.ChoiceBlock(choices=GRID_VARIANT_CHOICES, label="Variant")
+    meta_layout = blocks.ChoiceBlock(choices=TWO_COLUMNS_LAYOUT_CHOICES, label="Layout")
     meta_image_display = blocks.ChoiceBlock(choices=(
             ('contain', 'Contain'),
             ('cover', 'Stretch')
