@@ -317,3 +317,22 @@ $shelf-padding-extra: 2em;
     }
   }
 }
+
+//sexhealth
+.sexhealth {
+  .promo-shelf, .page-heading-shelf, .banner-shelf {
+    text-align: center;
+    .shelf__container {
+      background-color: $white;
+      color: $sexhealth-dark;
+
+      .shelf__col {
+        margin: 0 auto;
+      }
+    }
+
+    h1, h2, h3, h4, h5 {
+      color: $sexhealth-dark;
+    }
+  }
+}

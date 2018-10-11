@@ -266,3 +266,30 @@
     }
   }
 }
+
+//sexhealth
+.sexhealth{
+  .image-teaser--dark-bg {
+
+    .image-teaser__info {
+      padding: 0 !important;
+    }
+
+    .image-teaser__heading {
+      padding: 1.5em 1em;
+      background-color: $sexhealth-dark;
+      color: $white;
+    }
+
+    .image-teaser__text {
+      padding: 1.5em 1em;
+      background-color: $sexhealth-purple;
+      color: $white;
+
+      a.link-cta {
+        // text-decoration: none;
+        // color: $sunflower-yellow;
+      }
+    }  
+  }
+}

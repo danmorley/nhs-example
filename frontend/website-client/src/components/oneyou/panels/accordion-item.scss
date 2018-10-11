@@ -22,7 +22,7 @@
   @include media-breakpoint-up(sm) {
     margin-bottom: 2px;
   }
-  
+
   &:last-child {
     margin-bottom: 0;
   }
@@ -88,4 +88,38 @@
 .accordion-item__body--collapsed {
   max-height: 0;
   padding-top: 0;
+}
+
+
+//theming
+
+//sexhealth
+.sexhealth {
+  .accordion-item__header {
+    background-color: $white;
+    border-bottom: 2px solid $sexhealth-lightgrey;
+
+    h2 { 
+      &:after {
+        font-size: 1em;
+        color: $sexhealth-dark;
+      }
+    }
+    
+    &.accordion-item__header--expanded {
+      h2 {
+        &:after {
+          @extend %icon-sexhealth-minus;
+        }
+      }
+    }
+    
+    &.accordion-item__header--collapsed {
+      h2 {
+        &:after {
+          @extend %icon-sexhealth-plus;
+        }
+      }
+    }
+  }
 }

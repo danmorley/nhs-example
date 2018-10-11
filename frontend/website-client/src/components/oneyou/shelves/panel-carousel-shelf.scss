@@ -186,3 +186,16 @@ $arrow-distance: 10%;
     }
   }
 }
+
+
+//theming
+
+//sexhealth
+.sexhealth {
+  .panel-carousel {  
+
+    .slick-dots li.slick-active button:before {
+      color: $sexhealth-dark;
+    }
+  }
+}
