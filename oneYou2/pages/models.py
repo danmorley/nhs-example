@@ -4,8 +4,6 @@ import logging
 from django.conf import settings
 from django.db import models
 from django.db.models import DateField, TextField
-from django.db.models.signals import pre_save
-from django.dispatch import receiver
 from django.forms.models import model_to_dict
 from django.http import JsonResponse
 from django.template.response import TemplateResponse, SimpleTemplateResponse
@@ -14,7 +12,7 @@ from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, InlinePane
     MultiFieldPanel
 from wagtail.core import blocks
 from wagtail.core.fields import StreamField, RichTextField
-from wagtail.core.models import Site, Page, Orderable
+from wagtail.core.models import Page, Orderable
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
@@ -29,7 +27,7 @@ from modelcluster.models import get_all_child_relations, get_all_child_m2m_relat
 from .blocks import IDBlock, CTABlock, MenuItemPageBlock, ImageBlock, SimpleCtaLinkBlock, MediaChooserBlock
 from .utils import get_serializable_data_for_fields
 
-from home.models import SiteSettings, PageType
+from home.models import SiteSettings
 from oneYou2.utils import get_protocol
 
 from shelves.blocks import PromoShelfChooserBlock, BannerShelfChooserBlock, AppTeaserChooserBlock, \
@@ -1177,21 +1175,6 @@ class Theme(models.Model):
 
     def to_dict(self):
         return model_to_dict(self)
-
-
-def get_subclasses(cls):
-    for subclass in cls.__subclasses__():
-        yield from get_subclasses(subclass)
-        yield subclass
-
-
-@receiver(pre_save, sender=Site)
-def store_page_type(sender, instance, *args, **kwargs):
-    for cls_item in get_subclasses(GeneralShelvePage):
-        obj, created = PageType.objects.get_or_create(
-            label=cls_item.__name__,
-            app=cls_item.__module__.rsplit('.', 1)[0]
-        )
 
 
 # Disable variant from page creation

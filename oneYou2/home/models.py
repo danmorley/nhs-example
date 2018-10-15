@@ -4,25 +4,17 @@ from django import forms
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.core.models import Page
+from wagtail.core.models import Site
 from wagtail.documents.edit_handlers import DocumentChooserPanel
 from wagtail.documents.models import Document
-
+from wagtail.search import index
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
-
-
-class PageType(models.Model):
-    app = models.CharField(max_length=255, default='pages')
-    label = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.label
-    
-    class Meta:
-        unique_together = ('app', 'label',)
 
 
 class HomePage(Page):
@@ -34,7 +26,6 @@ class SiteSettings(BaseSetting):
     title = models.CharField(max_length=255)
     uid = models.SlugField(unique=True, verbose_name="Site name", help_text="An id which can be used to lookup the site"
                                                                             " in the API")
-    page_types = models.ManyToManyField(PageType, blank=True)
 
     menu = models.ForeignKey(
         'pages.Menu',
@@ -76,7 +67,7 @@ class SiteSettings(BaseSetting):
     general_panels = [
         FieldPanel('title'),
         FieldPanel('uid'),
-        FieldPanel('page_types', widget=forms.CheckboxSelectMultiple),
+        # FieldPanel('page_types', widget=forms.CheckboxSelectMultiple),
     ]
 
     theme_panels = [
@@ -141,3 +132,34 @@ class SiteSettings(BaseSetting):
                     )
                 ]}
             )
+
+
+def get_subclasses(cls):
+    for subclass in cls.__subclasses__():
+        yield from get_subclasses(subclass)
+        yield subclass
+
+
+def get_page_types():
+    from itertools import chain
+    from dctcmsbase.models import GeneralShelvePage
+    from pages.models import GeneralShelvePage as GeneralShelvePageLegacy
+
+    type_page_iterator = chain(get_subclasses(GeneralShelvePage), get_subclasses(GeneralShelvePageLegacy))
+    for cls_item in type_page_iterator:
+        yield (cls_item.__module__.rsplit('.', 1)[0], cls_item.__name__)
+
+
+# @receiver(pre_save, sender=Site)
+# def store_type_page(sender, instance, *args, **kwargs):
+#     from itertools import chain
+#     from dctcmsbase.models import GeneralShelvePage
+#     from pages.models import GeneralShelvePage as GeneralShelvePageLegacy
+
+#     type_page_iterator = chain(get_subclasses(GeneralShelvePage), get_subclasses(GeneralShelvePageLegacy))
+#     for cls_item in type_page_iterator:
+#         PageType.objects.get_or_create(
+#             label=cls_item.__name__,
+#             app=cls_item.__module__.rsplit('.', 1)[0]
+#         )
+

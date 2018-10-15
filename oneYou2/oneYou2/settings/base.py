@@ -29,6 +29,8 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'home',
     'search',
+    'dctcmsbase',
+    'dctsharedcontent',
     'pages',
     'sexhealth',
     'release',
@@ -66,6 +68,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'storages',
+    'django_extensions',
     'django.contrib.sitemaps',
     'debug_toolbar',
     'axes',

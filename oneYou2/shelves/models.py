@@ -249,6 +249,10 @@ class BannerShelf(ShelfAbstract):
                            null=True,
                            blank=True)
 
+    class Meta:
+        verbose_name = 'Banner Shelf (OneYou)'
+        verbose_name_plural = 'Banner Shelves (OneYou)'
+
     @property
     def meta_layout(self):
         return "full_width"

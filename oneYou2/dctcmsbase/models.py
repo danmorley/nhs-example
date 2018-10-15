@@ -10,7 +10,7 @@ from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
 from modelcluster.models import get_all_child_relations, get_all_child_m2m_relations
 
-from home.models import SiteSettings #, PageType
+from home.models import SiteSettings
 
 from .utils import get_serializable_data_for_fields
 
