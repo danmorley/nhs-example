@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import CmsComponentRegistry from '../CmsComponentRegistry';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import Panel from './Panel';
 import './panels.css';
 

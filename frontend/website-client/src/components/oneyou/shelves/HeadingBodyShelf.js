@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Shelf from './Shelf';
-import Text from '../Text';
-import CmsComponentRegistry from '../CmsComponentRegistry';
-import './promo-shelf.css';
+import Shelf from '../../base/shelves/Shelf';
+import Text from '../../base/Text';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
+import '../../base/shelves/promo-shelf.css';
 
 /**
  *  Heading and Body Shelf is a simple shelf that can be used to display generic

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import CmsComponentRegistry from '../CmsComponentRegistry';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './simple-image-panel.css';
 import Panel from './Panel';
 import PropTypes from 'prop-types';
-import Image from '../Image';
-import ImageUtils from './ImageUtils';
-import CtaUtils from '../shared/CtaUtils';
+import Image from '../../base/Image';
+import ImageUtils from '../../base/panels/ImageUtils';
+import CtaUtils from '../../base/shared/CtaUtils';
 import UrlUtils from '../../base/shared/UrlUtils';
 import { Link } from 'react-router-dom';
 

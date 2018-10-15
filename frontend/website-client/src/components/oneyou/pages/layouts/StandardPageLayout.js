@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 // import '../../../assets/styles/page.css';
 // import CmsComponentRegistry from '../CmsComponentRegistry';
-import Footer from '../../Footer';
+import Footer from '../../../base/Footer';
 import PageHeader from '../../page-header/PageHeader';
 import PageStyles from '../../PageStyles';
 import DocumentMeta from 'react-document-meta';

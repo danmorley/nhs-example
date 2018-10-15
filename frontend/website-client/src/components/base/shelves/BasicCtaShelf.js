@@ -106,7 +106,7 @@ class BasicCtaShelf extends Component {
       this.state.backgroundImageStyle : backgroundColourShelfStyle;
 
     let headingTagName = (classNamePrefix === 'page-heading-shelf') ? 'h1' : 'h2';
-    let cta = content.cta || content.promo.cta;
+    let cta = content.cta || content.panel.cta || content.promo.cta;
 
     if (metaLayout === 'image_on_left') {
       return (

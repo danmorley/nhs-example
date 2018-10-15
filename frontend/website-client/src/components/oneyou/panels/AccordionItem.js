@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Panel from './Panel';
-import CmsComponentRegistry from '../CmsComponentRegistry';
-import MultiPanelBlock from '../pages/blocks/MultiPanelBlock';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
+import MultiPanelBlock from '../../base/blocks/MultiPanelBlock';
 import './accordion-item.css';
 
 

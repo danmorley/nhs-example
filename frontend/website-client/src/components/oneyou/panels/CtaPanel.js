@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Text from '../Text';
-import CtaLinks from '../shared/CtaLinks';
-import CmsComponentRegistry from '../CmsComponentRegistry';
+import Text from '../../base/Text';
+import CtaLinks from '../../base/shared/CtaLinks';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './cta-panel.css';
 import Panel from './Panel';
 

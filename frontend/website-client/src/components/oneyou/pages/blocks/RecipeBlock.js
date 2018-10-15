@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Text from '../../Text';
-import ImageUtils from '../../panels/ImageUtils';
+import Text from '../../../base/Text';
+import ImageUtils from '../../../base/panels/ImageUtils';
 import './recipe-block.css';
 
 

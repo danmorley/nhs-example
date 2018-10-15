@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Shelf from '../shelves/Shelf';
-import CmsComponentRegistry from '../CmsComponentRegistry';
+import CmsComponentRegistry from '../base/CmsComponentRegistry';
 import Text from '../Text';
 import './triage-tool-shelf.css';
 

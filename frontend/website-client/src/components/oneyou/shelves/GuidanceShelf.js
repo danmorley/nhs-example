@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Shelf from './Shelf';
-import CmsComponentRegistry from '../CmsComponentRegistry';
+import Shelf from '../../base/shelves/Shelf';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import queryString from 'query-string';
 
 /**

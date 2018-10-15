@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Shelf from './Shelf';
+import Shelf from '../../base/shelves/Shelf';
 import InlineScriptPanel from '../panels/InlineScriptPanel';
-import CmsComponentRegistry from '../CmsComponentRegistry';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import startsWith from 'lodash.startswith';
 
 /**

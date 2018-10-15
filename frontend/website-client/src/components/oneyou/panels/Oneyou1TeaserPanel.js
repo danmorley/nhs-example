@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Text from '../Text';
-import CmsComponentRegistry from '../CmsComponentRegistry';
+import Text from '../../base/Text';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './oneyou1-teaser.css';
 import Panel from './Panel';
-import CtaList from '../shared/CtaList';
-import ImageUtils from './ImageUtils';
-import CtaUtils from '../shared/CtaUtils';
+import CtaList from '../../base/shared/CtaList';
+import ImageUtils from '../../base/panels/ImageUtils';
+import CtaUtils from '../../base/shared/CtaUtils';
 import Collapsible from '../shared/Collapsible';
 
 /**

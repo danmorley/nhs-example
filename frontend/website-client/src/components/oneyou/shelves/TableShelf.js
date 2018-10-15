@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Shelf from './Shelf';
-import CmsComponentRegistry from '../CmsComponentRegistry';
-import Text from '../Text';
+import Shelf from '../../base/shelves/Shelf';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
+import Text from '../../base/Text';
 import './table-shelf.css';
-import MultiPanelBlock from '../pages/blocks/MultiPanelBlock';
+import MultiPanelBlock from '../../base/blocks/MultiPanelBlock';
 
 
 /**

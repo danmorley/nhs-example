@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import '../../../assets/styles/page.css';
-import CmsComponentRegistry from '../CmsComponentRegistry';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import RecipeBlock from './blocks/RecipeBlock';
 import MultiShelfBlock from './blocks/MultiShelfBlock';
 

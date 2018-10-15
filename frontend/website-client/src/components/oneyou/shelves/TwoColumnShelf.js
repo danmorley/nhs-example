@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Shelf from '../shelves/Shelf';
-import CmsComponentRegistry from '../CmsComponentRegistry';
+import Shelf from '../../base/shelves/Shelf';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './two-column-shelf.css';
-import MultiPanelBlock from '../pages/blocks/MultiPanelBlock';
+import MultiPanelBlock from '../../base/blocks/MultiPanelBlock';
 
 
 /**
@@ -81,5 +81,6 @@ TwoColumnShelf.propTypes = {
 };
 
 CmsComponentRegistry.register('two_column_shelf', TwoColumnShelf, 'two-column-shelf', null, '50_50');
+CmsComponentRegistry.register('two_column_shelf_oneyou', TwoColumnShelf, 'two-column-shelf', null, '50_50');
 
 export default TwoColumnShelf;

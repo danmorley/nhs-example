@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CtaLink from './CtaLink';
+import CtaLink from '../../base/shared/CtaLink';
 import PropTypes from 'prop-types';
 
 /**

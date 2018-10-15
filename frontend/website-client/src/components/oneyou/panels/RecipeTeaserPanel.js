@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Text from '../Text';
-import CmsComponentRegistry from '../CmsComponentRegistry';
+import Text from '../../base/Text';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './recipe-teaser.css';
 import Panel from './Panel';
-import ImageUtils from './ImageUtils';
+import ImageUtils from '../../base/panels/ImageUtils';
 import { Link } from 'react-router-dom';
 
 /**

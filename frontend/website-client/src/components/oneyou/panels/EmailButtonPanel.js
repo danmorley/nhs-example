@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CmsComponentRegistry from '../CmsComponentRegistry';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './email-button.css';
 import Panel from '../panels/Panel';
 import ActionPlanContactForm from '../ActionPlanContactForm';

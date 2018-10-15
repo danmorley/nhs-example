@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import CmsComponentRegistry from '../CmsComponentRegistry';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import PropTypes from 'prop-types';
 import './share-button-shelf.css';
-import Shelf from './Shelf';
+import Shelf from '../../base/shelves/Shelf';
 import ShareButtonPanel from '../panels/ShareButtonPanel';
 import EmailButtonPanel from '../panels/EmailButtonPanel';
 import PrintButtonPanel from '../panels/PrintButtonPanel';

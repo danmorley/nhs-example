@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Shelf from './Shelf';
-import Text from '../Text';
-import Image from '../Image';
-import CtaLink from '../shared/CtaLink';
-import CmsComponentRegistry from '../CmsComponentRegistry';
-import './promo-shelf.css';
-import ImageUtils from '../panels/ImageUtils';
+import Shelf from '../../base/shelves/Shelf';
+import Text from '../../base/Text';
+import Image from '../../base/Image';
+import CtaLink from '../../base/shared/CtaLink';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
+import '../../base/shelves/promo-shelf.css';
+import ImageUtils from '../../base/panels/ImageUtils';
 
 /**
  *  Page Heading Shelf displays a page header with optional background image,

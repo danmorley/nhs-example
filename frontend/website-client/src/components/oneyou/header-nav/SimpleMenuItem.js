@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Text from '../Text';
+import Text from '../../base/Text';
 import { Link } from 'react-router-dom';
 
 class SimpleMenuItem extends Component {

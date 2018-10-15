@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Text from '../Text';
-import CmsComponentRegistry from '../CmsComponentRegistry';
+import Text from '../../base/Text';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './icon-card-panel.css';
 import Panel from './Panel';
-import ImageUtils from './ImageUtils';
-import Image from '../Image';
-import CtaLinks from '../shared/CtaLinks';
+import ImageUtils from '../../base/panels/ImageUtils';
+import Image from '../../base/Image';
+import CtaLinks from '../../base/shared/CtaLinks';
 
 /**
  *  IconCard panel component displaying a panel in the form of a heading

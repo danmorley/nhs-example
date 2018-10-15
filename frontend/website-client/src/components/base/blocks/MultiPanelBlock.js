@@ -1,28 +1,28 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import CmsComponentRegistry from '../../CmsComponentRegistry';
+import CmsComponentRegistry from '../CmsComponentRegistry';
 
 // Wildcard imports are not supported by Babel without babel-wildcard plugin.
 // Create react app template app hides away Babel, plugin can not be added. You must import
 // all inputs explicitly.
 // With the plugin import statement is as follows
 // import * as Panels from './panels'
-import PlaceholderPanel from '../../panels/PlaceholderPanel';
-import VideoTeaserPanel from '../../panels/VideoTeaserPanel';
-import ImageTeaserPanel from '../../panels/ImageTeaserPanel';
-import Oneyou1TeaserPanel from '../../panels/Oneyou1TeaserPanel';
-import AppTeaserPanel from '../../panels/AppTeaserPanel';
-import InformationPanel from '../../panels/InformationPanel';
-import SimpleTextPanel from '../../panels/SimpleTextPanel';
-import RichTextPanel from '../../panels/RichTextPanel';
-import IconCardPanel from '../../panels/IconCardPanel';
-import InlineScriptPanel from '../../panels/InlineScriptPanel';
-import InlineSvgPanel from '../../panels/InlineSvgPanel';
-import CtaPanel from '../../panels/CtaPanel';
-import ListItemPanel from '../../panels/ListItemPanel';
-import SimpleImagePanel from '../../panels/SimpleImagePanel';
-import AccordionPanel from '../../panels/AccordionPanel';
+import PlaceholderPanel from '../../oneyou/panels/PlaceholderPanel';
+import VideoTeaserPanel from '../../oneyou/panels/VideoTeaserPanel';
+import ImageTeaserPanel from '../../oneyou/panels/ImageTeaserPanel';
+import Oneyou1TeaserPanel from '../../oneyou/panels/Oneyou1TeaserPanel';
+import AppTeaserPanel from '../../oneyou/panels/AppTeaserPanel';
+import InformationPanel from '../../oneyou/panels/InformationPanel';
+import SimpleTextPanel from '../../oneyou/panels/SimpleTextPanel';
+import RichTextPanel from '../../oneyou/panels/RichTextPanel';
+import IconCardPanel from '../../oneyou/panels/IconCardPanel';
+import InlineScriptPanel from '../../oneyou/panels/InlineScriptPanel';
+import InlineSvgPanel from '../../oneyou/panels/InlineSvgPanel';
+import CtaPanel from '../../oneyou/panels/CtaPanel';
+import ListItemPanel from '../../oneyou/panels/ListItemPanel';
+import SimpleImagePanel from '../../oneyou/panels/SimpleImagePanel';
+import AccordionPanel from '../../oneyou/panels/AccordionPanel';
 
 class MultiPanelBlock extends Component {
   static renderItems(items, panelClass, containerTag) {

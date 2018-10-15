@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Text from '../Text';
-import CmsComponentRegistry from '../CmsComponentRegistry';
+import Text from '../../base/Text';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './information-panel.css';
 import Panel from './Panel';
 import PropTypes from 'prop-types';
-import ImageUtils from './ImageUtils';
-import CtaLinks from '../shared/CtaLinks';
+import ImageUtils from '../../base/panels/ImageUtils';
+import CtaLinks from '../../base/shared/CtaLinks';
 
 /**
  *  Information panel component displaying a panel in the form of a heading

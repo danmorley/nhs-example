@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Shelf from './Shelf';
-import CmsComponentRegistry from '../CmsComponentRegistry';
+import Shelf from '../../base/shelves/Shelf';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import Slider from 'react-slick';
 import Equalizer from 'react-equalizer';
 
 import PlaceholderShelf from './PlaceholderShelf';
 import GeneralTextShelf from './GeneralTextShelf';
-import BasicCtaShelf from './BasicCtaShelf';
+import BasicCtaShelf from '../../base/shelves/BasicCtaShelf';
 
 import './main-carousel-shelf.css';
 

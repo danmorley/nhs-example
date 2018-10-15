@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import FooterMenu from './header-nav/FooterMenu';
+import FooterMenu from '../oneyou/header-nav/FooterMenu';
 import Image from './Image.js';
-import SocialLinks from './header-nav/SocialLinks';
+import SocialLinks from '../oneyou/header-nav/SocialLinks';
 import logo from '../../assets/images/public-health-england-logo.png';
 
 class Footer extends Component {

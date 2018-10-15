@@ -1,6 +1,6 @@
 import Page from './Page';
 import withOwnContent from './withOwnContent';
-import ImageUtils from '../panels/ImageUtils';
+import ImageUtils from '../../base/panels/ImageUtils';
 import testBackgroundImage from '../../../assets/images/app-screen.jpg';
 import testImage from '../../../assets/images/test-image.jpg';
 import pheLogo from '../../../assets/images/public-health-england-logo.png';

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Shelf from './Shelf';
-import Text from '../Text';
-import CmsComponentRegistry from '../CmsComponentRegistry';
+import Shelf from '../../base/shelves/Shelf';
+import Text from '../../base/Text';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './article-page-heading-shelf.css';
 import { Link } from 'react-router-dom';
 import UrlUtils from '../../base/shared/UrlUtils';

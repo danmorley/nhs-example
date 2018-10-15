@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Text from '../Text';
-import CtaLinks from '../shared/CtaLinks';
-import CmsComponentRegistry from '../CmsComponentRegistry';
+import Text from '../../base/Text';
+import CtaLinks from '../../base/shared/CtaLinks';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './video-teaser.css';
 import Panel from './Panel';
-import ImageUtils from './ImageUtils';
+import ImageUtils from '../../base/panels/ImageUtils';
 import VideoModal from '../VideoModal';
 
 /**

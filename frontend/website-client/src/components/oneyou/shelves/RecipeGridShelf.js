@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Shelf from '../shelves/Shelf';
-import CmsComponentRegistry from '../CmsComponentRegistry';
+import Shelf from '../../base/shelves/Shelf';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './grid-shelf.css';
 import ShowMorePanel from '../shared/ShowMorePanel';
 

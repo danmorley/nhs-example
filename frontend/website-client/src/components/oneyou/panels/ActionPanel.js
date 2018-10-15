@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './action-panel.css';
 import PropTypes from 'prop-types';
 import Panel from './Panel';
-import CmsComponentRegistry from '../CmsComponentRegistry';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 
 const BASKET_KEY = 'basket';
 const ACTION_PLAN_KEY = 'action_plan';

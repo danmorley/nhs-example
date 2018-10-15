@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ImageUtils from '../panels/ImageUtils';
+import ImageUtils from '../../base/panels/ImageUtils';
 
 
 /**

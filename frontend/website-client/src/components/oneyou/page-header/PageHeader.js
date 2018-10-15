@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Swipeable from 'react-swipeable';
 import SiteNav from '../header-nav/SiteNav';
 import Breadcrumb from './Breadcrumb';
-import Text from '../Text';
+import Text from '../../base/Text';
 import { Link } from 'react-router-dom';
 import './page-header.css';
 

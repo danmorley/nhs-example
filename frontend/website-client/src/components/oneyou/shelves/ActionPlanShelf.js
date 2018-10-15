@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './action-plan-shelf.css'
 import PropTypes from 'prop-types';
-import Shelf from '../shelves/Shelf';
-import CmsComponentRegistry from '../CmsComponentRegistry';
+import Shelf from '../../base/shelves/Shelf';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import ActionGroupPanel from '../panels/ActionGroupPanel';
-import CtaLinks from '../shared/CtaLinks';
+import CtaLinks from '../../base/shared/CtaLinks';
 
 const BASKET_KEY = 'basket';
 const ACTION_PLAN_KEY = 'action_plan';

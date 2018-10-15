@@ -3,7 +3,7 @@ import Text from '../Text';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import CtaUtils from "./CtaUtils";
-import UrlUtils from "../../base/shared/UrlUtils";
+import UrlUtils from "../shared/UrlUtils";
 
 /**
  * Link component that will render a react router <Link> tag for internal

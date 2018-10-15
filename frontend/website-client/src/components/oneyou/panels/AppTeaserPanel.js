@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Text from '../Text';
-import CtaLink from '../shared/CtaLinks';
-import CmsComponentRegistry from '../CmsComponentRegistry';
+import Text from '../../base/Text';
+import CtaLink from '../../base/shared/CtaLinks';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './app-teaser.css';
 import Panel from './Panel';
-import ImageUtils from './ImageUtils';
+import ImageUtils from '../../base/panels/ImageUtils';
 
 /**
  *

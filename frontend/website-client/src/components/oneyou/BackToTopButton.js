@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TrackingUtils from './shared/TrackingUtils';
+import TrackingUtils from '../base/shared/TrackingUtils';
 
 class BackToTopButton extends Component {
   constructor(props){

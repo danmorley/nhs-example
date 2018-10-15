@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import ErrorBoundary from '../../../base/ErrorBoundary';
-import CmsComponentRegistry from '../../CmsComponentRegistry';
+import CmsComponentRegistry from '../../../base/CmsComponentRegistry';
 
 // Wildcard imports are not supported by Babel without babel-wildcard plugin.
 // Create react app template app hides away Babel, plugin can not be added. You must import
@@ -11,7 +11,7 @@ import CmsComponentRegistry from '../../CmsComponentRegistry';
 // import * as Shelves from './shelves'
 import PlaceholderShelf from '../../shelves/PlaceholderShelf';
 import GeneralTextShelf from '../../shelves/GeneralTextShelf';
-import BasicCtaShelf from '../../shelves/BasicCtaShelf';
+import BasicCtaShelf from '../../../base/shelves/BasicCtaShelf';
 import PageHeadingShelf from '../../shelves/PageHeadingShelf';
 import GuidanceShelf from '../../shelves/GuidanceShelf';
 import MainCarouselShelf from '../../shelves/MainCarouselShelf';
@@ -39,6 +39,7 @@ class MultiShelfBlock extends Component {
     let { body } = this.props;
 
     var shelves = body.map((shelf, _i) => {
+      console.log(shelf.type);
       const shelfInfo = CmsComponentRegistry.components[shelf.type];
       const ShelfClass = shelfInfo && shelfInfo.class;
       const shelfClassNamePrefix = shelfInfo && shelfInfo.classNamePrefix;

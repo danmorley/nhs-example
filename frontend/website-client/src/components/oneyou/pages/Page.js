@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import '../../../assets/styles/page.css';
-import CmsComponentRegistry from '../CmsComponentRegistry';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import DocumentMeta from 'react-document-meta';
 import StandardPageLayout from './layouts/StandardPageLayout';
 import ShareButtonShelf from '../shelves/ShareButtonShelf';

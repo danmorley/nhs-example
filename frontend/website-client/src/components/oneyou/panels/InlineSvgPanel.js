@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import CmsComponentRegistry from '../CmsComponentRegistry';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import Panel from './Panel';
-import ImageUtils from './ImageUtils';
+import ImageUtils from '../../base/panels/ImageUtils';
 
 /**
  *  Inline SVG Panel is a simple panel that can be used to
