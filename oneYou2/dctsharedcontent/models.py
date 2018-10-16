@@ -36,7 +36,7 @@ class SharedContent(models.Model):
     shelf_id = models.CharField(max_length=255,
                                 blank=True,
                                 null=True,
-                                verbose_name="ID")
+                                verbose_name='ID')
 
     content_type = models.ForeignKey(
         'contenttypes.ContentType',
@@ -84,7 +84,7 @@ class SharedContent(models.Model):
     @classmethod
     def from_dict(cls, obj_dict):
         if isinstance(obj_dict, str):
-            s = obj_dict.replace("'", "\"").replace('None', 'null')
+            s = obj_dict.replace('\'', '"').replace('None', 'null')
             obj_dict = json.loads(s)
         newObj = cls()
         for key in obj_dict:
@@ -176,48 +176,3 @@ class SharedContentRevision(models.Model):
 
     def __str__(self):
         return '"' + str(self.shelf) + '" at ' + str(self.created_at)
-
-
-# @register_snippet
-# class BannerShelf(SharedContent):
-#     heading = models.CharField(max_length=255, null=True, blank=True)
-#     body = RichTextField(blank=True, null=True)
-#     background_image = models.ForeignKey(
-#         'images.PHEImage',
-#         null=True,
-#         blank=True,
-#         on_delete=models.SET_NULL,
-#         related_name='+'
-#     )
-#     meta_gradient = models.BooleanField(default=False, verbose_name="Green gradient")
-#     cta_text = models.CharField(max_length=255, null=True, blank=True)
-#     cta_link = models.CharField(max_length=255, null=True, blank=True)
-#     cta_page = ParentalKey('wagtailcore.Page',
-#                            on_delete=models.SET_NULL,
-#                            related_name='shared_content_banner_shelf_links',
-#                            null=True,
-#                            blank=True)
-
-#     class Meta:
-#         verbose_name_plural = 'Banner Shelves'
-
-#     @property
-#     def meta_layout(self):
-#         return "full_width"
-
-#     @property
-#     def meta_variant(self):
-#         return "main-banner"
-
-#     api_fields = ['heading', 'body', 'image', 'cta_text', 'cta_link', 'cta_page', 'meta_gradient']
-
-#     panels = [
-#         FieldPanel('shelf_id'),
-#         FieldPanel('heading'),
-#         FieldPanel('body'),
-#         ImageChooserPanel('background_image'),
-#         FieldPanel('meta_gradient'),
-#         FieldPanel('cta_text'),
-#         FieldPanel('cta_link'),
-#         PageChooserPanel('cta_page'),
-#     ]

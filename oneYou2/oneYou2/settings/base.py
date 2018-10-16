@@ -199,7 +199,7 @@ MEDIA_URL = '/media/'
 
 # Wagtail settings
 
-WAGTAIL_SITE_NAME = "oneYou2"
+WAGTAIL_SITE_NAME = 'oneYou2'
 SITE_ENV = os.environ.get('SITE_ENV', 'db')
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
@@ -231,13 +231,13 @@ INITIALIZER = os.environ.get('INITIALIZER', False)
 # INTERNAL_IPS = ('127.0.0.1', 'localhost', '172.18.0.1')
 
 if ENV == 'prod':
-    PARAGON_ACTION_API_URL = "https://api-live-mentalhealth.paragon-cc.co.uk/api/Actions/UpdateAction"
-    PARAGON_ACTION_API_AUTH_HEADER = "cGFyYWdvbi1jYzoyNEVFM0ExMi0wM0U4LTQ5OTYtQkIwOS1DMzM1NzNFNUU5RUE="
-    PARAGON_ACTION_API_PRODUCT_TOKEN = "3D149395-F755-4586-BA8A-E4F915B023AD"
+    PARAGON_ACTION_API_URL = 'https://api-live-mentalhealth.paragon-cc.co.uk/api/Actions/UpdateAction'
+    PARAGON_ACTION_API_AUTH_HEADER = 'cGFyYWdvbi1jYzoyNEVFM0ExMi0wM0U4LTQ5OTYtQkIwOS1DMzM1NzNFNUU5RUE='
+    PARAGON_ACTION_API_PRODUCT_TOKEN = '3D149395-F755-4586-BA8A-E4F915B023AD'
 else:
-    PARAGON_ACTION_API_URL = "https://api-test-mentalhealth.cc-testing.co.uk/api/Actions/UpdateAction"
-    PARAGON_ACTION_API_AUTH_HEADER = "cGFyYWdvbi1jYzo5RjRGMkNGQi1ENUE4LTQyQTEtQTA2OC1GNkE0MTc0MEE4RUU="
-    PARAGON_ACTION_API_PRODUCT_TOKEN = "3D149395-F755-4586-BA8A-E4F915B023AD"
+    PARAGON_ACTION_API_URL = 'https://api-test-mentalhealth.cc-testing.co.uk/api/Actions/UpdateAction'
+    PARAGON_ACTION_API_AUTH_HEADER = 'cGFyYWdvbi1jYzo5RjRGMkNGQi1ENUE4LTQyQTEtQTA2OC1GNkE0MTc0MEE4RUU='
+    PARAGON_ACTION_API_PRODUCT_TOKEN = '3D149395-F755-4586-BA8A-E4F915B023AD'
 
 
 FAVICON_MAX_SIZE = 50000 # in bytes

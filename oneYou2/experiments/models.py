@@ -22,9 +22,9 @@ RECIPE_VARIANT_TYPE = 52
 
 class Experiment(ClusterableModel):
     STATUS_CHOICES = [
-        ('draft', "Draft"),
-        ('live', "Live"),
-        ('completed', "Completed"),
+        ('draft', 'Draft'),
+        ('live', 'Live'),
+        ('completed', 'Completed'),
     ]
 
     name = models.CharField(max_length=255)
@@ -66,7 +66,7 @@ class OneYouVariant(OneYou2Page):
     @property
     def part_of_experiments(self):
         appears_in = self.experiment_set.all().values_list('name', flat=True).distinct()
-        return ",".join(appears_in)
+        return ','.join(appears_in)
 
     @property
     def live_experiments(self):
@@ -74,7 +74,7 @@ class OneYouVariant(OneYou2Page):
         appears_in = self.experiment_set.filter(start_date__lte=now,
                                                 end_date__gte=now
                                                 ).values_list('name', flat=True).distinct()
-        return ",".join(appears_in)
+        return ','.join(appears_in)
 
     @property
     def is_live(self):
@@ -117,7 +117,7 @@ class RecipeVariant(RecipePage):
     @property
     def part_of_experiments(self):
         appears_in = self.experiment_set.all().values_list('name', flat=True).distinct()
-        return ",".join(appears_in)
+        return ','.join(appears_in)
 
     @property
     def live_experiments(self):
@@ -125,7 +125,7 @@ class RecipeVariant(RecipePage):
         appears_in = self.experiment_set.filter(start_date__lte=now,
                                                 end_date__gte=now
                                                 ).values_list('name', flat=True).distinct()
-        return ",".join(appears_in)
+        return ','.join(appears_in)
 
     @property
     def is_live(self):
@@ -172,7 +172,7 @@ def update_frozen_experiments_content(sender, instance, using, **kwargs):
         experiments_content = ExperimentsContent.objects.all().first()
         if not experiments_content:
             experiments_content = ExperimentsContent(content=json.dumps({}))
-        content = json.loads(getattr(experiments_content, "content", json.dumps({})))
+        content = json.loads(getattr(experiments_content, 'content', json.dumps({})))
         content[str(newest_revision.page_id)] = Release.generate_fixed_content(newest_revision)
         experiments_content.content = json.dumps(content)
         experiments_content.save()
@@ -185,4 +185,4 @@ def delete_from_frozen_experiments_content(sender, instance, using, **kwargs):
         content = json.loads(experiments_content.content)
         if str(instance.id) in content.keys():
             del content[str(instance.id)]
-    print("deleting...")
+    print('deleting...')

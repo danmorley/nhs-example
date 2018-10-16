@@ -30,24 +30,24 @@ class ImageBlock(blocks.StructBlock):
                                       default='cover',
                                       classname='dct-meta-field')
     meta_use_mobile_renditions = blocks.BooleanBlock(default=True,
-                                                     label="Use mobile reditions",
+                                                     label='Use mobile reditions',
                                                      required=False,
                                                      classname='dct-meta-field')
     meta_use_desktop_renditions = blocks.BooleanBlock(default=True,
-                                                      label="Use desktop renditions",
+                                                      label='Use desktop renditions',
                                                       required=False,
                                                       classname='dct-meta-field')
     meta_layout = blocks.ChoiceBlock(choices=PAGE_HEADING_LAYOUTS,
-                                     label="Variant",
+                                     label='Variant',
                                      classname='dct-meta-field',
                                      required=False,
                                      default=False)
 
     def __init__(self, *args, **kwargs):
         if kwargs:
-            self.max_width = kwargs.get("max_width", None)
-            self.max_height = kwargs.get("max_height", None)
-            self.image_required = kwargs.get("required", None)
+            self.max_width = kwargs.get('max_width', None)
+            self.max_height = kwargs.get('max_height', None)
+            self.image_required = kwargs.get('required', None)
         super(ImageBlock, self).__init__(*args, **kwargs)
 
     def clean(self, value):
@@ -60,13 +60,13 @@ class ImageBlock(blocks.StructBlock):
                     if val:
                         if self.max_width:
                             if val.width > self.max_width:
-                                errors['image'] = ["Image size exceeds maximum width ({}px)".format(self.max_width)]
+                                errors['image'] = ['Image size exceeds maximum width ({}px)'.format(self.max_width)]
                         if self.max_height:
                             if val.height > self.max_height:
-                                errors['image'] = ["Image size exceeds maximum height ({}px)".format(self.max_height)]
+                                errors['image'] = ['Image size exceeds maximum height ({}px)'.format(self.max_height)]
                     else:
                         if self.image_required:
-                            errors['image'] = ["This field is required."]
+                            errors['image'] = ['This field is required.']
 
             except ValidationError as e:
                 errors[name] = ErrorList([e])
@@ -139,7 +139,7 @@ class CTABlock(blocks.StructBlock):
 
         image_meta = value.get('image_meta')
 
-        context["image_meta"] = image_meta
+        context['image_meta'] = image_meta
 
         result = dict([
             (name, self.child_blocks[name].get_api_representation(val, context=context))

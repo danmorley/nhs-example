@@ -14,31 +14,31 @@ from home.models import SiteSettings
 from .models import OneYou2Page, Theme, Menu, Footer, Header, RecipePage
 
 
-def create_test_menu(label="menu_label"):
+def create_test_menu(label='menu_label'):
     menu = Menu(label=label)
     menu.save()
     return menu
 
 
-def create_test_footer(label="footer_label"):
+def create_test_footer(label='footer_label'):
     footer = Footer(label=label)
     footer.save()
     return footer
 
 
-def create_test_header(label="header_label"):
+def create_test_header(label='header_label'):
     header = Header(label=label)
     header.save()
     return header
 
 
-def create_test_theme(label="Test theme", class_name="test-class"):
+def create_test_theme(label='Test theme', class_name='test-class'):
     theme = Theme(label=label, class_name=class_name)
     theme.save()
     return theme
 
 
-def create_test_page(title='Test page', path="1111", depth=0, theme=None):
+def create_test_page(title='Test page', path='1111', depth=0, theme=None):
     if not theme:
         theme = create_test_theme()
     if PHEImage.objects.count() == 0:
@@ -65,7 +65,7 @@ def create_test_page(title='Test page', path="1111", depth=0, theme=None):
     return page
 
 
-def create_test_recipe_page(title='Test Recipe page', path="1111", depth=0, theme=None):
+def create_test_recipe_page(title='Test Recipe page', path='1111', depth=0, theme=None):
     if not theme:
         theme = create_test_theme()
     if PHEImage.objects.count() == 0:
@@ -93,7 +93,7 @@ def create_test_recipe_page(title='Test Recipe page', path="1111", depth=0, them
     return page
 
 
-def create_test_child_page(parent, title='Test child page', path="11111111", depth=1, theme=None):
+def create_test_child_page(parent, title='Test child page', path='11111111', depth=1, theme=None):
     if not theme:
         theme = create_test_theme()
     if PHEImage.objects.count() == 0:
@@ -133,7 +133,7 @@ class PageFactory(factory.django.DjangoModelFactory):
 
     title = fuzzy.FuzzyText()
     depth = 0
-    path = "1111"
+    path = '1111'
     slug = slugify(title)
     og_image_fk = factory.SubFactory(PHEImageFactory)
     twitter_image_fk = factory.SubFactory(PHEImageFactory)

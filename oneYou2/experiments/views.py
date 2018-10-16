@@ -87,7 +87,7 @@ def create(request, content_type_app_name, content_type_model_name, parent_page_
                 submitted_for_moderation=False,
             )
 
-            messages.success(request, _("Page '{0}' created.").format(page.get_admin_display_title()))
+            messages.success(request, _('Page \'{0}\' created.').format(page.get_admin_display_title()))
 
             for fn in hooks.get_hooks('after_create_page'):
                 result = fn(request, page)
@@ -103,7 +103,7 @@ def create(request, content_type_app_name, content_type_model_name, parent_page_
 
         else:
             messages.validation_error(
-                request, _("The page could not be created due to validation errors"), form
+                request, _('The page could not be created due to validation errors'), form
             )
             edit_handler = edit_handler.bind_to_instance(instance=page,
                                                          form=form,
@@ -114,7 +114,7 @@ def create(request, content_type_app_name, content_type_model_name, parent_page_
         page = page_class.from_json(parent_page_json)
         slug = hashlib.sha224(base64.b64encode(str(time.time()).encode('utf-8'))).hexdigest()
         page.slug = '%s-v%s' % (page.slug, slug[:6])
-        page.title = "%s (describe the variant)" % page.title
+        page.title = '%s (describe the variant)' % page.title
 
         signals.init_new_page.send(sender=create, page=page, parent=parent_page)
         form = form_class(instance=page, parent_page=parent_page)
@@ -199,21 +199,21 @@ def edit(request, page_id):
 
                     if is_reverting:
                         message = _(
-                            "Revision from {0} of page '{1}' has been scheduled for publishing."
+                            'Revision from {0} of page \'{1}\' has been scheduled for publishing.'
                         ).format(
-                            previous_revision.created_at.strftime("%d %b %Y %H:%M"),
+                            previous_revision.created_at.strftime('%d %b %Y %H:%M'),
                             page.get_admin_display_title()
                         )
                     else:
                         if page.live:
                             message = _(
-                                "Page '{0}' is live and this revision has been scheduled for publishing."
+                                'Page \'{0}\' is live and this revision has been scheduled for publishing.'
                             ).format(
                                 page.get_admin_display_title()
                             )
                         else:
                             message = _(
-                                "Page '{0}' has been scheduled for publishing."
+                                'Page \'{0}\' has been scheduled for publishing.'
                             ).format(
                                 page.get_admin_display_title()
                             )
@@ -231,14 +231,14 @@ def edit(request, page_id):
 
                     if is_reverting:
                         message = _(
-                            "Revision from {0} of page '{1}' has been published."
+                            'Revision from {0} of page \'{1}\' has been published.'
                         ).format(
-                            previous_revision.created_at.strftime("%d %b %Y %H:%M"),
+                            previous_revision.created_at.strftime('%d %b %Y %H:%M'),
                             page.get_admin_display_title()
                         )
                     else:
                         message = _(
-                            "Page '{0}' has been published."
+                            'Page \'{0}\' has been published.'
                         ).format(
                             page.get_admin_display_title()
                         )
@@ -253,7 +253,7 @@ def edit(request, page_id):
             elif is_submitting:
 
                 message = _(
-                    "Page '{0}' has been submitted for moderation."
+                    'Page \'{0}\' has been submitted for moderation.'
                 ).format(
                     page.get_admin_display_title()
                 )
@@ -271,20 +271,20 @@ def edit(request, page_id):
                 ])
 
                 if not send_notification(page.get_latest_revision().id, 'submitted', request.user.pk):
-                    messages.error(request, _("Failed to send notifications to moderators"))
+                    messages.error(request, _('Failed to send notifications to moderators'))
 
             else:  # Saving
 
                 if is_reverting:
                     message = _(
-                        "Page '{0}' has been replaced with revision from {1}."
+                        'Page \'{0}\' has been replaced with revision from {1}.'
                     ).format(
                         page.get_admin_display_title(),
-                        previous_revision.created_at.strftime("%d %b %Y %H:%M")
+                        previous_revision.created_at.strftime('%d %b %Y %H:%M')
                     )
                 else:
                     message = _(
-                        "Page '{0}' has been updated."
+                        'Page \'{0}\' has been updated.'
                     ).format(
                         page.get_admin_display_title()
                     )
@@ -312,10 +312,10 @@ def edit(request, page_id):
                 return redirect(target_url)
         else:
             if page.locked:
-                messages.error(request, _("The page could not be saved as it is locked"))
+                messages.error(request, _('The page could not be saved as it is locked'))
             else:
                 messages.validation_error(
-                    request, _("The page could not be saved due to validation errors"), form
+                    request, _('The page could not be saved due to validation errors'), form
                 )
 
             edit_handler = edit_handler.bind_to_instance(instance=page,
@@ -345,7 +345,7 @@ def edit(request, page_id):
                 _('Compare with live version')
             ))
 
-        messages.warning(request, _("This page is currently awaiting moderation"), buttons=buttons)
+        messages.warning(request, _('This page is currently awaiting moderation'), buttons=buttons)
 
     if page.live and page.has_unpublished_changes:
         # Page status needs to present the version of the page containing the correct live URL

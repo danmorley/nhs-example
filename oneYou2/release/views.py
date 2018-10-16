@@ -23,7 +23,7 @@ def release_html(request, site_name):
         site_setting = SiteSettings.objects.get(uid=site_name)
         site_id = site_setting.site.id
     except ObjectDoesNotExist:
-        return HttpResponse("Page Not Found", status=404)
+        return HttpResponse('Page Not Found', status=404)
 
     if getattr(request, 'path', None):
         site_redirects = Redirect.get_for_site(site_id)
@@ -65,7 +65,7 @@ def release_html(request, site_name):
     if settings.CONTENT_STORE_ENDPOINT:
         content_store_endpoint = settings.CONTENT_STORE_ENDPOINT
     else:
-        content_store_endpoint = get_protocol() + host + "/api"
+        content_store_endpoint = get_protocol() + host + '/api'
 
     template = Template(FrontendVersion.get_html_for_version(frontend_id))
 
@@ -119,8 +119,8 @@ def open_releases(request):
     releases = Release.objects.filter(content_status=0)
     response_obj = []
     for release in releases:
-        response_obj.append({"id": release.id, "name": release.release_name})
-    return JsonResponse({"releases": response_obj})
+        response_obj.append({'id': release.id, 'name': release.release_name})
+    return JsonResponse({'releases': response_obj})
 
 
 

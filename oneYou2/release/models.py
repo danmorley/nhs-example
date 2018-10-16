@@ -22,8 +22,8 @@ from frontendHandler.models import FrontendVersion
 from pages.models import RecipePage
 
 CONTENT_STATUS = (
-    (0, "PENDING"),
-    (1, "FROZEN"),
+    (0, 'PENDING'),
+    (1, 'FROZEN'),
 )
 
 

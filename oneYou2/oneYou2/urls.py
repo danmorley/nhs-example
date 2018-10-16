@@ -27,7 +27,7 @@ from shelves.views import upload_actions
 urlpatterns = [
     url(r'^django-admin/', include(admin.site.urls)),
 
-    url(r'^admin/custom/pages/', include(pages_urls, namespace="oneyou_pages")),
+    url(r'^admin/custom/pages/', include(pages_urls, namespace='oneyou_pages')),
     url(r'^admin/experiments/', include(experiment_urls)),
     url(r'^admin/pages/', include(pages_urls)),
     url(r'^admin/actions/upload/', upload_actions, name='upload_actions'),

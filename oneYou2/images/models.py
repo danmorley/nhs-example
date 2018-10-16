@@ -32,7 +32,7 @@ class PHEImage(AbstractImage):
         if self.file:
             return self.file.url
         else:
-            return ""
+            return ''
 
     def generate_or_get_all_renditions(self):
         if self.file:

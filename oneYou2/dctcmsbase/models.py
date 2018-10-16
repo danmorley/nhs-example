@@ -27,8 +27,8 @@ class Tracking(models.Model):
 
 class Social(models.Model):
     # Meta Fields
-    og_title = models.CharField(max_length=255, default="Home",)
-    og_description = models.CharField(max_length=255, default="Description")
+    og_title = models.CharField(max_length=255, default='Home',)
+    og_description = models.CharField(max_length=255, default='Description')
     og_url = models.CharField(max_length=255, blank=True)
     og_image_fk = models.ForeignKey(
         'images.PHEImage',
@@ -37,15 +37,15 @@ class Social(models.Model):
         default=1,
         on_delete=models.SET_NULL,
         related_name='+',
-        verbose_name="OG image"
+        verbose_name='OG image'
     )
-    og_type = models.CharField(max_length=255, default="website")
+    og_type = models.CharField(max_length=255, default='website')
 
     twitter_url = models.CharField(max_length=255, blank=True)
-    twitter_card = models.CharField(max_length=255, default="summary")
-    twitter_site = models.CharField(max_length=255, default="@TwitterUser")
-    twitter_title = models.CharField(max_length=255, default="Home")
-    twitter_description = models.CharField(max_length=255, default="Description")
+    twitter_card = models.CharField(max_length=255, default='summary')
+    twitter_site = models.CharField(max_length=255, default='@TwitterUser')
+    twitter_title = models.CharField(max_length=255, default='Home')
+    twitter_description = models.CharField(max_length=255, default='Description')
 
     use_share_button = models.BooleanField(default=True)
     use_email_button = models.BooleanField(default=False)
@@ -58,7 +58,7 @@ class Social(models.Model):
         default=1,
         on_delete=models.SET_NULL,
         related_name='+',
-        verbose_name="Twitter image"
+        verbose_name='Twitter image'
     )
 
     class Meta:
@@ -90,7 +90,7 @@ class GeneralShelvePage(Page):
             pass
         except ValueError:
             pass
-        return ""
+        return ''
 
     @property
     def twitter_image(self):
@@ -100,7 +100,7 @@ class GeneralShelvePage(Page):
             pass
         except ValueError:
             pass
-        return ""
+        return ''
 
     @property
     def page_theme(self):
@@ -119,10 +119,10 @@ class GeneralShelvePage(Page):
         for ancestor in ancestors:
             # If root page it doesn't have link url
             try:
-                breadcrumbs.append({"name": ancestor.specific.title, "url": ancestor.specific.link_url})
+                breadcrumbs.append({'name': ancestor.specific.title, 'url': ancestor.specific.link_url})
             except AttributeError:
                 site_name = SiteSettings.objects.get(site_id=self.get_site().id).uid
-                breadcrumbs.append({"name": ancestor.specific.title, "url": '/' + site_name})
+                breadcrumbs.append({'name': ancestor.specific.title, 'url': '/' + site_name})
         return breadcrumbs
         
     content_panels = Page.content_panels + [
@@ -209,7 +209,7 @@ class GeneralShelvePage(Page):
 
     def serve_preview(self, request, mode_name, model_name):
         request.is_preview = True
-        print("SERVE PREVIEW")
+        print('SERVE PREVIEW')
 
         if mode_name == 'json':
             from .serializers import GeneralShelvePageSerializer

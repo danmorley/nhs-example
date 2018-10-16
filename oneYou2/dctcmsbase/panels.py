@@ -70,7 +70,7 @@ class RichTextPanel(Panel):
 class StandardRichTextPanel(RichTextPanel):
     meta_variant = blocks.ChoiceBlock(choices=RICH_TEXT_PANEL_VARIANTS,
                                     default='standard',
-                                    label="Variant",
+                                    label='Variant',
                                     classname='dct-meta-field')
     
     class Meta:
@@ -96,7 +96,7 @@ class AudioTeaserPanel(TeaserPanel):
 
 
 class VideoTeaserPanel(TeaserPanel):
-    host = blocks.ChoiceBlock(choices=VIDEO_HOSTS, label="Host", default=BRIGHTCOVE_OPTION)
+    host = blocks.ChoiceBlock(choices=VIDEO_HOSTS, label='Host', default=BRIGHTCOVE_OPTION)
     video = blocks.CharBlock(required=False)
     meta_use_play_link = blocks.BooleanBlock(label='Use play video link', required=False, default=False,
                                              classname='dct-meta-field')
@@ -142,7 +142,7 @@ class InformationPanel(Panel):
     image = ImageBlock(required=False)
     ctas = blocks.StreamBlock([
         ('simple_cta_link', SimpleCtaLinkBlock()),
-    ], icon='arrow-left', label='Items', required=False, verbose_name="cta")
+    ], icon='arrow-left', label='Items', required=False, verbose_name='cta')
 
     class Meta:
         abstract = True
@@ -152,7 +152,7 @@ class InformationPanel(Panel):
 class StandardInformationPanel(InformationPanel):
     meta_variant = blocks.ChoiceBlock(
         choices=INFO_PANEL_VARIANTS,
-        label="Variant",
+        label='Variant',
         classname='dct-meta-field'
     )
 
@@ -180,7 +180,7 @@ class SimpleImagePanel(Panel):
 class StandardSimpleImagePanel(Panel):
     meta_variant = blocks.ChoiceBlock(choices=IMAGE_PANEL_VARIANTS,
                                       default='normal',
-                                      label="Variant",
+                                      label='Variant',
                                       classname='dct-meta-field')
 
     class Meta:

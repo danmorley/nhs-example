@@ -24,8 +24,8 @@ class HomePage(Page):
 @register_setting
 class SiteSettings(BaseSetting):
     title = models.CharField(max_length=255)
-    uid = models.SlugField(unique=True, verbose_name="Site name", help_text="An id which can be used to lookup the site"
-                                                                            " in the API")
+    uid = models.SlugField(unique=True, verbose_name='Site name', help_text='An id which can be used to lookup the site'
+                                                                            ' in the API')
 
     menu = models.ForeignKey(
         'pages.Menu',
@@ -89,10 +89,10 @@ class SiteSettings(BaseSetting):
     ]
 
     panels = [
-        MultiFieldPanel(general_panels, 'General', classname="collapsible"),
-        MultiFieldPanel(theme_panels, 'Theme', classname="collapsible"),
-        MultiFieldPanel(structure_panels, 'Page Structure', classname="collapsible"),
-        MultiFieldPanel(configuration_panels, 'Thrid Party configuration', classname="collapsible"),
+        MultiFieldPanel(general_panels, 'General', classname='collapsible'),
+        MultiFieldPanel(theme_panels, 'Theme', classname='collapsible'),
+        MultiFieldPanel(structure_panels, 'Page Structure', classname='collapsible'),
+        MultiFieldPanel(configuration_panels, 'Thrid Party configuration', classname='collapsible'),
     ]
 
 

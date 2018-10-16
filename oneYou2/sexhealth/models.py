@@ -17,34 +17,11 @@ from pages.models import TwoColumnShelf
 class SexHealthPage(GeneralShelvePage, Tracking, Social):
     body = StreamField([
         ('page_heading_shelf', PageHeadingShelf(icon='title')),
-        ('banner_shelf', BannerShelf(icon="title")),
-        ('grid_shelf', StandardGridShelf(icon="form")),
-        ('panel_carousel_shelf', PanelCarouselShelf(icon="repeat")),
-        ('two_column_shelf', StandardTwoColumnShelf(label="Two Column Shelf", icon='grip')),
-        ('two_column_shelf_oneyou', TwoColumnShelf(label="Two Column Shelf (OneYou)", icon='grip')),
-
-        # ('page_heading_shelf', PageHeading(icon='title')),
-        # ('simple_page_heading_shelf', SimplePageHeading(icon='title')),
-        # ('section_heading_shelf', SectionHeading(classname="full title", icon='title')),
-        # ('carousel_shelf', Carousel(icon="repeat")),
-        # ('panel_carousel_shelf', PanelCarousel(icon="repeat")),
-        # ('promo_shelf', PromoShelfChooserBlock(target_model="shelves.PromoShelf", icon="image")),
-        # ('promo_shelf_v2', PromoShelf(icon="title")),
-        # ('banner_shelf', BannerShelfChooserBlock(target_model="shelves.BannerShelf", icon="image")),
-        # ('grid_shelf', Grid(icon="form")),
-        # ('recipe_grid_shelf', RecipeGrid(icon="form")),
-        # ('find_out_more_dropdown', FindOutMoreDropDown(label="Link dropdown", icon="order-down")),
-        # ('iframe_shelf', IFrameShelf(label="IFrame", icon='placeholder')),
-        # ('divider', Divider(label="Divider", icon='horizontalrule')),
-        # ('article_page_heading_shelf', ArticlePageHeadingShelf(label="Article Page Heading", icon='title')),
-        # ('table', Table(label="Table", icon='list-ul')),
-        # ('script_shelf', InlineScriptPanel(label="Script shelf", icon='code')),
-        # ('triage_tool_shelf', TriageToolShelf(label="Triage tool shelf", icon='cog')),
-        # ('svg_shelf', InlineSvgPanel(label="SVG shelf", icon='snippet')),
-        # ('accordion_group', AccordionGroup(label="Accordion Group", icon='form')),
-        # ('action_plan_shelf', ActionPlan(label="Action Plan Builder shelf", icon='form')),
-        # ('action_plan_display_shelf', ActionPlanDisplay(label="Action Plan Display shelf", icon='form')),
-        
+        ('banner_shelf', BannerShelf(icon='title')),
+        ('grid_shelf', StandardGridShelf(icon='form')),
+        ('panel_carousel_shelf', PanelCarouselShelf(icon='repeat')),
+        ('two_column_shelf', StandardTwoColumnShelf(label='Two Column Shelf', icon='grip')),
+        ('two_column_shelf_oneyou', TwoColumnShelf(label='Two Column Shelf (OneYou)', icon='grip')),        
     ], null=True, blank=True)
 
     @classmethod
@@ -107,11 +84,11 @@ class SexHealthPage(GeneralShelvePage, Tracking, Social):
                    theme_id=obj_dict['page_theme']['id'])
 
 
-SexHealthPage._meta.get_field('og_title').default = "Sexual Health - Home"
-SexHealthPage._meta.get_field('og_description').default = "Description"
-SexHealthPage._meta.get_field('twitter_site').default = "@OneYouPHE"
-SexHealthPage._meta.get_field('twitter_title').default = "Sexual Health - Home"
-SexHealthPage._meta.get_field('twitter_description').default = "Description"
+SexHealthPage._meta.get_field('og_title').default = 'Sexual Health - Home'
+SexHealthPage._meta.get_field('og_description').default = 'Description'
+SexHealthPage._meta.get_field('twitter_site').default = '@OneYouPHE'
+SexHealthPage._meta.get_field('twitter_title').default = 'Sexual Health - Home'
+SexHealthPage._meta.get_field('twitter_description').default = 'Description'
 
 
 # Add SexHealthPage from page creation

@@ -26,7 +26,7 @@ class GeneralShelvePageSerializer(serializers.ModelSerializer):
             replace_resource_ids_with_links_for_download(shelf)
             shelf_id = shelf.get('id', None)
             if shelf_id:
-                shelf['id'] = "p%s-%s" % (data.id, shelf_id)
+                shelf['id'] = 'p%s-%s' % (data.id, shelf_id)
 
         serialized_data['meta']['breadcrumbs'] = data.breadcrumbs
 

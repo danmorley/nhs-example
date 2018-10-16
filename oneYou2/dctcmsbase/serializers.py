@@ -35,7 +35,7 @@ class GeneralShelvePageSerializer(serializers.ModelSerializer):
             replace_resource_ids_with_links_for_download(shelf)
             shelf_id = shelf.get('id', None)
             if shelf_id:
-                shelf['id'] = "p%s-%s" % (data.id, shelf_id)
+                shelf['id'] = 'p%s-%s' % (data.id, shelf_id)
 
         serialized_data['meta']['breadcrumbs'] = data.breadcrumbs
 
@@ -129,9 +129,9 @@ class BannerPanelSerializer(HyperlinkedModelSerializer):
         }
         if cta_page:
             representation['cta']['link_page'] = {
-                "id": cta_page.get('id'),
-                "slug": cta_page.get('slug'),
-                "relative_path": cta_page.get('relative_path'),
+                'id': cta_page.get('id'),
+                'slug': cta_page.get('slug'),
+                'relative_path': cta_page.get('relative_path'),
             }
 
         representation['shelf_id'] = slugify(representation['shelf_id'])

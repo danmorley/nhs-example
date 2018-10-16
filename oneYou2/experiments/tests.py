@@ -58,7 +58,7 @@ class VarientAdminURLHelperViewsTests(OneYouTests):
         model = 'oneyouvariant'
         id = 1
         actual = url_helper.get_action_url(action, module, model, id)
-        expected = "/admin/experiments/oneyouvariant/" + action + "/" + module + "/" + model + "/" + str(id) + "/"
+        expected = '/admin/experiments/oneyouvariant/' + action + '/' + module + '/' + model + '/' + str(id) + '/'
         self.assertIsTrue(expected in actual)
 
     def test_get_action_url_returns_the_edit_url_for_an_edit_action(self):
@@ -66,7 +66,7 @@ class VarientAdminURLHelperViewsTests(OneYouTests):
         action = 'edit'
         id = 1
         actual = url_helper.get_action_url(action, id)
-        expected = "/admin/experiments/oneyouvariant/" + str(id) + "/" + action + "/"
+        expected = '/admin/experiments/oneyouvariant/' + str(id) + '/' + action + '/'
         self.assertIsTrue(expected in actual)
 
 

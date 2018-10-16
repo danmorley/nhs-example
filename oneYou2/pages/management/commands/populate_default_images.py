@@ -18,8 +18,8 @@ class Command(BaseCommand):
         img_dir = BASE_DIR + '/oneYou2/static/img/'
         # default images is in format (file_name, title)
         default_images = [
-            ('one_you_logo.jpg', "OneYou Logo"),
-            ('phe_logo.png', "PHE Logo")
+            ('one_you_logo.jpg', 'OneYou Logo'),
+            ('phe_logo.png', 'PHE Logo')
         ]
 
         for img in default_images:

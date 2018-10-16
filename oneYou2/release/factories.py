@@ -5,7 +5,7 @@ from pages.factories import SiteFactory
 from .models import Release, ReleaseContent, ReleasePage
 
 
-def create_test_release(release_name="Test release", release_date=None, base_release=None, site_id=2):
+def create_test_release(release_name='Test release', release_date=None, base_release=None, site_id=2):
     release = Release(release_name=release_name, release_time=release_date, base_release=base_release, site_id=site_id)
     release.save()
     return release

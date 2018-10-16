@@ -143,7 +143,7 @@ class FrontendVersion:
 
         file_service.create_directory(settings.AZURE_FILE_SHARE, file_directory, fail_on_exist=False)
 
-        version_directory = file_directory + "/" + unique_id
+        version_directory = file_directory + '/' + unique_id
 
         print('creating frontend version directory' + version_directory)
         file_service.create_directory(settings.AZURE_FILE_SHARE, version_directory)
@@ -157,7 +157,7 @@ class FrontendVersion:
         file_service.create_directory(settings.AZURE_FILE_SHARE, version_directory + '/static/media')
 
         print('adding current_version to the version directory')
-        file_service.put_file_from_text(settings.AZURE_FILE_SHARE, version_directory, "current_version.txt", unique_id)
+        file_service.put_file_from_text(settings.AZURE_FILE_SHARE, version_directory, 'current_version.txt', unique_id)
 
         manifest = json.loads(open('./web/asset-manifest.json').read())
 
@@ -181,7 +181,7 @@ class FrontendVersion:
         file_service.put_file_from_text(settings.AZURE_FILE_SHARE, version_directory, 'tag.txt', release_tag)
 
         print('adding current tag meta to the environment directory')
-        file_service.put_file_from_text(settings.AZURE_FILE_SHARE, file_directory, "current_tag.txt", release_tag)
+        file_service.put_file_from_text(settings.AZURE_FILE_SHARE, file_directory, 'current_tag.txt', release_tag)
 
         print('updating current version meta in the environment directory')
-        file_service.put_file_from_text(settings.AZURE_FILE_SHARE, file_directory, "current_version.txt", unique_id)
+        file_service.put_file_from_text(settings.AZURE_FILE_SHARE, file_directory, 'current_version.txt', unique_id)

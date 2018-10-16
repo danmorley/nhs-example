@@ -21,7 +21,7 @@ class BannerPanel(SharedContent):
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    meta_gradient = models.BooleanField(default=False, verbose_name="Green gradient")
+    meta_gradient = models.BooleanField(default=False, verbose_name='Green gradient')
     cta_text = models.CharField(max_length=255, null=True, blank=True)
     cta_link = models.CharField(max_length=255, null=True, blank=True)
     cta_page = ParentalKey('wagtailcore.Page',
@@ -32,11 +32,11 @@ class BannerPanel(SharedContent):
 
     @property
     def meta_layout(self):
-        return "full_width"
+        return 'full_width'
 
     @property
     def meta_variant(self):
-        return "main-banner"
+        return 'main-banner'
 
     api_fields = ['heading', 'body', 'image', 'cta_text', 'cta_link', 'cta_page', 'meta_gradient']
 

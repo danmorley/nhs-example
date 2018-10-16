@@ -58,7 +58,7 @@ class ShelfAbstract(models.Model):
     shelf_id = models.CharField(max_length=255,
                                 blank=True,
                                 null=True,
-                                verbose_name="ID")
+                                verbose_name='ID')
 
     content_type = models.ForeignKey(
         'contenttypes.ContentType',
@@ -103,7 +103,7 @@ class ShelfAbstract(models.Model):
     @classmethod
     def from_dict(cls, obj_dict):
         if isinstance(obj_dict, str):
-            s = obj_dict.replace("'", "\"").replace('None', 'null')
+            s = obj_dict.replace('\'', '"').replace('None', 'null')
             obj_dict = json.loads(s)
         newObj = cls()
         for key in obj_dict:
@@ -222,11 +222,11 @@ class PromoShelf(ShelfAbstract):
 
     @property
     def meta_layout(self):
-        return "cta_on_right"
+        return 'cta_on_right'
 
     @property
     def meta_variant(self):
-        return "how-are-you"
+        return 'how-are-you'
 
 
 @register_snippet
@@ -240,7 +240,7 @@ class BannerShelf(ShelfAbstract):
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    meta_gradient = models.BooleanField(default=False, verbose_name="Green gradient")
+    meta_gradient = models.BooleanField(default=False, verbose_name='Green gradient')
     cta_text = models.CharField(max_length=255, null=True, blank=True)
     cta_link = models.CharField(max_length=255, null=True, blank=True)
     cta_page = ParentalKey('wagtailcore.Page',
@@ -255,11 +255,11 @@ class BannerShelf(ShelfAbstract):
 
     @property
     def meta_layout(self):
-        return "full_width"
+        return 'full_width'
 
     @property
     def meta_variant(self):
-        return "main-banner"
+        return 'main-banner'
 
     api_fields = ['heading', 'body', 'image', 'cta_text', 'cta_link', 'cta_page', 'meta_gradient']
 
@@ -371,18 +371,18 @@ class ActionPanel(ShelfAbstract):
 
 @register_snippet
 class ActionShelf(ShelfAbstract):
-    paragon_id = models.IntegerField(null=False, blank=False, unique=True, help_text="Matches with the UID at paragon")
+    paragon_id = models.IntegerField(null=False, blank=False, unique=True, help_text='Matches with the UID at paragon')
     paragon_action_code = models.CharField(max_length=255, null=False, blank=False, unique=True,
-                                           help_text="Must be unique, used by paragon. Designed to be a slug of title")
+                                           help_text='Must be unique, used by paragon. Designed to be a slug of title')
     category = models.CharField(max_length=255, null=False, blank=False, choices=ACTION_CATEGORY)
-    position = models.IntegerField(null=False, blank=False, help_text="Must be unique, this determines the"
-                                                                      "order paragon will return actions"
-                                                                      "in the email.")
+    position = models.IntegerField(null=False, blank=False, help_text='Must be unique, this determines the'
+                                                                      'order paragon will return actions'
+                                                                      'in the email.')
     action_code = models.CharField(max_length=255, null=True, blank=True,
-                                   help_text="Wirewax action code")
+                                   help_text='Wirewax action code')
     title = models.CharField(max_length=255, null=False, blank=False)
     rich_text_body = models.TextField(blank=True, null=True)
-    cta_type = models.CharField(max_length=255, null=True, blank=True, choices=CTA_TYPES, default="direct_app")
+    cta_type = models.CharField(max_length=255, null=True, blank=True, choices=CTA_TYPES, default='direct_app')
     cta1_text = models.CharField(max_length=255, null=True, blank=True)
     cta1_link = models.CharField(max_length=255, null=True, blank=True)
     cta2_text = models.CharField(max_length=255, null=True, blank=True)
@@ -444,37 +444,37 @@ class ActionShelf(ShelfAbstract):
         super(ActionShelf, self).save(*args, **kwargs)
 
         headers = {
-            "Authorization": settings.PARAGON_ACTION_API_AUTH_HEADER,
-            "Content-Type": "application/json",
+            'Authorization': settings.PARAGON_ACTION_API_AUTH_HEADER,
+            'Content-Type': 'application/json',
         }
         data = {
-            "ProductToken": settings.PARAGON_ACTION_API_PRODUCT_TOKEN,
-            "ActionId": self.paragon_id,
-            "ActionCategory": self.category,
-            "ActionPosition": self.position,
-            "ActionCode": self.paragon_action_code,
-            "ActionTitle": self.title,
-            "ActionTextBody": self.rich_text_body,
-            "ActionCTAType": self.cta_type,
-            "ActionButton1Text": self.cta1_text,
-            "ActionButton1Link": self.cta1_link,
-            "ActionButto2Text": self.cta2_text,
-            "ActionButton2Link": self.cta2_link,
-            "ActionGooglePlayLink": self.cta_googleplay,
-            "ActionAppStoreLink": self.cta_appstore,
-            "ActionActive": self.active,
-            "ActionSource": "webInput",
+            'ProductToken': settings.PARAGON_ACTION_API_PRODUCT_TOKEN,
+            'ActionId': self.paragon_id,
+            'ActionCategory': self.category,
+            'ActionPosition': self.position,
+            'ActionCode': self.paragon_action_code,
+            'ActionTitle': self.title,
+            'ActionTextBody': self.rich_text_body,
+            'ActionCTAType': self.cta_type,
+            'ActionButton1Text': self.cta1_text,
+            'ActionButton1Link': self.cta1_link,
+            'ActionButto2Text': self.cta2_text,
+            'ActionButton2Link': self.cta2_link,
+            'ActionGooglePlayLink': self.cta_googleplay,
+            'ActionAppStoreLink': self.cta_appstore,
+            'ActionActive': self.active,
+            'ActionSource': 'webInput',
         }
         r = requests.post(settings.PARAGON_ACTION_API_URL, headers=headers, data=json.dumps(data))
         if r.status_code != 200:
             print(r.status_code, r.content)
             print(data)
-            raise ConnectionError("Could not push action to paragon")
+            raise ConnectionError('Could not push action to paragon')
 
     class Meta:
         verbose_name = 'Action'
         verbose_name_plural = 'Actions'
-        unique_together = (("category", "position"),)
+        unique_together = (('category', 'position'),)
 
     def __str__(self):
         return self.title
