@@ -86,52 +86,13 @@ class ImageBlock(blocks.StructBlock):
 
         return StructValue(self, result)
 
-    def get_parent_rendition(self, type):
-        pass
-        # image = result['image']
-        # image['layout'] = result['meta_layout']
-        # if image:
-        #     if image.get('renditions'):
-        #         mobile_rendition = None
-        #         desktop_rendition = None
-
-        #         # This is a bit hacky but it's for the unit tests
-        #         if type(value['meta_use_mobile_renditions']) == bool:
-        #             use_mobile_renditions = value['meta_use_mobile_renditions']
-        #         else:
-        #             use_mobile_renditions = json.loads(value['meta_use_mobile_renditions'].lower())
-
-        #         if type(value['meta_use_desktop_renditions']) == bool:
-        #             use_desktop_rendtions = value['meta_use_desktop_renditions']
-        #         else:
-        #             use_desktop_rendtions = json.loads(value['meta_use_desktop_renditions'].lower())
-
-        #         if image_meta and use_mobile_renditions:
-        #             mobile_rendition = image['renditions'].get(image_meta + '/mobile')
-        #         if not mobile_rendition:
-        #             mobile_rendition = image['renditions']['original']
-
-        #         if image_meta and use_desktop_rendtions:
-        #             desktop_rendition = image['renditions'].get(image_meta + '/desktop')
-        #         if not desktop_rendition:
-        #             desktop_rendition = image['renditions']['original']
-
-        #         result['image']['renditions'] = {
-        #             'mobile': mobile_rendition,
-        #             'desktop': desktop_rendition
-        #         }
-
     # Convert value to plain dict.
     def get_api_representation(self, value, context=None):
-        # image_meta = context.get('image_meta', None)
-
         result = blocks.StructBlock.get_api_representation(self, value, context)
 
         image = result['image']
 
         if image and image.get('renditions'):
-            image['layout'] = result['meta_layout']
-
             meta_mobile_rendition = result['meta_mobile_rendition']
             meta_desktop_rendition = result['meta_desktop_rendition']
 
