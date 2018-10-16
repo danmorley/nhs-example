@@ -41,7 +41,7 @@ class ReleaseModelTests(OneYouTests):
         """
         to_dict method should return a dictionary representing the object
         """
-        test_name = "Test release"
+        test_name = 'Test release'
         test_date = timezone.now()
         release = create_test_release(test_name, test_date)
         release_dict = release.dict()
@@ -52,7 +52,7 @@ class ReleaseModelTests(OneYouTests):
         """
         to_dict method should return a dictionary representing the object
         """
-        test_name = "Test release"
+        test_name = 'Test release'
         release = create_test_release(test_name)
         release_dict = release.dict()
         self.assertIs(release_dict['release_name'], test_name)
@@ -65,6 +65,9 @@ class ReleaseModelTests(OneYouTests):
         page = create_test_page()
 
         release = create_test_release()
+
+        page.release = release
+        page.save()
 
         count_of_pages = OneYou2Page.objects.count()
 
@@ -80,7 +83,7 @@ class ReleaseModelTests(OneYouTests):
         """
         create_test_page()
 
-        release_name = "Unset release"
+        release_name = 'Unset release'
 
         create_test_release(release_name)
 
@@ -95,7 +98,7 @@ class ReleaseModelTests(OneYouTests):
         """
         create_test_page()
 
-        release_name = "Future release"
+        release_name = 'Future release'
         release_date = timezone.now() + timedelta(days=1)
 
         create_test_release(release_name, release_date)
@@ -111,7 +114,7 @@ class ReleaseModelTests(OneYouTests):
         """
         create_test_page()
 
-        release_name = "Past release"
+        release_name = 'Past release'
         release_date = timezone.now() + timedelta(days=-1)
 
         release = create_test_release(release_name, release_date)
@@ -129,10 +132,12 @@ class ReleaseModelTests(OneYouTests):
         """
         page = create_test_page()
 
-        release_name = "Base release"
+        release_name = 'Base release'
 
         base_release = create_test_release(release_name)
 
+        page.release = base_release
+        page.save()
         page.save_revision().publish()
 
         base_release_content = base_release.content.first()
@@ -178,10 +183,15 @@ class ReleaseModelTests(OneYouTests):
         """
         the remove page function should remove any linked revisions of that page from the release.
         """
-        page1 = create_test_page(title="Page 1")
-        page2 = create_test_page(title="Page 2", path='1112')
-
         release = create_test_release()
+
+        page1 = create_test_page(title='Page 1')
+        page1.release = release
+        page1.save()
+        
+        page2 = create_test_page(title='Page 2', path='1112')
+        page2.release = release
+        page2.save()
 
         page1_in_release = False
         page2_in_release = False
@@ -213,12 +223,17 @@ class ReleaseModelTests(OneYouTests):
         """
         the remove page function should not remove anything if the page is not in the release.
         """
-        page1 = create_test_page(title="Page 1")
-        page2 = create_test_page(title="Page 2", path='1112')
-
         release = create_test_release()
 
-        page3 = create_test_page(title="Page 3", path='1113')
+        page1 = create_test_page(title='Page 1')
+        page1.release = release
+        page1.save()
+        
+        page2 = create_test_page(title='Page 2', path='1112')
+        page2.release = release
+        page2.save()
+
+        page3 = create_test_page(title='Page 3', path='1113')
 
         page1_in_release = False
         page2_in_release = False
@@ -265,6 +280,9 @@ class ReleaseModelTests(OneYouTests):
 
         release = create_test_release()
 
+        page.release = release
+        page.save()
+
         initial_revision_in_release = False
 
         content = json.loads(release.content.first().content)
@@ -303,6 +321,9 @@ class ReleaseModelTests(OneYouTests):
         self.assertIsNotNone(initial_revision)
 
         release = create_test_release()
+        
+        page.release = release
+        page.save()
 
         initial_revision_in_release = False\
 
@@ -359,6 +380,9 @@ class ReleaseModelTests(OneYouTests):
         release_time = timezone.now() + timedelta(days=1)
         release = create_test_release(release_date=release_time)
 
+        page.release = release
+        page.save()
+
         release_page_content = release.get_content_for(page.id)
 
         self.assertIsNotNone(release_page_content)
@@ -369,7 +393,7 @@ class ReleaseModelTests(OneYouTests):
         When content is requested for a release after it is released it should load the content from the locked content
         not from the releated tables.
         """
-        initial_title = "Test page"
+        initial_title = 'Test page'
         page = create_test_page(initial_title)
         revision = page.get_latest_revision()
 
@@ -379,7 +403,10 @@ class ReleaseModelTests(OneYouTests):
 
         loaded_release = Release.objects.get(id=release.id)
 
-        second_title = "Altered page"
+        page.release = release
+        page.save()
+
+        second_title = 'Altered page'
         page.title = second_title
         revision.content_json = page.to_json()
         revision.save()
@@ -398,10 +425,13 @@ class ReleaseContentModelTests(OneYouTests):
         """
         When a specific page is requested from the locked content it should be retrievable.
         """
-        page = create_test_page(title="First Page")
+        page = create_test_page(title='First Page')
         self.assertIsNotNone(page.get_latest_revision())
 
         release = create_test_release()
+
+        page.release = release
+        page.save()
 
         # release_content = create_test_release_content(release, json.dumps(release.generate_fixed_content()))
         release_content = release.content.first()
@@ -475,15 +505,15 @@ class ReleaseUtilsTests(OneYouTests):
         """
         A published release is one whose release_time is in the past.
         """
-        release1_name = "Old release"
+        release1_name = 'Old release'
         release1_date = timezone.now() + timedelta(days=-10)
         release1 = create_test_release(release_name=release1_name, release_date=release1_date)
 
-        release2_name = "Current release"
+        release2_name = 'Current release'
         release2_date = timezone.now() + timedelta(days=-1)
         release2 = create_test_release(release_name=release2_name, release_date=release2_date)
 
-        release3_name = "Future release"
+        release3_name = 'Future release'
         release3_date = timezone.now() + timedelta(days=+10)
         release3 = create_test_release(release_name=release3_name, release_date=release3_date)
 
@@ -499,15 +529,15 @@ class ReleaseUtilsTests(OneYouTests):
         """
         A published release is one whose release_time is in the past.
         """
-        release1_name = "Next release"
+        release1_name = 'Next release'
         release1_date = None
         release1 = create_test_release(release_name=release1_name, release_date=release1_date)
 
-        release2_name = "Future release 1"
+        release2_name = 'Future release 1'
         release2_date = None
         release2 = create_test_release(release_name=release2_name, release_date=release2_date)
 
-        release3_name = "Future release 2"
+        release3_name = 'Future release 2'
         release3_date = timezone.now() + timedelta(days=+2)
         release3 = create_test_release(release_name=release3_name, release_date=release3_date)
 
@@ -523,11 +553,11 @@ class ReleaseUtilsTests(OneYouTests):
         """
         A published release is one whose release_time is in the past.
         """
-        release1_name = "Future release 1"
+        release1_name = 'Future release 1'
         release1_date = None
         release1 = create_test_release(release_name=release1_name, release_date=release1_date)
 
-        release2_name = "Future release 2"
+        release2_name = 'Future release 2'
         release2_date = None
         release2 = create_test_release(release_name=release2_name, release_date=release2_date)
 
@@ -552,11 +582,11 @@ class ReleaseViewsTests(OneYouTests):
         request.META['HTTP_HOST'] = http_host
 
         response = release_html(request, site_name)
-        response_content_string = response.content.decode("utf-8")
+        response_content_string = response.content.decode('utf-8')
 
-        self.assertIsFalse("{{ api_url }}" in response_content_string)
-        self.assertIsFalse("{{ site_setting.uid }}" in response_content_string)
-        self.assertIsFalse("{{ release_id }}" in response_content_string)
+        self.assertIsFalse('{{ api_url }}' in response_content_string)
+        self.assertIsFalse('{{ site_setting.uid }}' in response_content_string)
+        self.assertIsFalse('{{ release_id }}' in response_content_string)
         self.assertIsTrue(release.uuid in response_content_string)
 
     def test_release_html_function_returns_404_for_unknown_site_names(self, mock_file_service, mock_index_file):
@@ -601,7 +631,7 @@ class ReleaseViewsTests(OneYouTests):
         release.save()
 
         response = release_html(request, site_name)
-        response_content_string = response.content.decode("utf-8")
+        response_content_string = response.content.decode('utf-8')
         self.assertIsTrue(http_host + '/api' in response_content_string)
 
     def test_release_view_incorrect_release_id(self, mock_file_service, mock_index_file):
@@ -621,7 +651,7 @@ class ReleaseViewsTests(OneYouTests):
 
     def test_release_view_compare_to_live_release(self, mock_file_service, mock_index_file):
         # Create a live release with 2 pages
-        live_release = create_test_release("Live release", release_date=(timezone.now() + timezone.timedelta(days=-1)))
+        live_release = create_test_release('Live release', release_date=(timezone.now() + timezone.timedelta(days=-1)))
         test_live_page1 = create_test_page()
         test_live_page1.release = live_release
         test_live_page1.live_revision = test_live_page1.save_revision()
@@ -677,7 +707,7 @@ class ReleaseButtonHelperWagTailHooksTests(OneYouTests):
         release = create_test_release()
         release_admin = ReleaseAdmin()
         view = IndexView(release_admin)
-        request = WSGIRequest({'REQUEST_METHOD': "GET", 'wsgi.input': ''})
+        request = WSGIRequest({'REQUEST_METHOD': 'GET', 'wsgi.input': ''})
         request.user = create_test_user()
 
         release_button_helper = ReleaseButtonHelper(view, request)

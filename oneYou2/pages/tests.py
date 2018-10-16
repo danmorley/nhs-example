@@ -39,8 +39,8 @@ class OneYou2PageModelTests(OneYouTests):
         """
         page_theme property should return the theme as a dict
         """
-        test_label = "Test theme"
-        test_class_name = "test-class"
+        test_label = 'Test theme'
+        test_class_name = 'test-class'
         theme = create_test_theme(test_label, test_class_name)
         page = OneYou2Page(theme=theme)
         self.assertIs(page.theme.label, test_label)
@@ -89,7 +89,7 @@ class OneYou2PageModelTests(OneYouTests):
         """
         create_from_dict method should produce an instance of the class based on the dictonary
         """
-        theme = Theme(id=1, label="Test theme", class_name="test-class")
+        theme = Theme(id=1, label='Test theme', class_name='test-class')
         page = OneYou2Page(title='Page title', path='00001', depth='0', numchild='0',
                            theme=theme, live=True, slug='page-path', seo_title='page-name',
                            show_in_menus=True, search_description='page-description', first_published_at='yesterday')
@@ -149,6 +149,9 @@ class OneYou2PageModelTests(OneYouTests):
         page = create_test_page()
 
         release = create_test_release()
+
+        page.release = release
+        page.save()
 
         page_count = OneYou2Page.objects.count()
         live_page_count = OneYou2Page.objects.live().count()
@@ -253,6 +256,9 @@ class RecipePageModelTests(OneYouTests):
 
         release = create_test_release()
 
+        page.release = release
+        page.save()
+
         page_count = RecipePage.objects.count()
         live_page_count = RecipePage.objects.live().count()
 
@@ -297,8 +303,8 @@ class ThemeModelTests(OneYouTests):
         """
         to_dict method should return a dictionary representing the object
         """
-        test_label = "Test theme"
-        test_class_name = "test-class"
+        test_label = 'Test theme'
+        test_class_name = 'test-class'
         theme = Theme(label=test_label, class_name=test_class_name)
         theme_dict = theme.to_dict()
         self.assertIs(theme_dict['label'], test_label)
@@ -471,7 +477,7 @@ class ImageBlockTest(OneYouTests):
         image_block = serialized_page.data['body'][0]['value']['image_right']
         self.assertEqual(type(image_block['renditions']['desktop']), str)
         self.assertNotEqual(len(image_block['renditions']['desktop']), 0)
-        self.assertIn("original", image_block['renditions']['desktop'])
+        self.assertIn('original', image_block['renditions']['desktop'])
         self.assertEqual(type(image_block['renditions']['mobile']), str)
         self.assertNotEqual(len(image_block['renditions']['mobile']), 0)
-        self.assertIn("original", image_block['renditions']['mobile'])
+        self.assertIn('original', image_block['renditions']['mobile'])
