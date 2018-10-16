@@ -15,39 +15,33 @@ from images.renditions import MOBILE_RENDITION_CHOICES, DESKTOP_RENDITION_CHOICE
 from .serializers import BannerPanelSerializer
 
 
-IMAGE_VARIANT_CHOICES = (
-    ('contain', 'Contain'),
-    ('cover', 'Cover'),
-    ('parent', 'Use parent')
-)
-
-PAGE_HEADING_LAYOUTS = (
+IMAGE_POSITION = (
     ('top', 'Image top'),
     ('bottom', 'Image bottom'),
 )
 
-CTA_VARIANT_CHOICES = (
+CTA_VARIANT = (
     ('link', 'Link'),
     ('button', 'Button'),
 )
 
-TWO_COLUMNS_IMAGE_DISPLAY = (
+IMAGE_DISPLAY = (
     ('contain', 'Contain'),
     ('cover', 'Stretch'),
+)
+
+IMAGE_VARIANT = (
+    ('none', 'None'),
+    ('gradient', 'Background Gradient'),
 )
 
 
 class ImageBlock(blocks.StructBlock):
     image = BlobImageChooserBlock(required=False)
-    meta_variant = blocks.ChoiceBlock(IMAGE_VARIANT_CHOICES,
+    meta_variant = blocks.ChoiceBlock(IMAGE_VARIANT,
                                       label='Variant',
                                       default='cover',
                                       classname='dct-meta-field')
-    meta_layout = blocks.ChoiceBlock(choices=PAGE_HEADING_LAYOUTS,
-                                     label="Variant",
-                                     classname='dct-meta-field',
-                                     required=False,
-                                     default=False)
     meta_mobile_rendition = blocks.ChoiceBlock(MOBILE_RENDITION_CHOICES,
                                       label='Mobile Rendition',
                                       default='none',
@@ -59,9 +53,9 @@ class ImageBlock(blocks.StructBlock):
 
     def __init__(self, *args, **kwargs):
         if kwargs:
-            self.max_width = kwargs.get("max_width", None)
-            self.max_height = kwargs.get("max_height", None)
-            self.image_required = kwargs.get("required", None)
+            self.max_width = kwargs.get('max_width', None)
+            self.max_height = kwargs.get('max_height', None)
+            self.image_required = kwargs.get('required', None)
         super(ImageBlock, self).__init__(*args, **kwargs)
 
     def clean(self, value):
@@ -74,13 +68,13 @@ class ImageBlock(blocks.StructBlock):
                     if val:
                         if self.max_width:
                             if val.width > self.max_width:
-                                errors['image'] = ["Image size exceeds maximum width ({}px)".format(self.max_width)]
+                                errors['image'] = ['Image size exceeds maximum width ({}px)'.format(self.max_width)]
                         if self.max_height:
                             if val.height > self.max_height:
-                                errors['image'] = ["Image size exceeds maximum height ({}px)".format(self.max_height)]
+                                errors['image'] = ['Image size exceeds maximum height ({}px)'.format(self.max_height)]
                     else:
                         if self.image_required:
-                            errors['image'] = ["This field is required."]
+                            errors['image'] = ['This field is required.']
 
             except ValidationError as e:
                 errors[name] = ErrorList([e])
@@ -169,10 +163,19 @@ class ImageBlock(blocks.StructBlock):
 
 class BackgroundImageBlock(ImageBlock):
     meta_image_display = blocks.ChoiceBlock(
-        choices=TWO_COLUMNS_IMAGE_DISPLAY,
+        choices=IMAGE_DISPLAY,
         label='Image Display',
-        default="cover",
+        default='cover',
+        classname='dct-meta-field',
     )
+
+
+class PositionedImageBlock(ImageBlock):
+    meta_position = blocks.ChoiceBlock(choices=IMAGE_POSITION,
+                                     label='Position',
+                                     classname='dct-meta-field',
+                                     required=False,
+                                     default=False)
 
 
 class IDBlock(blocks.CharBlock):
@@ -214,7 +217,7 @@ class SimpleCtaLinkBlock(blocks.StructBlock):
     link_page = ItemPageBlock(required=False)
     link_id = IDBlock(required=False, label='ID', classname='dct-meta-field', help_text='Uniquely identify the CTA. Often used for tracking')
     meta_cta_variant = blocks.ChoiceBlock(
-        choices=CTA_VARIANT_CHOICES,
+        choices=CTA_VARIANT,
         default='link',
         label='CTA Style',
         classname='dct-meta-field'
@@ -229,7 +232,7 @@ class DocumentDownloadBlock(blocks.StructBlock):
     link_text = blocks.CharBlock(required=True)
     document = DocumentChooserBlock(label='Document', required=True)
     meta_cta_variant = blocks.ChoiceBlock(
-        choices=CTA_VARIANT_CHOICES,
+        choices=CTA_VARIANT,
         default='link',
         label='CTA Style',
         classname='dct-meta-field'

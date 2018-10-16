@@ -1,6 +1,6 @@
 from wagtail.core import blocks
 
-from .blocks import ImageBlock, IDBlock, BackgroundImageBlock, BannerPanelChooserBlock
+from .blocks import PositionedImageBlock, IDBlock, BackgroundImageBlock, BannerPanelChooserBlock
 from .panels import (StandardRichTextPanel, StandardInformationPanel, CtaPanel, StandardSimpleImagePanel,
     PlainTextPanel, AccordionPanel, StandardImageTeaserPanel, AudioTeaserPanel, StandardVideoTeaserPanel)
 
@@ -38,15 +38,15 @@ TWO_COLUMNS_LAYOUT_CHOICES = (
 )
 
 GRID_PANELS = [
-    ('rich_text_panel', StandardRichTextPanel(icon="title")),
-    ('information_panel', StandardInformationPanel(target_model="shelves.AppTeaser", icon="image")),
+    ('rich_text_panel', StandardRichTextPanel(icon='title')),
+    ('information_panel', StandardInformationPanel(target_model='shelves.AppTeaser', icon='image')),
     ('cta_panel', CtaPanel(icon='plus')),
-    ('simple_image_panel', StandardSimpleImagePanel(icon="image")),
+    ('simple_image_panel', StandardSimpleImagePanel(icon='image')),
     ('plain_text_panel', PlainTextPanel(required=False)),
     ('accordion_panel', AccordionPanel(required=False, icon='form')),
-    ('image_teaser', StandardImageTeaserPanel(icon="pick")),
-    ('audio_teaser', AudioTeaserPanel(icon="pick")),
-    ('video_teaser', StandardVideoTeaserPanel(icon="pick")),
+    ('image_teaser', StandardImageTeaserPanel(icon='pick')),
+    ('audio_teaser', AudioTeaserPanel(icon='pick')),
+    ('video_teaser', StandardVideoTeaserPanel(icon='pick')),
 ]
 
 
@@ -55,6 +55,7 @@ class Shelf(blocks.StructBlock):
                        label='ID',
                        help_text='Not displayed in the front end',
                        classname='dct-meta-field')
+    name = blocks.CharBlock(required=False, classname='dct-meta-field dct-name-field', help_text='Name to help identfy the shelf')
     
     class meta:
         abstract = True
@@ -90,14 +91,14 @@ class StandardGridShelf(GridShelf, WithTracking):
     items = blocks.StreamBlock(GRID_PANELS, icon='arrow-left', label='Items')
     meta_variant = blocks.ChoiceBlock(choices=GRID_VARIANT_CHOICES,
                                     default='standard',
-                                    label="Variant",
+                                    label='Variant',
                                     classname='dct-meta-field')
     
     meta_layout = blocks.ChoiceBlock(choices=GRID_LAYOUT_CHOICES,
                                      default='full_width',
-                                     label="Layout",
-                                     help_text="Use this to select number of columns on desktop (only one column"
-                                               " on mobile)", classname='dct-meta-field')
+                                     label='Layout',
+                                     help_text='Use this to select number of columns on desktop (only one column'
+                                               ' on mobile)', classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-grid-shelf dct-meta-panel'
@@ -107,12 +108,8 @@ class PageHeadingShelf(Shelf, WithTracking):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     background_image = BackgroundImageBlock(required=False)
-    image_left = ImageBlock(required=False)
-    image_right = ImageBlock(required=False)
-    meta_gradient = blocks.BooleanBlock(label='Green gradient',
-                                        required=False,
-                                        default=False,
-                                        classname='dct-meta-field')
+    image_left = PositionedImageBlock(label='Left Image', required=False)
+    image_right = PositionedImageBlock(label='Right Image', required=False)
 
     class Meta:
         form_classname = 'dct-page-heading-shelf dct-meta-panel'
@@ -128,8 +125,8 @@ class BannerShelf(Shelf, WithTracking):
 class PanelCarouselShelf(Shelf, WithTracking):
     heading = blocks.CharBlock(required=False)
     items = blocks.StreamBlock([
-        ('video_teaser', StandardVideoTeaserPanel(icon="media")),
-        ('image_teaser', StandardImageTeaserPanel(icon="pick")),
+        ('video_teaser', StandardVideoTeaserPanel(icon='media')),
+        ('image_teaser', StandardImageTeaserPanel(icon='pick')),
         ('cta_panel', CtaPanel(icon='plus')),
     ], icon='arrow-left', label='Items', required=False)
 
@@ -152,7 +149,7 @@ class TwoColumnShelf(Shelf, WithTracking):
 
 
 class StandardTwoColumnShelf(TwoColumnShelf):
-    meta_layout = blocks.ChoiceBlock(choices=TWO_COLUMNS_LAYOUT_CHOICES, label="Layout")
+    meta_layout = blocks.ChoiceBlock(choices=TWO_COLUMNS_LAYOUT_CHOICES, label='Layout')
     
     class Meta:
         verbose_name = 'two column'
