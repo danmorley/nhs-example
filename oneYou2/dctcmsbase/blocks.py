@@ -11,6 +11,7 @@ from wagtail.snippets.blocks import SnippetChooserBlock
 
 from shelves.blocks import BlobImageChooserBlock
 from images.renditions import MOBILE_RENDITION_CHOICES, DESKTOP_RENDITION_CHOICES
+from home.models import SiteSettings
 
 from .serializers import BannerPanelSerializer
 
@@ -51,40 +52,40 @@ class ImageBlock(blocks.StructBlock):
                                       default='none',
                                       classname='dct-meta-field')
 
-    def __init__(self, *args, **kwargs):
-        if kwargs:
-            self.max_width = kwargs.get('max_width', None)
-            self.max_height = kwargs.get('max_height', None)
-            self.image_required = kwargs.get('required', None)
-        super(ImageBlock, self).__init__(*args, **kwargs)
+    # def __init__(self, *args, **kwargs):
+    #     if kwargs:
+    #         self.max_width = kwargs.get('max_width', None)
+    #         self.max_height = kwargs.get('max_height', None)
+    #         self.image_required = kwargs.get('required', None)
+    #     super(ImageBlock, self).__init__(*args, **kwargs)
 
-    def clean(self, value):
-        result = []  # build up a list of (name, value) tuples to be passed to the StructValue constructor
-        errors = {}
-        for name, val in value.items():
-            try:
-                result.append((name, self.child_blocks[name].clean(val)))
-                if name == 'image':
-                    if val:
-                        if self.max_width:
-                            if val.width > self.max_width:
-                                errors['image'] = ['Image size exceeds maximum width ({}px)'.format(self.max_width)]
-                        if self.max_height:
-                            if val.height > self.max_height:
-                                errors['image'] = ['Image size exceeds maximum height ({}px)'.format(self.max_height)]
-                    else:
-                        if self.image_required:
-                            errors['image'] = ['This field is required.']
+    # def clean(self, value):
+    #     result = []  # build up a list of (name, value) tuples to be passed to the StructValue constructor
+    #     errors = {}
+    #     for name, val in value.items():
+    #         try:
+    #             result.append((name, self.child_blocks[name].clean(val)))
+    #             # if name == 'image':
+    #                 # if val:
+    #                     # if self.max_width:
+    #                     #     if val.width > self.max_width:
+    #                     #         errors['image'] = ['Image size exceeds maximum width ({}px)'.format(self.max_width)]
+    #                     # if self.max_height:
+    #                     #     if val.height > self.max_height:
+    #                     #         errors['image'] = ['Image size exceeds maximum height ({}px)'.format(self.max_height)]
+    #                 # else:
+    #                 #     if self.image_required:
+    #                 #         errors['image'] = ['This field is required.']
 
-            except ValidationError as e:
-                errors[name] = ErrorList([e])
+    #         except ValidationError as e:
+    #             errors[name] = ErrorList([e])
 
-        if errors:
-            # The message here is arbitrary - StructBlock.render_form will suppress it
-            # and delegate the errors contained in the 'params' dict to the child blocks instead
-            raise ValidationError('Validation error in StructBlock', params=errors)
+    #     if errors:
+    #         # The message here is arbitrary - StructBlock.render_form will suppress it
+    #         # and delegate the errors contained in the 'params' dict to the child blocks instead
+    #         raise ValidationError('Validation error in StructBlock', params=errors)
 
-        return StructValue(self, result)
+    #     return StructValue(self, result)
 
     # Convert value to plain dict.
     def get_api_representation(self, value, context=None):
