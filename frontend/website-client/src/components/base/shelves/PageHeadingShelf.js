@@ -10,6 +10,7 @@ import '../../base/shelves/promo-shelf.css';
 import ImageUtils from '../../base/panels/ImageUtils';
 import ResponsiveImage from '../shared/ResponsiveImage';
 import ResponsiveBackgroundImage from '../shared/ResponsiveBackgroundImage';
+import ImageTeaserPanel from '../../oneyou/panels/ImageTeaserPanel';
 
 /**
  *  Page Heading Shelf displays a page header with optional background image,
@@ -82,35 +83,39 @@ class PageHeadingShelf extends Component {
   }
 
   render() {
-    let { id, content, classNamePrefix, variant } = this.props;
-    let metaVariant = content.meta_variant || variant;
-    let firstImageLayout = content.image_left ?  content.image_left.layout : '';
-    let secondImageLayout = content.image_right ? content.image_right.layout : '';
-    let gradient = content.meta_gradient || false;
-    // let backgroundColourShelfStyle = {};
+    const { id, content, classNamePrefix, variant } = this.props;
+    const metaVariant = content.meta_variant || variant;
+    // let firstImageLayout = content.image_left ?  content.image_left.layout : '';
+    // let secondImageLayout = content.image_right ? content.image_right.layout : '';
+    const gradient = content.meta_gradient || false;
+    // // let backgroundColourShelfStyle = {};
 
-    // let shelfStyle = (ImageUtils.isValid(content.background_image)) ?
-    //   this.state.backgroundImageStyle : backgroundColourShelfStyle;
+    // // let shelfStyle = (ImageUtils.isValid(content.background_image)) ?
+    // //   this.state.backgroundImageStyle : backgroundColourShelfStyle;
 
-    console.log('PAGEHEADING', content.image_left);
-    let firstLogoStyle = "left-image--top";
-    let secondLogoStyle = "right-image--bottom";
+    // console.log('PAGEHEADING', content.image_left);
+    // let firstLogoStyle = "left-image--top";
+    // let secondLogoStyle = "right-image--bottom";
     
-    if (firstImageLayout === 'bottom') {
-      firstLogoStyle = "left-image--bottom"
-    }
+    // if (firstImageLayout === 'bottom') {
+    //   firstLogoStyle = "left-image--bottom"
+    // }
     
-    if (secondImageLayout === 'top') {
-      secondLogoStyle = "right-image--top"
-    }
-
+    // if (secondImageLayout === 'top') {
+    //   secondLogoStyle = "right-image--top"
+    // }
+    
     const headingTagName = (classNamePrefix === 'page-heading-shelf') ? 'h1' : 'h2';
-    const firstImage = ImageUtils.isValid(content.image_left) ? ImageUtils.deviceImage(content.image_left) : null;
-    const secondImage = ImageUtils.isValid(content.image_right) ? ImageUtils.deviceImage(content.image_right) : null;
+    const leftImage = ImageUtils.isValid(content.image_left) ? ImageUtils.deviceImage(content.image_left) : null;
+    const rightImage = ImageUtils.isValid(content.image_right) ? ImageUtils.deviceImage(content.image_right) : null;
 
+    // Calculate styling to position the left and right images 
+    const leftImageStyle = (content.image_left && content.image_left.meta_position === 'bottom')? 'left-image--bottom' : 'left-image--top';
+    const rightImageStyle = (content.image_right && content.image_right.meta_position === 'bottom')? 'right-image--bottom' : 'right-image--top';
+    
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group}>
-        <ResponsiveBackgroundImage image={content.background_image} className={`shelf__container container-fluid shelf-${firstLogoStyle} shelf-${secondLogoStyle} shelf__container-gradient--${gradient}`}
+        <ResponsiveBackgroundImage image={content.background_image} className={`shelf__container container shelf-${leftImageStyle} shelf-${rightImageStyle} shelf__container-gradient--${gradient}`}
         >
           <div className="container">
             <div className={`${classNamePrefix}__container-left`}>
@@ -120,16 +125,16 @@ class PageHeadingShelf extends Component {
                   {this.renderCta(content.cta)}
                 </div>
               </div>
-              { firstImage &&
-                <div className={`${classNamePrefix}__${firstLogoStyle}`}>
-                  <ResponsiveImage image={firstImage} className={`${classNamePrefix}__image`} />
+              { leftImage &&
+                <div className={`${classNamePrefix}__${leftImageStyle}`}>
+                  <ResponsiveImage image={leftImage} className={`${classNamePrefix}__image`} />
                 </div> 
               }  
             </div>  
             <div className={`${classNamePrefix}__container-right`}>
-              { secondImage &&
-                <div className={`${classNamePrefix}__${secondLogoStyle}`}>
-                  <ResponsiveImage image={secondImage} className={`${classNamePrefix}__image`} />
+              { rightImage &&
+                <div className={`${classNamePrefix}__${rightImageStyle}`}>
+                  <ResponsiveImage image={rightImage} className={`${classNamePrefix}__image`} />
                 </div>
               }
             </div>      

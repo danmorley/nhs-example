@@ -89,10 +89,7 @@ class ImageBlock(blocks.StructBlock):
     # Convert value to plain dict.
     def get_api_representation(self, value, context=None):
         result = blocks.StructBlock.get_api_representation(self, value, context)
-
         image = result['image']
-
-        print('IMAGEBLOCK Result {}'.format(result))
 
         if image and image.get('renditions'):
             meta_mobile_rendition = result['meta_mobile_rendition']

@@ -9,25 +9,11 @@ import ImageUtils from '../panels/ImageUtils';
  *
  */
 class ResponsiveBackgroundImage extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = { backgroundImageStyle: null };
-  // }
-
-  // setImage() {
-  //   const { image } = this.props;
-  //   if (image && image.image) {
-  //     const style = ImageUtils.backgroundImageStyle(this.props.image.image, ImageUtils.placeholderBackgroundImage());
-  //     this.setState({ backgroundImageStyle: style });
-  //   }
-  // }
-
   handleResize() {
     this.forceUpdate();
   }
 
   componentDidMount() {
-    // this.setImage();
     window.addEventListener('resize', this.handleResize.bind(this));
   }
 
@@ -35,24 +21,12 @@ class ResponsiveBackgroundImage extends Component {
     window.removeEventListener('resize', this.handleResize);
   }
 
-  // Code below was commented out as it isn't needed now that all components are keyed on their
-  // unique id passwed in from Wagtail.
-
-  // UNSAFE_componentWillReceiveProps(nextProps) {
-  //   this.props = nextProps;
-  //   this.setImage();
-  // }
-
   render() {
     const { image, variant, className, tagName } = this.props;
     const TagName = tagName;
-    let imageVariant = null, imageSet = null, backgroundImageStyle = null;
-
-    if (ImageUtils.isValid(image.image)) {
-      backgroundImageStyle = ImageUtils.backgroundImageStyle(image.image, ImageUtils.placeholderBackgroundImage());
-      imageVariant = ImageUtils.isValid(image.image) ? variant || 'image--' + image.meta_variant || 'auto' : '';
-      imageSet = ImageUtils.isValid(image.image) ? 'image-set' : 'image-not-set';
-    }
+    const backgroundImageStyle = ImageUtils.backgroundImageStyle(image, ImageUtils.placeholderBackgroundImage());
+    const imageVariant = ImageUtils.isValid(image) ? variant || 'image--' + image.meta_variant || 'auto' : '';
+    const imageSet = ImageUtils.isValid(image) ? 'image-set' : 'image-not-set';
 
     return (
       <TagName
