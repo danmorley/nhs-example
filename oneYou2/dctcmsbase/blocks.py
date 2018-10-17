@@ -57,26 +57,29 @@ class ImageBlock(blocks.StructBlock):
         result = blocks.StructBlock.get_api_representation(self, value, context)
         image = result['image']
 
-        if image and image.get('renditions'):
-            meta_mobile_rendition = result['meta_mobile_rendition']
-            meta_desktop_rendition = result['meta_desktop_rendition']
+        if image:
+            image['meta_variant'] = result['meta_variant']
 
-            if meta_mobile_rendition == 'none':
-                mobile_rendition = image['renditions']['original']
-            else:
-                mobile_rendition = image['renditions'][meta_mobile_rendition]
-            
-            if meta_desktop_rendition == 'none':
-                desktop_rendition = image['renditions']['original']
-            else:
-                desktop_rendition = image['renditions'][meta_desktop_rendition]
+            if image.get('renditions'):
+                meta_mobile_rendition = result['meta_mobile_rendition']
+                meta_desktop_rendition = result['meta_desktop_rendition']
 
-            result['image']['renditions'] = {
-                'mobile': mobile_rendition,
-                'desktop': desktop_rendition
-            }
+                if meta_mobile_rendition == 'none':
+                    mobile_rendition = image['renditions']['original']
+                else:
+                    mobile_rendition = image['renditions'][meta_mobile_rendition]
+                
+                if meta_desktop_rendition == 'none':
+                    desktop_rendition = image['renditions']['original']
+                else:
+                    desktop_rendition = image['renditions'][meta_desktop_rendition]
 
-        return result['image']
+                image['renditions'] = {
+                    'mobile': mobile_rendition,
+                    'desktop': desktop_rendition,
+                }
+
+        return image
 
     class Meta:
         icon = 'image'
@@ -109,9 +112,8 @@ class PositionedImageBlock(ImageBlock):
                                      default=False)
 
     def get_api_representation(self, value, context=None):
-        result = blocks.StructBlock.get_api_representation(self, value, context)
-
         image = super(PositionedImageBlock, self).get_api_representation(value, context)
+        result = blocks.StructBlock.get_api_representation(self, value, context)
         if image:
             image['meta_position'] = result['meta_position']
 
