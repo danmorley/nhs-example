@@ -35,6 +35,29 @@ IMAGE_VARIANT = (
     ('gradient', 'Background Gradient'),
 )
 
+def pair_down_image_renditions(image, result):
+    meta_mobile_rendition = result['meta_mobile_rendition']
+    meta_desktop_rendition = result['meta_desktop_rendition']
+
+    if meta_mobile_rendition == 'none':
+        mobile_rendition = image['renditions']['original']
+    elif meta_mobile_rendition == 'parent':
+        pass
+    else:
+        mobile_rendition = image['renditions'][meta_mobile_rendition]
+    
+    if meta_desktop_rendition == 'none':
+        desktop_rendition = image['renditions']['original']
+    elif meta_desktop_rendition == 'parent':
+        pass
+    else:
+        desktop_rendition = image['renditions'][meta_desktop_rendition]
+
+    result['image']['renditions'] = {
+        'mobile': mobile_rendition,
+        'desktop': desktop_rendition
+    }
+
 
 class ImageBlock(blocks.StructBlock):
     image = BlobImageChooserBlock(required=False)
@@ -92,7 +115,9 @@ class ImageBlock(blocks.StructBlock):
 
         image = result['image']
 
-        if image and image.get('renditions'):
+        print('IMAGEBLOCK Result {}'.format(result))
+
+        if image: # and image.get('renditions'):
             meta_mobile_rendition = result['meta_mobile_rendition']
             meta_desktop_rendition = result['meta_desktop_rendition']
 
@@ -130,6 +155,18 @@ class BackgroundImageBlock(ImageBlock):
         classname='dct-meta-field',
     )
 
+    def get_api_representation(self, value, context=None):
+        result = blocks.StructBlock.get_api_representation(self, value, context)
+
+        image = result['image']
+
+        if image:
+            pair_down_image_renditions(image, result)
+            meta_image_display = result['meta_image_display']
+            result['image']['meta_image_display'] = meta_image_display
+
+        return result['image']
+
 
 class PositionedImageBlock(ImageBlock):
     meta_position = blocks.ChoiceBlock(choices=IMAGE_POSITION,
@@ -137,6 +174,21 @@ class PositionedImageBlock(ImageBlock):
                                      classname='dct-meta-field',
                                      required=False,
                                      default=False)
+
+    def get_api_representation(self, value, context=None):
+        result = blocks.StructBlock.get_api_representation(self, value, context)
+
+        image = result['image']
+
+        # print('Image {}'.format(image))
+        # print('Position {}'.format(image.get('meta_position')))
+        
+        if image:
+            pair_down_image_renditions(image, result)
+            meta_position = result['meta_position']
+            result['image']['meta_position'] = meta_position
+
+        return result['image']
 
 
 class IDBlock(blocks.CharBlock):
