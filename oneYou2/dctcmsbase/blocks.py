@@ -94,7 +94,7 @@ class ImageBlock(blocks.StructBlock):
 
         print('IMAGEBLOCK Result {}'.format(result))
 
-        if image: # and image.get('renditions'):
+        if image and image.get('renditions'):
             meta_mobile_rendition = result['meta_mobile_rendition']
             meta_desktop_rendition = result['meta_desktop_rendition']
 
