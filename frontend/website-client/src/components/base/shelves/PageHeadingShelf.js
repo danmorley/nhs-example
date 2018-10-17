@@ -8,6 +8,8 @@ import CtaLink from '../../base/shared/CtaLink';
 import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import '../../base/shelves/promo-shelf.css';
 import ImageUtils from '../../base/panels/ImageUtils';
+import ResponsiveImage from '../shared/ResponsiveImage';
+import ResponsiveBackgroundImage from '../shared/ResponsiveBackgroundImage';
 
 /**
  *  Page Heading Shelf displays a page header with optional background image,
@@ -29,43 +31,43 @@ import ImageUtils from '../../base/panels/ImageUtils';
 class PageHeadingShelf extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      backgroundImageStyle: null
-    }
+    // this.state = {
+    //   backgroundImageStyle: null
+    // }
   }
 
-  setImage() {
-    this.setState({
-      backgroundImageStyle: ImageUtils.backgroundImageStyle(
-        this.props.content.background_image,
-        ImageUtils.placeholderBackgroundImage()
-      ),
-      firstImage: ImageUtils.isValid(this.props.content.image_left) ? ImageUtils.deviceImage(this.props.content.image_left) : null,
-      secondImage: ImageUtils.isValid(this.props.content.image_right) ? ImageUtils.deviceImage(this.props.content.image_right) : null
-    })
-  }
+  // setImage() {
+  //   this.setState({
+  //     backgroundImageStyle: ImageUtils.backgroundImageStyle(
+  //       this.props.content.background_image,
+  //       ImageUtils.placeholderBackgroundImage()
+  //     ),
+  //     firstImage: ImageUtils.isValid(this.props.content.image_left) ? ImageUtils.deviceImage(this.props.content.image_left) : null,
+  //     secondImage: ImageUtils.isValid(this.props.content.image_right) ? ImageUtils.deviceImage(this.props.content.image_right) : null
+  //   })
+  // }
 
-  componentDidMount() {
-    this.setImage();
-    window.addEventListener('resize', this.setImage.bind(this));
-  }
+  // componentDidMount() {
+  //   this.setImage();
+  //   window.addEventListener('resize', this.setImage.bind(this));
+  // }
 
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.setImage);
-  }
+  // componentWillUnmount() {
+  //   window.removeEventListener('resize', this.setImage);
+  // }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    this.props = nextProps;
-    this.setImage();
-  }
+  // UNSAFE_componentWillReceiveProps(nextProps) {
+  //   this.props = nextProps;
+  //   this.setImage();
+  // }
 
-  renderImage1(image, classname) {
-    return (<Image image={image} class={classname} />);
-  }
+  // renderImage1(image, classname) {
+  //   return (<Image image={image} class={classname} />);
+  // }
   
-  renderImage2(image, classname) {
-    return (<Image image={image} class={classname} />);
-  }
+  // renderImage2(image, classname) {
+  //   return (<Image image={image} class={classname} />);
+  // }
 
   renderHeadingBody(content, headingTagName) {
     return [
@@ -85,11 +87,12 @@ class PageHeadingShelf extends Component {
     let firstImageLayout = content.image_left ?  content.image_left.layout : '';
     let secondImageLayout = content.image_right ? content.image_right.layout : '';
     let gradient = content.meta_gradient || false;
-    let backgroundColourShelfStyle = {};
+    // let backgroundColourShelfStyle = {};
 
-    let shelfStyle = (ImageUtils.isValid(content.background_image)) ?
-      this.state.backgroundImageStyle : backgroundColourShelfStyle;
+    // let shelfStyle = (ImageUtils.isValid(content.background_image)) ?
+    //   this.state.backgroundImageStyle : backgroundColourShelfStyle;
 
+    console.log('PAGEHEADING', content.image_left);
     let firstLogoStyle = "left-image--top";
     let secondLogoStyle = "right-image--bottom";
     
@@ -101,11 +104,14 @@ class PageHeadingShelf extends Component {
       secondLogoStyle = "right-image--top"
     }
 
-    let headingTagName = (classNamePrefix === 'page-heading-shelf') ? 'h1' : 'h2';
+    const headingTagName = (classNamePrefix === 'page-heading-shelf') ? 'h1' : 'h2';
+    const firstImage = ImageUtils.isValid(content.image_left) ? ImageUtils.deviceImage(content.image_left) : null;
+    const secondImage = ImageUtils.isValid(content.image_right) ? ImageUtils.deviceImage(content.image_right) : null;
 
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group}>
-        <div className={`shelf__container container-fluid shelf-${firstLogoStyle} shelf-${secondLogoStyle} shelf__container-gradient--${gradient}`} style={shelfStyle}>
+        <ResponsiveBackgroundImage image={content.background_image} className={`shelf__container container-fluid shelf-${firstLogoStyle} shelf-${secondLogoStyle} shelf__container-gradient--${gradient}`}
+        >
           <div className="container">
             <div className={`${classNamePrefix}__container-left`}>
               <div className="row">
@@ -114,21 +120,21 @@ class PageHeadingShelf extends Component {
                   {this.renderCta(content.cta)}
                 </div>
               </div>
-              { this.state.firstImage &&
+              { firstImage &&
                 <div className={`${classNamePrefix}__${firstLogoStyle}`}>
-                  {this.renderImage1(content.image_left, `${classNamePrefix}__image`)}
+                  <ResponsiveImage image={firstImage} className={`${classNamePrefix}__image`} />
                 </div> 
               }  
             </div>  
             <div className={`${classNamePrefix}__container-right`}>
-              { this.state.secondImage &&
+              { secondImage &&
                 <div className={`${classNamePrefix}__${secondLogoStyle}`}>
-                  {this.renderImage2(content.image_right, `${classNamePrefix}__image`)}
+                  <ResponsiveImage image={secondImage} className={`${classNamePrefix}__image`} />
                 </div>
               }
             </div>      
           </div>
-        </div>
+        </ResponsiveBackgroundImage>
       </Shelf>
     );
   }
@@ -143,6 +149,6 @@ PageHeadingShelf.propTypes = {
   id: PropTypes.string
 }
 
-CmsComponentRegistry.register('page_heading_shelf', PageHeadingShelf, 'page-heading-shelf', 'home-page', null, 'oneyou');
+CmsComponentRegistry.register('page_heading_shelf', PageHeadingShelf, 'page-heading-shelf', 'home-page');
 
 export default PageHeadingShelf;

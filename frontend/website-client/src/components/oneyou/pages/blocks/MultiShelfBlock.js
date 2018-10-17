@@ -9,7 +9,7 @@ import CmsComponentRegistry from '../../../base/CmsComponentRegistry';
 // all inputs explicitly.
 // With the plugin import statement is as follows
 // import * as Shelves from './shelves'
-import PlaceholderShelf from '../../shelves/PlaceholderShelf';
+import PlaceholderShelf from '../../../base/shelves/PlaceholderShelf';
 import GeneralTextShelf from '../../shelves/GeneralTextShelf';
 import BasicCtaShelf from '../../../base/shelves/BasicCtaShelf';
 import PageHeadingShelf from '../../shelves/PageHeadingShelf';

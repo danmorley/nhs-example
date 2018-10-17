@@ -2,16 +2,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import '../../../assets/styles/page.css';
-import CmsComponentRegistry from '../../base/CmsComponentRegistry';
+import CmsComponentRegistry from '../CmsComponentRegistry';
 import DocumentMeta from 'react-document-meta';
-import StandardPageLayout from './layouts/StandardPageLayout';
-import ShareButtonShelf from '../shelves/ShareButtonShelf';
-import NoticeShelf from '../shelves/NoticeShelf';
+import StandardPageLayout from '../../oneyou/pages/layouts/StandardPageLayout';
+import ShareButtonShelf from '../../oneyou/shelves/ShareButtonShelf';
+import NoticeShelf from '../../oneyou/shelves/NoticeShelf';
 
 import GeneralPageContent from './GeneralPageContent';
-import RecipePageContent from './RecipePageContent';
-import BackToTopButton from '../BackToTopButton';
-import UrlUtils from '../../base/shared/UrlUtils';
+import OneYouGeneralPageContent from '../../oneyou/pages/GeneralPageContent';
+import OneYouRecipePageContent from '../../oneyou/pages/RecipePageContent';
+import SexhealthGeneralPageContent from '../../sexhealth/pages/SexhealthGeneralPageContent';
+import BackToTopButton from '../../oneyou/BackToTopButton';
+import UrlUtils from '../shared/UrlUtils';
 
 /**
  *  Component responsible for rendering the header, footer and content of all
@@ -26,26 +28,25 @@ class Page extends Component {
 
     if (page) {
       const { page_theme, page_styles } = page;
-      const pageType = page.meta.type || 'general_page';
+      page.type = page.meta.type || 'general_page';
+      page.type = 'general_page';
 
-      const pageInfo = CmsComponentRegistry.components[pageType];
+      const pageInfo = CmsComponentRegistry.components[page.type];
       const PageClass = pageInfo && pageInfo.class;
       // TODO: Handle no page for type
       const content = <PageClass page={page} site={site} />;
-
-      // const content = this.renderPageContent(page, site);
       const meta = this.pageMetaData(page, site);
 
       return (
         <DocumentMeta {...meta}>
-          {this.renderPage(content, page_theme, page_styles, site, page)}
+          {this.renderPage(content, page_theme, page_styles, site, page, pageInfo)}
         </DocumentMeta>
       );
 
     } else {
       // Page object is null so it must still be loading.
       var content = this.renderPageLoader();
-      return this.renderPage(content, null, null, site, null);
+      return this.renderPage(content, null, null, site, null, null);
     }
   }
 
@@ -53,13 +54,14 @@ class Page extends Component {
     return meta.use_share_button || meta.use_email_button || meta.use_print_button;
   }
 
-  renderPage(content, pageTheme, pageStyles, site, page) {
+  renderPage(content, pageTheme, pageStyles, site, page, pageInfo) {
     // let { menu, header, footer } = site;
     // let theme = (pageTheme && pageTheme.class_name) || 'oneyou';
     let useShareButton = page ? this.hasShareButton(page.meta) : false;
+    const pageTypeClass = (pageInfo)? `${pageInfo.classNamePrefix}-page` : 'general';
 
     return (
-      <StandardPageLayout site={site} page={page}>
+      <StandardPageLayout site={site} page={page} pageTypeClass={pageTypeClass}>
         {content}
         {useShareButton &&
           <ShareButtonShelf showShareButton={page.meta.use_share_button}

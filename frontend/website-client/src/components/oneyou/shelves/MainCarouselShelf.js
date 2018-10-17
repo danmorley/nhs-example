@@ -6,7 +6,7 @@ import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import Slider from 'react-slick';
 import Equalizer from 'react-equalizer';
 
-import PlaceholderShelf from './PlaceholderShelf';
+import PlaceholderShelf from '../../base/shelves/PlaceholderShelf';
 import GeneralTextShelf from './GeneralTextShelf';
 import BasicCtaShelf from '../../base/shelves/BasicCtaShelf';
 

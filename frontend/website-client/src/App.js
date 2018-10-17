@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import 'normalize.css';
 import './assets/styles/fonts.css';
 import AppRouteRegistry from './components/base/AppRouteRegistry';
-import Page from './components/oneyou/pages/Page';
+import Page from './components/base/pages/Page';
 import ShelfSamplesPage from './components/oneyou/pages/ShelfSamplesPage';
 import siteMapPage from './components/oneyou/pages/SiteMapPage';
 import CookieDeclarationPage from './components/oneyou/pages/CookieDeclarationPage';

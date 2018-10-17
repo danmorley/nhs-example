@@ -22,6 +22,6 @@ RecipePageContent.propTypes = {
   page: PropTypes.object.isRequired
 }
 
-CmsComponentRegistry.register('recipe_page', RecipePageContent, 'recipe-page');
+CmsComponentRegistry.register('recipe_page', RecipePageContent, 'oneyou-recipe');
 
 export default RecipePageContent;

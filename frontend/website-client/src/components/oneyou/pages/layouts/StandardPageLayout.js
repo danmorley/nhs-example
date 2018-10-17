@@ -68,7 +68,7 @@ class StandardPageLayout extends Component {
     }
 
     return (
-      <div className={`page-wrapper ${theme}`}>
+      <div className={`page-wrapper ${theme} ${this.props.pageTypeClass}`}>
         <PageStyles content={pageStyles} />
         {headerComp}
         <div className="page-content-wrapper">
@@ -114,7 +114,8 @@ class StandardPageLayout extends Component {
 
 StandardPageLayout.propTypes = {
   site: PropTypes.object.isRequired,
-  page: PropTypes.object
+  page: PropTypes.object,
+  pageTypeClass: PropTypes.string.isRequired
 }
 
 export default StandardPageLayout;

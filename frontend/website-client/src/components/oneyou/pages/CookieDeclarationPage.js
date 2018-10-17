@@ -1,4 +1,4 @@
-import Page from './Page';
+import Page from '../../base/pages/Page';
 import withOwnContent from './withOwnContent';
 import './cookie-declaration.css';
 

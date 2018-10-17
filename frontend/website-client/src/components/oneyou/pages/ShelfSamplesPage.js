@@ -1,4 +1,4 @@
-import Page from './Page';
+import Page from '../../base/pages/Page';
 import withOwnContent from './withOwnContent';
 import ImageUtils from '../../base/panels/ImageUtils';
 import testBackgroundImage from '../../../assets/images/app-screen.jpg';

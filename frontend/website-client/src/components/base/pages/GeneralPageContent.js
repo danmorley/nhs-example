@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import '../../../assets/styles/page.css';
-import CmsComponentRegistry from '../../base/CmsComponentRegistry';
-import MultiShelfBlock from './blocks/MultiShelfBlock';
+import CmsComponentRegistry from '../CmsComponentRegistry';
+import MultiShelfBlock from '../blocks/MultiShelfBlock';
 
 class GeneralPageContent extends Component {
   render() {
@@ -17,6 +17,6 @@ GeneralPageContent.propTypes = {
   page: PropTypes.object.isRequired
 }
 
-CmsComponentRegistry.register('oneyou_page', GeneralPageContent, 'oneyou-general');
+CmsComponentRegistry.register('general_page', GeneralPageContent, 'general');
 
 export default GeneralPageContent;
