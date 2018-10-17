@@ -190,6 +190,16 @@ class GeneralShelvePage(Page):
     class Meta:
         abstract = True
 
+    @classmethod
+    def get_serializer(cls):
+        import importlib
+        app = cls.__module__.rsplit('.', 1)[0]
+        module = '{}.serializers'.format(app)
+        serializer_name = '{}Serializer'.format(cls.__name__)
+        serializers_module = importlib.import_module(module)
+        serializer = getattr(serializers_module, serializer_name)
+        return serializer
+
     def save(self, *args, **kwargs):
         assigned_release = self.release
 
@@ -212,9 +222,9 @@ class GeneralShelvePage(Page):
         print('SERVE PREVIEW')
 
         if mode_name == 'json':
-            from .serializers import GeneralShelvePageSerializer
+            Serializer = self.__class__.get_serializer()
             latest_revision_as_page = self.get_latest_revision_as_page()
-            serialized_page = GeneralShelvePageSerializer(instance=latest_revision_as_page)
+            serialized_page = Serializer(instance=latest_revision_as_page)
             return JsonResponse(serialized_page.data)
 
         if mode_name == 'react':

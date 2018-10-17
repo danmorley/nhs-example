@@ -819,6 +819,21 @@ class GeneralShelvePage(Page):
     api_fields = ['body', 'path', 'depth', 'numchild', 'live', 'page_theme']
     exclude_fields_in_copy = ['release']
 
+    @classmethod
+    def get_serializer(cls):
+        import re
+        import importlib
+        if re.match( r'.+Variant', cls.__name__):
+            parent_cls = cls.__bases__
+            cls = list(filter(lambda cls_item: re.match( r'.+Page', cls_item.__name__), parent_cls))[0]
+        app = cls.__module__.rsplit('.', 1)[0]
+        module = '{}.serializers'.format(app)
+        class_name = cls.__name__
+        serializer_name = '{}Serializer'.format(class_name)
+        serializers_module = importlib.import_module(module)
+        serializer = getattr(serializers_module, serializer_name)
+        return serializer
+
     def save(self, *args, **kwargs):
         assigned_release = self.release
 
@@ -841,9 +856,9 @@ class GeneralShelvePage(Page):
         print('SERVE PREVIEW')
 
         if mode_name == 'json':
-            from .serializers import GeneralShelvePageSerializer
+            Serializer = self.__class__.get_serializer()
             latest_revision_as_page = self.get_latest_revision_as_page()
-            serialized_page = GeneralShelvePageSerializer(instance=latest_revision_as_page)
+            serialized_page = Serializer(instance=latest_revision_as_page)
             return JsonResponse(serialized_page.data)
 
         if mode_name == 'react':
@@ -1061,9 +1076,9 @@ class RecipePage(OneYou2Page):
         request.is_preview = True
 
         if mode_name == 'json':
-            from .serializers import RecipePageSerializer
+            Serializer = self.__class__.get_serializer()
             latest_revision_as_page = self.get_latest_revision_as_page()
-            serialized_page = RecipePageSerializer(instance=latest_revision_as_page)
+            serialized_page = Serializer(instance=latest_revision_as_page)
             return JsonResponse(serialized_page.data)
 
         if mode_name == 'react':
