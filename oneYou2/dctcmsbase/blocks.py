@@ -35,29 +35,6 @@ IMAGE_VARIANT = (
     ('gradient', 'Background Gradient'),
 )
 
-def pair_down_image_renditions(image, result):
-    meta_mobile_rendition = result['meta_mobile_rendition']
-    meta_desktop_rendition = result['meta_desktop_rendition']
-
-    if meta_mobile_rendition == 'none':
-        mobile_rendition = image['renditions']['original']
-    elif meta_mobile_rendition == 'parent':
-        pass
-    else:
-        mobile_rendition = image['renditions'][meta_mobile_rendition]
-    
-    if meta_desktop_rendition == 'none':
-        desktop_rendition = image['renditions']['original']
-    elif meta_desktop_rendition == 'parent':
-        pass
-    else:
-        desktop_rendition = image['renditions'][meta_desktop_rendition]
-
-    result['image']['renditions'] = {
-        'mobile': mobile_rendition,
-        'desktop': desktop_rendition
-    }
-
 
 class ImageBlock(blocks.StructBlock):
     image = BlobImageChooserBlock(required=False)
@@ -158,14 +135,11 @@ class BackgroundImageBlock(ImageBlock):
     def get_api_representation(self, value, context=None):
         result = blocks.StructBlock.get_api_representation(self, value, context)
 
-        image = result['image']
-
+        image = super(BackgroundImageBlock, self).get_api_representation(value, context)
         if image:
-            pair_down_image_renditions(image, result)
-            meta_image_display = result['meta_image_display']
-            result['image']['meta_image_display'] = meta_image_display
+            image['meta_image_display'] = result['meta_image_display']
 
-        return result['image']
+        return image
 
 
 class PositionedImageBlock(ImageBlock):
@@ -178,17 +152,11 @@ class PositionedImageBlock(ImageBlock):
     def get_api_representation(self, value, context=None):
         result = blocks.StructBlock.get_api_representation(self, value, context)
 
-        image = result['image']
-
-        # print('Image {}'.format(image))
-        # print('Position {}'.format(image.get('meta_position')))
-        
+        image = super(PositionedImageBlock, self).get_api_representation(value, context)
         if image:
-            pair_down_image_renditions(image, result)
-            meta_position = result['meta_position']
-            result['image']['meta_position'] = meta_position
+            image['meta_position'] = result['meta_position']
 
-        return result['image']
+        return image
 
 
 class IDBlock(blocks.CharBlock):
