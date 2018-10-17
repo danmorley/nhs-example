@@ -5,6 +5,11 @@ from .panels import (StandardRichTextPanel, StandardInformationPanel, CtaPanel, 
     PlainTextPanel, AccordionPanel, StandardImageTeaserPanel, AudioTeaserPanel, StandardVideoTeaserPanel)
 
 
+SHELF_WIDTH = (
+    ('responsive', 'Responsive Width'),
+    ('full', 'Full Width'),
+)
+
 GRID_GUTTER_CHOICES = (
     ('gutter-unset', 'Unset'),
     ('gutter-sm', 'Small'),
@@ -56,7 +61,11 @@ class Shelf(blocks.StructBlock):
                        help_text='Not displayed in the front end',
                        classname='dct-meta-field')
     name = blocks.CharBlock(required=False, classname='dct-meta-field dct-name-field', help_text='Name to help identfy the shelf')
-    
+    width = blocks.ChoiceBlock(SHELF_WIDTH,
+                                label='Width',
+                                default='responsive',
+                                classname='dct-meta-field')
+
     class meta:
         abstract = True
 
