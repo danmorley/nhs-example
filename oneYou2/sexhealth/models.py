@@ -21,7 +21,6 @@ class SexHealthPage(GeneralShelvePage, Tracking, Social):
         ('grid_shelf', StandardGridShelf(icon='form')),
         ('panel_carousel_shelf', PanelCarouselShelf(icon='repeat')),
         ('two_column_shelf', StandardTwoColumnShelf(label='Two Column Shelf', icon='grip')),
-        ('two_column_shelf_oneyou', TwoColumnShelf(label='Two Column Shelf (OneYou)', icon='grip')),        
     ], null=True, blank=True)
 
     @classmethod

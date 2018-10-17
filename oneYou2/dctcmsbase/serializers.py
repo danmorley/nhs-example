@@ -123,11 +123,21 @@ class BannerPanelSerializer(HyperlinkedModelSerializer):
                 'slug': cta_page.get('slug'),
                 'relative_path': cta_page.get('relative_path'),
             }
+        
+        """Remove unnecessary renditions"""
+        mobile_rendition = obj.background_image_mobile_rendition
+        desktop_rendition = obj.background_image_desktop_rendition
+        meta_variant = representation.pop('meta_variant')
+        representation['background_image']['renditions'] = {
+            'mobile': representation['background_image']['renditions'][mobile_rendition],
+            'desktop': representation['background_image']['renditions'][desktop_rendition],
+            'meta_variant': meta_variant,
+        }
 
         representation['shelf_id'] = slugify(representation['shelf_id'])
         return representation
 
     class Meta:
         model = BannerPanel
-        fields = ['heading', 'body', 'background_image', 'meta_gradient', 'cta_text', 'cta_link', 'cta_page',
+        fields = ['heading', 'body', 'background_image', 'meta_variant', 'cta_text', 'cta_link', 'cta_page',
                   'shelf_id', 'meta_layout', 'meta_variant']
