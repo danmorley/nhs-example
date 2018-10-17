@@ -10,11 +10,6 @@ from rest_framework.serializers import HyperlinkedModelSerializer
 from .utils import determine_image_rendtions_for_shared_content_shelves, replace_resource_ids_with_links_for_download
 from .sharedcontent import BannerPanel
 
-# serializer for all the GeneralShelvePage child page model
-
-def get_GeneralShelvePage_model():
-    from dctcmsbase.models import GeneralShelvePage
-    return GeneralShelvePage
 
 class GeneralShelvePageSerializer(serializers.ModelSerializer):
     body = StreamField()
@@ -42,59 +37,55 @@ class GeneralShelvePageSerializer(serializers.ModelSerializer):
         return serialized_data
 
     class Meta:
-        # TODO check if class have Tracking and Social as parent
-        model = get_GeneralShelvePage_model()
 
-        fields = (
-            'id',
-            'title',
-            'body',
-            # 'path',
-            # 'depth',
-            # 'numchild',
-            # 'live',
-            'page_theme',
-        )
+        def get_fields():
+            return (
+                'id',
+                'title',
+                'body',
+                'page_theme',
+            )
 
-        meta_fields = (
-            # 'type',
-            'slug',
-            # 'html_url',
-            # 'detail_url',
-            'show_in_menus',
+        def get_meta_fields():
+            return (
+                'slug',
+                'show_in_menus',
+                'seo_title',
+                'search_description',
+                'first_published_at',
+            )
 
-            'seo_title',
-            'search_description',
-            'first_published_at',
-            # 'parent',
-        )
+        def get_social_fields():
+            return (
+                # OpenGraph fields
+                'og_title',
+                'og_description',
+                'og_url',
+                'og_image',
+                'og_type',
 
-        social_fields = (
-            # OpenGraph fields
-            'og_title',
-            'og_description',
-            'og_url',
-            'og_image',
-            'og_type',
+                # Twitter fields
+                'twitter_url',
+                'twitter_card',
+                'twitter_site',
+                'twitter_title',
+                'twitter_description',
+                'twitter_image',
 
-            # Twitter fields
-            'twitter_url',
-            'twitter_card',
-            'twitter_site',
-            'twitter_title',
-            'twitter_description',
-            'twitter_image',
+                'use_share_button',
+                'use_email_button',
+                'use_print_button',
+            )
 
-            'use_share_button',
-            'use_email_button',
-            'use_print_button',
-        )
+        def get_tracking_fields():
+            return (
+                'tracking_group',
+            )
 
-        tracking_fields = (
-            'tracking_group',
-        )
+        abstract = True
 
-        fields = fields + meta_fields + social_fields + tracking_fields
+        fields = get_fields() + get_meta_fields() + get_social_fields() + get_tracking_fields()
+        meta_fields = get_meta_fields()
 
 
 class CTAPageSerializer(serializers.Serializer):

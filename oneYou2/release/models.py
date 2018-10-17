@@ -145,11 +145,9 @@ class Release(ClusterableModel):
 
     @classmethod
     def generate_fixed_content(cls, revision):
-        from pages.serializers import GeneralShelvePageSerializer, RecipePageSerializer
         page = revision.as_page_object()
-        if isinstance(page, RecipePage):
-            return RecipePageSerializer(page).data
-        return GeneralShelvePageSerializer(page).data
+        Serializer = page.__class__.get_serializer()
+        return Serializer(page).data
 
     def generate_fixed_site_meta(self):
         from oneYou2.serializers import SiteSerializer
