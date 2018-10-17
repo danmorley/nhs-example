@@ -16,9 +16,6 @@ from dctsharedcontent.models import SharedContent
 from home.models import SiteSettings
 
 
-# SHARED_CONTENT_TYPES = ['promo_shelf', 'banner_shelf', 'app_shelf']
-
-
 def process_inlines(field):
     if field:
         field = process_inline_hyperlinks(field)
@@ -122,10 +119,6 @@ def get_field_value(field, model):
                 final_content = []
                 for shelf in field_dict:
                     parse_shelf(shelf, parent=None)
-                    # if shelf['type'] in SHARED_CONTENT_TYPES:
-                    #     shelf['content'] = SharedContent.objects.get(id=shelf['value']).specific.serializable_data()
-                    #     final_content.append(shelf)
-                    # else:
                     shelf['content'] = shelf['value']
                     final_content.append(shelf)
                 return json.dumps(final_content)
@@ -152,70 +145,6 @@ def get_serializable_data_for_fields(model):
             obj[field.name] = get_field_value(field, model)
 
     return obj
-
-
-def determine_image_rendtions_for_shared_content_shelves(shelf, parent=None):
-    """
-    Will recursively traverse a tree of shelves and determine the correct image rendition.
-    The rendition is based not only on the shelf type but also potentially on the shelf type of the parent.
-    A shelf passed in will contain a dictionary in either image or background_image called "renditions" which will
-    be a list of all possible renditions for the image. This function will filter and manipulate that dictionary
-    so that the shelf returned contains only two keys, mobile and desktop. The frontend will then pick the appropriate
-    rendition. This manipulation will also be performed on any child shelves. It is also possible that the original
-    image will be used if desktop_use_renditions or mobile_use_renditions is false. In that case
-    Args:
-        shelf: A dictionary representations of one the CMS shelf types from within a streamfield.
-        parent: Same as above
-    Returns:
-        shelf: A dictionary representation of a shelf and all it's child shelves (nested dictionaries) with a filtered
-        renditions dict.
-    """
-    if type(shelf['value']) is dict or type(shelf['value']) is OrderedDict:
-        shelf_type = shelf['type']
-
-        if not parent:
-            shelf['value']['image_meta'] = '{}/{}/{}'.format(shelf_type, None, None)
-        elif parent.get('type') == 'grid_shelf':
-            shelf['value']['image_meta'] = '{}/{}/{}'.format(shelf_type, parent['type'], parent['value']['meta_layout'])
-        else:
-            shelf['value']['image_meta'] = '{}/{}/{}'.format(shelf_type, parent['type'], None)
-
-        # TODO: MERGE THE TWO IF STATEMENTS BELOW
-
-        if 'recipe_teaser' in shelf_type:
-            image = shelf['value']['background_image']
-            if image:
-                rendition_shelf_type = 'recipe_teaser'
-                parent_shelf_type = parent['type']
-
-                image['renditions'] = {
-                    'mobile': image['renditions']['{}/{}/None/mobile'.format(rendition_shelf_type,
-                                                                             parent_shelf_type)],
-                    'desktop': image['renditions']['{}/{}/None/desktop'.format(rendition_shelf_type,
-                                                                               parent_shelf_type)]
-                }
-
-        if 'app_teaser' in shelf_type:
-            image = shelf['value']['image']
-            if image:
-                rendition_shelf_type = 'app_teaser'
-                parent_shelf_type = parent['type']
-                parent_meta_layout = parent['value'].get('meta_layout')
-
-                image['renditions'] = {
-                    'mobile': image['renditions']['{}/{}/{}/mobile'.format(rendition_shelf_type,
-                                                                           parent_shelf_type,
-                                                                           parent_meta_layout)],
-                    'desktop': image['renditions']['{}/{}/{}/desktop'.format(rendition_shelf_type,
-                                                                             parent_shelf_type,
-                                                                             parent_meta_layout)]
-                }
-
-        items = shelf['value'].get('items', [])
-        for item in items:
-            determine_image_rendtions_for_shared_content_shelves(item, parent=shelf)
-
-    return shelf
 
 
 def replace_resource_ids_with_links_for_download(shelf):

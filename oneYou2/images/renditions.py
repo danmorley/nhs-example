@@ -46,7 +46,6 @@ ONEYOU_RENDITIONS = [
 
 MOBILE_RENDITION_CHOICES = (
     ('none', 'Use Original'),
-    ('parent', 'Use Parent'),
     ('107x176', '107 x 176'),
     ('107x370', '107 x 370'),
     ('120x120', '120 x 120'),
@@ -67,7 +66,6 @@ MOBILE_RENDITION_CHOICES = (
 
 DESKTOP_RENDITION_CHOICES = (
     ('none', 'Use Original'),
-    ('parent', 'Use Parent'),
     ('1150x220', '1150x220'),
     ('128x263', '128x263'),
     ('128x378', '128x378'),

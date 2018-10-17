@@ -82,10 +82,6 @@ class GridShelf(Shelf):
     body = blocks.RichTextBlock(required=False)
     background_image = BackgroundImageBlock(required=False)
     rows_to_show = blocks.IntegerBlock(default=0, classname='dct-meta-field')
-    # meta_image_display = blocks.ChoiceBlock(GRID_IMAGE_CHOICES,
-    #                                         label='Teaser image display',
-    #                                         default='cover',
-    #                                         classname='dct-meta-field')
     meta_gutter_size = blocks.ChoiceBlock(GRID_GUTTER_CHOICES,
                                             label='Gutter size',
                                             default='gutter-unset',

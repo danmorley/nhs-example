@@ -7,7 +7,7 @@ from wagtail.api.v2.serializers import StreamField
 
 from rest_framework.serializers import HyperlinkedModelSerializer
 
-from .utils import determine_image_rendtions_for_shared_content_shelves, replace_resource_ids_with_links_for_download
+from .utils import replace_resource_ids_with_links_for_download
 from .sharedcontent import BannerPanel
 
 
@@ -26,7 +26,6 @@ class GeneralShelvePageSerializer(serializers.ModelSerializer):
                 pass
         serialized_data['meta']['type'] = 'general_page'
         for shelf in serialized_data['body']:
-            determine_image_rendtions_for_shared_content_shelves(shelf)
             replace_resource_ids_with_links_for_download(shelf)
             shelf_id = shelf.get('id', None)
             if shelf_id:
