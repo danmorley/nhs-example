@@ -246,13 +246,6 @@ BasicCtaShelf.propTypes = {
 // Variants:
 CmsComponentRegistry.register('basic_cta_shelf', BasicCtaShelf, 'basic-cta-shelf');
 
-// Banner Shelf
-//
-// Layouts: cta_on_right, cta_on_left
-// Variants: banner
-CmsComponentRegistry.register('banner_shelf', BasicCtaShelf, 'banner-shelf', 'banner');
-CmsComponentRegistry.register('banner_shelf_v2', BasicCtaShelf, 'banner-shelf', 'banner');
-
 // Promo Shelf
 //
 // Layouts: cta_on_right, cta_on_left
