@@ -29,7 +29,6 @@ class Page extends Component {
     if (page) {
       const { page_theme, page_styles } = page;
       page.type = page.meta.type || 'general_page';
-      page.type = 'general_page';
 
       const pageInfo = CmsComponentRegistry.components[page.type];
       const PageClass = pageInfo && pageInfo.class;

@@ -29,7 +29,7 @@ class GeneralShelvePageSerializer(serializers.ModelSerializer):
                 serialized_data['meta'][meta_field] = meta_field_value
             except KeyError:
                 pass
-        # serialized_data['meta']['type'] = 'oneyou_page'
+        serialized_data['meta']['type'] = 'general_page'
         for shelf in serialized_data['body']:
             determine_image_rendtions_for_shared_content_shelves(shelf)
             replace_resource_ids_with_links_for_download(shelf)
