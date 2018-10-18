@@ -122,4 +122,20 @@
       }
     }
   }
+
+  .accordion-panel {
+    h2.accordion-item__sub-container {
+      border-bottom: 2px solid #ccc;
+      padding: 0.1em !important;
+    }
+
+    .accordion-item__body {
+      padding: 0.1em;
+    }
+
+    .accordion-item__body--expanded {
+      padding-top: 1em;
+      padding-bottom: 1.5em;
+    }
+  }
 }
