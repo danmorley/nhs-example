@@ -15,18 +15,21 @@ class Shelf extends Component {
     if (this.props.trackingGroup) TrackingUtils.trackEvent(e.target, this.props.trackingGroup, 'Click', this.props.id);
   }
 
-  shelfClasses() {
-    let classNamePrefix = this.props.classNamePrefix || 'basic';
-    return this.props.variant ? `shelf ${classNamePrefix} ${classNamePrefix}--${this.props.variant}` : `shelf ${classNamePrefix}`;
-  }
-
   render() {
-    const { id, layout, style, trackingGroup, children } = this.props;
-    let sectionStyle = (layout) ? "shelf-section shelf-" + layout : "shelf-section";
+    let { id, classNamePrefix, layout, variant, style, trackingGroup, classExtra, noPadding, children } = this.props;
+    const classes = [
+      'shelf',
+      classNamePrefix,
+      `${classNamePrefix}--${variant}`,
+      `${classNamePrefix}--${layout}`,
+      classExtra
+    ]
+
+    const sectionStyle = (noPadding) ? "shelf-section shelf-no-padding" : "shelf-section";  // Try and remove this as a section should have no padding.
 
     return (
       <section className={sectionStyle}>
-        <div id={id} className={this.shelfClasses()} style={style} data-tracking-group={trackingGroup} onMouseDown={this.handleClick}>
+        <div id={id} className={classes.join(' ')} style={style} data-tracking-group={trackingGroup} onMouseDown={this.handleClick}>
           {children}
         </div>
       </section>
@@ -34,13 +37,22 @@ class Shelf extends Component {
   }
 }
 
+Shelf.defaultProps = {
+  classNamePrefix: 'basic',
+  layout: 'standard_layout',
+  variant: 'standard_variant',
+  noPadding: false
+};
+
 Shelf.propTypes = {
   classNamePrefix: PropTypes.string.isRequired,
   variant: PropTypes.string,
   layout: PropTypes.string,
   style: PropTypes.object,
   trackingGroup: PropTypes.string,
-  id: PropTypes.string
+  id: PropTypes.string,
+  noPadding: PropTypes.bool,
+  classExtra: PropTypes.string
 }
 
 export default Shelf;

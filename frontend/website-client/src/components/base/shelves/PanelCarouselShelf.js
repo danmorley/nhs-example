@@ -7,13 +7,14 @@ import Slider from 'react-slick';
 import Equalizer from 'react-equalizer';
 
 import PlaceholderPanel from '../panels/PlaceholderPanel';
-import VideoTeaserPanel from '../panels/VideoTeaserPanel';
-import ImageTeaserPanel from '../panels/ImageTeaserPanel';
-import Oneyou1TeaserPanel from '../panels/Oneyou1TeaserPanel';
-import AppTeaserPanel from '../panels/AppTeaserPanel';
-import InformationPanel from '../panels/InformationPanel';
+// import VideoTeaserPanel from '../panels/VideoTeaserPanel';
+import ImageTeaserPanel from '../panels/ImageTeaserPanel/ImageTeaserPanel';
+// import Oneyou1TeaserPanel from '../panels/Oneyou1TeaserPanel';
+// import AppTeaserPanel from '../panels/AppTeaserPanel';
+// import InformationPanel from '../panels/InformationPanel';
 
 import './panel-carousel-shelf.css';
+import ShelfUtils from '../shared/ShelfUtils';
 
 /**
  *  Panel Carousel Shelf is used to display a list of slides in a panel carousel widget.
@@ -90,16 +91,16 @@ class PanelCarouselShelf extends Component {
 
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} trackingGroup={content.tracking_group}>
-        <div className="shelf__container container">
+        <div className={`shelf__container ${ShelfUtils.shelfContainerClass(content)}`}>
           <h2 className="shelf__header">{content.heading}</h2>
-        </div>
-        <div className="container-fluid">
-          <div className="row carousel__row">
-            <Equalizer nodes={this.getNodes.bind(this)}>
-              <Slider className="panel-carousel carousel-panel" {...settings}>
-                {slides}
-              </Slider>
-            </Equalizer>
+          <div className="container-fluid">
+            <div className="row carousel__row">
+              <Equalizer nodes={this.getNodes.bind(this)}>
+                <Slider className="panel-carousel carousel-panel" {...settings}>
+                  {slides}
+                </Slider>
+              </Equalizer>
+            </div>
           </div>
         </div>
       </Shelf>
@@ -113,6 +114,6 @@ PanelCarouselShelf.propTypes = {
   id: PropTypes.string
 }
 
-CmsComponentRegistry.register('panel_carousel_shelf', PanelCarouselShelf, 'panel-carousel-shelf', null, null, 'oneyou');
+CmsComponentRegistry.register('panel_carousel_shelf', PanelCarouselShelf, 'panel-carousel-shelf');
 
 export default PanelCarouselShelf;

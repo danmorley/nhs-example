@@ -10,7 +10,8 @@ import CmsComponentRegistry from '../CmsComponentRegistry';
 // import * as Panels from './panels'
 import PlaceholderPanel from '../../oneyou/panels/PlaceholderPanel';
 import VideoTeaserPanel from '../../oneyou/panels/VideoTeaserPanel';
-import ImageTeaserPanel from '../../oneyou/panels/ImageTeaserPanel';
+import '../../oneyou/panels/ImageTeaserPanel';
+import '../panels/ImageTeaserPanel/ImageTeaserPanel';
 import Oneyou1TeaserPanel from '../../oneyou/panels/Oneyou1TeaserPanel';
 import AppTeaserPanel from '../../oneyou/panels/AppTeaserPanel';
 import InformationPanel from '../../oneyou/panels/InformationPanel';

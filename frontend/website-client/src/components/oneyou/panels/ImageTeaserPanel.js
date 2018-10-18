@@ -97,6 +97,6 @@ ImageTeaserPanel.propTypes = {
   id: PropTypes.string
 };
 
-CmsComponentRegistry.register('image_teaser', ImageTeaserPanel, 'image-teaser');
+CmsComponentRegistry.register('image_teaser', ImageTeaserPanel, 'image-teaser', null, null, 'oneyou');
 
 export default ImageTeaserPanel;
