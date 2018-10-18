@@ -23,7 +23,7 @@ BACKGROUND_IMAGE_VARIANT = (
     ('gradient', 'Background Gradient'),
 )
 
-BANNER_VARIANT_CHOICES = (
+BANNER_LAYOUT_CHOICES = (
     ('vertical_left', 'Vertical & Left Aligned'),
     ('vertical_center', 'Vertical & Center Aligned'),
     ('vertical_right', 'Vertical & Right Aligned'),
