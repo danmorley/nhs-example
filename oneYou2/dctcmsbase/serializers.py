@@ -8,7 +8,7 @@ from wagtail.api.v2.serializers import StreamField
 from rest_framework.serializers import HyperlinkedModelSerializer
 
 from .utils import replace_resource_ids_with_links_for_download
-from .sharedcontent import BannerPanel
+from .sharedcontent import Banner
 
 
 class GeneralShelvePageSerializer(serializers.ModelSerializer):
@@ -101,7 +101,7 @@ class CTAPageSerializer(serializers.Serializer):
         return serialized_data
 
 
-class BannerPanelSerializer(HyperlinkedModelSerializer):
+class BannerSerializer(HyperlinkedModelSerializer):
     from images.serializers import ImageSerializer
 
     cta_page = CTAPageSerializer()
@@ -125,19 +125,20 @@ class BannerPanelSerializer(HyperlinkedModelSerializer):
             }
         
         """Remove unnecessary renditions"""
-        mobile_rendition = obj.background_image_mobile_rendition
-        desktop_rendition = obj.background_image_desktop_rendition
-        meta_variant = representation.pop('meta_variant')
-        representation['background_image']['renditions'] = {
-            'mobile': representation['background_image']['renditions'][mobile_rendition],
-            'desktop': representation['background_image']['renditions'][desktop_rendition],
-            'meta_variant': meta_variant,
-        }
+        if representation['background_image']:
+            mobile_rendition = obj.background_image_mobile_rendition
+            desktop_rendition = obj.background_image_desktop_rendition
+            meta_variant = representation.pop('meta_variant')
+            representation['background_image']['renditions'] = {
+                'mobile': representation['background_image']['renditions'][mobile_rendition],
+                'desktop': representation['background_image']['renditions'][desktop_rendition],
+                'meta_variant': meta_variant,
+            }
 
         representation['shelf_id'] = slugify(representation['shelf_id'])
         return representation
 
     class Meta:
-        model = BannerPanel
+        model = Banner
         fields = ['heading', 'body', 'background_image', 'meta_variant', 'cta_text', 'cta_link', 'cta_page',
                   'shelf_id', 'meta_layout', 'meta_variant']

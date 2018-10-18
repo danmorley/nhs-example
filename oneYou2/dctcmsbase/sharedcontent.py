@@ -23,9 +23,18 @@ BACKGROUND_IMAGE_VARIANT = (
     ('gradient', 'Background Gradient'),
 )
 
+BANNER_VARIANT_CHOICES = (
+    ('vertical_left', 'Vertical & Left Aligned'),
+    ('vertical_center', 'Vertical & Center Aligned'),
+    ('vertical_right', 'Vertical & Right Aligned'),
+    ('horizontal_left', 'Horizontal & Left Aligned'),
+    ('horizontal_center', 'Horizontal & Center Aligned'),
+    ('horizontal_right', 'Horizontal & Right Aligned'),
+)
+
 
 @register_snippet
-class BannerPanel(SharedContent):
+class Banner(SharedContent):
     heading = models.CharField(max_length=255, null=True, blank=True)
     body = RichTextField(blank=True, null=True)
     background_image = models.ForeignKey(

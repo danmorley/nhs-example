@@ -1,8 +1,9 @@
 from wagtail.core import blocks
 
-from .blocks import PositionedImageBlock, IDBlock, BackgroundImageBlock, BannerPanelChooserBlock
+from .blocks import PositionedImageBlock, IDBlock, BackgroundImageBlock, BannerChooserBlock
 from .panels import (StandardRichTextPanel, StandardInformationPanel, CtaPanel, StandardSimpleImagePanel,
     PlainTextPanel, AccordionPanel, StandardImageTeaserPanel, AudioTeaserPanel, StandardVideoTeaserPanel)
+from .sharedcontent import BANNER_VARIANT_CHOICES
 
 
 SHELF_WIDTH = (
@@ -121,7 +122,11 @@ class PageHeadingShelf(Shelf, WithTracking):
 
 
 class BannerShelf(Shelf, WithTracking):
-    panel = BannerPanelChooserBlock(target_model='dctcmsbase.BannerPanel', icon='image')
+    panel = BannerChooserBlock(target_model='dctcmsbase.Banner', icon='image')
+    meta_variant = blocks.ChoiceBlock(choices=BANNER_VARIANT_CHOICES,
+                                    default='vertical_center',
+                                    label='Variant',
+                                    classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-banner-shelf dct-meta-panel'

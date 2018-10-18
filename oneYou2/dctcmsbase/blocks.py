@@ -14,7 +14,7 @@ from shelves.blocks import BlobImageChooserBlock
 from images.renditions import MOBILE_RENDITION_CHOICES, DESKTOP_RENDITION_CHOICES
 from home.models import SiteSettings
 
-from .serializers import BannerPanelSerializer
+from .serializers import BannerSerializer
 
 
 IMAGE_POSITION = (
@@ -132,9 +132,9 @@ class IDBlock(blocks.CharBlock):
         return slugify(value)
 
 
-class BannerPanelChooserBlock(SnippetChooserBlock):
+class BannerChooserBlock(SnippetChooserBlock):
     def get_api_representation(self, value, context=None):
-        return BannerPanelSerializer(context=context).to_representation(value)
+        return BannerSerializer(context=context).to_representation(value)
 
 
 class ItemPageBlock(blocks.PageChooserBlock):
