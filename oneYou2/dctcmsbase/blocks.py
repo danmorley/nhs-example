@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
 from django.template.defaultfilters import slugify
 
+from wagtail.api import APIField
 from wagtail.core import blocks
 from wagtail.core.blocks import StructValue
 from wagtail.documents.blocks import DocumentChooserBlock
@@ -179,3 +180,17 @@ class DocumentDownloadBlock(blocks.StructBlock):
         label='CTA Style',
         classname='dct-meta-field'
     )
+    
+    api_fields = [
+        APIField('document'),
+    ]
+
+    def get_api_representation(self, value, context=None):
+        result = blocks.StructBlock.get_api_representation(self, value, context)
+        document_id = result['document']
+
+        if document_id:
+            from wagtail.documents.models import Document
+            result['document'] = Document.objects.get(id=document_id).file.url
+
+        return result

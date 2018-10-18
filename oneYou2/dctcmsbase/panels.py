@@ -167,6 +167,8 @@ class CtaPanel(Panel):
         ('simple_cta_link', SimpleCtaLinkBlock()),
     ], icon='arrow-left', label='CTA links', required=False)
 
+    class Meta:
+        form_classname = 'dct-panel-cta dct-meta-panel'
 
 class SimpleImagePanel(Panel):
     image = ImageBlock(required=False)
@@ -177,7 +179,7 @@ class SimpleImagePanel(Panel):
         form_classname = 'dct-simple-image-panel dct-meta-panel'
 
 
-class StandardSimpleImagePanel(Panel):
+class StandardSimpleImagePanel(SimpleImagePanel):
     meta_variant = blocks.ChoiceBlock(choices=IMAGE_PANEL_VARIANTS,
                                       default='normal',
                                       label='Variant',
@@ -189,9 +191,12 @@ class StandardSimpleImagePanel(Panel):
 class PlainTextPanel(Panel):
     text = blocks.CharBlock(required=False)
 
+    class Meta:
+        form_classname = 'dct-panel-plain-text dct-meta-panel'
+
 
 ACCORDION_ITEMS = [
-    ('rich_text_panel', RichTextPanel(required=False)),
+    ('rich_text_panel', StandardRichTextPanel(required=False)),
 ]
 
 class AccordionItemsPanel(Panel):
@@ -199,10 +204,13 @@ class AccordionItemsPanel(Panel):
     items = blocks.StreamBlock(ACCORDION_ITEMS, icon='arrow-left', label='Items')
 
     class Meta:
-        form_classname = 'dct-table-shelf dct-meta-panel'
+        form_classname = 'dct-panel-accordion-items dct-meta-panel'
 
 
 class AccordionPanel(Panel):
     accordions = blocks.StreamBlock([
         ('accordion_items', AccordionItemsPanel(required=True, icon='collapse-down'))
     ])
+
+    class Meta:
+        form_classname = 'dct-panel-panel-accordion dct-meta-panel'
