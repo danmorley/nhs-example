@@ -94,6 +94,16 @@ class TeaserPanel(Panel):
 class AudioTeaserPanel(TeaserPanel):
     audio = AbstractMediaChooserBlock(required=False)
 
+    def get_api_representation(self, value, context=None):
+        result = blocks.StructBlock.get_api_representation(self, value, context)
+        audio_id = result['audio']
+
+        if audio_id:
+            from wagtailmedia.models import Media
+            result['audio'] = Media.objects.get(id=audio_id).file.url
+
+        return result
+
 
 class VideoTeaserPanel(TeaserPanel):
     host = blocks.ChoiceBlock(choices=VIDEO_HOSTS, label='Host', default=BRIGHTCOVE_OPTION)

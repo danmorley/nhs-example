@@ -145,20 +145,3 @@ def get_serializable_data_for_fields(model):
             obj[field.name] = get_field_value(field, model)
 
     return obj
-
-
-def replace_resource_ids_with_links_for_download(shelf):
-    if type(shelf['value']) is dict or type(shelf['value']) is OrderedDict:
-        ctas = shelf['value'].get('cta', [])
-        for cta in ctas:
-            if 'document' in cta:
-                cta['link_external'] = Document.objects.get(id=cta['document']).file.url
-                cta['document'] = True
-        if 'audio' in shelf['value'] and not shelf['value']['audio'] is None:
-            print('found audio key in', shelf)
-            shelf['value']['audio'] = Media.objects.get(id=shelf['value']['audio']).file.url
-        items = shelf['value'].get('items', [])
-        for item in items:
-            replace_resource_ids_with_links_for_download(item)
-
-    return shelf
