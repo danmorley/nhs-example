@@ -1,0 +1,25 @@
+@import '../../../assets/styles/variables/variables';
+@import "../../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+$shelf-padding-standard: 1em;
+$shelf-padding-extra: 2em;
+
+.sexhealth {
+  .banner-shelf {
+    h2 {
+      margin-bottom: -6px;
+    }
+    .row {
+      margin: 1em 0;
+    }
+    .banner-shelf-body p {
+      color: black;
+      margin: 0 auto;
+      width: 95%;
+
+      @include media-breakpoint-up(md) {
+        width: 80%;
+      }
+    }
+  }
+}

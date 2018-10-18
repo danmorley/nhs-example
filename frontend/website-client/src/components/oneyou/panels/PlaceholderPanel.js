@@ -23,6 +23,6 @@ PlaceholderPanel.propTypes = {
   id: PropTypes.string
 }
 
-CmsComponentRegistry.register('placeholder_panel', PlaceholderPanel);
+CmsComponentRegistry.register('placeholder_panel', PlaceholderPanel, null, null, null, 'oneyou');
 
 export default PlaceholderPanel;

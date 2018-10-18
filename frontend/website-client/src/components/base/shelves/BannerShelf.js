@@ -6,7 +6,7 @@ import Text from '../Text';
 import Image from '../Image';
 import CtaLink from '../shared/CtaLink';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-import './promo-shelf.css';
+import './banner-shelf.css';
 import ResponsiveBackgroundImage from '../shared/ResponsiveBackgroundImage';
 import ShelfUtils from '../shared/ShelfUtils';
 
@@ -65,22 +65,37 @@ class BannerShelf extends Component {
     return (<Image image={image} class={classname} />);
   }
 
-  renderHeadingBody(content, headingTagName) {
-    return [
-      (<Text key="1" tagName={headingTagName} content={content.heading} />),
-      (<Text key="2" content={content.body} format="richtext"/>)
-    ];
+  renderHeading(text, headingTagName, colClass) {
+    if (!text) return null;
+    return (
+      <div className={`banner-shelf-heading ${colClass || ''}`}>
+        <Text tagName={headingTagName} content={text} />
+      </div>
+    );
   }
 
-  renderCta(cta) {
+  renderBody(text, colClass) {
+    if (!text) return null;
+    return (
+      <div className={`banner-shelf-body ${colClass | ''}`}>
+        <Text content={text} format="richtext" />
+      </div>
+    );
+  }
+
+  renderCta(cta, colClass) {
     if (!cta) return null;
-    return (<CtaLink variant="button" cta={cta} />);
+    return (
+      <div className={`banner-shelf-cta ${colClass || ''}`}>
+        <CtaLink variant="button" cta={cta} />
+      </div>
+    );
   }
 
   render() {
     let { id, content, classNamePrefix, variant, layout } = this.props;
     let metaVariant = content.meta_variant || variant;
-    let metaLayout = content.meta_layout || layout;
+    let metaLayout = content.meta_layout || layout || 'vertical';
     let headingTagName = (classNamePrefix === 'page-heading-shelf') ? 'h1' : 'h2';
     content = content.panel
 
@@ -89,14 +104,22 @@ class BannerShelf extends Component {
 
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group}>
-        <ResponsiveBackgroundImage image={content.background_image} className={`shelf__container zzz 
-        ${ShelfUtils.shelfContainerClass(content)} child-image--${content.meta_image_display}`}>
-          <div className="row">
-            <div className="shelf__col col-12 col-vertical-center">
-              {this.renderHeadingBody(content, headingTagName)}
-              {this.renderCta(content.cta)}
+        <ResponsiveBackgroundImage image={content.background_image} className={`shelf__container ${ShelfUtils.shelfContainerClass(content)} child-image--${content.meta_image_display}`}>
+          { metaLayout === 'vertical' && [
+            <div key="1" className="row">{this.renderHeading(content.heading, headingTagName, 'col-12')}</div>,
+            <div key="2" className="row">{this.renderBody(content.body, 'col-12')}</div>,
+            <div key="3" className="row">{this.renderCta(content.cta, 'col-12')}</div>
+          ]
+          }
+          { metaLayout === 'horizontal' &&
+            <div key="1" className="row align-items-center">
+              <div className="col">
+                {this.renderHeading(content.heading, headingTagName)}
+                {this.renderBody(content.body)}
+              </div>
+              {this.renderCta(content.cta, 'col')}
             </div>
-          </div>
+          }
         </ResponsiveBackgroundImage>
       </Shelf>
     );
