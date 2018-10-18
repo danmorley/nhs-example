@@ -163,3 +163,26 @@ class StandardTwoColumnShelf(TwoColumnShelf):
     
     class Meta:
         verbose_name = 'two column'
+
+
+class SimplePageHeadingShelf(Shelf):
+    heading = blocks.CharBlock(required=False)
+    display_back_button = blocks.BooleanBlock(label='Display a back button', required=False, default=True)
+    back_button_label = blocks.CharBlock(required=False)
+
+    class Meta:
+        form_classname = 'dct-simple-page-heading-shelf dct-meta-panel'
+
+
+class SimpleSectionHeadingShelf(Shelf):
+    heading = blocks.CharBlock(required=True)
+
+    class Meta:
+        form_classname = 'dct-simple-section-heading-shelf dct-meta-panel'
+
+
+class SimpleRichTextHeadingShelf(Shelf):
+    body = blocks.RichTextBlock(required=False)
+
+    class Meta:
+        form_classname = 'dct-simple-rich-text-heading-shelf dct-meta-panel'

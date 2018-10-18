@@ -8,7 +8,7 @@ from modelcluster.models import get_all_child_relations, get_all_child_m2m_relat
 from dctcmsbase.models import GeneralShelvePage, Tracking, Social
 from dctcmsbase.shelves import PageHeadingShelf
 from dctcmsbase.shelves import (PageHeadingShelf, BannerShelf, StandardGridShelf, PanelCarouselShelf,
-    StandardTwoColumnShelf)
+    StandardTwoColumnShelf, SimplePageHeadingShelf, SimpleSectionHeadingShelf, SimpleRichTextHeadingShelf)
 from dctcmsbase.utils import get_serializable_data_for_fields
 
 from pages.models import TwoColumnShelf
@@ -21,6 +21,9 @@ class SexHealthPage(GeneralShelvePage, Tracking, Social):
         ('grid_shelf', StandardGridShelf(icon='form')),
         ('panel_carousel_shelf', PanelCarouselShelf(icon='repeat')),
         ('two_column_shelf', StandardTwoColumnShelf(label='Two Column Shelf', icon='grip')),
+        ('simple_page_heading_shelf', SimplePageHeadingShelf(icon='title')),
+        ('simple_section_heading_shelf', SimpleSectionHeadingShelf(icon='title')),
+        ('simple_richtext_heading_shelf', SimpleRichTextHeadingShelf(icon='title')),
     ], null=True, blank=True)
 
     @classmethod
