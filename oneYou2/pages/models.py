@@ -1136,19 +1136,26 @@ class Footer(models.Model):
         related_name='+'
     )
 
+    heading = models.CharField(max_length=255, null=True, blank=True,)
+    show_sitemap = models.BooleanField(default=True)
+    number_per_column = models.IntegerField(null=True, blank=True, default=4, help_text='Number of menu items per column')
+
     menu_items = StreamField([
         ('simple_menu_item', SimpleMenuItem()),
     ])
 
     follow_us = StreamField([
         ('social_media_link', SocialMediaFooterLink()),
-    ])
+    ], null=True, blank=True,)
 
     panels = [
         FieldPanel('label'),
+        FieldPanel('heading'),
+        FieldPanel('show_sitemap'),
+        FieldPanel('number_per_column'),
         ImageChooserPanel('image'),
         StreamFieldPanel('menu_items'),
-        StreamFieldPanel('follow_us')
+        StreamFieldPanel('follow_us'),
     ]
 
     def __str__(self):

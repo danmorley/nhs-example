@@ -29,6 +29,9 @@ class FooterSerializer(serializers.ModelSerializer):
             'items',
             'social_media',
             'image',
+            'show_sitemap',
+            'heading',
+            'number_per_column',
         )
 
 

@@ -111,3 +111,52 @@
   margin-bottom: 1.5em;
 }
 
+
+//theming
+
+//sexhealth
+.sexhealth {
+  .page-footer {
+    background: $black;
+  }
+
+  .footer-nav {
+    display: block;
+    margin-left: 45px;
+    padding-left: 45px;
+    border-left: 2px solid;
+
+    h2{
+      margin-bottom: 10px;
+      margin-left: -20px;
+    }
+
+    ul {
+      margin-right: 50px;
+    }
+  }
+
+  .footer-nav__link {
+    color: $sexhealth-pink;
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .footer-nav__list {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .footer-nav__item {
+    color: $sexhealth-pink;
+    list-style: disc;
+  }
+
+  .footer-left{
+    display: flex;
+    flex-direction: row;
+  }
+}

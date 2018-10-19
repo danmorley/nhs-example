@@ -30,7 +30,7 @@ class ImageBlock(blocks.StructBlock):
                                       default='cover',
                                       classname='dct-meta-field')
     meta_use_mobile_renditions = blocks.BooleanBlock(default=True,
-                                                     label='Use mobile reditions',
+                                                     label='Use mobile renditions',
                                                      required=False,
                                                      classname='dct-meta-field')
     meta_use_desktop_renditions = blocks.BooleanBlock(default=True,
