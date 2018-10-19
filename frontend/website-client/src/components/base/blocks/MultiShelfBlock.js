@@ -25,7 +25,7 @@ import GridShelf from '../shelves/GridShelf';
 // import SvgShelf from '../../shelves/SvgShelf';
 // import SiteMapShelf from '../../shelves/SiteMapShelf';
 // import DividerShelf from '../../shelves/DividerShelf';
-// import ArticlePageHeadingShelf from '../../shelves/ArticlePageHeadingShelf';
+import SimplePageHeadingShelf from '../shelves/SimplePageHeadingShelf/SimplePageHeadingShelf';
 // import RecipeGridShelf from '../../shelves/RecipeGridShelf';
 // import ShareButtonShelf from '../../shelves/ShareButtonShelf';
 // import TableShelf from '../../shelves/TableShelf';
@@ -37,7 +37,7 @@ import GridShelf from '../shelves/GridShelf';
 
 class MultiShelfBlock extends Component {
   render() {
-    let { body } = this.props;
+    const { body, context } = this.props;
 
     var shelves = body.map((shelf, _i) => {
       console.log(shelf.type);
@@ -49,7 +49,7 @@ class MultiShelfBlock extends Component {
       const shelfId = shelf.value.field_id || shelf.value.shelf_id || 'shelf-' + shelf.id;
 
       if (ShelfClass) {
-        return (<ErrorBoundary key={shelf.id}><ShelfClass content={shelf.value} id={shelfId} classNamePrefix={shelfClassNamePrefix} variant={shelfVariant} layout={shelfLayout}/></ErrorBoundary>);
+        return (<ErrorBoundary key={shelf.id}><ShelfClass content={shelf.value} id={shelfId} classNamePrefix={shelfClassNamePrefix} variant={shelfVariant} layout={shelfLayout} context={context}/></ErrorBoundary>);
       } else {
         return (<PlaceholderShelf key={shelf.id} shelfType={shelf.type} id={shelfId} classNamePrefix={shelfClassNamePrefix}/>);
       }
@@ -60,7 +60,8 @@ class MultiShelfBlock extends Component {
 }
 
 MultiShelfBlock.propTypes = {
-  body: PropTypes.array.isRequired
+  body: PropTypes.array.isRequired,
+  context: PropTypes.object.isRequired
 }
 
 export default MultiShelfBlock;

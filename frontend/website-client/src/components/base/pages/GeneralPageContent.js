@@ -7,8 +7,9 @@ import MultiShelfBlock from '../blocks/MultiShelfBlock';
 
 class GeneralPageContent extends Component {
   render() {
-    let { page } = this.props;
-    return <MultiShelfBlock body={page.body} />;
+    const { page } = this.props;
+    const context = { page: page }
+    return <MultiShelfBlock body={page.body} context={context}/>;
   }
 }
 

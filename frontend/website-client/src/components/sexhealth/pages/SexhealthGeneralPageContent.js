@@ -8,7 +8,8 @@ import MultiShelfBlock from '../../base/blocks/MultiShelfBlock';
 class SexhealthGeneralPageContent extends Component {
   render() {
     let { page } = this.props;
-    return <MultiShelfBlock body={page.body} />;
+    const context = { page: page }
+    return <MultiShelfBlock body={page.body} context={context}/>;
   }
 }
 
