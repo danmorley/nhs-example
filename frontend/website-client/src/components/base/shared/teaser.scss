@@ -1,0 +1,32 @@
+.teaser {
+  background-color: #f4f4f4;
+  height: 100%;
+}
+
+.teaser-image {
+  background-color: #f0f0f0;
+  background-size: cover;
+}
+
+.teaser-body {
+  display: flex;
+  height: 100%;
+  min-height: 200px;
+  flex-direction: column;
+  align-items: stretch;   /* default: stretch, use 'flex-start','center','flex-end' to left, centre and right align respectively. */
+  justify-content: flex-start; /* default: flex-start, justify-content only works if this container has it's min-height set */
+}
+
+.teaser-heading {
+  background-color: #c4c4c4;
+}
+
+.teaser-text {
+  background-color: #f4f4f4;
+  flex-grow: 5;
+}
+
+.teaser-ctas {
+  background-color: #e8e8e8;
+  /* align-self: center; /* Use to override align-items of the parent container. */
+}

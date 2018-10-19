@@ -6,6 +6,7 @@ import './image-teaser-panel.css';
 import Panel from '../Panel';
 import PropTypes from 'prop-types';
 import ResponsiveBackgroundImage from '../../shared/ResponsiveBackgroundImage';
+import Teaser from '../../shared/Teaser';
 
 /**
  *  Image Teaser panel component displaying a teaser panel in the form of a heading
@@ -28,6 +29,24 @@ import ResponsiveBackgroundImage from '../../shared/ResponsiveBackgroundImage';
  */
 class ImageTeaserPanel extends Component {
   render() {
+    const { content, classNamePrefix } = this.props;
+    const layout = content.meta_layout;
+    // const layout = content.meta_layout_desktop + '-' + content.meta_layout_mobile;
+    const ctaStyle = content.meta_cta_variant;
+
+    return (
+      <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant} layout={layout}>
+        <Teaser 
+          image={content.image}
+          heading={<Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />}
+          body={<Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>}
+          ctas={<CtaLinks cta={content.ctas} variant={ctaStyle} />}
+        />
+      </Panel>
+    );
+  }
+
+  renderOld() {
     const { content, classNamePrefix } = this.props;
     const layout = content.meta_layout;
     // const layout = content.meta_layout_desktop + '-' + content.meta_layout_mobile;

@@ -210,7 +210,7 @@
       }
       
       @include media-breakpoint-up(md) {
-        @include heading-h2(oneyou)
+        @include heading-h2(oneyou);
         padding: 1em 0 0;
       }
     }
@@ -272,33 +272,37 @@
 .sexhealth {
   .image-teaser--primary_background {
 
-    .image-teaser__info {
+    .xximage-teaser__info {
       padding: 0  !important;
     }
 
-    .image-teaser__heading {
-      padding: 1.5em 0.5em !important;
-      background-color: $black !important;
+    .xxteaser-image {
+      background-size: cover;
+    }
+
+    .teaser-heading {
+      xxpadding: 0em 18px !important;
+      background-color: $black;
       color: $white;
     }
 
-    .image-teaser__body {
-      padding: 0 0.5em;
-    }
-
-    .image-teaser__text {
-      padding: 1.5em 1em;
+    .teaser-body {
       background-color: $sexhealth-purple;
-      color: $white;
-
-      a.link-cta {
-        // text-decoration: none;
-        // color: $sunflower-yellow;
-      }
     }
 
-    .cta-list {
-      padding: 0 0.5em;
+    .teaser-text {
+      xxpadding: 1em 18px;
+      color: $white;
+      background-color: transparent;
+    }
+
+    .teaser-ctas {
+      background-color: transparent;
+
+      a {
+        text-decoration: none;
+        color: $sunflower-yellow;
+      }
     }
   }
 
