@@ -2,7 +2,8 @@ from wagtail.core import blocks
 
 from .blocks import PositionedImageBlock, IDBlock, BackgroundImageBlock, BannerChooserBlock
 from .panels import (StandardRichTextPanel, StandardInformationPanel, CtaPanel, StandardSimpleImagePanel,
-    PlainTextPanel, AccordionPanel, StandardImageTeaserPanel, AudioTeaserPanel, StandardVideoTeaserPanel)
+    PlainTextPanel, AccordionPanel, StandardImageTeaserPanel, AudioTeaserPanel, StandardVideoTeaserPanel,
+    SimpleServiceFinder)
 from .sharedcontent import BANNER_LAYOUT_CHOICES
 
 
@@ -53,6 +54,7 @@ GRID_PANELS = [
     ('image_teaser', StandardImageTeaserPanel(icon='pick')),
     ('audio_teaser', AudioTeaserPanel(icon='pick')),
     ('video_teaser', StandardVideoTeaserPanel(icon='pick')),
+    ('simple_service_finder', SimpleServiceFinder(icon='form')),
 ]
 
 

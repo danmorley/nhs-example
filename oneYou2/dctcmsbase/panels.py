@@ -224,3 +224,14 @@ class AccordionPanel(Panel):
 
     class Meta:
         form_classname = 'dct-panel-panel-accordion dct-meta-panel'
+
+
+class SimpleServiceFinder(Panel):
+    heading = blocks.CharBlock(required=False)
+    finder_url = blocks.URLBlock()
+    searchbox_placeholder = blocks.CharBlock(required=False)
+    submit_button_copy = blocks.CharBlock()
+    use_location_button_copy = blocks.CharBlock()
+
+    class Meta:
+        form_classname = 'dct-panel-panel-simple-service-finder dct-meta-panel'

@@ -27,7 +27,7 @@ class FooterMenu extends Component {
       <div className ="footer-nav">
         {heading && <h2>{heading}</h2>}
         <div className ="footer-nav__list">
-          {chunk(items, number_per_column||100).map((list, i) => {
+          {chunk(items, number_per_column).map((list, i) => {
             return <ul key={i} className={`footer-nav__col-${i+1}`}>
               {list.map((item, j) => {
                 return <SimpleMenuItem key={j} item={item} classNamePrefix="footer" />;

@@ -31,10 +31,10 @@ class Footer extends Component {
             <div className ="col footer-left">
               <Image image={tempImage} height="68" className="page-footer__phe-logo" />
               <FooterMenu
-                items={items}
+                items={items || undefined}
                 show_sitemap={show_sitemap}
                 heading={heading}
-                number_per_column={number_per_column}
+                number_per_column={number_per_column || undefined}
               />
             </div>
             {social_media_component}
