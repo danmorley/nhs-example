@@ -29,38 +29,6 @@ import ShelfUtils from '../shared/ShelfUtils';
  *    image_on_left: 
  */
 class BannerShelf extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     backgroundImageStyle: null,
-  //     image: null
-  //   }
-  // }
-
-  // setImage() {
-  //   this.setState({
-  //     backgroundImageStyle: ImageUtils.backgroundImageStyle(
-  //       this.props.content.background_image,
-  //       ImageUtils.placeholderBackgroundImage()
-  //     ),
-  //     image: ImageUtils.isValid(this.props.content.image) ? ImageUtils.deviceImage(this.props.content.image) : null
-  //   })
-  // }
-
-  // componentDidMount() {
-  //   this.setImage();
-  //   window.addEventListener('resize', this.setImage.bind(this));
-  // }
-
-  // componentWillUnmount() {
-  //   window.removeEventListener('resize', this.setImage);
-  // }
-
-  // UNSAFE_componentWillReceiveProps(nextProps) {
-  //   this.props = nextProps;
-  //   this.setImage();
-  // }
-
   renderImage(image, classname) {
     return (<Image image={image} class={classname} />);
   }
@@ -93,31 +61,31 @@ class BannerShelf extends Component {
   }
 
   render() {
-    let { id, content, classNamePrefix, variant, layout } = this.props;
-    let metaVariant = content.meta_variant || variant;
-    let metaLayout = content.meta_layout || layout || 'vertical';
-    let headingTagName = (classNamePrefix === 'page-heading-shelf') ? 'h1' : 'h2';
-    content = content.panel
+    const { id, content, classNamePrefix, variant, layout } = this.props;
 
-    // let shelfStyle = (ImageUtils.isValid(content.background_image)) ?
-    // this.state.backgroundImageStyle : backgroundColourShelfStyle;
+    const metaVariant = content.meta_variant || variant;
+    const metaLayout = content.meta_layout || layout || 'vertical_left';
+    const [ direction, alignment ] = metaLayout.split('_');
+
+    const headingTagName = (classNamePrefix === 'page-heading-shelf') ? 'h1' : 'h2';
+    const panel = content.panel
 
     return (
-      <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group}>
-        <ResponsiveBackgroundImage image={content.background_image} className={`shelf__container ${ShelfUtils.shelfContainerClass(content)} child-image--${content.meta_image_display}`}>
-          { metaLayout === 'vertical' && [
-            <div key="1" className="row">{this.renderHeading(content.heading, headingTagName, 'col-12')}</div>,
-            <div key="2" className="row">{this.renderBody(content.body, 'col-12')}</div>,
-            <div key="3" className="row">{this.renderCta(content.cta, 'col-12')}</div>
+      <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group} layout={`align-${alignment}`}>
+        <ResponsiveBackgroundImage image={panel.background_image} className={`shelf__container ${ShelfUtils.shelfContainerClass(content)} child-image--${content.meta_image_display}`}>
+          { direction === 'vertical' && [
+            <div key="1" className="row">{this.renderHeading(panel.heading, headingTagName, 'col-12')}</div>,
+            <div key="2" className="row">{this.renderBody(panel.body, 'col-12')}</div>,
+            <div key="3" className="row">{this.renderCta(panel.cta, 'col-12')}</div>
           ]
           }
-          { metaLayout === 'horizontal' &&
+          { direction === 'horizontal' &&
             <div key="1" className="row align-items-center">
               <div className="col">
-                {this.renderHeading(content.heading, headingTagName)}
-                {this.renderBody(content.body)}
+                {this.renderHeading(panel.heading, headingTagName)}
+                {this.renderBody(panel.body)}
               </div>
-              {this.renderCta(content.cta, 'col')}
+              {this.renderCta(panel.cta, 'col')}
             </div>
           }
         </ResponsiveBackgroundImage>
