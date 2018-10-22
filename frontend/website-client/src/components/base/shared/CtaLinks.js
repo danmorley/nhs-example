@@ -26,7 +26,7 @@ class CtaLinks extends Component {
     } else {
       // Return a single cta link.
       return (
-        <CtaLink cta={cta} variant={variant} disabled={this.props.disabled} />
+        <CtaList items={[cta]} variant={variant} disabled={this.props.disabled} />
       );
     }
   }
