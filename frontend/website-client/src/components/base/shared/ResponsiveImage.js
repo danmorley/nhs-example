@@ -8,39 +8,17 @@ import Image from '../../base/Image';
  *
  */
 class ResponsiveImage extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = { backgroundImageStyle: null };
-  // }
-
-  // setImage() {
-  //   const { image } = this.props;
-  //   if (image && image.image) {
-  //     const style = ImageUtils.backgroundImageStyle(this.props.image.image, ImageUtils.placeholderBackgroundImage());
-  //     this.setState({ backgroundImageStyle: style });
-  //   }
-  // }
-
   handleResize() {
     this.forceUpdate();
   }
 
   componentDidMount() {
-    // this.setImage();
     window.addEventListener('resize', this.handleResize.bind(this));
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize);
   }
-
-  // Code below was commented out as it isn't needed now that all components are keyed on their
-  // unique id passwed in from Wagtail.
-
-  // UNSAFE_componentWillReceiveProps(nextProps) {
-  //   this.props = nextProps;
-  //   this.setImage();
-  // }
 
   render() {
     const { image, variant, className } = this.props;
