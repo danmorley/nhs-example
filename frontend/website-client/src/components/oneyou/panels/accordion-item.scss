@@ -97,17 +97,22 @@
 .sexhealth {
   .accordion-item__header {
     background-color: $white;
-    border-bottom: 2px solid $sexhealth-lightgrey;
+    border-bottom: 1px solid $sexhealth-lightgrey;
 
-    h2 { 
+    h3 { 
       &:after {
         font-size: 1em;
         color: $sexhealth-dark;
+        float: right;
       }
+    }
+
+    h3.accordion-item__sub-container {
+      padding: 0.5em 0 !important;
     }
     
     &.accordion-item__header--expanded {
-      h2 {
+      h3 {
         &:after {
           @extend %icon-sexhealth-minus;
         }
@@ -115,7 +120,7 @@
     }
     
     &.accordion-item__header--collapsed {
-      h2 {
+      h3 {
         &:after {
           @extend %icon-sexhealth-plus;
         }
@@ -124,9 +129,8 @@
   }
 
   .accordion-panel {
-    h2.accordion-item__sub-container {
+    h3.accordion-item__sub-container {
       border-bottom: 2px solid #ccc;
-      padding: 0.1em !important;
     }
 
     .accordion-item__body {
