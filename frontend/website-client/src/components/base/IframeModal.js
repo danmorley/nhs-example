@@ -12,23 +12,50 @@ class IframeModal extends Component {
     super(props);
     this.state = {
       isShowingModal: false,
-      iframe_src: null
+      iframe_src: null,
+      iframeIsLoaded: false,
+      modalWidth: null
     };
-
+    this.widthPercentage = 0.9;
+    this.heightPercentage = 0.9;
     this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
 
   handleClick = () => this.setState({isShowingModal: true})
-  handleClose = () => this.setState({isShowingModal: false})
+  handleClose = () => this.setState({
+    isShowingModal: false,
+    iframeIsLoaded: false,
+    modalWidth: null
+  })
   
   openModal(iframe_src) {
     this.setState({
         iframe_src: iframe_src
     });
-    this.divElement.click()
+    this.divElement.click();
   }
 
+  _iframeLoaded(evt) {
+    const document = evt.target.contentDocument;
+    const backElement = document.getElementsByClassName('back')[0];
+    backElement.parentNode.removeChild(backElement);
+    
+    const header = document.getElementsByClassName('results-header')[0].childNodes[0];
+    header.parentNode.removeChild(header);
+
+    const footer = document.getElementsByTagName('footer')[0];
+    footer.parentNode.removeChild(footer);
+
+    const container = document.getElementById('search-results').getElementsByClassName('body')[0].getElementsByClassName('container')[0];
+    container.style.width = '100%';
+    container.style.padding = '0';
+ 
+    this.setState({
+      iframeIsLoaded: true,
+      modalWidth: window.innerWidth * this.widthPercentage
+    });
+  }
 
   render() {
     return (  
@@ -46,9 +73,12 @@ class IframeModal extends Component {
             replace={false}
             ref="modal"
             className ="iframe-modal"
-            width="90%"
+            width={this.state.modalWidth}
           >
-            <iframe src={this.state.iframe_src} width="100%" frameBorder="0" />
+            {!this.state.iframeIsLoaded && <p>Loading...</p>}
+            <div style={this.state.iframeIsLoaded ? {} : { display: 'none' }}>
+              <iframe src={this.state.iframe_src} width="100%" frameBorder="0" height={window.innerHeight * this.heightPercentage} onLoad={(evt) => this._iframeLoaded(evt)}/>
+            </div>
           </PureModal>
           ,portalContainer
         ) 

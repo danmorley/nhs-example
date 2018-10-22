@@ -35,5 +35,27 @@
         button:last-child {
             margin-top: 15px;
         }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            margin-bottom: 15px;
+        }
+
+        background-color: $black;
+        color: $white;
+        margin: -20px 0 -20px 0;
+        position: relative;
+        left: 35px;
+        padding: 20px;
+
+        @media (max-width: 575px) {
+            margin: 0px -31px -27px -31px;
+            padding: 20px;
+            position: none;
+            left: 0;
+        }
     }
 }

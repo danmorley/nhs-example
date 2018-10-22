@@ -71,6 +71,7 @@ if settings.DEBUG:
     import debug_toolbar
     from django.conf.urls.static import static
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+    from .views import api_gateway_portal
 
     # Serve static and media files from development server
     urlpatterns += staticfiles_urlpatterns()
@@ -79,4 +80,5 @@ if settings.DEBUG:
     # Django debug toolbar
     urlpatterns = [
                       url(r'^__debug__/', include(debug_toolbar.urls)),
+                      url(r'^location/', api_gateway_portal),
                   ] + urlpatterns

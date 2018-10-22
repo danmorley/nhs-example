@@ -227,6 +227,7 @@ class AccordionPanel(Panel):
 
 
 class SimpleServiceFinder(Panel):
+    text = blocks.RichTextBlock(required=False)
     heading = blocks.CharBlock(required=False)
     finder_url = blocks.URLBlock()
     searchbox_placeholder = blocks.CharBlock(required=False)

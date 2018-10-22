@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import Panel from './Panel';
+import Text from '../../base/Text';
 import PureModal from 'react-pure-modal';
 import PropTypes from 'prop-types';
 import IframeModal from '../IframeModal';
@@ -15,9 +16,17 @@ class SimpleServiceFinder extends Component {
       postcode: null
     };
     this.iframe = React.createRef();
+    // this.triggerModal = this.triggerModal.bind(this)
   }
 
-  triggerModal = (evt) => {
+  onKeyPress(evt) {
+    if(evt.key === 'Enter'){
+      console.log('Enter');
+      this.triggerModal();
+    }
+  }
+
+  triggerModal(){
     const iframeSrc = `${this.props.content.finder_url}?postcode=${this.state.postcode}`;
     this.iframe.current.openModal(iframeSrc);
   }
@@ -41,10 +50,17 @@ class SimpleServiceFinder extends Component {
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
         <IframeModal ref={this.iframe} />
+        {content.text && <Text tagName="div" content={content.text} format="richtext" className="rich-text" />}
         {content.heading && <h3>{content.heading}</h3>}
         {content.submit_button_copy && 
           <div>
-            <input data-webtrends-id="Condom finder input" placeholder={content.searchbox_placeholder} type="text" onChange={evt => this.updateInputPostcode(evt)}/>
+            <input
+              data-webtrends-id="Condom finder input"
+              placeholder={content.searchbox_placeholder}
+              type="text"
+              onChange={evt => this.updateInputPostcode(evt)}
+              onKeyPress={evt => this.onKeyPress(evt)}
+            />
             <button onClick={this.triggerModal.bind(this)}>{content.submit_button_copy}</button>
           </div>
         }
