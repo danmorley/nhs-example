@@ -51,3 +51,23 @@
     src: url('../fonts/icomoon.svg?ojf9ob#icomoon') format('svg');
   }
 }
+
+/* typography */
+@font-face {
+  font-family: 'GothamBook';
+  src: url('../fonts/Gotham-Book.eot');
+  src: url('../fonts/Gotham-Book.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/Gotham-Book.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* typography */
+@font-face {
+  font-family: 'GothamBold';
+  src: url('../fonts/Gotham-Bold.eot');
+  src: url('../fonts/Gotham-Bold.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/Gotham-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}

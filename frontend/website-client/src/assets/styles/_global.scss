@@ -280,6 +280,7 @@ h2 {
   }
   
   h2 {
+    font-family: $sexhealth-bold-font;
     font-size: map-deep-get($headings, sexhealth, heading-h2, mobile);
     
     @include media-breakpoint-up(sm) {
@@ -289,8 +290,10 @@ h2 {
 
   .button-cta {
     background-color: $sexhealth-pink;
+    font-family: $sexhealth-font;
     color: $white;
     border: 2px solid $sexhealth-pink;
+    text-transform: none;
   
     &:active, &:visited {
       background-color: $sexhealth-pink;
