@@ -16,6 +16,7 @@
   .shelf__backbutton {
     position: absolute;
     left: 0;
+    top: -0.4em;
     font-size: calc(0.75 * #{$h2});
     font-family: $secondary-brand-font;
     font-weight: normal;
