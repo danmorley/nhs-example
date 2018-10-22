@@ -41,6 +41,8 @@ ONEYOU_RENDITIONS = [
 
     ('grid_shelf', None, None, {'desktop': '1440x800', 'mobile': '375x143'}),
     ('icon_card_panel', 'two_column_shelf', None, {'desktop': '200x200', 'mobile': '120x120'}),
+
+    ('blurb', None, None, {'desktop': '1366x591', 'mobile': '375x162'}),
 ]
 
 
@@ -73,7 +75,7 @@ DESKTOP_RENDITION_CHOICES = (
     ('1440x240', '1440x240'),
     ('1440x309', '1440x309'),
     ('1440x366', '1440x366'),
-    ('1440x623', '1440x623 Sexhealth Page Header Background'),
+    ('1366x591', '1366x591 Sexhealth Page Header Background'),
     ('1440x800', '1440x800'),
     ('146x336', '146x336'),
     ('182x378', '182x378'),
