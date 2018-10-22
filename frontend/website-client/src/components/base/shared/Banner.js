@@ -48,20 +48,19 @@ class Banner extends Component {
     // Direction: vertical, horizontal
     // Alignment: left, center, right
     const [ direction, alignment ] = layout.split('_');
-    let ratio1 = 'x', ratio2 = 'x';
-    if (direction === 'horizontal') {
-      [ ratio1, ratio2 ] = ratios.split('_');
-      // col1 = `col-${ratio1}`;
-      // col2 = `col-${ratio2}`;
-    }
-    if (direction === 'vertical' && alignment === 'center') {
-      [ ratio1, ratio2 ] = ratios.split('_');
-      ratio1 = 'x', ratio2 = 'x';
-    }
+    // let ratio1 = 'x', ratio2 = 'x';
+    // if (direction === 'horizontal') {
+    //   [ ratio1, ratio2 ] = ratios.split('_');
+    //   // col1 = `col-${ratio1}`;
+    //   // col2 = `col-${ratio2}`;
+    // }
+    // if (direction === 'vertical' && alignment === 'center') {
+    //   [ ratio1, ratio2 ] = ratios.split('_');
+    //   ratio1 = 'x', ratio2 = 'x';
+    // }
 
     const bannerClass = `banner row no-gutters banner-direction-${direction} banner-align-${alignment} ${className}`;
     
-    const buttonsLayout = ''
     return (
       <ResponsiveBackgroundImage image={backgroundImage} className={bannerClass}>
         { direction === 'vertical' &&

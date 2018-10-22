@@ -38,7 +38,7 @@ class App extends Component {
     console.log('First time load of page for path ' + path);
     if (!AppRouteRegistry.routeIsLocal(path)) {
       console.log('Loading cms page', path);
-      let key = path.substring(1, path.length-1);
+      let key = this.pageKey(path);
       this.loadPageForKey(key);
     } else {
       console.log('Loading app page', path);
@@ -55,7 +55,7 @@ class App extends Component {
       if (!AppRouteRegistry.routeIsLocal(path)) {
         path = path.replace(global.rootUrl, '');
         console.log('Loading cms page', path);
-        let key = path.substring(1, path.length-1);
+        let key = this.pageKey(path);
         this.loadPageForKey(key);
       } else {
         path = path.replace(global.rootUrl, '');
@@ -137,11 +137,8 @@ class App extends Component {
     return path.slice(-1) === '/' ? path : path + '/';
   }
 
-  pageSlug(path) {
-    // Remove trailing slash
-    let path_minus_slash = path.replace(/\/$/, '');
-    let slug = path_minus_slash.substr(path_minus_slash.lastIndexOf('/') + 1)
-    return slug
+  pageKey(path) {
+    return path.substring(1, path.length-1);
   }
 
   loadPage(_props) {
