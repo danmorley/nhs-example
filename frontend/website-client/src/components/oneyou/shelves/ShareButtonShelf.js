@@ -13,8 +13,8 @@ class ShareButtonShelf extends Component {
     const { showShareButton, showEmailButton, showPrintButton, trackingGroup } = this.props;
 
     return (
-      <div className="shelf__container container">
-        <Shelf classNamePrefix="share-button-shelf" variant="align-right" trackingGroup={trackingGroup} id="share-button-shelf">
+      <Shelf classNamePrefix="share-button-shelf" variant="align-right" trackingGroup={trackingGroup} id="share-button-shelf">
+        <div className="shelf__container container">
           { showShareButton &&
             <ShareButtonPanel />
           }
@@ -26,8 +26,8 @@ class ShareButtonShelf extends Component {
           { showPrintButton &&
             <PrintButtonPanel />
           }
-        </Shelf>
-      </div>
+        </div>
+      </Shelf>
     );
   }
 }
