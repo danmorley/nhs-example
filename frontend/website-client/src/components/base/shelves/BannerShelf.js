@@ -7,8 +7,8 @@ import Image from '../Image';
 import CtaLink from '../shared/CtaLink';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import './banner-shelf.css';
-import ResponsiveBackgroundImage from '../shared/ResponsiveBackgroundImage';
 import ShelfUtils from '../shared/ShelfUtils';
+import Banner from '../shared/Banner';
 
 /**
  *  Banner Shelf is a simple shelf that can be used to display content
@@ -63,32 +63,25 @@ class BannerShelf extends Component {
   render() {
     const { id, content, classNamePrefix, variant, layout } = this.props;
 
-    const metaVariant = content.meta_variant || variant;
+    const metaVariant = content.meta_variant || variant || 'primary';
     const metaLayout = content.meta_layout || layout || 'vertical_left';
     const [ direction, alignment ] = metaLayout.split('_');
 
     const headingTagName = (classNamePrefix === 'page-heading-shelf') ? 'h1' : 'h2';
     const panel = content.panel
+    const containerClass = `shelf__container ${ShelfUtils.shelfContainerClass(content)}`;
 
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group} layout={`align-${alignment}`}>
-        <ResponsiveBackgroundImage image={panel.background_image} className={`shelf__container ${ShelfUtils.shelfContainerClass(content)} child-image--${content.meta_image_display}`}>
-          { direction === 'vertical' && [
-            <div key="1" className="row">{this.renderHeading(panel.heading, headingTagName, 'col-12')}</div>,
-            <div key="2" className="row">{this.renderBody(panel.body, 'col-12')}</div>,
-            <div key="3" className="row">{this.renderCta(panel.cta, 'col-12')}</div>
-          ]
-          }
-          { direction === 'horizontal' &&
-            <div key="1" className="row align-items-center">
-              <div className="col">
-                {this.renderHeading(panel.heading, headingTagName)}
-                {this.renderBody(panel.body)}
-              </div>
-              {this.renderCta(panel.cta, 'col')}
-            </div>
-          }
-        </ResponsiveBackgroundImage>
+        <div className={containerClass}>
+          <Banner 
+            backGroundImage={panel.background_image}
+            heading={<Text tagName={headingTagName} content={panel.heading} />}
+            body={<Text content={panel.body} format="richtext"/>}
+            ctas={panel.cta}
+            layout={metaLayout}
+          />
+        </div>
       </Shelf>
     );
   }
@@ -102,6 +95,6 @@ BannerShelf.propTypes = {
   id: PropTypes.string
 }
 
-CmsComponentRegistry.register('banner_shelf', BannerShelf, 'banner-shelf', 'banner');
+CmsComponentRegistry.register('banner_shelf', BannerShelf, 'cc-banner-shelf', 'banner');
 
 export default BannerShelf;

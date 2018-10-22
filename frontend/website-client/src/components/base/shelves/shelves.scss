@@ -208,7 +208,7 @@ h1, h2 {
 //sexhealth
 .sexhealth {
 
-  .container .row{
+  .container .row {
     margin-right: 0;
     margin-left: 0;
   }
@@ -221,19 +221,30 @@ h1, h2 {
     background-color: $white;
   }
 
+  h2 {
+    color: $sexhealth-dark;
+  }
+  
   .basic-grid-shelf {
     h2 {
       color: $sexhealth-dark;
     }
   }
   
-  .shelf__header {
-    font-family: $primary-brand-font;
-    font-weight: normal;
-    text-align: center;
-    color: $sexhealth-dark;
-  }
+  // .shelf__header {
+  //   font-family: $primary-brand-font;
+  //   text-transform: none;
+  //   font-weight: normal;
+  //   text-align: center;
+  //   color: $sexhealth-dark;
+  // }
   
+  .shelf__header {
+    font-family: unset;
+    text-align: center;
+    font-weight: bold;
+  }
+
   .shelf__body {
      text-align: center;
      padding: 0 0.5em;

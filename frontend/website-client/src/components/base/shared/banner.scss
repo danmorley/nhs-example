@@ -1,0 +1,64 @@
+.banner {
+  /*background-color: #f4f4f4;*/
+  display: flex;
+  flex-direction: column;
+
+  &.banner-align-left {
+    align-items: flex-start;
+
+    .banner-content {
+      align-items: flex-start;
+    }
+  }
+
+  &.banner-align-center {
+    align-items: center;
+
+    .banner-content {
+      align-items: center;
+    }
+  }
+
+  &.banner-align-right {
+    align-items: flex-end;
+
+    .banner-content {
+      align-items: flex-end;
+    }
+  }
+
+  .banner-content {
+    /*background-color: blue;*/
+    max-width: 75%;
+    display: flex;
+    flex-direction: column; 
+  }
+
+  .banner-ctas {
+    /*background-color: #e8e8e8;*/
+    align-self: stretch; /* Use to override align-items of the parent container. */
+  }
+
+  &.banner-direction-horizontal {
+    &.banner-align-center .row {
+      align-items: center;
+    }
+  }
+}
+
+  // .banner-ctas {
+  //   background-color: #e8e8e8;
+  //   /* align-self: center; /* Use to override align-items of the parent container. */
+  // }
+
+  // .banner-headingbody-wrapper {
+  //   display: flex;
+  //   flex-direction: column;
+  //   max-width: 35em;
+  //   align-items: stretch;   /* default: stretch, use 'flex-start','center','flex-end' to left, centre and right align respectively. */
+  //   justify-content: flex-start; /* default: flex-start, justify-content only works if this container has it's min-height set */
+  // }
+
+
+
+ 

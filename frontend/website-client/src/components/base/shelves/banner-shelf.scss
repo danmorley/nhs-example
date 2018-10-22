@@ -5,20 +5,34 @@ $shelf-padding-standard: 1em;
 $shelf-padding-extra: 2em;
 
 .sexhealth {
-  .banner-shelf {
-    h2 {
-      margin-bottom: -6px;
+  .cc-banner-shelf {
+    .banner {
+      padding-left: 2em;
+      padding-right: 2em;
     }
-    .row {
-      margin: 1em 0;
-    }
-    .banner-shelf-body p {
-      color: black;
-      margin: 0 auto;
-      width: 95%;
 
-      @include media-breakpoint-up(md) {
-        width: 80%;
+    .banner-body {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+
+    &.banner-shelf--none {
+      .shelf__container {
+        background-color: $white;
+        
+        .banner {
+          color: $sexhealth-dark !important;
+        }
+      }
+    }
+
+    &.banner-shelf--primary {
+      .shelf__container {
+        background-color: $sexhealth-purple;
+        
+        .banner {
+          color: $sexhealth-dark !important;
+        }
       }
     }
   }

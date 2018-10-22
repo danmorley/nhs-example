@@ -1,0 +1,83 @@
+.buttons {
+  width: 100%;
+  /*background-color: #f4f4f4;*/
+
+  &.buttons-direction-vertical {
+    .buttons-ctas {
+      width: 100%;
+    }
+
+    .buttons-ctas .cta-list {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+  
+      a.button-cta, .cta-list__item {
+        margin-top: 0.5em;
+  
+        &:first-child {
+          margin-top: 0;
+        }
+      }  
+    }
+
+    &.buttons-align-left {
+      .buttons-ctas .cta-list {
+        align-items: flex-start;   /* default: stretch, use 'flex-start','center','flex-end' to left, centre and right align respectively. */
+      }
+    }
+
+    &.buttons-align-center {
+      .buttons-ctas .cta-list {
+        align-items: center;   /* default: stretch, use 'flex-start','center','flex-end' to left, centre and right align respectively. */
+        justify-content: center;
+      }
+    }
+
+    &.buttons-align-right {
+      .buttons-ctas .cta-list {
+        align-items: flex-end;   /* default: stretch, use 'flex-start','center','flex-end' to left, centre and right align respectively. */
+      }
+    }
+  }
+
+  &.buttons-direction-horizontal {
+    .buttons-ctas {
+      width: 100%;
+    }
+
+    .buttons-ctas .cta-list {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    &.buttons-align-left {
+      .buttons-ctas .cta-list {
+        justify-content: flex-start;
+      }
+    }
+
+    &.buttons-align-center {
+      .buttons-ctas .cta-list {
+        justify-content: center;
+      }
+    }
+
+    &.buttons-align-right {
+      .buttons-ctas .cta-list {
+        justify-content: flex-end;
+      }
+    }
+
+    a.button-cta, .cta-list__item {
+      margin-right: 0.5em;
+      margin-top: 0.5em;
+
+      &:last-child {
+        margin-tfop: 0;
+      }
+    }
+  }
+}
