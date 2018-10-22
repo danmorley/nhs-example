@@ -6,7 +6,10 @@ import sys
 
 if __name__ == '__main__':
     ENV = os.environ.get('CMS_ENV', 'dev')
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'oneYou2.settings.{}'.format(ENV))
+    if ENV == 'staging':
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'oneYou2.settings.production')
+    else:
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'oneYou2.settings.{}'.format(ENV))
 
     from django.core.management import execute_from_command_line
 

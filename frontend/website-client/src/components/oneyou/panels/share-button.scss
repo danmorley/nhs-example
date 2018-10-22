@@ -116,4 +116,31 @@
     font-size: 20px;
   }
 }
-  
+
+.share-button-shelf {
+  .shelf__container {
+    padding: 0;
+    background-color: transparent;
+  }
+
+  .share-button-panel {
+    display: flex;
+    flex-direction: row;
+    margin-left: 0;
+
+    &.share-button-panel--align-right {
+      justify-content: flex-end;
+    }
+  } 
+}
+
+
+.sexhealth .share-button-shelf .share-button {
+  background-color: $sexhealth-pink;
+  color: $white;
+  text-transform: none;
+
+  ul.share-button__items a:after {
+    color: $white;
+  }
+}

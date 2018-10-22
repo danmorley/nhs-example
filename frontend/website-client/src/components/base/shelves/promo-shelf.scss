@@ -333,14 +333,14 @@ $shelf-padding-extra: 2em;
 
       h1 {
         color: $white !important;
-        font-family: unset;
-        text-transform: capitalize;
+        font-family: $sexhealth-bold-font;
+        text-transform: none;
         font-size: 3em;
-        font-weight: bold;
       }
     }
 
     h1, h2, h3, h4, h5 {
+      font-family: $sexhealth-bold-font;
       color: $sexhealth-dark;
     }
   }
