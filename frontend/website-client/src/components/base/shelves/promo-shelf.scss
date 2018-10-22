@@ -325,9 +325,18 @@ $shelf-padding-extra: 2em;
     .shelf__container {
       background-color: $white;
       color: $sexhealth-dark;
+      padding-top: 0;
 
       .shelf__col {
         margin: 0 auto;
+      }
+
+      h1 {
+        color: $white !important;
+        font-family: unset;
+        text-transform: capitalize;
+        font-size: 3em;
+        font-weight: bold;
       }
     }
 
