@@ -222,11 +222,13 @@ h1, h2 {
   }
 
   h2 {
+    font-family: $sexhealth-bold-font;
     color: $sexhealth-dark;
   }
   
   .basic-grid-shelf {
     h2 {
+      font-family: $sexhealth-bold-font;
       color: $sexhealth-dark;
     }
   }
@@ -240,9 +242,8 @@ h1, h2 {
   // }
   
   .shelf__header {
-    font-family: unset;
+    font-family: $sexhealth-bold-font;
     text-align: center;
-    font-weight: bold;
   }
 
   .shelf__body {
@@ -255,7 +256,7 @@ h1, h2 {
   }
   
   .section-heading-shelf h2 {
-    font-family: $primary-brand-font;
+    font-family: $sexhealth-bold-font;
     font-weight: normal;
     text-align: center;
     color: $sexhealth-dark;

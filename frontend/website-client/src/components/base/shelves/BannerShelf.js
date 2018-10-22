@@ -68,7 +68,7 @@ class BannerShelf extends Component {
     const [ direction, alignment ] = metaLayout.split('_');
 
     const headingTagName = (classNamePrefix === 'page-heading-shelf') ? 'h1' : 'h2';
-    const panel = content.panel
+    const panel = content.panel ? content.panel : content;
     const containerClass = `shelf__container ${ShelfUtils.shelfContainerClass(content)}`;
 
     return (

@@ -49,30 +49,27 @@ class Page extends Component {
     }
   }
 
-  hasShareButton(meta) {
-    return meta.use_share_button || meta.use_email_button || meta.use_print_button;
-  }
-
   renderPage(content, pageTheme, pageStyles, site, page, pageInfo) {
     // let { menu, header, footer } = site;
     // let theme = (pageTheme && pageTheme.class_name) || 'oneyou';
-    let useShareButton = page ? this.hasShareButton(page.meta) : false;
     const pageTypeClass = (pageInfo)? `${pageInfo.classNamePrefix}-page` : 'general';
+    const meta = (page && page.meta.hasOwnProperty('use_share_button')) ? page.meta : page;
+    const useShareButton = page && (meta.use_share_button || meta.use_email_button || meta.use_print_button);
 
     return (
       <StandardPageLayout site={site} page={page} pageTypeClass={pageTypeClass}>
         {content}
         {useShareButton &&
-          <ShareButtonShelf showShareButton={page.meta.use_share_button}
-            showEmailButton={page.meta.use_email_button}
-            showPrintButton={page.meta.use_print_button}
-            opt1={page.meta.opt_in_1_text} 
-            opt2={page.meta.opt_in_2_text}
-            tsAndCs ={page.meta.ts_and_cs_statement}
-            trackingGroup={page.meta.tracking_group}
+          <ShareButtonShelf showShareButton={meta.use_share_button}
+            showEmailButton={meta.use_email_button}
+            showPrintButton={meta.use_print_button}
+            opt1={meta.opt_in_1_text} 
+            opt2={meta.opt_in_2_text}
+            tsAndCs ={meta.ts_and_cs_statement}
+            trackingGroup={meta.tracking_group}
           />
         }
-        { page && <BackToTopButton trackingGroup={page.meta.tracking_group} />}
+        { page && <BackToTopButton trackingGroup={meta.tracking_group} />}
       </StandardPageLayout>
     );
   }
