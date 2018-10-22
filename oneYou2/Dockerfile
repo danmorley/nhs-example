@@ -6,4 +6,5 @@ FROM breneser/mssql-python-nodejs
 WORKDIR /code
 ADD requirements.txt /code/
 RUN pip install -r requirements.txt
+RUN apt-get install graphviz -y
 ADD . /code

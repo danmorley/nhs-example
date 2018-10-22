@@ -12,6 +12,8 @@ from wagtail.documents.models import Document
 from wagtailmedia.models import Media
 
 from shelves.models import ShelfAbstract
+from home.models import SiteSettings
+
 
 SHARED_CONTENT_TYPES = ['promo_shelf', 'banner_shelf', 'app_shelf']
 
@@ -25,26 +27,26 @@ def process_inlines(field):
 
 def process_inline_images(field):
     from images.models import PHEImage
-    soup = BeautifulSoup(field, "html.parser")
-    embed_tags = soup.findAll("embed")
+    soup = BeautifulSoup(field, 'html.parser')
+    embed_tags = soup.findAll('embed')
     for embed_tag in embed_tags:
         image = PHEImage.objects.get(id=embed_tag['id'])
-        alt_text = embed_tag.get("alt", "")
+        alt_text = embed_tag.get('alt', '')
         img_tag_src = '<img alt="{}" src="{}"/>'.format(alt_text, image.link)
-        img_tag = BeautifulSoup(img_tag_src, "html.parser")
+        img_tag = BeautifulSoup(img_tag_src, 'html.parser')
         embed_tag.replaceWith(img_tag)
     return html.unescape(str(soup)).replace(';=', '=')
 
 
 def process_inline_hyperlinks(field):
     from wagtail.core.models import Page
-    soup = BeautifulSoup(field, "html.parser")
-    a_tags = soup.findAll("a", {"linktype": "page"})
+    soup = BeautifulSoup(field, 'html.parser')
+    a_tags = soup.findAll('a', {'linktype': 'page'})
     for a_tag in a_tags:
         page = Page.objects.get(id=a_tag['id'])
-        site_name = page.get_site().site_name
+        site_settings = SiteSettings.objects.get(site=page.get_site())
         url_parts = page.get_url_parts()
-        a_tag['href'] = '/{}{}'.format(site_name.lower(), url_parts[2])
+        a_tag['href'] = '/{}{}'.format(site_settings.uid.lower(), url_parts[2])
     return html.unescape(str(soup)).replace(';=', '=')
 
 
@@ -63,9 +65,9 @@ def parse_shelf(shelf, parent=None):
         if not parent:
             shelf['value']['image_meta'] = '{}/{}/{}'.format(shelf_type, None, None)
         elif parent.get('type') == 'grid_shelf':
-            shelf['value']['image_meta'] = "{}/{}/{}".format(shelf_type, parent['type'], parent['value']['meta_layout'])
+            shelf['value']['image_meta'] = '{}/{}/{}'.format(shelf_type, parent['type'], parent['value']['meta_layout'])
         else:
-            shelf['value']['image_meta'] = "{}/{}/{}".format(shelf_type, parent['type'], None)
+            shelf['value']['image_meta'] = '{}/{}/{}'.format(shelf_type, parent['type'], None)
 
         # Process ImageBlocks by setting the meta_rendition (formerly image_meta) field
         # By convention, images must end in '_image' to be processed.
@@ -75,9 +77,9 @@ def parse_shelf(shelf, parent=None):
                 if type(value) is dict or type(value) is OrderedDict:
                     if parent:
                         shelf['value'][key]['meta_rendition_key'] = \
-                            "{}/{}/{}".format(shelf_type, parent['type'], parent['value']['meta_layout'])
+                            '{}/{}/{}'.format(shelf_type, parent['type'], parent['value']['meta_layout'])
                     else:
-                        shelf['value'][key]['meta_rendition_key'] = "{}/{}/{}".format(shelf_type, None, None)
+                        shelf['value'][key]['meta_rendition_key'] = '{}/{}/{}'.format(shelf_type, None, None)
 
         # Process inline tags, updating shelf values as necessary.
         for key in shelf['value']:
@@ -174,25 +176,25 @@ def determine_image_rendtions_for_shared_content_shelves(shelf, parent=None):
         if not parent:
             shelf['value']['image_meta'] = '{}/{}/{}'.format(shelf_type, None, None)
         elif parent.get('type') == 'grid_shelf':
-            shelf['value']['image_meta'] = "{}/{}/{}".format(shelf_type, parent['type'], parent['value']['meta_layout'])
+            shelf['value']['image_meta'] = '{}/{}/{}'.format(shelf_type, parent['type'], parent['value']['meta_layout'])
         else:
-            shelf['value']['image_meta'] = "{}/{}/{}".format(shelf_type, parent['type'], None)
+            shelf['value']['image_meta'] = '{}/{}/{}'.format(shelf_type, parent['type'], None)
 
         # TODO: MERGE THE TWO IF STATEMENTS BELOW
 
-        if 'banner_shelf' in shelf_type:
-            background_image = shelf['value']['background_image']
+        if 'banner_shelf_v2' in shelf_type:
+            background_image = shelf['value']['banner']['background_image']
             if background_image:
                 rendition_shelf_type = 'banner_shelf'
                 if parent:
-                    parent_shelf_type = parent["type"]
+                    parent_shelf_type = parent['type']
                 else:
                     parent_shelf_type = None
 
                 background_image['renditions'] = {
-                    'mobile': background_image['renditions']["{}/{}/None/mobile".format(rendition_shelf_type,
+                    'mobile': background_image['renditions']['{}/{}/None/mobile'.format(rendition_shelf_type,
                                                                                         parent_shelf_type)],
-                    'desktop': background_image['renditions']["{}/{}/None/desktop".format(rendition_shelf_type,
+                    'desktop': background_image['renditions']['{}/{}/None/desktop'.format(rendition_shelf_type,
                                                                                           parent_shelf_type)]
                 }
 
@@ -200,12 +202,12 @@ def determine_image_rendtions_for_shared_content_shelves(shelf, parent=None):
             image = shelf['value']['background_image']
             if image:
                 rendition_shelf_type = 'recipe_teaser'
-                parent_shelf_type = parent["type"]
+                parent_shelf_type = parent['type']
 
                 image['renditions'] = {
-                    'mobile': image['renditions']["{}/{}/None/mobile".format(rendition_shelf_type,
+                    'mobile': image['renditions']['{}/{}/None/mobile'.format(rendition_shelf_type,
                                                                              parent_shelf_type)],
-                    'desktop': image['renditions']["{}/{}/None/desktop".format(rendition_shelf_type,
+                    'desktop': image['renditions']['{}/{}/None/desktop'.format(rendition_shelf_type,
                                                                                parent_shelf_type)]
                 }
 
@@ -213,14 +215,14 @@ def determine_image_rendtions_for_shared_content_shelves(shelf, parent=None):
             image = shelf['value']['image']
             if image:
                 rendition_shelf_type = 'app_teaser'
-                parent_shelf_type = parent["type"]
+                parent_shelf_type = parent['type']
                 parent_meta_layout = parent['value'].get('meta_layout')
 
                 image['renditions'] = {
-                    'mobile': image['renditions']["{}/{}/{}/mobile".format(rendition_shelf_type,
+                    'mobile': image['renditions']['{}/{}/{}/mobile'.format(rendition_shelf_type,
                                                                            parent_shelf_type,
                                                                            parent_meta_layout)],
-                    'desktop': image['renditions']["{}/{}/{}/desktop".format(rendition_shelf_type,
+                    'desktop': image['renditions']['{}/{}/{}/desktop'.format(rendition_shelf_type,
                                                                              parent_shelf_type,
                                                                              parent_meta_layout)]
                 }

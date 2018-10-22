@@ -1,0 +1,272 @@
+@import "../../../assets/styles/variables/variables";
+@import "../../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+$shelf-padding-standard: 1em;
+$shelf-padding-extra: 2em;
+
+.shelf__container > .container {
+  padding-bottom: 0;
+  padding-top: 0
+}
+
+.shelf__placeholder {
+  background-color: #e4e4e4;
+  border: 1px solid #c8c8c8;
+  padding: 12px;
+  text-align: center;
+}
+
+.shelf-section {
+  padding: 0.5em 0;
+
+  @include media-breakpoint-up(sm) {
+    padding: 1em 0;
+  }
+
+  &:first-child {
+    padding-top: 0;
+
+    @include media-breakpoint-down(sm) {
+      p {
+        font-weight: bold;
+      }
+    }
+  }
+
+  &.shelf-no-padding {
+    padding: 0;
+  }
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.shelf__col {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+
+  h1 + div .richTextEditor > p,
+  h2 + div .richTextEditor > p {
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+  }
+
+  div > .richTextEditor > p:last-child {
+    margin-bottom: 0;
+  }
+
+  div + a.button-cta {
+    margin-top: 2em;
+  }
+}
+
+.shelf__body {
+  
+  p {
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+  }
+}
+
+.shelf__header {
+  font-family: $secondary-brand-font;
+  font-weight: normal;
+  margin-bottom: 0.2em;
+
+  @include media-breakpoint-up(sm) {
+    margin-bottom: 0.5em;
+  }
+}
+
+.carousel-full .container-fluid,
+.section-heading-shelf,
+.basic-grid-shelf,
+.panel-carousel-shelf,
+.table-shelf {
+
+   > .container {
+    @include media-breakpoint-up(sm) {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}
+
+.shelf__container > .container {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.section-heading-shelf h2 {
+    font-family: $secondary-brand-font;
+    font-weight: normal;
+}
+
+.section-heading-shelf p {
+  margin-bottom: 1em;
+}
+
+.section-heading-shelf .shelf__col > div {
+  h2, h3 {
+    margin-top: 1.5em;
+  }
+}
+
+.shelf-full_to_half_width {
+
+  @include media-breakpoint-only(lg) {
+    padding-top: 0;
+  }
+
+  .container.full-to-half-width {
+    padding-top: 0;
+    padding-bottom:0;
+  }
+}
+
+.guidance-shelf {
+  background-color: #fcf4ba;
+  border: 1px solid #c8c8c8;
+  margin: 0px 40px;
+  padding: 12px;
+  text-align: center;
+
+  h2 {
+    width: 100%;
+    margin-bottom: 16px;
+    color: #302f25 !important;
+  }
+  p {
+    width: 100%;
+    text-align: center;
+    line-height: 1.4em;
+  }
+} 
+
+//theming
+
+//default theme (oneyou)
+h1, h2 {
+  .marker {
+    display: inline-block;
+    line-height: 0.9em;
+    border-bottom: 0.15em solid $white;
+  }
+}
+
+.shelf {
+  h2 {
+    color: $teal-blue;
+  }
+}
+
+//stoptober
+.stoptober {
+  
+  .basic-grid-shelf {
+    h2 {
+      color: $black;
+    }
+  }
+  
+  .shelf__header {
+    font-family: $primary-brand-font;
+    font-weight: normal;
+    text-align: center;
+    color: $black;
+  }
+  
+  .shelf__body {
+     text-align: center;
+     padding: 0 0.5em;
+     
+     @include media-breakpoint-up(md) {
+       padding: 0 5em;
+     }
+  }
+  
+  .section-heading-shelf h2 {
+    font-family: $primary-brand-font;
+    font-weight: normal;
+    text-align: center;
+    color: $black;
+  }
+
+  .section-heading-shelf p {
+    text-align: center;
+    padding: 0 0.5em;
+    
+    @include media-breakpoint-up(md) {
+      padding: 0 5em;
+    }
+  }
+}
+
+//sexhealth
+.sexhealth {
+
+  .container .row {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .container{
+    padding: 1em;
+  }
+
+  .shelf__container{
+    background-color: $white;
+  }
+
+  h2 {
+    color: $sexhealth-dark;
+  }
+  
+  .basic-grid-shelf {
+    h2 {
+      color: $sexhealth-dark;
+    }
+  }
+  
+  // .shelf__header {
+  //   font-family: $primary-brand-font;
+  //   text-transform: none;
+  //   font-weight: normal;
+  //   text-align: center;
+  //   color: $sexhealth-dark;
+  // }
+  
+  .shelf__header {
+    font-family: unset;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .shelf__body {
+     text-align: center;
+     padding: 0 0.5em;
+     
+     @include media-breakpoint-up(md) {
+       padding: 0 5em;
+     }
+  }
+  
+  .section-heading-shelf h2 {
+    font-family: $primary-brand-font;
+    font-weight: normal;
+    text-align: center;
+    color: $sexhealth-dark;
+  }
+
+  .section-heading-shelf p {
+    text-align: center;
+    padding: 0 0.5em;
+    
+    @include media-breakpoint-up(md) {
+      padding: 0 5em;
+    }
+  }
+}

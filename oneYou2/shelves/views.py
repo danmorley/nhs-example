@@ -17,17 +17,17 @@ key_translations = {
     'ActionId': 'paragon_id',
     'ActionActive': 'active',
     'ActionButton2Text': 'cta2_text',
-    'ActionCategory': "category",
-    'ActionCTAType': "cta_type",
-    'ActionTextBody': "rich_text_body",
-    'ActionButton1Link': "cta1_link",
-    'ActionCode': "paragon_action_code",
+    'ActionCategory': 'category',
+    'ActionCTAType': 'cta_type',
+    'ActionTextBody': 'rich_text_body',
+    'ActionButton1Link': 'cta1_link',
+    'ActionCode': 'paragon_action_code',
     'ActionTitle': 'title',
-    'ActionButton1Text': "cta1_text",
-    'ActionPosition': "position",
-    'ActionAppStoreLink': "cta_appstore",
-    'ActionGooglePlayLink': "cta_googleplay",
-    'ActionButton2Link': "cta2_link",
+    'ActionButton1Text': 'cta1_text',
+    'ActionPosition': 'position',
+    'ActionAppStoreLink': 'cta_appstore',
+    'ActionGooglePlayLink': 'cta_googleplay',
+    'ActionButton2Link': 'cta2_link',
 }
 
 
@@ -42,7 +42,7 @@ def upload_actions(request):
                              'ActionTextBody', 'ActionButton1Link', 'ActionCode', 'ActionTitle', 'ActionButton1Text',
                              'ActionPosition', 'ActionAppStoreLink', 'ActionGooglePlayLink', 'ActionButton2Link'}
             if set(df.keys()) != expected_keys:
-                raise KeyError("Spreadsheet of Actions is in incorrect format")
+                raise KeyError('Spreadsheet of Actions is in incorrect format')
             df = df.rename(index=str, columns=key_translations)
             for index, row in df.iterrows():
                 row_dict = row.to_dict()

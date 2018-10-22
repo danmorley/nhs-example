@@ -1,5 +1,6 @@
 import json
 import uuid
+import os
 
 from azure.storage.file import FileService
 from azure.common import AzureMissingResourceHttpError
@@ -18,17 +19,22 @@ class FrontendVersion:
 
     @classmethod
     def get_current_version(cls):
+        if settings.ENV == 'local':
+            return 'local'
+
         # TODO try to find a way to mock this function on server start
         if settings.AZURE_ACCOUNT_NAME == 'test' or settings.AZURE_ACCOUNT_NAME is None:
             return 'test'
 
         file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
-        file_directory = settings.ENV if settings.ENV != 'local' else 'dev'
-        return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, file_directory, 'current_version.txt')
+        return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, settings.ENV, 'current_version.txt')
 
     @classmethod
     def get_available_versions(cls):
         print('loading available versions')
+
+        if settings.ENV == 'local':
+            return [('local', 'local')]
 
         # TODO try to find a way to mock this function on server start
         if settings.AZURE_ACCOUNT_NAME == 'test' or settings.AZURE_ACCOUNT_NAME is None:
@@ -36,10 +42,8 @@ class FrontendVersion:
 
         file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
 
-        file_directory = settings.ENV if settings.ENV != 'local' else 'dev'
-
         current_tag = get_release_version()
-        latest_deployed_tag = file_service.get_file_to_text(settings.AZURE_FILE_SHARE, file_directory,
+        latest_deployed_tag = file_service.get_file_to_text(settings.AZURE_FILE_SHARE, settings.ENV,
                                                             'current_tag.txt')
 
         deployed_status = frontend_deployed()
@@ -55,7 +59,7 @@ class FrontendVersion:
                 print('running deploy for integration environment')
                 # always deploy the frontend version in the integration and review environments
                 FrontendVersion.deploy_version()
-            elif settings.ENV != 'local' and current_tag != latest_deployed_tag:
+            elif current_tag != latest_deployed_tag:
                 print('running deploy for ' + settings.ENV + ' environment')
                 # we need to start using 'local' as the environment variable on local machines, to prevent frontend
                 # deployment when running locally.
@@ -64,16 +68,16 @@ class FrontendVersion:
             set_frontend_deployed_status('True')
 
         # we have to return all directories as azure SDK had no way to order and limit response count
-        directories = file_service.list_directories_and_files(settings.AZURE_FILE_SHARE, file_directory).directories
+        directories = file_service.list_directories_and_files(settings.AZURE_FILE_SHARE, settings.ENV).directories
         available_versions = []
 
         for directory in directories:
             print('loading meta for ' + directory.name)
             properties = file_service.get_directory_properties(settings.AZURE_FILE_SHARE,
-                                                               file_directory + '/' + directory.name)
+                                                               settings.ENV + '/' + directory.name)
             try:
                 release_tag = file_service.get_file_to_text(settings.AZURE_FILE_SHARE,
-                                                            file_directory + '/' + directory.name, 'tag.txt')
+                                                            settings.ENV + '/' + directory.name, 'tag.txt')
             except AzureMissingResourceHttpError:
                 print('Invalid front end ' + directory.name)
                 release_tag = 'Invalid front end ' + directory.name
@@ -86,34 +90,47 @@ class FrontendVersion:
         return sorted_list[:20]
 
     @classmethod
+    def get_local_file_text(cls, file_path):
+        file_path = os.path.join(settings.PROJECT_DIR, '..', 'frontend', 'website-client', 'build', *file_path)
+        file = open(file_path, 'r')
+        html_text = file.read().strip()
+        file.close()
+        return html_text
+
+    @classmethod
     def get_html_for_version(cls, uuid):
-        file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
-        file_directory = settings.ENV if settings.ENV != 'local' else 'dev'
-        return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, file_directory + '/' + uuid, 'index.html')
+        if settings.ENV == 'local':
+            return cls.get_local_file_text(['index.html'])
+        else:
+            file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
+            return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, settings.ENV + '/' + uuid, 'index.html')
 
     @classmethod
     def get_js_for_version(cls, version_id, file_name):
-        file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
-        file_directory = settings.ENV if settings.ENV != 'local' else 'dev'
-        directory_name = file_directory + '/' + version_id + '/static/js'
-
-        return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, directory_name, file_name)
+        if settings.ENV == 'local':
+            return cls.get_local_file_text(['static', 'js', file_name])
+        else:
+            file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
+            directory_name = settings.ENV + '/' + version_id + '/static/js'
+            return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, directory_name, file_name)
 
     @classmethod
     def get_css_for_version(cls, version_id, file_name):
-        file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
-        file_directory = settings.ENV if settings.ENV != 'local' else 'dev'
-        directory_name = file_directory + '/' + version_id + '/static/css'
-        return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, directory_name, file_name)
+        if settings.ENV == 'local':
+            return cls.get_local_file_text(['static', 'css', file_name])
+        else:
+            file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
+            directory_name = settings.ENV + '/' + version_id + '/static/css'
+            return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, directory_name, file_name)
 
     @classmethod
     def load_static(cls, path, file_name):
-        # print("load_static, path is %s, file is %s" % (path, file_name))
-        file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
-        file_directory = settings.ENV if settings.ENV != 'local' else 'dev'
-        directory_name = file_directory + '/' + path
-        # print("load_static, get_file dir %s, file %s to ./web" % (directory_name, file_name))
-        return file_service.get_file_to_path(settings.AZURE_FILE_SHARE, directory_name, file_name, './web/' + file_name)
+        if settings.ENV == 'local':
+            return cls.get_local_file_text([path, file_name, './web/' + file_name])
+        else:
+            file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
+            directory_name = settings.ENV + '/' + path
+            return file_service.get_file_to_path(settings.AZURE_FILE_SHARE, directory_name, file_name, './web/' + file_name)
 
     @classmethod
     def deploy_version(cls):
@@ -126,7 +143,7 @@ class FrontendVersion:
 
         file_service.create_directory(settings.AZURE_FILE_SHARE, file_directory, fail_on_exist=False)
 
-        version_directory = file_directory + "/" + unique_id
+        version_directory = file_directory + '/' + unique_id
 
         print('creating frontend version directory' + version_directory)
         file_service.create_directory(settings.AZURE_FILE_SHARE, version_directory)
@@ -140,7 +157,7 @@ class FrontendVersion:
         file_service.create_directory(settings.AZURE_FILE_SHARE, version_directory + '/static/media')
 
         print('adding current_version to the version directory')
-        file_service.put_file_from_text(settings.AZURE_FILE_SHARE, version_directory, "current_version.txt", unique_id)
+        file_service.put_file_from_text(settings.AZURE_FILE_SHARE, version_directory, 'current_version.txt', unique_id)
 
         manifest = json.loads(open('./web/asset-manifest.json').read())
 
@@ -164,7 +181,7 @@ class FrontendVersion:
         file_service.put_file_from_text(settings.AZURE_FILE_SHARE, version_directory, 'tag.txt', release_tag)
 
         print('adding current tag meta to the environment directory')
-        file_service.put_file_from_text(settings.AZURE_FILE_SHARE, file_directory, "current_tag.txt", release_tag)
+        file_service.put_file_from_text(settings.AZURE_FILE_SHARE, file_directory, 'current_tag.txt', release_tag)
 
         print('updating current version meta in the environment directory')
-        file_service.put_file_from_text(settings.AZURE_FILE_SHARE, file_directory, "current_version.txt", unique_id)
+        file_service.put_file_from_text(settings.AZURE_FILE_SHARE, file_directory, 'current_version.txt', unique_id)

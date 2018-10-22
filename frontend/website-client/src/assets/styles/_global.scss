@@ -260,3 +260,46 @@ h2 {
   }
 }
 
+//sexhealth
+.sexhealth {
+
+  background-color: $sexhealth-grey;
+
+  html & {  
+    color: $sexhealth-dark;
+  }
+
+  h1 {
+    font-size: map-deep-get($headings, sexhealth, heading-h1, mobile);
+    font-weight: normal;
+    
+    
+    @include media-breakpoint-up(sm) {
+      font-size: map-deep-get($headings, sexhealth, heading-h1, desktop);
+    }
+  }
+  
+  h2 {
+    font-size: map-deep-get($headings, sexhealth, heading-h2, mobile);
+    
+    @include media-breakpoint-up(sm) {
+      font-size: map-deep-get($headings, sexhealth, heading-h2, desktop);
+    }
+  }
+
+  .button-cta {
+    background-color: $sexhealth-pink;
+    color: $white;
+    border: 2px solid $sexhealth-pink;
+  
+    &:active, &:visited {
+      background-color: $sexhealth-pink;
+      color: $white;
+    }
+  
+    &:hover {
+      background-color: $white;
+      color: $sexhealth-pink;
+    }
+  }
+}

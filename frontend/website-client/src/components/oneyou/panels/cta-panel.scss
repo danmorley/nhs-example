@@ -1,0 +1,64 @@
+@import '../../../assets/styles/variables/variables';
+@import "../../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+.cta-panel {
+  
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  
+  @include media-breakpoint-up(md) {
+    flex-direction: row;
+  }
+  
+  .cta-list {
+    margin-top: auto;
+  }
+  
+  .cta-list__item {
+    margin-bottom: 0.5em;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.cta-panel__heading {
+  margin-bottom: 0.5em;
+  text-transform: uppercase;
+  font-weight: normal;
+  font-family: $secondary-brand-font;
+}
+
+.cta-panel__text {
+  margin-bottom: 0.5em;
+  
+  @include media-breakpoint-up(md) {
+    margin-bottom: 0;
+  }
+}
+
+.cta-panel__col {
+  display: flex;
+  flex-direction: column;
+  
+  &:first-child {
+    flex-grow: 1;
+    min-width: 1px;
+    
+    @include media-breakpoint-up(md) {
+      padding-right: 1em;
+    }
+  }
+}
+
+.sexhealth {
+  .cta-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+}

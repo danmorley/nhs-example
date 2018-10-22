@@ -19,9 +19,11 @@ $h4: 1em;
 
 $h1-oneyou: 1.625em;
 $h1-stoptober: 1.625em;
+$h1-sexhealth: 1.625em;
 
 $h2-oneyou: 1.25em;
 $h2-stoptober: 1.625em;
+$h2-sexhealth: 1.625em;
 
 $headings: (
   oneyou: (
@@ -42,6 +44,16 @@ $headings: (
     heading-h2: (
       mobile: $h2-stoptober,
       desktop: $h2-stoptober*1.2
+    )
+  ),
+  sexhealth: (
+    heading-h1: (
+      mobile: $h1-sexhealth,
+      desktop: $h1-sexhealth*1.231
+    ),
+    heading-h2: (
+      mobile: $h2-sexhealth,
+      desktop: $h2-sexhealth*1.2
     )
   )
 );

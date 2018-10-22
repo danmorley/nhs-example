@@ -6,6 +6,8 @@ from django.core.exceptions import PermissionDenied
 from django.http import HttpRequest, Http404, QueryDict
 from django.utils import timezone
 
+from wagtail.core.models import Page
+
 from .factories import create_test_oneyou_variant, create_test_experiment
 from .models import OneYouVariant
 from .views import VarientAdminURLHelper, create, edit
@@ -14,6 +16,8 @@ from oneYou2.factories import create_test_user
 from oneYou2.test.utils import OneYouTests
 
 from pages.factories import create_test_recipe_page
+from pages.models import OneYou2Page, Theme
+
 
 TEST_POST_CONTENT = QueryDict('csrfmiddlewaretoken=Rr2jKQfBjWRU85VE2JSabVjhYNuyrxYWZH3keFXELWABv8XIKAda7ybCYxpOkaq2'
                               '&next=%2Fadmin%2Fexperiments%2Foneyouvariant%2F&title=SMALL+SOMETHING&body-count=1'
@@ -54,7 +58,7 @@ class VarientAdminURLHelperViewsTests(OneYouTests):
         model = 'oneyouvariant'
         id = 1
         actual = url_helper.get_action_url(action, module, model, id)
-        expected = "/admin/experiments/oneyouvariant/" + action + "/" + module + "/" + model + "/" + str(id) + "/"
+        expected = '/admin/experiments/oneyouvariant/' + action + '/' + module + '/' + model + '/' + str(id) + '/'
         self.assertIsTrue(expected in actual)
 
     def test_get_action_url_returns_the_edit_url_for_an_edit_action(self):
@@ -62,11 +66,33 @@ class VarientAdminURLHelperViewsTests(OneYouTests):
         action = 'edit'
         id = 1
         actual = url_helper.get_action_url(action, id)
-        expected = "/admin/experiments/oneyouvariant/" + str(id) + "/" + action + "/"
+        expected = '/admin/experiments/oneyouvariant/' + str(id) + '/' + action + '/'
         self.assertIsTrue(expected in actual)
 
 
 class CreateExperimentsViewsTests(OneYouTests):
+
+    def setUp(self):
+        theme = Theme(
+            label='One You',
+            class_name='oneyou',
+        )
+        theme.save()
+
+        root_page = Page.objects.get(id=1).specific
+        self.oneyou_homepage = OneYou2Page(
+            search_description='',
+            seo_title='foo',
+            show_in_menus=False,
+            slug='foobar',
+            title='Foo Bar',
+            og_image_fk=None,
+            twitter_image_fk=None,
+            theme=theme,
+        )
+
+        root_page.add_child(instance=self.oneyou_homepage)
+        self.oneyou_homepage.save()
 
     def test_create_view_get(self):
         request = HttpRequest()
@@ -74,7 +100,7 @@ class CreateExperimentsViewsTests(OneYouTests):
         request.user = user
         app_name = 'experiments'
         model_name = 'oneyouvariant'
-        response = create(request, app_name, model_name, 3)
+        response = create(request, app_name, model_name, self.oneyou_homepage.id)
         self.assertEquals(response.status_code, 200)
 
     def test_create_view_post(self):
@@ -89,7 +115,7 @@ class CreateExperimentsViewsTests(OneYouTests):
         request.POST = TEST_POST_CONTENT
         app_name = 'experiments'
         model_name = 'oneyouvariant'
-        response = create(request, app_name, model_name, 3)
+        response = create(request, app_name, model_name, self.oneyou_homepage.id)
         self.assertEquals(response.status_code, 200)
 
     def test_create_view_correctly_checks_permisions(self):
@@ -100,7 +126,7 @@ class CreateExperimentsViewsTests(OneYouTests):
         model_name = 'oneyouvariant'
         permission_error_thrown = False
         try:
-            create(request, app_name, model_name, 3)
+            create(request, app_name, model_name, self.oneyou_homepage.id)
         except PermissionDenied:
             permission_error_thrown = True
         self.assertIsTrue(permission_error_thrown)
@@ -113,7 +139,7 @@ class CreateExperimentsViewsTests(OneYouTests):
         model_name = 'oneyouvariant'
         not_found_error_thrown = False
         try:
-            create(request, app_name, model_name, 3)
+            create(request, app_name, model_name, self.oneyou_homepage.id)
         except Http404:
             not_found_error_thrown = True
         self.assertIsTrue(not_found_error_thrown)
@@ -126,7 +152,7 @@ class CreateExperimentsViewsTests(OneYouTests):
         model_name = 'made_up_name'
         not_found_error_thrown = False
         try:
-            create(request, app_name, model_name, 3)
+            create(request, app_name, model_name, self.oneyou_homepage.id)
         except Http404:
             not_found_error_thrown = True
         self.assertIsTrue(not_found_error_thrown)

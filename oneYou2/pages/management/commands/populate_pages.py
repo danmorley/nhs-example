@@ -7,8 +7,8 @@ from django.db import DEFAULT_DB_ALIAS
 class Command(BaseCommand):
     help = 'Installs the named fixture(s) in the database if no OneYou pages exist.'
     missing_args_message = (
-        "No database fixture specified. Please provide the path of at least "
-        "one fixture in the command line."
+        'No database fixture specified. Please provide the path of at least '
+        'one fixture in the command line.'
     )
 
     def add_arguments(self, parser):
@@ -38,7 +38,7 @@ class Command(BaseCommand):
     def handle(self, *fixture_labels, **options):
         from pages.models import OneYou2Page
         one_you_pages = OneYou2Page.objects.count()
-        print("Current number of pages: ", one_you_pages)
+        print('Current number of pages: ', one_you_pages)
         if one_you_pages == 0:
             self.ignore = options['ignore']
             self.using = options['database']

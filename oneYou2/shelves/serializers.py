@@ -12,7 +12,7 @@ class ImageSerializer(serializers.Serializer):
     def to_representation(self, data):
         if not data:
             return {
-                'title': "",
+                'title': '',
                 'renditions': {}
             }
         serialized_data = super(ImageSerializer, self).to_representation(data)
@@ -55,9 +55,9 @@ class PromoShelfSerializer(HyperlinkedModelSerializer):
         }
         if cta_page:
             representation['cta']['link_page'] = {
-                "id": cta_page.get('id'),
-                "slug": cta_page.get('slug'),
-                "relative_path": cta_page.get('relative_path'),
+                'id': cta_page.get('id'),
+                'slug': cta_page.get('slug'),
+                'relative_path': cta_page.get('relative_path'),
             }
 
         representation['shelf_id'] = slugify(representation['shelf_id'])
@@ -84,9 +84,9 @@ class BannerShelfSerializer(HyperlinkedModelSerializer):
         }
         if cta_page:
             representation['cta']['link_page'] = {
-                "id": cta_page.get('id'),
-                "slug": cta_page.get('slug'),
-                "relative_path": cta_page.get('relative_path'),
+                'id': cta_page.get('id'),
+                'slug': cta_page.get('slug'),
+                'relative_path': cta_page.get('relative_path'),
             }
 
         representation['shelf_id'] = slugify(representation['shelf_id'])
@@ -107,12 +107,12 @@ class AppTeaserSerializer(HyperlinkedModelSerializer):
         cta_googleplay = representation.pop('cta_googleplay')
         if cta_appstore:
             representation['cta_appstore'] = {
-                'link_text': "",
+                'link_text': '',
                 'link_external': cta_appstore,
             }
         if cta_googleplay:
             representation['cta_googleplay'] = {
-                'link_text': "",
+                'link_text': '',
                 'link_external': cta_googleplay,
             }
 
@@ -125,9 +125,9 @@ class AppTeaserSerializer(HyperlinkedModelSerializer):
         }
         if cta_page:
             representation['cta']['link_page'] = {
-                "id": cta_page.get('id'),
-                "slug": cta_page.get('slug'),
-                "relative_path": cta_page.get('relative_path'),
+                'id': cta_page.get('id'),
+                'slug': cta_page.get('slug'),
+                'relative_path': cta_page.get('relative_path'),
             }
         return representation
 

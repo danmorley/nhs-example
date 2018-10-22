@@ -41,33 +41,33 @@ class ShelfAbstractModelTests(OneYouTests):
         abstractShelf.delete()
 
     def test_saving_a_shelf_abstract_creates_a_new_revision(self):
-        shelf = ShelfAbstract(shelf_id="Test shelf")
+        shelf = ShelfAbstract(shelf_id='Test shelf')
 
         self.assertEqual(shelf.revisions.count(), 0)
 
         shelf.save()
 
-        loadedShelf = ShelfAbstract.objects.get(shelf_id="Test shelf")
+        loadedShelf = ShelfAbstract.objects.get(shelf_id='Test shelf')
 
         self.assertEqual(loadedShelf.revisions.count(), 1)
 
         shelf.delete()
 
     def test_child_class_saving_also_creates_new_revision(self):
-        shelf = PromoShelf(shelf_id="Test shelf", heading="The heading of the shelf")
+        shelf = PromoShelf(shelf_id='Test shelf', heading='The heading of the shelf')
 
         self.assertEqual(shelf.revisions.count(), 0)
 
         shelf.save()
 
-        loadedShelf = PromoShelf.objects.get(heading="The heading of the shelf")
+        loadedShelf = PromoShelf.objects.get(heading='The heading of the shelf')
 
         self.assertEqual(loadedShelf.revisions.count(), 1)
 
         shelf.delete()
 
     def test_saving_associates_new_revision_to_live_revision(self):
-        shelf = ShelfAbstract(shelf_id="Test shelf")
+        shelf = ShelfAbstract(shelf_id='Test shelf')
 
         self.assertIsNone(shelf.live_revision)
 
@@ -227,14 +227,14 @@ class BannerShelfModelTests(OneYouTests):
     def test_meta_layout_returns_the_correct_value(self):
         shelf = create_test_banner_shelf()
 
-        expected_value = "full_width"
+        expected_value = 'full_width'
 
         self.assertEqual(expected_value, shelf.meta_layout)
 
     def test_meta_variant_returns_the_correct_value(self):
         shelf = create_test_banner_shelf()
 
-        expected_value = "main-banner"
+        expected_value = 'main-banner'
 
         self.assertEqual(expected_value, shelf.meta_variant)
 
@@ -243,14 +243,14 @@ class PromoShelfModelTests(OneYouTests):
     def test_meta_layout_returns_the_correct_value(self):
         shelf = create_test_promo_shelf()
 
-        expected_value = "cta_on_right"
+        expected_value = 'cta_on_right'
 
         self.assertEqual(expected_value, shelf.meta_layout)
 
     def test_meta_variant_returns_the_correct_value(self):
         shelf = create_test_promo_shelf()
 
-        expected_value = "how-are-you"
+        expected_value = 'how-are-you'
 
         self.assertEqual(expected_value, shelf.meta_variant)
 

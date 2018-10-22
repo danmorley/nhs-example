@@ -16,7 +16,6 @@ services:
       CONTENT_STORE_ENDPOINT: ${CONTENT_STORE_ENDPOINT}
       CMS_ENV: ${CMS_ENV}
       PUBLIC_URL: ${REACT_APP_PUBLIC_URL}
-      ADOBE_TRACKING_URL: ${ADOBE_TRACKING_URL}
     labels:
       io.rancher.container.pull_image: always
       traefik.enable: true

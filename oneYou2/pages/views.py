@@ -25,7 +25,7 @@ def unpublish(request, page_id):
 
     next_url = get_valid_next_url_from_request(request)
 
-    include_descendants = request.POST.get("include_descendants", False)
+    include_descendants = request.POST.get('include_descendants', False)
 
     page.unpublish()
 
@@ -35,11 +35,11 @@ def unpublish(request, page_id):
             if user_perms.for_page(live_descendant_page).can_unpublish():
                 live_descendant_page.unpublish()
 
-    messages.success(request, _("Page '{0}' unpublished.").format(page.get_admin_display_title()), buttons=[
+    messages.success(request, _('Page \'{0}\' unpublished.').format(page.get_admin_display_title()), buttons=[
         messages.button(reverse('wagtailadmin_pages:edit', args=(page.id,)), _('Edit'))
     ])
 
-    page.release_id = request.POST.get("release", None)
+    page.release_id = request.POST.get('release', None)
     page.save()
 
     if next_url:
@@ -88,10 +88,10 @@ def copy(request, page_id):
             can_publish = parent_page.permissions_for_user(request.user).can_publish_subpage()
 
             # Copy the page
-            print("YYYYY")
+            print('YYYYY')
             print(page.slug)
             print(page.theme)
-            print("NNNN")
+            print('NNNN')
             new_page = newest_revision.as_page_object().copy(
                 recursive=form.cleaned_data.get('copy_subpages'),
                 to=parent_page,
@@ -107,10 +107,10 @@ def copy(request, page_id):
             if form.cleaned_data.get('copy_subpages'):
                 messages.success(
                     request,
-                    _("Page '{0}' and {1} subpages copied.").format(page.get_admin_display_title(), new_page.get_descendants().count())
+                    _('Page \'{0}\' and {1} subpages copied.').format(page.get_admin_display_title(), new_page.get_descendants().count())
                 )
             else:
-                messages.success(request, _("Page '{0}' copied.").format(page.get_admin_display_title()))
+                messages.success(request, _('Page \'{0}\' copied.').format(page.get_admin_display_title()))
 
             for fn in hooks.get_hooks('after_copy_page'):
                 result = fn(request, page, new_page)
@@ -190,14 +190,14 @@ def edit(request, page_id):
 
                 if is_reverting:
                     message = _(
-                        "Revision from {0} of page '{1}' has been published."
+                        'Revision from {0} of page \'{1}\' has been published.'
                     ).format(
-                        previous_revision.created_at.strftime("%d %b %Y %H:%M"),
+                        previous_revision.created_at.strftime('%d %b %Y %H:%M'),
                         page.get_admin_display_title()
                     )
                 else:
                     message = _(
-                        "Page '{0}' has been published."
+                        'Page \'{0}\' has been published.'
                     ).format(
                         page.get_admin_display_title()
                     )
@@ -214,14 +214,14 @@ def edit(request, page_id):
                 release = Release.objects.get(id=release_for_unpublish)
                 release.remove_page(page_id)
 
-                messages.success(request, _("Page '{0}' unpublished.").format(page.get_admin_display_title()), buttons=[
+                messages.success(request, _('Page \'{0}\' unpublished.').format(page.get_admin_display_title()), buttons=[
                     messages.button(reverse('wagtailadmin_pages:edit', args=(page.id,)), _('Edit'))
                 ])
 
             elif is_submitting:
 
                 message = _(
-                    "Page '{0}' has been submitted for moderation."
+                    'Page \'{0}\' has been submitted for moderation.'
                 ).format(
                     page.get_admin_display_title()
                 )
@@ -239,20 +239,20 @@ def edit(request, page_id):
                 ])
 
                 if not send_notification(page.get_latest_revision().id, 'submitted', request.user.pk):
-                    messages.error(request, _("Failed to send notifications to moderators"))
+                    messages.error(request, _('Failed to send notifications to moderators'))
 
             else:  # Saving
 
                 if is_reverting:
                     message = _(
-                        "Page '{0}' has been replaced with revision from {1}."
+                        'Page \'{0}\' has been replaced with revision from {1}.'
                     ).format(
                         page.get_admin_display_title(),
-                        previous_revision.created_at.strftime("%d %b %Y %H:%M")
+                        previous_revision.created_at.strftime('%d %b %Y %H:%M')
                     )
                 else:
                     message = _(
-                        "Page '{0}' has been updated."
+                        'Page \'{0}\' has been updated.'
                     ).format(
                         page.get_admin_display_title()
                     )
@@ -280,10 +280,10 @@ def edit(request, page_id):
                 return redirect(target_url)
         else:
             if page.locked:
-                messages.error(request, _("The page could not be saved as it is locked"))
+                messages.error(request, _('The page could not be saved as it is locked'))
             else:
                 messages.validation_error(
-                    request, _("The page could not be saved due to validation errors"), form
+                    request, _('The page could not be saved due to validation errors'), form
                 )
 
             edit_handler = edit_handler.bind_to_instance(instance=page,
@@ -313,7 +313,7 @@ def edit(request, page_id):
                 _('Compare with live version')
             ))
 
-        messages.warning(request, _("This page is currently awaiting moderation"), buttons=buttons)
+        messages.warning(request, _('This page is currently awaiting moderation'), buttons=buttons)
 
     if page.live and page.has_unpublished_changes:
         # Page status needs to present the version of the page containing the correct live URL

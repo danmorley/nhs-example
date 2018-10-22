@@ -19,11 +19,11 @@ from oneYou2.panels import ReadOnlyPanel
 
 from frontendHandler.models import FrontendVersion
 
-from pages.models import OneYou2Page, RecipePage
+from pages.models import RecipePage
 
 CONTENT_STATUS = (
-    (0, "PENDING"),
-    (1, "FROZEN"),
+    (0, 'PENDING'),
+    (1, 'FROZEN'),
 )
 
 
@@ -99,20 +99,17 @@ class Release(ClusterableModel):
             content = {}
             if self.base_release:
                 content = json.loads(self.base_release.content.first().content)
-            else:
-                live_pages = OneYou2Page.objects.live()
-                for page in live_pages:
-                    content[str(page.id)] = Release.generate_fixed_content(page.get_latest_revision())
-                    if page.live_revision:
-                        ReleasePage(release=self, revision=page.live_revision).save()
             ReleaseContent(release=self, content=json.dumps(content)).save()
         return self
 
     def dict(self):
         self_dict = obj_to_dict(self)
-        self_dict['pages'] = []
-        for page in self.pages.all():
-            self_dict['pages'].append(page.id)
+        attr = self.__class__.__dict__.keys()
+        page_attributes = [key for key in attr if key.endswith('_pages')]
+        for page_attr in page_attributes:
+            self_dict[page_attr] = []
+            for page in getattr(self, page_attr).all():
+                self_dict[page_attr].append(page.id)
         return self_dict
 
     def __str__(self):
@@ -148,11 +145,9 @@ class Release(ClusterableModel):
 
     @classmethod
     def generate_fixed_content(cls, revision):
-        from pages.serializers import OneYouPageSerializer, RecipePageSerializer
         page = revision.as_page_object()
-        if isinstance(page, RecipePage):
-            return RecipePageSerializer(page).data
-        return OneYouPageSerializer(page).data
+        Serializer = page.__class__.get_serializer()
+        return Serializer(page).data
 
     def generate_fixed_site_meta(self):
         from oneYou2.serializers import SiteSerializer
@@ -206,5 +201,4 @@ class ReleaseContent(models.Model):
 
     def get_content_for(self, key):
         content_dict = json.loads(self.content)
-        print(content_dict.keys())
         return content_dict[key]

@@ -3,7 +3,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="google-site-verification" content="GW_njQqLsclGe9GQQWYs2hYGPmjdEff_XkRrOyfzrBk"/>
+    {% if site_setting.google_site_verification_id %}
+        <meta name="google-site-verification" content="{{ site_setting.google_site_verification_id }}"/>
+    {% endif %}
     <meta name="indexlocation" content="public/index.html"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
@@ -13,14 +15,14 @@
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
     <script type="text/javascript" src="//ww4player.s3.amazonaws.com/ww4release/javascripts/wirewax-iframe-api.js"></script>
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <link rel="manifest" href="{{ public_url }}/manifest.json">
+    <link rel="shortcut icon" href="{{ site_setting.favicon.file.url }}">
     <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
+      Notice the use of {{ public_url }} in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      Unlike "/favicon.ico" or "favicon.ico", "{{ public_url }}/favicon.ico" will
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
@@ -143,25 +145,29 @@
         }
     </style>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120378767-1"></script>
-  
-    <script>(function (a, s, y, n, c, h, i, d, e) {
-        console.log("ASYNC HIDE");
-        s.className += ' ' + y;
-        h.start = 1 * new Date;
-        h.end = i = function () {
-            s.className = s.className.replace(RegExp(' ?' + y), '')
-        };
-        (a[n] = a[n] || []).hide = h;
-        setTimeout(function () {
-            i();
-            h.end = null
-        }, c);
-        h.timeout = c;
-    })(window, document.documentElement, 'async-hide', 'dataLayer', 4000,
-        {'GTM-NQPC6C': true});
-    </script>
+    {% if site_setting.global_google_tag_manager_id %}
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ site_setting.global_google_tag_manager_id }}"></script>
+    {% endif %}
+    
+    {% if site_setting.google_tag_manager_id %}
+        <script>(function (a, s, y, n, c, h, i, d, e) {
+            console.log("ASYNC HIDE");
+            s.className += ' ' + y;
+            h.start = 1 * new Date;
+            h.end = i = function () {
+                s.className = s.className.replace(RegExp(' ?' + y), '')
+            };
+            (a[n] = a[n] || []).hide = h;
+            setTimeout(function () {
+                i();
+                h.end = null
+            }, c);
+            h.timeout = c;
+        })(window, document.documentElement, 'async-hide', 'dataLayer', 4000,
+            {'{{ site_setting.google_tag_manager_id }}': true});
+        </script>
+    {% endif %}
 
     <script type="text/javascript">
       function enableWebtrends() {
@@ -184,46 +190,56 @@
         (function () {
           var s = document.createElement("script");
           s.async = true;
-          s.src = "%PUBLIC_URL%/webtrends.min.js";
+          s.src = "{{ public_url }}/webtrends.min.js";
           var s2 = document.getElementsByTagName("script")[0];
           s2.parentNode.insertBefore(s, s2);
         }());
       }
 
-      function enableGoogleAnalytics() {
-        window.dataLayer = window.dataLayer || [];
+      {% if site_setting.google_tag_manager_id %}
+        function enableGoogleAnalytics() {
+            window.dataLayer = window.dataLayer || [];
 
-        function gtag() {
-          dataLayer.push(arguments);
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+
+            gtag('js', new Date());
+            gtag('config', '{{ site_setting.google_tag_manager_id }}');
         }
-
-        gtag('js', new Date());
-        gtag('config', 'UA-119038613-1');    
-      }
+      {% endif %}
     </script>
 
-    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="9d5293f5-cb06-4c3c-a81c-58ac270dec41"
-            type="text/javascript" async></script>
+    {% if site_setting.cookiebot_id %}
+        <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="{{ site_setting.cookiebot_id }}"
+                type="text/javascript" async></script>
 
-    <script type="text/javascript">
-      function CookiebotCallback_OnAccept() {
-        if (Cookiebot.consent.statistics) {
-          enableWebtrends();
-          enableGoogleAnalytics();
-        }
-      }
-    </script>
+        <script type="text/javascript">
+            function CookiebotCallback_OnAccept() {
+                if (Cookiebot.consent.statistics) {
+                    enableWebtrends();
+                    {% if site_setting.google_tag_manager_id %}
+                        enableGoogleAnalytics();
+                    {% endif %}
+                }
+            }
+        </script>
+    {% endif %}
 
-    <!-- Google Tag Manager -->
-    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NQPC6C" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <script type="text/plain" data-cookieconsent="statistics">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-NQPC6C');</script>
-    <!-- End Google Tag Manager -->
+    {% if site_setting.google_tag_manager_id %}
+        <!-- Google Tag Manager -->
+        <noscript><iframe src="//www.googletagmanager.com/ns.html?id={{ site_setting.google_tag_manager_id }}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <script type="text/plain" data-cookieconsent="statistics">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','{{ site_setting.google_tag_manager_id }}');</script>
+        <!-- End Google Tag Manager -->
+    {% endif %}
 
-    <script src="%adobe_tracking_url%" async data-cookieconsent="statistics"></script>
+    {% if site_setting.adobe_tracking_url %}
+        <script src="{{ site_setting.adobe_tracking_url }}" async data-cookieconsent="statistics"></script>
+    {% endif %}
 </head>
 <body>
 <noscript>
@@ -240,7 +256,7 @@
         <div class="sk-cube3 sk-cube"></div>
     </div>
 </div>
-<div id="root" data-content-store-endpoint="%apiurl%" data-site="oneyou" data-release="%releaseid%"></div>
+<div id="root" data-content-store-endpoint="{{ api_url }}" data-site="{{ site_setting.uid }}" data-release="{{ release_id }}"></div>
 <!--
   This HTML file is a template.
   If you open it directly in the browser, you will see an empty page.

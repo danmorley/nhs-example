@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 import 'normalize.css';
 import './assets/styles/fonts.css';
-import AppRouteRegistry from './components/AppRouteRegistry';
-import Page from './components/pages/Page';
-import ShelfSamplesPage from './components/pages/ShelfSamplesPage';
-import siteMapPage from './components/pages/SiteMapPage';
-import CookieDeclarationPage from './components/pages/CookieDeclarationPage';
+import AppRouteRegistry from './components/base/AppRouteRegistry';
+import Page from './components/base/pages/Page';
+import ShelfSamplesPage from './components/oneyou/pages/ShelfSamplesPage';
+import siteMapPage from './components/oneyou/pages/SiteMapPage';
+import CookieDeclarationPage from './components/oneyou/pages/CookieDeclarationPage';
 import { notFoundPage, serverErrorPage } from './data/exceptionPages';
 import createHistory from 'history/createBrowserHistory';
 import startsWith from 'lodash.startswith';
@@ -34,12 +34,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    let path = this.checkForRedirect() || this.pagePathToRender(window.location.pathname);
+    let path = this.pagePathToRender(window.location.pathname);
     console.log('First time load of page for path ' + path);
     if (!AppRouteRegistry.routeIsLocal(path)) {
       console.log('Loading cms page', path);
-      let key = this.pageSlug(path);
-
+      let key = this.pageKey(path);
       this.loadPageForKey(key);
     } else {
       console.log('Loading app page', path);
@@ -56,7 +55,7 @@ class App extends Component {
       if (!AppRouteRegistry.routeIsLocal(path)) {
         path = path.replace(global.rootUrl, '');
         console.log('Loading cms page', path);
-        let key = this.pageSlug(path);
+        let key = this.pageKey(path);
         this.loadPageForKey(key);
       } else {
         path = path.replace(global.rootUrl, '');
@@ -82,7 +81,8 @@ class App extends Component {
    *  a re-render of the new page.
    */
   loadPageForKey(key) {
-    if (!key) key = 'home';
+    if (!key || key == '/') key = 'home';
+    key = key.replace(/\//g, '|');
     console.log('Loading page for key', key);
     App.setContentVisibile(false);
 
@@ -137,11 +137,8 @@ class App extends Component {
     return path.slice(-1) === '/' ? path : path + '/';
   }
 
-  pageSlug(path) {
-    // Remove trailing slash
-    let path_minus_slash = path.replace(/\/$/, '');
-    let slug = path_minus_slash.substr(path_minus_slash.lastIndexOf('/') + 1)
-    return slug
+  pageKey(path) {
+    return path.substring(1, path.length-1);
   }
 
   loadPage(_props) {
@@ -186,7 +183,8 @@ class App extends Component {
       const hash = window.location.hash;
       if (hash) {
         let scrollTarget = document.getElementById(hash.substring(1));
-        let offset = document.querySelector('.page-header').clientHeight;
+        const pageHeaderElem = document.querySelector('.page-header');
+        const offset = (pageHeaderElem)? pageHeaderElem.clientHeight : 0;
         if (scrollTarget) {
           scrollTarget.scrollIntoView();
           window.scrollBy(0, -offset);

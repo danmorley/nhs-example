@@ -110,3 +110,13 @@ _:-ms-fullscreen, :root {
 .no-bottom-margin {
   margin-top: 0 !important;
 }
+
+
+//theming
+
+//sexhealth
+.sexhealth {
+  &.page-wrapper {
+    max-width: none;
+  }
+}

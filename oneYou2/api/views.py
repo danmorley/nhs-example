@@ -1,6 +1,7 @@
 import json
 
 import re
+from urllib.parse import unquote
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
 from django.template.response import TemplateResponse
@@ -10,11 +11,13 @@ from oneYou2.serializers import SiteSerializer
 
 from release.utils import get_latest_live_release, get_release_object, populate_release_if_required
 
-from pages.serializers import OneYouPageListSerializer, OneYouPageSerializer
+from pages.serializers import OneYouPageListSerializer
 
 from wagtail.core.models import Page, Site
 
 from experiments.models import ExperimentsContent
+from home.models import SiteSettings
+
 from .utils import get_site_or_404
 
 
@@ -30,7 +33,7 @@ def site_view(request, site_identifier):
 
     current_release = get_latest_live_release(site.site.pk)
     if not current_release:
-        return JsonResponse({'message': "The current site has no live releases"}, status=404)
+        return JsonResponse({'message': 'The current site has no live releases'}, status=404)
 
     populate_release_if_required(current_release)
 
@@ -44,22 +47,22 @@ def site_view(request, site_identifier):
 def release_view(request, site_identifier, release_uuid):
     site = get_site_or_404(site_identifier)
 
-    if release_uuid == "current":
+    if release_uuid == 'current':
         release_object = get_latest_live_release(site.site.pk)
         if not release_object:
-            return JsonResponse({'message': "The current site has no live releases"}, status=404)
+            return JsonResponse({'message': 'The current site has no live releases'}, status=404)
         release_uuid = release_object.uuid
     else:
         # Request is asking for a specific release
         release_object = get_release_object(release_uuid)
         if not release_object:
-            return JsonResponse({'message': "Release not found"}, status=404)
+            return JsonResponse({'message': 'Release not found'}, status=404)
         
     setattr(site, 'release_uuid', release_uuid)
     serialized_site_data = SiteSerializer(site).data
     json_response = JsonResponse(serialized_site_data)
     if release_object.content_status == 1:
-        json_response = JsonResponse(release_object.get_content_for("site_json"))
+        json_response = JsonResponse(release_object.get_content_for('site_json'))
         json_response['Cache-Control'] = 'max-age=3600'
     return json_response
 
@@ -71,17 +74,17 @@ def page_list(request, site_identifier, release_uuid):
     get_site_or_404(site_identifier)
     release = get_release_object(release_uuid)
     if not release:
-        return JsonResponse({'message': "Release not found"}, status=404)
+        return JsonResponse({'message': 'Release not found'}, status=404)
     populate_release_if_required(release)
 
     release_pages = release.revisions.all()
     pages = [p.revision.as_page_object() for p in release_pages]
     serialized_page_data = OneYouPageListSerializer(pages, many=True).data
     page_data = {
-        "meta": {
-            "total_count": len(pages)
+        'meta': {
+            'total_count': len(pages)
         },
-        "items": serialized_page_data
+        'items': serialized_page_data
     }
     json_response = JsonResponse(page_data)
     return json_response
@@ -98,38 +101,42 @@ def full_page_list(request, site_identifier):
     for page in pages:
         serialized_page_data.append(json.loads(page.to_json()))
     page_data = {
-        "meta": {
-            "total_count": len(pages)
+        'meta': {
+            'total_count': len(pages)
         },
-        "items": serialized_page_data
+        'items': serialized_page_data
     }
     return JsonResponse(page_data)
 
 
 @require_safe
-def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug=None):
+def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug_path=None):
     """RETURN PAGE DETAILS IN API"""
     # Match variants, a variant's slug should end with -v and then a truncated hash of 6 characters
-    variant_regex = re.compile(r"-v[a-zA-Z0-9]{6}$")
+    variant_regex = re.compile(r'-v[a-zA-Z0-9]{6}$')
 
-    if page_slug:
-        if variant_regex.search(page_slug):
+    if page_slug_path:
+        if variant_regex.search(page_slug_path):
             variant = True
-            not_found_msg = "Variant Not Found"
+            not_found_msg = 'Variant Not Found'
         else:
             variant = False
-            not_found_msg = "Page Not Found"
+            not_found_msg = 'Page Not Found'
 
         try:
             # This somewhat defeats the point of freezing content
             # TODO: Fix this, you can do this by freezing content with slug keys
             # You would then only need to get the page object for variants
-            page = Page.objects.get(slug=page_slug)
-            page_pk = page.pk
+            homepage = SiteSettings.objects.get(uid=site_identifier).site.root_page
+            page_pk = homepage.pk
+            if homepage.url_path != page_slug_path:
+                path = '/{}/{}/'.format(homepage.slug, unquote(page_slug_path).replace('|', '/'))
+                page = Page.objects.get(url_path=path)
+                page_pk = page.pk
         except ObjectDoesNotExist:
             try:
                 if variant:  # Try and get parent page
-                    page = Page.objects.get(slug=page_slug[:-8])
+                    page = Page.objects.get(slug=page_slug_path[:-8])
                     page_pk = page.pk
                     variant = False
                 else:
@@ -138,12 +145,12 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug=
                 return JsonResponse({'message': not_found_msg}, status=404)
     else:  # If there is no slug it cannot be a variant
         variant = False
-        not_found_msg = "Page Not Found"
+        not_found_msg = 'Page Not Found'
 
     get_site_or_404(site_identifier)
     release = get_release_object(release_uuid)
     if not release:
-        return JsonResponse({'message': "Release not found"}, status=404)
+        return JsonResponse({'message': 'Release not found'}, status=404)
     populate_release_if_required(release)
 
     if variant:
@@ -154,10 +161,10 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug=
                     page_content = experiments_content.get_content_for(page_pk)
                 else:
                     # Get parent page content
-                    print("scenario 2")
+                    print('scenario 2')
                     page_content = release.get_content_for(page.get_parent().id)
             else:
-                return JsonResponse({'message': "No content for any experiment found"}, status=500)
+                return JsonResponse({'message': 'No content for any experiment found'}, status=500)
         except KeyError:
             return JsonResponse({'message': not_found_msg}, status=404)
 
@@ -177,21 +184,25 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug=
 def home_page_detail(request, site_identifier, release_uuid):
     """Because the home page lives on a hardcoded / url"""
     # NOT SURE THIS IS USED ANYMORE
-    return page_detail(request, site_identifier, release_uuid, page_slug="home")
+    homepage = SiteSettings.objects.get(uid=site_identifier).site.root_page
+    return page_detail(request, site_identifier, release_uuid, page_slug_path=homepage.url_path)
 
 
 @require_safe
-def page_preview(request, site_identifier, page_slug):
+def page_preview(request, site_identifier, page_slug_path=None):
+    if page_slug_path == 'home':
+        page_slug_path = SiteSettings.objects.get(uid=site_identifier).site.root_page.slug
     site = Site.objects.get(site_name=site_identifier)
-    pages = Page.objects.filter(slug=page_slug)
+    pages = Page.objects.filter(slug=page_slug_path)
     page = [p for p in pages if p.get_site().pk == site.id][0]
-    serialized_page = OneYouPageSerializer(instance=page.specific.get_latest_revision_as_page())
+    Serializer = self.__class__.get_serializer()
+    serialized_page = Serializer(instance=page.specific.get_latest_revision_as_page())
     return JsonResponse(serialized_page.data)
 
 
 @require_safe
 def robots(request):
-    if "service" in request.get_host():
+    if 'service' in request.get_host():
         return TemplateResponse(request, 'robots-disallow.txt',)
     else:
         return TemplateResponse(request, 'robots-allow.txt', )

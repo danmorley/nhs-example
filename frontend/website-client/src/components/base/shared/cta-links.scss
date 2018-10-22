@@ -1,0 +1,9 @@
+@import '../../../assets/styles/variables/variables';
+
+a.disabled {
+  pointer-events: none;
+
+  &.button-cta {
+    opacity: 0.7;
+  }
+}

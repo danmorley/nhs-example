@@ -1,0 +1,29 @@
+@import '../../../assets/styles/variables/variables';
+@import "../../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+.simple-image-panel {
+  img {
+    width: 100%;
+  }
+
+  .image-wrapper {
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+
+  .image-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .image-caption.hidden {
+    visibility: hidden;
+  }
+
+  .image-wrapper:hover .image-caption.hidden {
+    visibility: visible;
+  }
+}

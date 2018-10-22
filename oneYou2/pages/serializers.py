@@ -7,12 +7,12 @@ from images.models import PHEImage
 from .utils import determine_image_rendtions_for_shared_content_shelves, replace_resource_ids_with_links_for_download
 
 
-class OneYouPageSerializer(serializers.ModelSerializer):
+class OneYou2PageSerializer(serializers.ModelSerializer):
     body = StreamField()
 
     def to_representation(self, data):
         meta_fields = getattr(self.Meta, 'meta_fields')
-        serialized_data = super(OneYouPageSerializer, self).to_representation(data)
+        serialized_data = super(OneYou2PageSerializer, self).to_representation(data)
         serialized_data['meta'] = {}
         for meta_field in meta_fields:
             try:
@@ -20,13 +20,13 @@ class OneYouPageSerializer(serializers.ModelSerializer):
                 serialized_data['meta'][meta_field] = meta_field_value
             except KeyError:
                 pass
-        serialized_data['meta']['type'] = 'oneyou_page'
+        serialized_data['meta']['type'] = 'general_page'
         for shelf in serialized_data['body']:
             determine_image_rendtions_for_shared_content_shelves(shelf)
             replace_resource_ids_with_links_for_download(shelf)
             shelf_id = shelf.get('id', None)
             if shelf_id:
-                shelf['id'] = "p%s-%s" % (data.id, shelf_id)
+                shelf['id'] = 'p%s-%s' % (data.id, shelf_id)
 
         serialized_data['meta']['breadcrumbs'] = data.breadcrumbs
 

@@ -5,6 +5,7 @@ import App from './App';
 import { unregister } from './registerServiceWorker';
 import ContentStore from './services/ContentStore';
 import queryString from 'query-string';
+import UrlUtils from './components/base/shared/UrlUtils';
 
 /**
  *  Script to 'load' the website into the 'root' element.
@@ -19,9 +20,10 @@ import queryString from 'query-string';
  *  data-content-store-endpoint: "https://oneyou-cms.service.nhs.uk/api"
  */
 let rootElem = document.getElementById('root');
-global.rootUrl = rootElem.getAttribute('data-site') ? '/' + rootElem.getAttribute('data-site') : '/oneyou';
+const siteSlug = UrlUtils.siteSlugFromPath(window.location.pathname);
+global.rootUrl = rootElem.getAttribute('data-site') ? '/' + rootElem.getAttribute('data-site') : '/' + siteSlug;
 let dataContentStoreEndpoint = rootElem.getAttribute('data-content-store-endpoint') || 'http://localhost:8000/api';
-let dataSite = rootElem.getAttribute('data-site') || 'oneyou';
+let dataSite = rootElem.getAttribute('data-site') || siteSlug;
 let dataRelease = rootElem.getAttribute('data-release') || 'current';
 
 // Ensure query param release id is used if given.

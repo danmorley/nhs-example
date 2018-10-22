@@ -1,0 +1,27 @@
+@import '../../../assets/styles/variables/variables';
+
+.email-button-panel {
+  margin-left: 1em;
+}
+
+.email-button {
+  background: $sunflower-yellow;
+  border: 1px solid transparent;
+  position: relative;
+  padding: 1em;
+  font-weight: bold;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-decoration: none;
+  display: inline-block;
+  height: auto;
+  cursor: pointer;
+
+  .email-button__title {
+    position: relative;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+
+}

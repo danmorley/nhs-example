@@ -1,0 +1,90 @@
+@import '../../../assets/styles/variables/variables';
+@import "../../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+.icon-card-panel {
+
+  .icon-card-panel__image img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .icon-card-panel__heading {
+    color: $grey-brown-dark;
+  }
+  
+  .icon-card-panel__text { 
+    color: $grey-brown-dark;
+  }
+  
+  &.icon-card-panel--standard_grey_bg {
+    .icon-card-panel__heading {
+      font-size: 1.15em;
+      font-family: $secondary-brand-font;
+      text-transform: uppercase;
+    }
+
+    .icon-card-panel__text {
+      font-size: 0.8em;
+
+      @include media-breakpoint-down(sm) {
+        font-size: 0.9em;
+      }
+    }
+  }
+
+  &.icon-card-panel--x_small_heading_large_body_no_bg {
+    .icon-card-panel__heading {
+      font-size: 0.6em;
+      font-family: $default-font;
+      font-weight: normal;
+      margin-bottom: 0.7em;
+    }
+
+    .icon-card-panel__text {
+      font-size: 1.6em;
+      font-family: $secondary-brand-font;
+      text-transform: uppercase;
+    }
+  }
+}
+
+//themeing
+
+//stoptober
+.stoptober { 
+  
+  .icon-card-panel {
+  
+    .icon-card-panel__heading {
+      color: $black;
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+    }
+
+    .icon-card-panel__image img {
+      width: 5em;
+
+      @include media-breakpoint-down(sm) {
+        width: 7.5em;
+      }
+    }
+    
+    .icon-card-panel__text { 
+      color: $black;
+      line-height: 1.2em;
+      padding: 0px 0.5em;
+
+      @include media-breakpoint-down(sm) {
+        padding: 0px 4em;
+      }
+    }
+
+    @include media-breakpoint-down(sm) {
+      padding-bottom: 1em;
+    }
+  }
+}
+
+.icon-card-panel--icon_on_top {
+  text-align: center;
+}

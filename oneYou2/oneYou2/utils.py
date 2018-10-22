@@ -6,7 +6,7 @@ def get_release_version():
         with open('version.txt') as data_file:
             return data_file.read()
     except FileNotFoundError:
-        return "Cannot locate version number"
+        return 'Cannot locate version number'
 
 
 def get_protocol():
@@ -26,6 +26,6 @@ def frontend_deployed():
 
 
 def set_frontend_deployed_status(status):
-    status_file = open("frontend_deployed.txt", "w")
+    status_file = open('frontend_deployed.txt', 'w')
     status_file.write(status)
     status_file.close()

@@ -1,0 +1,99 @@
+@import '../../../assets/styles/variables/variables';
+@import "../../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+.action-plan-display-shelf {
+  color: $white;
+
+  font-size: 20px;
+
+  @include media-breakpoint-down(sm) {
+    font-size: 16px;
+  }
+
+  .action-plan-display-shelf--lead {
+    background-color: $grey-brown-dark;
+    text-align: center;
+    padding: 25px;
+
+    .action-plan-display-shelf--title {
+      font-family: $secondary-brand-font;
+      font-size: 30px;
+      font-weight: normal;
+      color: $white;
+      margin-bottom: 0.7em;
+
+      @include media-breakpoint-down(sm) {
+        font-size: 20px;
+      }
+    }
+  }
+  
+  > div {
+    margin-bottom: 1em
+  }
+  
+  ul {
+    padding-left: 0;
+  }
+  
+  li {
+    list-style: none;
+    
+    @include media-breakpoint-up(md) {
+      margin-bottom: 1em;
+    }
+  }
+}
+
+.action-plan-display-shelf--action-list {
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 25px 30px;
+  border-radius: 5px;
+
+  @include media-breakpoint-down(sm) {
+    margin-top: 15px;
+    padding: 15px 30px;
+    background-color: $teal-blue;
+  }
+}
+
+.action-plan-display-shelf--action {
+  background-color: $teal-blue;
+  padding: 0.5em;
+  border-radius: 0;
+
+  @include media-breakpoint-up(md) {
+    border-radius: 5px;
+    padding: 1.2em;
+  }
+
+  div {
+    
+    position: relative;
+    padding-left: 1.8em;
+    
+    &:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 2px;
+      border-radius: 14px;
+      height: 14px;
+      width: 14px;
+      background-color: $white;
+      vertical-align: middle;
+      margin-right: 15px;
+      
+      @include media-breakpoint-up(md) {
+        top: 4px;
+      }
+    }
+  }
+}
+
+.action-plan-display-shelf--further-info {
+  margin-top: 0.5em;
+  font-size: 14px;
+}

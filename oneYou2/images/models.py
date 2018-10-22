@@ -32,7 +32,7 @@ class PHEImage(AbstractImage):
         if self.file:
             return self.file.url
         else:
-            return ""
+            return ''
 
     def generate_or_get_all_renditions(self):
         if self.file:
@@ -47,6 +47,7 @@ class PHEImage(AbstractImage):
                                              rendition[2],
                                              device)
                     ] = self.get_rendition('fill-{}'.format(size)).url
+                    renditions_dict[size] = self.get_rendition('fill-{}'.format(size)).url
             return renditions_dict
         else:
             return {}
