@@ -99,6 +99,13 @@ class FrontendVersion:
 
     @classmethod
     def get_html_for_version(cls, uuid):
+        print('DEBUGAZURE===account_name:"{0}"--account_key:"{1}"--azure_file_share:"{2}"--env:"{3}"--uuid:"{4}"'.format(
+            settings.AZURE_ACCOUNT_NAME,
+            settings.AZURE_ACCOUNT_KEY,
+            settings.AZURE_FILE_SHARE,
+            settings.ENV,
+            uuid,
+        ))
         if settings.ENV == 'local':
             return cls.get_local_file_text(['index.html'])
         else:
