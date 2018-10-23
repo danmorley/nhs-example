@@ -48,19 +48,20 @@ def release_html(request, site_name):
     release_id = request.GET.get('id')
     if release_id:
         release = Release.objects.get(uuid=release_id)
-        frontend_name = release.get_frontend_id_display()
-        matchObj = re.match( r'V([0-9]+)\..* - .*', frontend_name, re.I)
-        if matchObj:
-            try:
-                major_frontend_version = int(matchObj.group(1))
-            except ValueError:
-                pass
     else:
         preview_page = request.GET.get('preview_page')
         if preview_page:
             release = get_latest_release(site_id)
         else:
             release = get_latest_live_release(site_id)
+
+    frontend_name = release.get_frontend_id_display()
+    matchObj = re.match( r'V([0-9]+)\..* - .*', frontend_name, re.I)
+    if matchObj:
+        try:
+            major_frontend_version = int(matchObj.group(1))
+        except ValueError:
+            pass
 
     if release:
         frontend_id = release.frontend_id

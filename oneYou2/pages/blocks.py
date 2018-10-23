@@ -195,7 +195,7 @@ class IDBlock(blocks.CharBlock):
 
 class MenuItemPageBlock(blocks.PageChooserBlock):
     def get_api_representation(self, value, context=None):
-        if value:
+        if value and value.get_site():
             site = value.get_site()
             site_settings = SiteSettings.objects.get(site=site)
             site_name = site_settings.uid
