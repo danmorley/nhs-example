@@ -87,7 +87,8 @@ class FrontendVersion:
         sorted_list = sorted(available_versions, key=lambda x: datetime.strptime(x[1].split(' - ')[1],
                                                                                  '%a, %d %b %Y %H:%M:%S %Z'),
                              reverse=True)
-        return sorted_list[:20]
+        # return sorted_list[:20]
+        return sorted_list
 
     @classmethod
     def get_local_file_text(cls, file_path):
