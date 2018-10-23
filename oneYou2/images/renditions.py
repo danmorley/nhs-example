@@ -42,7 +42,10 @@ ONEYOU_RENDITIONS = [
     ('grid_shelf', None, None, {'desktop': '1440x800', 'mobile': '375x143'}),
     ('icon_card_panel', 'two_column_shelf', None, {'desktop': '200x200', 'mobile': '120x120'}),
 
-    ('blurb', None, None, {'desktop': '1366x591', 'mobile': '375x162'}),
+    ('sexhealth_page_header', None, None, {'desktop': '1440x366', 'mobile': '375x200'}),
+    ('sexhealth_banner_promo', None, None, {'desktop': '1440x315', 'mobile': '375x172'}),
+    ('sexhealth_teaser', None, None, {'desktop': '180x360', 'mobile': '360x180'}),
+    ('sexhealth_information', None, None, {'desktop': '408x351', 'mobile': '136x117'}),
 ]
 
 
