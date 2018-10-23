@@ -9,6 +9,7 @@ import CmsComponentRegistry from '../CmsComponentRegistry';
 import './banner-shelf.css';
 import ShelfUtils from '../shared/ShelfUtils';
 import Banner from '../shared/Banner';
+import ImageUtils from '../panels/ImageUtils';
 
 /**
  *  Banner Shelf is a simple shelf that can be used to display content
@@ -70,12 +71,13 @@ class BannerShelf extends Component {
     const headingTagName = (classNamePrefix === 'page-heading-shelf') ? 'h1' : 'h2';
     const panel = content.panel ? content.panel : content;
     const containerClass = `shelf__container ${ShelfUtils.shelfContainerClass(content)}`;
-
+    const classExtra = ImageUtils.isValid(panel.background_image) ? 'banner-shelf--imagebackground' : null;
+    
     return (
-      <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group} layout={`align-${alignment}`}>
+      <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group} layout={`align-${alignment}`} classExtra={classExtra}>
         <div className={containerClass}>
           <Banner 
-            backGroundImage={panel.background_image}
+            backgroundImage={panel.background_image}
             heading={<Text tagName={headingTagName} content={panel.heading} />}
             body={<Text content={panel.body} format="richtext"/>}
             ctas={panel.cta}
