@@ -14,4 +14,5 @@ services:
       AZURE_CONTAINER: "test"
       AZURE_FILE_SHARE: "test"
       CONTENT_STORE_ENDPOINT: ""
+      ADOBE_TRACKING_URL: ""
     command: bash -c "python manage.py migrate && coverage run manage.py test && coverage report --fail-under=65"

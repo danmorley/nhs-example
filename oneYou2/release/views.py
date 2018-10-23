@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 import json
+import re
 
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
@@ -43,9 +44,17 @@ def release_html(request, site_name):
             permanent = wagtail_redirect.is_permanent
             return redirect(redirect_path, permanent=permanent)
 
+    major_frontend_version = None
     release_id = request.GET.get('id')
     if release_id:
         release = Release.objects.get(uuid=release_id)
+        frontend_name = release.get_frontend_id_display()
+        matchObj = re.match( r'V([0-9]+)\..* - .*', frontend_name, re.I)
+        if matchObj:
+            try:
+                major_frontend_version = int(matchObj.group(1))
+            except ValueError:
+                pass
     else:
         preview_page = request.GET.get('preview_page')
         if preview_page:
@@ -67,19 +76,42 @@ def release_html(request, site_name):
     else:
         content_store_endpoint = get_protocol() + host + '/api'
 
-    template = Template(FrontendVersion.get_html_for_version(frontend_id))
+    if major_frontend_version <= 1:
+        # legacy to render frontend index.html before multisite have been implemented
+        index = FrontendVersion.get_html_for_version(frontend_id)
+        substituted_index = index.replace("/static/css/", "/{}/version/css/{}/?file_name=".format(site_name, frontend_id))
+        substituted_index = substituted_index.replace("/static/js/",
+                                                    "/{}/version/js/{}/?file_name=".format(site_name, frontend_id))
+        substituted_index = substituted_index.replace("/manifest", "/{}/public/manifest".format(site_name))
+        substituted_index = substituted_index.replace("/favicon", "/{}/public/{}/favicon".format(site_name, frontend_id))
+        substituted_index = substituted_index.replace("/webtrends.min.js", "/{}/public/{}/webtrends.min.js".format(site_name, frontend_id))
 
-    context = Context({
-        'site_setting': site_setting,
-        'api_url': content_store_endpoint,
-        'release_id': uuid,
-        'public_url': '/{}/public/{}'.format(site_name, frontend_id),
-    })
+        host = request.META['HTTP_HOST']
+        if settings.CONTENT_STORE_ENDPOINT:
+            content_store_endpoint = settings.CONTENT_STORE_ENDPOINT
+        else:
+            content_store_endpoint = get_protocol() + host + "/api"
 
-    if settings.ENV == 'local':
-        context['public_url'] = '/static'
+        substituted_index = substituted_index.replace("%apiurl%", content_store_endpoint)
+        substituted_index = substituted_index.replace("%releaseid%", uuid)
+        substituted_index = substituted_index.replace("%adobe_tracking_url%", settings.ADOBE_TRACKING_URL)
+        http_response = HttpResponse(substituted_index)
+    else:
+        template = Template(FrontendVersion.get_html_for_version(frontend_id))
 
-    http_response = HttpResponse(template.render(context))
+        context = Context({
+            'site_setting': site_setting,
+            'api_url': content_store_endpoint,
+            'release_id': uuid,
+            'public_url': '/{}/public/{}'.format(site_name, frontend_id),
+            'css_path': '/{}/version/css/{}/?file_name='.format(site_name, frontend_id),
+            'js_path': '/{}/version/js/{}/?file_name='.format(site_name, frontend_id),
+        })
+
+        if settings.ENV == 'local':
+            context['public_url'] = '/static'
+
+        http_response = HttpResponse(template.render(context))
 
     if release and release.content_status == 1:
         http_response['Cache-Control'] = 'max-age=900'
