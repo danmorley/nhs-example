@@ -76,7 +76,7 @@ def release_html(request, site_name):
     else:
         content_store_endpoint = get_protocol() + host + '/api'
 
-    if major_frontend_version <= 1:
+    if major_frontend_version and major_frontend_version <= 1:
         # legacy to render frontend index.html before multisite have been implemented
         index = FrontendVersion.get_html_for_version(frontend_id)
         substituted_index = index.replace("/static/css/", "/{}/version/css/{}/?file_name=".format(site_name, frontend_id))
