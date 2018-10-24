@@ -44,25 +44,25 @@ class TwoColumnShelf extends Component {
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
         <div className={`shelf__container container image--${metaImageDisplay}`}>
-          <div className="row">
+          <div className="row no-gutters">
             {content.column_1_heading &&
-              <div className={`col-12 col-sm-${this.colWidthForPercent(col1Percent)} order-1 no-gutters`}>
+              <div className={`col-12 col-md-${this.colWidthForPercent(col1Percent)} order-1 no-gutters`}>
                 <div className="row align-items-end">
                   <h2 className="col shelf__header">{content.column_1_heading}</h2>
                 </div>
               </div>
             }
-            <div className={`col-12 col-sm-${this.colWidthForPercent(col1Percent)} order-2 order-sm-3`}>
+            <div className={`col-12 col-md-${this.colWidthForPercent(col1Percent)} order-2 order-sm-3`}>
               <MultiPanelBlock items={content.column_1_items}/>
             </div>
             {content.column_2_heading &&
-              <div className={`col-12 col-sm-${this.colWidthForPercent(col2Percent)} order-3 order-sm-2`}>
+              <div className={`col-12 col-md-${this.colWidthForPercent(col2Percent)} order-3 order-sm-2`}>
                 <div className="row align-items-end h-100">
                   <h2 className="col shelf__header">{content.column_2_heading}</h2>
                 </div>
               </div>
             }
-            <div className={`col-12 col-sm-${this.colWidthForPercent(col2Percent)} order-4`}>
+            <div className={`col-12 col-md-${this.colWidthForPercent(col2Percent)} order-4`}>
               <MultiPanelBlock items={content.column_2_items}/>
             </div>
           </div>
