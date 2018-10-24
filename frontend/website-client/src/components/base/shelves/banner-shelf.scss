@@ -31,7 +31,31 @@ $shelf-padding-extra: 2em;
         background-color: $sexhealth-purple;
         
         .banner {
-          color: $sexhealth-dark !important;
+          color: $white !important;
+        }
+      }
+    }
+
+    &.banner-shelf--imagebackground {
+      .shelf__container {
+        padding: 0;
+        background-color: $sexhealth-purple;
+        
+        .banner, h2 {
+          color: $white;
+          font-weight: normal;
+        }
+
+        .banner {
+          padding-top: 1em;
+          padding-bottom: 1em;
+          background-repeat: no-repeat;
+          background-size: cover;
+
+          @include media-breakpoint-up(sm) {
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+          }      
         }
       }
     }

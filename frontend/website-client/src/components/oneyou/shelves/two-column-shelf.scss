@@ -2,9 +2,15 @@
 @import "../../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
 
 .two-column-shelf {
-  .container {
+  .shelf__container {
+    padding: 0;
     // padding-left: 0px;
     // padding-right: 0px;
+  }
+
+  .rich-text-panel {
+    padding-left: 1em;
+    padding-right: 1em;
   }
 }
 

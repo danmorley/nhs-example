@@ -46,16 +46,11 @@
 
         background-color: $black;
         color: $white;
-        margin: -20px 0 -20px 0;
-        position: relative;
-        left: 35px;
+        margin: 0 0 0 -15px;
         padding: 20px;
 
-        @media (max-width: 575px) {
-            margin: 0px -31px -27px -31px;
-            padding: 20px;
-            position: none;
-            left: 0;
+        @include media-breakpoint-up(sm) {
+            margin: 0;
         }
     }
 }
