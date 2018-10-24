@@ -56,7 +56,7 @@ def release_html(request, site_name):
             release = get_latest_live_release(site_id)
 
     frontend_name = release.get_frontend_id_display()
-    matchObj = re.match( r'V([0-9]+)\..* - .*', frontend_name, re.I)
+    matchObj = re.match( r'V([0-9]+)\..* - .*', frontend_name.replace('\n', ''), re.I | re.M)
     if matchObj:
         try:
             major_frontend_version = int(matchObj.group(1))
