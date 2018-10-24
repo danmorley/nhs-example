@@ -187,4 +187,4 @@ class SimpleRichTextShelf(Shelf):
     body = blocks.RichTextBlock(required=False)
 
     class Meta:
-        form_classname = 'dct-simple-rich-text-heading-shelf dct-meta-panel'
+        form_classname = 'dct-simple-rich-text-shelf dct-meta-panel'
