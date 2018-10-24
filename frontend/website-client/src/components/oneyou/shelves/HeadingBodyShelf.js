@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Shelf from '../../base/shelves/Shelf';
 import Text from '../../base/Text';
 import CmsComponentRegistry from '../../base/CmsComponentRegistry';
-import '../../base/shelves/promo-shelf.css';
+import '../../base/shelves/page-heading-shelf.css';
 
 /**
  *  Heading and Body Shelf is a simple shelf that can be used to display generic

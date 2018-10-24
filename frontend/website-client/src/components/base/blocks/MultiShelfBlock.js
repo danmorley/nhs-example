@@ -11,7 +11,7 @@ import CmsComponentRegistry from '../CmsComponentRegistry';
 // import * as Shelves from './shelves'
 import PlaceholderShelf from '../shelves/PlaceholderShelf';
 // import GeneralTextShelf from '../../shelves/GeneralTextShelf';
-import BasicCtaShelf from '../shelves/BasicCtaShelf';
+// import BasicCtaShelf from '../shelves/BasicCtaShelf';
 import BannerShelf from '../shelves/BannerShelf';
 import PageHeadingShelf from '../shelves/PageHeadingShelf';
 // import GuidanceShelf from '../../shelves/GuidanceShelf';

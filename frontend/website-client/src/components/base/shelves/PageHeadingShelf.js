@@ -5,7 +5,7 @@ import Shelf from '../../base/shelves/Shelf';
 import Text from '../../base/Text';
 import CtaLink from '../../base/shared/CtaLink';
 import CmsComponentRegistry from '../../base/CmsComponentRegistry';
-import '../../base/shelves/promo-shelf.css';
+import './page-heading-shelf.css';
 import ImageUtils from '../../base/panels/ImageUtils';
 import ResponsiveImage from '../shared/ResponsiveImage';
 import ResponsiveBackgroundImage from '../shared/ResponsiveBackgroundImage';

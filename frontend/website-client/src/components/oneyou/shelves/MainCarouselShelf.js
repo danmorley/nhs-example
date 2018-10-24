@@ -8,7 +8,7 @@ import Equalizer from 'react-equalizer';
 
 import PlaceholderShelf from '../../base/shelves/PlaceholderShelf';
 import GeneralTextShelf from './GeneralTextShelf';
-import BasicCtaShelf from '../../base/shelves/BasicCtaShelf';
+import BasicCtaShelf from './BasicCtaShelf';
 
 import './main-carousel-shelf.css';
 
