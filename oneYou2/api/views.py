@@ -135,14 +135,18 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug_
                 page_pk = page.pk
         except ObjectDoesNotExist:
             try:
-                if variant:  # Try and get parent page
-                    page = Page.objects.get(slug=page_slug_path[:-8])
-                    page_pk = page.pk
-                    variant = False
-                else:
-                    return JsonResponse({'message': not_found_msg}, status=404)
+                #legacy to support frontend v1 call to the api using only the slug
+                page = Page.objects.get(slug=page_slug_path)
             except ObjectDoesNotExist:
-                return JsonResponse({'message': not_found_msg}, status=404)
+                try:
+                    if variant:  # Try and get parent page
+                        page = Page.objects.get(slug=page_slug_path[:-8])
+                        page_pk = page.pk
+                        variant = False
+                    else:
+                        return JsonResponse({'message': not_found_msg}, status=404)
+                except ObjectDoesNotExist:
+                    return JsonResponse({'message': not_found_msg}, status=404)
     else:  # If there is no slug it cannot be a variant
         variant = False
         not_found_msg = 'Page Not Found'
