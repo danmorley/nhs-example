@@ -1,18 +1,16 @@
-from dctcmsbase.shelves import GridShelf, WithTracking, GRID_VARIANT_CHOICES, GRID_LAYOUT_CHOICES
 
-SEXHEALTH_GRID_PANELS = ()
+from wagtail.core import blocks
 
-class SexHealthGridShelf(GridShelf, WithTracking):
-    items = blocks.StreamBlock(SEXHEALTH_GRID_PANELS, icon='arrow-left', label='Items')
-    meta_variant = blocks.ChoiceBlock(choices=GRID_VARIANT_CHOICES,
-                                    default='standard',
-                                    label='Variant',
-                                    classname='dct-meta-field')
-    meta_layout = blocks.ChoiceBlock(choices=GRID_LAYOUT_CHOICES,
-                                     default='full_width',
-                                     label='Layout',
-                                     help_text='Use this to select number of columns on desktop (only one column'
-                                               ' on mobile)', classname='dct-meta-field')
+from dctcmsbase.shelves import PageHeadingShelf
+from dctcmsbase.panels import VIDEO_HOSTS, BRIGHTCOVE_OPTION
+
+
+class SexHealthPageHeadingShelf(PageHeadingShelf):
+    host = blocks.ChoiceBlock(choices=VIDEO_HOSTS, label='Host', default=BRIGHTCOVE_OPTION)
+    video_id = blocks.CharBlock(required=False)
+    meta_use_play_link = blocks.BooleanBlock(label='Use play video link', required=False, default=False,
+                                             classname='dct-meta-field')
+    meta_play_link_text = blocks.CharBlock(default='Play', label='Play Video Link Text', classname='dct-meta-field')
 
     class Meta:
-        form_classname = 'dct-grid-shelf dct-meta-panel'
+        form_classname = 'dct-page-heading-shelf dct-meta-panel'

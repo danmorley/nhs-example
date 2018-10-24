@@ -7,7 +7,7 @@ import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './video-teaser.css';
 import Panel from './Panel';
 import ImageUtils from '../../base/panels/ImageUtils';
-import VideoModal from '../VideoModal';
+import VideoModal from '../../base/VideoModal';
 
 /**
  *  Video Teaser panel component, that provides 'teaser' details for a video_teaser

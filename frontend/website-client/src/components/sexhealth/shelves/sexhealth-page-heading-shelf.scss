@@ -1,0 +1,32 @@
+@import '../../../assets/styles/variables/variables';
+@import '../../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints';
+
+//theming
+
+// sexhealth
+.sexhealth {
+  .sexhealth-page-heading-shelf {
+      .shelf__container {
+        color: $white;
+      }
+
+      .container {
+        padding-bottom: 2.6em;
+      }
+
+      span[role=button] {
+        cursor: pointer;
+        text-decoration: none;
+        background-image: url('../../../assets/images/play-icon-white.png');
+        background-position: center center;
+        background-size: 50px;
+        background-repeat: no-repeat;
+        padding: 10px 0px 90px 0px;
+      }
+
+      span[role=button]:hover {
+        color: $sexhealth-pink;
+        background-image: url('../../../assets/images/play-icon-pink.png');
+      }
+  }
+}

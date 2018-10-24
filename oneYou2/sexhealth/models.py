@@ -13,10 +13,13 @@ from dctcmsbase.utils import get_serializable_data_for_fields
 
 from pages.models import TwoColumnShelf
 
+from .shelves import SexHealthPageHeadingShelf
+
 
 class SexHealthPage(GeneralShelvePage, Tracking, Social):
     body = StreamField([
         ('page_heading_shelf', PageHeadingShelf(icon='title')),
+        ('sexhealth_heading_shelf', SexHealthPageHeadingShelf(icon='title')),
         ('banner_shelf', BannerShelf(icon='title')),
         ('grid_shelf', StandardGridShelf(icon='form')),
         ('panel_carousel_shelf', PanelCarouselShelf(icon='repeat')),

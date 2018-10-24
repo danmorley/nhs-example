@@ -56,7 +56,7 @@ class VideoModal extends Component {
             isOpen={false}
             replace={false}
             ref="modal"
-            className ="video-modal"
+            className ={`video-modal ${this.props.classExtra}`}
           >
             {this.renderVideo(this.props.video, this.props.host)}
           </PureModal>
@@ -72,7 +72,8 @@ VideoModal.propTypes = {
   variant: PropTypes.string,
   host: PropTypes.string,
   classNamePrefix: PropTypes.string,
-  image: PropTypes.string
+  image: PropTypes.string,
+  classExtra: PropTypes.string
 };
 
 export default VideoModal;

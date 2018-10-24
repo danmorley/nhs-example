@@ -3,7 +3,7 @@ import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './email-button.css';
 import Panel from '../panels/Panel';
 import ActionPlanContactForm from '../ActionPlanContactForm';
-import StandardModal from '../StandardModal';
+import StandardModal from '../../base/StandardModal';
 
 
 class EmailButtonPanel extends Component {

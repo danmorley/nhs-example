@@ -52,3 +52,45 @@
     }
   }
 }
+
+
+//theming
+
+//sexhealth
+.pure-modal-backdrop {
+  .sexhealth-video-modal {
+    background-color: $white;
+
+    &.video-modal .video-js {
+      height: 150px;
+      padding-bottom: 56.25%;
+    }
+
+    .panel-default {
+      padding: 15px 25px 30px 25px;
+      .panel-heading {
+        height: 50px;
+        background: $white;
+
+        .close {
+          right: 0;
+          font-size: 50px;
+          color: $sexhealth-pink;
+          margin-top: -8px;
+          font-family: 'GothamBook';
+        }
+      }
+    }
+
+    @media (min-width: 575px){
+      &.video-modal {  
+        width: 600px;
+        margin: 30px auto;
+
+        .video-js {
+          height: 400px;
+        }
+      }
+    }
+  }
+}
