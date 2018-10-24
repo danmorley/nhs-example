@@ -26,6 +26,7 @@ import GridShelf from '../shelves/GridShelf';
 // import SiteMapShelf from '../../shelves/SiteMapShelf';
 // import DividerShelf from '../../shelves/DividerShelf';
 import SimplePageHeadingShelf from '../shelves/SimplePageHeadingShelf/SimplePageHeadingShelf';
+import SimpleRichTextShelf from '../shelves/SimpleRichTextShelf/SimpleRichTextShelf';
 // import RecipeGridShelf from '../../shelves/RecipeGridShelf';
 // import ShareButtonShelf from '../../shelves/ShareButtonShelf';
 // import TableShelf from '../../shelves/TableShelf';
