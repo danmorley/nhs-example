@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Shelf from './Shelf';
-import Text from '../Text';
-import Image from '../Image';
-import CtaLink from '../shared/CtaLink';
-import CmsComponentRegistry from '../CmsComponentRegistry';
+import Shelf from '../../base/shelves/Shelf';
+import Text from '../../base/Text';
+import Image from '../../base/Image';
+import CtaLink from '../../base/shared/CtaLink';
+import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './promo-shelf.css';
-import ImageUtils from '../panels/ImageUtils';
+import ImageUtils from '../../base/panels/ImageUtils';
 
 /**
  *  Basic CTA Shelf is a simple shelf that can be used to display content
@@ -252,5 +252,7 @@ CmsComponentRegistry.register('basic_cta_shelf', BasicCtaShelf, 'basic-cta-shelf
 // Variants: promo
 CmsComponentRegistry.register('promo_shelf', BasicCtaShelf, 'promo-shelf', 'promo');
 CmsComponentRegistry.register('promo_shelf_v2', BasicCtaShelf, 'promo-shelf', 'promo');
+
+CmsComponentRegistry.register('banner_shelf', BasicCtaShelf, 'banner-shelf', 'banner', null, 'oneyou');
 
 export default BasicCtaShelf;
