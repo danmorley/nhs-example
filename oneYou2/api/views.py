@@ -137,6 +137,7 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug_
             try:
                 #legacy to support frontend v1 call to the api using only the slug
                 page = Page.objects.get(slug=page_slug_path)
+                page_pk = page.pk
             except ObjectDoesNotExist:
                 try:
                     if variant:  # Try and get parent page
