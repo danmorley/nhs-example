@@ -44,6 +44,11 @@ TWO_COLUMNS_LAYOUT_CHOICES = (
     ('25_75', '25%, 75%'),
 )
 
+TWO_COLUMNS_VARIANT_CHOICES = (
+    ('none', 'None'),
+    ('with_padding', 'Padded'),
+)
+
 GRID_PANELS = [
     ('rich_text_panel', StandardRichTextPanel(icon='title')),
     ('information_panel', StandardInformationPanel(target_model='shelves.AppTeaser', icon='image')),
@@ -154,7 +159,6 @@ class TwoColumnShelf(Shelf, WithTracking):
     column_2_items = blocks.StreamBlock(GRID_PANELS, icon='arrow-left', label='Column 2 Content')
     background_image = BackgroundImageBlock(required=False)
 
-
     class Meta:
         abstract = True
         form_classname = 'dct-two-column-shelf dct-meta-panel'
@@ -162,6 +166,10 @@ class TwoColumnShelf(Shelf, WithTracking):
 
 class StandardTwoColumnShelf(TwoColumnShelf):
     meta_layout = blocks.ChoiceBlock(choices=TWO_COLUMNS_LAYOUT_CHOICES, label='Layout')
+    meta_variant = blocks.ChoiceBlock(choices=TWO_COLUMNS_VARIANT_CHOICES,
+                                        default='none',
+                                        label='Variant',
+                                        classname='dct-meta-field')
     
     class Meta:
         verbose_name = 'two column'
