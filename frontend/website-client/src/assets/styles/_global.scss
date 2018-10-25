@@ -323,4 +323,14 @@ h2 {
       height:100%;
     }
   }
+  
+  .richTextEditor ul {
+    li {
+      margin-bottom: 1em;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
 }
