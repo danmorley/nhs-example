@@ -35,3 +35,22 @@
     }
   }
 }
+
+.sexhealth {
+  
+  .simple-page-heading-shelf {
+    
+    .shelf__container {
+      padding: 0;
+      background: transparent;
+    }
+    
+    .shelf__backbutton {
+      color: $sexhealth-pink;
+      
+      &:before {
+        color: $sexhealth-pink;
+      }
+    }
+  }
+}

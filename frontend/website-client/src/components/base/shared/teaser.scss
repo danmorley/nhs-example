@@ -1,3 +1,5 @@
+@import '../../../assets/styles/variables/variables';
+
 .teaser {
   background-color: #f4f4f4;
   height: 100%;
@@ -32,4 +34,12 @@
 .teaser-ctas {
   background-color: #e8e8e8;
   /* align-self: center; /* Use to override align-items of the parent container. */
+}
+
+
+.sexhealth {
+  
+  .image-teaser__heading {
+    font-family: $sexhealth-bold-font !important; 
+  }
 }
