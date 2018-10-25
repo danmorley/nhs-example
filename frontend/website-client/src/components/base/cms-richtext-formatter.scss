@@ -48,3 +48,15 @@
   top: auto;
   left: auto;
 }
+
+.sexhealth {
+
+  .richTextEditor > p {
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+  }
+
+  .richTextEditor > p:last-child {
+    margin-bottom: 0;
+  }
+}

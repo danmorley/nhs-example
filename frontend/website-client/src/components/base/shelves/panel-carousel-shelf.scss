@@ -237,12 +237,26 @@ $arrow-distance: 10%;
 
     .shelf__container {
       padding-bottom: 3em;
+      
+      @include media-breakpoint-up(sm) {
+        padding-bottom: 5em;
+      }
     }
   }
 
   .carousel-panel {
+    
     @include media-breakpoint-up(md) {
       margin: 0.5em 30px 0;
     }  
+    
+    .slick-dots {
+      bottom: -35px;
+      width: 100%;
+      
+      @include media-breakpoint-up(sm) {
+        bottom: -55px;
+      }
+    }
   }
 }

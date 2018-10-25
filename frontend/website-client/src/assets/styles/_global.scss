@@ -273,6 +273,12 @@ h2 {
     }
   }
 
+  a {  
+    &:active {
+      background-color: transparent;
+    }
+  }
+
   h1 {
     font-size: map-deep-get($headings, sexhealth, heading-h1, mobile);
     font-weight: normal;
@@ -298,6 +304,7 @@ h2 {
     color: $white;
     border: 2px solid $sexhealth-pink;
     text-transform: none;
+    padding: 1em 2em;
   
     &:active, &:visited {
       background-color: $sexhealth-pink;
