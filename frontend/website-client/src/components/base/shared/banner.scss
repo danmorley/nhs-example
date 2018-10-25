@@ -55,6 +55,15 @@
   }
 }
 
+.sexhealth {
+  
+  .banner-heading {
+    
+    @include media-breakpoint-up(lg) {
+      padding-bottom: 0.5rem !important;
+    }
+  }
+}
   // .banner-ctas {
   //   background-color: #e8e8e8;
   //   /* align-self: center; /* Use to override align-items of the parent container. */

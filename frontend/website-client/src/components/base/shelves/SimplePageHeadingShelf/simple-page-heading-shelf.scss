@@ -46,7 +46,12 @@
     }
     
     .shelf__backbutton {
+      font-family: $sexhealth-bold-font;
       color: $sexhealth-pink;
+      
+      @include media-breakpoint-up(md) {
+        font-size: 1.2em;
+      }
       
       &:before {
         color: $sexhealth-pink;

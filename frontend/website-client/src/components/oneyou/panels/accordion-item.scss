@@ -98,6 +98,7 @@
   .accordion-item__header {
     background-color: $white;
     border-bottom: 1px solid $sexhealth-lightgrey;
+    font-family: $sexhealth-bold-font;
 
     h3 { 
       &:after {
@@ -134,7 +135,11 @@
     }
 
     .accordion-item__body {
-      padding: 0.1em;
+      padding: 0;
+    
+      p {
+        font-weight: normal;
+      }
     }
 
     .accordion-item__body--expanded {
