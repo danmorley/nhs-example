@@ -44,7 +44,6 @@ class PageHeadingShelf extends Component {
   render() {
     const { id, content, classNamePrefix, variant } = this.props;
     const metaVariant = content.meta_variant || variant;
-    const gradient = content.meta_gradient || false;
     const headingTagName = (classNamePrefix === 'page-heading-shelf') ? 'h1' : 'h2';
     const leftImage = ImageUtils.isValid(content.image_left) ? ImageUtils.deviceImage(content.image_left) : null;
     const rightImage = ImageUtils.isValid(content.image_right) ? ImageUtils.deviceImage(content.image_right) : null;
@@ -55,7 +54,10 @@ class PageHeadingShelf extends Component {
     
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group}>
-        <ResponsiveBackgroundImage image={content.background_image} className={`shelf__container ${ShelfUtils.shelfContainerClass(content)} shelf-${leftImageStyle} shelf-${rightImageStyle} shelf__container-gradient--${gradient}`}
+        <ResponsiveBackgroundImage 
+          image={content.background_image} 
+          className={`shelf__container ${ShelfUtils.shelfContainerClass(content)} shelf-${leftImageStyle} shelf-${rightImageStyle}`}
+          variant={content.background_image.meta_variant}
         >
           <div className="container">
             <div className={`${classNamePrefix}__container-left`}>

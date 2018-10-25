@@ -32,7 +32,7 @@ import './sexhealth-page-heading-shelf.css';
  *  }
  */
  
-class SexHeathageHeadingShelf extends PageHeadingShelf {
+class SexhealthPageHeadingShelf extends PageHeadingShelf {
 
   constructor(props) {
     super(props);
@@ -104,10 +104,10 @@ class SexHeathageHeadingShelf extends PageHeadingShelf {
   }
 }
 
-SexHeathageHeadingShelf.propTypes = {
+SexhealthPageHeadingShelf.propTypes = {
   ...PageHeadingShelf.propTypes
 }
 
-CmsComponentRegistry.register('sexhealth_heading_shelf', SexHeathageHeadingShelf, 'page-heading-shelf', null, null, 'sexhealth');
+CmsComponentRegistry.register('sexhealth_heading_shelf', SexhealthPageHeadingShelf, 'page-heading-shelf', null, null);
 
-export default SexHeathageHeadingShelf;
+export default SexhealthPageHeadingShelf;
