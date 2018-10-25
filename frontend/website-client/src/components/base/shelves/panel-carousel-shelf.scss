@@ -192,23 +192,38 @@ $arrow-distance: 10%;
 
 //sexhealth
 .sexhealth {
+  
   .panel-carousel {  
+  
     .slick-next {
+  
+      display: none !important;
+      
       @include media-breakpoint-up(sm) {
-       right: -50px;
+        right: -50px;
         z-index: 1;
         height: 46px;
         width: 30px;
+      }
+      
+      @include media-breakpoint-up(md) {
+        display: block !important;
       }
     }
   
     .slick-prev {
   
+      display: none !important;
+      
       @include media-breakpoint-up(sm) {
         left: -50px;
         z-index: 1;
         height: 46px;
         width: 30px;
+      }
+      
+      @include media-breakpoint-up(md) {
+        display: block !important;
       }
     }
   

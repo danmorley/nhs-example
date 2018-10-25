@@ -16,13 +16,13 @@ class Teaser extends Component {
         </ResponsiveBackgroundImage>
         <div className={`col-12 col-md-${col2}`}>
           <div className="teaser-body">
-            <div className="teaser-heading p-1 p-lg-3">
+            <div className="teaser-heading p-2 p-lg-3">
               {heading}
             </div>
-            <div className="teaser-text p-1 p-lg-3">
+            <div className="teaser-text p-2 p-lg-3">
               {body}
             </div>
-            <div className="teaser-ctas p-1 p-lg-3">
+            <div className="teaser-ctas p-2 p-lg-3">
               {ctas}
             </div>
           </div>
