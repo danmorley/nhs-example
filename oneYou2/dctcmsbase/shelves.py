@@ -196,3 +196,16 @@ class SimpleRichTextShelf(Shelf):
 
     class Meta:
         form_classname = 'dct-simple-rich-text-shelf dct-meta-panel'
+
+
+class InlineScriptShelf(Shelf):
+    script = blocks.TextBlock(required=False, help_text='The javascript to be inserted')
+    src = blocks.CharBlock(required=False, help_text='URL of the javascript file')
+    field_id = IDBlock(required=False, label='ID', retain_case=True, classname='dct-meta-field')
+    script_id = IDBlock(required=False, label='Script tag ID', retain_case=True,
+                        help_text='Optional ID of the script tag')
+    placeholder_id = IDBlock(required=False, label='Placeholder ID', retain_case=True,
+                             help_text='If given, an empty placeholder div will be added before the script tag')
+
+    class Meta:
+        form_classname = 'dct-inline-script-shelf dct-meta-shelf'
