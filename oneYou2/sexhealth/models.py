@@ -18,8 +18,8 @@ from .shelves import SexHealthPageHeadingShelf
 
 class SexHealthPage(GeneralShelvePage, Tracking, Social):
     body = StreamField([
-        ('page_heading_shelf', PageHeadingShelf(icon='title')),
-        ('sexhealth_heading_shelf', SexHealthPageHeadingShelf(icon='title')),
+        ('sexhealth_page_heading_shelf', PageHeadingShelf(icon='title')),
+        ('sexhealth_page_heading_shelf_with_video', SexHealthPageHeadingShelf(icon='title')),
         ('banner_shelf', BannerShelf(icon='title')),
         ('grid_shelf', StandardGridShelf(icon='form')),
         ('panel_carousel_shelf', PanelCarouselShelf(icon='repeat')),

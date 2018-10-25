@@ -12,7 +12,7 @@ import ResponsiveBackgroundImage from '../../base/shared/ResponsiveBackgroundIma
 import ShelfUtils from '../../base/shared/ShelfUtils';
 import VideoModal from '../../base/VideoModal';
 
-import './sexhealth-page-heading-shelf.css';
+import './sexhealth-page-heading-with-video-shelf.css';
 // import '../../base/shelves/promo-shelf.css';
 
 /**
@@ -32,7 +32,7 @@ import './sexhealth-page-heading-shelf.css';
  *  }
  */
  
-class SexhealthPageHeadingShelf extends PageHeadingShelf {
+class SexhealthPageHeadingWithVideoShelf extends PageHeadingShelf {
 
   constructor(props) {
     super(props);
@@ -68,7 +68,9 @@ class SexhealthPageHeadingShelf extends PageHeadingShelf {
     const rightImageStyle = (content.image_right && content.image_right.meta_position === 'bottom')? 'right-image--bottom' : 'right-image--top';
     
     return (
-      <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group} classExtra="sexhealth-page-heading-shelf">
+      <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group} classExtra="sexhealth-page-heading-with-video-shelf">
+        {content.video_id && <VideoModal video={content.video_id} host={content.host} classNamePrefix={classNamePrefix} ref={this.video} classExtra="sexhealth-video-modal">
+        </VideoModal>}
         <ResponsiveBackgroundImage image={content.background_image} className={`shelf__container ${ShelfUtils.shelfContainerClass(content)} shelf-${leftImageStyle} shelf-${rightImageStyle} shelf__container-gradient--${gradient}`}
         >
           <div className="container">
@@ -77,6 +79,9 @@ class SexhealthPageHeadingShelf extends PageHeadingShelf {
                 <div className="shelf__col col-10 col-sm-8 col-md-7">
                   {this.renderHeadingBody(content, headingTagName)}
                   {this.renderCta(content.cta)}
+                  {content.meta_use_play_link === true &&
+                    <span role="button" onClick={this.triggerModal.bind(this)} className={`${classNamePrefix}__play-link`}>{content.meta_play_link_text}</span>
+                  }
                 </div>
               </div>
               { leftImage &&
@@ -99,10 +104,10 @@ class SexhealthPageHeadingShelf extends PageHeadingShelf {
   }
 }
 
-SexhealthPageHeadingShelf.propTypes = {
+SexhealthPageHeadingWithVideoShelf.propTypes = {
   ...PageHeadingShelf.propTypes
 }
 
-CmsComponentRegistry.register('sexhealth_page_heading_shelf', SexhealthPageHeadingShelf, 'page-heading-shelf', null, null);
+CmsComponentRegistry.register('sexhealth_page_heading_shelf_with_video', SexhealthPageHeadingWithVideoShelf, 'page-heading-shelf', null, null);
 
-export default SexhealthPageHeadingShelf;
+export default SexhealthPageHeadingWithVideoShelf;

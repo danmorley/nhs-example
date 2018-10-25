@@ -5,28 +5,27 @@
 
 // sexhealth
 .sexhealth {
-  .sexhealth-page-heading-shelf {
-      .shelf__container {
-        color: $white;
-      }
+    .page-heading-shelf.sexhealth-page-heading-shelf {
+        .shelf__container {
+            background-color: initial;
+            color: $white;
+            text-align: left;
+            font-size: 16px;
 
-      .container {
-        padding: 0.3em 0.5em 2.6em;
-      }
+            h1 {
+                font-size: 1.3em;
+            }
 
-      span[role=button] {
-        cursor: pointer;
-        text-decoration: none;
-        background-image: url('../../../assets/images/play-icon-white.png');
-        background-position: center center;
-        background-size: 50px;
-        background-repeat: no-repeat;
-        padding: 10px 0px 90px 0px;
-      }
+            .shelf__col {
+                margin: 0 40px;
+                max-width: 48%;
+            }
+        }
 
-      span[role=button]:hover {
-        color: $sexhealth-pink;
-        background-image: url('../../../assets/images/play-icon-pink.png');
-      }
-  }
+        @media (min-width: 768px) {
+            .container, .page-heading-shelf .container-fluid {
+                padding-bottom: 0.6em;
+            }
+        }
+    }
 }

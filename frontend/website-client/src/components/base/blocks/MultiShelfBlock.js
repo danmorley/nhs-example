@@ -28,6 +28,7 @@ import GridShelf from '../shelves/GridShelf';
 import SimplePageHeadingShelf from '../shelves/SimplePageHeadingShelf/SimplePageHeadingShelf';
 import SimpleRichTextShelf from '../shelves/SimpleRichTextShelf/SimpleRichTextShelf';
 import SexhealthPageHeadingShelf from '../../sexhealth/shelves/SexhealthPageHeadingShelf';
+import SexhealthPageHeadingWithVideoShelf from '../../sexhealth/shelves/SexhealthPageHeadingWithVideoShelf';
 // import RecipeGridShelf from '../../shelves/RecipeGridShelf';
 // import ShareButtonShelf from '../../shelves/ShareButtonShelf';
 // import TableShelf from '../../shelves/TableShelf';
