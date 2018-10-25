@@ -267,6 +267,10 @@ h2 {
 
   html & {  
     color: $sexhealth-dark;
+    
+    @include media-breakpoint-up(sm) {
+      font-size: $font-sexhealth-desktop;
+    }
   }
 
   h1 {
