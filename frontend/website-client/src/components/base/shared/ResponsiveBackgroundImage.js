@@ -25,8 +25,10 @@ class ResponsiveBackgroundImage extends Component {
     const { image, variant, className, tagName } = this.props;
     const TagName = tagName;
     const backgroundImageStyle = image ? ImageUtils.backgroundImageStyle(image) : {};
-    const imageVariant = variant ? 'image--' + variant : 'image--' + image.meta_variant;
-    const imageVariantClass = ImageUtils.isValid(image) ? imageVariant || 'auto' : '';
+    let imageVariantClass = '';
+    if (ImageUtils.isValid(image)){
+      imageVariantClass = variant ? 'image--' + variant : 'image--' + image.meta_variant;
+    }
     const imageSet = ImageUtils.isValid(image) ? 'image-set' : 'image-not-set';
 
     return (

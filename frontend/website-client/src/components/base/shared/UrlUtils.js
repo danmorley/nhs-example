@@ -24,6 +24,7 @@ class UrlUtils {
     const n = UrlUtils.pathMinusSlash(path).lastIndexOf('/');
     return path.substr(0, n);
   }
+
   static isSiteHomePage() {
     return UrlUtils.pathMinusSlash(window.location.pathname) === global.rootUrl;
   }
