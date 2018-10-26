@@ -37,19 +37,23 @@ class IframeModal extends Component {
   }
 
   _iframeLoaded(evt) {
-    const document = evt.target.contentDocument;
-    const backElement = document.getElementsByClassName('back')[0];
+    const documentIframe = evt.target.contentDocument;
+    const backElement = documentIframe.getElementsByClassName('back')[0];
     backElement.parentNode.removeChild(backElement);
     
-    const header = document.getElementsByClassName('results-header')[0].childNodes[0];
+    const header = documentIframe.getElementsByClassName('results-header')[0];
     header.parentNode.removeChild(header);
 
-    const footer = document.getElementsByTagName('footer')[0];
+    const footer = documentIframe.getElementsByTagName('footer')[0];
     footer.parentNode.removeChild(footer);
 
-    const container = document.getElementById('search-results').getElementsByClassName('body')[0].getElementsByClassName('container')[0];
+    const container = documentIframe.getElementById('search-results').getElementsByClassName('body')[0].getElementsByClassName('container')[0];
     container.style.width = '100%';
     container.style.padding = '0';
+
+    const body = documentIframe.getElementsByTagName('body')[0];
+    body.style.background = 'none';
+    body.style.overflowX = 'hidden';
  
     this.setState({
       iframeIsLoaded: true,
