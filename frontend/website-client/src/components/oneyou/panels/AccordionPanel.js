@@ -19,18 +19,20 @@ class AccordionPanel extends Component {
   }
 
   render() {
-    let { id, classNamePrefix, content } = this.props;
+    let { id, classNamePrefix, content, scrollItemsToTopWhenSelected } = this.props;
+    scrollItemsToTopWhenSelected = scrollItemsToTopWhenSelected || content.scroll_items_to_top_when_selected || false;
 
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} trackingGroup={content.tracking_group}>
         <div className={`shelf__container container-fluid ${classNamePrefix}__container`}>
           { content.accordions && content.accordions.map((accordion, i) =>
             <AccordionItem key={i}
-             id={accordion.id}
-             classNamePrefix={'accordion-item'}
-             content={accordion.value}
-             expanded={this.state.expandedGroup === accordion.id}
-             setExpandedGroup={this.setExpandedGroup} />
+              id={accordion.id}
+              classNamePrefix={'accordion-item'}
+              content={accordion.value}
+              expanded={this.state.expandedGroup === accordion.id}
+              setExpandedGroup={this.setExpandedGroup}
+              scrollToTopWhenSelected={scrollItemsToTopWhenSelected} />
           )}
         </div>
       </Shelf>
@@ -41,6 +43,7 @@ class AccordionPanel extends Component {
 AccordionPanel.propTypes = {
   content: PropTypes.object.isRequired,
   classNamePrefix: PropTypes.string.isRequired,
+  scrollItemsToTopWhenSelected: PropTypes.bool,
   id: PropTypes.string
 };
 

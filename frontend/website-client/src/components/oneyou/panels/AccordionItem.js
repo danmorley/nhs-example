@@ -30,7 +30,7 @@ class AccordionItem extends Component {
     const pageHeaderElem = document.querySelector('.page-header');
     const offset = (pageHeaderElem)? pageHeaderElem.clientHeight + 5 : 0;
 
-    if (this.props.expanded) {
+    if (this.props.expanded && this.props.scrollToTopWhenSelected) {
       scrollToComponent(this.Accordion, { offset: -offset, align: 'top', duration: 500, ease:'inCirc'});
     }
   }
@@ -72,12 +72,17 @@ class AccordionItem extends Component {
   }
 }
 
+AccordionItem.defaultProps = {
+  scrollToTopWhenSelected: true
+}
+
 AccordionItem.propTypes = {
   content: PropTypes.object.isRequired,
   classNamePrefix: PropTypes.string.isRequired,
   id: PropTypes.string,
   expanded: PropTypes.bool.isRequired,
-  setExpandedGroup: PropTypes.func.isRequired
+  setExpandedGroup: PropTypes.func.isRequired,
+  scrollToTopWhenSelected: PropTypes.bool
 };
 
 CmsComponentRegistry.register('accordion_item', AccordionItem, 'accordion-item');
