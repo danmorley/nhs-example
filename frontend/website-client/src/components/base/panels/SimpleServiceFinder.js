@@ -32,8 +32,10 @@ class SimpleServiceFinder extends Component {
   }
 
   updateInputPostcode(evt) {
+    // clean postcode, remove space and add + between the 2 part of the postcode
+    const postcode = evt.target.value.replace(/^\s*([A-z0-9]+)\s*([A-z0-9]+)\s*$/g,  '$1+$2');
     this.setState({
-      postcode: evt.target.value
+      postcode: postcode
     });
   }
 
