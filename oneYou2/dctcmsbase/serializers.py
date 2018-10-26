@@ -81,8 +81,8 @@ class GeneralShelvePageSerializer(serializers.ModelSerializer):
 
         abstract = True
 
-        fields = get_fields() + get_meta_fields() + get_social_fields() + get_tracking_fields()
-        meta_fields = get_meta_fields()
+        meta_fields = get_meta_fields() + get_social_fields() + get_tracking_fields()
+        fields = get_fields() + meta_fields
 
 
 class CTAPageSerializer(serializers.Serializer):
