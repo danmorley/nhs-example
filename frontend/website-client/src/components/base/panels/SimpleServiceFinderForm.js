@@ -44,7 +44,7 @@ class SimpleServiceFinderForm extends Component {
             <form ref={this.form} id="finder" name="finder" method="get" action={content.finder_url} >
               <fieldset>
                 <legend>{content.heading && <h3>{content.heading}</h3>}</legend>
-                <input data-name="Condom finder input" name="postcode" placeholder={content.searchbox_placeholder} type="text" />
+                <input data-name="Condom finder input" name="postcode" placeholder={content.searchbox_placeholder} type="text" required />
               </fieldset>
               <input ref={this.lat} name="latitude" type="hidden" />
               <input ref={this.lon} name="longitude" type="hidden" />
