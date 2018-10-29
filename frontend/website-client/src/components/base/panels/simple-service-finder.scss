@@ -10,6 +10,7 @@
 //sexhealth
 .sexhealth {
     color: $white;
+    
     .simple-service-finder {
         input {
             width: 100%;
@@ -52,11 +53,7 @@
 
         background-color: $black;
         color: $white;
-        margin: 0 0 0 -15px;
+        margin: 0;
         padding: 20px;
-
-        @include media-breakpoint-up(sm) {
-            margin: 0;
-        }
     }
 }
