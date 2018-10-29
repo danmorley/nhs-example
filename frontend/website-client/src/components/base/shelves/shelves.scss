@@ -213,8 +213,13 @@ h1, h2 {
     margin-left: 0;
   }
 
-  .container{
+  .container {
     padding: 1em;
+    
+    >  .container {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 
   .shelf__container{

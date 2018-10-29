@@ -24,7 +24,7 @@ class AccordionPanel extends Component {
 
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} trackingGroup={content.tracking_group}>
-        <div className={`shelf__container container-fluid ${classNamePrefix}__container`}>
+        <div className={`shelf__container ${classNamePrefix}__container`}>
           { content.accordions && content.accordions.map((accordion, i) =>
             <AccordionItem key={i}
               id={accordion.id}
