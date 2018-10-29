@@ -138,6 +138,7 @@
 .sexhealth .share-button-shelf {
   
   padding: 0 1em;
+  display: block;
   
   @include media-breakpoint-up(sm) {
     padding: 0;

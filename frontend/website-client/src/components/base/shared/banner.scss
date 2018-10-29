@@ -16,9 +16,13 @@
 
   &.banner-align-center {
     align-items: center;
-
+    
+    .banner-heading {
+      text-align: center;
+    }
+    
     .banner-content {
-      align-items: center;
+      align-items: stretch;
     }
   }
 
@@ -29,7 +33,11 @@
       align-items: flex-end;
     }
   }
-
+  
+  .banner-header {
+    text-align: left;
+  }
+  
   .banner-content {
     /*background-color: blue;*/
     display: flex;
