@@ -19,6 +19,7 @@ class SimpleServiceFinderForm extends Component {
     };
     
     this.form = React.createRef();
+    this.postcode = React.createRef();
     this.lat = React.createRef();
     this.lon = React.createRef();
   }
@@ -27,10 +28,18 @@ class SimpleServiceFinderForm extends Component {
     t.preventDefault();
     navigator.geolocation.getCurrentPosition((position) => {
       this.setState({ lat: position.coords.latitude, lon: position.coords.longitude });
+      this.postcode.current.value = null;
       this.lat.current.value = position.coords.latitude;
       this.lon.current.value = position.coords.longitude;
       this.form.current.submit();
     });
+  }
+
+  submitForm(t) {
+    t.preventDefault();
+    this.lat.current.value = null;
+    this.lon.current.value = null;
+    this.form.current.submit();
   }
 
   render() {
@@ -41,10 +50,10 @@ class SimpleServiceFinderForm extends Component {
         {content.text && <Text tagName="div" content={content.text} format="richtext" className="rich-text" />}
         {content.submit_button_copy && 
           <div>
-            <form ref={this.form} id="finder" name="finder" method="get" action={content.finder_url} >
+            <form onSubmit={this.submitForm.bind(this)} ref={this.form} id="finder" name="finder" method="get" action={content.finder_url} >
               <fieldset>
                 <legend>{content.heading && <h3>{content.heading}</h3>}</legend>
-                <input data-name="Condom finder input" name="postcode" placeholder={content.searchbox_placeholder} type="text" required />
+                <input ref={this.postcode} data-name="Condom finder input" name="postcode" placeholder={content.searchbox_placeholder} type="text" required />
               </fieldset>
               <input ref={this.lat} name="latitude" type="hidden" />
               <input ref={this.lon} name="longitude" type="hidden" />
