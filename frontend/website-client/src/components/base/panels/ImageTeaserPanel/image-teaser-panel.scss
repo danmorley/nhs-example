@@ -294,8 +294,28 @@
       }
     }
   }
-
-  .panel-carousel-shelf .shelf__container {
-    padding-bottomz: 3em;
+  
+  .image-teaser--desktop-image-default-mobile-image-default,
+  .image-teaser--desktop-image-left-mobile-image-default,
+  .image-teaser--desktop-image-default-mobile-image-top,
+  .image-teaser--desktop-image-left-mobile-image-top {
+  
+    .image-teaser {
+      flex-direction: column; 
+    } 
+    
+    .image-teaser__info {
+      width: 65%;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  
+    @include media-breakpoint-down(sm) {
+      flex-direction: column;
+      
+      .image-teaser__image, .image-teaser__info, .image-teaser__text {
+        width: 100%;
+      }
+    }
   }
 }
