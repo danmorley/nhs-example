@@ -221,6 +221,12 @@ class AccordionPanel(Panel):
     accordions = blocks.StreamBlock([
         ('accordion_items', AccordionItemsPanel(required=True, icon='collapse-down'))
     ])
+    scroll_items_to_top_when_selected = blocks.BooleanBlock(
+        label='Scroll to the top of the item when selected',
+        required=False,
+        default=False,
+        classname='dct-meta-field'
+    )
 
     class Meta:
         form_classname = 'dct-panel-panel-accordion dct-meta-panel'
