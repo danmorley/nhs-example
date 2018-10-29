@@ -33,7 +33,19 @@
         height: 120px;
 
         &.page-heading-shelf--no-text .container {
+            height: 140px;
             min-height: initial;
+        }
+    }
+
+    @media (max-width: 767px) {
+
+        .page-heading-shelf--no-text {
+            height: 70px;
+
+            &.page-heading-shelf--no-text .container {
+                height: 80px;
+            }
         }
     }
 }
