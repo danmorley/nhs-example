@@ -29,7 +29,9 @@ class Footer extends Component {
         <div className ="container">
           <div className = "row">
             <div className ="col footer-left">
-              <Image image={tempImage} height="68" className="page-footer__phe-logo" />
+              <div className ="footer-logo">
+                <Image image={tempImage} height="68" className="page-footer__phe-logo" />
+              </div>
               <FooterMenu
                 items={items || undefined}
                 show_sitemap={show_sitemap}

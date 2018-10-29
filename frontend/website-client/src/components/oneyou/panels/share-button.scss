@@ -135,12 +135,21 @@
 }
 
 
-.sexhealth .share-button-shelf .share-button {
-  background-color: $sexhealth-pink;
-  color: $white;
-  text-transform: none;
-
-  ul.share-button__items a:after {
+.sexhealth .share-button-shelf {
+  
+  padding: 0 1em;
+  
+  @include media-breakpoint-up(sm) {
+    padding: 0;
+  }
+  
+  .share-button {
+    background-color: $sexhealth-pink;
     color: $white;
+    text-transform: none;
+
+    ul.share-button__items a:after {
+      color: $white;
+    }
   }
 }
