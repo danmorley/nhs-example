@@ -13,6 +13,7 @@ import VideoTeaserPanel from '../../oneyou/panels/VideoTeaserPanel';
 import '../../oneyou/panels/ImageTeaserPanel';
 import '../panels/ImageTeaserPanel/ImageTeaserPanel';
 import '../panels/SimpleServiceFinder';
+import '../panels/SimpleServiceFinderForm';
 import Oneyou1TeaserPanel from '../../oneyou/panels/Oneyou1TeaserPanel';
 import AppTeaserPanel from '../../oneyou/panels/AppTeaserPanel';
 import InformationPanel from '../../oneyou/panels/InformationPanel';

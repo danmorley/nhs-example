@@ -80,6 +80,6 @@ SimpleServiceFinder.propTypes = {
   id: PropTypes.string
 };
 
-CmsComponentRegistry.register('simple_service_finder', SimpleServiceFinder, 'simple-service-finder', null, null);
+CmsComponentRegistry.register('simple_service_finder_old', SimpleServiceFinder, 'simple-service-finder', null, null);
 
 export default SimpleServiceFinder;
