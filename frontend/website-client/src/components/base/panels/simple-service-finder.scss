@@ -41,7 +41,13 @@
         }
 
         h3 {
+            margin-top: 15px;
             margin-bottom: 15px;
+        }
+
+        fieldset {
+            border: none;
+            padding: 0;
         }
 
         background-color: $black;
