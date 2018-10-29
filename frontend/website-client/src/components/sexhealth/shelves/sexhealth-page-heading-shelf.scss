@@ -30,6 +30,10 @@
     }
 
     .page-heading-shelf--no-text {
-        margin-bottom: -60px;
+        height: 120px;
+
+        &.page-heading-shelf--no-text .container {
+            min-height: initial;
+        }
     }
 }
