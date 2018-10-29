@@ -269,7 +269,8 @@
 
 //sexhealth
 .sexhealth {
-  .image-teaser--dark-bg {
+  .image-teaser--dark-bg,
+  .image-teaser--primary_background {
 
     .image-teaser__info {
       padding: 0 !important;
@@ -286,9 +287,9 @@
       background-color: $sexhealth-purple;
       color: $white;
 
-      a.link-cta {
-        // text-decoration: none;
-        // color: $sunflower-yellow;
+      .cta-list__item  a {
+        text-decoration: none;
+        color: $sunflower-yellow;
       }
     }  
   }

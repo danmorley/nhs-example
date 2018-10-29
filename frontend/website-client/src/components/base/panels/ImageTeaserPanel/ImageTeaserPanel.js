@@ -28,7 +28,7 @@ import CcTeaser from '../../layouts/CcTeaser';
  *  }
  */
 class ImageTeaserPanel extends Component {
-  render() {
+  renderOld() {
     const { content, classNamePrefix } = this.props;
     const layout = content.meta_layout;
     // const layout = content.meta_layout_desktop + '-' + content.meta_layout_mobile;
@@ -46,7 +46,7 @@ class ImageTeaserPanel extends Component {
     );
   }
 
-  renderOld() {
+  render() {
     const { content, classNamePrefix } = this.props;
     const layout = content.meta_layout;
     // const layout = content.meta_layout_desktop + '-' + content.meta_layout_mobile;
