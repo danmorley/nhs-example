@@ -1,0 +1,55 @@
+@import '../../../assets/styles/variables/variables';
+
+.cc-teaser {
+  background-color: red;
+  margin: 0;
+  padding: 0;
+}
+@media (max-width: 768px) {
+  .cc-teaser.h-100, .bs-teaser .h-100 {
+    height: auto !important;
+  }
+}
+.cc-teaser-image {
+  background-color: orange;
+  min-height: 200px !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+.cc-teaser-body {
+  background-color: green;
+}
+.cc-teaser-body-wrapzz {
+  height: 500px !important;
+}
+.cc-teaser-heading {
+  background-color: yellow;
+  font-size: 1.5em;
+  padding: 1em 1em 1em 1em;
+}
+.cc-teaser-text {
+  background-color: blue;
+  font-size: 1.5em;
+  padding: 1em 1em 1em 1em;
+}
+.cc-teaser-ctas {
+  background-color: purple;
+  padding: 1em 1em 1em 1em;
+}
+
+.sexhealth {
+  
+  .cc-teaser-heading {
+    
+    h3 {
+      font-family: $sexhealth-font;
+      font-size: 1em;
+      padding: 0;
+    }
+  }
+
+  .cc-teaser-text {
+    padding: 0.5em 1em;
+  }
+}

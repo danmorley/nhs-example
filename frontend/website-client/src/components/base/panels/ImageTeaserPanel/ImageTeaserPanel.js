@@ -6,7 +6,7 @@ import './image-teaser-panel.css';
 import Panel from '../Panel';
 import PropTypes from 'prop-types';
 import ResponsiveBackgroundImage from '../../shared/ResponsiveBackgroundImage';
-import Teaser from '../../shared/Teaser';
+import CcTeaser from '../../layouts/CcTeaser';
 
 /**
  *  Image Teaser panel component displaying a teaser panel in the form of a heading
@@ -36,9 +36,9 @@ class ImageTeaserPanel extends Component {
 
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant} layout={layout}>
-        <Teaser 
+        <CcTeaser 
           image={content.image}
-          heading={<Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />}
+          heading={<Text tagName="h3" content={content.heading}/>}
           body={<Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>}
           ctas={<CtaLinks cta={content.ctas} variant={ctaStyle} />}
         />
