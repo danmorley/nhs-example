@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Text from '../../base/Text';
-import CtaLink from '../../base/shared/CtaLinks';
+import CtaLink from '../../base/shared/CtaLink';
 import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './app-teaser.css';
 import Panel from './Panel';
