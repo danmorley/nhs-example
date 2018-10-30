@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 import json
 import re
+from urllib.parse import urlparse, urlunparse
 
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
@@ -27,22 +28,20 @@ def release_html(request, site_name):
         return HttpResponse('Page Not Found', status=404)
 
     if getattr(request, 'path', None):
+        # This redirection doesn't support multisite on different domain
+        url = urlparse(request.get_full_path())
+        path = url.path[:-1] if url.path[-1] == '/' else url.path
         site_redirects = Redirect.get_for_site(site_id)
-        wagtail_redirect = site_redirects.filter(old_path=request.path).first()
-        if not wagtail_redirect:
-            if request.path[-1] == '/':
-                wagtail_redirect = Redirect.objects.filter(site=site_id, old_path=request.path[:-1]).first()
-            else:
-                wagtail_redirect = Redirect.objects.filter(site=site_id, old_path=request.path + '/').first()
+        wagtail_redirect = site_redirects.filter(old_path=path).first()
 
         if wagtail_redirect:
             if wagtail_redirect.redirect_page:
-                redirect_path = '/{}{}'.format(site_name, wagtail_redirect.redirect_page.url)
+                url = url._replace(path=wagtail_redirect.redirect_page.specific.link_url)
+                redirect_path = urlunparse(url)
             else:
+                # Re-direct is to a link
                 redirect_path = wagtail_redirect.redirect_link
-
-            permanent = wagtail_redirect.is_permanent
-            return redirect(redirect_path, permanent=permanent)
+            return redirect(redirect_path, permanent=wagtail_redirect.is_permanent)
 
     major_frontend_version = None
     release_id = request.GET.get('id')
