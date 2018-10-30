@@ -30,6 +30,7 @@ class AccordionPanel extends Component {
               id={accordion.id}
               classNamePrefix={'accordion-item'}
               content={accordion.value}
+              container={classNamePrefix}
               expanded={this.state.expandedGroup === accordion.id}
               setExpandedGroup={this.setExpandedGroup}
               scrollToTopWhenSelected={scrollItemsToTopWhenSelected} />

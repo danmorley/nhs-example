@@ -52,16 +52,23 @@ class AccordionItem extends Component {
   }
 
   render() {
-    let { id, classNamePrefix, content } = this.props;
+    let { id, classNamePrefix, container, content } = this.props;
     let expansionClassName = this.props.expanded ? 'expanded' : 'collapsed';
 
     return (
       <Panel id={content.shelf_id} classNamePrefix={classNamePrefix}>
         <div ref={ (div) => { this.Accordion = div; } }>
           <div className={`${classNamePrefix}__header ${classNamePrefix}__header--${expansionClassName}`}>
-            <h3 onClick={this.handleClick} className={`container ${classNamePrefix}__sub-container`}>
-              {content.heading}
-            </h3>
+           { container == 'accordion-panel' &&
+              <h3 onClick={this.handleClick} className={`container ${classNamePrefix}__sub-container`}>
+                {content.heading}
+              </h3>
+            }
+            { container == 'accordion-group' &&
+               <h2 onClick={this.handleClick} className={`container ${classNamePrefix}__sub-container`}>
+                 {content.heading}
+               </h2>
+             }
           </div>
           <div className={`${classNamePrefix}__body ${classNamePrefix}__body--${expansionClassName} container ${classNamePrefix}__sub-container`}>
             { MultiPanelBlock.renderItems(content.items, '', 'div') }
@@ -78,6 +85,7 @@ AccordionItem.defaultProps = {
 
 AccordionItem.propTypes = {
   content: PropTypes.object.isRequired,
+  container: PropTypes.object.isRequired,
   classNamePrefix: PropTypes.string.isRequired,
   id: PropTypes.string,
   expanded: PropTypes.bool.isRequired,
