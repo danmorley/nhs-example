@@ -730,11 +730,25 @@ class GeneralShelvePage(Page):
     def page_theme(self):
         return self.theme.to_dict()
 
+    # @property
+    # def link_url(self):
+    #     # TODO: This could potentially use some base page methods
+    #     site_name = SiteSettings.objects.get(site_id=self.get_site().id).uid
+    #     return '/' + site_name + self.url_path
+
     @property
     def link_url(self):
         # TODO: This could potentially use some base page methods
-        site_name = SiteSettings.objects.get(site_id=self.get_site().id).uid
-        return '/' + site_name + self.url_path
+        import re
+        url_path = self.url_path
+        # Remove homepage slug from url_path
+        site_settings = SiteSettings.objects.get(site_id=self.get_site().id)
+        homepage_slug_path = site_settings.site.root_page.slug
+        regexp = r'/{0}(/.*)'.format(homepage_slug_path)
+        matchObj = re.match( regexp, self.url_path)
+        if matchObj:
+            url_path = matchObj.group(1)
+        return '/' + site_settings.uid + url_path
 
     @property
     def breadcrumbs(self):
