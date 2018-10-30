@@ -181,20 +181,19 @@ def determine_image_rendtions_for_shared_content_shelves(shelf, parent=None):
             shelf['value']['image_meta'] = '{}/{}/{}'.format(shelf_type, parent['type'], None)
 
         # TODO: MERGE THE TWO IF STATEMENTS BELOW
-
-        if 'banner_shelf_v2' in shelf_type:
-            background_image = shelf['value']['banner']['background_image']
+        if 'banner_shelf' in shelf_type:
+            background_image = shelf['value']['background_image']
             if background_image:
                 rendition_shelf_type = 'banner_shelf'
                 if parent:
-                    parent_shelf_type = parent['type']
+                    parent_shelf_type = parent["type"]
                 else:
                     parent_shelf_type = None
 
                 background_image['renditions'] = {
-                    'mobile': background_image['renditions']['{}/{}/None/mobile'.format(rendition_shelf_type,
+                    'mobile': background_image['renditions']["{}/{}/None/mobile".format(rendition_shelf_type,
                                                                                         parent_shelf_type)],
-                    'desktop': background_image['renditions']['{}/{}/None/desktop'.format(rendition_shelf_type,
+                    'desktop': background_image['renditions']["{}/{}/None/desktop".format(rendition_shelf_type,
                                                                                           parent_shelf_type)]
                 }
 
