@@ -120,7 +120,6 @@ class GeneralShelvePage(Page):
             url_path = matchObj.group(1)
         return '/' + site_settings.uid + url_path
 
-
     @property
     def breadcrumbs(self):
         ancestors = self.get_ancestors().live()[1:]

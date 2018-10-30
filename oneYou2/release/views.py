@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 import json
 import re
+from urllib.parse import urlparse, urlunparse
 
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
@@ -28,53 +29,20 @@ def release_html(request, site_name):
         return HttpResponse('Page Not Found', status=404)
 
     if getattr(request, 'path', None):
-        print('Checking for redirect')
+        # This redirection doesn't support multisite on different domain
+        url = urlparse(request.get_full_path())
+        path = url.path[:-1] if url.path[-1] == '/' else url.path
         site_redirects = Redirect.get_for_site(site_id)
-        wagtail_redirect = site_redirects.filter(old_path=request.path).first()
-        if not wagtail_redirect:
-            if request.path[-1] == '/':
-                path_minus_slash = request.path[:-1]
-                print('trying for path minus slash {}'.format(path_minus_slash))
-                wagtail_redirect = site_redirects.filter(old_path=request.path[:-1]).first()
-            else:
-                print('trying for path plus slash')
-                wagtail_redirect = site_redirects.filter(old_path=request.path + '/').first()
+        wagtail_redirect = site_redirects.filter(old_path=path).first()
 
         if wagtail_redirect:
-            print('wagtail redirect is {}'.format(wagtail_redirect.old_path))
             if wagtail_redirect.redirect_page:
-                # Re-direct is to a page.
-                homepage_slug_path = site_setting.site.root_page.slug
-                print('homepage_slug_path is {}'.format(homepage_slug_path))
-                print('redirect page url is {}'.format(wagtail_redirect.redirect_page.url))
-                print('site_name is {}'.format(site_name))
-
-                # url = urlsplit(wagtail_redirect.redirect_page.url, scheme='', allow_fragments=True)
-                url = urlunparse((None, None, reverse('url_name'), None, 'queryparam={}'.format(some_variable), None))
-                parsed_redirect_path = urlparse('https://www.example.com/path?query=value&another=value#fragment')
-                redirect_path = '/{}{}'.format(site_name, parsed_redirect_path.path)
-                print('url is {}'.format(url))
-                
-                regexp = r'/{0}(/.*)'.format(homepage_slug_path)
-                matchObj = re.match(regexp, self.url_path)
-                if matchObj:
-                    url_path = matchObj.group(1)
-                test = '/' + site_settings.uid + url_path
-                print('test is {}'.format(test))
-
-                redirect_path = '/{}{}'.format(site_name, wagtail_redirect.redirect_page.url)
-                print('wagtail page is {}'.format(wagtail_redirect.redirect_page))
-                print('wagtail page is {}'.format(type(wagtail_redirect.redirect_page.url).__name__))
-                print('wagtail page is {}'.format(wagtail_redirect.redirect_page.specific_class.link_url))
+                url = url._replace(path=wagtail_redirect.redirect_page.specific.link_url)
+                redirect_path = urlunparse(url)
             else:
                 # Re-direct is to a link
                 redirect_path = wagtail_redirect.redirect_link
-
-            print('wagtail redirect_path is {}'.format(redirect_path))
-            permanent = wagtail_redirect.is_permanent
-            return redirect(redirect_path, permanent=permanent)
-        else:
-            print('no redirect for {}'.format(request.path))
+            return redirect(redirect_path, permanent=wagtail_redirect.is_permanent)
 
     major_frontend_version = None
     release_id = request.GET.get('id')

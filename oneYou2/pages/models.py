@@ -745,7 +745,7 @@ class GeneralShelvePage(Page):
         site_settings = SiteSettings.objects.get(site_id=self.get_site().id)
         homepage_slug_path = site_settings.site.root_page.slug
         regexp = r'/{0}(/.*)'.format(homepage_slug_path)
-        matchObj = re.match( regexp, self.url_path)
+        matchObj = re.match(regexp, self.url_path)
         if matchObj:
             url_path = matchObj.group(1)
         return '/' + site_settings.uid + url_path
