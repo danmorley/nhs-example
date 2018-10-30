@@ -10,7 +10,6 @@ from django.shortcuts import redirect, render
 from django.template import Context, Template
 from django.views.static import serve
 
-from urllib.parse import urlunparse
 from wagtail.contrib.redirects.models import Redirect
 
 from frontendHandler.models import FrontendVersion
