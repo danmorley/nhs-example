@@ -132,7 +132,7 @@ class GeneralShelvePage(Page):
                 site_name = SiteSettings.objects.get(site_id=self.get_site().id).uid
                 breadcrumbs.append({'name': ancestor.specific.seo_title or ancestor.specific.title, 'url': '/' + site_name})
         return breadcrumbs
-        
+
     content_panels = Page.content_panels + [
         StreamFieldPanel('body'),
         FieldPanel('release'),
