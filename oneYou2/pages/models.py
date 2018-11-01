@@ -757,10 +757,10 @@ class GeneralShelvePage(Page):
         for ancestor in ancestors:
             # If root page it doesn't have link url
             try:
-                breadcrumbs.append({'name': ancestor.specific.title, 'url': ancestor.specific.link_url})
+                breadcrumbs.append({'name': ancestor.specific.seo_title, 'url': ancestor.specific.link_url})
             except AttributeError:
                 site_name = SiteSettings.objects.get(site_id=self.get_site().id).uid
-                breadcrumbs.append({'name': ancestor.specific.title, 'url': '/' + site_name})
+                breadcrumbs.append({'name': ancestor.specific.seo_title, 'url': '/' + site_name})
         return breadcrumbs
         
     content_panels = Page.content_panels + [
