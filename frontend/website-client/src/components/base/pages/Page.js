@@ -34,14 +34,12 @@ class Page extends Component {
       const PageClass = pageInfo && pageInfo.class;
       // TODO: Handle no page for type
       const content = <PageClass page={page} site={site} />;
-      const meta = this.pageMetaData(page, site);
 
-      return (
-        <DocumentMeta {...meta}>
-          {this.renderPage(content, page_theme, page_styles, site, page, pageInfo)}
-        </DocumentMeta>
-      );
+      const pageTypeClass = (pageInfo)? `${pageInfo.classNamePrefix}-page` : 'general';
+      const meta = (page && page.meta.hasOwnProperty('use_share_button')) ? page.meta : page;
+      const useShareButton = page && (meta.use_share_button || meta.use_email_button || meta.use_print_button);
 
+      return this.renderPage(content, page_theme, page_styles, site, page, pageInfo);
     } else {
       // Page object is null so it must still be loading.
       var content = this.renderPageLoader();
@@ -97,35 +95,6 @@ class Page extends Component {
     return (
       <NoticeShelf content={warningMessage} />
     );
-  }
-
-  pageMetaData(page, site) {
-    const documentTitle = (UrlUtils.isSiteHomePage()) ? site.site_name : `${page.meta.seo_title || page.title} | ${site.site_name}`;
-
-    return {
-      title: documentTitle,
-      description: page.meta.search_description,
-      meta: {
-        property: {
-          'og:title': documentTitle,
-          'og:description': page.meta.og_description,
-          'og:url': page.meta.og_url || window.location.href,
-          'og:image': page.meta.og_image,
-          'og:type': page.meta.og_type
-        },
-        name: {
-          'WT.cg_n': 'OneYou Core',
-          'WT.cg_s': page.title,
-          'DCSext.RealUrl': window.location.pathname,
-          'twitter:url': page.meta.twitter_url || window.location.href,
-          'twitter:card': page.meta.twitter_card,
-          'twitter:site': page.meta.twitter_site,
-          'twitter:title': documentTitle,
-          'twitter:description': page.meta.twitter_description,
-          'twitter:image': page.meta.twitter_image
-        }
-      }
-    };
   }
 }
 
