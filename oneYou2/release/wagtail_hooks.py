@@ -47,8 +47,7 @@ class ReleaseButtonHelper(ButtonHelper):
         btns = ButtonHelper.get_buttons_for_obj(self, obj, exclude=None, classnames_add=None, classnames_exclude=None)
         pk = getattr(obj, self.opts.pk.attname)
         btns.insert(1, self.preview_button(pk, ['button'], classnames_exclude))
-        if not obj.release_date_has_passed():
-            btns.insert(2, self.detail_revision_button(pk, ['button'], classnames_exclude))
+        btns.insert(2, self.detail_revision_button(pk, ['button'], classnames_exclude))
         return btns
 
 
@@ -67,7 +66,7 @@ class ReleaseAdmin(ModelAdmin):
     add_to_settings_menu = False  # or True to add your model to the Settings sub-menu
     exclude_from_explorer = False  # or True to exclude pages of this type from Wagtail's explorer view
     list_display = ('release_name', 'uuid', 'content_status', 'release_time')
-    list_filter = ('content_status',)
+    list_filter = ('content_status', 'site',)
     search_fields = ('release_name',)
     index_view_extra_css = ('css/admin_index.css',)
 
@@ -78,6 +77,17 @@ class ReleaseAdmin(ModelAdmin):
         """
         qs = Release.objects.all()
         return qs
+
+    def index_view(self, request):
+        # set pending as default filter
+        http_referer = request.META['HTTP_REFERER'].split(request.META['PATH_INFO'])
+        if http_referer[-1] and not http_referer[-1].startswith('?'):
+            if 'content_status__exact' not in request.GET:
+                q = request.GET.copy()
+                q['content_status__exact'] = '0'
+                request.GET = q
+                request.META['QUERY_STRING'] = request.GET.urlencode()
+        return super(ReleaseAdmin,self).index_view(request)
 
 
 # Now you just need to register your customised ModelAdmin class with Wagtail
