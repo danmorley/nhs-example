@@ -196,7 +196,8 @@ class OneYou2PageModelTests(OneYouTests):
                               ' "1"}, "id": "b2d5e2e8-ae9d-46ef-92e6-27745a85df8c"},{"type": "promo_shelf", "value": ' \
                               + str(shelf.id) + ', "id": "14dd05e9-1d75-4831-a969-01f5c2c82b55"}]'
         page = create_test_page()
-        page.body = page._meta.fields[24].to_python(body_content_string)
+        body_field = [field for field in page._meta.fields if field.name == 'body'][0]
+        page.body = body_field.to_python(body_content_string)
 
         page.save_revision()
         body_dict = json.loads(json.loads(page.get_latest_revision().content_json)['body'])
@@ -410,7 +411,8 @@ class ImageBlockTest(OneYouTests):
                               ' "shelf_id": "1", "background_image": %d, "image_right": {"image": %d}},' \
                               ' "id": "a2d5e2e8-ae9d-46ef-92e6-27745a85df8c"}]' % (image.id, image.id)
 
-        page.body = page._meta.fields[24].to_python(body_content_string)
+        body_field = [field for field in page._meta.fields if field.name == 'body'][0]
+        page.body = body_field.to_python(body_content_string)
 
         page.save()
         page.save_revision()
@@ -438,7 +440,8 @@ class ImageBlockTest(OneYouTests):
                               ' "meta_use_mobile_renditions": "true"}},' \
                               ' "id": "a2d5e2e8-ae9d-46ef-92e6-27745a85df8c"}]' % (image.id, image.id)
 
-        page.body = page._meta.fields[24].to_python(body_content_string)
+        body_field = [field for field in page._meta.fields if field.name == 'body'][0]
+        page.body = body_field.to_python(body_content_string)
 
         page.save()
         page.save_revision()
@@ -468,7 +471,8 @@ class ImageBlockTest(OneYouTests):
                               ' "meta_use_mobile_renditions": "false"}},' \
                               ' "id": "a2d5e2e8-ae9d-46ef-92e6-27745a85df8c"}]' % (image.id, image.id)
 
-        page.body = page._meta.fields[24].to_python(body_content_string)
+        body_field = [field for field in page._meta.fields if field.name == 'body'][0]
+        page.body = body_field.to_python(body_content_string)
 
         page.save()
         page.save_revision()
