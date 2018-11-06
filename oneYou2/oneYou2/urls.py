@@ -2,6 +2,7 @@ from __future__ import absolute_import, unicode_literals
 
 from django.conf import settings
 from django.conf.urls import include, url
+from django.urls import include, path, re_path
 from django.contrib import admin
 from django.http import HttpResponse
 from django.views.static import serve
@@ -25,7 +26,7 @@ from shelves.views import upload_actions
 
 
 urlpatterns = [
-    url(r'^django-admin/', include(admin.site.urls)),
+    url(r'^django-admin/', admin.site.urls),
 
     url(r'^admin/custom/pages/', include(pages_urls, namespace='oneyou_pages')),
     url(r'^admin/experiments/', include(experiment_urls)),

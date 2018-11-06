@@ -58,7 +58,11 @@ class PHEImage(AbstractImage):
 
 
 class PHERendition(AbstractRendition):
-    image = models.ForeignKey(PHEImage, related_name='renditions')
+    image = models.ForeignKey(
+        PHEImage,
+        related_name='renditions',
+        on_delete=models.CASCADE,
+    )
 
     class Meta:
         unique_together = (

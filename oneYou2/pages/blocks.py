@@ -87,7 +87,7 @@ class ImageBlock(blocks.StructBlock):
 
         # If image supplied, filter renditions list to leave just two renditions, one for
         # desktop and one for mobile.
-        if image_meta:
+        if 'image' in result and image_meta:
 
             image = result['image']
             image['layout'] = result['meta_layout']
@@ -122,7 +122,8 @@ class ImageBlock(blocks.StructBlock):
                         'desktop': desktop_rendition
                     }
 
-        return result['image']
+            return result['image']
+        return result
 
     class Meta:
         icon = 'image'
