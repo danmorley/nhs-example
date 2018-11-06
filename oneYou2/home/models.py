@@ -55,6 +55,7 @@ class SiteSettings(BaseSetting):
     google_tag_manager_id = models.CharField(max_length=50, null=True, blank=True,)
     cookiebot_id = models.CharField(max_length=80, null=True, blank=True,)
     adobe_tracking_url = models.URLField(max_length=255, null=True, blank=True,)
+    adobe_datalayer_url = models.URLField(max_length=255, null=True, blank=True,)
 
     favicon = models.ForeignKey(
         'wagtaildocs.Document',
@@ -80,6 +81,7 @@ class SiteSettings(BaseSetting):
         FieldPanel('google_tag_manager_id'),
         FieldPanel('cookiebot_id'),
         FieldPanel('adobe_tracking_url'),
+        FieldPanel('adobe_datalayer_url'),
     ]
 
     structure_panels = [
