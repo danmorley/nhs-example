@@ -224,7 +224,6 @@ AZURE_CONTAINER = os.environ.get('AZURE_CONTAINER')          # eg. 'campaign-res
 AZURE_FILE_SHARE = os.environ.get('AZURE_FILE_SHARE')
 CONTENT_STORE_ENDPOINT = os.environ.get('CONTENT_STORE_ENDPOINT')
 ADOBE_TRACKING_URL = os.environ.get('ADOBE_TRACKING_URL')
-ADOBE_DATALAYER_URL = os.environ.get('ADOBE_DATALAYER_URL')
 
 ENV = os.environ.get('CMS_ENV', 'local')
 
