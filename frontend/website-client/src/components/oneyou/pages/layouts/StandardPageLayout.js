@@ -83,7 +83,12 @@ class StandardPageLayout extends Component {
 
   pageMetaData(page, site) {
     // use breadcrumb in reverse oder to generate page tile
-    const pageTitles = page.meta.breadcrumbs.map((item) => item.name).splice(1).reverse().join(' | ');
+    let pageTitles = null;
+    if( page.meta.breadcrumbs ){
+      pageTitles = page.meta.breadcrumbs.map((item) => item.name).splice(1).reverse().join(' | ');
+    } else {
+      console.log('No Breadcrumbs from API');
+    }
     const documentTitle = (UrlUtils.isSiteHomePage())? site.site_name : `${page.meta.seo_title || page.title} | ${pageTitles} | ${site.site_name}`;
 
     return {
