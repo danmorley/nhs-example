@@ -157,7 +157,7 @@ def open_releases(request):
 
 
 def release_view(request, release_id):
-    release = None
+    release, live_release = None, None
     error_msg = ''
     pages = {}
 
@@ -169,13 +169,19 @@ def release_view(request, release_id):
     if release:
         pages_release = ReleasePage.objects.filter(release__id=release_id)
 
-        # get live release content
-        live_release, live_pages_release = None, None
-        try:
-            live_release = get_latest_live_release(release.site.id)
-            live_pages_release = ReleasePage.objects.filter(release__id=live_release.id)
-        except (Release.DoesNotExist, AttributeError) as e:
-            error_msg = 'No live release'
+        # compare with the current live release if release is pending else compare with the previous frozen release
+        live_pages_release = None
+        if release.content_status == 0:
+            # get live release content
+            try:
+                live_release = get_latest_live_release(release.site.id)
+                live_pages_release = ReleasePage.objects.filter(release__id=live_release.id)
+            except (Release.DoesNotExist, AttributeError) as e:
+                error_msg = 'No live release'
+        else:
+            live_release = Release.objects.filter(release_time__lte=release.release_time, site__id=release.site.id, content_status=1).exclude(id=release.id).order_by('-release_time').first()
+            if not live_release:
+                error_msg = 'No live release'
         
         # Compare release with live release
         for page_release in pages_release:
@@ -205,6 +211,7 @@ def release_view(request, release_id):
 
     return render(request, 'wagtailadmin/release/detail.html', {
         'release': release,
+        'live_release': live_release,
         'pages': pages,
         'error_msg': error_msg,
     })
