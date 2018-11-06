@@ -4,6 +4,7 @@ import os
 
 from azure.storage.file import FileService
 from azure.common import AzureMissingResourceHttpError
+from azure.storage.file.models import File as AzureFile, Directory as AzureDirectory
 
 from datetime import datetime
 
@@ -27,7 +28,7 @@ class FrontendVersion:
             return 'test'
 
         file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
-        return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, settings.ENV, 'current_version.txt')
+        return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, settings.ENV, 'current_version.txt').content.rstrip('\n\r')
 
     @classmethod
     def get_available_versions(cls):
@@ -44,7 +45,7 @@ class FrontendVersion:
 
         current_tag = get_release_version()
         latest_deployed_tag = file_service.get_file_to_text(settings.AZURE_FILE_SHARE, settings.ENV,
-                                                            'current_tag.txt')
+                                                            'current_tag.txt').content.rstrip('\n\r')
 
         deployed_status = frontend_deployed()
         print('checking for initializer and deployed status')
@@ -68,21 +69,26 @@ class FrontendVersion:
             set_frontend_deployed_status('True')
 
         # we have to return all directories as azure SDK had no way to order and limit response count
-        directories = file_service.list_directories_and_files(settings.AZURE_FILE_SHARE, settings.ENV).directories
+        directories_files = file_service.list_directories_and_files(settings.AZURE_FILE_SHARE, settings.ENV)
+
         available_versions = []
 
-        for directory in directories:
-            print('loading meta for ' + directory.name)
-            properties = file_service.get_directory_properties(settings.AZURE_FILE_SHARE,
-                                                               settings.ENV + '/' + directory.name)
-            try:
-                release_tag = file_service.get_file_to_text(settings.AZURE_FILE_SHARE,
-                                                            settings.ENV + '/' + directory.name, 'tag.txt')
-            except AzureMissingResourceHttpError:
-                print('Invalid front end ' + directory.name)
-                release_tag = 'Invalid front end ' + directory.name
+        for directory_file in directories_files:
+            if type(directory_file) is AzureDirectory:
+                directory = directory_file
+                print('loading meta for ' + directory.name)
+                directory_properties = file_service.get_directory_properties(settings.AZURE_FILE_SHARE,
+                                                                settings.ENV + '/' + directory.name)
+                try:
+                    release_tag = file_service.get_file_to_text(settings.AZURE_FILE_SHARE,
+                                                                settings.ENV + '/' + directory.name, 'tag.txt').content.rstrip('\n\r')
+                except AzureMissingResourceHttpError:
+                    print('Invalid front end ' + directory.name)
+                    release_tag = 'Invalid front end ' + directory.name
 
-            available_versions.append((directory.name, release_tag + ' - ' + properties['last-modified']))
+                last_modified = directory_properties.properties.last_modified.strftime('%a, %d %b %Y %H:%M:%S %Z')
+                print('{} - {}'.format(release_tag, last_modified))
+                available_versions.append((directory.name, '{} - {}'.format(release_tag, last_modified)))
 
         sorted_list = sorted(available_versions, key=lambda x: datetime.strptime(x[1].split(' - ')[1],
                                                                                  '%a, %d %b %Y %H:%M:%S %Z'),
@@ -104,7 +110,7 @@ class FrontendVersion:
             return cls.get_local_file_text(['index.html'])
         else:
             file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
-            return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, settings.ENV + '/' + uuid, 'index.html')
+            return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, settings.ENV + '/' + uuid, 'index.html').content
 
     @classmethod
     def get_js_for_version(cls, version_id, file_name):
@@ -113,7 +119,7 @@ class FrontendVersion:
         else:
             file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
             directory_name = settings.ENV + '/' + version_id + '/static/js'
-            return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, directory_name, file_name)
+            return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, directory_name, file_name).content
 
     @classmethod
     def get_css_for_version(cls, version_id, file_name):
@@ -122,7 +128,7 @@ class FrontendVersion:
         else:
             file_service = FileService(account_name=settings.AZURE_ACCOUNT_NAME, account_key=settings.AZURE_ACCOUNT_KEY)
             directory_name = settings.ENV + '/' + version_id + '/static/css'
-            return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, directory_name, file_name)
+            return file_service.get_file_to_text(settings.AZURE_FILE_SHARE, directory_name, file_name).content
 
     @classmethod
     def load_static(cls, path, file_name):
@@ -158,31 +164,31 @@ class FrontendVersion:
         file_service.create_directory(settings.AZURE_FILE_SHARE, version_directory + '/static/media')
 
         print('adding current_version to the version directory')
-        file_service.put_file_from_text(settings.AZURE_FILE_SHARE, version_directory, 'current_version.txt', unique_id)
+        file_service.create_file_from_text(settings.AZURE_FILE_SHARE, version_directory, 'current_version.txt', unique_id)
 
         manifest = json.loads(open('./web/asset-manifest.json').read())
 
         for key in manifest:
             print('uploading ' + manifest[key])
-            file_service.put_file_from_path(settings.AZURE_FILE_SHARE, version_directory, manifest[key],
+            file_service.create_file_from_path(settings.AZURE_FILE_SHARE, version_directory, manifest[key],
                                             './web/' + manifest[key])
         print('uploading index.html')
-        file_service.put_file_from_path(settings.AZURE_FILE_SHARE, version_directory, 'index.html', './web/index.html')
+        file_service.create_file_from_path(settings.AZURE_FILE_SHARE, version_directory, 'index.html', './web/index.html')
 
         print('uploading favicon')
-        file_service.put_file_from_path(settings.AZURE_FILE_SHARE, version_directory, 'favicon.ico',
+        file_service.create_file_from_path(settings.AZURE_FILE_SHARE, version_directory, 'favicon.ico',
                                         './web/favicon.ico')
 
         print('uploading webtrends.min.js')
-        file_service.put_file_from_path(settings.AZURE_FILE_SHARE, version_directory, 'webtrends.min.js',
+        file_service.create_file_from_path(settings.AZURE_FILE_SHARE, version_directory, 'webtrends.min.js',
                                         './web/webtrends.min.js')
 
         release_tag = get_release_version()
         print('adding tag meta to the version directory')
-        file_service.put_file_from_text(settings.AZURE_FILE_SHARE, version_directory, 'tag.txt', release_tag)
+        file_service.create_file_from_text(settings.AZURE_FILE_SHARE, version_directory, 'tag.txt', release_tag)
 
         print('adding current tag meta to the environment directory')
-        file_service.put_file_from_text(settings.AZURE_FILE_SHARE, file_directory, 'current_tag.txt', release_tag)
+        file_service.create_file_from_text(settings.AZURE_FILE_SHARE, file_directory, 'current_tag.txt', release_tag)
 
         print('updating current version meta in the environment directory')
-        file_service.put_file_from_text(settings.AZURE_FILE_SHARE, file_directory, 'current_version.txt', unique_id)
+        file_service.create_file_from_text(settings.AZURE_FILE_SHARE, file_directory, 'current_version.txt', unique_id)
