@@ -1,7 +1,7 @@
 {% extends "wagtailadmin/base.html" %}
 {% load i18n wagtailadmin_tags %}
 
-{% block titletag %}{% if release %}{% blocktrans with title=release.release_name %}Release detail: {{ title }}{% endblocktrans %}{% else %}{% blocktrans %}Incorrect Release{% endblocktrans %}{% endif %}{% endblock %}
+{% block titletag %}{% if release and live_release %}{% blocktrans with title=release.release_name %}Release detail: {{ title }}{% endblocktrans %}{% else %}{% blocktrans %}Incorrect Release{% endblocktrans %}{% endif %}{% endblock %}
 
 {% block extra_css %}
     {{ block.super }}
@@ -22,8 +22,8 @@
 
 {% block content %}
     {% trans "Incorrect Release" as revisions_str %}
-    {% if release %}
-        {% trans "Release: "|add:release.release_name as revisions_str %}
+    {% if release and live_release %}
+        {% trans "COMPARE \""|add:release.release_name|add:"\" TO \""|add:live_release.release_name|add:"\"" as revisions_str %}
     {% endif %}
     {% include "wagtailadmin/shared/header.html" with title=revisions_str subtitle=release.get_admin_display_title icon="doc-empty-inverse" %}
 
@@ -39,7 +39,7 @@
                     </thead>
                     {% endcomment %}
                     <tbody>
-                        {% if release %}
+                        {% if release and live_release %}
                             {% for page in pages.values %}
                                 {% if page.status != "unchanged" %}
                                     <tr>

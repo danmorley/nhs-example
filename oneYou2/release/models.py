@@ -14,12 +14,14 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 
 from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.core.models import Page
 
 from oneYou2.panels import ReadOnlyPanel
 
 from frontendHandler.models import FrontendVersion
 
 from pages.models import RecipePage
+
 
 CONTENT_STATUS = (
     (0, 'PENDING'),
@@ -99,6 +101,18 @@ class Release(ClusterableModel):
             content = {}
             if self.base_release:
                 content = json.loads(self.base_release.content.first().content)
+                for page_id in content.keys():
+                    try:
+                        page = Page.objects.get(id=int(page_id))
+                        try:
+                            base_release_page = ReleasePage.objects.get(release=self.base_release, revision__page=page_id)
+                            ReleasePage(release=self, revision=base_release_page.revision).save()
+                        except ReleasePage.DoesNotExist:
+                            ReleasePage(release=self, revision=page.get_latest_revision()).save()
+                    except Page.DoesNotExist:
+                        pass
+                    except ValueError:
+                        pass
             ReleaseContent(release=self, content=json.dumps(content)).save()
         return self
 
