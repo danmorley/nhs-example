@@ -323,6 +323,11 @@ class ListItemPanel(blocks.StructBlock):
     text = blocks.CharBlock(required=True)
 
 
+class DataAttributeBlock(blocks.StructBlock):
+    name = blocks.CharBlock(help_text='Data attribute name, don\'t add \'data-\'')
+    value = blocks.CharBlock()
+
+
 class InlineScriptPanel(blocks.StructBlock):
     script = blocks.TextBlock(required=False, help_text='The javascript to be inserted')
     src = blocks.CharBlock(required=False, help_text='URL of the javascript file')
@@ -331,6 +336,9 @@ class InlineScriptPanel(blocks.StructBlock):
                         help_text='Optional ID of the script tag')
     placeholder_id = IDBlock(required=False, label='Placeholder ID', retain_case=True,
                              help_text='If given, an empty placeholder div will be added before the script tag')
+    data_attributes = blocks.StreamBlock([
+        ('data_attribute', DataAttributeBlock(icon='collapse-down'))
+    ])
 
     class Meta:
         form_classname = 'dct-inline-script-panel dct-meta-panel'
