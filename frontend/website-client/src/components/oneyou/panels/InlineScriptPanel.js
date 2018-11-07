@@ -49,9 +49,15 @@ class InlineScriptPanel extends Component {
   render() {
     let { id, content, classNamePrefix } = this.props;
 
+    let data_attribute = {}
+
+    for (var key in content.data_attributes) {
+      data_attribute['data-'+content.data_attributes[key]['value']['name']] = content.data_attributes[key]['value']['value'];
+    }
+
     return (
       <Panel id={id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
-        { content.placeholder_id && <div id={content.placeholder_id} /> }
+        { content.placeholder_id && <div id={content.placeholder_id} {...data_attribute}/> }
         <div ref={el => (this.instance = el)} />
       </Panel>
     )
