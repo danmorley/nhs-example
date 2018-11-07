@@ -337,8 +337,9 @@ class InlineScriptPanel(blocks.StructBlock):
     placeholder_id = IDBlock(required=False, label='Placeholder ID', retain_case=True,
                              help_text='If given, an empty placeholder div will be added before the script tag')
     data_attributes = blocks.StreamBlock([
-        ('data_attribute', DataAttributeBlock(icon='collapse-down'))
-    ])
+            ('data_attribute', DataAttributeBlock(icon='collapse-down')),
+        ], required=False,
+    )
 
     class Meta:
         form_classname = 'dct-inline-script-panel dct-meta-panel'
