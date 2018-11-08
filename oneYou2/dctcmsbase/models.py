@@ -231,9 +231,14 @@ class GeneralShelvePage(Page):
         revision = super(GeneralShelvePage, self).save_revision(user, submitted_for_moderation, approved_go_live_at, changed)
         assigned_release = self.release
         self.release = None
+        if self.release:
+            self.release = None
 
         if assigned_release:
-            assigned_release.add_revision(revision)
+            if self.live:
+                assigned_release.add_revision(revision)
+            else:
+                assigned_release.remove_page(self.id)
 
         return revision
 
