@@ -60,7 +60,6 @@ def create_test_page(title='Test page', path='1111', depth=0, theme=None):
     page = OneYou2Page(title=title, path=path, depth=depth, theme=theme, live=True)
     root_page.add_child(instance=page)
     page.save_revision().publish()
-    page.save()
 
     return page
 
@@ -88,7 +87,6 @@ def create_test_recipe_page(title='Test Recipe page', path='1111', depth=0, them
     root_page.add_child(instance=page)
 
     page.save_revision().publish()
-    page.save()
 
     return page
 
@@ -114,7 +112,6 @@ def create_test_child_page(parent, title='Test child page', path='11111111', dep
     parent.add_child(instance=page)
 
     page.save_revision().publish()
-    page.save()
 
     return page
 
@@ -149,7 +146,6 @@ class PageFactory(factory.django.DjangoModelFactory):
 
         page = manager.create(*args, **kwargs)
         page.save_revision()
-        page.save()
 
         return page
 

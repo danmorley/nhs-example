@@ -92,7 +92,7 @@ class CreateExperimentsViewsTests(OneYouTests):
         )
 
         root_page.add_child(instance=self.oneyou_homepage)
-        self.oneyou_homepage.save()
+        self.oneyou_homepage.save_revision()
 
     def test_create_view_get(self):
         request = HttpRequest()
