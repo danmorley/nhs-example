@@ -228,17 +228,16 @@ class GeneralShelvePage(Page):
         return serializer
 
     def save_revision(self, user=None, submitted_for_moderation=False, approved_go_live_at=None, changed=True):
-        revision = super(GeneralShelvePage, self).save_revision(user, submitted_for_moderation, approved_go_live_at, changed)
         assigned_release = self.release
         self.release = None
-        if self.release:
-            self.release = None
+        revision = super(GeneralShelvePage, self).save_revision(user, submitted_for_moderation, approved_go_live_at, changed)
 
         if assigned_release:
-            if self.live:
-                assigned_release.add_revision(revision)
+            from release.models import ReleasePage
+            if submitted_for_moderation:
+                ReleasePage.submit_for_moderation(revision, assigned_release)
             else:
-                assigned_release.remove_page(self.id)
+                assigned_release.add_revision(revision)
 
         return revision
 

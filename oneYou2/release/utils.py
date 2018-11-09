@@ -1,7 +1,7 @@
 import json
 from django.utils import timezone
 
-from release.models import Release
+from release.models import Release, ReleasePage
 
 
 def get_latest_release(site_id):
@@ -37,5 +37,8 @@ def populate_release_if_required(release):
         release_content.save()
         release.content_status = 1
         release.save()
+
+        # Remove revision submitted for moderation for this release
+        ReleasePage.remove_submitted_for_moderation(None, release)
 
     return release
