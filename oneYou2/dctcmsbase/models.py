@@ -225,7 +225,7 @@ class GeneralShelvePage(Page):
 
         return self
 
-    def serve_preview(self, request, mode_name, model_name):
+    def serve_preview(self, request, mode_name, site_name):
         request.is_preview = True
         print('SERVE PREVIEW')
 
@@ -238,7 +238,7 @@ class GeneralShelvePage(Page):
         if mode_name == 'react':
             path = self.get_url_parts(request)[2] if self.get_url_parts(request) is not None else '/home'
             context = {
-                'preview_url': '/{}{}?is_preview'.format(model_name, path)
+                'preview_url': '/{}{}?is_preview'.format(site_name, path)
             }
             return SimpleTemplateResponse(template='preview_wrapper.html', context=context)
 

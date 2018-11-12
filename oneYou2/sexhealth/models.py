@@ -11,6 +11,7 @@ from dctcmsbase.shelves import (PageHeadingShelf, BannerShelf, StandardGridShelf
     StandardTwoColumnShelf, SimplePageHeadingShelf, SimpleSectionHeadingShelf, SimpleRichTextShelf)
 from dctcmsbase.utils import get_serializable_data_for_fields
 
+from home.models import SiteSettings
 from pages.models import TwoColumnShelf
 
 from .shelves import SexHealthPageHeadingShelf, SexHealthPageHeadingWithVideoShelf
@@ -72,7 +73,8 @@ class SexHealthPage(GeneralShelvePage, Tracking, Social):
         return self
 
     def serve_preview(self, request, mode_name):
-        return super(SexHealthPage, self).serve_preview(request, mode_name, 'sexhealth')
+        site_setting = SiteSettings.objects.get(site_id=self.get_site().id)
+        return super(SexHealthPage, self).serve_preview(request, mode_name, site_setting.uid)
 
     @classmethod
     def create_from_dict(cls, obj_dict):
