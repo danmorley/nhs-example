@@ -878,7 +878,6 @@ class GeneralShelvePage(Page):
 
     def serve_preview(self, request, mode_name, model_name):
         request.is_preview = True
-        print('SERVE PREVIEW')
 
         if mode_name == 'json':
             Serializer = self.__class__.get_serializer()
@@ -889,7 +888,8 @@ class GeneralShelvePage(Page):
         if mode_name == 'react':
             path = self.get_url_parts(request)[2] if self.get_url_parts(request) is not None else '/home'
             context = {
-                'preview_url': '/{}{}?preview_page={}'.format(model_name, path, self.slug)
+                'preview_url': '/{}{}?is_preview'.format(model_name, path),
+
             }
             return SimpleTemplateResponse(template='preview_wrapper.html', context=context)
 
@@ -1108,7 +1108,7 @@ class RecipePage(OneYou2Page):
 
         if mode_name == 'react':
             context = {
-                'preview_url': '/oneyou{}?preview_page={}'.format(self.get_url(), self.slug)
+                'preview_url': '/oneyou{}?is_preview'.format(self.get_url()),
             }
             return SimpleTemplateResponse(template='preview_wrapper.html', context=context)
 
