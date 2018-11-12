@@ -32,9 +32,9 @@ if (params.id) dataRelease = params.id;
 if (params.cms) dataContentStoreEndpoint = params.cms;
 if (params.cmsid) dataRelease = params.cmsid;
 
-let preview_page = params.preview_page || null;
+let is_preview = 'is_preview' in params ? true : false;
 
-global.contentStore = new ContentStore(dataContentStoreEndpoint, dataSite, dataRelease, preview_page);
+global.contentStore = new ContentStore(dataContentStoreEndpoint, dataSite, dataRelease, is_preview);
 
 // Load site.json before mounting the React app.
 global.contentStore.getSite().then((site) => {

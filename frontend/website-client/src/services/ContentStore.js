@@ -1,10 +1,10 @@
 import ServerError from './ServerError';
 
-function ContentStore(contentStoreEndpoint, site, release, preview_page) {
+function ContentStore(contentStoreEndpoint, site, release, is_preview) {
   this.contentStoreEndpoint = contentStoreEndpoint;
   this.site = site;
   this.release = release;
-  this.preview_page = preview_page
+  this.is_preview = is_preview
 }
 
 ContentStore.prototype.getSite = async function() {
@@ -12,13 +12,10 @@ ContentStore.prototype.getSite = async function() {
 };
 
 ContentStore.prototype.getPage = async function(pageId) {
-  console.log("PREVIEW");
-  console.log(this.preview_page);
-  if (pageId === this.preview_page) {
-    console.log(pageId);
+  if (this.is_preview) {
+    console.log("PREVIEW");
     return await _getPreviewPage(this.contentStoreEndpoint, this.site, pageId);
-  }
-  else {
+  } else {
     return await _getPage(this.contentStoreEndpoint, this.site, this.release, pageId);
   }
 };

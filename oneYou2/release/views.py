@@ -48,8 +48,7 @@ def release_html(request, site_name):
     if release_id:
         release = Release.objects.get(uuid=release_id)
     else:
-        preview_page = request.GET.get('preview_page')
-        if preview_page:
+        if 'is_preview' in request.GET:
             release = get_latest_release(site_id)
         else:
             release = get_latest_live_release(site_id)

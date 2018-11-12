@@ -68,49 +68,7 @@ def release_view(request, site_identifier, release_uuid):
 
 
 @require_safe
-def page_list(request, site_identifier, release_uuid):
-    """The frontend shouldn't call this, iterating through release pages is not optimal"""
-    # Ideally the react client would never need to use this endpoint
-    get_site_or_404(site_identifier)
-    release = get_release_object(release_uuid)
-    if not release:
-        return JsonResponse({'message': 'Release not found'}, status=404)
-    populate_release_if_required(release)
-
-    release_pages = release.revisions.all()
-    pages = [p.revision.as_page_object() for p in release_pages]
-    serialized_page_data = OneYouPageListSerializer(pages, many=True).data
-    page_data = {
-        'meta': {
-            'total_count': len(pages)
-        },
-        'items': serialized_page_data
-    }
-    json_response = JsonResponse(page_data)
-    return json_response
-
-
-@require_safe
-def full_page_list(request, site_identifier):
-    """The frontend shouldn't call this, iterating through release pages is not optimal"""
-    # Ideally the react client would never need to use this endpoint
-    get_site_or_404(site_identifier)
-
-    pages = Page.objects.all()
-    serialized_page_data = []
-    for page in pages:
-        serialized_page_data.append(json.loads(page.to_json()))
-    page_data = {
-        'meta': {
-            'total_count': len(pages)
-        },
-        'items': serialized_page_data
-    }
-    return JsonResponse(page_data)
-
-
-@require_safe
-def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug_path=None):
+def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug_path=None, is_preview=False):
     """RETURN PAGE DETAILS IN API"""
     # Match variants, a variant's slug should end with -v and then a truncated hash of 6 characters
     variant_regex = re.compile(r'-v[a-zA-Z0-9]{6}$')
@@ -128,11 +86,14 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug_
             # TODO: Fix this, you can do this by freezing content with slug keys
             # You would then only need to get the page object for variants
             homepage = SiteSettings.objects.get(uid=site_identifier).site.root_page
-            page_pk = homepage.pk
-            if homepage.url_path != page_slug_path:
-                path = '/{}/{}/'.format(homepage.slug, unquote(page_slug_path).replace('|', '/'))
-                page = Page.objects.get(url_path=path)
-                page_pk = page.pk
+            if page_slug_path == 'home':
+                page = homepage
+                page_pk = homepage.pk
+            else:
+                if homepage.url_path != page_slug_path:
+                    path = '/{}/{}/'.format(homepage.slug, unquote(page_slug_path).replace('|', '/'))
+                    page = Page.objects.get(url_path=path)
+                    page_pk = page.pk
         except ObjectDoesNotExist:
             try:
                 #legacy to support frontend v1 call to the api using only the slug
@@ -153,56 +114,48 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug_
         not_found_msg = 'Page Not Found'
 
     get_site_or_404(site_identifier)
-    release = get_release_object(release_uuid)
-    if not release:
-        return JsonResponse({'message': 'Release not found'}, status=404)
-    populate_release_if_required(release)
 
-    if variant:
-        try:
-            experiments_content = ExperimentsContent.objects.first()
-            if experiments_content:
-                if page.specific.is_live:
-                    page_content = experiments_content.get_content_for(page_pk)
-                else:
-                    # Get parent page content
-                    print('scenario 2')
-                    page_content = release.get_content_for(page.get_parent().id)
-            else:
-                return JsonResponse({'message': 'No content for any experiment found'}, status=500)
-        except KeyError:
-            return JsonResponse({'message': not_found_msg}, status=404)
-
+    if is_preview:
+        Serializer = page.specific.__class__.get_serializer()
+        serialized_page = Serializer(instance=page.specific.get_latest_revision_as_page())
+        json_response = JsonResponse(serialized_page.data)
     else:
-        try:
-            page_content = release.get_content_for(page_pk)
-        except KeyError:
-            return JsonResponse({'message': not_found_msg}, status=404)
+        release = get_release_object(release_uuid)
+        if not release:
+            return JsonResponse({'message': 'Release not found'}, status=404)
+        populate_release_if_required(release)
 
-    json_response = JsonResponse(page_content)
-    if release.content_status == 1:
-        json_response['Cache-Control'] = 'max-age=3600'
+        if variant:
+            try:
+                experiments_content = ExperimentsContent.objects.first()
+                if experiments_content:
+                    if page.specific.is_live:
+                        page_content = experiments_content.get_content_for(page_pk)
+                    else:
+                        # Get parent page content
+                        print('scenario 2')
+                        page_content = release.get_content_for(page.get_parent().id)
+                else:
+                    return JsonResponse({'message': 'No content for any experiment found'}, status=500)
+            except KeyError:
+                return JsonResponse({'message': not_found_msg}, status=404)
+
+        else:
+            try:
+                page_content = release.get_content_for(page_pk)
+            except KeyError:
+                return JsonResponse({'message': not_found_msg}, status=404)
+
+        json_response = JsonResponse(page_content)
+        if release.content_status == 1:
+            json_response['Cache-Control'] = 'max-age=3600'
+
     return json_response
 
 
 @require_safe
-def home_page_detail(request, site_identifier, release_uuid):
-    """Because the home page lives on a hardcoded / url"""
-    # NOT SURE THIS IS USED ANYMORE
-    homepage = SiteSettings.objects.get(uid=site_identifier).site.root_page
-    return page_detail(request, site_identifier, release_uuid, page_slug_path=homepage.url_path)
-
-
-@require_safe
 def page_preview(request, site_identifier, page_slug_path=None):
-    if page_slug_path == 'home':
-        page_slug_path = SiteSettings.objects.get(uid=site_identifier).site.root_page.slug
-    site = Site.objects.get(site_name=site_identifier)
-    pages = Page.objects.filter(slug=page_slug_path)
-    page = [p for p in pages if p.get_site().pk == site.id][0]
-    Serializer = self.__class__.get_serializer()
-    serialized_page = Serializer(instance=page.specific.get_latest_revision_as_page())
-    return JsonResponse(serialized_page.data)
+    return page_detail(request, site_identifier, None, None, page_slug_path, True)
 
 
 @require_safe

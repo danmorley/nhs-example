@@ -238,7 +238,7 @@ class GeneralShelvePage(Page):
         if mode_name == 'react':
             path = self.get_url_parts(request)[2] if self.get_url_parts(request) is not None else '/home'
             context = {
-                'preview_url': '/{}{}?preview_page={}'.format(model_name, path, self.slug)
+                'preview_url': '/{}{}?is_preview'.format(model_name, path)
             }
             return SimpleTemplateResponse(template='preview_wrapper.html', context=context)
 
