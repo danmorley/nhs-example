@@ -998,7 +998,8 @@ class OneYou2Page(GeneralShelvePage):
         return self
 
     def serve_preview(self, request, mode_name):
-        return super(OneYou2Page, self).serve_preview(request, mode_name, 'oneyou')
+        site_setting = SiteSettings.objects.get(site_id=self.get_site().id)
+        return super(OneYou2Page, self).serve_preview(request, mode_name, site_setting.uid)
 
     @classmethod
     def create_from_dict(cls, obj_dict):
