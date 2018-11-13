@@ -299,7 +299,16 @@ def edit(request, page_id):
             )
             has_unsaved_changes = True
     else:
-        form = form_class(instance=page, parent_page=parent)
+        edit_handler = page_class.get_edit_handler()
+        form_class = edit_handler.get_form_class()
+
+        class CustomPageForm(form_class):
+            def __init__(self, *args, **kwargs):
+                from release.models import Release
+                super(CustomPageForm, self).__init__(*args, **kwargs)
+                self.fields['release'].queryset = self.fields['release'].queryset.filter(site=self.instance.get_site())
+
+        form = CustomPageForm(instance=page, parent_page=parent)
         edit_handler = edit_handler.bind_to_instance(instance=page, form=form, request=request)
         has_unsaved_changes = False
 

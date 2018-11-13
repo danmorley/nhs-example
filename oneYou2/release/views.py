@@ -154,7 +154,6 @@ def open_releases(request):
     return JsonResponse({'releases': response_obj})
 
 
-
 def release_view(request, release_id):
     release, live_release = None, None
     error_msg = ''
