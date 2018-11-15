@@ -81,6 +81,8 @@ class GeneralShelvePage(Page):
         related_name='%(class)s_pages',
         null=True,
         on_delete=models.SET_NULL)
+    
+    hide_from_breadcrumb = models.BooleanField(default=False)
 
     @property
     def og_image(self):
@@ -127,10 +129,18 @@ class GeneralShelvePage(Page):
         for ancestor in ancestors:
             # If root page it doesn't have link url
             try:
-                breadcrumbs.append({'name': ancestor.specific.seo_title or ancestor.specific.title , 'url': ancestor.specific.link_url})
+                breadcrumbs.append({
+                    'name': ancestor.specific.seo_title or ancestor.specific.title ,
+                    'url': ancestor.specific.link_url,
+                    'visible': not ancestor.specific.hide_from_breadcrumb,
+                })
             except AttributeError:
                 site_name = SiteSettings.objects.get(site_id=self.get_site().id).uid
-                breadcrumbs.append({'name': ancestor.specific.seo_title or ancestor.specific.title, 'url': '/' + site_name})
+                breadcrumbs.append({
+                    'name': ancestor.specific.seo_title or ancestor.specific.title,
+                    'url': '/' + site_name,
+                    'visible': True,
+                })
         return breadcrumbs
 
     content_panels = Page.content_panels + [
@@ -182,14 +192,23 @@ class GeneralShelvePage(Page):
     ]
 
     promote_panels = [
-        FieldPanel('slug'),
+        MultiFieldPanel(
+            [
+                FieldPanel('slug'),
+                FieldPanel('seo_title'),
+                FieldPanel('show_in_menus'),
+                FieldPanel('search_description'),
+                FieldPanel('hide_from_breadcrumb'),
+            ],
+            heading='Common page configuration',
+        )
     ]
 
     edit_handler = TabbedInterface([
         ObjectList(content_panels, heading='Content'),
         ObjectList(info_content_panels, heading='Notes'),
         ObjectList(meta_content_panels, heading='Meta'),
-        ObjectList(Page.promote_panels, heading='Settings'),
+        ObjectList(promote_panels, heading='Settings'),
     ])
 
     api_fields = ['body', 'path', 'depth', 'numchild', 'live', 'page_theme']
