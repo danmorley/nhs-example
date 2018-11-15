@@ -123,17 +123,6 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug_
         else:
             content_to_serialize = page.specific.get_latest_revision_as_page()
 
-    #         pages = Page.objects.filter(slug=page_slug)
-    #     page = pages.first()
-    #     if page_revision == 'latest':
-    #         print('LATEST')
-    #         serialized_page = OneYouPageSerializer(instance=page.specific.get_latest_revision_as_page())
-    #     else:
-    #         revision = PageRevision.objects.get(id=page_revision)
-    #         serialized_page = OneYouPageSerializer(instance=revision.as_page_object())
-
-    # return JsonResponse(serialized_page.data)
-
         Serializer = page.specific.__class__.get_serializer()
         serialized_page = Serializer(instance=content_to_serialize)
         json_response = JsonResponse(serialized_page.data)
