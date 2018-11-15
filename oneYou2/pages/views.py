@@ -128,8 +128,6 @@ def copy(request, page_id):
         'next': next_url,
     })
 
-
-<<<<<<< HEAD
 def edit(request, page_id):
     real_page_record = get_object_or_404(Page, id=page_id)
     latest_revision = real_page_record.get_latest_revision()
@@ -343,7 +341,6 @@ def edit(request, page_id):
         'has_unsaved_changes': has_unsaved_changes,
     })
 
-=======
 def revisions_view(request, page_id, revision_id):
     page = get_object_or_404(Page, id=page_id).specific
     revision = get_object_or_404(page.revisions, id=revision_id)
@@ -351,4 +348,3 @@ def revisions_view(request, page_id, revision_id):
 
     print("PAGES revisions_view", revision_id)
     return revision_page.serve_preview(page.dummy_request(request), page.default_preview_mode, revision_id)
->>>>>>> 2a0c12f8... Allow page revisions to be previewed.

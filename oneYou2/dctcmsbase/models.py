@@ -237,9 +237,8 @@ class GeneralShelvePage(Page):
 
         return revision
 
-    def serve_preview(self, request, mode_name, site_name):
+    def serve_preview(self, request, mode_name, site_name, revision_id='latest'):
         request.is_preview = True
-        print('SERVE PREVIEW')
 
         if mode_name == 'json':
             Serializer = self.__class__.get_serializer()
@@ -250,7 +249,7 @@ class GeneralShelvePage(Page):
         if mode_name == 'react':
             path = self.get_url_parts(request)[2] if self.get_url_parts(request) is not None else '/home'
             context = {
-                'preview_url': '/{}{}?is_preview'.format(site_name, path)
+                'preview_url': '/{}{}?is_preview&revision={}'.format(site_name, path, revision_id)
             }
             return SimpleTemplateResponse(template='preview_wrapper.html', context=context)
 

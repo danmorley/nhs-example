@@ -68,7 +68,7 @@ async function _getPage(contentStoreEndpoint, site, release, pageId) {
 }
 
 async function _getPreviewPage(contentStoreEndpoint, site, pageId, previewRevision) {
-  let pageUrl = `${contentStoreEndpoint}/preview/pages/${pageId}/revisions/${previewRevision}/`;
+  let pageUrl = `${contentStoreEndpoint}/preview/sites/${site}/pages/${pageId}/revisions/${previewRevision}/`;
 
   try {
     const response = await _getRequest(pageUrl);
