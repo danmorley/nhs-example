@@ -55,7 +55,6 @@ INSTALLED_APPS = [
     'wagtail.contrib.modeladmin',
     'wagtailmedia',
 
-
     'modelcluster',
     'taggit',
     'wagtailsnippetscopy',

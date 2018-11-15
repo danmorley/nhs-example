@@ -81,23 +81,36 @@ class StandardPageLayout extends Component {
     );
   }
 
-  pageMetaData(page, site) {
-    // use breadcrumb in reverse oder to generate page tile
-    let pageTitles = null;
-    if( page.meta.breadcrumbs ){
-      pageTitles = page.meta.breadcrumbs.map((item) => item.name).splice(1).reverse().join(' | ');
+  getSEOTitle(page, site) {
+    if (UrlUtils.isSiteHomePage()) {
+      return site.site_name;
     } else {
-      console.log('No Breadcrumbs from API');
+      const documentTitle = `${page.meta.seo_title || page.title}`;
+      let pageTitles = [];
+      // use breadcrumb in reverse oder to generate page tile
+      if( page.meta.breadcrumbs ){
+        pageTitles = page.meta.breadcrumbs.map((item) => item.name).splice(1).reverse();
+      } else {
+        console.log('No Breadcrumbs from API');
+      }
+      pageTitles.splice(0, 0, documentTitle);
+      pageTitles.push(site.site_name);
+      while(pageTitles.join(' | ').length > 60 && pageTitles.length > 2){
+        pageTitles.splice(-2, 1)
+      }
+      return pageTitles.join(' | ');
     }
-    const documentTitle = (UrlUtils.isSiteHomePage())? site.site_name : `${page.meta.seo_title || page.title} | ${pageTitles} | ${site.site_name}`;
+  }
 
+  pageMetaData(page, site) {
+    const SEOTitle = this.getSEOTitle(page, site)
     return {
-      title: documentTitle,
+      title: SEOTitle,
       breadcrumbs: page.meta.breadcrumbs,
       description: page.meta.search_description,
       meta: {
         property: {
-          'og:title': documentTitle,
+          'og:title': SEOTitle,
           'og:description': page.meta.og_description,
           'og:url': page.meta.og_url || window.location.href,
           'og:image': page.meta.og_image,
@@ -110,7 +123,7 @@ class StandardPageLayout extends Component {
           'twitter:url': page.meta.twitter_url || window.location.href,
           'twitter:card': page.meta.twitter_card,
           'twitter:site': page.meta.twitter_site,
-          'twitter:title': documentTitle,
+          'twitter:title': SEOTitle,
           'twitter:description': page.meta.twitter_description,
           'twitter:image': page.meta.twitter_image
         }

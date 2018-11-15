@@ -13,7 +13,9 @@ class Breadcrumb extends Component {
       // do nothing;
     }
     else {
-      links = breadcrumbs.map((item) => {
+      links = breadcrumbs.filter(function (item) {
+        return item.visible;
+      }).map((item) => {
         return (
           <li key={item.url} className="breadcrumbs__item">
             <Link to={item.url} key={item.id} className="breadcrumbs__link">{item.name}</Link>

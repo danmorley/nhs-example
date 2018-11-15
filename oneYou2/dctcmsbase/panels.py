@@ -16,7 +16,7 @@ IMAGE_PANEL_VARIANTS = (
 IMAGE_TEASER_VARIANT_CHOICES = (
     ('no_bg', 'No Background'),
     ('primary_background', 'Primary colour background'),
-    ('secondary_background', 'Primary colour background'),
+    ('secondary_background', 'Secondary colour background'),
 )
 
 IMAGE_TEASER_LAYOUT_CHOICES = (
