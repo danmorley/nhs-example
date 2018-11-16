@@ -1,22 +1,20 @@
-import json
-
-import re
 from urllib.parse import unquote
+import json
+import re
+
+from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
 from django.template.response import TemplateResponse
 from django.views.decorators.http import require_safe
 
-from oneYou2.serializers import SiteSerializer
-
-from release.utils import get_latest_live_release, get_release_object, populate_release_if_required
-
-from pages.serializers import OneYouPageListSerializer
-
 from wagtail.core.models import Page, PageRevision, Site
 
 from experiments.models import ExperimentsContent
 from home.models import SiteSettings
+from oneYou2.serializers import SiteSerializer
+from pages.serializers import OneYouPageListSerializer
+from release.utils import get_latest_live_release, get_release_object, populate_release_if_required
 
 from .utils import get_site_or_404
 
@@ -161,6 +159,7 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug_
 
 
 @require_safe
+@login_required(login_url='/admin/login/')
 def page_preview(request, site_identifier, page_slug_path=None, page_revision=None):
     return page_detail(request, site_identifier, None, None, page_slug_path, True, page_revision)
 
