@@ -81,20 +81,19 @@ class StandardPageLayout extends Component {
     );
   }
 
-  getSEOTitle(page, site) {
-    if (UrlUtils.isSiteHomePage()) {
-      return site.site_name;
+  getSEOTitle(isSiteHomePage, title, site_name, breadcrumbs) {
+    if (isSiteHomePage || !title) {
+      return site_name;
     } else {
-      const documentTitle = `${page.meta.seo_title || page.title}`;
       let pageTitles = [];
       // use breadcrumb in reverse oder to generate page tile
-      if( page.meta.breadcrumbs ){
-        pageTitles = page.meta.breadcrumbs.map((item) => item.name).splice(1).reverse();
+      if( breadcrumbs ){
+        pageTitles = breadcrumbs.map((item) => item.name).splice(1).reverse();
       } else {
         console.log('No Breadcrumbs from API');
       }
-      pageTitles.splice(0, 0, documentTitle);
-      pageTitles.push(site.site_name);
+      pageTitles.splice(0, 0, title);
+      pageTitles.push(site_name);
       while(pageTitles.join(' | ').length > 60 && pageTitles.length > 2){
         pageTitles.splice(-2, 1)
       }
@@ -103,7 +102,8 @@ class StandardPageLayout extends Component {
   }
 
   pageMetaData(page, site) {
-    const SEOTitle = this.getSEOTitle(page, site)
+    const title = `${page.meta.seo_title || page.title}`;
+    const SEOTitle = this.getSEOTitle(UrlUtils.isSiteHomePage(), title, site.site_name, page.meta.breadcrumbs);
     return {
       title: SEOTitle,
       breadcrumbs: page.meta.breadcrumbs,
