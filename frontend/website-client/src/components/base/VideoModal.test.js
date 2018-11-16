@@ -4,9 +4,14 @@ import VideoModal from './VideoModal';
 import BrightcoveVideo from './BrightcoveVideo';
 import WirewaxVideo from './WirewaxVideo';
 
+beforeEach(function(){
+  spyOn(console, 'error');
+});
+
 it('renders without crashing with no content', () => {
     const div = document.createElement('div');
     ReactDOM.render(<VideoModal />, div);
+    expect(console.error).toHaveBeenCalled();
 });
 
 it('renders without crashing with content', () => {

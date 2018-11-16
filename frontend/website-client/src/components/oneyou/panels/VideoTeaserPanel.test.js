@@ -5,18 +5,23 @@ import { shallow } from 'enzyme';
 
 describe('VideoTeaserPanel', () => {
   let content = {
-    image: 'test',
+    image: 'test'
   };
 
   let content_update = {
-    image: 'update',
+    image: 'update'
   };
 
   let classNamePrefix = 'test';
 
+  beforeEach(function(){
+    spyOn(console, 'error');
+  });
+
   it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<VideoTeaserPanel content={content} classNamePrefix={classNamePrefix}/>, div);
+    expect(console.error).toHaveBeenCalled();
   });
 
   it('unmounts without crashing', () => {

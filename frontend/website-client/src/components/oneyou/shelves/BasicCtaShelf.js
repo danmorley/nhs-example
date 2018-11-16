@@ -97,6 +97,10 @@ class BasicCtaShelf extends Component {
       content.cta = content.banner.cta;
     }
 
+    if (content.panel) {
+      content.cta = content.cta || content.panel.cta;
+    }
+
     let metaVariant = content.meta_variant || variant;
     let metaLayout = content.meta_layout || layout;
     let gradient = content.meta_gradient || false;
@@ -106,7 +110,6 @@ class BasicCtaShelf extends Component {
       this.state.backgroundImageStyle : backgroundColourShelfStyle;
 
     let headingTagName = (classNamePrefix === 'page-heading-shelf') ? 'h1' : 'h2';
-    let cta = content.cta || content.panel.cta || content.promo.cta;
 
     if (metaLayout === 'image_on_left') {
       return (
@@ -118,7 +121,7 @@ class BasicCtaShelf extends Component {
               </div>
               <div className="shelf__col col">
                 {this.renderHeadingBody(content, headingTagName)}
-                {this.renderCta(cta)}
+                {this.renderCta(content.cta)}
               </div>
             </div>
           </div>
@@ -131,7 +134,7 @@ class BasicCtaShelf extends Component {
             <div className="row">
               <div className="shelf__col col">
                 {this.renderHeadingBody(content, headingTagName)}
-                {this.renderCta(cta)}
+                {this.renderCta(content.cta)}
               </div>
               <div className="shelf__col col">
                 {this.renderImage(this.state.image)}
@@ -146,7 +149,7 @@ class BasicCtaShelf extends Component {
           <div className="shelf__container container" style={shelfStyle}>
             <div className="row">
               <div className="shelf__col col col-vertical-center col-shrink-to-fit">
-                {this.renderCta(cta)}
+                {this.renderCta(content.cta)}
               </div>
               <div className="shelf__col col col-vertical-center md-content-right">
                 {this.renderHeadingBody(content, headingTagName)}
@@ -164,7 +167,7 @@ class BasicCtaShelf extends Component {
                 {this.renderHeadingBody(content, headingTagName)}
               </div>
               <div className="shelf__col col col-vertical-center md-content-right col-shrink-to-fit">
-                {this.renderCta(cta)}
+                {this.renderCta(content.cta)}
               </div>
             </div>
           </div>
@@ -178,7 +181,7 @@ class BasicCtaShelf extends Component {
               <div className="row">
                 <div className="shelf__col col-10 col-sm-10 col-md-7">
                   {this.renderHeadingBody(content, headingTagName)}
-                  {this.renderCta(cta)}
+                  {this.renderCta(content.cta)}
                 </div>
               </div>
             </div>
@@ -195,7 +198,7 @@ class BasicCtaShelf extends Component {
                   {this.renderHeadingBody(content, headingTagName)}
                 </div>
                 <div className="shelf__col col col-vertical-center md-content-right">
-                  {this.renderCta(cta)}
+                  {this.renderCta(content.cta)}
                 </div>
               </div>
             </div>
@@ -222,7 +225,7 @@ class BasicCtaShelf extends Component {
             <div className="row">
               <div className="shelf__col col-12 col-vertical-center">
                 {this.renderHeadingBody(content, headingTagName)}
-                {this.renderCta(cta)}
+                {this.renderCta(content.cta)}
               </div>
             </div>
           </div>
