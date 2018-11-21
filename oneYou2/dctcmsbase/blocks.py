@@ -56,9 +56,9 @@ class ImageBlock(blocks.StructBlock):
     # Convert value to plain dict.
     def get_api_representation(self, value, context=None):
         result = blocks.StructBlock.get_api_representation(self, value, context)
-        image = result['image']
 
-        if image:
+        if 'image' in result:
+            image = result['image']
             image['meta_variant'] = result['meta_variant']
 
             if image.get('renditions'):
@@ -145,7 +145,7 @@ class ItemPageBlock(blocks.PageChooserBlock):
 
             return {'id': value.id,
                     'slug': value.slug,
-                    'relative_path': '/{}{}'.format(site_name.lower(), url_parts[2])
+                    'relative_path': '/{}{}'.format(site_name, url_parts[2])
                     }
         else:
             return {}
@@ -184,9 +184,9 @@ class DocumentDownloadBlock(blocks.StructBlock):
 
     def get_api_representation(self, value, context=None):
         result = blocks.StructBlock.get_api_representation(self, value, context)
-        document_id = result['document']
 
-        if document_id:
+        if 'document' in result:
+            document_id = result['document']
             from wagtail.documents.models import Document
             result['document'] = Document.objects.get(id=document_id).file.url
 

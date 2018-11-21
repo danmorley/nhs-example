@@ -96,9 +96,9 @@ class AudioTeaserPanel(TeaserPanel):
 
     def get_api_representation(self, value, context=None):
         result = blocks.StructBlock.get_api_representation(self, value, context)
-        audio_id = result['audio']
 
-        if audio_id:
+        if 'audio' in result:
+            audio_id = result['audio']
             from wagtailmedia.models import Media
             result['audio'] = Media.objects.get(id=audio_id).file.url
 

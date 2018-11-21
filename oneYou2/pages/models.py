@@ -1017,7 +1017,7 @@ class OneYou2Page(GeneralShelvePage):
         return self
 
     def serve_preview(self, request, mode_name):
-        site_name = SiteSettings.objects.get(site=self.get_site())
+        site_name = SiteSettings.objects.get(site=self.get_site()).uid
         return super(OneYou2Page, self).serve_preview(request, mode_name, site_name)
 
     @classmethod
