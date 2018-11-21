@@ -80,15 +80,12 @@ class ImageBlock(blocks.StructBlock):
 
     def get_api_representation(self, value, context=None):
         # Convert value to plain dict.
-
-        image_meta = context['image_meta']
-
         result = blocks.StructBlock.get_api_representation(self, value, context)
 
         # If image supplied, filter renditions list to leave just two renditions, one for
         # desktop and one for mobile.
-        if 'image' in result and image_meta:
-
+        if 'image' in result and 'image_meta' in context:
+            image_meta = context['image_meta']
             image = result['image']
             image['layout'] = result['meta_layout']
             if image:
