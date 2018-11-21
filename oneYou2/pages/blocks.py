@@ -197,15 +197,11 @@ class IDBlock(blocks.CharBlock):
 class MenuItemPageBlock(blocks.PageChooserBlock):
     def get_api_representation(self, value, context=None):
         if value and value.get_site():
-            site = value.get_site()
-            site_settings = SiteSettings.objects.get(site=site)
-            site_name = site_settings.uid
-
+            site_name = SiteSettings.objects.get(site=value.get_site()).uid
             url_parts = value.get_url_parts()
-
             return {'id': value.id,
                     'slug': value.slug,
-                    'relative_path': '/{}{}'.format(site_name.lower(), url_parts[2])
+                    'relative_path': '/{}{}'.format(site_name, url_parts[2])
                     }
         else:
             return {}

@@ -73,8 +73,8 @@ class SexHealthPage(GeneralShelvePage, Tracking, Social):
         return self
 
     def serve_preview(self, request, mode_name):
-        site_setting = SiteSettings.objects.get(site_id=self.get_site().id)
-        return super(SexHealthPage, self).serve_preview(request, mode_name, site_setting.uid)
+        site_name = SiteSettings.objects.get(site=self.get_site()).uid
+        return super(SexHealthPage, self).serve_preview(request, mode_name, site_name)
 
     @classmethod
     def create_from_dict(cls, obj_dict):

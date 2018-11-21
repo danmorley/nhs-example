@@ -140,10 +140,7 @@ class BannerChooserBlock(SnippetChooserBlock):
 class ItemPageBlock(blocks.PageChooserBlock):
     def get_api_representation(self, value, context=None):
         if value:
-            site = value.get_site()
-            site_settings = SiteSettings.objects.get(site=site)
-            site_name = site_settings.uid
-
+            site_name = SiteSettings.objects.get(site=value.get_site()).uid
             url_parts = value.get_url_parts()
 
             return {'id': value.id,

@@ -44,9 +44,9 @@ def process_inline_hyperlinks(field):
     a_tags = soup.findAll('a', {'linktype': 'page'})
     for a_tag in a_tags:
         page = Page.objects.get(id=a_tag['id'])
-        site_settings = SiteSettings.objects.get(site=page.get_site())
+        site_name = SiteSettings.objects.get(site=page.get_site()).uid
         url_parts = page.get_url_parts()
-        a_tag['href'] = '/{}{}'.format(site_settings.uid.lower(), url_parts[2])
+        a_tag['href'] = '/{}{}'.format(site_name, url_parts[2])
     return html.unescape(str(soup)).replace(';=', '=')
 
 
