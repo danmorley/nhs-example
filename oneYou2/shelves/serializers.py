@@ -4,6 +4,8 @@ from rest_framework import serializers
 from rest_framework.serializers import HyperlinkedModelSerializer
 from shelves.models import PromoShelf, BannerShelf, AppTeaser, RecipeTeaser, ActionShelf
 
+from home.models import SiteSettings
+
 
 # TODO: Remove this, use the one in image.serializers. This exists due to circular imports.
 class ImageSerializer(serializers.Serializer):
@@ -33,9 +35,9 @@ class CTAPageSerializer(serializers.Serializer):
     def to_representation(self, value):
         serialized_data = super(CTAPageSerializer, self).to_representation(value)
         if value:
-            site_name = value.get_site().site_name
+            site_name = SiteSettings.objects.get(site=value.get_site()).uid
             url_parts = value.get_url_parts()
-            serialized_data['relative_path'] = '/{}{}'.format(site_name.lower(), url_parts[2])
+            serialized_data['relative_path'] = '/{}{}'.format(site_name, url_parts[2])
 
         return serialized_data
 

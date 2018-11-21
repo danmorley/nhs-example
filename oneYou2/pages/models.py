@@ -746,7 +746,7 @@ class GeneralShelvePage(Page):
     # @property
     # def link_url(self):
     #     # TODO: This could potentially use some base page methods
-    #     site_name = SiteSettings.objects.get(site_id=self.get_site().id).uid
+    #     site_name = SiteSettings.objects.get(site=self.get_site()).uid
     #     return '/' + site_name + self.url_path
 
     @property
@@ -755,7 +755,7 @@ class GeneralShelvePage(Page):
         import re
         url_path = self.url_path
         # Remove homepage slug from url_path
-        site_settings = SiteSettings.objects.get(site_id=self.get_site().id)
+        site_settings = SiteSettings.objects.get(site=self.get_site())
         homepage_slug_path = site_settings.site.root_page.slug
         regexp = r'/{0}(/.*)'.format(homepage_slug_path)
         matchObj = re.match(regexp, self.url_path)
@@ -776,7 +776,7 @@ class GeneralShelvePage(Page):
                     'visible': not ancestor.specific.hide_from_breadcrumb,
                 })
             except AttributeError:
-                site_name = SiteSettings.objects.get(site_id=self.get_site().id).uid
+                site_name = SiteSettings.objects.get(site=self.get_site()).uid
                 breadcrumbs.append({
                     'name': ancestor.specific.seo_title or ancestor.specific.title,
                     'url': '/' + site_name,
@@ -1017,8 +1017,8 @@ class OneYou2Page(GeneralShelvePage):
         return self
 
     def serve_preview(self, request, mode_name):
-        site_setting = SiteSettings.objects.get(site_id=self.get_site().id)
-        return super(OneYou2Page, self).serve_preview(request, mode_name, site_setting.uid)
+        site_name = SiteSettings.objects.get(site=self.get_site())
+        return super(OneYou2Page, self).serve_preview(request, mode_name, site_name)
 
     @classmethod
     def create_from_dict(cls, obj_dict):
