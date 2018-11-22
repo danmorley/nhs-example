@@ -3,10 +3,22 @@ import PropTypes from 'prop-types';
 
 import Text from '../../../base/Text';
 import ImageUtils from '../../../base/panels/ImageUtils';
+import VideoModal from '../../../base/VideoModal';
+
 import './recipe-block.css';
 
 
 class RecipeBlock extends Component {
+
+  constructor(props) {
+    super(props);
+    this.video = React.createRef();
+  }
+
+  triggerModal = () => {
+    this.video.current.openModal();
+  }
+
   render() {
     const { recipe } = this.props;
 
@@ -19,14 +31,21 @@ class RecipeBlock extends Component {
     const deviceImage = ImageUtils.deviceImage(reformattedImage);
     const bkgImage =  ImageUtils.backgroundImageStyle(deviceImage);
 
-    const recipeTags = recipe.tags.split(',');
-    const recipeItems = recipeTags.map((item, i) =>
+    const recipeItems = recipe.tags ? recipe.tags.split(',').recipeTags.map((item, i) =>
       <li className="recipe__tags__item" key={i}>{item}</li>
-    );
+    ) : null;
+
+    const playButtonSvg = require(`!raw-loader!../../../../assets/svg/OneYou-play.svg`);
 
     return (
       <div className="recipe">
-        <div className="recipe__banner container" style={bkgImage}></div>
+        {recipe.video_id && <VideoModal video={recipe.video_id} host={recipe.host} ref={this.video}></VideoModal>}
+        <div className="recipe__banner container" style={bkgImage}>
+          <div>
+            {recipe.header_gradient == true && <div className="gradient"></div>}
+            {recipe.video_id && <span className="video_play_button" dangerouslySetInnerHTML={{__html: playButtonSvg}} onClick={this.triggerModal.bind(this)}/>}
+          </div>
+        </div>
         <div className ="recipe__block container">
           <section className="recipe__intro">
             <div className="recipe__intro__col-1">

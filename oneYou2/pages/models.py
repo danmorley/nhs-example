@@ -1068,17 +1068,28 @@ class RecipePage(OneYou2Page):
     ingredients_list = RichTextField(null=True, blank=True)
     instructions = RichTextField(null=True, blank=True)
 
+    header_gradient = models.BooleanField(default=False)
+    video_id = models.CharField(null=True, blank=True, max_length=50)
+    host = models.CharField(choices=VIDEO_HOSTS, max_length=15, default='brightcove', null=True, blank=True)
+
     content_panels = [
         FieldPanel('title'),
         ImageChooserPanel('image'),
+        FieldPanel('header_gradient'),
         FieldPanel('recipe_name'),
+        MultiFieldPanel(
+            [
+                FieldPanel('video_id'),
+                FieldPanel('host'),
+            ],
+            heading='Popup Header Video',
+        ),
         FieldPanel('tags'),
         FieldPanel('serves'),
         FieldPanel('preparation_time'),
         FieldPanel('difficulty'),
         FieldPanel('ingredients_list'),
         FieldPanel('instructions'),
-        FieldPanel('body'),
         FieldPanel('release'),
         SnippetChooserPanel('theme'),
     ]
@@ -1118,21 +1129,7 @@ class RecipePage(OneYou2Page):
         return self
 
     def serve_preview(self, request, mode_name):
-        request.is_preview = True
-
-        if mode_name == 'json':
-            Serializer = self.__class__.get_serializer()
-            latest_revision_as_page = self.get_latest_revision_as_page()
-            serialized_page = Serializer(instance=latest_revision_as_page)
-            return JsonResponse(serialized_page.data)
-
-        if mode_name == 'react':
-            context = {
-                'preview_url': '/oneyou{}?is_preview'.format(self.get_url()),
-            }
-            return SimpleTemplateResponse(template='preview_wrapper.html', context=context)
-
-        return self.serve(request)
+        return super(RecipePage, self).serve_preview(request, mode_name)
 
 
 # Orderables
