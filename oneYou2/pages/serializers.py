@@ -147,7 +147,10 @@ class RecipePageSerializer(serializers.ModelSerializer):
             'difficulty',
             'ingredients_list',
             'instructions',
-            'page_theme'
+            'page_theme',
+            'video_id',
+            'host',
+            'header_gradient',
         )
 
         meta_fields = (

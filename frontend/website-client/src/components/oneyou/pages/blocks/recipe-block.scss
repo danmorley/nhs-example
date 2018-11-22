@@ -8,12 +8,38 @@
   background-size: cover;
   background-position: 50%;
   margin-bottom: 1em;
+  position: relative;
+
+  .gradient {
+    width:100%;
+    content:'';
+    display:block;
+    position:absolute;
+    top:0;
+    left:0;
+    background: linear-gradient(90deg, #000000 0%, rgba(0,164,166,0) 100%);
+    opacity: 0.4;
+    height:100%;
+  }
   
   @include media-breakpoint-up(sm) {
       min-height: 300px;
       margin-bottom: 1.5em;
   }
+
+  .video_play_button {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 110px;
+    width: 110px;
+    cursor: pointer;
+  }
 }
+
+
 
 .recipe__intro {
   

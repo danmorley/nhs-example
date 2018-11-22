@@ -12,10 +12,10 @@ services:
     environment:
       HAY_DEBUG: "True"
       DB_NAME: "${DB_NAME:-master}"
-      DB_HOST: "db"
-      DB_PORT: "1433"
-      DB_USER: "sa"
-      DB_PASSWORD: "msSQL_password"
+      DB_HOST: "${DB_HOST}"
+      DB_PORT: "${DB_PORT}"
+      DB_USER: "${DB_USER}"
+      DB_PASSWORD: "${DB_PASSWORD}"
       SITE_ENV: 'Live'
       AZURE_ACCOUNT_NAME: ${AZURE_ACCOUNT_NAME}
       AZURE_ACCOUNT_KEY: ${AZURE_ACCOUNT_KEY}
