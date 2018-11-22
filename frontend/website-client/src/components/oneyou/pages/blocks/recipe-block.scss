@@ -10,6 +10,10 @@
   margin-bottom: 1em;
   position: relative;
 
+  &.clickable {
+    cursor: pointer;
+  }
+
   .gradient {
     width:100%;
     content:'';
@@ -35,11 +39,8 @@
     transform: translate(-50%, -50%);
     height: 110px;
     width: 110px;
-    cursor: pointer;
   }
 }
-
-
 
 .recipe__intro {
   

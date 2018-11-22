@@ -37,13 +37,23 @@ class RecipeBlock extends Component {
 
     const playButtonSvg = require(`!raw-loader!../../../../assets/svg/OneYou-play.svg`);
 
+    let bannerClassNames = 'recipe__banner container';
+    let bannerAttr = {};
+
+    if (recipe.video_id) {
+      bannerAttr = {
+        onClick: this.triggerModal.bind(this)
+      }
+      bannerClassNames += ' clickable'
+    }
+
     return (
       <div className="recipe">
         {recipe.video_id && <VideoModal video={recipe.video_id} host={recipe.host} ref={this.video}></VideoModal>}
-        <div className="recipe__banner container" style={bkgImage}>
+        <div className={bannerClassNames} style={bkgImage} {...bannerAttr} >
           <div>
             {recipe.header_gradient == true && <div className="gradient"></div>}
-            {recipe.video_id && <span className="video_play_button" dangerouslySetInnerHTML={{__html: playButtonSvg}} onClick={this.triggerModal.bind(this)}/>}
+            {recipe.video_id && <span className="video_play_button" dangerouslySetInnerHTML={{__html: playButtonSvg}} />}
           </div>
         </div>
         <div className ="recipe__block container">
