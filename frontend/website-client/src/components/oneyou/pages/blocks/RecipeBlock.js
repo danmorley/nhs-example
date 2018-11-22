@@ -31,7 +31,7 @@ class RecipeBlock extends Component {
     const deviceImage = ImageUtils.deviceImage(reformattedImage);
     const bkgImage =  ImageUtils.backgroundImageStyle(deviceImage);
 
-    const recipeItems = recipe.tags ? recipe.tags.split(',').recipeTags.map((item, i) =>
+    const recipeItems = recipe.tags ? recipe.tags.split(',').map((item, i) =>
       <li className="recipe__tags__item" key={i}>{item}</li>
     ) : null;
 
