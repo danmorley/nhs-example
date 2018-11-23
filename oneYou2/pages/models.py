@@ -899,7 +899,7 @@ class GeneralShelvePage(Page):
             except Release.DoesNotExist:
                 pass
 
-    def serve_preview(self, request, mode_name, model_name):
+    def serve_preview(self, request, mode_name, model_name, revision_id='latest'):
         request.is_preview = True
 
         if mode_name == 'json':
@@ -911,8 +911,7 @@ class GeneralShelvePage(Page):
         if mode_name == 'react':
             path = self.get_url_parts(request)[2] if self.get_url_parts(request) is not None else '/home'
             context = {
-                'preview_url': '/{}{}?is_preview'.format(model_name, path),
-
+                'preview_url': '/{}{}?is_preview&revision={}'.format(model_name, path, revision_id)
             }
             return SimpleTemplateResponse(template='preview_wrapper.html', context=context)
 
@@ -1020,9 +1019,10 @@ class OneYou2Page(GeneralShelvePage):
                 setattr(self, key, value)
         return self
 
-    def serve_preview(self, request, mode_name):
+    def serve_preview(self, request, mode_name, revision_id='latest'):
         site_name = SiteSettings.objects.get(site=self.get_site()).uid
-        return super(OneYou2Page, self).serve_preview(request, mode_name, site_name)
+        return super(OneYou2Page, self).serve_preview(request, mode_name, site_name, revision_id)
+
 
     @classmethod
     def create_from_dict(cls, obj_dict):
@@ -1132,8 +1132,8 @@ class RecipePage(OneYou2Page):
 
         return self
 
-    def serve_preview(self, request, mode_name):
-        return super(RecipePage, self).serve_preview(request, mode_name)
+    def serve_preview(self, request, mode_name, revision_id='latest'):
+        return super(RecipePage, self).serve_preview(request, mode_name, revision_id)
 
 
 # Orderables

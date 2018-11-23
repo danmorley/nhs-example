@@ -78,7 +78,7 @@ li a:hover:not(.active) {
 <!--</ul>-->
 
 <div id="content">
-    <iframe width="100%" height="100%" frameborder="0" src="{{ preview_url }}"></iframe>
+    <iframe width="100%" height="100%" frameborder="0" src="{% autoescape off %}{{ preview_url }}{% endautoescape %}"></iframe>
 </div>
 
 </body>

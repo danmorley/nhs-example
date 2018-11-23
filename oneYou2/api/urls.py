@@ -5,7 +5,7 @@ from release import views as release_views
 
 app_name = 'react_api'
 urlpatterns = [
-    url(r'^preview/sites/(?P<site_identifier>[\w\-]+)/pages/(?P<page_slug_path>[\w|\W]+)/$',
+    url(r'^preview/sites/(?P<site_identifier>[\w\-]+)/pages/(?P<page_slug_path>[\w|\W]+)/revisions/(?P<page_revision>[\w\-]+)/$',
         views.page_preview,
         name='page-preview'),
 
