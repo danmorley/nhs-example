@@ -29,14 +29,14 @@ class SimplePageHeadingShelf extends Component {
     let metaVariant = content.meta_variant || variant;
     // let metaLayout = content.meta_layout || layout;
 
-    const parentBreadcrumb = PageUtils.parentBreadcrumbForPage(context.page);
+    const parentBreadcrumb = context.page && context.page.meta ? PageUtils.parentBreadcrumbForPage(context.page.meta.breadcrumbs) : null;
 
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group}>
         <div className="shelf__container container">
           <div className="row justify-content-center align-items-center">
             <div className="shelf__col col-12">
-              {content.display_back_button && <Link to={parentBreadcrumb.url} className="shelf__backbutton">{content.back_button_label}</Link>}
+              {content.display_back_button && parentBreadcrumb && <Link to={parentBreadcrumb.url} className="shelf__backbutton">{content.back_button_label}</Link>}
               <Text tagName="h1" content={content.heading} />
             </div>
           </div>
