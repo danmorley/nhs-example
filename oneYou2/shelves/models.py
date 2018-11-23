@@ -378,8 +378,7 @@ class ActionShelf(ShelfAbstract):
     position = models.IntegerField(null=False, blank=False, help_text='Must be unique, this determines the'
                                                                       'order paragon will return actions'
                                                                       'in the email.')
-    action_code = models.CharField(max_length=255, null=True, blank=True,
-                                   help_text='Wirewax action code')
+    action_code = models.CharField(max_length=255, help_text='Wirewax action code')
     title = models.CharField(max_length=255, null=False, blank=False)
     rich_text_body = models.TextField(blank=True, null=True)
     cta_type = models.CharField(max_length=255, null=True, blank=True, choices=CTA_TYPES, default='direct_app')
