@@ -23,8 +23,13 @@ describe('AccordionItem', () => {
 
   let classNamePrefix = 'accordion-shelf';
 
+  beforeEach(function(){
+    spyOn(console, 'error');
+  });
+
   it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<AccordionItem content={content} classNamePrefix={classNamePrefix}/>, div);
+    expect(console.error).toHaveBeenCalled();
   });
 })

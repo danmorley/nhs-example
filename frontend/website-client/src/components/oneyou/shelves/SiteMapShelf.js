@@ -49,8 +49,7 @@ class SiteMapShelf extends Component {
 }
 
 SiteMapShelf.propTypes = {
-  content: PropTypes.object.isRequired,
-  classNamePrefix: PropTypes.string.isRequired
+  content: PropTypes.object.isRequired
 };
 
 CmsComponentRegistry.register('sitemap_shelf', SiteMapShelf);

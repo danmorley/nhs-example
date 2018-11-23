@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SimpleImagePanel from './SimpleImagePanel';
-import Image from '../Image';
+import Image from '../../base/Image';
 import { Link } from 'react-router-dom';
 import { shallow } from 'enzyme';
 

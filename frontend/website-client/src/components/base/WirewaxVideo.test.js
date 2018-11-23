@@ -5,23 +5,28 @@ import WirewaxVideo from './WirewaxVideo.js';
 const BASKET_KEY = 'basket';
 
 const eventData = {
-                    data: {
-                      product: {
-                        imageurl: "https://wirewax.s3.amazonaws.com/creativeData/demos/addtocarttest/shoes.jpg",
-                        name: "Asics Gel-Lyte iii Trainer",
-                        quantity: 1,
-                        size: "6",
-                        variantId: "42592100"
-                      }
-                    },
-                    name: "addToCart",
-                    uniqueViewId: "05a371dd-9480-4e43-bc0e-c28082dd6223",
-                    vidId: 8012777
-                  }
+  data: {
+    product: {
+      imageurl: "https://wirewax.s3.amazonaws.com/creativeData/demos/addtocarttest/shoes.jpg",
+      name: "Asics Gel-Lyte iii Trainer",
+      quantity: 1,
+      size: "6",
+      variantId: "42592100"
+    }
+  },
+  name: "addToCart",
+  uniqueViewId: "05a371dd-9480-4e43-bc0e-c28082dd6223",
+  vidId: 8012777
+};
 
+beforeEach(function(){
+  spyOn(console, 'error');
+});
+                  
 it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<WirewaxVideo />, div);
+    expect(console.error).toHaveBeenCalled();
 });
 
 it('renders without crashing with content', () => {

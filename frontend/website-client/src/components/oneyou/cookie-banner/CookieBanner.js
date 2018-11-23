@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Image from '../Image.js';
+import Image from '../../base/Image';
 import './cookie-banner.css';
 import classNames from 'classnames';
 import Cookies from 'universal-cookie';
