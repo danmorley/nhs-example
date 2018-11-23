@@ -67,7 +67,7 @@ class ReleaseModelTests(OneYouTests):
         release = create_test_release()
 
         page.release = release
-        page.save()
+        page.save_revision()
 
         count_of_pages = OneYou2Page.objects.count()
 
@@ -137,7 +137,6 @@ class ReleaseModelTests(OneYouTests):
         base_release = create_test_release(release_name)
 
         page.release = base_release
-        page.save()
         page.save_revision().publish()
 
         base_release_content = base_release.content.first()
@@ -187,11 +186,11 @@ class ReleaseModelTests(OneYouTests):
 
         page1 = create_test_page(title='Page 1')
         page1.release = release
-        page1.save()
+        page1.save_revision()
         
         page2 = create_test_page(title='Page 2', path='1112')
         page2.release = release
-        page2.save()
+        page2.save_revision()
 
         page1_in_release = False
         page2_in_release = False
@@ -227,11 +226,11 @@ class ReleaseModelTests(OneYouTests):
 
         page1 = create_test_page(title='Page 1')
         page1.release = release
-        page1.save()
+        page1.save_revision()
         
         page2 = create_test_page(title='Page 2', path='1112')
         page2.release = release
-        page2.save()
+        page2.save_revision()
 
         page3 = create_test_page(title='Page 3', path='1113')
 
@@ -281,7 +280,7 @@ class ReleaseModelTests(OneYouTests):
         release = create_test_release()
 
         page.release = release
-        page.save()
+        page.save_revision()
 
         initial_revision_in_release = False
 
@@ -323,7 +322,7 @@ class ReleaseModelTests(OneYouTests):
         release = create_test_release()
         
         page.release = release
-        page.save()
+        page.save_revision()
 
         initial_revision_in_release = False\
 
@@ -381,7 +380,7 @@ class ReleaseModelTests(OneYouTests):
         release = create_test_release(release_date=release_time)
 
         page.release = release
-        page.save()
+        page.save_revision()
 
         release_page_content = release.get_content_for(page.id)
 
@@ -404,10 +403,11 @@ class ReleaseModelTests(OneYouTests):
         loaded_release = Release.objects.get(id=release.id)
 
         page.release = release
-        page.save()
+        page.save_revision()
 
         second_title = 'Altered page'
         page.title = second_title
+        page.save_revision()
         revision.content_json = page.to_json()
         revision.save()
 
@@ -431,7 +431,7 @@ class ReleaseContentModelTests(OneYouTests):
         release = create_test_release()
 
         page.release = release
-        page.save()
+        page.save_revision()
 
         # release_content = create_test_release_content(release, json.dumps(release.generate_fixed_content()))
         release_content = release.content.first()
@@ -655,19 +655,16 @@ class ReleaseViewsTests(OneYouTests):
         test_live_page1 = create_test_page()
         test_live_page1.release = live_release
         test_live_page1.live_revision = test_live_page1.save_revision()
-        test_live_page1.save()
         
         test_live_page2 = create_test_page()
         test_live_page2.release = live_release
         test_live_page2.live_revision = test_live_page2.save_revision()
-        test_live_page2.save()
 
         # Create current release edit page1 from live release, remove a page2 live release
         # and create a new page3
         current_release = create_test_release()
         test_live_page1.release = current_release
         test_live_page1.live_revision = test_live_page1.save_revision()
-        test_live_page1.save()
 
         current_release.remove_page(test_live_page2.id)
 

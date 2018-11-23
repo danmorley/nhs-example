@@ -878,22 +878,26 @@ class GeneralShelvePage(Page):
         serializer = getattr(serializers_module, serializer_name)
         return serializer
 
-    def save(self, *args, **kwargs):
+    def save_revision(self, user=None, submitted_for_moderation=False, approved_go_live_at=None, changed=True):
         assigned_release = self.release
-
-        if self.release:
-            self.release = None
-
-        super(GeneralShelvePage, self).save(*args, **kwargs)
-        newest_revision = self.get_latest_revision()
+        self.release = None
+        revision = super(GeneralShelvePage, self).save_revision(user, submitted_for_moderation, approved_go_live_at, changed)
 
         if assigned_release:
-            if self.live:
-                assigned_release.add_revision(newest_revision)
-            else:
-                assigned_release.remove_page(self.id)
+            assigned_release.add_revision(revision)
 
-        return self
+        return revision
+
+    def unpublish(self, release_id=None):
+        if not release_id:
+            pass
+        else:
+            from release.models import Release
+            try:
+                release = Release.objects.get(id=release_id)
+                release.remove_page(self.id)
+            except Release.DoesNotExist:
+                pass
 
     def serve_preview(self, request, mode_name, model_name):
         request.is_preview = True

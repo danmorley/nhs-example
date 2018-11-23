@@ -40,7 +40,7 @@ def unpublish(request, page_id):
     ])
 
     page.release_id = request.POST.get('release', None)
-    page.save()
+    page.save_revision(request.user)
 
     if next_url:
         return redirect(next_url)
