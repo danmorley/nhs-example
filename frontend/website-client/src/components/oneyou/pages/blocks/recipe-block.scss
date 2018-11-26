@@ -115,9 +115,26 @@
 
     li {
       margin-left: 0;
+      margin-bottom: 0.5em
     }
 
     ul {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+  
+  ol {
+    list-style-type: decimal;
+    margin: 1em 0;
+    padding-left: 1em;
+
+    li {
+      margin-left: 0;
+      margin-bottom: 0.5em
+    }
+
+    ol {
       margin-top: 0;
       margin-bottom: 0;
     }
@@ -186,7 +203,6 @@ ul.recipe__tags {
        width: 33%;
        padding-right: 1em;
        padding-left: 0.5em;
-       margin-bottom: 0.5em;
      }
    }
 }
