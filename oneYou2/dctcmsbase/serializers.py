@@ -1,15 +1,14 @@
 from rest_framework import serializers
+from rest_framework.serializers import HyperlinkedModelSerializer
 
 from django.apps import apps
 from django.utils.text import slugify
 
 from wagtail.api.v2.serializers import StreamField
 
-from rest_framework.serializers import HyperlinkedModelSerializer
-
 from home.models import SiteSettings
 
-from .sharedcontent import Banner
+from .sharedcontent import Promo, Banner
 
 
 class GeneralShelvePageSerializer(serializers.ModelSerializer):
@@ -101,44 +100,23 @@ class CTAPageSerializer(serializers.Serializer):
         return serialized_data
 
 
-class BannerSerializer(HyperlinkedModelSerializer):
-    from images.serializers import ImageSerializer
-
-    cta_page = CTAPageSerializer()
-    background_image = ImageSerializer()
+class PromoSerializer(HyperlinkedModelSerializer):
+    attributes = StreamField()
+    ctas = StreamField()
 
     def to_representation(self, obj):
         """Move fields from profile to user representation."""
         representation = super().to_representation(obj)
-        cta_text = representation.pop('cta_text')
-        cta_link = representation.pop('cta_link')
-        cta_page = representation.pop('cta_page')
-        representation['cta'] = {
-            'link_text': cta_text,
-            'link_external': cta_link,
-        }
-        if cta_page:
-            representation['cta']['link_page'] = {
-                'id': cta_page.get('id'),
-                'slug': cta_page.get('slug'),
-                'relative_path': cta_page.get('relative_path'),
-            }
-        
-        """Remove unnecessary renditions"""
-        if representation['background_image']:
-            mobile_rendition = obj.background_image_mobile_rendition
-            desktop_rendition = obj.background_image_desktop_rendition
-            meta_variant = representation.pop('meta_variant')
-            representation['background_image']['renditions'] = {
-                'mobile': representation['background_image']['renditions'][mobile_rendition],
-                'desktop': representation['background_image']['renditions'][desktop_rendition],
-                'meta_variant': meta_variant,
-            }
-
         representation['shelf_id'] = slugify(representation['shelf_id'])
         return representation
 
     class Meta:
+        model = Promo
+        fields = ['shelf_id', 'heading', 'attributes', 'ctas']
+
+
+class BannerSerializer(PromoSerializer):
+
+    class Meta:
         model = Banner
-        fields = ['heading', 'body', 'background_image', 'meta_variant', 'cta_text', 'cta_link', 'cta_page',
-                  'shelf_id', 'meta_layout', 'meta_variant']
+        fields = ['shelf_id', 'heading', 'body', 'attributes', 'ctas']

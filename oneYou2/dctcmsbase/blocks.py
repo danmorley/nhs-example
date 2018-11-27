@@ -16,8 +16,6 @@ from images.renditions import MOBILE_RENDITION_CHOICES, DESKTOP_RENDITION_CHOICE
 from images.serializers import ImageSerializer
 from shelves.blocks import BlobImageChooserBlock
 
-from .serializers import BannerSerializer
-
 
 IMAGE_POSITION = (
     ('top', 'Image top'),
@@ -129,7 +127,14 @@ class IDBlock(blocks.CharBlock):
 
 class BannerChooserBlock(SnippetChooserBlock):
     def get_api_representation(self, value, context=None):
+        from .serializers import BannerSerializer
         return BannerSerializer(context=context).to_representation(value)
+
+
+class PromoChooserBlock(SnippetChooserBlock):
+    def get_api_representation(self, value, context=None):
+        from .serializers import PromoSerializer
+        return PromoSerializer(context=context).to_representation(value)
 
 
 class ItemPageBlock(blocks.PageChooserBlock):
@@ -160,7 +165,8 @@ class SimpleCtaLinkBlock(blocks.StructBlock):
 
     class Meta:
         icon = 'link'
-        form_classname = 'dct-simple-cta-link-block dct-meta-block'
+        label = 'cta'
+        form_classname = 'dct-simple-cta-link-block dct-meta-block sequence-member'
 
 
 class DocumentDownloadBlock(blocks.StructBlock):

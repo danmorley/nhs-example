@@ -1,13 +1,14 @@
 from django.db import models
 
+from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.admin.edit_handlers import StreamFieldPanel
+from wagtail.core.fields import RichTextField, StreamField
 from wagtail.snippets.models import register_snippet
-from wagtail.admin.edit_handlers import FieldPanel, PageChooserPanel, MultiFieldPanel
-from wagtail.core.fields import RichTextField
-from wagtail.images.edit_handlers import ImageChooserPanel
-
-from modelcluster.fields import ParentalKey
 
 from dctsharedcontent.models import SharedContent
+
+from .blocks import BackgroundImageBlock, SimpleCtaLinkBlock
+from .stream_block import ExpandedStreamBlock
 
 
 MOBILE_BANNER_PANEL_RENDITION_CHOICES = (
@@ -23,7 +24,7 @@ BACKGROUND_IMAGE_VARIANT = (
     ('gradient', 'Background Gradient'),
 )
 
-BANNER_LAYOUT_CHOICES = (
+PROMO_LAYOUT_CHOICES = (
     ('vertical_left', 'Vertical & Left Aligned'),
     ('vertical_center', 'Vertical & Center Aligned'),
     ('vertical_right', 'Vertical & Right Aligned'),
@@ -32,80 +33,74 @@ BANNER_LAYOUT_CHOICES = (
     ('horizontal_right', 'Horizontal & Right Aligned'),
 )
 
+BANNER_LAYOUT_CHOICES = PROMO_LAYOUT_CHOICES
+
 
 @register_snippet
-class Banner(SharedContent):
+class Promo(SharedContent):
     heading = models.CharField(max_length=255, null=True, blank=True)
-    body = RichTextField(blank=True, null=True)
-    background_image = models.ForeignKey(
-        'images.PHEImage',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
+
+    attributes = StreamField(
+        ExpandedStreamBlock([
+            ('background_image', BackgroundImageBlock()),
+        ]),
+        blank=True, null=True,
     )
-    background_image_mobile_rendition = models.CharField(
-        max_length=20,
-        choices=MOBILE_BANNER_PANEL_RENDITION_CHOICES,
-        default='375x256',
-    )
-    background_image_desktop_rendition = models.CharField(
-        max_length=20,
-        choices=DESKTOP_BANNER_PANEL_RENDITION_CHOICES,
-        default='1440x309',
-    )
-    meta_variant = models.CharField(
-        max_length=20,
-        choices=BACKGROUND_IMAGE_VARIANT,
-        default='none',
-    )
-    cta_text = models.CharField(max_length=255, null=True, blank=True)
-    cta_link = models.CharField(max_length=255, null=True, blank=True)
-    cta_page = ParentalKey('wagtailcore.Page',
-                           on_delete=models.SET_NULL,
-                           related_name='base_banner_shelf_links',
-                           null=True,
-                           blank=True)
+
+    ctas = StreamField([
+            ('cta', SimpleCtaLinkBlock()),
+        ], blank=True, null=True)
 
     @property
     def meta_layout(self):
         return 'full_width'
 
-    # @property
-    # def meta_variant(self):
-    #     return 'main-banner'
+    api_fields = [
+        'heading',
+        'attributes',
+        'ctas',
+    ]
+
+    panels = [
+        FieldPanel('heading'),
+        StreamFieldPanel('attributes'),
+        StreamFieldPanel('ctas'),
+    ]
+
+
+@register_snippet
+class Banner(SharedContent):
+    heading = models.CharField(max_length=255, null=True, blank=True)
+    body = RichTextField(blank=True, null=True)
+
+    heading = models.CharField(max_length=255, null=True, blank=True)
+
+    attributes = StreamField(
+        ExpandedStreamBlock([
+            ('background_image', BackgroundImageBlock()),
+        ]),
+        blank=True, null=True,
+    )
+
+    ctas = StreamField([
+            ('cta', SimpleCtaLinkBlock()),
+        ], blank=True, null=True)
+
+    @property
+    def meta_layout(self):
+        return 'full_width'
+
 
     api_fields = [
         'heading',
         'body',
-        'image',
-        'cta_text',
-        'cta_link',
-        'cta_page',
-        'meta_variant',
-    ]
-
-    general_panels = [
-        FieldPanel('shelf_id'),
-        FieldPanel('heading'),
-        FieldPanel('body'),
-    ]
-
-    background_image_panels = [
-        ImageChooserPanel('background_image'),
-        FieldPanel('background_image_mobile_rendition'),
-        FieldPanel('background_image_desktop_rendition'),
-        FieldPanel('meta_variant'),
-    ]
-
-    cta_panels = [
-        FieldPanel('cta_text'),
-        FieldPanel('cta_link'),
-        PageChooserPanel('cta_page'),
+        'attributes',
+        'ctas',
     ]
 
     panels = [
-        MultiFieldPanel(general_panels, 'General', classname='collapsible'),
-        MultiFieldPanel(background_image_panels, 'Background Image', classname='collapsible'),
-        MultiFieldPanel(cta_panels, 'CTA', classname='collapsible'),
+        FieldPanel('heading'),
+        FieldPanel('body'),
+        StreamFieldPanel('attributes'),
+        StreamFieldPanel('ctas'),
     ]

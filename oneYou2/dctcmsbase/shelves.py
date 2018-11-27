@@ -1,10 +1,10 @@
 from wagtail.core import blocks
 
-from .blocks import PositionedImageBlock, IDBlock, BackgroundImageBlock, BannerChooserBlock
+from .blocks import PositionedImageBlock, IDBlock, BackgroundImageBlock, BannerChooserBlock, PromoChooserBlock
 from .panels import (StandardRichTextPanel, StandardInformationPanel, CtaPanel, StandardSimpleImagePanel,
     PlainTextPanel, AccordionPanel, StandardImageTeaserPanel, AudioTeaserPanel, StandardVideoTeaserPanel,
     SimpleServiceFinder)
-from .sharedcontent import BANNER_LAYOUT_CHOICES
+from .sharedcontent import BANNER_LAYOUT_CHOICES, PROMO_LAYOUT_CHOICES
 
 
 SHELF_WIDTH = (
@@ -128,6 +128,17 @@ class PageHeadingShelf(Shelf, WithTracking):
         form_classname = 'dct-page-heading-shelf dct-meta-panel'
 
 
+class PromoShelf(Shelf, WithTracking):
+    panel = PromoChooserBlock(target_model='dctcmsbase.Promo', icon='image')
+    meta_layout = blocks.ChoiceBlock(choices=PROMO_LAYOUT_CHOICES,
+                                    default='vertical_center',
+                                    label='Layout',
+                                    classname='dct-meta-field')
+
+    class Meta:
+        form_classname = 'dct-promo-shelf dct-meta-panel'
+
+
 class BannerShelf(Shelf, WithTracking):
     panel = BannerChooserBlock(target_model='dctcmsbase.Banner', icon='image')
     meta_layout = blocks.ChoiceBlock(choices=BANNER_LAYOUT_CHOICES,
@@ -198,6 +209,11 @@ class SimpleRichTextShelf(Shelf):
         form_classname = 'dct-simple-rich-text-shelf dct-meta-panel'
 
 
+class DataAttributeBlock(blocks.StructBlock):
+    name = blocks.CharBlock(help_text='Data attribute name, don\'t add \'data-\'')
+    value = blocks.CharBlock()
+
+
 class InlineScriptShelf(Shelf):
     script = blocks.TextBlock(required=False, help_text='The javascript to be inserted')
     src = blocks.CharBlock(required=False, help_text='URL of the javascript file')
@@ -206,6 +222,16 @@ class InlineScriptShelf(Shelf):
                         help_text='Optional ID of the script tag')
     placeholder_id = IDBlock(required=False, label='Placeholder ID', retain_case=True,
                              help_text='If given, an empty placeholder div will be added before the script tag')
+    data_attributes = blocks.StreamBlock([
+            ('data_attribute', DataAttributeBlock(icon='collapse-down')),
+        ],
+        required=False,
+        label='Data attributes for placeholder div',
+    )
 
     class Meta:
         form_classname = 'dct-inline-script-shelf dct-meta-shelf'
+
+
+class DividerShelf(Shelf):
+    pass
