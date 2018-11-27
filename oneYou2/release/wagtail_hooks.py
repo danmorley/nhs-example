@@ -80,13 +80,14 @@ class ReleaseAdmin(ModelAdmin):
 
     def index_view(self, request):
         # set pending as default filter
-        http_referer = request.META['HTTP_REFERER'].split(request.META['PATH_INFO'])
-        if http_referer[-1] and not http_referer[-1].startswith('?'):
-            if 'content_status__exact' not in request.GET:
-                q = request.GET.copy()
-                q['content_status__exact'] = '0'
-                request.GET = q
-                request.META['QUERY_STRING'] = request.GET.urlencode()
+        if 'HTTP_REFERER' in request.META:
+            http_referer = request.META['HTTP_REFERER'].split(request.META['PATH_INFO'])
+            if http_referer[-1] and not http_referer[-1].startswith('?'):
+                if 'content_status__exact' not in request.GET:
+                    q = request.GET.copy()
+                    q['content_status__exact'] = '0'
+                    request.GET = q
+                    request.META['QUERY_STRING'] = request.GET.urlencode()
         return super(ReleaseAdmin,self).index_view(request)
 
 
