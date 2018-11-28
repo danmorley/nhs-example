@@ -76,8 +76,9 @@ class ShareButtonPanel extends Component {
     let items = SOCIAL_LINKS.map((item, i) => {
       return (
         <li className={"share-button__"+item.share_item} key={i}>
-          <a href="#" data-social-type={item.share_item} title="(opens in new window)" onClick={(evt) => this.handleClick(evt, item.share_text)} data-name={`share-${item.share_item}`}
-          ></a>
+          <a href="#" data-social-type={item.share_item} title="(opens in new window)" onClick={(evt) => this.handleClick(evt, item.share_text)} data-name={`share-${item.share_item}`}>
+            <span className ="screen-reader-text">{`share to ${item.share_item}`}</span>
+          </a>
         </li>
       );
     });
