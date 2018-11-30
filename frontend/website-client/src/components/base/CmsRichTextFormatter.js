@@ -66,7 +66,9 @@ class CmsRichTextFormatter  {
               <p key={i} className={i === node.children.length - 1 ? 'rich-text-see-more__inline' : ''}>{child.data} </p>
             )}
             <input key='see-more-input' id={id} className="rich-text-see-more__input" type="checkbox" />
-            <label key='see-more-label' htmlFor={id} className="rich-text-see-more__label"></label>
+            <label key='see-more-label' htmlFor={id} className="rich-text-see-more__label">
+              <span className ="screen-reader-text">content toggle button</span>
+            </label>
           </React.Fragment>
         )
       }
