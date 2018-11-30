@@ -8,11 +8,13 @@ from wagtail.api import APIField
 from wagtail.core import blocks
 from wagtail.core.blocks import StructValue
 from wagtail.documents.blocks import DocumentChooserBlock
+from wagtail.images.blocks import ImageChooserBlock
 from wagtail.snippets.blocks import SnippetChooserBlock
 
-from shelves.blocks import BlobImageChooserBlock
-from images.renditions import MOBILE_RENDITION_CHOICES, DESKTOP_RENDITION_CHOICES
 from home.models import SiteSettings
+from images.renditions import MOBILE_RENDITION_CHOICES, DESKTOP_RENDITION_CHOICES
+from images.serializers import ImageSerializer
+from shelves.blocks import BlobImageChooserBlock
 
 from .serializers import BannerSerializer
 
@@ -38,6 +40,11 @@ IMAGE_VARIANT = (
 )
 
 
+class BlobImageChooserBlock(ImageChooserBlock):
+    def get_api_representation(self, value, context=None):
+        return ImageSerializer(context=context, required=False).to_representation(value)
+
+
 class ImageBlock(blocks.StructBlock):
     image = BlobImageChooserBlock(required=False)
     meta_variant = blocks.ChoiceBlock(IMAGE_VARIANT,
@@ -61,25 +68,13 @@ class ImageBlock(blocks.StructBlock):
             image = result['image']
             image['meta_variant'] = result['meta_variant']
 
-            if image.get('renditions'):
-                meta_mobile_rendition = result['meta_mobile_rendition']
-                meta_desktop_rendition = result['meta_desktop_rendition']
+            meta_mobile_rendition = result['meta_mobile_rendition']
+            meta_desktop_rendition = result['meta_desktop_rendition']
 
-                if meta_mobile_rendition == 'none':
-                    mobile_rendition = image['renditions']['original']
-                else:
-                    mobile_rendition = image['renditions'][meta_mobile_rendition]
-                
-                if meta_desktop_rendition == 'none':
-                    desktop_rendition = image['renditions']['original']
-                else:
-                    desktop_rendition = image['renditions'][meta_desktop_rendition]
-
-                image['renditions'] = {
-                    'mobile': mobile_rendition,
-                    'desktop': desktop_rendition,
-                }
-
+            image['renditions'] = {
+                'mobile': value['image'].generate_and_get_rendition(meta_mobile_rendition) if value['image'] else None,
+                'desktop': value['image'].generate_and_get_rendition(meta_desktop_rendition) if value['image'] else None,
+            }
         return image
 
     class Meta:
