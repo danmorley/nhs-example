@@ -3,15 +3,17 @@
  *  Simple utility class for page helper functions.
  */
 class PageUtils {
-  static parentBreadcrumbForPage(page) {
-    if (page && page.meta) {
-      const breadcrumbs = page.meta.breadcrumbs || [];
-      if (breadcrumbs.length > 0) {
-        return breadcrumbs[breadcrumbs.length - 1];
+  static parentBreadcrumbForPage(breadcrumbs) {
+    if (breadcrumbs.length > 0) {
+      let index = breadcrumbs.length - 1;
+      let parentBreadcrumbPage = breadcrumbs[index];
+      while (index >= 0 && !parentBreadcrumbPage.visible) {
+        index--;
+        parentBreadcrumbPage = breadcrumbs[index];
+        console.log(breadcrumbs[index]);
       }
+      return parentBreadcrumbPage;
     }
-    
-    return null;
   }
 }
 
