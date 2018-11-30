@@ -21,9 +21,9 @@ class SocialLinks extends Component {
 
     return (
       <div className ="page-footer__social-media" id="social">
-        <h5 className ="page-footer__follow-title">
+        <h3 className ="page-footer__follow-title">
           Follow us
-        </h5>
+        </h3>
         <ul className ="page-footer__social-links" aria-label="Social networks">
           {items}
         </ul>
