@@ -114,7 +114,7 @@ class VideoTeaserPanel extends Component {
               <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
 
               {content.meta_use_play_link === true &&
-                <span role="button" onClick={this.triggerModal.bind(this)} className={`${classNamePrefix}__play-link`}>{content.meta_play_link_text}</span>
+                <button onClick={this.triggerModal.bind(this)} className={`${classNamePrefix}__play-link`}>{content.meta_play_link_text}</button>
               }
 
               <CtaLinks cta={content.cta} />
