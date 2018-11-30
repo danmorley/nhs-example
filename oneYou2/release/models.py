@@ -139,10 +139,7 @@ class Release(ClusterableModel):
         content[str(new_revision.page_id)] = Release.generate_fixed_content(new_revision)
         release_content.content = json.dumps(content)
         release_content.save()
-        try:
-            ReleasePage.objects.get(release=self, revision__page=new_revision.page_id).delete()
-        except ReleasePage.DoesNotExist:
-            pass
+        ReleasePage.objects.filter(release=self, revision__page=new_revision.page).delete()
         ReleasePage(release=self, revision=new_revision).save()
 
     def remove_page(self, page_id):
@@ -192,7 +189,11 @@ class ReleasePage(models.Model):
         blank=False,
         null=False,
         on_delete=models.CASCADE)
-    
+    submitted_for_moderation = models.BooleanField(
+        verbose_name=_('submitted for moderation'),
+        default=False,
+    )
+
     def get_page_detail_dict(self, status=None):
         return {
             'id': self.revision.page.id,
@@ -202,6 +203,29 @@ class ReleasePage(models.Model):
             'revision_user': self.revision.user,
             'status': status,
         }
+    
+    @classmethod
+    def submit_for_moderation(clss, revision, assigned_release):
+        # remove ReleeasePage submitted for moderation
+        clss.remove_submitted_for_moderation(revision, assigned_release)
+
+        # save new revision to submit for moderation
+        clss(release=assigned_release, revision=revision, submitted_for_moderation=True).save()
+
+    @classmethod
+    def remove_submitted_for_moderation(clss, revision=None, release=None):
+        # remove ReleeasePage submitted for moderation
+        release_pages = clss.objects.filter(
+            submitted_for_moderation=True
+        )
+
+        if revision:
+            release_pages = release_pages.filter(revision__page=revision.page_id)
+        
+        if release:
+            release_pages = release_pages.filter(release=release)
+
+        release_pages.delete()
 
 
 class ReleaseContent(models.Model):

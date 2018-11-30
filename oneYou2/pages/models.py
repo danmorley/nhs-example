@@ -881,12 +881,31 @@ class GeneralShelvePage(Page):
     def save_revision(self, user=None, submitted_for_moderation=False, approved_go_live_at=None, changed=True):
         assigned_release = self.release
         self.release = None
+
+        if self.release:
+            self.release = None
+
         revision = super(GeneralShelvePage, self).save_revision(user, submitted_for_moderation, approved_go_live_at, changed)
 
         if assigned_release:
-            assigned_release.add_revision(revision)
+            from release.models import ReleasePage
+            if submitted_for_moderation:
+                ReleasePage.submit_for_moderation(revision, assigned_release)
+            else:
+                assigned_release.add_revision(revision)
 
         return revision
+
+    def unpublish(self, release_id=None):
+        if not release_id:
+            pass
+        else:
+            from release.models import Release
+            try:
+                release = Release.objects.get(id=release_id)
+                release.remove_page(self.id)
+            except Release.DoesNotExist:
+                pass
 
     def unpublish(self, release_id=None):
         if not release_id:

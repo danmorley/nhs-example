@@ -9,7 +9,7 @@ from django.urls import reverse
 from wagtail.admin import messages
 from wagtail.admin.forms import CopyForm
 from wagtail.admin.utils import user_passes_test, user_has_any_page_permission, send_notification
-from wagtail.admin.views.pages import get_valid_next_url_from_request
+from wagtail.admin.views.pages import get_valid_next_url_from_request, approve_moderation, reject_moderation
 from wagtail.core import hooks
 from wagtail.core.models import Page, UserPagePermissionsProxy
 
@@ -341,6 +341,7 @@ def edit(request, page_id):
         'has_unsaved_changes': has_unsaved_changes,
     })
 
+
 def revisions_view(request, page_id, revision_id):
     page = get_object_or_404(Page, id=page_id).specific
     revision = get_object_or_404(page.revisions, id=revision_id)
@@ -348,3 +349,23 @@ def revisions_view(request, page_id, revision_id):
 
     print("PAGES revisions_view", revision_id)
     return revision_page.serve_preview(page.dummy_request(request), page.default_preview_mode, revision_id)
+
+
+def approve_moderation_release(request, revision_id):
+    from release.models import ReleasePage
+    try:
+        release_page = ReleasePage.objects.get(revision=revision_id, submitted_for_moderation=True)
+        release_page.release.add_revision(release_page.revision)
+    except ReleasePage.DoesNotExist:
+        pass
+    return approve_moderation(request, revision_id)
+
+
+def reject_moderation_release(request, revision_id):
+    from release.models import ReleasePage
+    try:
+        release_page = ReleasePage.objects.get(revision=revision_id, submitted_for_moderation=True)
+        ReleasePage.remove_submitted_for_moderation(release_page.revision)
+    except ReleasePage.DoesNotExist:
+        pass
+    return reject_moderation(request, revision_id)

@@ -5,8 +5,9 @@ from datetime import timedelta
 from django.core.exceptions import ValidationError
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpRequest
+from django.test import Client, override_settings
+from django.urls import reverse
 from django.utils import timezone
-from django.test import Client
 
 from unittest.mock import patch
 
@@ -15,7 +16,7 @@ from wagtail.contrib.modeladmin.views import IndexView
 from home.factories import create_test_site_settings
 from home.models import SiteSettings
 
-from oneYou2.factories import create_test_user
+from oneYou2.factories import create_test_user, create_test_admin_user
 from oneYou2.test.utils import OneYouTests
 
 from pages.factories import create_test_page
@@ -23,7 +24,7 @@ from pages.models import OneYou2Page
 
 from release.factories import create_test_release, create_test_release_page
 
-from release.models import Release, validate_in_future, query_set_to_dict
+from release.models import Release, ReleasePage, validate_in_future, query_set_to_dict
 from release.utils import get_release_object, get_latest_live_release, get_latest_release, populate_release_if_required
 from release.views import release_html
 from release.wagtail_hooks import ReleaseButtonHelper, ReleaseAdmin
@@ -737,3 +738,181 @@ class ReleaseAdminWagTailHooksTests(OneYouTests):
         expected_release_count = Release.objects.count()
 
         self.assertEqual(expected_release_count, admin_release_list.count())
+
+
+@patch('azure.storage.file.fileservice.FileService.get_file_to_text', return_value='abcd')
+class ReleaseModerationModelTests(OneYouTests):
+
+    def setUp(self):
+        self.release = create_test_release()
+        self.page = create_test_page()
+        self.user = create_test_user()
+
+    def test_submitformoderation_then_publish(self, mock_file_service):
+        # submit for moderation
+        self.page.release = self.release
+        self.page.save_revision(self.user, True)
+
+        release_page = ReleasePage.objects.filter(release=self.release, revision__page=self.page)
+        release_content = self.release.content.first()
+        release_content_dict = json.loads(release_content.content)
+
+        self.assertEqual(release_page.count(), 1)
+        self.assertEqual(release_page.filter(submitted_for_moderation=True).count(), 1)
+        self.assertEqual(len(release_content_dict), 0)
+
+        # publish
+        self.page.release = self.release
+        self.page.save_revision(self.user)
+
+        release_content = self.release.content.first()
+        release_content_dict = json.loads(release_content.content)
+
+        self.assertEqual(release_page.count(), 1)
+        self.assertEqual(release_page.filter(submitted_for_moderation=False).count(), 1)
+        self.assertEqual(len(release_content_dict), 1)
+        self.assertEqual(str(self.page.id), list(release_content_dict.keys())[0])
+
+    def test_publish_then_submitformoderation(self, mock_file_service):
+        # publish
+        self.page.release = self.release
+        self.page.title = 'Published'
+        self.page.save_revision(self.user)
+
+        release_page = ReleasePage.objects.filter(release=self.release, revision__page=self.page)
+        release_content = self.release.content.first()
+        release_content_dict = json.loads(release_content.content)
+
+        self.assertEqual(release_page.count(), 1)
+        self.assertEqual(release_page.filter(submitted_for_moderation=False).count(), 1)
+        self.assertEqual(len(release_content_dict), 1)
+        self.assertEqual(str(self.page.id), list(release_content_dict.keys())[0])
+
+        # submit for moderation
+        self.page.release = self.release
+        self.page.title = 'Submitted for moderation'
+        self.page.save_revision(self.user, True)
+
+        release_content = self.release.content.first()
+        release_content_dict = json.loads(release_content.content)
+
+        self.assertEqual(release_page.count(), 2)
+        self.assertEqual(release_page.filter(submitted_for_moderation=True).count(), 1)
+        self.assertEqual(release_page.filter(submitted_for_moderation=False).count(), 1)
+        self.assertEqual(len(release_content_dict), 1)
+        self.assertEqual(str(self.page.id), list(release_content_dict.keys())[0])
+        self.assertEqual(release_content_dict[str(self.page.id)]['title'], 'Published')
+    
+    def test_reject_submitformoderation(self, mock_file_service):
+        # publish
+        self.page.release = self.release
+        self.page.title = 'Published'
+        self.page.save_revision(self.user)
+
+        # submit for moderation
+        self.page.release = self.release
+        self.page.title = 'Submitted for moderation'
+        revision= self.page.save_revision(self.user, True)
+
+        release_page = ReleasePage.objects.filter(release=self.release, revision__page=self.page)
+        release_content = self.release.content.first()
+        release_content_dict = json.loads(release_content.content)
+
+        self.assertEqual(release_page.count(), 2)
+        self.assertEqual(release_page.filter(submitted_for_moderation=True).count(), 1)
+        self.assertEqual(release_page.filter(submitted_for_moderation=False).count(), 1)
+        self.assertEqual(len(release_content_dict), 1)
+        self.assertEqual(str(self.page.id), list(release_content_dict.keys())[0])
+        self.assertEqual(release_content_dict[str(self.page.id)]['title'], 'Published')
+
+        # reject
+        admin_user = create_test_admin_user()
+        c = Client()
+        c.force_login(admin_user)
+        response = c.get(reverse('oneyou_pages:reject_moderation', kwargs={'revision_id': revision.id}))
+
+        release_content = self.release.content.first()
+        release_content_dict = json.loads(release_content.content)
+
+        self.assertEqual(release_page.count(), 1)
+        self.assertEqual(release_page.filter(submitted_for_moderation=False).count(), 1)
+        self.assertEqual(len(release_content_dict), 1)
+        self.assertEqual(str(self.page.id), list(release_content_dict.keys())[0])
+        self.assertEqual(release_content_dict[str(self.page.id)]['title'], 'Published')
+
+    
+    def test_accept_submitformoderation(self, mock_file_service):
+        # publish
+        self.page.release = self.release
+        self.page.title = 'Published'
+        self.page.save_revision(self.user)
+
+        # submit for moderation
+        self.page.release = self.release
+        self.page.title = 'Submitted for moderation'
+        revision = self.page.save_revision(self.user, True)
+
+        release_page = ReleasePage.objects.filter(release=self.release, revision__page=self.page)
+        release_content = self.release.content.first()
+        release_content_dict = json.loads(release_content.content)
+
+        self.assertEqual(release_page.count(), 2)
+        self.assertEqual(release_page.filter(submitted_for_moderation=True).count(), 1)
+        self.assertEqual(release_page.filter(submitted_for_moderation=False).count(), 1)
+        self.assertEqual(len(release_content_dict), 1)
+        self.assertEqual(str(self.page.id), list(release_content_dict.keys())[0])
+        self.assertEqual(release_content_dict[str(self.page.id)]['title'], 'Published')
+
+        # accept
+        admin_user = create_test_admin_user()
+        c = Client()
+        c.force_login(admin_user)
+        response = c.get(reverse('oneyou_pages:approve_moderation', kwargs={'revision_id': revision.id}))
+
+        release_content = self.release.content.first()
+        release_content_dict = json.loads(release_content.content)
+
+        self.assertEqual(release_page.count(), 1)
+        self.assertEqual(release_page.filter(submitted_for_moderation=False).count(), 1)
+        self.assertEqual(len(release_content_dict), 1)
+        self.assertEqual(str(self.page.id), list(release_content_dict.keys())[0])
+        self.assertEqual(release_content_dict[str(self.page.id)]['title'], 'Submitted for moderation')
+
+
+    def test_submitformoderation_freezerelease(self, mock_file_service):
+        # publish
+        self.page.release = self.release
+        self.page.title = 'Published'
+        self.page.save_revision(self.user)
+
+        # submit for moderation
+        self.page.release = self.release
+        self.page.title = 'Submitted for moderation'
+        revision = self.page.save_revision(self.user, True)
+
+        release_page = ReleasePage.objects.filter(release=self.release, revision__page=self.page)
+        release_content = self.release.content.first()
+        release_content_dict = json.loads(release_content.content)
+
+        self.assertEqual(release_page.count(), 2)
+        self.assertEqual(release_page.filter(submitted_for_moderation=True).count(), 1)
+        self.assertEqual(release_page.filter(submitted_for_moderation=False).count(), 1)
+        self.assertEqual(len(release_content_dict), 1)
+        self.assertEqual(str(self.page.id), list(release_content_dict.keys())[0])
+        self.assertEqual(release_content_dict[str(self.page.id)]['title'], 'Published')
+
+        #freeze release
+        release_date = timezone.now() - timedelta(days=1)
+        self.release.release_time = release_date
+        self.release.save()
+        populate_release_if_required(self.release)
+
+        release_content = self.release.content.first()
+        release_content_dict = json.loads(release_content.content)
+        release_content_dict.pop('site_json')
+
+        self.assertEqual(release_page.count(), 1)
+        self.assertEqual(release_page.filter(submitted_for_moderation=False).count(), 1)
+        self.assertEqual(len(release_content_dict), 1)
+        self.assertEqual(str(self.page.id), list(release_content_dict.keys())[0])
+        self.assertEqual(release_content_dict[str(self.page.id)]['title'], 'Published')

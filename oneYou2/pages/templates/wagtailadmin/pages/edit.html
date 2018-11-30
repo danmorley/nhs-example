@@ -86,7 +86,10 @@
                                     </li>
                                 {% endif %}
                                 {% if not is_revision %}
-                                    <li><input type="submit" name="action-submit" value="{% trans 'Submit for moderation' %}" class="button" /></li>
+                                    <li>
+                                        <button id="release-picker-submit-toggle" type="submit" name="action-submit" value="action-submit" class="button" tabindex="3" {% if page.locked %}disabled {% endif %}>{% trans 'Submit for moderation' %}</button>
+                                        <!--input type="submit" name="action-submit" value="{% trans 'Submit for moderation' %}" class="button" /-->
+                                    </li>
                                 {% endif %}
                             </ul>
                         {% endif %}
@@ -171,14 +174,23 @@
                 e.preventDefault();
                 $('.popup').children('button[name="action-publish"]').first().show();
                 $('.popup').children('button[name="action-unpublish"]').first().hide();
+                $('.popup').children('button[name="action-submit"]').first().hide();
                 $('.popup-cover').show();
-
             });
 
             $('#release-picker-unpublish-toggle').click(function (e) {
                 e.preventDefault();
                 $('.popup').children('button[name="action-unpublish"]').first().show();
                 $('.popup').children('button[name="action-publish"]').first().hide();
+                $('.popup').children('button[name="action-submit"]').first().hide();
+                $('.popup-cover').show();
+            });
+
+            $('#release-picker-submit-toggle').click(function (e) {
+                e.preventDefault();
+                $('.popup').children('button[name="action-submit"]').first().show();
+                $('.popup').children('button[name="action-publish"]').first().hide();
+                $('.popup').children('button[name="action-unpublish"]').first().hide();
                 $('.popup-cover').show();
             });
         }
@@ -200,7 +212,8 @@
             releasePopUp.find('button[name="action-publish"]').attr('id', 'publish-page');
             $('button[name="action-unpublish"]').clone().appendTo(releasePopUp);
             releasePopUp.find('button[name="action-unpublish"]').attr('id', 'unpublish-page');
-
+            $('button[name="action-submit"]').clone().appendTo(releasePopUp);
+            releasePopUp.find('button[name="action-submit"]').attr('id', 'submit-page');
 
             startCancelWatcher(releasePopUp)
         }
