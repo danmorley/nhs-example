@@ -140,3 +140,10 @@
     }  
   }
 }
+
+.shelf.basic-grid-shelf--article_full_width .information-panel__image {
+  @include media-breakpoint-down(xs) {
+    background-size: contain;
+    background-position: unset;
+  }
+}
