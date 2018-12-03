@@ -6,29 +6,38 @@ import Panel from '../panels/Panel';
 const SOCIAL_LINKS = [
   {
     share_item: 'email',
-    share_text: ''
+    url: "mailto:?" + "body=" + window.location.href
   },
   {
     share_item: 'whatsapp',
-    share_text: ''
+    url: "whatsapp://send?text=" + " " + window.location.href
   },
   {
     share_item: 'facebook',
-    share_text: ''
+    url: "https://www.facebook.com/sharer/sharer.php?quote=" + "&" + "u=" + window.location.href
   },
   {
     share_item: 'twitter',
-    share_text: ''
+    url: "https://twitter.com/intent/tweet?text=" + "&" + "url=" + window.location.href
   }
 ];
 
 
 class ShareButtonPanel extends Component {
+  
   constructor (props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.shareButtonClick = this.shareButtonClick.bind(this);
     this.socialWindow = this.socialWindow.bind(this);
+  }
+  
+  
+  popup() {
+    var left = (window.screen.width - 570) / 2;
+    var top = (window.screen.height - 570) / 2;
+    var params = 'menubar=no,toolbar=no,status=no,width=570,height=570,top=' + top + ',left=' + left;
+    window.open(this.href, 'NewWindow',params);
   }
 
   socialWindow(url) {
@@ -42,19 +51,19 @@ class ShareButtonPanel extends Component {
     this.shareButton = elem;
   }
 
-  handleClick(evt, shareText) {
+  handleClick(evt) {
     let pageUrl = window.location.href,
       site = '';
 
     switch (evt.currentTarget.getAttribute('data-social-type')) {
     case 'facebook':
       evt.preventDefault();
-      site = "https://www.facebook.com/sharer/sharer.php?quote=" + shareText + "&" + "u=" + pageUrl;
+      evt.currentTarget.href = "https://www.facebook.com/sharer/sharer.php?quote=" + "&" + "u=" + pageUrl;
       this.socialWindow(site);
       break;
     case 'twitter':
       evt.preventDefault();
-      site = "https://twitter.com/intent/tweet?text=" + shareText + "&" + "url=" + pageUrl;
+      evt.currentTarget.href = "https://twitter.com/intent/tweet?text=" + "&" + "url=" + pageUrl;
       this.socialWindow(site);
       break;
     case 'email':
@@ -64,7 +73,7 @@ class ShareButtonPanel extends Component {
       break;
     case 'whatsapp':
       evt.preventDefault();
-      site = "whatsapp://send?text=" + shareText + " " + pageUrl;
+      evt.currentTarget.href = "whatsapp://send?text=" + " " + pageUrl;
       this.socialWindow(site);
       break;
     default:
@@ -74,12 +83,23 @@ class ShareButtonPanel extends Component {
 
   render() {
     let items = SOCIAL_LINKS.map((item, i) => {
+      let left = (window.screen.width - 570) / 2;
+      let top = (window.screen.height - 570) / 2;
+      let link ="<a href= "  + encodeURI(item.url) + " title='(opens in new window)'" 
+              
+                +">"
+                
+                + "<span className =\"screen-reader-text\">" + "share to " + item.share_item + "</span>"
+                
+                + "</a>";
+              
+                
       return (
-        <li className={"share-button__"+item.share_item} key={i}>
-          <a href="#" data-social-type={item.share_item} title="(opens in new window)" onClick={(evt) => this.handleClick(evt, item.share_text)} data-name={`share-${item.share_item}`}>
-            <span className ="screen-reader-text">{`share to ${item.share_item}`}</span>
-          </a>
-        </li>
+      <React.Fragment key={i}>
+          <li  className={"share-button__"+item.share_item} key={i} dangerouslySetInnerHTML={{ __html: link }}/>
+          
+          
+       </React.Fragment>
       );
     });
 
