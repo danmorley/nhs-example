@@ -16,6 +16,8 @@ from wagtail.documents.models import Document
 from wagtail.search import index
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
+from images.renditions import RENTIDTION_SITES
+
 
 class HomePage(Page):
     pass
@@ -26,6 +28,7 @@ class SiteSettings(BaseSetting):
     title = models.CharField(max_length=255)
     uid = models.SlugField(unique=True, verbose_name='Site name', help_text='An id which can be used to lookup the site'
                                                                             ' in the API')
+    rendition = models.CharField(max_length=50, choices=RENTIDTION_SITES, default='base')
 
     menu = models.ForeignKey(
         'pages.Menu',
@@ -67,7 +70,7 @@ class SiteSettings(BaseSetting):
     general_panels = [
         FieldPanel('title'),
         FieldPanel('uid'),
-        # FieldPanel('page_types', widget=forms.CheckboxSelectMultiple),
+        FieldPanel('rendition'),
     ]
 
     theme_panels = [

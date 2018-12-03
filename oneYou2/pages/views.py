@@ -13,6 +13,7 @@ from wagtail.admin.views.pages import get_valid_next_url_from_request, approve_m
 from wagtail.core import hooks
 from wagtail.core.models import Page, UserPagePermissionsProxy
 
+from home.models import SiteSettings
 from release.models import Release
 
 
@@ -339,6 +340,7 @@ def edit(request, page_id):
         'form': form,
         'next': next_url,
         'has_unsaved_changes': has_unsaved_changes,
+        'rendition': SiteSettings.objects.get(site=page.get_site()).rendition,
     })
 
 
