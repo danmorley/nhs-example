@@ -27,7 +27,7 @@ class SiteNav extends Component {
     });
 
     return (
-      <nav className="header-nav">
+      <nav className="header-nav" role="navigation">
         <div className="header-nav__close" aria-label="Close navigation" onClick={this.onNavCloseClick.bind(this)}>x</div>
         <h2 className="header-nav__title">
           MENU

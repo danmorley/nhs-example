@@ -71,12 +71,12 @@ class StandardPageLayout extends Component {
       <div className={`page-wrapper ${theme} ${this.props.pageTypeClass}`}>
         <PageStyles content={pageStyles} />
         {headerComp}
-        <div className="page-content-wrapper">
+        <main className="page-content-wrapper" role="main">
           <div id="page-content" className="page-content">
             {content}
           </div>
-        </div>
-        <Footer className="page-footer" content={site_footer} site={site}/>
+        </main>
+        <Footer className="page-footer" content={site_footer} site={site} />
       </div>
     );
   }

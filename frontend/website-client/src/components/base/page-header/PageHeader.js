@@ -60,7 +60,7 @@ class PageHeader extends Component {
     }
 
     return (
-      <div ref={(divElement) => this.divElement = divElement} className="container-fluid page-header">
+      <div ref={(divElement) => this.divElement = divElement} className="container-fluid page-header" role="banner">
         <div className= "container">
           <Breadcrumb breadcrumbs={breadcrumbs}/>
           <div className="page-header__row">

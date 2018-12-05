@@ -25,7 +25,7 @@ class Footer extends Component {
     }
 
     return (
-      <div className={className}>
+      <div className={className} role="contentinfo">
         <div className ="container">
           <div className = "row">
             <div className ="col footer-left">
