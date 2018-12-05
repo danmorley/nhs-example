@@ -86,6 +86,10 @@
       position: absolute;
       color: $text-primary;
     }
+    
+    &:active {
+      background-color: transparent;
+    }
   }
 }
 
