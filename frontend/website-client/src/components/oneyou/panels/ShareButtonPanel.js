@@ -58,11 +58,9 @@ class ShareButtonPanel extends Component {
                 </a>;
                 
       return (
-        <React.Fragment key={i}>
-          <li  className={"share-button__"+item.share_item} key={i}>
-            {link}
-          </li>
-        </React.Fragment>
+        <li  className={"share-button__"+item.share_item} key={i}>
+          {link}
+        </li>
       );
     });
 
