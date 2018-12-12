@@ -16,17 +16,16 @@ class ShareButtonPanel extends Component {
   }
 
   handleClick(evt, item) {    
-    if (item == "email") {
+    if (item.share_item == "email") {
       return;
     } 
     else {
       evt.preventDefault();
-      let target = evt.target,
-        left = (window.screen.width - 570) / 2,
+      let left = (window.screen.width - 570) / 2,
         top = (window.screen.height - 570) / 2,
         params = 'menubar=no,toolbar=no,status=no,width=570,height=570,top=' + top + ',left=' + left;
         
-      window.open(target.getAttribute('href'), 'NewWindow',params);
+      window.open(item.url, 'NewWindow',params);
     }
   }
   
@@ -52,14 +51,17 @@ class ShareButtonPanel extends Component {
     ];
     
     let items = socialLinks.map((item, i) => {
-      let link ="<a href= "  + encodeURI(item.url) + " title='(opens in new window)'"           
-                +">"
-                + "<span class =\"screen-reader-text\">" + "share to " + item.share_item + "</span>"
-                + "</a>";
-        
+      let link =<a href={encodeURI(item.url)} title="(opens in new window)" onClick={(evt) => this.handleClick(evt, item)} >
+                  <span className ="screen-reader-text">
+                    {item.share_item}
+                  </span>
+                </a>;
+                
       return (
         <React.Fragment key={i}>
-          <li  className={"share-button__"+item.share_item} key={i} dangerouslySetInnerHTML={{ __html: link }} onClick={(evt) => this.handleClick(evt, item.share_item)} />
+          <li  className={"share-button__"+item.share_item} key={i}>
+            {link}
+          </li>
         </React.Fragment>
       );
     });
