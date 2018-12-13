@@ -122,9 +122,13 @@
 }
 
 .share-button-shelf {
+  
   .shelf__container {
-    padding: 0;
     background-color: transparent;
+    
+    @include media-breakpoint-up(sm) {
+      padding-right: 0;
+    }
   }
 
   .share-button-panel {
