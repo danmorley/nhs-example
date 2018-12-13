@@ -3,82 +3,63 @@ import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './share-button.css';
 import Panel from '../panels/Panel';
 
-const SOCIAL_LINKS = [
-  {
-    share_item: 'email',
-    share_text: ''
-  },
-  {
-    share_item: 'whatsapp',
-    share_text: ''
-  },
-  {
-    share_item: 'facebook',
-    share_text: ''
-  },
-  {
-    share_item: 'twitter',
-    share_text: ''
-  }
-];
-
-
-class ShareButtonPanel extends Component {
+class ShareButtonPanel extends Component {  
+  
   constructor (props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.shareButtonClick = this.shareButtonClick.bind(this);
-    this.socialWindow = this.socialWindow.bind(this);
-  }
-
-  socialWindow(url) {
-    var left = (window.screen.width - 570) / 2;
-    var top = (window.screen.height - 570) / 2;
-    var params = 'menubar=no,toolbar=no,status=no,width=570,height=570,top=' + top + ',left=' + left;
-    window.open(encodeURI(url), 'NewWindow',params);
   }
 
   setShareButton(elem) {
     this.shareButton = elem;
   }
 
-  handleClick(evt, shareText) {
-    let pageUrl = window.location.href,
-      site = '';
-
-    switch (evt.currentTarget.getAttribute('data-social-type')) {
-    case 'facebook':
+  handleClick(evt, item) {    
+    if (item.share_item == "email") {
+      return;
+    } 
+    else {
       evt.preventDefault();
-      site = "https://www.facebook.com/sharer/sharer.php?quote=" + shareText + "&" + "u=" + pageUrl;
-      this.socialWindow(site);
-      break;
-    case 'twitter':
-      evt.preventDefault();
-      site = "https://twitter.com/intent/tweet?text=" + shareText + "&" + "url=" + pageUrl;
-      this.socialWindow(site);
-      break;
-    case 'email':
-      var link = "mailto:?"
-          + "body=" + pageUrl;
-      evt.currentTarget.href=link;
-      break;
-    case 'whatsapp':
-      evt.preventDefault();
-      site = "whatsapp://send?text=" + shareText + " " + pageUrl;
-      this.socialWindow(site);
-      break;
-    default:
-      break;
+      let left = (window.screen.width - 570) / 2,
+        top = (window.screen.height - 570) / 2,
+        params = 'menubar=no,toolbar=no,status=no,width=570,height=570,top=' + top + ',left=' + left;
+        
+      window.open(item.url, 'NewWindow',params);
     }
   }
-
+  
   render() {
-    let items = SOCIAL_LINKS.map((item, i) => {
+    
+    let socialLinks = [
+      {
+        share_item: 'email',
+        url: "mailto:?" + "body=" + window.location.href
+      },
+      {
+        share_item: 'whatsapp',
+        url: "whatsapp://send?text=" + " " + window.location.href
+      },
+      {
+        share_item: 'facebook',
+        url: "https://www.facebook.com/sharer/sharer.php?quote=" + "&" + "u=" + window.location.href
+      },
+      {
+        share_item: 'twitter',
+        url: "https://twitter.com/intent/tweet?text=" + "&" + "url=" + window.location.href
+      }
+    ];
+    
+    let items = socialLinks.map((item, i) => {
+      let link =<a href={encodeURI(item.url)} title="(opens in new window)" onClick={(evt) => this.handleClick(evt, item)} >
+                  <span className ="screen-reader-text">
+                    {item.share_item}
+                  </span>
+                </a>;
+                
       return (
-        <li className={"share-button__"+item.share_item} key={i}>
-          <a href="#" data-social-type={item.share_item} title="(opens in new window)" onClick={(evt) => this.handleClick(evt, item.share_text)} data-name={`share-${item.share_item}`}>
-            <span className ="screen-reader-text">{`share to ${item.share_item}`}</span>
-          </a>
+        <li  className={"share-button__"+item.share_item} key={i}>
+          {link}
         </li>
       );
     });
