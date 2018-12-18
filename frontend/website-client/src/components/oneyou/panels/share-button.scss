@@ -136,10 +136,24 @@
     flex-direction: row;
     margin-left: 0;
 
+    @include media-breakpoint-down(sm) {    
+      &:first-child {
+        margin-bottom: 0.5em;
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    
     &.share-button-panel--align-right {
       justify-content: flex-end;
     }
   } 
+  
+  .print-button-panel--align-right,
+  .email-button-panel--align-right {
+    justify-content: flex-end;
+  }
 }
 
 
