@@ -237,36 +237,6 @@
         <!-- End Google Tag Manager -->
     {% endif %}
 
-    <script>
-      AdobeDataLayer = function () {
-        function getPageName(path) {
-          return 'nhs:phe' + path.replace(/\/$/, '').replace(/\//g, ':');
-        }
-
-        function getCategories(path) {
-          return path.split('/').filter(Boolean);
-        }
-
-        function setDigitalData() {
-          var path = document.location.pathname;
-          var categories = getCategories(path);
-          window.digitalData = {
-            page: {
-              category: {
-                primaryCategory: categories[0],
-                subCategory1: categories[1],
-                subCategory2: categories[2],
-                subCategory3: categories[3]
-              },
-              pageInfo: {
-                pageName: getPageName(path)
-              }
-            }
-          };
-        }
-      };
-    </script>
-
     {% if site_setting.adobe_tracking_url %}
         <script src="{{ site_setting.adobe_tracking_url }}" async data-cookieconsent="statistics"></script>
     {% endif %}
