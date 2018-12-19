@@ -96,6 +96,11 @@ class App extends Component {
               'WT.cg_s', page.response.title,
               'DCSext.RealUrl', window.location.pathname);
           }
+          console.log(global);
+          if (global.AdobeDataLayer) {
+            global.AdobeDataLayer.setDigitalData();
+            //_satellite.track("page_view");
+          }
         } else {
           console.error(page.error, page.info.statusCode, page.info.message);
           if (page.info.statusCode === 404) {

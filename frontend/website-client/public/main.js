@@ -1,4 +1,5 @@
 ( function() {
+  console.log('help');
   var js = document.createElement('script');
   var css = document.createElement('link');
   var domain = getDomain();
@@ -24,5 +25,4 @@
       return '';
     }
   }
-
 })();
