@@ -19,6 +19,36 @@ import UrlUtils from './components/base/shared/UrlUtils';
  *
  *  data-content-store-endpoint: "https://oneyou-cms.service.nhs.uk/api"
  */
+
+(function (context) {
+  function getPageName(path) {
+    return 'nhs:phe' + path.replace(/\/$/, '').replace(/\//g, ':');
+  }
+
+  function getCategories(path) {
+    return path.split('/').filter(Boolean);
+  }
+
+  context.setDigitalData = function() {
+    var path = document.location.pathname;
+    var categories = getCategories(path);
+
+    window.digitalData = {
+      page: {
+        category: {
+          primaryCategory: categories[0],
+          subCategory1: categories[1],
+          subCategory2: categories[2],
+          subCategory3: categories[3]
+        },
+        pageInfo: {
+          pageName: getPageName(path)
+        }
+      }
+    };
+  }
+})(global);
+
 let rootElem = document.getElementById('root');
 const siteSlug = UrlUtils.siteSlugFromPath(window.location.pathname);
 global.rootUrl = rootElem.getAttribute('data-site') ? '/' + rootElem.getAttribute('data-site') : '/' + siteSlug;

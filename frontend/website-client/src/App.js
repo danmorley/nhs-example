@@ -96,6 +96,9 @@ class App extends Component {
               'WT.cg_s', page.response.title,
               'DCSext.RealUrl', window.location.pathname);
           }
+          if (global.setDigitalData) {
+            global.setDigitalData();
+          }
         } else {
           console.error(page.error, page.info.statusCode, page.info.message);
           if (page.info.statusCode === 404) {
