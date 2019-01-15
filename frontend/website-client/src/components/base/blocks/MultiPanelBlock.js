@@ -8,15 +8,18 @@ import CmsComponentRegistry from '../CmsComponentRegistry';
 // all inputs explicitly.
 // With the plugin import statement is as follows
 // import * as Panels from './panels'
+import InformationPanel from '../panels/InformationPanel';
+import VideoTeaserPanel from '../panels/VideoTeaserPanel';
+
 import PlaceholderPanel from '../../oneyou/panels/PlaceholderPanel';
-import VideoTeaserPanel from '../../oneyou/panels/VideoTeaserPanel';
-import '../../oneyou/panels/ImageTeaserPanel';
+// import VideoTeaserPanel from '../../oneyou/panels/VideoTeaserPanel';
+import '../panels/ImageTeaserPanel';
 import '../panels/ImageTeaserPanel/ImageTeaserPanel';
 import '../panels/SimpleServiceFinder';
 import '../panels/SimpleServiceFinderForm';
+import BannerPanel from '../panels/BannerPanel';
 import Oneyou1TeaserPanel from '../../oneyou/panels/Oneyou1TeaserPanel';
 import AppTeaserPanel from '../../oneyou/panels/AppTeaserPanel';
-import InformationPanel from '../../oneyou/panels/InformationPanel';
 import SimpleTextPanel from '../../oneyou/panels/SimpleTextPanel';
 import RichTextPanel from '../../oneyou/panels/RichTextPanel';
 import IconCardPanel from '../../oneyou/panels/IconCardPanel';

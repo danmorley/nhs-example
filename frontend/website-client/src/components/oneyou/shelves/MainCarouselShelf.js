@@ -82,7 +82,7 @@ MainCarouselShelf.propTypes = {
   id: PropTypes.string
 };
 
-CmsComponentRegistry.register('main_carousel_shelf', MainCarouselShelf, 'carousel-shelf');
-CmsComponentRegistry.register('carousel_shelf', MainCarouselShelf, 'carousel-shelf');
+// CmsComponentRegistry.register('main_carousel_shelf', MainCarouselShelf, 'carousel-shelf');
+// CmsComponentRegistry.register('carousel_shelf', MainCarouselShelf, 'carousel-shelf');
 
 export default MainCarouselShelf;

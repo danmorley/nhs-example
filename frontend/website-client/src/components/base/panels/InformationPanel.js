@@ -61,7 +61,7 @@ class InformationPanel extends Component {
           <div className={`${classNamePrefix}__text`}>
             <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
           </div>
-          <CtaLinks cta={content.cta} variant="button" />
+          <CtaLinks ctas={content.ctas} variant="button" />
         </div>
         <div className={`${classNamePrefix}__image`} style={backgroundImage}>
         </div>
@@ -76,6 +76,6 @@ InformationPanel.propTypes = {
   id: PropTypes.string
 };
 
-// CmsComponentRegistry.register('information_panel', InformationPanel, 'information-panel');
+CmsComponentRegistry.register('information_panel', InformationPanel, 'information-panel');
 
 export default InformationPanel;

@@ -52,6 +52,12 @@ class PageHeadingShelf extends Component {
     const leftImageStyle = (content.image_left && content.image_left.meta_position === 'bottom')? 'left-image--bottom' : 'left-image--top';
     const rightImageStyle = (content.image_right && content.image_right.meta_position === 'bottom')? 'right-image--bottom' : 'right-image--top';
     
+    console.log("-------------------");
+    console.log(content);
+    console.log(content.background_image);
+    console.log(content.background_image.meta_variant);
+    console.log("-------------------");
+
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group}>
         <ResponsiveBackgroundImage 

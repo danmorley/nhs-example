@@ -66,7 +66,7 @@ class SexhealthPageHeadingWithVideoShelf extends PageHeadingShelf {
     // Calculate styling to position the left and right images 
     const leftImageStyle = (content.image_left && content.image_left.meta_position === 'bottom')? 'left-image--bottom' : 'left-image--top';
     const rightImageStyle = (content.image_right && content.image_right.meta_position === 'bottom')? 'right-image--bottom' : 'right-image--top';
-    
+
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group} classExtra="sexhealth-page-heading-with-video-shelf">
         {content.video_id && <VideoModal video={content.video_id} host={content.host} classNamePrefix={classNamePrefix} ref={this.video} classExtra="sexhealth-video-modal">

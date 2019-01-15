@@ -31,6 +31,6 @@ DividerShelf.propTypes = {
   id: PropTypes.string
 };
 
-CmsComponentRegistry.register('divider', DividerShelf, 'divider-shelf');
+CmsComponentRegistry.register('divider_shelf', DividerShelf, 'divider-shelf');
 
 export default DividerShelf;

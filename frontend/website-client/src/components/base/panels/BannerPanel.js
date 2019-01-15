@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Shelf from './Shelf';
+import Panel from './Panel';
 import Text from '../Text';
 import Image from '../Image';
 import CtaLink from '../shared/CtaLink';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-import './banner-shelf.css';
+import './banner-panel.css';
 import ShelfUtils from '../shared/ShelfUtils';
 import Banner from '../shared/Banner';
-import ImageUtils from '../panels/ImageUtils';
+import ImageUtils from './ImageUtils';
 
 /**
  *  Banner Shelf is a simple shelf that can be used to display content
@@ -29,7 +29,7 @@ import ImageUtils from '../panels/ImageUtils';
  *  Layouts:
  *    image_on_left: 
  */
-class BannerShelf extends Component {
+class BannerPanel extends Component {
   renderImage(image, classname) {
     return (<Image image={image} class={classname} />);
   }
@@ -62,44 +62,47 @@ class BannerShelf extends Component {
   }
 
   render() {
-    const { id, content, classNamePrefix, variant, layout } = this.props;
+    const { id, content, classNamePrefix, variant, layout, width } = this.props;
 
     const metaVariant = content.meta_variant || variant || 'primary';
     const metaLayout = content.meta_layout || layout || 'vertical_left';
     const [ direction, alignment ] = metaLayout.split('_');
 
-    const headingTagName = (classNamePrefix === 'page-heading-shelf') ? 'h1' : 'h2';
+    const headingTagName = (classNamePrefix === 'page-heading-panel') ? 'h1' : 'h2';
     const panel = content.panel ? content.panel : content;
     const containerClass = `shelf__container ${ShelfUtils.shelfContainerClass(content)}`;
-    const classExtra = ImageUtils.isValid(panel.background_image) ? 'banner-shelf--imagebackground' : null;
-    const background =  panel.attributes[0] ? panel.attributes[0].value : null;
-    
+    const classExtra = ImageUtils.isValid(panel.background_image) ? 'banner-panel--imagebackground' : null;
+
+    const banner = (
+      <Banner 
+        backgroundImage={panel.attributes[0].value}
+        heading={<Text tagName={headingTagName} content={panel.heading} />}
+        body={<Text content={panel.body} format="richtext"/>}
+        ctas={panel.ctas}
+        layout={metaLayout}
+        panel
+      />
+    );
+
+    width
+
     return (
-      <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group} layout={`align-${alignment}`} classExtra={classExtra}>
-        <div className="shelf__container container">
-          <div className={containerClass}>
-            <Banner 
-              backgroundImage={background}
-              heading={<Text tagName={headingTagName} content={panel.heading} />}
-              body={<Text content={panel.body} format="richtext"/>}
-              ctas={panel.ctas}
-              layout={metaLayout}
-            />
-          </div>
-        </div>
-      </Shelf>
+      <Panel id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group} layout={`align-${alignment}`} classExtra={classExtra}>
+        {width == "full" && banner}
+      </Panel>
     );
   }
 }
 
-BannerShelf.propTypes = {
+BannerPanel.propTypes = {
   content: PropTypes.object.isRequired,
   classNamePrefix: PropTypes.string.isRequired,
   variant: PropTypes.string,
   layout: PropTypes.string,
+  width: PropTypes.string,
   id: PropTypes.string
 }
 
-CmsComponentRegistry.register('banner_shelf', BannerShelf, 'banner-shelf', 'banner');
+CmsComponentRegistry.register('banner_panel', BannerPanel, 'banner-panel', 'banner');
 
-export default BannerShelf;
+export default BannerPanel;

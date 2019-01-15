@@ -43,7 +43,7 @@ class Banner extends Component {
   }
 
   render() {
-    const { backgroundImage, heading, body, ctas, className, layout, ratios } = this.props;
+    const { backgroundImage, heading, body, ctas, className, layout, ratios, panel } = this.props;
 
     // Direction: vertical, horizontal
     // Alignment: left, center, right
@@ -59,45 +59,70 @@ class Banner extends Component {
     //   ratio1 = 'x', ratio2 = 'x';
     // }
 
-    const bannerClass = `banner row no-gutters banner-direction-${direction} banner-align-${alignment} ${className}`;
-    
+    // const variant = backgroundImage && backgroundImage.meta_variant || false;
+
+    // console.log("backgroundImage");
+    // console.log(variant);
+
+    // shelf__container-gradient--${gradient}
+
+    // const bannerClass = `banner row no-gutters banner-direction-${direction} banner-align-${alignment} ${className}`;
+    const bannerClass = `shelf__container container-fluid shelf__container-gradient--false`;
+
+    let container  = null;
+
+    if (panel) {
+      container = (<div className="container">
+        <div className="row">
+          <div className="shelf__col col-10 col-sm-10 col-md-7">
+            {heading}
+            {body}
+            <Buttons ctas={ctas} layout={this.horizontalButtonsLayout(alignment)} />
+          </div>
+        </div>
+      </div>);
+    } else {
+      if (direction === 'vertical') {
+        container = (<div className="container">
+          <div className="row">
+            <div className="banner-content">
+              <div key="1" className="banner-heading p-1 p-lg-3">
+                {heading}
+              </div>
+              <div key="2" className="banner-body p-1 p-lg-3">
+                {body}
+              </div>
+              <div key="3" className="banner-ctas p-1 p-lg-3">
+                <Buttons ctas={ctas} layout={this.horizontalButtonsLayout(alignment)} />
+              </div>
+            </div>
+          </div>
+        </div>);
+      } else if (direction === 'horizontal') {
+        const ctas_container = (<div className="col-12 col-lg-3">
+          <Buttons ctas={ctas} layout={this.verticalButtonsLayout(alignment, ctas.length)} />
+        </div>);
+        const body_container = (<div className="col-12 col-lg-9">
+          {heading}
+          {body}
+        </div>);
+        if (alignment === 'left') {
+          container = (<div className="row align-items-center">
+            {ctas_container}
+            {body_container}
+          </div>);
+        } else {
+          container = (<div className="row align-items-center">
+            {body_container}
+            {ctas_container}
+          </div>);
+        }
+      }
+    }
+
     return (
       <ResponsiveBackgroundImage image={backgroundImage} className={bannerClass}>
-        { direction === 'vertical' &&
-          <div className="banner-content">
-            <div key="1" className="banner-heading p-1 p-lg-3">
-              {heading}
-            </div>
-            <div key="2" className="banner-body p-1 p-lg-3">
-              {body}
-            </div>
-            <div key="3" className="banner-ctas p-1 p-lg-3">
-              <Buttons ctas={ctas} layout={this.horizontalButtonsLayout(alignment)} />
-            </div>
-          </div>
-        }
-        { direction === 'horizontal' && (alignment === 'right' || alignment === 'center') &&
-          <div className="row align-items-center">
-            <div className="col-12 col-lg-9">
-              {heading}
-              {body}
-            </div>
-            <div className="col-12 col-lg-3">
-              <Buttons ctas={ctas} layout={this.verticalButtonsLayout(alignment, ctas.length)} />
-            </div>
-          </div>
-        }
-        { direction === 'horizontal' && alignment === 'left' &&
-          <div className="row align-items-center">
-            <div className="col-12 col-lg-3">
-              <Buttons ctas={ctas} layout={this.verticalButtonsLayout(alignment, ctas.length)} />
-            </div>
-            <div className="col-12 col-lg-9">
-              {heading}
-              {body}
-            </div>
-          </div>
-        }
+        {container}
       </ResponsiveBackgroundImage>
     );
   }
@@ -106,7 +131,8 @@ class Banner extends Component {
 Banner.defaultProps = {
   className: '',
   layout: 'horizontal_left',
-  ratios: '9_3'
+  ratios: '9_3',
+  panel: false
 }
 
 Banner.propTypes = {
@@ -117,7 +143,8 @@ Banner.propTypes = {
   className: PropTypes.string.isRequired,
   layout: PropTypes.string,
   ratios: PropTypes.string,
-  id: PropTypes.string
+  id: PropTypes.string,
+  panel: PropTypes.boolean
 };
 
 export default Banner;

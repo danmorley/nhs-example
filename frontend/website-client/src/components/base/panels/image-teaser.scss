@@ -1,5 +1,5 @@
-@import '../../../../assets/styles/variables/variables';
-@import '../../../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints';
+@import '../../../assets/styles/variables/variables';
+@import "../../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
 
 .image-teaser {
   display: flex; 
@@ -13,7 +13,6 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  width: 50%;
   
   .child-image--contain & {
     background-size: contain;
@@ -92,13 +91,13 @@
 .image-teaser--dark-bg {
   
   .image-teaser__info {
-    // width: 65%;
+    width: 65%;
     padding-left: 0;
     padding-right: 0;
   }
   
   .image-teaser__image {
-    // width: 35%;
+    width: 35%;
   }
 }
 
@@ -134,7 +133,7 @@
     padding-right: 1em;
     color: $white;
 
-    a.link-cta {
+    .cta-list__item a {
       color: $sunflower-yellow;
     }
   }  
@@ -160,10 +159,7 @@
       }
     }
   }
-  
-  .image-teaser--desktop-image-default-mobile-image-default,
-  .image-teaser--desktop-image-left-mobile-image-default,
-  .image-teaser--desktop-image-default-mobile-image-top,
+
   .image-teaser--desktop-image-left-mobile-image-top {
   
     .image-teaser__info {
@@ -210,7 +206,7 @@
       }
       
       @include media-breakpoint-up(md) {
-        @include heading-h2(oneyou);
+        @include heading-h2(oneyou)
         padding: 1em 0 0;
       }
     }
@@ -270,52 +266,36 @@
 
 //sexhealth
 .sexhealth {
+  .image-teaser--dark-bg,
   .image-teaser--primary_background {
-    .teaser-heading {
-      background-color: $black;
+
+    .image-teaser__info {
+      padding: 0 !important;
+    }
+
+    .image-teaser__heading {
+      padding: 1.5em 1em;
+      background-color: $sexhealth-dark;
       color: $white;
     }
 
-    .teaser-body {
+    .image-teaser__text {
+      padding: 1.5em 1em;
       background-color: $sexhealth-purple;
-    }
-
-    .teaser-text {
       color: $white;
-      background-color: transparent;
-    }
 
-    .teaser-ctas {
-      background-color: transparent;
-
-      a {
+      .cta-list__item  a {
         text-decoration: none;
         color: $sunflower-yellow;
       }
-    }
+    }  
   }
   
-  .image-teaser--desktop-image-default-mobile-image-default,
-  .image-teaser--desktop-image-left-mobile-image-default,
-  .image-teaser--desktop-image-default-mobile-image-top,
-  .image-teaser--desktop-image-left-mobile-image-top {
+  .panel-carousel {
   
-    .image-teaser {
-      flex-direction: column; 
+    .image-teaser__heading {
+      font-family: $sexhealth-bold-font;
     } 
-    
-    .image-teaser__info {
-      width: 65%;
-      padding-left: 0;
-      padding-right: 0;
-    }
-  
-    @include media-breakpoint-down(sm) {
-      flex-direction: column;
-      
-      .image-teaser__image, .image-teaser__info, .image-teaser__text {
-        width: 100%;
-      }
-    }
   }
+    
 }

@@ -76,6 +76,6 @@ GridShelf.propTypes = {
   id: PropTypes.string
 };
 
-CmsComponentRegistry.register('grid_shelf', GridShelf, 'basic-grid-shelf', null, 'responsive_2_col', 'oneyou');
+// CmsComponentRegistry.register('grid_shelf', GridShelf, 'basic-grid-shelf', null, 'responsive_2_col', 'oneyou');
 
 export default GridShelf;

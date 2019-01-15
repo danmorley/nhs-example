@@ -29,7 +29,7 @@ class Buttons extends Component {
     return (
       <div className={buttonsClass}>
         <div className="buttons-ctas">
-          {<CtaLinks cta={ctas} variant="button" />}
+          {<CtaLinks ctas={ctas} variant="button" />}
         </div>
       </div>
     );

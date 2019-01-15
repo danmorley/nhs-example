@@ -16,7 +16,7 @@ import BannerShelf from '../shelves/BannerShelf';
 import PageHeadingShelf from '../shelves/PageHeadingShelf';
 // import GuidanceShelf from '../../shelves/GuidanceShelf';
 // import MainCarouselShelf from '../../shelves/MainCarouselShelf';
-import PanelCarouselShelf from '../shelves/PanelCarouselShelf';
+import CarouselShelf from '../shelves/CarouselShelf';
 import GridShelf from '../shelves/GridShelf';
 // import HeadingBodyShelf from '../../shelves/HeadingBodyShelf';
 // import NoticeShelf from '../../shelves/NoticeShelf';

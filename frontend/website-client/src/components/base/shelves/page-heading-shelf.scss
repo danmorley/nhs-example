@@ -192,7 +192,7 @@ $shelf-padding-extra: 2em;
   
   > .shelf__container {
     
-    &.shelf__container-gradient--true:after {
+    &.image--gradient:after {
       width:100%;
       content:'';
       display:block;
