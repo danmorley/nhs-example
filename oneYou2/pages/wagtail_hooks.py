@@ -1,15 +1,16 @@
 from axes.models import AccessAttempt
+
 from django.urls import reverse
-from wagtail.contrib.modeladmin.helpers import ButtonHelper
-from wagtail.contrib.modeladmin.options import (
-    ModelAdmin, modeladmin_register)
 from django.utils.translation import ugettext as _
 
-from .models import Menu, Theme
-
-import wagtail.admin.rich_text.editors.draftail.features as draftail_features
+from wagtail.admin import widgets as wagtailadmin_widgets
 from wagtail.admin.rich_text.converters.html_to_contentstate import BlockElementHandler
+from wagtail.admin.rich_text.editors.draftail import features as draftail_features
+from wagtail.contrib.modeladmin.helpers import ButtonHelper
+from wagtail.contrib.modeladmin.options import ModelAdmin, modeladmin_register
 from wagtail.core import hooks
+
+from .models import Menu, Theme
 
 
 @hooks.register('register_rich_text_features')
@@ -38,6 +39,14 @@ def register_strikethrough_feature(features):
 
     features.default_features.append('div')
 
+@hooks.register('register_page_listing_buttons')
+def page_listing_buttons(page, page_perms, is_parent=False):
+    if page.__class__.__name__.lower() in ['oneyou2page']:
+        yield wagtailadmin_widgets.PageListingButton(
+            'Copy New World',
+            reverse('oneyou_pages:copy_oneyou_newworld', args=[page.id]),
+            priority=45,
+        )
 
 class AccessAttemptAdmin(ModelAdmin):
     model = AccessAttempt

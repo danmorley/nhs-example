@@ -330,6 +330,12 @@ def edit(request, page_id):
     else:
         page_for_status = page
 
+    rendition = None
+    try:
+        rendition = SiteSettings.objects.get(site=page.get_site()).rendition
+    except SiteSettings.DoesNotExist:
+        pass
+
     return render(request, 'wagtailadmin/pages/edit.html', {
         'page': page,
         'page_for_status': page_for_status,
@@ -340,7 +346,7 @@ def edit(request, page_id):
         'form': form,
         'next': next_url,
         'has_unsaved_changes': has_unsaved_changes,
-        'rendition': SiteSettings.objects.get(site=page.get_site()).rendition,
+        'rendition': rendition,
     })
 
 

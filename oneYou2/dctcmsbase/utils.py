@@ -12,7 +12,6 @@ from wagtail.documents.models import Document
 
 from wagtailmedia.models import Media
 
-from dctsharedcontent.models import SharedContent
 from home.models import SiteSettings
 
 
