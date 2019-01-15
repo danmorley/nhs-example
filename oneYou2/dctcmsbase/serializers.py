@@ -8,7 +8,7 @@ from wagtail.api.v2.serializers import StreamField
 
 from home.models import SiteSettings
 
-from .sharedcontent import Promo, Banner
+from .sharedcontent import Banner, AppTeaser
 
 
 class GeneralShelvePageSerializer(serializers.ModelSerializer):
@@ -100,7 +100,8 @@ class CTAPageSerializer(serializers.Serializer):
         return serialized_data
 
 
-class PromoSerializer(HyperlinkedModelSerializer):
+class BannerSerializer(HyperlinkedModelSerializer):
+
     attributes = StreamField()
     ctas = StreamField()
 
@@ -110,13 +111,47 @@ class PromoSerializer(HyperlinkedModelSerializer):
         representation['shelf_id'] = slugify(representation['shelf_id'])
         return representation
 
-    class Meta:
-        model = Promo
-        fields = ['shelf_id', 'heading', 'attributes', 'ctas']
-
-
-class BannerSerializer(PromoSerializer):
 
     class Meta:
         model = Banner
         fields = ['shelf_id', 'heading', 'body', 'attributes', 'ctas']
+
+
+class AppTeaserSerializer(HyperlinkedModelSerializer):
+
+    attributes = StreamField()
+    ctas = StreamField()
+
+    def to_representation(self, obj):
+        representation = super().to_representation(obj)
+        cta_appstore = representation.pop('cta_appstore')
+        cta_googleplay = representation.pop('cta_googleplay')
+        if cta_appstore:
+            representation['cta_appstore'] = {
+                'link_text': '',
+                'link_external': cta_appstore,
+            }
+        if cta_googleplay:
+            representation['cta_googleplay'] = {
+                'link_text': '',
+                'link_external': cta_googleplay,
+            }
+
+        # cta_text = representation.pop('cta_text')
+        # cta_link = representation.pop('cta_link')
+        # cta_page = representation.pop('cta_page')
+        # representation['cta'] = {
+        #     'link_text': cta_text,
+        #     'link_external': cta_link,
+        # }
+        # if cta_page:
+        #     representation['cta']['link_page'] = {
+        #         'id': cta_page.get('id'),
+        #         'slug': cta_page.get('slug'),
+        #         'relative_path': cta_page.get('relative_path'),
+        #     }
+        return representation
+
+    class Meta:
+        model = AppTeaser
+        fields = ['shelf_id', 'heading', 'body', 'attributes', 'ctas', 'cta_googleplay', 'cta_appstore']
