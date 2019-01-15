@@ -131,10 +131,10 @@ class BannerChooserBlock(SnippetChooserBlock):
         return BannerSerializer(context=context).to_representation(value)
 
 
-class PromoChooserBlock(SnippetChooserBlock):
+class AppTeaserChooserBlock(SnippetChooserBlock):
     def get_api_representation(self, value, context=None):
-        from .serializers import PromoSerializer
-        return PromoSerializer(context=context).to_representation(value)
+        from .serializers import AppTeaserSerializer
+        return AppTeaserSerializer(context=context).to_representation(value)
 
 
 class ItemPageBlock(blocks.PageChooserBlock):
@@ -192,3 +192,44 @@ class DocumentDownloadBlock(blocks.StructBlock):
             result['document'] = Document.objects.get(id=document_id).file.url
 
         return result
+
+
+class DataAttributeBlock(blocks.StructBlock):
+    name = blocks.CharBlock(help_text='Data attribute name, don\'t add \'data-\'')
+    value = blocks.CharBlock()
+
+
+class InlineScriptBlock(blocks.StructBlock):
+    script = blocks.TextBlock(required=False, help_text='The javascript to be inserted')
+    src = blocks.CharBlock(required=False, help_text='URL of the javascript file')
+    script_id = IDBlock(required=False, label='Script tag ID', retain_case=True,
+                        help_text='Optional ID of the script tag')
+    placeholder_id = IDBlock(required=False, label='Placeholder ID', retain_case=True,
+                             help_text='If given, an empty placeholder div will be added before the script tag')
+    data_attributes = blocks.StreamBlock([
+            ('data_attribute', DataAttributeBlock(icon='collapse-down')),
+        ],
+        required=False,
+        label='Data attributes for placeholder div',
+    )
+
+    class meta:
+        abstract = True
+
+
+class InlineSvgBlock(blocks.StructBlock):
+    svg = blocks.TextBlock(required=True, label='SVG code', help_text='The SVG source')
+    svg_mob = blocks.TextBlock(
+        required=False,
+        label='SVG code for mobile',
+        help_text='The SVG source for display on mobile devises'
+    )
+    styles = blocks.TextBlock(required=False, help_text='CSS styling')
+    script = blocks.TextBlock(
+        required=False,
+        label='Inline script code',
+        help_text='Inline javascript to make the SVG interactive'
+    )
+
+    class Meta:
+        abstract = True

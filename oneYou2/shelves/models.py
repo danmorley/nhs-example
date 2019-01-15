@@ -220,6 +220,10 @@ class PromoShelf(ShelfAbstract):
         PageChooserPanel('cta_page'),
     ]
 
+    class Meta:
+        verbose_name = 'Promo Shelf (OneYou)'
+        verbose_name_plural = 'Promo Shelves (OneYou)'
+
     @property
     def meta_layout(self):
         return 'cta_on_right'
@@ -342,6 +346,10 @@ class AppTeaser(ShelfAbstract):
 
         if validation_errors:
             raise ValidationError(validation_errors)
+    
+    class Meta:
+        verbose_name = 'App Teaser (OneYou)'
+        verbose_name_plural = 'App Teasers (OneYou)'
 
 
 @register_snippet
@@ -471,8 +479,8 @@ class ActionShelf(ShelfAbstract):
             raise ConnectionError('Could not push action to paragon')
 
     class Meta:
-        verbose_name = 'Action'
-        verbose_name_plural = 'Actions'
+        verbose_name = 'Action (OneYou)'
+        verbose_name_plural = 'Actions (OneYou)'
         unique_together = (('category', 'position'),)
 
     def __str__(self):

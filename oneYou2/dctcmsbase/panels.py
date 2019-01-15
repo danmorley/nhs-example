@@ -5,7 +5,8 @@ from wagtail.core import blocks
 
 from wagtailmedia.blocks import AbstractMediaChooserBlock
 
-from .blocks import IDBlock, ImageBlock, SimpleCtaLinkBlock, DocumentDownloadBlock
+from .blocks import (IDBlock, ImageBlock, SimpleCtaLinkBlock, DocumentDownloadBlock, InlineScriptBlock,
+    AppTeaserChooserBlock, InlineSvgBlock)
 
 
 IMAGE_PANEL_VARIANTS = (
@@ -14,18 +15,17 @@ IMAGE_PANEL_VARIANTS = (
 )
 
 IMAGE_TEASER_VARIANT_CHOICES = (
-    ('no_bg', 'No Background'),
-    ('primary_background', 'Primary colour background'),
-    ('secondary_background', 'Secondary colour background'),
+    ('light-bg', 'Light Background'),
+    ('dark-bg', 'Dark Background'),
 )
 
 IMAGE_TEASER_LAYOUT_CHOICES = (
-    ('desktop-image-default-mobile-image-default', 'Desktop: Default, Mobile: Default'),
-    ('desktop-image-default-mobile-image-top', 'Desktop: Default, Mobile: Top'),
-    ('desktop-image-default-mobile-image-left', 'Desktop: Default, Mobile: Left'),
-    ('desktop-image-left-mobile-image-default', 'Desktop: Left, Mobile: Default'),
     ('desktop-image-left-mobile-image-top', 'Desktop: Left, Mobile: Top'),
     ('desktop-image-left-mobile-image-left', 'Desktop: Left, Mobile: Left'),
+)
+
+VIDEO_TEASER_LAYOUT_CHOICES = IMAGE_TEASER_LAYOUT_CHOICES + (
+    ('image_only', 'Image only'),
 )
 
 RICH_TEXT_PANEL_VARIANTS = (
@@ -35,10 +35,32 @@ RICH_TEXT_PANEL_VARIANTS = (
 )
 
 INFO_PANEL_VARIANTS = (
-    ('mobile-image-top-text-right', 'Mobile image on top, Desktop image on left with text right'),
-    ('mobile-image-right', 'Mobile image on right, Desktop image on right'),
     ('light_background', 'Light background'),
     ('dark_background', 'Dark background')
+)
+
+INFO_PANEL_LAYOUTS = (
+    ('desktop-image-left-mobile-image-top', 'Desktop: Image Left/Text Right, Mobile: Image Top'),
+    ('desktop-image-right-mobile-image-right', 'Desktop: Image Right, Mobile: Image Left'),
+)
+
+ICON_CARD_LAYOUTS = (
+    ('icon_on_left', 'Icon on Left'),
+    ('icon_on_right', 'Icon on Right'),
+    ('icon_heading_left', 'Icon Heading Left'),
+    ('icon_heading_right', 'Icon Heading Right'),
+    ('icon_body_left', 'Icon Body Left'),
+    ('icon_body_right', 'Icon Body Right'),
+    ('icon_on_top', 'Icon on Top'),
+    ('icon_on_bottom', 'Icon on Bottom'),
+)
+
+ICON_CARD_VARIANTS = (
+    ('standard_grey_bg', 'Standard on Grey Background'),
+    ('standard_heading_standard_body_grey_bg', 'Standard Heading, Standard Body Text, Grey Background'),
+    ('large_green_heading_standard_body_grey_bg', 'Large Green Heading, Standard Body Text, Grey Background'),
+    ('x_small_heading_large_body_no_bg', 'X Small Heading, Large Body Text, No Background'),
+    ('large_yellow_heading_standard_body_no_bg', 'Large yellow heading, standard body, no background (Active 10)'),
 )
 
 BRIGHTCOVE_OPTION = ('brightcove', 'Brightcove')
@@ -119,7 +141,7 @@ class VideoTeaserPanel(TeaserPanel):
 
 class StandardVideoTeaserPanel(VideoTeaserPanel):
     meta_layout = blocks.ChoiceBlock(
-        choices=IMAGE_TEASER_LAYOUT_CHOICES,
+        choices=VIDEO_TEASER_LAYOUT_CHOICES,
         default='mobile-image-default',
         label='Mobile Image Position',
         classname='dct-meta-field'
@@ -163,6 +185,11 @@ class StandardInformationPanel(InformationPanel):
     meta_variant = blocks.ChoiceBlock(
         choices=INFO_PANEL_VARIANTS,
         label='Variant',
+        classname='dct-meta-field'
+    )
+    meta_layout = blocks.ChoiceBlock(
+        choices=INFO_PANEL_LAYOUTS,
+        label='Layout',
         classname='dct-meta-field'
     )
 
@@ -219,7 +246,7 @@ class AccordionItemsPanel(Panel):
 
 class AccordionPanel(Panel):
     accordions = blocks.StreamBlock([
-        ('accordion_items', AccordionItemsPanel(required=True, icon='collapse-down'))
+        ('accordion_items_panel', AccordionItemsPanel(required=True, icon='collapse-down'))
     ])
     scroll_items_to_top_when_selected = blocks.BooleanBlock(
         label='Scroll to the top of the item when selected',
@@ -232,7 +259,7 @@ class AccordionPanel(Panel):
         form_classname = 'dct-panel-panel-accordion dct-meta-panel'
 
 
-class SimpleServiceFinder(Panel):
+class SimpleServiceFinderPanel(Panel):
     text = blocks.RichTextBlock(required=False)
     heading = blocks.CharBlock(required=False)
     finder_url = blocks.URLBlock()
@@ -242,3 +269,45 @@ class SimpleServiceFinder(Panel):
 
     class Meta:
         form_classname = 'dct-panel-panel-simple-service-finder dct-meta-panel'
+
+
+class InlineScriptPanel(Panel, InlineScriptBlock):
+    class Meta:
+        form_classname = 'dct-panel-inline-script dct-meta-panel'
+
+
+class InlineSvgPanel(Panel, InlineSvgBlock):
+    class Meta:
+        form_classname = 'dct-inline-svg-panel dct-meta-panel'
+
+
+class AppTeaserPanel(Panel):
+    panel = AppTeaserChooserBlock(target_model='dctcmsbase.AppTeaser', icon='image')
+
+    class Meta:
+        form_classname = 'dct-appteaser-shelf dct-meta-panel'
+
+
+class IconCardPanel(Panel):
+    heading = blocks.CharBlock(required=False)
+    body = blocks.RichTextBlock(required=False)
+    image = ImageBlock(required=False)
+    ctas = blocks.StreamBlock([
+        ('simple_cta_link', SimpleCtaLinkBlock())
+    ], icon='arrow-left', label='CTA links', required=False)
+    meta_variant = blocks.ChoiceBlock(choices=ICON_CARD_VARIANTS,
+                                      default='standard_grey_bg',
+                                      label='Variant',
+                                      classname='dct-meta-field')
+    meta_layout = blocks.ChoiceBlock(choices=ICON_CARD_LAYOUTS,
+                                     default='icon_on_left',
+                                     label='Layout',
+                                     classname='dct-meta-field')
+
+    class Meta:
+        form_classname = 'dct-icon-card-panel dct-meta-panel'
+
+
+
+class ListItemPanel(Panel):
+    text = blocks.CharBlock(required=True)

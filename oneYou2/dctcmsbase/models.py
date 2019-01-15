@@ -1,3 +1,5 @@
+import json
+
 from django.db import models
 from django.http import JsonResponse
 from django.template.response import TemplateResponse, SimpleTemplateResponse
@@ -227,6 +229,53 @@ class GeneralShelvePage(Page):
         serializer = getattr(serializers_module, serializer_name)
         return serializer
 
+    @classmethod
+    def create_from_dict(cls, obj_dict):
+        return cls(title=obj_dict['title'],
+                   path=obj_dict['path'],
+                   depth=obj_dict['depth'],
+                   numchild=obj_dict['numchild'],
+                   slug=obj_dict['meta']['slug'],
+                   seo_title=obj_dict['meta']['seo_title'],
+                   show_in_menus=obj_dict['meta']['show_in_menus'],
+                   search_description=obj_dict['meta']['search_description'],
+                   first_published_at=obj_dict['meta']['first_published_at'],
+                   body=json.dumps(obj_dict['body']),
+                   live=obj_dict['live'],
+                   theme_id=obj_dict['page_theme']['id'])
+
+    def update_from_dict(self, obj_dict, default_excludes=None, excludes=None):
+        if not default_excludes:
+            class_ptr_id = '{}_ptr_id'.format(t.__class__.__name__.lower())
+            default_excludes = ['id', 'path', 'depth', 'numchild', 'content_type_id', 'live_revision_id',
+                                'page_ptr_id', class_ptr_id, 'release_id', 'live', 'locked', 'url_path']
+        if not excludes:
+            excludes = []
+
+        excludes = default_excludes + excludes
+        for key, value in obj_dict.items():
+            if key not in excludes and not key.startswith('_'):
+                setattr(self, key, value)
+        return self
+
+    def serializable_data(self):
+        obj = get_serializable_data_for_fields(self)
+
+        for rel in get_all_child_relations(self):
+            rel_name = rel.get_accessor_name()
+            children = getattr(self, rel_name).all()
+
+            if hasattr(rel.related_model, 'serializable_data'):
+                obj[rel_name] = [child.serializable_data() for child in children]
+            else:
+                obj[rel_name] = [get_serializable_data_for_fields(child) for child in children]
+
+        for field in get_all_child_m2m_relations(self):
+            children = getattr(self, field.name).all()
+            obj[field.name] = [child.pk for child in children]
+
+        return obj
+
     def save_revision(self, user=None, submitted_for_moderation=False, approved_go_live_at=None, changed=True):
         assigned_release = self.release
         self.release = None
@@ -240,6 +289,17 @@ class GeneralShelvePage(Page):
                 assigned_release.add_revision(revision)
 
         return revision
+
+    def unpublish(self, release_id=None):
+        if not release_id:
+            pass
+        else:
+            from release.models import Release
+            try:
+                release = Release.objects.get(id=release_id)
+                release.remove_page(self.id)
+            except Release.DoesNotExist:
+                pass
 
     def serve_preview(self, request, mode_name, site_name, revision_id='latest'):
         request.is_preview = True
