@@ -9,8 +9,8 @@ class SimpleMenuItem extends Component {
     if (link_page.relative_path) {
       return (
         <li className={this.props.classNamePrefix + "-nav__item"}>
-          <div className={this.props.classNamePrefix + "-nav__separator"}>
-            <Link onClick={this.handleClick} to={link_page.relative_path}
+          <div className={this.props.classNamePrefix + "-nav__separator"}>   
+            <Link onClick={this.handleClick.bind(this)} innerRef={(el) => (this.instance = el)}  to={link_page.relative_path}
               className={this.props.classNamePrefix + "-nav__link"}>
               <Text tagName="span" content={link_text}/>
             </Link>
@@ -21,7 +21,7 @@ class SimpleMenuItem extends Component {
       return (
         <li className={this.props.classNamePrefix + "-nav__item"}>
           <div className={this.props.classNamePrefix + "-nav__separator"}>
-            <a onClick={this.handleClick} href={link_external}
+            <a onClick={this.handleClick} href={link_external} 
               className={this.props.classNamePrefix + "-nav__link"}>
               <Text tagName="span" content={link_text}/>
             </a>
@@ -32,7 +32,8 @@ class SimpleMenuItem extends Component {
   }
 
   handleClick(event) {
-    SimpleMenuItem.closeMenu(event);
+    this.instance.blur();
+    SimpleMenuItem.closeMenu(event, this);
   }
 
   static closeMenu(_event) {
