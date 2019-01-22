@@ -33,18 +33,19 @@ class SimpleMenuItem extends Component {
 
   handleClick(event) {
     this.instance.blur();
-    SimpleMenuItem.closeMenu(event, this);
-  }
-
-  static closeMenu(_event) {
-    const box = document.querySelector('.page-wrapper');
-    box.classList.remove('header-nav--open');
+    
+    if (this.props.subNavClicked){
+      this.props.subNavClicked()
+    }
+    
+    document.querySelector('.page-wrapper').classList.remove('header-nav--open');
   }
 }
 
 SimpleMenuItem.propTypes = {
   item: PropTypes.object.isRequired,
-  classNamePrefix: PropTypes.string.isRequired
+  classNamePrefix: PropTypes.string.isRequired,
+  subNavClicked: PropTypes
 }
 
 export default SimpleMenuItem;
