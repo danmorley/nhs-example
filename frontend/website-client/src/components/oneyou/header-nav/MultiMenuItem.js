@@ -20,7 +20,7 @@ class MultiMenuItem extends Component {
     let children = item.value.menu_items.map((item) => {
       if (item.type === 'simple_menu_item'){
         return (
-          <SimpleMenuItem item={item} key={item.id} classNamePrefix={classNamePrefix} subNavClicked={this.hideSubMenu} />
+          <SimpleMenuItem item={item} key={item.id} classNamePrefix={classNamePrefix} menuItemWasClicked={this.hideSubMenu} />
         );
       } else {
         return null;

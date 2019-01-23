@@ -34,8 +34,8 @@ class SimpleMenuItem extends Component {
   handleClick(event) {
     this.instance.blur();
     
-    if (this.props.subNavClicked){
-      this.props.subNavClicked()
+    if (this.props.menuItemWasClicked){
+      this.props.menuItemWasClicked()
     }
     
     document.querySelector('.page-wrapper').classList.remove('header-nav--open');
@@ -45,7 +45,7 @@ class SimpleMenuItem extends Component {
 SimpleMenuItem.propTypes = {
   item: PropTypes.object.isRequired,
   classNamePrefix: PropTypes.string.isRequired,
-  subNavClicked: PropTypes
+  menuItemWasClicked: PropTypes.func
 }
 
 export default SimpleMenuItem;
