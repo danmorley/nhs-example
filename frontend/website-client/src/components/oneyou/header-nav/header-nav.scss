@@ -426,7 +426,7 @@ $secondary-item-padding: 0.4em;
   }  
 }
 
-.header-nav-multi__item:hover, 
+.header-nav-multi__item.sub-nav-show, 
 .header-nav-multi__item:focus-within {
 
   > .header-nav__separator
