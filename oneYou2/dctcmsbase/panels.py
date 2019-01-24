@@ -5,8 +5,8 @@ from wagtail.core import blocks
 
 from wagtailmedia.blocks import AbstractMediaChooserBlock
 
-from .blocks import (IDBlock, ImageBlock, SimpleCtaLinkBlock, DocumentDownloadBlock, InlineScriptBlock,
-    AppTeaserChooserBlock, InlineSvgBlock)
+from .blocks import (IMAGE_DISPLAY, IDBlock, ImageBlock, SimpleCtaLinkBlock, DocumentDownloadBlock, InlineScriptBlock,
+                     AppTeaserChooserBlock, InlineSvgBlock)
 
 
 IMAGE_PANEL_VARIANTS = (
@@ -20,6 +20,8 @@ IMAGE_TEASER_VARIANT_CHOICES = (
 )
 
 IMAGE_TEASER_LAYOUT_CHOICES = (
+    ('desktop-image-top-mobile-image-top', 'Desktop: Top, Mobile: Top'),
+    ('desktop-image-top-mobile-image-left', 'Desktop: Top, Mobile: Left'),
     ('desktop-image-left-mobile-image-top', 'Desktop: Left, Mobile: Top'),
     ('desktop-image-left-mobile-image-left', 'Desktop: Left, Mobile: Left'),
 )
@@ -41,7 +43,7 @@ INFO_PANEL_VARIANTS = (
 
 INFO_PANEL_LAYOUTS = (
     ('desktop-image-left-mobile-image-top', 'Desktop: Image Left/Text Right, Mobile: Image Top'),
-    ('desktop-image-right-mobile-image-right', 'Desktop: Image Right, Mobile: Image Left'),
+    ('desktop-image-right-mobile-image-right', 'Desktop: Image Right, Mobile: Image Right'),
 )
 
 ICON_CARD_LAYOUTS = (
@@ -73,10 +75,10 @@ VIDEO_HOSTS = (
 
 class Panel(blocks.StructBlock):
     panel_id = IDBlock(required=False,
-                    label='ID',
-                    help_text='Not displayed in the front end',
-                    classname='dct-meta-field')
-    
+                       label='ID',
+                       help_text='Not displayed in the front end',
+                       classname='dct-meta-field')
+
     class Meta:
         abstract = True
 
@@ -91,10 +93,10 @@ class RichTextPanel(Panel):
 
 class StandardRichTextPanel(RichTextPanel):
     meta_variant = blocks.ChoiceBlock(choices=RICH_TEXT_PANEL_VARIANTS,
-                                    default='standard',
-                                    label='Variant',
-                                    classname='dct-meta-field')
-    
+                                      default='standard',
+                                      label='Variant',
+                                      classname='dct-meta-field')
+
     class Meta:
         verbose_name = 'rich text panel'
 
@@ -107,6 +109,9 @@ class TeaserPanel(Panel):
         ('simple_cta_link', SimpleCtaLinkBlock()),
         ('document_download', DocumentDownloadBlock())
     ], icon='arrow-left', label='Items', required=False)
+    meta_image_display = blocks.ChoiceBlock(IMAGE_DISPLAY,
+                                            label='Image Display',
+                                            default='cover', classname='dct-meta-field')
 
     class Meta:
         abstract = True
@@ -150,6 +155,7 @@ class StandardVideoTeaserPanel(VideoTeaserPanel):
     class Meta:
         verbose_name = 'video teaser panel'
 
+
 class StandardImageTeaserPanel(TeaserPanel):
     meta_variant = blocks.ChoiceBlock(
         choices=IMAGE_TEASER_VARIANT_CHOICES,
@@ -175,6 +181,9 @@ class InformationPanel(Panel):
     ctas = blocks.StreamBlock([
         ('simple_cta_link', SimpleCtaLinkBlock()),
     ], icon='arrow-left', label='Items', required=False, verbose_name='cta')
+    meta_image_display = blocks.ChoiceBlock(IMAGE_DISPLAY,
+                                            label='Image Display',
+                                            default='cover', classname='dct-meta-field')
 
     class Meta:
         abstract = True
@@ -200,12 +209,13 @@ class StandardInformationPanel(InformationPanel):
 class CtaPanel(Panel):
     heading = blocks.CharBlock(required=False)
     body = blocks.RichTextBlock(required=False)
-    cta = blocks.StreamBlock([
+    ctas = blocks.StreamBlock([
         ('simple_cta_link', SimpleCtaLinkBlock()),
     ], icon='arrow-left', label='CTA links', required=False)
 
     class Meta:
         form_classname = 'dct-panel-cta dct-meta-panel'
+
 
 class SimpleImagePanel(Panel):
     image = ImageBlock(required=False)
@@ -225,6 +235,7 @@ class StandardSimpleImagePanel(SimpleImagePanel):
     class Meta:
         verbose_name = 'simple image panel'
 
+
 class PlainTextPanel(Panel):
     text = blocks.CharBlock(required=False)
 
@@ -235,6 +246,7 @@ class PlainTextPanel(Panel):
 ACCORDION_ITEMS = [
     ('rich_text_panel', StandardRichTextPanel(required=False)),
 ]
+
 
 class AccordionItemsPanel(Panel):
     heading = blocks.CharBlock(required=False)
@@ -306,7 +318,6 @@ class IconCardPanel(Panel):
 
     class Meta:
         form_classname = 'dct-icon-card-panel dct-meta-panel'
-
 
 
 class ListItemPanel(Panel):

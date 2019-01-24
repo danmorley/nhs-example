@@ -130,6 +130,9 @@ def copy(request, page_id):
     })
 
 def edit(request, page_id):
+    from PIL import ImageFile
+    ImageFile.LOAD_TRUNCATED_IMAGES = True
+
     real_page_record = get_object_or_404(Page, id=page_id)
     latest_revision = real_page_record.get_latest_revision()
     page = real_page_record.get_latest_revision_as_page()

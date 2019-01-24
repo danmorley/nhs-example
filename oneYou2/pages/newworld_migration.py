@@ -337,7 +337,12 @@ def update_accordion_group_shelf(shelf):
     ])
 
     panel = update_accordion_panel(shelf)
-    shelf.value['items'] = StreamValue(item_block, [('accordion_panel', panel.value)])
+    # shelf.value['items'] = StreamValue(item_block, [('accordion_panel', panel.value)])
+    shelf.value['items'] = StreamValue(item_block, [('accordion_panel', StructValue(AccordionPanel, [
+            ('accordions', panel.value['accordions']),
+            ('scroll_items_to_top_when_selected', True),
+        ])
+    )])
 
     keys_to_remove = ['tracking_group', 'accordions']
     for key in keys_to_remove:
@@ -412,21 +417,24 @@ def update_accordion_items_panel(panel):
 
 
 def update_accordion_panel(panel):
-    items = []
+    accordion_block = StreamBlock([('accordion_items_panel', AccordionItemsPanel(required=True, icon='collapse-down'))])
+    rich_text_block = StreamBlock([('rich_text_panel', StandardRichTextPanel(required=False))])
+    accordion_item_panel = []
     for item in panel.value['accordions']:
-        # if item.block_type in panels_name_conversion.keys():
-        #     block_type = panels_name_conversion[item.block_type]
-        # else:
-        #     block_type = item.block_type if item.block_type.endswith('_panel') else '{}_panel'.format(item.block_type)
-        # item = globals()['update_{}'.format(block_type)](item)
-        # item.block.name = block_type
-        item = update_accordion_items_panel(item)
-        item.block.name = 'accordion_items_panel'
-        # items.append(('accordion_items_panel', item.value))
-
-    # accordion_block = StreamBlock([('accordion_items_panel', AccordionItemsPanel(required=True, icon='collapse-down'))])
-    # panel.value['accordions'] = StreamValue(accordion_block, items)
-    panel.block = AccordionPanel()
+        items = []
+        for text in item.value['items']:
+            items.append(('rich_text_panel', StructValue(StandardRichTextPanel, [
+                    ('text', text.value['text']),
+                    ('meta_variant', text.value['meta_variant']),
+                ])
+            ))
+        accordion_item_panel.append(('accordion_items_panel', StructValue(AccordionItemsPanel, [
+                ('heading', item.value['heading']),
+                ('items', StreamValue(rich_text_block, items)),
+            ])
+        ))
+    
+    panel.value['accordions'] = StreamValue(accordion_block, accordion_item_panel)
 
     return panel
 
@@ -452,15 +460,24 @@ def update_information_panel(panel):
         panel.value['meta_layout'] = variant[panel.value['meta_variant']]
         panel.value['meta_variant'] = 'light_background'
 
+    cta_stream_block = StreamBlock([('simple_menu_item', SimpleCtaLinkBlock())])
+
+    ctas = []
     for item in panel.value['cta']:
-        item.block = SimpleCtaLinkBlock()
-        item.block.name = 'simple_cta_link'
+        ctas.append(('simple_menu_item', StructValue(SimpleCtaLinkBlock, [
+                ('link_text', item.value['link_text']),
+                ('link_external', item.value['link_external']),
+                ('link_page', item.value['link_page']),
+                ('link_id', item.value['link_id']),
+                ('meta_cta_variant', 'button'),
+            ])
+        ))
     
-    panel.value['ctas'] = panel.value.pop('cta')
+    panel.value['ctas'] = StreamValue(cta_stream_block, ctas)
 
     panel.value['panel_id'] = panel.value.pop('shelf_id')
 
-    keys_to_remove = ['image_meta', 'mobile_use_renditions', 'desktop_use_renditions']
+    keys_to_remove = ['image_meta', 'mobile_use_renditions', 'desktop_use_renditions', 'cta']
     for key in keys_to_remove:
         del(panel.value[key])
 
@@ -543,15 +560,24 @@ def update_oneyou_teaser_panel(panel):
         ]
     )
 
+    cta_stream_block = StreamBlock([('simple_menu_item', SimpleCtaLinkBlock())])
+
+    ctas = []
     for item in panel.value['cta']:
-        item.block = SimpleCtaLinkBlock()
-        item.block.name = 'simple_cta_link'
+        ctas.append(('simple_menu_item', StructValue(SimpleCtaLinkBlock, [
+                ('link_text', item.value['link_text']),
+                ('link_external', item.value['link_external']),
+                ('link_page', item.value['link_page']),
+                ('link_id', item.value['link_id']),
+                ('meta_cta_variant', 'link'),
+            ])
+        ))
     
-    panel.value['ctas'] = panel.value.pop('cta')
+    panel.value['ctas'] = StreamValue(cta_stream_block, ctas)
 
     panel.value['panel_id'] = panel.value.pop('shelf_id')
 
-    keys_to_remove = ['image_meta', 'mobile_use_renditions', 'desktop_use_renditions']
+    keys_to_remove = ['image_meta', 'mobile_use_renditions', 'desktop_use_renditions', 'cta']
     for key in keys_to_remove:
         del(panel.value[key])
 
@@ -634,8 +660,12 @@ def update_iframe_shelf(shelf):
 
 
 def update_action_plan_shelf(shelf):
-    action_groups = StreamBlock([
+
+    action_groups_block = StreamBlock([
         ('action_group', ActionGroupPanel(required=False, icon='collapse-down')),
+    ])
+    action_plan_block = StreamBlock([
+        ('action_panel', ActionChooserBlock(target_model='oneyou.Action', icon='list-ul')),
     ])
 
     action_group_items = []
@@ -644,13 +674,31 @@ def update_action_plan_shelf(shelf):
         for item in action_group.value['actions']:
             item.value = get_or_create_action(item.value)
             item.block = ActionChooserBlock(target_model='oneyou.Action')
-            items.append((item.block, item.value))
+            items.append(('action_panel', item.value))
+        action_group_items.append(('action_group', StructValue(ActionGroupPanel, [
+                ('title', action_group.value['title']),
+                ('actions', StreamValue(action_plan_block, items)),
+            ])
+        ))
 
+    shelf.value['action_groups'] = StreamValue(action_groups_block, action_group_items)
+
+    cta_stream_block = StreamBlock([('simple_menu_item', SimpleCtaLinkBlock())])
+
+    ctas = []
     for item in shelf.value['cta']:
-        item.block = SimpleCtaLinkBlock()
-        item.block.name = 'simple_cta_link'
+        ctas.append(('simple_menu_item', StructValue(SimpleCtaLinkBlock, [
+                ('link_text', item.value['link_text']),
+                ('link_external', item.value['link_external']),
+                ('link_page', item.value['link_page']),
+                ('link_id', item.value['link_id']),
+                ('meta_cta_variant', 'button'),
+            ])
+        ))
     
-    shelf.value['ctas'] = shelf.value.pop('cta')
+    shelf.value['ctas'] = StreamValue(cta_stream_block, ctas)
+
+    del(shelf.value['cta'])
 
     shelf.block = ActionPlanShelf()
 
@@ -816,6 +864,8 @@ def copy_oneyou_newworld(request, page_id):
         shelf = globals()['update_{}'.format(block_type)](shelf)
         if block_type == 'accordion_group_shelf':
             shelf.block.name = 'grid_shelf'
+        elif block_type == 'promo_shelf':
+            shelf.block.name = 'banner_shelf'
         else:
             shelf.block.name = block_type
 

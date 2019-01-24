@@ -5,6 +5,8 @@ from wagtail.core.fields import StreamField, RichTextField
 from wagtail.core.models import Page
 from wagtail.images.edit_handlers import ImageChooserPanel
 
+from images.renditions import MOBILE_RENDITION_CHOICES, DESKTOP_RENDITION_CHOICES
+
 from dctcmsbase.models import GeneralShelvePage, Tracking, Social
 from dctcmsbase.panels import VIDEO_HOSTS
 from dctcmsbase.shelves import (PageHeadingShelf, DividerShelf, InlineScriptShelf, BannerShelf,
@@ -70,13 +72,21 @@ class RecipePage(GeneralShelvePage, Tracking, Social):
         ('medium', 'Medium'),
         ('hard', 'Hard'),
     )
-    image = models.ForeignKey(
+    header_image = models.ForeignKey(
         'images.PHEImage',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    header_image_mobile_rendition = models.CharField(choices=MOBILE_RENDITION_CHOICES,
+                                      verbose_name='Mobile Rendition',
+                                      default='none',
+                                      max_length=10)
+    header_image_desktop_rendition = models.CharField(choices=DESKTOP_RENDITION_CHOICES,
+                                      verbose_name='Mobile Rendition',
+                                      default='none',
+                                      max_length=10)
     recipe_name = models.CharField(max_length=255, null=True, blank=True)
     tags = models.CharField(max_length=255, null=True, blank=True)
     serves = models.IntegerField(default=0)
@@ -99,7 +109,9 @@ class RecipePage(GeneralShelvePage, Tracking, Social):
         ),
         MultiFieldPanel(
             [
-                ImageChooserPanel('image'),
+                ImageChooserPanel('header_image'),
+                FieldPanel('header_image_mobile_rendition'),
+                FieldPanel('header_image_desktop_rendition'),
                 FieldPanel('header_gradient'),
                 FieldPanel('recipe_name'),
                 FieldPanel('video_id'),

@@ -14,7 +14,7 @@ from .sharedcontent import Banner, AppTeaser
 class GeneralShelvePageSerializer(serializers.ModelSerializer):
     body = StreamField()
 
-    def to_representation(self, data):
+    def to_representation(self, data, has_body=True):
         meta_fields = getattr(self.Meta, 'meta_fields')
         serialized_data = super(GeneralShelvePageSerializer, self).to_representation(data)
         serialized_data['meta'] = {}
@@ -25,10 +25,12 @@ class GeneralShelvePageSerializer(serializers.ModelSerializer):
             except KeyError:
                 pass
         serialized_data['meta']['type'] = 'general_page'
-        for shelf in serialized_data['body']:
-            shelf_id = shelf.get('id', None)
-            if shelf_id:
-                shelf['id'] = 'p%s-%s' % (data.id, shelf_id)
+
+        if has_body:
+            for shelf in serialized_data['body']:
+                shelf_id = shelf.get('id', None)
+                if shelf_id:
+                    shelf['id'] = 'p%s-%s' % (data.id, shelf_id)
 
         serialized_data['meta']['breadcrumbs'] = data.breadcrumbs
 
