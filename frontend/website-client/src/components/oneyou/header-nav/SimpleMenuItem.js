@@ -37,8 +37,6 @@ class SimpleMenuItem extends Component {
     if (this.props.menuItemWasClicked){
       this.props.menuItemWasClicked()
     }
-    
-    document.querySelector('.page-wrapper').classList.remove('header-nav--open');
   }
 }
 

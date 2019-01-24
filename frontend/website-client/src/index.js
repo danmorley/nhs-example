@@ -49,12 +49,12 @@ import UrlUtils from './components/base/shared/UrlUtils';
   }
 })(global);
 
-let rootElem = document.getElementById('root');
+global.rootElem = document.getElementById('root');
 const siteSlug = UrlUtils.siteSlugFromPath(window.location.pathname);
-global.rootUrl = rootElem.getAttribute('data-site') ? '/' + rootElem.getAttribute('data-site') : '/' + siteSlug;
-let dataContentStoreEndpoint = rootElem.getAttribute('data-content-store-endpoint') || 'http://localhost:8000/api';
-let dataSite = rootElem.getAttribute('data-site') || siteSlug;
-let dataRelease = rootElem.getAttribute('data-release') || 'current';
+global.rootUrl = global.rootElem.getAttribute('data-site') ? '/' + global.rootElem.getAttribute('data-site') : '/' + siteSlug;
+let dataContentStoreEndpoint = global.rootElem.getAttribute('data-content-store-endpoint') || 'http://localhost:8000/api';
+let dataSite = global.rootElem.getAttribute('data-site') || siteSlug;
+let dataRelease = global.rootElem.getAttribute('data-release') || 'current';
 
 // Ensure query param release id is used if given.
 let params = queryString.parse(window.location.search);
@@ -70,15 +70,15 @@ global.contentStore = new ContentStore(dataContentStoreEndpoint, dataSite, dataR
 global.contentStore.getSite().then((site) => {
   if (site.code === 0) {
     global.contentStore.release = site.response.meta.release_id; // Set release to the actual release guid
-    ReactDOM.render(<App site={site && site.response}/>, rootElem);
+    ReactDOM.render(<App site={site && site.response}/>, global.rootElem);
     // registerServiceWorker();
     unregister();
   } else {
     console.error(site.error, site.info.statusCode, site.info.message);
     if (site.info.statusCode === 404) {
-      ReactDOM.render(<div className="container"><h1>Page not found.</h1><p>Please retry later.</p></div>, rootElem);
+      ReactDOM.render(<div className="container"><h1>Page not found.</h1><p>Please retry later.</p></div>, global.rootElem);
     } else {
-      ReactDOM.render(<div className="container"><h1>Something went wrong.</h1><p>Please refresh or try again later.</p></div>, rootElem);
+      ReactDOM.render(<div className="container"><h1>Something went wrong.</h1><p>Please refresh or try again later.</p></div>, global.rootElem);
     }
     // registerServiceWorker();
     unregister();

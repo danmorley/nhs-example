@@ -124,5 +124,11 @@
         font-size:30px;
       }  
     }
+    
+    span {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
   }      
 }
