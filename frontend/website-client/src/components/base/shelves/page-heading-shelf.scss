@@ -251,6 +251,18 @@ $shelf-padding-extra: 2em;
         text-transform: none;
         font-size: 3em;
       }
+
+      &.image--gradient:after {
+        width:100%;
+        content:'';
+        display:block;
+        position:absolute;
+        top:0;
+        left:0;
+        background: linear-gradient(91.54deg, $sexhealth-purple 0%, $sexhealth-purple 41.86%, rgba(0,164,166,0) 100%) !important;
+        opacity: 0.4;
+        height:100%;
+      }
     }
 
     h1, h2, h3, h4, h5 {

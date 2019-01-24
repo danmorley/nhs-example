@@ -25,7 +25,7 @@
     min-height: 336px;
   }
   
-  .child-image--contain & {
+  &.image--contain {
     background-size: contain;
     background-position: top left;
   }
@@ -57,64 +57,12 @@
   }
 }
 
-.information-panel--mobile-image-top-text-right {
-  flex-direction: column-reverse;
-  
-  @include media-breakpoint-up(md) { 
-    flex-direction: row-reverse;
-  }
-  .information-panel__info {
-    
-    width: 100%;  
-    
-    @include media-breakpoint-up(sm) { 
-      padding: 0;
-    }
-    
-    @include media-breakpoint-up(md) { 
-      width: 50%;
-      padding-left: 2em;
-    }
-  }
-  .information-panel__image {
-    
-    min-height: 290px;
-    margin-bottom: 1em;
-    
-    @include media-breakpoint-up(vsm) { 
-      min-height: 340px;
-    }
-    
-    @include media-breakpoint-up(md) { 
-      min-height: auto;
-      margin-bottom: 0;
-    }
-    
-    .child-image--contain & {
-      background-size: contain;
-      background-position: top center;
-      
-        
-      @include media-breakpoint-down(sm) { 
-        width: auto;
-      }
-      @include media-breakpoint-up(md) {
-        background-position: center center;
-      }
-    }
-  }
-}
-
-.information-panel--light_background, .information-panel--dark_background {
+.information-panel--desktop-image-left-mobile-image-top {
   padding-top: 1em;
   padding-bottom: 1em;
 
   @include media-breakpoint-down(md) {
     flex-direction: column-reverse;
-  }
-
-  .information-panel__heading {
-    color: $teal-blue !important;
   }
 
   .information-panel__info {
@@ -147,10 +95,30 @@
   }
 }
 
+.information-panel--light_background {
+  .information-panel__heading {
+    color: $teal-blue;
+  }
+}
+
 .information-panel--dark_background {
-  .information-panel__text {  
-    a {
-      color: $sunflower-yellow;
+
+  .information-panel__heading {
+    color: $grey-brown-dark;
+  }
+
+  .information-panel__image {
+    @include media-breakpoint-down(md) {
+      position: static;
+      margin-bottom: 1em;
+    }
+
+    // @include media-breakpoint-up(md) {
+    //   min-width: 780px;
+    // }
+
+    @include media-breakpoint-up(lg) {
+      min-width: 300px;
     }
   }
 }
@@ -185,10 +153,6 @@
 .information-panel__text {
   color: $grey-brown-dark;
 }
-  
-.shelf .information-panel__heading {
-  color: $grey-brown-dark;
-}
 
 //stoptober
 .stoptober {
@@ -208,10 +172,9 @@
     color: $teal-blue;
   }
   
-  .child-image--contain {
-  
-    .information-panel__image {
-      
+  .information-panel__image {
+
+    &.image--contain {
       width: 50%;
       
       @include media-breakpoint-down(sm) { 

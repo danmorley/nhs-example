@@ -12,7 +12,9 @@ import UrlUtils from "../shared/UrlUtils";
  */
 class CtaLink extends Component {
   render() {
-    let { cta, variant, dataName } = this.props;
+    let { cta, dataName, variant } = this.props;
+    var linkClass;
+    const disabledClass = this.props.disabled ? ' disabled' : '';
 
     if (!cta) return null;
 
@@ -23,26 +25,18 @@ class CtaLink extends Component {
 
     if (!CtaUtils.isValidCta(cta)) return null;
 
-    var linkClass;
-
-    const disabledClass = this.props.disabled ? ' disabled' : '';
-
-    if (variant === 'button') {
+    if (variant === 'appstore') {
+      linkClass += ' button-appstore' + disabledClass;
+    } else if (variant === 'googleplay') {
+      linkClass += ' button-googleplay' + disabledClass;
+    } else if (cta.meta_cta_variant === 'button') {
       linkClass = 'button-cta' + disabledClass;
-    }
-    else if (variant === 'appstore') {
-      linkClass = 'button-appstore' + disabledClass;
-    }
-    else if (variant === 'googleplay') {
-      linkClass = 'button-googleplay' + disabledClass;
-    }
-    else if (variant === 'link') {
+    } else if (cta.meta_cta_variant === 'link') {
       linkClass = 'link-cta' + disabledClass;
-    }
-    else {
+    } else {
       linkClass = null;
     }
-
+    
     const href = CtaUtils.getCtaPath(cta);
 
     // Render the link.
@@ -69,8 +63,8 @@ class CtaLink extends Component {
 CtaLink.propTypes = {
   cta: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   disabled: PropTypes.bool,
-  variant: PropTypes.string,
-  dataName: PropTypes.string
+  dataName: PropTypes.string,
+  variant: PropTypes.string
 };
 
 export default CtaLink;

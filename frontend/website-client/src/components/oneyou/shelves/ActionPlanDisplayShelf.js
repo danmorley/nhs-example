@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import Shelf from '../../base/shelves/Shelf';
 import Text from '../../base/Text';
 import CmsComponentRegistry from '../../base/CmsComponentRegistry';
-import ActionGroupPanel from '../panels/ActionGroupPanel';
-import CtaLinks from '../../base/shared/CtaLinks';
+// import ActionGroupPanel from '../panels/ActionGroupPanel';
+// import CtaLinks from '../../base/shared/CtaLinks';
 
 const ACTION_PLAN_KEY = 'action_plan';
 const BASKET_KEY = 'basket';
@@ -44,7 +44,7 @@ class ActionPlanDisplayShelf extends Component {
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} trackingGroup={content.tracking_group}>
         <div className={`${classNamePrefix}--lead`}>
-          <div className='container'>
+          <div className="container">
             {heading != '' &&
               <Text tagName="h2" content={heading} className={`${classNamePrefix}--title`} />
             }

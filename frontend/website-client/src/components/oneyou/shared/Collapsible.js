@@ -6,6 +6,8 @@ class Collapsible extends Component {
     super(props);
     this.state = { open: false };
     this.handleTriggerClick = this.handleTriggerClick.bind(this);
+    this.innerRef = React.createRef();
+    this.outerRef = React.createRef();
   }
 
   handleTriggerClick(event) {
@@ -15,7 +17,7 @@ class Collapsible extends Component {
 
   render() {
     const transition = `height 200ms linear`;
-    const height = this.state.open ? this.refs.inner.offsetHeight : 0;
+    const height = this.state.open ? this.innerRef.current.offsetHeight : 0;
     const dropdownStyle = {
       height: height,
       WebkitTransition: transition,
@@ -43,8 +45,8 @@ class Collapsible extends Component {
         >
           {this.props.trigger}
         </TriggerElement>
-        <div className="Collapsible__contentOuter" ref="outer" style={dropdownStyle}>
-          <div className="Collapsible__contentInner" ref="inner">
+        <div className="Collapsible__contentOuter" ref={this.outerRef} style={dropdownStyle}>
+          <div className="Collapsible__contentInner" ref={this.innerRef}>
             {this.props.children}
           </div>
         </div>

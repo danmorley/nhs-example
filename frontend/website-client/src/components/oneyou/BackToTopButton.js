@@ -58,7 +58,7 @@ class BackToTopButton extends Component {
 }
 
 BackToTopButton.propTypes = {
-  trackingGroup: PropTypes.String
+  trackingGroup: PropTypes.string
 }
 
 export default BackToTopButton;

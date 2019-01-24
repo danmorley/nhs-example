@@ -297,5 +297,11 @@ $shelf-padding-extra: 2em;
         }      
       }
     }
+
+    .shelf__container.image-not-set {
+      .banner, h2, p {
+        color: $sexhealth-dark;
+      }
+    }
   }
 }

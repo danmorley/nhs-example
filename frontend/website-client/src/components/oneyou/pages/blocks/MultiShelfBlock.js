@@ -14,8 +14,8 @@ import GeneralTextShelf from '../../shelves/GeneralTextShelf';
 import BasicCtaShelf from '../../shelves/BasicCtaShelf';
 import PageHeadingShelf from '../../shelves/PageHeadingShelf';
 import GuidanceShelf from '../../shelves/GuidanceShelf';
-import MainCarouselShelf from '../../shelves/MainCarouselShelf';
-import PanelCarouselShelf from '../../shelves/PanelCarouselShelf';
+// import MainCarouselShelf from '../../shelves/MainCarouselShelf';
+// import PanelCarouselShelf from '../../shelves/PanelCarouselShelf';
 import GridShelf from '../../shelves/GridShelf';
 import HeadingBodyShelf from '../../shelves/HeadingBodyShelf';
 import NoticeShelf from '../../shelves/NoticeShelf';
@@ -39,7 +39,6 @@ class MultiShelfBlock extends Component {
     let { body } = this.props;
 
     var shelves = body.map((shelf, _i) => {
-      console.log(shelf.type);
       const shelfInfo = CmsComponentRegistry.components[shelf.type];
       const ShelfClass = shelfInfo && shelfInfo.class;
       const shelfClassNamePrefix = shelfInfo && shelfInfo.classNamePrefix;

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import Panel from './Panel';
 import Text from '../Text';
-import PureModal from 'react-pure-modal';
+// import PureModal from 'react-pure-modal';
 import PropTypes from 'prop-types';
-import IframeModal from '../IframeModal';
+// import IframeModal from '../IframeModal';
 import './simple-service-finder.css';
 
 
@@ -18,28 +18,28 @@ class SimpleServiceFinderForm extends Component {
       lon: null
     };
     
-    this.form = React.createRef();
-    this.postcode = React.createRef();
-    this.lat = React.createRef();
-    this.lon = React.createRef();
+    this.formRef = React.createRef();
+    this.postcodeRef = React.createRef();
+    this.latRef = React.createRef();
+    this.lonRef = React.createRef();
   }
 
   getCurrentGeolocation(t) {
     t.preventDefault();
     navigator.geolocation.getCurrentPosition((position) => {
       this.setState({ lat: position.coords.latitude, lon: position.coords.longitude });
-      this.postcode.current.value = null;
-      this.lat.current.value = position.coords.latitude;
-      this.lon.current.value = position.coords.longitude;
-      this.form.current.submit();
+      this.postcodeRef.current.value = null;
+      this.latRef.current.value = position.coords.latitude;
+      this.lonRef.current.value = position.coords.longitude;
+      this.formRef.current.submit();
     });
   }
 
   submitForm(t) {
     t.preventDefault();
-    this.lat.current.value = null;
-    this.lon.current.value = null;
-    this.form.current.submit();
+    this.latRef.current.value = null;
+    this.lonRef.current.value = null;
+    this.formRef.current.submit();
   }
 
   render() {
@@ -50,13 +50,13 @@ class SimpleServiceFinderForm extends Component {
         {content.text && <Text tagName="div" content={content.text} format="richtext" className="rich-text" />}
         {content.submit_button_copy && 
           <div>
-            <form onSubmit={this.submitForm.bind(this)} ref={this.form} id="finder" name="finder" method="get" action={content.finder_url} >
+            <form onSubmit={this.submitForm.bind(this)} ref={this.formRef} id="finder" name="finder" method="get" action={content.finder_url} >
               <fieldset>
                 <legend>{content.heading && <h3>{content.heading}</h3>}</legend>
-                <input ref={this.postcode} data-name="Condom finder input" name="postcode" placeholder={content.searchbox_placeholder} type="text" required />
+                <input ref={this.postcodeRef} data-name="Condom finder input" name="postcode" placeholder={content.searchbox_placeholder} type="text" required />
               </fieldset>
-              <input ref={this.lat} name="latitude" type="hidden" />
-              <input ref={this.lon} name="longitude" type="hidden" />
+              <input ref={this.latRef} name="latitude" type="hidden" />
+              <input ref={this.lonRef} name="longitude" type="hidden" />
               <button className="sexualhealth-search" data-name="Condom finder search" form="finder" id="postcodeSearch" type="submit" value="Submit">{content.submit_button_copy}</button>
               {content.use_location_button_copy && navigator.geolocation &&
                 <button onClick={this.getCurrentGeolocation.bind(this)} data-name="Condom finder Geo Search" form="finder" id="geoSearch" type="submit" value="LatLon">{content.use_location_button_copy}</button>

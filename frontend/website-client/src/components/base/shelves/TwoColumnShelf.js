@@ -81,6 +81,6 @@ TwoColumnShelf.propTypes = {
 };
 
 CmsComponentRegistry.register('two_column_shelf', TwoColumnShelf, 'two-column-shelf', null, '50_50');
-CmsComponentRegistry.register('two_column_shelf_oneyou', TwoColumnShelf, 'two-column-shelf', null, '50_50');
+// CmsComponentRegistry.register('two_column_shelf_oneyou', TwoColumnShelf, 'two-column-shelf', null, '50_50');
 
 export default TwoColumnShelf;

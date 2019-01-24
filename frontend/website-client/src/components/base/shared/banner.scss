@@ -57,18 +57,13 @@
       align-items: center;
     }
   }
-}
 
-.sexhealth {
-  
-  .banner-heading {
-    
-    @include media-breakpoint-up(lg) {
-      padding-bottom: 0.5rem !important;
+  @media (max-width: 768px) {
+   .buttons-direction-vertical.buttons-align-right .buttons-ctas .cta-list{
+      flex-direction: initial;
     }
   }
 }
-
 
 .banner-panel {  
   .container, .container-fluid {
@@ -103,5 +98,51 @@
 .banner-panel {
   h2 {
     @include heading-h1(oneyou);
+  }
+}
+
+.banner .panel {
+  h1, h2, h3, h4, h5 {
+    color: $white;
+  }
+
+  p, ul, ol {
+    color: $white;
+  }
+  
+  a:not(.button-cta) { 
+   color: $white;
+ }
+}
+
+.banner h2 {
+  
+  @include media-breakpoint-down(sm) { 
+    font-size: 1.5em;
+  }
+  
+  @media (max-width: 365px) {
+    font-size: 1.4em;
+  }
+}
+
+.sexhealth {
+  
+  .banner {
+    padding: 1.6rem 1rem;
+
+    @media (min-width: 992px) {
+      .panel {
+        padding-top: .5em;
+        padding-bottom: .5em;
+        width: 75%;
+      }
+    }
+  
+    h2 {
+      @include media-breakpoint-up(lg) {
+        padding-bottom: 0.5rem !important;
+      }
+    }
   }
 }

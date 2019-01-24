@@ -58,17 +58,14 @@ class ImageTeaserPanel extends Component {
   }
 
   render() {
-    let { content, classNamePrefix } = this.props;
-    let backgroundTeaserImage = this.state.backgroundImageStyle;
-    let desktopLayout = content.meta_layout_desktop ? content.meta_layout_desktop : 'desktop-image-default';
-    let mobilLayout = content.meta_layout_mobile ? content.meta_layout_mobile : 'mobile-image-default';
-    // let layout = content.meta_layout_desktop + '-' + content.meta_layout_mobile;
-    // let layout = content.meta_layout;
-    let ctaStyle = content.meta_cta_variant;
+    const { content, classNamePrefix } = this.props;
+    const backgroundTeaserImage = this.state.backgroundImageStyle;
+    const ctaStyle = content.meta_cta_variant;
+    const imgDisplay = `image--${content.meta_image_display}`;
 
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant} layout={content.meta_layout}>
-        <div className={`${classNamePrefix}__image`} style={backgroundTeaserImage}>
+        <div className={`${classNamePrefix}__image ${imgDisplay}`} style={backgroundTeaserImage}>
         </div>
         <div className={`${classNamePrefix}__info`}>
           <Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />

@@ -3,6 +3,7 @@ import './banner.css';
 import PropTypes from 'prop-types';
 import ResponsiveBackgroundImage from './ResponsiveBackgroundImage';
 import Buttons from './Buttons';
+import CtaLink from './CtaLink';
 
 /**
  * Implemenation of a Banner component.
@@ -43,66 +44,35 @@ class Banner extends Component {
   }
 
   render() {
-    const { backgroundImage, heading, body, ctas, className, layout, ratios, panel } = this.props;
-
-    // Direction: vertical, horizontal
-    // Alignment: left, center, right
+    const { backgroundImage, heading, body, ctas, className, layout, panel, width } = this.props;
     const [ direction, alignment ] = layout.split('_');
-    // let ratio1 = 'x', ratio2 = 'x';
-    // if (direction === 'horizontal') {
-    //   [ ratio1, ratio2 ] = ratios.split('_');
-    //   // col1 = `col-${ratio1}`;
-    //   // col2 = `col-${ratio2}`;
-    // }
-    // if (direction === 'vertical' && alignment === 'center') {
-    //   [ ratio1, ratio2 ] = ratios.split('_');
-    //   ratio1 = 'x', ratio2 = 'x';
-    // }
-
-    // const variant = backgroundImage && backgroundImage.meta_variant || false;
-
-    // console.log("backgroundImage");
-    // console.log(variant);
-
-    // shelf__container-gradient--${gradient}
-
-    // const bannerClass = `banner row no-gutters banner-direction-${direction} banner-align-${alignment} ${className}`;
-    const bannerClass = `shelf__container container-fluid shelf__container-gradient--false`;
-
+    let bannerClass = `banner row no-gutters banner-direction-${direction} banner-align-${alignment} shelf__container ${className}`;
     let container  = null;
 
-    if (panel) {
-      container = (<div className="container">
-        <div className="row">
-          <div className="shelf__col col-10 col-sm-10 col-md-7">
-            {heading}
-            {body}
-            <Buttons ctas={ctas} layout={this.horizontalButtonsLayout(alignment)} />
-          </div>
-        </div>
+    if (panel || backgroundImage) {
+      container = (<div className="shelf__col col-10 col-sm-10 col-md-7 panel">
+        {heading}
+        {body}
+        <CtaLink cta={ctas[0]} />
       </div>);
     } else {
       if (direction === 'vertical') {
-        container = (<div className="container">
-          <div className="row">
-            <div className="banner-content">
-              <div key="1" className="banner-heading p-1 p-lg-3">
-                {heading}
-              </div>
-              <div key="2" className="banner-body p-1 p-lg-3">
-                {body}
-              </div>
-              <div key="3" className="banner-ctas p-1 p-lg-3">
-                <Buttons ctas={ctas} layout={this.horizontalButtonsLayout(alignment)} />
-              </div>
-            </div>
+        container = (<div className="banner-content">
+          <div key="1" className="banner-heading p-1 p-lg-3">
+            {heading}
+          </div>
+          <div key="2" className="banner-body p-1 p-lg-3">
+            {body}
+          </div>
+          <div key="3" className="banner-ctas p-1 p-lg-3">
+            <Buttons ctas={ctas} layout={this.horizontalButtonsLayout(alignment)} />
           </div>
         </div>);
       } else if (direction === 'horizontal') {
-        const ctas_container = (<div className="col-12 col-lg-3">
+        const ctas_container = (<div className="shelf__col col-12 col-lg-3">
           <Buttons ctas={ctas} layout={this.verticalButtonsLayout(alignment, ctas.length)} />
         </div>);
-        const body_container = (<div className="col-12 col-lg-9">
+        const body_container = (<div className="shelf__col col-12 col-lg-9">
           {heading}
           {body}
         </div>);
@@ -120,11 +90,29 @@ class Banner extends Component {
       }
     }
 
-    return (
-      <ResponsiveBackgroundImage image={backgroundImage} className={bannerClass}>
-        {container}
-      </ResponsiveBackgroundImage>
-    );
+    if (width == "full") {
+      container = (<div className="container">
+        <div className="row">
+          {container}
+        </div>
+      </div>);
+    }
+
+    if (backgroundImage && backgroundImage.renditions.desktop) {
+      bannerClass += `shelf__container container-fluid`;
+      return (
+        <ResponsiveBackgroundImage image={backgroundImage} className={bannerClass}>
+          {container}
+        </ResponsiveBackgroundImage>
+      );
+    } else {
+      bannerClass += `image-not-set`;
+      return (
+        <div className={bannerClass}>
+          {container}
+        </div>
+      );
+    }
   }
 }
 
@@ -137,14 +125,15 @@ Banner.defaultProps = {
 
 Banner.propTypes = {
   backgroundImage: PropTypes.object,
-  heading: PropTypes.string,
-  body: PropTypes.string,
-  ctas: PropTypes.string,
+  heading: PropTypes.object,
+  body: PropTypes.object,
+  ctas: PropTypes.array,
   className: PropTypes.string.isRequired,
   layout: PropTypes.string,
   ratios: PropTypes.string,
   id: PropTypes.string,
-  panel: PropTypes.boolean
+  panel: PropTypes.bool,
+  width: PropTypes.string
 };
 
 export default Banner;

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+// import PropTypes from 'prop-types';
 
 import Shelf from '../../base/shelves/Shelf';
 import PageHeadingShelf from '../../base/shelves/PageHeadingShelf';
@@ -36,11 +36,11 @@ class SexhealthPageHeadingWithVideoShelf extends PageHeadingShelf {
 
   constructor(props) {
     super(props);
-    this.video = React.createRef();
+    this.videoRef = React.createRef();
   }
 
   triggerModal = () => {
-    this.video.current.openModal();
+    this.videoRef.current.openModal();
   }
 
   renderHeadingBody(content, headingTagName) {
@@ -69,7 +69,7 @@ class SexhealthPageHeadingWithVideoShelf extends PageHeadingShelf {
 
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group} classExtra="sexhealth-page-heading-with-video-shelf">
-        {content.video_id && <VideoModal video={content.video_id} host={content.host} classNamePrefix={classNamePrefix} ref={this.video} classExtra="sexhealth-video-modal">
+        {content.video_id && <VideoModal video={content.video_id} host={content.host} classNamePrefix={classNamePrefix} ref={this.videoRef} classExtra="sexhealth-video-modal">
         </VideoModal>}
         <ResponsiveBackgroundImage image={content.background_image} className={`shelf__container ${ShelfUtils.shelfContainerClass(content)} shelf-${leftImageStyle} shelf-${rightImageStyle} shelf__container-gradient--${gradient}`}
         >

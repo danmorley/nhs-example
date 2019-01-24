@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './cta-links.css';
-import CtaLink from './CtaLink';
+// import CtaLink from './CtaLink';
 import CtaList from './CtaList';
 
 /**
@@ -32,9 +32,13 @@ class CtaLinks extends Component {
   }
 }
 
+CtaLinks.defaultProps = {
+  disabled: false
+}
+
 CtaLinks.propTypes = {
   ctas: PropTypes.oneOfType([PropTypes.object,PropTypes.array]),
-  disabled: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool,
   variant: PropTypes.string
 };
 

@@ -52,14 +52,14 @@ class AccordionItem extends Component {
   }
 
   render() {
-    let { id, classNamePrefix, container, content } = this.props;
+    let { classNamePrefix, container, content } = this.props;
     let expansionClassName = this.props.expanded ? 'expanded' : 'collapsed';
 
     return (
       <Panel id={content.shelf_id} classNamePrefix={classNamePrefix}>
         <div ref={ (div) => { this.Accordion = div; } }>
           <div className={`${classNamePrefix}__header ${classNamePrefix}__header--${expansionClassName}`}>
-           { container == 'accordion-panel' &&
+            { container == 'accordion-panel' &&
               <h3 onClick={this.handleClick} className={`container ${classNamePrefix}__sub-container`}>
                 {content.heading}
               </h3>
@@ -68,7 +68,7 @@ class AccordionItem extends Component {
                <h2 onClick={this.handleClick} className={`container ${classNamePrefix}__sub-container`}>
                  {content.heading}
                </h2>
-             }
+            }
           </div>
           <div className={`${classNamePrefix}__body ${classNamePrefix}__body--${expansionClassName} container ${classNamePrefix}__sub-container`}>
             { MultiPanelBlock.renderItems(content.items, '', 'div') }

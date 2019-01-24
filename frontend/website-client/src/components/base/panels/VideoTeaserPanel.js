@@ -37,7 +37,7 @@ class VideoTeaserPanel extends Component {
       backgroundImageStyle: null
     }
     
-    this.video = React.createRef();
+    this.videoRef = React.createRef();
   }
 
   setImage() {
@@ -59,7 +59,7 @@ class VideoTeaserPanel extends Component {
   }
   
   triggerModal = () => {
-    this.video.current.openModal();
+    this.videoRef.current.openModal();
   }
   
   hasTextContent() {
@@ -79,7 +79,7 @@ class VideoTeaserPanel extends Component {
 
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant} layout={layout}>
-        <VideoModal video={content.video} host={content.host} classNamePrefix={classNamePrefix} image={backgroundTeaserImage} ref={this.video}>
+        <VideoModal video={content.video} host={content.host} classNamePrefix={classNamePrefix} image={backgroundTeaserImage} ref={this.videoRef}>
         </VideoModal>
         
         { this.hasTextContent()  &&

@@ -19,8 +19,8 @@ class ShowMorePanel extends Component {
     this.doExpand = this.doExpand.bind(this);
     this.doContract = this.doContract.bind(this);
     this.storageKey = `${props.id}_panelExpanded`;
-    this.containerElem = React.createRef();
-    this.contentElem = React.createRef();
+    this.containerElemRef = React.createRef();
+    this.contentElemRef = React.createRef();
   }
 
   handleResize() {
@@ -58,16 +58,16 @@ class ShowMorePanel extends Component {
       return children.length;  // Display all children.
 
     } else {
-      if (this.contentElem.current) {
-        if (this.contentElem.current.childElementCount === 0) return 0; // No children to display.
+      if (this.contentElemRef.current) {
+        if (this.contentElemRef.current.childElementCount === 0) return 0; // No children to display.
 
         // Get client width of first child.
-        const childElems = this.contentElem.current.children;
+        const childElems = this.contentElemRef.current.children;
         const firstChild = childElems[0];
         const width = firstChild.clientWidth;
 
         // Get client width of content container.
-        const availableWidth = this.contentElem.current.clientWidth * rowsToShow;
+        const availableWidth = this.contentElemRef.current.clientWidth * rowsToShow;
 
         // Calculate the number of children to show.
         let childrenToView = availableWidth / width;
@@ -104,8 +104,8 @@ class ShowMorePanel extends Component {
     console.log('SMP.render:', 'displaying', childrenToView, 'of', this.props.children.length, 'child panels');
 
     const container =
-      <div key="1" ref={this.containerElem} className="show-more-panel">
-        <div ref={this.contentElem} className="row show-more-content">
+      <div key="1" ref={this.containerElemRef} className="show-more-panel">
+        <div ref={this.contentElemRef} className="row show-more-content">
           {this.renderChildren(childrenToView)}
         </div>
       </div>

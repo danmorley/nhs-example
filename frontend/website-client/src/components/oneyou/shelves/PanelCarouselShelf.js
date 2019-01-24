@@ -9,7 +9,7 @@ import Equalizer from 'react-equalizer';
 import PlaceholderPanel from '../panels/PlaceholderPanel';
 import VideoTeaserPanel from '../panels/VideoTeaserPanel';
 import ImageTeaserPanel from '../panels/ImageTeaserPanel';
-import Oneyou1TeaserPanel from '../panels/Oneyou1TeaserPanel';
+import OneyouTeaserPanel from '../panels/OneyouTeaserPanel';
 import AppTeaserPanel from '../panels/AppTeaserPanel';
 import InformationPanel from '../panels/InformationPanel';
 
@@ -113,6 +113,6 @@ PanelCarouselShelf.propTypes = {
   id: PropTypes.string
 }
 
-CmsComponentRegistry.register('panel_carousel_shelf', PanelCarouselShelf, 'panel-carousel-shelf', null, null, 'oneyou');
+// CmsComponentRegistry.register('panel_carousel_shelf', PanelCarouselShelf, 'panel-carousel-shelf', null, null, 'oneyou');
 
 export default PanelCarouselShelf;

@@ -13,6 +13,7 @@ import PlaceholderShelf from './PlaceholderShelf';
 // import BasicCtaShelf from './BasicCtaShelf';
 
 import './carousel-shelf.css';
+import './panel-carousel-shelf.css';
 
 /**
  * Carousel Shelf is used to display a list of slides in a full width carousel widget.

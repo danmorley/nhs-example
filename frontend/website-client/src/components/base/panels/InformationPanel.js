@@ -51,11 +51,12 @@ class InformationPanel extends Component {
   }
 
   render() {
-    let { content, classNamePrefix } = this.props;
-    let backgroundImage = this.state.backgroundImageStyle;
+    const { content, classNamePrefix } = this.props;
+    const backgroundImage = this.state.backgroundImageStyle;
+    const imgDisplay = `image--${content.meta_image_display}`;
 
     return (
-      <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant}>
+      <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant} layout={content.meta_layout}>
         <div className={`${classNamePrefix}__info`}>
           <Text tagName="h2" content={content.heading} className={`${classNamePrefix}__heading`} />
           <div className={`${classNamePrefix}__text`}>
@@ -63,7 +64,7 @@ class InformationPanel extends Component {
           </div>
           <CtaLinks ctas={content.ctas} variant="button" />
         </div>
-        <div className={`${classNamePrefix}__image`} style={backgroundImage}>
+        <div className={`${classNamePrefix}__image ${imgDisplay}`} style={backgroundImage}>
         </div>
       </Panel>
     );

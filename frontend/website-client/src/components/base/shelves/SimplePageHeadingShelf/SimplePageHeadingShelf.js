@@ -6,7 +6,7 @@ import Text from '../../../base/Text';
 import CmsComponentRegistry from '../../../base/CmsComponentRegistry';
 import './simple-page-heading-shelf.css';
 import { Link } from 'react-router-dom';
-import UrlUtils from '../../../base/shared/UrlUtils';
+// import UrlUtils from '../../../base/shared/UrlUtils';
 import PageUtils from '../../shared/PageUtils';
 
 /**

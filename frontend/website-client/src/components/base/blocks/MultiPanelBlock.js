@@ -8,8 +8,6 @@ import CmsComponentRegistry from '../CmsComponentRegistry';
 // all inputs explicitly.
 // With the plugin import statement is as follows
 // import * as Panels from './panels'
-import InformationPanel from '../panels/InformationPanel';
-import VideoTeaserPanel from '../panels/VideoTeaserPanel';
 
 import PlaceholderPanel from '../../oneyou/panels/PlaceholderPanel';
 // import VideoTeaserPanel from '../../oneyou/panels/VideoTeaserPanel';
@@ -17,18 +15,24 @@ import '../panels/ImageTeaserPanel';
 import '../panels/ImageTeaserPanel/ImageTeaserPanel';
 import '../panels/SimpleServiceFinder';
 import '../panels/SimpleServiceFinderForm';
+
+/*eslint-disable */
 import BannerPanel from '../panels/BannerPanel';
-import Oneyou1TeaserPanel from '../../oneyou/panels/Oneyou1TeaserPanel';
-import AppTeaserPanel from '../../oneyou/panels/AppTeaserPanel';
-import SimpleTextPanel from '../../oneyou/panels/SimpleTextPanel';
-import RichTextPanel from '../../oneyou/panels/RichTextPanel';
-import IconCardPanel from '../../oneyou/panels/IconCardPanel';
-import InlineScriptPanel from '../../oneyou/panels/InlineScriptPanel';
-import InlineSvgPanel from '../../oneyou/panels/InlineSvgPanel';
-import CtaPanel from '../../oneyou/panels/CtaPanel';
-import ListItemPanel from '../../oneyou/panels/ListItemPanel';
-import SimpleImagePanel from '../../oneyou/panels/SimpleImagePanel';
+import InformationPanel from '../panels/InformationPanel';
+import InlineScriptPanel from '../panels/InlineScriptPanel';
+import InlineSvgPanel from '../panels/InlineSvgPanel';
+import VideoTeaserPanel from '../panels/VideoTeaserPanel';
+
 import AccordionPanel from '../../oneyou/panels/AccordionPanel';
+import AppTeaserPanel from '../../oneyou/panels/AppTeaserPanel';
+import CtaPanel from '../../oneyou/panels/CtaPanel';
+import IconCardPanel from '../../oneyou/panels/IconCardPanel';
+import ListItemPanel from '../../oneyou/panels/ListItemPanel';
+import OneyouTeaserPanel from '../../oneyou/panels/OneyouTeaserPanel';
+import RichTextPanel from '../../oneyou/panels/RichTextPanel';
+import SimpleImagePanel from '../../oneyou/panels/SimpleImagePanel';
+import SimpleTextPanel from '../../oneyou/panels/SimpleTextPanel';
+/*eslint-enable */
 
 class MultiPanelBlock extends Component {
   static renderItems(items, panelClass, containerTag) {
@@ -57,7 +61,7 @@ class MultiPanelBlock extends Component {
   render() {
     console.log('rendering MultiPanelBlock');
     const { items, panelClass, containerTagName } = this.props;
-    const ContainerTag = containerTagName;
+    // const ContainerTag = containerTagName;
     return MultiPanelBlock.renderItems(items, panelClass, containerTagName);
   }
 }

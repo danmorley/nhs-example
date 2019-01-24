@@ -4,8 +4,12 @@
 $shelf-padding-standard: 1em;
 $shelf-padding-extra: 2em;
 
+.banner-panel-section {
+  height: 100%;
+}
 
-.banner-panel {  
+.banner-panel {
+  height: 100%;
   .container, .container-fluid {
     position: relative;
     z-index: 1;

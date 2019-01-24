@@ -3,17 +3,20 @@ import PropTypes from 'prop-types';
 
 import '../../../assets/styles/page.css';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-import DocumentMeta from 'react-document-meta';
-import StandardPageLayout from '../../oneyou/pages/layouts/StandardPageLayout';
-import ShareButtonShelf from '../../oneyou/shelves/ShareButtonShelf';
-import NoticeShelf from '../../oneyou/shelves/NoticeShelf';
-
-import GeneralPageContent from './GeneralPageContent';
-import OneYouGeneralPageContent from '../../oneyou/pages/GeneralPageContent';
-import OneYouRecipePageContent from '../../oneyou/pages/RecipePageContent';
-import SexhealthGeneralPageContent from '../../sexhealth/pages/SexhealthGeneralPageContent';
+// import DocumentMeta from 'react-document-meta';
 import BackToTopButton from '../../oneyou/BackToTopButton';
-import UrlUtils from '../shared/UrlUtils';
+import NoticeShelf from '../../oneyou/shelves/NoticeShelf';
+import ShareButtonShelf from '../../oneyou/shelves/ShareButtonShelf';
+import StandardPageLayout from '../../oneyou/pages/layouts/StandardPageLayout';
+
+/*eslint-disable */
+import GeneralPageContent from './GeneralPageContent';
+import OneYouRecipePageContent from '../../oneyou/pages/RecipePageContent';
+/*eslint-enable */
+
+// import OneYouGeneralPageContent from '../../oneyou/pages/GeneralPageContent';
+// import SexhealthGeneralPageContent from '../../sexhealth/pages/SexhealthGeneralPageContent';
+// import UrlUtils from '../shared/UrlUtils';
 
 /**
  *  Component responsible for rendering the header, footer and content of all
@@ -35,9 +38,9 @@ class Page extends Component {
       // TODO: Handle no page for type
       const content = <PageClass page={page} site={site} />;
 
-      const pageTypeClass = (pageInfo)? `${pageInfo.classNamePrefix}-page` : 'general';
-      const meta = (page && page.meta.hasOwnProperty('use_share_button')) ? page.meta : page;
-      const useShareButton = page && (meta.use_share_button || meta.use_email_button || meta.use_print_button);
+      // const pageTypeClass = (pageInfo)? `${pageInfo.classNamePrefix}-page` : 'general';
+      // const meta = (page && page.meta.hasOwnProperty('use_share_button')) ? page.meta : page;
+      // const useShareButton = page && (meta.use_share_button || meta.use_email_button || meta.use_print_button);
 
       return this.renderPage(content, page_theme, page_styles, site, page, pageInfo);
     } else {

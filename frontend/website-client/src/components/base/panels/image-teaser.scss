@@ -14,7 +14,7 @@
   background-position: center;
   background-repeat: no-repeat;
   
-  .child-image--contain & {
+  &.image--contain {
     background-size: contain;
     background-position: top left;
   }
@@ -196,29 +196,29 @@
       }
     }
 
-    .image-teaser__heading {
-      padding: 0.9em 0 0 0;
-      font-family: $secondary-brand-font;
-      font-weight: normal;
+    // .image-teaser__heading {
+    //   padding: 0.9em 0 0 0;
+    //   font-family: $secondary-brand-font;
+    //   font-weight: normal;
       
-      @include media-breakpoint-down(sm) {
-        font-size: 1em;
-      }
+    //   @include media-breakpoint-down(sm) {
+    //     font-size: 1em;
+    //   }
       
-      @include media-breakpoint-up(md) {
-        @include heading-h2(oneyou)
-        padding: 1em 0 0;
-      }
-    }
+    //   @include media-breakpoint-up(md) {
+    //     @include heading-h2(oneyou)
+    //     padding: 1em 0 0;
+    //   }
+    // }
 
-    .image-teaser__text {
-      padding-left: 0;
-      padding-right: 0;
-    }
+    // .image-teaser__text {
+    //   padding-left: 0;
+    //   padding-right: 0;
+    // }
     
-    .image-teaser__heading {
-      background-color: inherit;
-    }
+    // .image-teaser__heading {
+    //   background-color: inherit;
+    // }
   }
 
   .image-teaser__text {
@@ -297,5 +297,10 @@
       font-family: $sexhealth-bold-font;
     } 
   }
-    
+
+  .image-teaser--dark-bg {
+    .image-teaser__image {
+      width: 50%;
+    }
+  }
 }

@@ -7,7 +7,7 @@ import Image from '../Image';
 import CtaLink from '../shared/CtaLink';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import './banner-panel.css';
-import ShelfUtils from '../shared/ShelfUtils';
+// import ShelfUtils from '../shared/ShelfUtils';
 import Banner from '../shared/Banner';
 import ImageUtils from './ImageUtils';
 
@@ -66,11 +66,12 @@ class BannerPanel extends Component {
 
     const metaVariant = content.meta_variant || variant || 'primary';
     const metaLayout = content.meta_layout || layout || 'vertical_left';
-    const [ direction, alignment ] = metaLayout.split('_');
+    // const [ direction, alignment ] = metaLayout.split('_');
+    const alignment = metaLayout.split('_')[1];
 
     const headingTagName = (classNamePrefix === 'page-heading-panel') ? 'h1' : 'h2';
     const panel = content.panel ? content.panel : content;
-    const containerClass = `shelf__container ${ShelfUtils.shelfContainerClass(content)}`;
+    // const containerClass = `shelf__container ${ShelfUtils.shelfContainerClass(content)}`;
     const classExtra = ImageUtils.isValid(panel.background_image) ? 'banner-panel--imagebackground' : null;
 
     const banner = (
@@ -80,16 +81,17 @@ class BannerPanel extends Component {
         body={<Text content={panel.body} format="richtext"/>}
         ctas={panel.ctas}
         layout={metaLayout}
+        width={width}
         panel
       />
     );
 
-    width
-
     return (
-      <Panel id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group} layout={`align-${alignment}`} classExtra={classExtra}>
-        {width == "full" && banner}
-      </Panel>
+      <section className="panel-section">
+        <Panel id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group} layout={`align-${alignment}`} classExtra={classExtra}>
+          {banner}
+        </Panel>
+      </section>
     );
   }
 }
