@@ -58,7 +58,7 @@ class App extends Component {
         let key = this.pageKey(path);
         this.loadPageForKey(key);
         var event = new Event('pageChanged');
-        document.getElementById('root').dispatchEvent(event);
+        global.rootElem.dispatchEvent(event);
       } else {
         path = path.replace(global.rootUrl, '');
         console.log('Loading app page', path);

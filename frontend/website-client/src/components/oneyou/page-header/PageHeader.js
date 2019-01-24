@@ -35,12 +35,12 @@ class PageHeader extends Component {
   componentDidMount() {
     this.handleResize();
     window.addEventListener('resize', this.handleResize);
-    document.getElementById('root').addEventListener('pageChanged', this.handlePageChange);
+    global.rootElem.addEventListener('pageChanged', this.handlePageChange);
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize);
-    document.getElementById('root').removeEventListener('pageChanged', this.handlePageChange);
+    global.rootElem.removeEventListener('pageChanged', this.handlePageChange);
   }
 
   setBurgerElem(elem) {
