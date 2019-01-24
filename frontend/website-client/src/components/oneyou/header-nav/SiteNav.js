@@ -6,8 +6,9 @@ import MultiMenuItem from './MultiMenuItem';
 import './header-nav.css';
 
 class SiteNav extends Component {
+  
   onNavCloseClick() {
-    document.querySelector('.page-wrapper').classList.toggle('header-nav--open');
+    this.props.navCloseWasClicked();
   }
 
   render() {
@@ -27,7 +28,7 @@ class SiteNav extends Component {
 
     return (
       <nav className="header-nav">
-        <div className="header-nav__close" aria-label="Close navigation" onClick={this.onNavCloseClick}>x</div>
+        <div className="header-nav__close" aria-label="Close navigation" onClick={this.onNavCloseClick.bind(this)}>x</div>
         <h2 className="header-nav__title">
           MENU
         </h2>
@@ -40,7 +41,8 @@ class SiteNav extends Component {
 }
 
 SiteNav.propTypes = {
-  navItems: PropTypes.array.isRequired
+  navItems: PropTypes.array.isRequired,
+  navCloseWasClicked: PropTypes.func
 };
 
 export default SiteNav;

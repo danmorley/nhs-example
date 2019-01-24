@@ -11,8 +11,14 @@ import './page-header.css';
 class PageHeader extends Component {
   constructor (props) {
     super(props);
-    this.state = { navHeight: "0" };
-    this.handleClick = this.handleClick.bind(this);
+    this.state = { 
+      navHeight: "0",
+      navOpen: false
+     };
+    this.toggleMenu = this.toggleMenu.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
+    this.handlePageChange = this.handlePageChange.bind(this);
+    this.swipedLeft = this.swipedLeft.bind(this);
   }
 
   handleResize = () => {
@@ -22,13 +28,19 @@ class PageHeader extends Component {
     document.querySelector('.page-wrapper').style.paddingTop = (this.divElement.clientHeight +'px');
   }
 
+  handlePageChange() {
+    this.closeMenu();
+  }
+  
   componentDidMount() {
     this.handleResize();
     window.addEventListener('resize', this.handleResize);
+    document.getElementById('root').addEventListener('pageChanged', this.handlePageChange);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize)
+    window.removeEventListener('resize', this.handleResize);
+    document.getElementById('root').removeEventListener('pageChanged', this.handlePageChange);
   }
 
   setBurgerElem(elem) {
@@ -36,15 +48,15 @@ class PageHeader extends Component {
   }
 
   swipedLeft(e, _absX) {
-    PageHeader.toggleMenu(e);
+    this.toggleMenu(e);
   }
-
+  
   render() {
     let { navItems, header, breadcrumbs } = this.props;
     let siteNav;
 
     if (navItems) {
-      siteNav = <SiteNav navItems={navItems} />;
+      siteNav = <SiteNav navItems={navItems} navCloseWasClicked={this.closeMenu} />;
     }
 
     return (
@@ -53,8 +65,8 @@ class PageHeader extends Component {
           <Breadcrumb breadcrumbs={breadcrumbs}/>
           <div className="page-header__row">
             <div className="page-header__info">
-              <button ref={(elem) => this.setBurgerElem(elem)} className="page-header__burger" onClick={this.handleClick}>
-                <i className="font-icon"></i>
+              <button ref={(elem) => this.setBurgerElem(elem)} className="page-header__burger" onClick={this.toggleMenu}>
+                <i className="font-icon"><span>{this.state.navOpen? 'close' : 'open'} navigation</span></i>
               </button>
               <Link to={global.rootUrl} className="page-header__logo">
                 <Text content={header.title || 'html::One <span>You</span>'} tagName={"div"} />
@@ -73,14 +85,16 @@ class PageHeader extends Component {
     );
   }
 
-  handleClick(event) {
-    PageHeader.toggleMenu(event);
+  closeMenu(){
+    this.setState({ 
+      navOpen: false 
+    });
+    document.querySelector('.page-wrapper').classList.remove('header-nav--open');
   }
 
-  static toggleMenu(event) {
-    const box = document.querySelector('.page-wrapper');
-    event.preventDefault();
-    box.classList.toggle('header-nav--open');
+  toggleMenu(event) {
+    this.setState(prevState => ({navOpen: !prevState.navOpen}));
+    document.querySelector('.page-wrapper').classList.toggle('header-nav--open');
   }
 }
 
