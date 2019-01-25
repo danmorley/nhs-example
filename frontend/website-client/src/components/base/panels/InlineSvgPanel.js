@@ -57,7 +57,7 @@ class InlineSvgPanel extends Component {
 
 InlineSvgPanel.propTypes = {
   content: PropTypes.object.isRequired,
-  classNamePrefix: PropTypes.string.isRequired,
+  classNamePrefix: PropTypes.string,
   id: PropTypes.string
 }
 

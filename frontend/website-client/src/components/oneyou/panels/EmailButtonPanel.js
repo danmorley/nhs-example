@@ -10,11 +10,11 @@ class EmailButtonPanel extends Component {
   
   constructor(props) {
     super(props);
-    this.modal = React.createRef();
+    this.modalRef = React.createRef();
   }
   
   triggerModal = () => {
-    this.modal.current.openModal();
+    this.modalRef.current.openModal();
   }
   
   render() {
@@ -23,7 +23,7 @@ class EmailButtonPanel extends Component {
         <div onClick={this.triggerModal.bind(this)} className="email-button" data-name="email-button">
           <span className="email-button__title">Email</span>
         </div>
-        <StandardModal content={<ActionPlanContactForm {...this.props} />} ref={this.modal}/>
+        <StandardModal content={<ActionPlanContactForm {...this.props} />} ref={this.modalRef}/>
       </Panel>
     );
   }

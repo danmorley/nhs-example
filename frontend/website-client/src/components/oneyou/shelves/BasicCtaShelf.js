@@ -6,7 +6,7 @@ import Text from '../../base/Text';
 import Image from '../../base/Image';
 import CtaLink from '../../base/shared/CtaLink';
 import CmsComponentRegistry from '../../base/CmsComponentRegistry';
-import './promo-shelf.css';
+// import './promo-shelf.css';
 import ImageUtils from '../../base/panels/ImageUtils';
 
 /**
@@ -256,6 +256,6 @@ CmsComponentRegistry.register('basic_cta_shelf', BasicCtaShelf, 'basic-cta-shelf
 CmsComponentRegistry.register('promo_shelf', BasicCtaShelf, 'promo-shelf', 'promo');
 CmsComponentRegistry.register('promo_shelf_v2', BasicCtaShelf, 'promo-shelf', 'promo');
 
-CmsComponentRegistry.register('banner_shelf', BasicCtaShelf, 'banner-shelf', 'banner', null, 'oneyou');
+// CmsComponentRegistry.register('banner_shelf', BasicCtaShelf, 'banner-shelf', 'banner', null, 'oneyou');
 
 export default BasicCtaShelf;

@@ -26,6 +26,8 @@ class GridShelf extends Component {
     let gutterSize = content.meta_gutter_size || 'gutter-unset';
     let gridHeading = content.heading || '';
     let gridBody = content.body || '';
+    const containerClass = content.width != "full" ? `shelf__container ${ShelfUtils.shelfContainerClass(content)}` : null;
+    const containerSubClass = content.width != "full" ? `container` : null;
 
     const panelClass = ((metaLayout) => {
       switch(metaLayout) {
@@ -48,9 +50,9 @@ class GridShelf extends Component {
     })(metaLayout);
 
     return (
-      <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group}>
-        <ResponsiveBackgroundImage image={content.background_image} className={`shelf__container ${ShelfUtils.shelfContainerClass(content)} child-image--${content.meta_image_display}`}>
-          <div className="container">
+      <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group} layout={metaLayout}>
+        <ResponsiveBackgroundImage image={content.background_image} className={`${containerClass} child-image--${content.meta_image_display}`}>
+          <div className={containerSubClass}>
             {gridHeading != '' &&
               <Text tagName="h2" content={gridHeading} className="shelf__header" />
             }

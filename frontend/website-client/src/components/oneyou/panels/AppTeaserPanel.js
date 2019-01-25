@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Text from '../../base/Text';
 import CtaLink from '../../base/shared/CtaLink';
+import CtaLinks from '../../base/shared/CtaLinks';
 import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './app-teaser.css';
 import Panel from './Panel';
@@ -25,7 +26,7 @@ class AppTeaserPanel extends Component {
   setImage() {
     this.setState({
       backgroundImageStyle: ImageUtils.backgroundImageStyle(
-        this.props.content.image,
+        this.props.content.panel.attributes[0].value,
         ImageUtils.placeholderBackgroundImage()
       )
     })
@@ -50,11 +51,11 @@ class AppTeaserPanel extends Component {
     let backgroundTeaserImage = this.state.backgroundImageStyle;
 
     // Set button text for accessibility and tracking.
-    if (content.cta_appstore) {
-      content.cta_appstore.link_text = 'Download from the Appstore';
+    if (content.panel.cta_appstore) {
+      content.panel.cta_appstore.link_text = 'Download from the Appstore';
     }
-    if (content.cta_googleplay) {
-      content.cta_googleplay.link_text = 'Get it on Google Play';
+    if (content.panel.cta_googleplay) {
+      content.panel.cta_googleplay.link_text = 'Get it on Google Play';
     }
 
     return (
@@ -63,25 +64,21 @@ class AppTeaserPanel extends Component {
           {/* // needs alt text */}
         </div>
         <div className={`${classNamePrefix}__info`}>
-          <Text tagName="h3" content={content.heading}  className={`${classNamePrefix}__heading`} />
+          <Text tagName="h3" content={content.panel.heading}  className={`${classNamePrefix}__heading`} />
           <div className={`${classNamePrefix}__text`}>
-            <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
-            { (content.cta_appstore || content.cta_googleplay) &&
+            <Text content={content.panel.body} className={`${classNamePrefix}__body`} format="richtext"/>
+            { (content.panel.cta_appstore || content.panel.cta_googleplay) &&
               <ul className={`${classNamePrefix}__app-button-list`}>
                 <li>
-                  <CtaLink cta={content.cta_appstore} variant="appstore" dataName={`appstore-${content.heading}`} /> 
+                  <CtaLink cta={content.panel.cta_appstore} variant="appstore" dataName={`appstore-${content.panel.heading}`} /> 
                 </li>
                 <li>
-                  <CtaLink cta={content.cta_googleplay} variant="googleplay" dataName={`googleplay-${content.heading}`} />
+                  <CtaLink cta={content.panel.cta_googleplay} variant="googleplay" dataName={`googleplay-${content.panel.heading}`} />
                 </li>
               </ul>
             }
-            { content.cta.link_text &&
-              <ul className={`${classNamePrefix}__button-list`}>
-                <li>
-                  <CtaLink cta={content.cta} variant="button" />
-                </li>
-              </ul>
+            { content.panel.ctas &&
+              <CtaLinks ctas={content.panel.ctas} variant="button" />
             }
           </div>
         </div>
@@ -96,6 +93,6 @@ AppTeaserPanel.propTypes = {
   id: PropTypes.string
 };
 
-CmsComponentRegistry.register('app_teaser', AppTeaserPanel, 'app-teaser');
+CmsComponentRegistry.register('app_teaser_panel', AppTeaserPanel, 'app-teaser');
 
 export default AppTeaserPanel;

@@ -60,8 +60,8 @@ class ImageTeaserPanel extends Component {
   render() {
     let { content, classNamePrefix } = this.props;
     let backgroundTeaserImage = this.state.backgroundImageStyle;
-    let desktopLayout = content.meta_layout_desktop ? content.meta_layout_desktop : 'desktop-image-default';
-    let mobilLayout = content.meta_layout_mobile ? content.meta_layout_mobile : 'mobile-image-default';
+    // let desktopLayout = content.meta_layout_desktop ? content.meta_layout_desktop : 'desktop-image-default';
+    // let mobilLayout = content.meta_layout_mobile ? content.meta_layout_mobile : 'mobile-image-default';
     let layout = content.meta_layout_desktop + '-' + content.meta_layout_mobile;
     let ctaStyle = content.meta_cta_variant;
 
@@ -77,10 +77,10 @@ class ImageTeaserPanel extends Component {
 
             { content.audio &&
               <audio
-                  id={`${content.panel_id}-audio`}
-                  controls
-                  src={`${content.audio}`}>
-                  Your browser does not support the <code>audio</code> element.
+                id={`${content.panel_id}-audio`}
+                controls
+                src={`${content.audio}`}>
+                Your browser does not support the <code>audio</code> element.
               </audio>
             }
             <CtaLinks cta={content.cta} variant={ctaStyle} />

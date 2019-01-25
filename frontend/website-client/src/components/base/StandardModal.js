@@ -9,13 +9,18 @@ const portalContainer = document.getElementById('root');
 
 class StandardModal extends Component {
 
+  constructor(props){
+    super(props);
+    this.modalRef = React.createRef();
+  }
+
   openModal() {
-    this.refs.modal.open() 
+    this.modalRef.current.open();
   }
   
   render() {
     return (  
-       ReactDOM.createPortal(
+      ReactDOM.createPortal(
         <PureModal
           key = "2"
           header=""
@@ -25,12 +30,10 @@ class StandardModal extends Component {
           }}
           isOpen={false}
           replace={false}
-          ref="modal"
+          ref={this.modalRef}
           className ="standard-modal"
         >
-
-            {this.props.content}
-
+          {this.props.content}
         </PureModal>
         ,portalContainer
       ) 

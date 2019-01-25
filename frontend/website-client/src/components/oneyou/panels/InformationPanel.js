@@ -76,6 +76,6 @@ InformationPanel.propTypes = {
   id: PropTypes.string
 };
 
-CmsComponentRegistry.register('information_panel', InformationPanel, 'information-panel');
+// CmsComponentRegistry.register('information_panel', InformationPanel, 'information-panel');
 
 export default InformationPanel;

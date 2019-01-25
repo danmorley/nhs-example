@@ -5,11 +5,13 @@ from home.models import SiteSettings as CustomSite
 
 def get_site_by_id_or_uuid(identifier):
     try:
+        pk = int(identifier)
+        return CustomSite.objects.get(pk=pk)
+    except ValueError:
         try:
-            pk = int(identifier)
-            return CustomSite.objects.get(pk=pk)
-        except ValueError:
             return CustomSite.objects.get(uid=identifier)
+        except CustomSite.DoesNotExist:
+            return None
     except CustomSite.DoesNotExist:
         return None
 

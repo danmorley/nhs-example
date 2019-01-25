@@ -5,14 +5,14 @@ import Panel from '../panels/Panel';
 
 
 class PrintButtonPanel extends Component {
-  handleClick(evt) {
+  handleClick() {
     window.print();
   }
 
   render() {
     return (
       <Panel classNamePrefix="print-button-panel" variant="align-right">
-        <div className="print-button" onClick={(e) => this.handleClick(e)} data-name="print-button">
+        <div className="print-button" onClick={this.handleClick()} data-name="print-button">
           <span className="print-button__title">Print</span>
         </div>
       </Panel>

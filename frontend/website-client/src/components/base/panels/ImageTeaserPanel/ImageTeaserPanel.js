@@ -61,10 +61,10 @@ class ImageTeaserPanel extends Component {
             <Text content={content.body} className={`${classNamePrefix}__body`} format="richtext"/>
             { content.audio &&
               <audio
-                  id={`${content.panel_id}-audio`}
-                  controls
-                  src={`${content.audio}`}>
-                  Your browser does not support the <code>audio</code> element.
+                id={`${content.panel_id}-audio`}
+                controls
+                src={`${content.audio}`}>
+                Your browser does not support the <code>audio</code> element.
               </audio>
             }
             <CtaLinks cta={content.ctas} variant={ctaStyle} />

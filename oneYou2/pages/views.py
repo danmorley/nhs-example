@@ -13,6 +13,7 @@ from wagtail.admin.views.pages import get_valid_next_url_from_request, approve_m
 from wagtail.core import hooks
 from wagtail.core.models import Page, UserPagePermissionsProxy
 
+from home.models import SiteSettings
 from release.models import Release
 
 
@@ -129,6 +130,9 @@ def copy(request, page_id):
     })
 
 def edit(request, page_id):
+    from PIL import ImageFile
+    ImageFile.LOAD_TRUNCATED_IMAGES = True
+
     real_page_record = get_object_or_404(Page, id=page_id)
     latest_revision = real_page_record.get_latest_revision()
     page = real_page_record.get_latest_revision_as_page()
@@ -329,6 +333,12 @@ def edit(request, page_id):
     else:
         page_for_status = page
 
+    rendition = None
+    try:
+        rendition = SiteSettings.objects.get(site=page.get_site()).rendition
+    except SiteSettings.DoesNotExist:
+        pass
+
     return render(request, 'wagtailadmin/pages/edit.html', {
         'page': page,
         'page_for_status': page_for_status,
@@ -339,6 +349,7 @@ def edit(request, page_id):
         'form': form,
         'next': next_url,
         'has_unsaved_changes': has_unsaved_changes,
+        'rendition': rendition,
     })
 
 

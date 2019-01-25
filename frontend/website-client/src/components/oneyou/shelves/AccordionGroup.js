@@ -26,12 +26,12 @@ class AccordionGroup extends Component {
         <div className={`shelf__container container-fluid ${classNamePrefix}__container`}>
           { content.accordions && content.accordions.map((accordion, i) =>
             <AccordionItem key={i}
-             id={accordion.id}
-             classNamePrefix={'accordion-item'}
-             content={accordion.value}
-             container={classNamePrefix}
-             expanded={this.state.expandedGroup === accordion.id}
-             setExpandedGroup={this.setExpandedGroup} />
+              id={accordion.id}
+              classNamePrefix={'accordion-item'}
+              content={accordion.value}
+              container={classNamePrefix}
+              expanded={this.state.expandedGroup === accordion.id}
+              setExpandedGroup={this.setExpandedGroup} />
           )}
         </div>
       </Shelf>

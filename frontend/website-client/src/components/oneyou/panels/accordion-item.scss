@@ -95,26 +95,33 @@
 
 //sexhealth
 .sexhealth {
-  
+  .accordion-item {
+    padding-top: 0em;
+    padding-bottom: 0em;
+  }
+
   .accordion-item__header {
     background-color: $white;
     border-bottom: 1px solid $sexhealth-lightgrey;
     font-family: $sexhealth-bold-font;
 
-    h3 { 
+    h2 { 
+      font-size: 1.15em;
       &:after {
         font-size: 1em;
         color: $sexhealth-dark;
         float: right;
+        font-family: inherit;
+        position: inherit;
       }
     }
 
-    h3.accordion-item__sub-container {
+    h2.accordion-item__sub-container {
       padding: 0.5em 0 !important;
     }
     
     &.accordion-item__header--expanded {
-      h3 {
+      h2 {
         &:after {
           @extend %icon-sexhealth-minus;
         }
@@ -122,7 +129,7 @@
     }
     
     &.accordion-item__header--collapsed {
-      h3 {
+      h2 {
         &:after {
           @extend %icon-sexhealth-plus;
         }
@@ -130,22 +137,23 @@
     }
   }
 
-  .accordion-panel {
-    h3.accordion-item__sub-container {
-      border-bottom: 2px solid #ccc;
-    }
+  h2.accordion-item__sub-container {
+    border-bottom: 2px solid #ccc;
+  }
 
-    .accordion-item__body {
-      padding: 0;
-    
-      p {
-        font-weight: normal;
-      }
+  .accordion-item__body {
+    padding: 0;
+  
+    p {
+      font-weight: normal;
     }
+  }
 
-    .accordion-item__body--expanded {
-      padding-top: 1em;
-      padding-bottom: 1.5em;
+  .accordion-item__body--expanded {
+    padding-top: 1em;
+    padding-bottom: 1.5em;
+    div {
+      width: 100%;
     }
   }
 }

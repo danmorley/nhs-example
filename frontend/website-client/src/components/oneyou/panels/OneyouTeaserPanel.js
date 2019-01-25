@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Text from '../../base/Text';
 import CmsComponentRegistry from '../../base/CmsComponentRegistry';
-import './oneyou1-teaser.css';
+import './oneyou-teaser.css';
 import Panel from './Panel';
 import CtaList from '../../base/shared/CtaList';
 import ImageUtils from '../../base/panels/ImageUtils';
@@ -16,7 +16,7 @@ import Collapsible from '../shared/Collapsible';
  *
  *  }
  */
-class Oneyou1TeaserPanel extends Component {
+class OneyouTeaserPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -68,24 +68,24 @@ class Oneyou1TeaserPanel extends Component {
   renderCta() {
     let { content, classNamePrefix } = this.props;
 
-    if (!CtaUtils.isCta(content.cta)) return null;
+    if (!CtaUtils.isCta(content.ctas)) return null;
 
     return (
       <div className={`${classNamePrefix}__cta-list`}>
         <Collapsible trigger={<h4>{content.cta_heading || 'Find out more'}</h4>} transitionTime={200}>
-          <CtaList items={content.cta} />
+          <CtaList items={content.ctas} />
         </Collapsible>
       </div>
     );
   }
 }
 
-Oneyou1TeaserPanel.propTypes = {
+OneyouTeaserPanel.propTypes = {
   content: PropTypes.object.isRequired,
   classNamePrefix: PropTypes.string.isRequired,
   id: PropTypes.string
 };
 
-CmsComponentRegistry.register('oneyou1_teaser', Oneyou1TeaserPanel, 'oneyou1-teaser');
+CmsComponentRegistry.register('oneyou_teaser_panel', OneyouTeaserPanel, 'oneyou-teaser');
 
-export default Oneyou1TeaserPanel;
+export default OneyouTeaserPanel;

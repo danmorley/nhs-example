@@ -135,10 +135,16 @@ class Release(ClusterableModel):
 
     def add_revision(self, new_revision):
         release_content = self.content.first()
-        content = json.loads(release_content.content)
+        content = {}
+        if release_content:
+            content = json.loads(release_content.content)
         content[str(new_revision.page_id)] = Release.generate_fixed_content(new_revision)
-        release_content.content = json.dumps(content)
-        release_content.save()
+        try:
+            ReleaseContent.objects.get(release=self)
+            release_content.content = json.dumps(content)
+            release_content.save()
+        except ReleaseContent.DoesNotExist:
+            ReleaseContent(release=self, content=json.dumps(content)).save()
         ReleasePage.objects.filter(release=self, revision__page=new_revision.page).delete()
         ReleasePage(release=self, revision=new_revision).save()
 

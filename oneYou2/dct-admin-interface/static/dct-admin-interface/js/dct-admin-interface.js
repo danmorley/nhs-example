@@ -98,15 +98,9 @@ function addInfoButton(buttonGroup, rootId) {
  *  unless needed.
  */
 function addButtonGroup(el) {
-  // console.log('Adding button group', el);
-
   var buttonGroup = document.createElement('div');
   buttonGroup.classList.add('sequence-controls');
-  var heading = document.createElement('h3');
-  var label = document.createElement('label');
-  label.innerHTML = 'Image';
-  heading.appendChild(label);
-  buttonGroup.appendChild(heading);
+  buttonGroup.style.cssText = "padding: 0";
   var group = document.createElement('div');
   group.classList.add('button-group', 'button-group-square');
   buttonGroup.appendChild(group);

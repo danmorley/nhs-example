@@ -25,7 +25,7 @@ class CtaPanel extends Component {
           <Text content={content.body} className={`${classNamePrefix}__text`} format="richtext"/>
         </div>
         <div className={`${classNamePrefix}__col`}>
-          <CtaLinks cta={content.cta} variant="button" />
+          <CtaLinks ctas={content.ctas} variant="button" />
         </div>
       </Panel>
     );

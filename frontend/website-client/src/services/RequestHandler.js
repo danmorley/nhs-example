@@ -14,13 +14,13 @@ export function signUpForActionPlan() {
   submission['UserItems'] = userItems;
 
   return fetch('https://api-live-mentalhealth.paragon-cc.co.uk/api/Actions/AddUserRecord', {
-      method: 'POST',
-      headers : {
-        "Authorization": "cGFyYWdvbi1jYzoyNEVFM0ExMi0wM0U4LTQ5OTYtQkIwOS1DMzM1NzNFNUU5RUE=",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(submission)
-    })
+    method: 'POST',
+    headers : {
+      "Authorization": "cGFyYWdvbi1jYzoyNEVFM0ExMi0wM0U4LTQ5OTYtQkIwOS1DMzM1NzNFNUU5RUE=",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(submission)
+  })
     .then((response) => response.json())
     .catch((error) => {
       console.error(error);

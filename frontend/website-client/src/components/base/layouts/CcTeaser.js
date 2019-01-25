@@ -5,7 +5,7 @@ import ResponsiveBackgroundImage from '../shared/ResponsiveBackgroundImage';
 
 class CcTeaser extends Component {
   render() {
-    const { image, imagePanelText, heading, body, ctas, className, layout } = this.props;
+    const { image, imagePanelText, heading, body, ctas, className } = this.props;
     const teaserClass = `cc-teaser container-fluid h-100 ${className}`;
     // const [ col1, col2 ] = layout.split('_');
 

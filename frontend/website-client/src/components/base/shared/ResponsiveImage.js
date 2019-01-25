@@ -21,7 +21,7 @@ class ResponsiveImage extends Component {
   }
 
   render() {
-    const { image, variant, className } = this.props;
+    const { image, className } = this.props;
     const deviceImage = ImageUtils.isValid(image) ? ImageUtils.deviceImage(image) : null
 
     return (

@@ -6,7 +6,7 @@ import './grid-shelf.css';
 import ShowMorePanel from '../shared/ShowMorePanel';
 
 import PlaceholderPanel from '../panels/PlaceholderPanel';
-import RecipeTeaserPanel from '../panels/RecipeTeaserPanel';
+// import RecipeTeaserPanel from '../panels/RecipeTeaserPanel';
 
 /**
  *  Grid Shelf is a simple shelf that can be used to display other

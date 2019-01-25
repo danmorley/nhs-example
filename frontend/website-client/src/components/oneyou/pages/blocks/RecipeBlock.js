@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Text from '../../../base/Text';
-import ImageUtils from '../../../base/panels/ImageUtils';
 import VideoModal from '../../../base/VideoModal';
+
+import ResponsiveBackgroundImage from '../../../base/shared/ResponsiveBackgroundImage';
 
 import './recipe-block.css';
 
@@ -12,11 +13,11 @@ class RecipeBlock extends Component {
 
   constructor(props) {
     super(props);
-    this.video = React.createRef();
+    this.videoRef = React.createRef();
   }
 
   triggerModal = () => {
-    this.video.current.openModal();
+    this.videoRef.current.openModal();
   }
 
   render() {
@@ -25,11 +26,8 @@ class RecipeBlock extends Component {
     // Convert recipe passed through to standard format.
     const reformattedImage = {
       title: recipe.recipe_name,
-      renditions: recipe.image
+      renditions: recipe.header_image
     }
-
-    const deviceImage = ImageUtils.deviceImage(reformattedImage);
-    const bkgImage =  ImageUtils.backgroundImageStyle(deviceImage);
 
     const recipeItems = recipe.tags ? recipe.tags.split(',').map((item, i) =>
       <li className="recipe__tags__item" key={i}>{item}</li>
@@ -49,13 +47,11 @@ class RecipeBlock extends Component {
 
     return (
       <div className="recipe">
-        {recipe.video_id && <VideoModal video={recipe.video_id} host={recipe.host} ref={this.video}></VideoModal>}
-        <div className={bannerClassNames} style={bkgImage} {...bannerAttr} >
-          <div>
-            {recipe.header_gradient == true && <div className="gradient"></div>}
-            {recipe.video_id && <span className="video_play_button" dangerouslySetInnerHTML={{__html: playButtonSvg}} />}
-          </div>
-        </div>
+        {recipe.video_id && <VideoModal video={recipe.video_id} host={recipe.host} ref={this.videoRef}></VideoModal>}
+        <ResponsiveBackgroundImage image={reformattedImage} className={bannerClassNames}  {...bannerAttr} >
+          {recipe.header_gradient == true && <div className="gradient"></div>}
+          {recipe.video_id && <span className="video_play_button" dangerouslySetInnerHTML={{__html: playButtonSvg}} />}
+        </ResponsiveBackgroundImage>
         <div className ="recipe__block container">
           <section className="recipe__intro">
             <div className="recipe__intro__col-1">

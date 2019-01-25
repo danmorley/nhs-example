@@ -18,7 +18,7 @@ class VideoModal extends Component {
     this.state = {
       isShowingModal: false
     };
-
+    this.modalRef = React.createRef();
     this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
@@ -42,9 +42,9 @@ class VideoModal extends Component {
   }
 
   render() {
-    return (  
-       [
-        <div key="1" ref={div => this.divElement = div} onClick={() => this.refs.modal.open() } className={`${this.props.classNamePrefix}__image`} style={this.props.image}>{this.props.children}</div>,
+    return (
+      [
+        <div key="1" ref={div => this.divElement = div} onClick={() => this.modalRef.current.open() } className={`${this.props.classNamePrefix}__image`} style={this.props.image}>{this.props.children}</div>,
         ReactDOM.createPortal(
           <PureModal
             key = "2"
@@ -55,7 +55,7 @@ class VideoModal extends Component {
             }}
             isOpen={false}
             replace={false}
-            ref="modal"
+            ref={this.modalRef}
             className ={`video-modal ${this.props.classExtra}`}
           >
             {this.renderVideo(this.props.video, this.props.host)}
@@ -72,7 +72,7 @@ VideoModal.propTypes = {
   variant: PropTypes.string,
   host: PropTypes.string,
   classNamePrefix: PropTypes.string,
-  image: PropTypes.string,
+  image: PropTypes.object,
   classExtra: PropTypes.string
 };
 

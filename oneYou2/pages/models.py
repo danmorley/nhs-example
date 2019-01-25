@@ -907,17 +907,6 @@ class GeneralShelvePage(Page):
             except Release.DoesNotExist:
                 pass
 
-    def unpublish(self, release_id=None):
-        if not release_id:
-            pass
-        else:
-            from release.models import Release
-            try:
-                release = Release.objects.get(id=release_id)
-                release.remove_page(self.id)
-            except Release.DoesNotExist:
-                pass
-
     def serve_preview(self, request, mode_name, model_name, revision_id='latest'):
         request.is_preview = True
 

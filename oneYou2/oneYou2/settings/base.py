@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'dctcmsbase',
     'dctsharedcontent',
     'pages',
+    'oneyou',
     'sexhealth',
     'release',
     'shelves',

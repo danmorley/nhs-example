@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Shelf from '../../base/shelves/Shelf';
-import CmsComponentRegistry from '../../base/CmsComponentRegistry';
+// import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import Text from '../../base/Text';
 import './grid-shelf.css';
 import ShowMorePanel from '../shared/ShowMorePanel';
@@ -76,6 +76,6 @@ GridShelf.propTypes = {
   id: PropTypes.string
 };
 
-CmsComponentRegistry.register('grid_shelf', GridShelf, 'basic-grid-shelf', null, 'responsive_2_col', 'oneyou');
+// CmsComponentRegistry.register('grid_shelf', GridShelf, 'basic-grid-shelf', null, 'responsive_2_col', 'oneyou');
 
 export default GridShelf;

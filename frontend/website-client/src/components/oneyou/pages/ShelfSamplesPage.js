@@ -1,6 +1,6 @@
 import Page from '../../base/pages/Page';
 import withOwnContent from './withOwnContent';
-import ImageUtils from '../../base/panels/ImageUtils';
+// import ImageUtils from '../../base/panels/ImageUtils';
 import testBackgroundImage from '../../../assets/images/app-screen.jpg';
 import testImage from '../../../assets/images/test-image.jpg';
 import pheLogo from '../../../assets/images/public-health-england-logo.png';
@@ -53,8 +53,8 @@ const image_right = {
   title: 'Img right top'
 };
 
-const BASKET_KEY = 'basket';
-const ACTION_PLAN_KEY = 'action_plan';
+// const BASKET_KEY = 'basket';
+// const ACTION_PLAN_KEY = 'action_plan';
 
 const sampleShelvesPage = {
   title: 'Shelf Samples',
@@ -4041,9 +4041,9 @@ const sampleShelvesPage = {
         body: '',
         items: [
           {
-            type: "oneyou1_teaser",
+            type: "oneyou_teaser",
             value: {
-              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              image_meta: "oneyou_teaser/grid_shelf/full_width",
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "One you teaser",
@@ -4055,9 +4055,9 @@ const sampleShelvesPage = {
             id: 'full-grid-one-you-1'
           },
           {
-            type: "oneyou1_teaser",
+            type: "oneyou_teaser",
             value: {
-              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              image_meta: "oneyou_teaser/grid_shelf/full_width",
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "One you teaser",
@@ -6339,9 +6339,9 @@ const sampleShelvesPage = {
         body: '',
         items: [
           {
-            type: "oneyou1_teaser",
+            type: "oneyou_teaser",
             value: {
-              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              image_meta: "oneyou_teaser/grid_shelf/full_width",
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "One you teaser",
@@ -6353,9 +6353,9 @@ const sampleShelvesPage = {
             id: '2-grid-one-you-1'
           },
           {
-            type: "oneyou1_teaser",
+            type: "oneyou_teaser",
             value: {
-              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              image_meta: "oneyou_teaser/grid_shelf/full_width",
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "One you teaser",
@@ -8637,9 +8637,9 @@ const sampleShelvesPage = {
         body: '',
         items: [
           {
-            type: "oneyou1_teaser",
+            type: "oneyou_teaser",
             value: {
-              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              image_meta: "oneyou_teaser/grid_shelf/full_width",
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "One you teaser",
@@ -8651,9 +8651,9 @@ const sampleShelvesPage = {
             id: '3-grid-one-you-1'
           },
           {
-            type: "oneyou1_teaser",
+            type: "oneyou_teaser",
             value: {
-              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              image_meta: "oneyou_teaser/grid_shelf/full_width",
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "One you teaser",
@@ -10935,9 +10935,9 @@ const sampleShelvesPage = {
         body: '',
         items: [
           {
-            type: "oneyou1_teaser",
+            type: "oneyou_teaser",
             value: {
-              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              image_meta: "oneyou_teaser/grid_shelf/full_width",
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "One you teaser",
@@ -10949,9 +10949,9 @@ const sampleShelvesPage = {
             id: 'grid-4-panel-2'
           },
           {
-            type: "oneyou1_teaser",
+            type: "oneyou_teaser",
             value: {
-              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              image_meta: "oneyou_teaser/grid_shelf/full_width",
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "One you teaser",
@@ -10992,9 +10992,9 @@ const sampleShelvesPage = {
         body: '',
         items: [
           {
-            type: "oneyou1_teaser",
+            type: "oneyou_teaser",
             value: {
-              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              image_meta: "oneyou_teaser/grid_shelf/full_width",
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "One you teaser",
@@ -11006,9 +11006,9 @@ const sampleShelvesPage = {
             id: 'grid-5-panel-2'
           },
           {
-            type: "oneyou1_teaser",
+            type: "oneyou_teaser",
             value: {
-              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              image_meta: "oneyou_teaser/grid_shelf/full_width",
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "One you teaser",
@@ -11049,9 +11049,9 @@ const sampleShelvesPage = {
         body: '',
         items: [
           {
-            type: "oneyou1_teaser",
+            type: "oneyou_teaser",
             value: {
-              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              image_meta: "oneyou_teaser/grid_shelf/full_width",
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "One you teaser",
@@ -11063,9 +11063,9 @@ const sampleShelvesPage = {
             id: 'grid-6-panel-2'
           },
           {
-            type: "oneyou1_teaser",
+            type: "oneyou_teaser",
             value: {
-              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              image_meta: "oneyou_teaser/grid_shelf/full_width",
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "One you teaser",
@@ -11106,9 +11106,9 @@ const sampleShelvesPage = {
         body: '',
         items: [
           {
-            type: "oneyou1_teaser",
+            type: "oneyou_teaser",
             value: {
-              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              image_meta: "oneyou_teaser/grid_shelf/full_width",
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "One you teaser",
@@ -11120,9 +11120,9 @@ const sampleShelvesPage = {
             id: 'grid-7-panel-2'
           },
           {
-            type: "oneyou1_teaser",
+            type: "oneyou_teaser",
             value: {
-              image_meta: "oneyou1_teaser/grid_shelf/full_width",
+              image_meta: "oneyou_teaser/grid_shelf/full_width",
               mobile_use_renditions: true,
               desktop_use_renditions: true,
               heading: "One you teaser",

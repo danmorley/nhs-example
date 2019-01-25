@@ -66,11 +66,11 @@ class ActionPlanShelf extends Component {
           )}
 
           <div className={`${classNamePrefix}--cta`}>
-            <div className='button-cta' onClick={this.clearBasket.bind(this)}>
+            <div className="button-cta" onClick={this.clearBasket.bind(this)}>
               Reset
             </div>
 
-            <CtaLinks disabled={ctaDisabled} cta={content.cta} variant='button' />
+            <CtaLinks disabled={ctaDisabled} ctas={content.ctas} variant="button" />
           </div>
         </div>
       </Shelf>

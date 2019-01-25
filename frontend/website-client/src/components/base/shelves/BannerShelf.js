@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Shelf from './Shelf';
 import Text from '../Text';
 import Image from '../Image';
-import CtaLink from '../shared/CtaLink';
+// import CtaLink from '../shared/CtaLink';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import './banner-shelf.css';
 import ShelfUtils from '../shared/ShelfUtils';
@@ -34,54 +34,56 @@ class BannerShelf extends Component {
     return (<Image image={image} class={classname} />);
   }
 
-  renderHeading(text, headingTagName, colClass) {
-    if (!text) return null;
-    return (
-      <div className={`banner-shelf-heading ${colClass || ''}`}>
-        <Text tagName={headingTagName} content={text} />
-      </div>
-    );
-  }
+  // renderHeading(text, headingTagName, colClass) {
+  //   if (!text) return null;
+  //   return (
+  //     <div className={`banner-shelf-heading ${colClass || ''}`}>
+  //       <Text tagName={headingTagName} content={text} />
+  //     </div>
+  //   );
+  // }
 
-  renderBody(text, colClass) {
-    if (!text) return null;
-    return (
-      <div className={`banner-shelf-body ${colClass | ''}`}>
-        <Text content={text} format="richtext" />
-      </div>
-    );
-  }
+  // renderBody(text, colClass) {
+  //   if (!text) return null;
+  //   return (
+  //     <div className={`banner-shelf-body ${colClass | ''}`}>
+  //       <Text content={text} format="richtext" />
+  //     </div>
+  //   );
+  // }
 
-  renderCta(cta, colClass) {
-    if (!cta) return null;
-    return (
-      <div className={`banner-shelf-cta ${colClass || ''}`}>
-        <CtaLink variant="button" cta={cta} />
-      </div>
-    );
-  }
+  // renderCta(cta, colClass) {
+  //   if (!cta) return null;
+  //   return (
+  //     <div className={`banner-shelf-cta ${colClass || ''}`}>
+  //       <CtaLink variant="button" cta={cta} />
+  //     </div>
+  //   );
+  // }
 
   render() {
-    const { id, content, classNamePrefix, variant, layout } = this.props;
+    const { id, content, classNamePrefix, variant } = this.props;
 
     const metaVariant = content.meta_variant || variant || 'primary';
-    const metaLayout = content.meta_layout || layout || 'vertical_left';
-    const [ direction, alignment ] = metaLayout.split('_');
+    const metaLayout = content.meta_layout || 'vertical_left';
+    const alignment = metaLayout.split('_')[1];
 
     const headingTagName = (classNamePrefix === 'page-heading-shelf') ? 'h1' : 'h2';
     const panel = content.panel ? content.panel : content;
-    const containerClass = `shelf__container ${ShelfUtils.shelfContainerClass(content)}`;
+    const containerClass = content.width != "full" ? `shelf__container ${ShelfUtils.shelfContainerClass(content)}` : null;
     const classExtra = ImageUtils.isValid(panel.background_image) ? 'banner-shelf--imagebackground' : null;
-    
+    const background =  panel.attributes[0] ? panel.attributes[0].value : null;
+
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group} layout={`align-${alignment}`} classExtra={classExtra}>
         <div className={containerClass}>
           <Banner 
-            backgroundImage={panel.background_image}
+            backgroundImage={background}
             heading={<Text tagName={headingTagName} content={panel.heading} />}
             body={<Text content={panel.body} format="richtext"/>}
-            ctas={panel.cta}
+            ctas={panel.ctas}
             layout={metaLayout}
+            width={content.width}
           />
         </div>
       </Shelf>
@@ -93,10 +95,9 @@ BannerShelf.propTypes = {
   content: PropTypes.object.isRequired,
   classNamePrefix: PropTypes.string.isRequired,
   variant: PropTypes.string,
-  layout: PropTypes.string,
   id: PropTypes.string
 }
 
-CmsComponentRegistry.register('banner_shelf', BannerShelf, 'cc-banner-shelf', 'banner');
+CmsComponentRegistry.register('banner_shelf', BannerShelf, 'banner-shelf', 'banner');
 
 export default BannerShelf;

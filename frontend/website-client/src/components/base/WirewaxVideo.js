@@ -16,9 +16,9 @@ class WirewaxVideo extends Component {
   componentDidMount() {
     window.wirewax.addEventListener(window.wirewax.events.listeners.ADD_TO_CART, this.addToBasket.bind(this));
 
-    window.wirewax.addEventListener(window.wirewax.events.listeners.PLAYER_READY, function(eventData) {
-      console.log('Player ready');
-    });
+    // window.wirewax.addEventListener(window.wirewax.events.listeners.PLAYER_READY, function(eventData) {
+    //   console.log('Player ready');
+    // });
   }
 
   storageToJSON() {
@@ -42,13 +42,13 @@ class WirewaxVideo extends Component {
   render() {
     let { video, ...rest } = this.props;
     if (!video) return null;
-    let basketCount = this.state.basketCount;
+    // let basketCount = this.state.basketCount;
 
     // TODO embedLoc needs to be updated to PHE location when we have PHE videos. Currently using different to get the add to cart to fire.
 
     return (
       <div {...rest}>
-        <iframe className='video-js wirewax' src={`//embed.wirewax.com/${video}?embedLoc=footlocker`} frameBorder="0" id="video"></iframe>
+        <iframe title="Wirewax Video" className="video-js wirewax" src={`//embed.wirewax.com/${video}?embedLoc=footlocker`} frameBorder="0" id="video" />
       </div>
     );
   }

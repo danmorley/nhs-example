@@ -18,6 +18,7 @@ class IframeModal extends Component {
     };
     this.widthPercentage = 0.9;
     this.heightPercentage = 0.9;
+    this.modalRef = React.createRef();
     this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
@@ -31,7 +32,7 @@ class IframeModal extends Component {
   
   openModal(iframe_src) {
     this.setState({
-        iframe_src: iframe_src
+      iframe_src: iframe_src
     });
     this.divElement.click();
   }
@@ -63,8 +64,8 @@ class IframeModal extends Component {
 
   render() {
     return (  
-       [
-        <div key="1" ref={div => this.divElement = div} onClick={() => this.refs.modal.open() }>{this.props.children}</div>,
+      [
+        <div key="1" ref={div => this.divElement = div} onClick={() => this.modalRef.open() }>{this.props.children}</div>,
         ReactDOM.createPortal(
           <PureModal
             key = "2"
@@ -75,13 +76,13 @@ class IframeModal extends Component {
             }}
             isOpen={false}
             replace={false}
-            ref="modal"
+            ref={this.modalRef}
             className ="iframe-modal"
             width={this.state.modalWidth}
           >
             {!this.state.iframeIsLoaded && <p>Loading...</p>}
             <div style={this.state.iframeIsLoaded ? {} : { display: 'none' }}>
-              <iframe src={this.state.iframe_src} width="100%" frameBorder="0" height={window.innerHeight * this.heightPercentage} onLoad={(evt) => this._iframeLoaded(evt)}/>
+              <iframe title="Modal" src={this.state.iframe_src} width="100%" frameBorder="0" height={window.innerHeight * this.heightPercentage} onLoad={(evt) => this._iframeLoaded(evt)}/>
             </div>
           </PureModal>
           ,portalContainer
