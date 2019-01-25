@@ -71,7 +71,7 @@ MultiPanelBlock.defaultProps = {
 };
 
 MultiPanelBlock.propTypes = {
-  items: PropTypes.object.isRequired,
+  items: PropTypes.array.isRequired,
   containerTagName: PropTypes.string,
   panelClass: PropTypes.object
 }

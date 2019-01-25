@@ -49,7 +49,7 @@ class Banner extends Component {
     let bannerClass = `banner row no-gutters banner-direction-${direction} banner-align-${alignment} shelf__container ${className}`;
     let container  = null;
 
-    if (panel || backgroundImage) {
+    if (panel || (backgroundImage && backgroundImage.renditions.desktop)) {
       container = (<div className="shelf__col col-10 col-sm-10 col-md-7 panel">
         {heading}
         {body}

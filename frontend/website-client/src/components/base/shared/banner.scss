@@ -128,8 +128,15 @@
 
 .sexhealth {
   
-  .banner {
-    padding: 1.6rem 1rem;
+  .banner-shelf .shelf__container .banner {
+
+    &.image-set {
+      padding: 1.5rem 1rem;
+    }
+
+    .banner-content {
+      padding: 1em;
+    }
 
     @media (min-width: 992px) {
       .panel {

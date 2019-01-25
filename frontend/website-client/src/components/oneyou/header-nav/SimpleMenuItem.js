@@ -31,7 +31,7 @@ class SimpleMenuItem extends Component {
     }
   }
 
-  handleClick(event) {
+  handleClick() {
     this.instance.blur();
     
     if (this.props.menuItemWasClicked){

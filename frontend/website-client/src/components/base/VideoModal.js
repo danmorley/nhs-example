@@ -72,7 +72,7 @@ VideoModal.propTypes = {
   variant: PropTypes.string,
   host: PropTypes.string,
   classNamePrefix: PropTypes.string,
-  image: PropTypes.string,
+  image: PropTypes.object,
   classExtra: PropTypes.string
 };
 

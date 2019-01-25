@@ -50,6 +50,7 @@ class CarouselShelf extends Component {
 
     let classNameCarousel = "carousel carousel-full";
     if (content.meta_layout == "panel") {
+      classNamePrefix = `panel-${classNamePrefix}`;
       classNameCarousel = "panel-carousel carousel-panel";
       settings = Object.assign({
         centerMode: true,
@@ -85,6 +86,9 @@ class CarouselShelf extends Component {
       }
     });
 
+    // carousel-shelf
+    // panel-carousel-shelf
+    console.log("classNamePrefix", classNamePrefix);
 
     const containerFluid = (
       <div className="container-fluid">

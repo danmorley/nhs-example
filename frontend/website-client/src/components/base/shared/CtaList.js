@@ -25,9 +25,13 @@ class CtaList extends Component {
   }
 }
 
+CtaList.defaultProps = {
+  disabled: false
+}
+
 CtaList.propTypes = {
   items: PropTypes.array.isRequired,
-  disabled: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool,
   variant: PropTypes.string
 };
 

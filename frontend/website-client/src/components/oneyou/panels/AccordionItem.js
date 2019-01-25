@@ -85,7 +85,7 @@ AccordionItem.defaultProps = {
 
 AccordionItem.propTypes = {
   content: PropTypes.object.isRequired,
-  container: PropTypes.object.isRequired,
+  container: PropTypes.string.isRequired,
   classNamePrefix: PropTypes.string.isRequired,
   id: PropTypes.string,
   expanded: PropTypes.bool.isRequired,
