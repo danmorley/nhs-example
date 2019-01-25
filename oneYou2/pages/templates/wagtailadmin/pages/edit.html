@@ -221,7 +221,7 @@
         function filterRendtionSelect() {
             const rendition = "{{rendition}}";
             const renditionFormatted = " [[{{rendition}}]]";
-            $(".dct-image-block .sequence-controls button.icon-cogs").click(function (e) {
+            $(document).on("click", ".dct-image-block .sequence-controls button.icon-cogs", function(){
                 const parentElt = $(this).parents(".dct-image-block");
                 parentElt.find(".fieldname-meta_mobile_rendition select > option, .fieldname-meta_desktop_rendition select > option").each(function() {
                     const optionRenditionRegExp = /.* (\[\[(.+)\]\])/;
