@@ -1,7 +1,8 @@
 
 from wagtail.core import blocks
 
-from dctcmsbase.panels import VIDEO_HOSTS, BRIGHTCOVE_OPTION, SimpleServiceFinderPanel
+from dctcmsbase.panels import (VIDEO_HOSTS, BRIGHTCOVE_OPTION, SimpleServiceFinderPanel, StandardRichTextPanel,
+    StandardSimpleImagePanel, StandardImageTeaserPanel)
 from dctcmsbase.shelves import PageHeadingShelf, StandardGridShelf, StandardTwoColumnShelf, STANDARD_GRID_PANELS
 
 
@@ -11,6 +12,10 @@ PAGE_HEADING_VARIANT_CHOICES = (
 )
 
 SEXHEALTH_GRID_SHELF_PANELS = STANDARD_GRID_PANELS
+ARTICLE_SEXHEALTH_GRID_SHELF_PANELS = [
+    ('rich_text_panel', StandardRichTextPanel(icon='title')),
+    ('simple_image_panel', StandardSimpleImagePanel(icon='image')),
+]
 SEXHEALTH_TWO_COLUMNSHELF_PANELS = STANDARD_GRID_PANELS + [('simple_service_finder_panel', SimpleServiceFinderPanel(icon='form'))]
 
 
@@ -42,3 +47,14 @@ class SexHealthGridShelf(StandardGridShelf):
 class SexHealthTwoColumnShelf(StandardTwoColumnShelf):
     column_1_items = blocks.StreamBlock(SEXHEALTH_TWO_COLUMNSHELF_PANELS, icon='arrow-left', label='Column 1 Content')
     column_2_items = blocks.StreamBlock(SEXHEALTH_TWO_COLUMNSHELF_PANELS, icon='arrow-left', label='Column 2 Content')
+
+
+class ArticleSexHealthTwoColumnShelf(StandardTwoColumnShelf):
+    column_1_items = blocks.StreamBlock(ARTICLE_SEXHEALTH_GRID_SHELF_PANELS, icon='arrow-left', label='Column 1 Content')
+    column_2_items = blocks.StreamBlock(ARTICLE_SEXHEALTH_GRID_SHELF_PANELS, icon='arrow-left', label='Column 2 Content')
+
+
+class ArticleSexHealthGridShelf(StandardGridShelf):
+    items = blocks.StreamBlock([
+        ('image_teaser_panel', StandardImageTeaserPanel(icon='pick')),
+    ], icon='arrow-left', label='Items')
