@@ -18,7 +18,7 @@ from home.models import SiteSettings
 
 from .sharedcontent import Action
 from .shelves import (OneYouGridShelf, OneYouTwoColumnShelf, OneYouSectionHeadingShelf, ActionPlanShelf,
-    ActionPlanDisplayShelf)
+    ActionPlanDisplayShelf, ArticleOneYouGridShelf)
 
 
 class OneYouPage(GeneralShelvePage, Tracking, Social):
@@ -47,7 +47,7 @@ class OneYouPage(GeneralShelvePage, Tracking, Social):
         as a list of model classes
         """
         return [
-            OneYouPage, RecipePage
+            OneYouPage, RecipePage, ArticleOneYouPage,
         ]
 
     def serve_preview(self, request, mode_name, revision_id='latest'):
@@ -147,9 +147,45 @@ class RecipePage(GeneralShelvePage, Tracking, Social):
         as a list of model classes
         """
         return [
-            OneYouPage, RecipePage
+            OneYouPage, RecipePage, ArticleOneYouPage,
         ]
+
+
+class ArticleOneYouPage(GeneralShelvePage, Tracking, Social):
+    body = StreamField([
+        ('page_heading_shelf', PageHeadingShelf(icon='title')),
+        ('banner_shelf', BannerShelf(icon='title')),
+        ('section_heading_shelf', OneYouSectionHeadingShelf(classname='full title', icon='title')),
+        ('svg_shelf', InlineSvgShelf(label='SVG shelf', icon='snippet')),
+        ('grid_shelf', ArticleOneYouGridShelf(icon='form')),
+    ], null=True, blank=True)
+
+    @classmethod
+    def allowed_subpage_models(cls):
+        """
+        Returns the list of page types that this page type can have as subpages,
+        as a list of model classes
+        """
+        return [
+            OneYouPage, RecipePage, ArticleOneYouPage,
+        ]
+
+    def serve_preview(self, request, mode_name, revision_id='latest'):
+        site_name = SiteSettings.objects.get(site=self.get_site()).uid
+        return super(ArticleOneYouPage, self).serve_preview(request, mode_name, site_name, revision_id)
+
+
+ArticleOneYouPage._meta.get_field('og_title').default = 'One You - Home'
+ArticleOneYouPage._meta.get_field('og_description').default = ('Start the fight back to a healthier you! One You is'
+                                                         ' packed with practical tips, tools and free apps'
+                                                         ' to help you improve your health today')
+ArticleOneYouPage._meta.get_field('twitter_site').default = '@OneYouPHE'
+ArticleOneYouPage._meta.get_field('twitter_title').default = 'One You - Home'
+ArticleOneYouPage._meta.get_field('twitter_description').default = ('Start the fight back to a healthier you! One You is packed with'
+                                                        ' practical tips, tools and free apps to help you improve'
+                                                        ' your health today')
 
 # Add OneYouPage from page creation
 Page.subpage_types.append(OneYouPage)
 Page.subpage_types.append(RecipePage)
+Page.subpage_types.append(ArticleOneYouPage)

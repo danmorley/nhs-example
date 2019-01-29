@@ -14,6 +14,11 @@ class OneYouPageSerializer(GeneralShelvePageSerializer):
         model = apps.get_model('oneyou', 'OneYouPage')
 
 
+class ArticleOneYouPageSerializer(GeneralShelvePageSerializer):
+    class Meta(GeneralShelvePageSerializer.Meta):
+        model = apps.get_model('oneyou', 'ArticleOneYouPage')
+
+
 class ActionSerializer(HyperlinkedModelSerializer):
 
     def to_representation(self, obj):
