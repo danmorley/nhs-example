@@ -14,6 +14,7 @@ from modelcluster.models import get_all_child_relations, get_all_child_m2m_relat
 
 from home.models import SiteSettings
 
+from .pagecomponents import Theme
 from .utils import get_serializable_data_for_fields
 
 

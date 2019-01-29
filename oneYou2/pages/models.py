@@ -1175,6 +1175,10 @@ class Menu(SnippetCopyMixin, models.Model):
     def __str__(self):
         return self.label
 
+    class Meta:
+        verbose_name = 'Menu (OneYou)'
+        verbose_name_plural = 'Menus (OneYou)'
+
 
 snippet_copy_registry.register(Menu, 'label')
 
@@ -1215,6 +1219,10 @@ class Footer(models.Model):
     def __str__(self):
         return self.label
 
+    class Meta:
+        verbose_name = 'Footer (OneYou)'
+        verbose_name_plural = 'Footers (OneYou)'
+
 
 @register_snippet
 class Header(models.Model):
@@ -1235,6 +1243,10 @@ class Header(models.Model):
     def __str__(self):
         return self.label
 
+    class Meta:
+        verbose_name = 'Header (OneYou)'
+        verbose_name_plural = 'Headers (OneYou)'
+
 
 @register_snippet
 class Theme(models.Model):
@@ -1251,6 +1263,10 @@ class Theme(models.Model):
 
     def to_dict(self):
         return model_to_dict(self)
+
+    class Meta:
+        verbose_name = 'Theme (OneYou)'
+        verbose_name_plural = 'Themes (OneYou)'
 
 
 # Disable variant from page creation
