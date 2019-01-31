@@ -3,7 +3,7 @@ import json
 from unittest.mock import patch
 
 from dctcmsbase.factories import create_test_page, create_test_theme
-from pages.models import Theme
+from dctcmsbase.pagecomponents import Theme
 from oneYou2.test.utils import OneYouTests
 from release.factories import create_test_release
 
@@ -20,10 +20,9 @@ class SexHealthPageModelTests(OneYouTests):
         test_label = 'Test theme'
         test_class_name = 'test-class'
         theme = create_test_theme(test_label, test_class_name)
-        page = SexHealthPage(theme=theme)
-        self.assertIs(page.theme.label, test_label)
-        self.assertIs(page.page_theme['label'], test_label)
-        self.assertIs(page.page_theme['class_name'], test_class_name)
+        page = SexHealthPage(page_theme=theme)
+        self.assertIs(page.page_theme.label, test_label)
+        self.assertIs(page.page_theme.class_name, test_class_name)
 
     def test_breadcrumbs_property(self):
         parent_page = create_test_page(SexHealthPage)
@@ -38,7 +37,7 @@ class SexHealthPageModelTests(OneYouTests):
         create_from_dict method should produce an instance of the class based on the dictonary
         """
         obj_dict = {'title': 'Page title', 'path': '00001', 'depth': '0', 'numchild': '0',
-                    'body': '', 'page_theme': {'id': 1}, 'live': True,
+                    'body': '', 'theme': {'id': 1}, 'live': True,
                     'meta': {'slug': 'page-path', 'seo_title': 'page-name',
                              'show_in_menus': True, 'search_description': 'page-description',
                              'first_published_at': 'today'}
@@ -48,7 +47,7 @@ class SexHealthPageModelTests(OneYouTests):
         self.assertIs(page.path, obj_dict['path'])
         self.assertIs(page.depth, obj_dict['depth'])
         self.assertIs(page.numchild, obj_dict['numchild'])
-        self.assertIs(page.theme_id, obj_dict['page_theme']['id'])
+        self.assertIs(page.page_theme_id, obj_dict['theme']['id'])
         self.assertIs(page.live, obj_dict['live'])
         self.assertIs(page.slug, obj_dict['meta']['slug'])
         self.assertIs(page.seo_title, obj_dict['meta']['seo_title'])
@@ -63,7 +62,7 @@ class SexHealthPageModelTests(OneYouTests):
         """
         theme = Theme(id=1, label='Test theme', class_name='test-class')
         page = SexHealthPage(title='Page title', path='00001', depth='0', numchild='0',
-                           theme=theme, live=True, slug='page-path', seo_title='page-name',
+                           page_theme=theme, live=True, slug='page-path', seo_title='page-name',
                            show_in_menus=True, search_description='page-description', first_published_at='yesterday')
 
         obj_dict = {'title': 'Page title 2', 'path': '00002', 'depth': '1', 'numchild': '1',

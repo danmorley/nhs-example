@@ -30,7 +30,7 @@ class Page extends Component {
     let { site, page } = this.props;
 
     if (page) {
-      const { page_theme, page_styles } = page;
+      const { theme, page_styles } = page;
       page.type = page.meta.type || 'general_page';
 
       const pageInfo = CmsComponentRegistry.components[page.type];
@@ -42,7 +42,7 @@ class Page extends Component {
       // const meta = (page && page.meta.hasOwnProperty('use_share_button')) ? page.meta : page;
       // const useShareButton = page && (meta.use_share_button || meta.use_email_button || meta.use_print_button);
 
-      return this.renderPage(content, page_theme, page_styles, site, page, pageInfo);
+      return this.renderPage(content, theme, page_styles, site, page, pageInfo);
     } else {
       // Page object is null so it must still be loading.
       var content = this.renderPageLoader();

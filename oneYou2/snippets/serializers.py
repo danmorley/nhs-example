@@ -12,7 +12,7 @@ class MenuSerializer(serializers.ModelSerializer):
     items = StreamField(source='menu_items')
 
     class Meta:
-        model = apps.get_model('pages', 'Menu')
+        model = apps.get_model('dctcmsbase', 'Menu')
         fields = (
             'items',
         )
@@ -24,7 +24,7 @@ class FooterSerializer(serializers.ModelSerializer):
     image = ImageSerializer()
 
     class Meta:
-        model = apps.get_model('pages', 'Footer')
+        model = apps.get_model('dctcmsbase', 'Footer')
         fields = (
             'items',
             'social_media',
@@ -39,7 +39,7 @@ class HeaderSerializer(serializers.ModelSerializer):
     title = ReadOnlyField(source='label')
 
     class Meta:
-        model = apps.get_model('pages', 'Header')
+        model = apps.get_model('dctcmsbase', 'Header')
         fields = (
             'title',
             'image'

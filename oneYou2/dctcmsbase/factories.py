@@ -3,9 +3,21 @@ from wagtail.core.models import Site
 from home.models import SiteSettings
 from images.factories import create_default_test_image
 from images.models import PHEImage
-from pages.factories import create_test_theme, create_test_menu
 
 from .sharedcontent import Banner
+from .pagecomponents import Theme, Menu
+
+
+def create_test_theme(label='Test theme', class_name='test-class'):
+    theme = Theme(label=label, class_name=class_name)
+    theme.save()
+    return theme
+
+
+def create_test_menu(label='menu_label'):
+    menu = Menu(label=label)
+    menu.save()
+    return menu
 
 
 def create_test_page(model, parent=None, title='Test page', path='1111', depth=0, theme=None):
@@ -28,7 +40,7 @@ def create_test_page(model, parent=None, title='Test page', path='1111', depth=0
     if parent is None:
         parent = site.root_page
 
-    page = model(title=title, path=path, depth=depth, theme=theme, live=True)
+    page = model(title=title, path=path, depth=depth, page_theme=theme, live=True)
     parent.add_child(instance=page)
     page.save_revision().publish()
 

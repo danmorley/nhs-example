@@ -43,7 +43,7 @@ class GeneralShelvePageSerializer(serializers.ModelSerializer):
                 'id',
                 'title',
                 'body',
-                'page_theme',
+                'theme',
             )
 
         def get_meta_fields():

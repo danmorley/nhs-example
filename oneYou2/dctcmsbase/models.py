@@ -79,12 +79,13 @@ class GeneralShelvePage(Page):
         on_delete=models.SET_NULL,
         limit_choices_to={'content_status': CONTENT_STATUS_PENDING})
 
-    theme = models.ForeignKey(
-        'pages.Theme',
+    page_theme = models.ForeignKey(
+        Theme,
         related_name='%(class)s_pages',
         null=True,
-        on_delete=models.SET_NULL)
-    
+        on_delete=models.SET_NULL,
+        verbose_name='theme')
+
     hide_from_breadcrumb = models.BooleanField(default=False)
 
     @property
@@ -108,8 +109,8 @@ class GeneralShelvePage(Page):
         return ''
 
     @property
-    def page_theme(self):
-        return self.theme.to_dict()
+    def theme(self):
+        return self.page_theme.to_dict()
 
     @property
     def link_url(self):
@@ -149,7 +150,7 @@ class GeneralShelvePage(Page):
     content_panels = Page.content_panels + [
         StreamFieldPanel('body'),
         FieldPanel('release'),
-        SnippetChooserPanel('theme'),
+        SnippetChooserPanel('page_theme'),
     ]
 
     info_content_panels = [
@@ -214,7 +215,7 @@ class GeneralShelvePage(Page):
         ObjectList(promote_panels, heading='Settings'),
     ])
 
-    api_fields = ['body', 'path', 'depth', 'numchild', 'live', 'page_theme']
+    api_fields = ['body', 'path', 'depth', 'numchild', 'live', 'theme']
     exclude_fields_in_copy = ['release']
 
     class Meta:
@@ -243,7 +244,7 @@ class GeneralShelvePage(Page):
                    first_published_at=obj_dict['meta']['first_published_at'],
                    body=json.dumps(obj_dict['body']),
                    live=obj_dict['live'],
-                   theme_id=obj_dict['page_theme']['id'])
+                   page_theme_id=obj_dict['theme']['id'])
 
     def update_from_dict(self, obj_dict, default_excludes=None, excludes=None):
         if not default_excludes:

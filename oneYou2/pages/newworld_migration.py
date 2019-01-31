@@ -14,6 +14,7 @@ from wagtail.core.models import Page
 
 from dctcmsbase.blocks import (BackgroundImageBlock, PositionedImageBlock, SimpleCtaLinkBlock, AppTeaserChooserBlock,
     ImageBlock, BannerChooserBlock, DocumentDownloadBlock)
+from dctcmsbase.pagecomponents import Theme
 from dctcmsbase.panels import (StandardRichTextPanel, CtaPanel, StandardInformationPanel, StandardVideoTeaserPanel, 
     StandardImageTeaserPanel, StandardVideoTeaserPanel, PlainTextPanel, StandardSimpleImagePanel, AccordionItemsPanel,
     AccordionPanel, InlineScriptPanel, InlineSvgPanel, AppTeaserPanel, IconCardPanel, ListItemPanel)
@@ -33,7 +34,7 @@ from oneyou.shelves import (OneYouSectionHeadingShelf, OneYouGridShelf, OneYouTw
     ActionPlanDisplayShelf)
 from shelves.blocks import BlobImageChooserBlock
 
-from .models import OneYou2Page, Theme
+from .models import OneYou2Page
 
 
 shelves_name_conversion = {
@@ -865,7 +866,7 @@ def copy_oneyou_newworld(request, page_id):
 
     # update Theme
     theme = Theme.objects.get(id=data['theme'])
-    data['theme'] = theme
+    data['page_theme'] = theme
 
     # Update owner
     owner = User.objects.get(id=9)

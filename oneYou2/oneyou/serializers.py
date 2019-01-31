@@ -62,7 +62,7 @@ class RecipePageSerializer(GeneralShelvePageSerializer):
             return (
                 'id',
                 'title',
-                'page_theme',
+                'theme',
                 'header_image',
                 'header_image_mobile_rendition',
                 'header_image_desktop_rendition',

@@ -130,7 +130,7 @@ class RecipePage(GeneralShelvePage, Tracking, Social):
             heading='Recipe details',
         ),
         FieldPanel('release'),
-        SnippetChooserPanel('theme'),
+        SnippetChooserPanel('page_theme'),
     ]
 
     edit_handler = TabbedInterface([
