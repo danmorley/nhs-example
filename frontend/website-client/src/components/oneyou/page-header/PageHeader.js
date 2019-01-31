@@ -14,7 +14,7 @@ class PageHeader extends Component {
     this.state = { 
       navHeight: "0",
       navOpen: false
-     };
+    };
     this.toggleMenu = this.toggleMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -47,8 +47,8 @@ class PageHeader extends Component {
     this.burgerElem = elem;
   }
 
-  swipedLeft(e, _absX) {
-    this.toggleMenu(e);
+  swipedLeft() {
+    this.toggleMenu();
   }
   
   render() {
@@ -92,7 +92,7 @@ class PageHeader extends Component {
     document.querySelector('.page-wrapper').classList.remove('header-nav--open');
   }
 
-  toggleMenu(event) {
+  toggleMenu() {
     this.setState(prevState => ({navOpen: !prevState.navOpen}));
     document.querySelector('.page-wrapper').classList.toggle('header-nav--open');
   }

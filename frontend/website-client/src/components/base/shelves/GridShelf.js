@@ -56,7 +56,7 @@ class GridShelf extends Component {
             {gridHeading != '' &&
               <Text tagName="h2" content={gridHeading} className="shelf__header" />
             }
-            {gridBody != '' &&
+            {gridBody && gridBody !== '<p></p>' != '' &&
               <Text tagName="div" content={gridBody} className="shelf__body" format="richtext"/>
             }
             <div className="grid-container">

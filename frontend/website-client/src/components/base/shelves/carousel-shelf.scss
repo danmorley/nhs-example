@@ -22,18 +22,24 @@ $arrow-distance: 5%;
     }
   }
 
-  .shelf__container {
-    padding-top: 1.4em;
-    padding-bottom: 1.5em;
+  .shelf-section, .full-section {
+  // .shelf__container {
+    height: 100%;
 
-    @include media-breakpoint-up(sm) {
-      padding-top: 1.2em;
-      padding-bottom: 2.5em;
-    }
+    > div.shelf, div.shelf__container {
+      height: 100%;
+      padding-top: 1.4em;
+      padding-bottom: 1.5em;
 
-    @include media-breakpoint-up(xl) {
-      padding-left: inherit;
-      padding-right: inherit;
+      @include media-breakpoint-up(sm) {
+        padding-top: 1.2em;
+        padding-bottom: 2.5em;
+      }
+
+      @include media-breakpoint-up(xl) {
+        padding-left: inherit;
+        padding-right: inherit;
+      }
     }
   }
 }
@@ -48,44 +54,6 @@ $arrow-distance: 5%;
       width: auto;
   }
 }
-
-.carousel {
-  
-  .shelf-section, .panel-section {
-    padding-top: 0;
-    padding-bottom: 0;
-    height: 100%;
-
-    > div.shelf, div.shelf__container {
-      height: 100%;
-    }
-  }
-
-  .shelf__container {
-    padding-top: 1.4em;
-    padding-bottom: 1.5em;
-
-    @include media-breakpoint-up(sm) {
-      padding-top: 1.2em;
-      padding-bottom: 2.5em;
-    }
-
-    @include media-breakpoint-up(md) {
-      padding-left: 5%;
-      padding-right: 5%;
-    }
-    @include media-breakpoint-up(xl) {
-      padding-left: inherit;
-      padding-right: inherit;
-    }
-  }
-}
-
-
-
-
-
-
 
 .slick-dots {
   position: absolute;

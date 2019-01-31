@@ -179,9 +179,9 @@ class DocumentDownloadBlock(blocks.StructBlock):
         classname='dct-meta-field'
     )
     
-    api_fields = [
-        APIField('document'),
-    ]
+    # api_fields = [
+    #     APIField('document'),
+    # ]
 
     def get_api_representation(self, value, context=None):
         result = blocks.StructBlock.get_api_representation(self, value, context)
@@ -189,9 +189,15 @@ class DocumentDownloadBlock(blocks.StructBlock):
         if 'document' in result:
             document_id = result['document']
             from wagtail.documents.models import Document
-            result['document'] = Document.objects.get(id=document_id).file.url
+            result['link_external'] = Document.objects.get(id=document_id).file.url
+            del(result['document'])
 
         return result
+
+    class Meta:
+        icon = 'doc-full'
+        label = 'Document'
+        form_classname = 'dct-simple-document-block dct-meta-block sequence-member'
 
 
 class DataAttributeBlock(blocks.StructBlock):

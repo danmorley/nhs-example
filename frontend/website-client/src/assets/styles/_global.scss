@@ -234,6 +234,18 @@ h2 {
   }
 }
 
+.image--gradient:after {
+  width:100%;
+  content:'';
+  display:block;
+  position:absolute;
+  top:0;
+  left:0;
+  background: linear-gradient(91.54deg, $teal-blue 0%, $teal-blue 41.86%, rgba(0,164,166,0) 100%);
+  opacity: 0.8;
+  height:100%;
+}
+
 //stoptober
 .stoptober {
 
