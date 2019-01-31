@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import Text from '../../base/Text';
-import Panel from '../../base/panels/Panel';
+import Panel from './Panel';
+import './simple-text-panel.css';
 
 /**
  *  SimpleTextPanel is a simple field that will output escaped text or
@@ -34,6 +35,6 @@ SimpleTextPanel.propTypes = {
   id: PropTypes.string
 };
 
-CmsComponentRegistry.register('simple_text_panel', SimpleTextPanel, 'simple-text-panel');
+CmsComponentRegistry.register('plain_text_panel', SimpleTextPanel, 'simple-text-panel');
 
 export default SimpleTextPanel;

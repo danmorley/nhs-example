@@ -1,0 +1,31 @@
+@import '../../../assets/styles/variables/variables';
+@import "../../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+ .simple-text-panel--vertical_align_middle {
+   @include media-breakpoint-up(md) {
+     display: flex;
+     align-items: center;
+   }
+ }
+ 
+ //theming
+
+ //default theme (oneyou)
+ .simple-text-panel {
+   
+   h1, h2 {
+     text-transform: uppercase;
+     font-family: $primary-brand-font;
+     font-weight: normal;
+
+     .text-light {
+       font-family: $secondary-brand-font;
+       font-weight: normal;
+     }
+   }
+
+   .marker {
+     font-family: $tertiary-brand-font;
+     color: $sunflower-yellow;
+   }
+ }
