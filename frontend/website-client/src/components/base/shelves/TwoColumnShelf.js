@@ -44,7 +44,7 @@ class TwoColumnShelf extends Component {
       <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
         <div className={`shelf__container container image--${metaImageDisplay}`}>
           <div className="row">
-              <div className={`shelf__col col ${classNamePrefix}-column col-12 col-md-${this.colWidthForPercent(col1Percent)}`}>
+              <div className={`shelf__col col ${classNamePrefix}-column column1 col-12 col-md-${this.colWidthForPercent(col1Percent)}`}>
                   {content.column_1_heading &&
                     <div className={`${classNamePrefix}-heading`}>
                       <h2 className="shelf__header">{content.column_1_heading}</h2>
