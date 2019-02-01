@@ -15,13 +15,13 @@ class StandardPageLayout extends Component {
     let { site, page } = this.props;
 
     if (page) {
-      let { page_theme, page_styles } = page;
+      let { theme, page_styles } = page;
       const content = this.props.children;
       const meta = this.pageMetaData(page, site);
 
       return (
         <DocumentMeta {...meta}>
-          {this.renderPage(content, page_theme, page_styles, site, page, meta.breadcrumbs)}
+          {this.renderPage(content, theme, page_styles, site, page, meta.breadcrumbs)}
         </DocumentMeta>
       );
 
@@ -58,13 +58,13 @@ class StandardPageLayout extends Component {
   }
 
   renderPage(content, pageTheme, pageStyles, site, _page, breadcrumbs) {
-    let { menu, header, footer } = site;
+    let { site_menu, site_header, site_footer } = site;
     let theme = (pageTheme && pageTheme.class_name) || 'oneyou';
-    let items = menu && "items" in menu ? menu.items : null;
+    let items = site_menu && "items" in site_menu ? site_menu.items : null;
     let headerComp;
 
-    if (header) {
-      headerComp = <PageHeader navItems={items} header={header} breadcrumbs={breadcrumbs}/>;
+    if (site_header) {
+      headerComp = <PageHeader navItems={items} header={site_header} breadcrumbs={breadcrumbs}/>;
     }
 
     return (
@@ -76,7 +76,7 @@ class StandardPageLayout extends Component {
             {content}
           </div>
         </div>
-        <Footer className="page-footer" content={footer} site={site}/>
+        <Footer className="page-footer" content={site_footer} site={site}/>
       </div>
     );
   }

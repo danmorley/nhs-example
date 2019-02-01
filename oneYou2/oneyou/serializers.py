@@ -14,6 +14,11 @@ class OneYouPageSerializer(GeneralShelvePageSerializer):
         model = apps.get_model('oneyou', 'OneYouPage')
 
 
+class ArticleOneYouPageSerializer(GeneralShelvePageSerializer):
+    class Meta(GeneralShelvePageSerializer.Meta):
+        model = apps.get_model('oneyou', 'ArticleOneYouPage')
+
+
 class ActionSerializer(HyperlinkedModelSerializer):
 
     def to_representation(self, obj):
@@ -57,7 +62,7 @@ class RecipePageSerializer(GeneralShelvePageSerializer):
             return (
                 'id',
                 'title',
-                'page_theme',
+                'theme',
                 'header_image',
                 'header_image_mobile_rendition',
                 'header_image_desktop_rendition',

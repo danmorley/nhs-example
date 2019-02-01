@@ -14,6 +14,7 @@ from wagtail.core.models import Page
 
 from dctcmsbase.blocks import (BackgroundImageBlock, PositionedImageBlock, SimpleCtaLinkBlock, AppTeaserChooserBlock,
     ImageBlock, BannerChooserBlock, DocumentDownloadBlock)
+from dctcmsbase.pagecomponents import Theme
 from dctcmsbase.panels import (StandardRichTextPanel, CtaPanel, StandardInformationPanel, StandardVideoTeaserPanel, 
     StandardImageTeaserPanel, StandardVideoTeaserPanel, PlainTextPanel, StandardSimpleImagePanel, AccordionItemsPanel,
     AccordionPanel, InlineScriptPanel, InlineSvgPanel, AppTeaserPanel, IconCardPanel, ListItemPanel)
@@ -26,14 +27,14 @@ from pages.models import AccordionItem
 from images.models import PHEImage
 from images.renditions import ONEYOU_RENDITIONS
 from oneyou.blocks import ActionChooserBlock
-from oneyou.models import OneYouPage
+from oneyou.models import OneYouPage, ArticleOneYouPage
 from oneyou.sharedcontent import Action
 from oneyou.panels import BackwardsCompatibleContentPanel, ActionGroupPanel
 from oneyou.shelves import (OneYouSectionHeadingShelf, OneYouGridShelf, OneYouTwoColumnShelf, ActionPlanShelf,
     ActionPlanDisplayShelf)
 from shelves.blocks import BlobImageChooserBlock
 
-from .models import OneYou2Page, Theme
+from .models import OneYou2Page
 
 
 shelves_name_conversion = {
@@ -826,11 +827,33 @@ def update_grid_shelf(shelf):
 
 @user_passes_test(user_has_any_page_permission)
 def copy_oneyou_newworld(request, page_id):
+    articlepage_slug = [
+        '10-top-tips-to-move-more',
+        '5-tips-to-help-you-quit-smoking' ,
+        '9-stop-smoking-aids-that-can-help-you-quit',
+        'using-e-cigarettes-vapes-to-quit-smoking',
+        'support-tools-for-quitting-smoking',
+        'what-happens-when-you-quit-smoking',
+        'expert-face-to-face-support',
+        'how-to-avoid-a-hangover',
+        'know-your-alcohol-units',
+        'darens-story',
+        'tims-story',
+        'terris-story',
+    ]
+    is_article = False
     oneyou2page = OneYou2Page.objects.get(id=page_id)
     data = model_to_dict(oneyou2page, exclude=['id', 'numchild', 'page_ptr', 'opt_in_1_text', 'opt_in_2_text', 'ts_and_cs_statement'])
 
+    if data['slug'] in articlepage_slug:
+        is_article = True
+
     # Update Content Type
-    contenttype = ContentType.objects.get(app_label='oneyou', model='oneyoupage')
+    contenttype = None
+    if is_article:
+        contenttype = ContentType.objects.get(app_label='oneyou', model='articleoneyoupage')
+    else:
+        contenttype = ContentType.objects.get(app_label='oneyou', model='oneyoupage')
     data['content_type'] = contenttype
 
     # update images
@@ -843,7 +866,7 @@ def copy_oneyou_newworld(request, page_id):
 
     # update Theme
     theme = Theme.objects.get(id=data['theme'])
-    data['theme'] = theme
+    data['page_theme'] = theme
 
     # Update owner
     owner = User.objects.get(id=9)
@@ -869,7 +892,11 @@ def copy_oneyou_newworld(request, page_id):
         else:
             shelf.block.name = block_type
 
-    oneyou = OneYouPage.objects.create(**data)
+    oneyou = None
+    if is_article:
+        oneyou = ArticleOneYouPage.objects.create(**data)
+    else:
+        oneyou = OneYouPage.objects.create(**data)
 
     parent_page = oneyou.get_parent()
     parent_page.numchild += 1

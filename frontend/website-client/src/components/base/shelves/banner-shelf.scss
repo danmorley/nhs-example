@@ -25,6 +25,15 @@ $shelf-padding-extra: 2em;
   h2 {
     @include heading-h1(oneyou);
   }
+
+  .image-set {
+    @include media-breakpoint-down(sm) {
+      h2 {
+        white-space: normal;
+        font-size: 1.625em;
+      }
+    }
+  }
 }
 
 .banner-shelf > .container {
@@ -66,7 +75,7 @@ $shelf-padding-extra: 2em;
   }
   
   h2 {
-    @include media-breakpoint-only(lg) {  
+    @include media-breakpoint-only(lg) {
         @include heading-h2(oneyou)
     }
   }

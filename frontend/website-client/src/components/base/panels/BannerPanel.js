@@ -73,6 +73,7 @@ class BannerPanel extends Component {
     const panel = content.panel ? content.panel : content;
     // const containerClass = `shelf__container ${ShelfUtils.shelfContainerClass(content)}`;
     const classExtra = ImageUtils.isValid(panel.background_image) ? 'banner-panel--imagebackground' : null;
+    const sectionClass = content.panel ? 'panel-section' : 'full-section';
 
     const banner = (
       <Banner 
@@ -87,7 +88,7 @@ class BannerPanel extends Component {
     );
 
     return (
-      <section className="panel-section">
+      <section className={sectionClass}>
         <Panel id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group} layout={`align-${alignment}`} classExtra={classExtra}>
           {banner}
         </Panel>

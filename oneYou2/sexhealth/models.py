@@ -8,7 +8,7 @@ from dctcmsbase.shelves import (BannerShelf, CarouselShelf, SimplePageHeadingShe
 from home.models import SiteSettings
 
 from .shelves import (SexHealthPageHeadingShelf, SexHealthPageHeadingWithVideoShelf, SexHealthGridShelf,
-    SexHealthTwoColumnShelf)
+    SexHealthTwoColumnShelf, ArticleSexHealthTwoColumnShelf, ArticleSexHealthGridShelf)
 
 
 class SexHealthPage(GeneralShelvePage, Tracking, Social):
@@ -31,7 +31,9 @@ class SexHealthPage(GeneralShelvePage, Tracking, Social):
         Returns the list of page types that this page type can have as subpages,
         as a list of model classes
         """
-        return [SexHealthPage]
+        return [
+            SexHealthPage, ArticleSexHealthPage,
+        ]
 
     def serve_preview(self, request, mode_name, revision_id='latest'):
         site_name = SiteSettings.objects.get(site=self.get_site()).uid
@@ -43,6 +45,37 @@ SexHealthPage._meta.get_field('og_description').default = 'Description'
 SexHealthPage._meta.get_field('twitter_site').default = '@OneYouPHE'
 SexHealthPage._meta.get_field('twitter_title').default = 'Sexual Health - Home'
 SexHealthPage._meta.get_field('twitter_description').default = 'Description'
+
+
+class ArticleSexHealthPage(GeneralShelvePage, Tracking, Social):
+    body = StreamField([
+        ('sexhealth_page_heading_shelf', SexHealthPageHeadingShelf(icon='title')),
+        ('simple_page_heading_shelf', SimplePageHeadingShelf(icon='title')),
+        ('banner_shelf', BannerShelf(icon='title')),
+        ('two_column_shelf', ArticleSexHealthTwoColumnShelf(label='Two Column Shelf', icon='grip')),
+        ('grid_shelf', ArticleSexHealthGridShelf(icon='form')),
+    ], null=True, blank=True)
+
+    @classmethod
+    def allowed_subpage_models(cls):
+        """
+        Returns the list of page types that this page type can have as subpages,
+        as a list of model classes
+        """
+        return [
+            SexHealthPage, ArticleSexHealthPage,
+        ]
+
+    def serve_preview(self, request, mode_name, revision_id='latest'):
+        site_name = SiteSettings.objects.get(site=self.get_site()).uid
+        return super(ArticleSexHealthPage, self).serve_preview(request, mode_name, site_name, revision_id)
+
+
+ArticleSexHealthPage._meta.get_field('og_title').default = 'Sexual Health - Home'
+ArticleSexHealthPage._meta.get_field('og_description').default = 'Description'
+ArticleSexHealthPage._meta.get_field('twitter_site').default = '@OneYouPHE'
+ArticleSexHealthPage._meta.get_field('twitter_title').default = 'Sexual Health - Home'
+ArticleSexHealthPage._meta.get_field('twitter_description').default = 'Description'
 
 
 # Add SexHealthPage from page creation

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Shelf from '../../base/shelves/Shelf';
+import Panel from '../../base/shelves/Panel';
 import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import AccordionItem from '../panels/AccordionItem';
 
@@ -22,7 +22,7 @@ class AccordionGroup extends Component {
     let { id, classNamePrefix, content } = this.props;
 
     return (
-      <Shelf id={id} classNamePrefix={classNamePrefix} trackingGroup={content.tracking_group}>
+      <Panel id={id} classNamePrefix={classNamePrefix} trackingGroup={content.tracking_group}>
         <div className={`shelf__container container-fluid ${classNamePrefix}__container`}>
           { content.accordions && content.accordions.map((accordion, i) =>
             <AccordionItem key={i}
@@ -34,7 +34,7 @@ class AccordionGroup extends Component {
               setExpandedGroup={this.setExpandedGroup} />
           )}
         </div>
-      </Shelf>
+      </Panel>
     );
   }
 }

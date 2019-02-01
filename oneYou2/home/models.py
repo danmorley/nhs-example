@@ -30,23 +30,24 @@ class SiteSettings(BaseSetting):
                                                                             ' in the API')
     rendition = models.CharField(max_length=50, choices=RENTIDTION_SITES, default='base')
 
-    menu = models.ForeignKey(
-        'pages.Menu',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-    footer = models.ForeignKey(
-        'pages.footer',
+    site_menu = models.ForeignKey(
+        'dctcmsbase.Menu',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+'
     )
 
-    header = models.ForeignKey(
-        'pages.header',
+    site_footer = models.ForeignKey(
+        'dctcmsbase.footer',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    site_header = models.ForeignKey(
+        'dctcmsbase.header',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -86,9 +87,9 @@ class SiteSettings(BaseSetting):
     ]
 
     structure_panels = [
-        SnippetChooserPanel('menu'),
-        SnippetChooserPanel('footer'),
-        SnippetChooserPanel('header'),
+        SnippetChooserPanel('site_menu'),
+        SnippetChooserPanel('site_footer'),
+        SnippetChooserPanel('site_header'),
     ]
 
     panels = [
