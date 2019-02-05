@@ -1,8 +1,11 @@
+import factory
+
 from wagtail.core.models import Site
 
 from home.models import SiteSettings
 from images.factories import create_default_test_image
 from images.models import PHEImage
+from images.factories import PHEImageFactory
 
 from .sharedcontent import Banner
 from .pagecomponents import Theme, Menu
@@ -50,3 +53,11 @@ def create_test_banner(heading='Test heading'):
     banner = Banner(heading=heading)
     banner.save()
     return banner
+
+
+class ThemeFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Theme
+
+    label = factory.fuzzy.FuzzyText()
+    class_name = factory.fuzzy.FuzzyText()

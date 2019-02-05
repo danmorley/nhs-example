@@ -187,5 +187,5 @@ ArticleOneYouPage._meta.get_field('twitter_description').default = ('Start the f
 
 # Add OneYouPage from page creation
 Page.subpage_types.append(OneYouPage)
-Page.subpage_types.append(RecipePage)
-Page.subpage_types.append(ArticleOneYouPage)
+# Page.subpage_types.append(RecipePage)
+# Page.subpage_types.append(ArticleOneYouPage)

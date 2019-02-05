@@ -1,16 +1,13 @@
 import operator
+from functools import reduce
 
 from django.db import models
 from django.db.models import Q
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
-from functools import reduce
-
 from wagtail.core.models import PageRevision
 from wagtail.images.models import Image, AbstractImage, AbstractRendition
-
-# from pages.models import OneYou2Page
 
 from images.renditions import ONEYOU_RENDITIONS
 

@@ -1,12 +1,14 @@
 import json
+from modelcluster.fields import ParentalKey
 
 from django.db import models
+from django.db.models import DateField, TextField
 from django.http import JsonResponse
 from django.template.response import TemplateResponse, SimpleTemplateResponse
 
 from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel, StreamFieldPanel, ObjectList, TabbedInterface,
     MultiFieldPanel)
-from wagtail.core.models import Page
+from wagtail.core.models import Page, Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
@@ -368,3 +370,17 @@ class GeneralShelvePage(Page):
     @property
     def default_preview_mode(self):
         return self.preview_modes[0][0]
+
+
+class ChangeHistory(Orderable):
+    page = ParentalKey(Page, related_name='change_history')
+    date_of_change = DateField(blank=False, verbose_name='Date')
+    comment = TextField(blank=False)
+
+    panels = [
+        FieldPanel('date_of_change', classname='col4'),
+        FieldPanel('comment', classname='col8'),
+    ]
+
+
+Page.subpage_types = []

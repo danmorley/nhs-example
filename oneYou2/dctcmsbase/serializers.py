@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.fields import ReadOnlyField
 from rest_framework.serializers import HyperlinkedModelSerializer
 
 from django.apps import apps
@@ -7,6 +8,7 @@ from django.utils.text import slugify
 from wagtail.api.v2.serializers import StreamField
 
 from home.models import SiteSettings
+from images.serializers import ImageSerializer
 
 from .sharedcontent import Banner, AppTeaser
 
@@ -138,22 +140,46 @@ class AppTeaserSerializer(HyperlinkedModelSerializer):
                 'link_text': '',
                 'link_external': cta_googleplay,
             }
-
-        # cta_text = representation.pop('cta_text')
-        # cta_link = representation.pop('cta_link')
-        # cta_page = representation.pop('cta_page')
-        # representation['cta'] = {
-        #     'link_text': cta_text,
-        #     'link_external': cta_link,
-        # }
-        # if cta_page:
-        #     representation['cta']['link_page'] = {
-        #         'id': cta_page.get('id'),
-        #         'slug': cta_page.get('slug'),
-        #         'relative_path': cta_page.get('relative_path'),
-        #     }
         return representation
 
     class Meta:
         model = AppTeaser
         fields = ['shelf_id', 'heading', 'body', 'attributes', 'ctas', 'cta_googleplay', 'cta_appstore']
+
+
+class MenuSerializer(serializers.ModelSerializer):
+    items = StreamField(source='menu_items')
+
+    class Meta:
+        model = apps.get_model('dctcmsbase', 'Menu')
+        fields = (
+            'items',
+        )
+
+
+class FooterSerializer(serializers.ModelSerializer):
+    items = StreamField(source='menu_items')
+    social_media = StreamField(source='follow_us')
+    image = ImageSerializer()
+
+    class Meta:
+        model = apps.get_model('dctcmsbase', 'Footer')
+        fields = (
+            'items',
+            'social_media',
+            'image',
+            'show_sitemap',
+            'heading',
+            'number_per_column',
+        )
+
+
+class HeaderSerializer(serializers.ModelSerializer):
+    title = ReadOnlyField(source='label')
+
+    class Meta:
+        model = apps.get_model('dctcmsbase', 'Header')
+        fields = (
+            'title',
+            'image'
+        )

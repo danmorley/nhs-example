@@ -156,27 +156,6 @@ class SexHealthPageModelTests(OneYouTests):
 
         self.assertIsFalse(revision_in_release)
 
-    # def test_page_serializable_data_function_returns_the_full_content_of_shared_shelves(self):
-    #     """
-    #     serializable_data is used in the saving of a revision,
-    #     so to check its working correctly we check the content of the revision.
-    #     """
-    #     shelf = create_test_promo_shelf()
-    #     body_content_string = '[{"type": "simple_page_heading_shelf", "value": {"heading": "Heading", "shelf_id":' \
-    #                           ' "1"}, "id": "b2d5e2e8-ae9d-46ef-92e6-27745a85df8c"},{"type": "promo_shelf", "value": ' \
-    #                           + str(shelf.id) + ', "id": "14dd05e9-1d75-4831-a969-01f5c2c82b55"}]'
-    #     page = create_test_page(SexHealthPage)
-    #     body_field = [field for field in page._meta.fields if field.name == 'body'][0]
-    #     page.body = body_field.to_python(body_content_string)
-
-    #     page.save_revision()
-    #     body_dict = json.loads(json.loads(page.get_latest_revision().content_json)['body'])
-
-    #     self.assertEqual(len(body_dict), 2)
-    #     self.assertIsTrue('content' in body_dict[1])
-    #     self.assertIsTrue('shelf_id' in body_dict[1]['content'])
-    #     self.assertEqual(body_dict[1]['content']['shelf_id'], shelf.shelf_id)
-
     def test_page_preview_modes_function_returns_the_correct_options(self):
         page = create_test_page(SexHealthPage)
         self.assertEquals(page.preview_modes, SexHealthPage.DEFAULT_PREVIEW_MODES)

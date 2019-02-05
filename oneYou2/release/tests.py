@@ -19,8 +19,8 @@ from home.models import SiteSettings
 from oneYou2.factories import create_test_user, create_test_admin_user
 from oneYou2.test.utils import OneYouTests
 
-from pages.factories import create_test_page
-from pages.models import OneYou2Page
+from dctcmsbase.factories import create_test_page
+from oneyou.models import OneYouPage
 
 from release.factories import create_test_release, create_test_release_page
 
@@ -63,14 +63,14 @@ class ReleaseModelTests(OneYouTests):
         """
         when a new release is created it should be linked to the latest revisions of all live pages.
         """
-        page = create_test_page()
+        page = create_test_page(OneYouPage)
 
         release = create_test_release()
 
         page.release = release
         page.save_revision()
 
-        count_of_pages = OneYou2Page.objects.count()
+        count_of_pages = OneYouPage.objects.count()
 
         release_content = release.content.first()
         release_content_dict = json.loads(release_content.content)
@@ -82,7 +82,7 @@ class ReleaseModelTests(OneYouTests):
         """
         when a release is requested with no release date, it should not save the content into json.
         """
-        create_test_page()
+        create_test_page(OneYouPage)
 
         release_name = 'Unset release'
 
@@ -97,7 +97,7 @@ class ReleaseModelTests(OneYouTests):
         """
         when a release is requested before its release date, it should not save the content into json.
         """
-        create_test_page()
+        create_test_page(OneYouPage)
 
         release_name = 'Future release'
         release_date = timezone.now() + timedelta(days=1)
@@ -113,7 +113,7 @@ class ReleaseModelTests(OneYouTests):
         """
         when a release is requested after its release date, it should save the content into json.
         """
-        create_test_page()
+        create_test_page(OneYouPage)
 
         release_name = 'Past release'
         release_date = timezone.now() + timedelta(days=-1)
@@ -131,7 +131,7 @@ class ReleaseModelTests(OneYouTests):
         when a release is initialised from an existing release as a base it gets linked to the same pages the base
         release is linked to at that point.
         """
-        page = create_test_page()
+        page = create_test_page(OneYouPage)
 
         release_name = 'Base release'
 
@@ -185,11 +185,11 @@ class ReleaseModelTests(OneYouTests):
         """
         release = create_test_release()
 
-        page1 = create_test_page(title='Page 1')
+        page1 = create_test_page(OneYouPage, None, title='Page 1')
         page1.release = release
         page1.save_revision()
         
-        page2 = create_test_page(title='Page 2', path='1112')
+        page2 = create_test_page(OneYouPage, None, title='Page 2', path='1112')
         page2.release = release
         page2.save_revision()
 
@@ -225,15 +225,15 @@ class ReleaseModelTests(OneYouTests):
         """
         release = create_test_release()
 
-        page1 = create_test_page(title='Page 1')
+        page1 = create_test_page(OneYouPage, None, title='Page 1')
         page1.release = release
         page1.save_revision()
         
-        page2 = create_test_page(title='Page 2', path='1112')
+        page2 = create_test_page(OneYouPage, None, title='Page 2', path='1112')
         page2.release = release
         page2.save_revision()
 
-        page3 = create_test_page(title='Page 3', path='1113')
+        page3 = create_test_page(OneYouPage, None, title='Page 3', path='1113')
 
         page1_in_release = False
         page2_in_release = False
@@ -273,7 +273,7 @@ class ReleaseModelTests(OneYouTests):
         """
         when a revision is added to a release it replaces the existing revision linked to the release.
         """
-        page = create_test_page()
+        page = create_test_page(OneYouPage)
         initial_revision = page.get_latest_revision()
 
         self.assertIsNotNone(initial_revision)
@@ -315,7 +315,7 @@ class ReleaseModelTests(OneYouTests):
         """
         when a revision is added to a release it creates a new link if the page not already linked to the release.
         """
-        page = create_test_page()
+        page = create_test_page(OneYouPage)
         initial_revision = page.get_latest_revision()
 
         self.assertIsNotNone(initial_revision)
@@ -338,7 +338,7 @@ class ReleaseModelTests(OneYouTests):
 
         self.assertEquals(len(release_content_dict), 1)
 
-        page2 = create_test_page(title='Page 2', path='1112')
+        page2 = create_test_page(OneYouPage, None, title='Page 2', path='1112')
         second_revision = page2.get_latest_revision()
 
         release.add_revision(second_revision)
@@ -374,7 +374,7 @@ class ReleaseModelTests(OneYouTests):
         not from locked content. Tested by checking that before it is released it returns any content, because before
         its released there is not locked content to load from.
         """
-        page = create_test_page()
+        page = create_test_page(OneYouPage)
         revision = page.get_latest_revision()
 
         release_time = timezone.now() + timedelta(days=1)
@@ -394,7 +394,7 @@ class ReleaseModelTests(OneYouTests):
         not from the releated tables.
         """
         initial_title = 'Test page'
-        page = create_test_page(initial_title)
+        page = create_test_page(OneYouPage, None, initial_title)
         revision = page.get_latest_revision()
 
         release_time = timezone.now() + timedelta(days=-1)
@@ -426,7 +426,7 @@ class ReleaseContentModelTests(OneYouTests):
         """
         When a specific page is requested from the locked content it should be retrievable.
         """
-        page = create_test_page(title='First Page')
+        page = create_test_page(OneYouPage, None, title='First Page')
         self.assertIsNotNone(page.get_latest_revision())
 
         release = create_test_release()
@@ -458,7 +458,7 @@ class ReleasePageModelTests(OneYouTests):
     def test_a_release_page_object_returns_associated_release(self, mock_file_service):
         release = create_test_release()
 
-        page = create_test_page()
+        page = create_test_page(OneYouPage)
         revision = page.get_latest_revision()
 
         release_page = create_test_release_page(release, revision)
@@ -653,11 +653,11 @@ class ReleaseViewsTests(OneYouTests):
     def test_release_view_compare_to_live_release(self, mock_file_service, mock_index_file):
         # Create a live release with 2 pages
         live_release = create_test_release('Live release', release_date=(timezone.now() + timezone.timedelta(days=-1)))
-        test_live_page1 = create_test_page()
+        test_live_page1 = create_test_page(OneYouPage)
         test_live_page1.release = live_release
         test_live_page1.live_revision = test_live_page1.save_revision()
         
-        test_live_page2 = create_test_page()
+        test_live_page2 = create_test_page(OneYouPage)
         test_live_page2.release = live_release
         test_live_page2.live_revision = test_live_page2.save_revision()
 
@@ -669,7 +669,7 @@ class ReleaseViewsTests(OneYouTests):
 
         current_release.remove_page(test_live_page2.id)
 
-        test_live_page3 = create_test_page()
+        test_live_page3 = create_test_page(OneYouPage)
         test_live_page3.release = current_release
         test_live_page3.live_revision = test_live_page3.save_revision()
         test_live_page3.save()
@@ -745,7 +745,7 @@ class ReleaseModerationModelTests(OneYouTests):
 
     def setUp(self):
         self.release = create_test_release()
-        self.page = create_test_page()
+        self.page = create_test_page(OneYouPage)
         self.user = create_test_user()
 
     def test_submitformoderation_then_publish(self, mock_file_service):

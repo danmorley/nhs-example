@@ -10,10 +10,9 @@ from django.views.decorators.http import require_safe
 
 from wagtail.core.models import Page, PageRevision, Site
 
-from experiments.models import ExperimentsContent
+# from experiments.models import ExperimentsContent
 from home.models import SiteSettings
 from oneYou2.serializers import SiteSerializer
-from pages.serializers import OneYouPageListSerializer
 from release.utils import get_latest_live_release, get_release_object, populate_release_if_required
 
 from .utils import get_site_or_404
@@ -69,15 +68,15 @@ def release_view(request, site_identifier, release_uuid):
 def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug_path=None, is_preview=False, page_revision=None):
     """RETURN PAGE DETAILS IN API"""
     # Match variants, a variant's slug should end with -v and then a truncated hash of 6 characters
-    variant_regex = re.compile(r'-v[a-zA-Z0-9]{6}$')
+    # variant_regex = re.compile(r'-v[a-zA-Z0-9]{6}$')
 
     if page_slug_path:
-        if variant_regex.search(page_slug_path):
-            variant = True
-            not_found_msg = 'Variant Not Found'
-        else:
-            variant = False
-            not_found_msg = 'Page Not Found'
+        # if variant_regex.search(page_slug_path):
+        #     variant = True
+        #     not_found_msg = 'Variant Not Found'
+        # else:
+        # variant = False
+        not_found_msg = 'Page Not Found'
 
         try:
             # This somewhat defeats the point of freezing content
@@ -98,17 +97,18 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug_
                 page = Page.objects.get(slug=page_slug_path)
                 page_pk = page.pk
             except ObjectDoesNotExist:
-                try:
-                    if variant:  # Try and get parent page
-                        page = Page.objects.get(slug=page_slug_path[:-8])
-                        page_pk = page.pk
-                        variant = False
-                    else:
-                        return JsonResponse({'message': not_found_msg}, status=404)
-                except ObjectDoesNotExist:
-                    return JsonResponse({'message': not_found_msg}, status=404)
+                return JsonResponse({'message': not_found_msg}, status=404)
+                # try:
+                #     if variant:  # Try and get parent page
+                #         page = Page.objects.get(slug=page_slug_path[:-8])
+                #         page_pk = page.pk
+                #         variant = False
+                #     else:
+                #         return JsonResponse({'message': not_found_msg}, status=404)
+                # except ObjectDoesNotExist:
+                #     return JsonResponse({'message': not_found_msg}, status=404)
     else:  # If there is no slug it cannot be a variant
-        variant = False
+        # variant = False
         not_found_msg = 'Page Not Found'
 
     get_site_or_404(site_identifier)
@@ -130,26 +130,26 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug_
             return JsonResponse({'message': 'Release not found'}, status=404)
         populate_release_if_required(release)
 
-        if variant:
-            try:
-                experiments_content = ExperimentsContent.objects.first()
-                if experiments_content:
-                    if page.specific.is_live:
-                        page_content = experiments_content.get_content_for(page_pk)
-                    else:
-                        # Get parent page content
-                        print('scenario 2')
-                        page_content = release.get_content_for(page.get_parent().id)
-                else:
-                    return JsonResponse({'message': 'No content for any experiment found'}, status=500)
-            except KeyError:
-                return JsonResponse({'message': not_found_msg}, status=404)
+        # if variant:
+        #     try:
+        #         experiments_content = ExperimentsContent.objects.first()
+        #         if experiments_content:
+        #             if page.specific.is_live:
+        #                 page_content = experiments_content.get_content_for(page_pk)
+        #             else:
+        #                 # Get parent page content
+        #                 print('scenario 2')
+        #                 page_content = release.get_content_for(page.get_parent().id)
+        #         else:
+        #             return JsonResponse({'message': 'No content for any experiment found'}, status=500)
+        #     except KeyError:
+        #         return JsonResponse({'message': not_found_msg}, status=404)
 
-        else:
-            try:
-                page_content = release.get_content_for(page_pk)
-            except KeyError:
-                return JsonResponse({'message': not_found_msg}, status=404)
+        # else:
+        try:
+            page_content = release.get_content_for(page_pk)
+        except KeyError:
+            return JsonResponse({'message': not_found_msg}, status=404)
 
         json_response = JsonResponse(page_content)
         if release.content_status == 1:

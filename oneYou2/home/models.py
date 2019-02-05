@@ -144,26 +144,11 @@ def get_subclasses(cls):
         yield subclass
 
 
-def get_page_types():
-    from itertools import chain
-    from dctcmsbase.models import GeneralShelvePage
-    from pages.models import GeneralShelvePage as GeneralShelvePageLegacy
-
-    type_page_iterator = chain(get_subclasses(GeneralShelvePage), get_subclasses(GeneralShelvePageLegacy))
-    for cls_item in type_page_iterator:
-        yield (cls_item.__module__.rsplit('.', 1)[0], cls_item.__name__)
-
-
-# @receiver(pre_save, sender=Site)
-# def store_type_page(sender, instance, *args, **kwargs):
+# def get_page_types():
 #     from itertools import chain
 #     from dctcmsbase.models import GeneralShelvePage
 #     from pages.models import GeneralShelvePage as GeneralShelvePageLegacy
 
 #     type_page_iterator = chain(get_subclasses(GeneralShelvePage), get_subclasses(GeneralShelvePageLegacy))
 #     for cls_item in type_page_iterator:
-#         PageType.objects.get_or_create(
-#             label=cls_item.__name__,
-#             app=cls_item.__module__.rsplit('.', 1)[0]
-#         )
-
+#         yield (cls_item.__module__.rsplit('.', 1)[0], cls_item.__name__)

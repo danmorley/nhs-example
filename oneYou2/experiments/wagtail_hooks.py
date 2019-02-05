@@ -42,4 +42,4 @@ class ExperimentAdminGroup(ModelAdminGroup):
     items = (ExperimentAdmin, OneYouVariantAdmin, RecipeVariantAdmin)
 
 
-modeladmin_register(ExperimentAdminGroup)
+# modeladmin_register(ExperimentAdminGroup)
