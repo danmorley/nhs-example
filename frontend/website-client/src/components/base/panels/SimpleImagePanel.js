@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './simple-image-panel.css';
-import Panel from './Panel';
+import Panel from '../../base/panels/Panel';
 import PropTypes from 'prop-types';
 import Image from '../../base/Image';
 import ImageUtils from '../../base/panels/ImageUtils';

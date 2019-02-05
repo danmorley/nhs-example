@@ -6,7 +6,7 @@ import CtaLink from '../../base/shared/CtaLink';
 import CtaLinks from '../../base/shared/CtaLinks';
 import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './app-teaser.css';
-import Panel from './Panel';
+import Panel from '../../base/panels/Panel';
 import ImageUtils from '../../base/panels/ImageUtils';
 
 /**

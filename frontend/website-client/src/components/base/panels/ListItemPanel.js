@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './list-item.css';
-import Panel from './Panel';
+import Panel from '../../base/panels/Panel';
 
 
 /**

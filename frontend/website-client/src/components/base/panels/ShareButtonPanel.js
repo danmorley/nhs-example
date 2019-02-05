@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './share-button.css';
 import Panel from '../panels/Panel';
 
@@ -83,7 +82,5 @@ class ShareButtonPanel extends Component {
 
 ShareButtonPanel.propTypes = {
 };
-
-CmsComponentRegistry.register('share_button_panel', ShareButtonPanel, 'share-button-panel');
 
 export default ShareButtonPanel;

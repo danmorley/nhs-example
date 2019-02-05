@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './email-button.css';
-import Panel from '../panels/Panel';
-import ActionPlanContactForm from '../ActionPlanContactForm';
+import Panel from '../../base/panels/Panel';
+import ActionPlanContactForm from '../../oneyou/ActionPlanContactForm';
 import StandardModal from '../../base/StandardModal';
 
 
@@ -31,7 +30,5 @@ class EmailButtonPanel extends Component {
 
 EmailButtonPanel.propTypes = {
 };
-
-CmsComponentRegistry.register('share_button_panel', EmailButtonPanel, 'share-button-panel');
 
 export default EmailButtonPanel;

@@ -10,10 +10,8 @@ import ImageUtils from '../../base/panels/ImageUtils';
 import ResponsiveImage from '../../base/shared/ResponsiveImage';
 import ResponsiveBackgroundImage from '../../base/shared/ResponsiveBackgroundImage';
 import ShelfUtils from '../../base/shared/ShelfUtils';
-// import VideoModal from '../../base/VideoModal';
 
 import './sexhealth-page-heading-shelf.css';
-// import '../../base/shelves/promo-shelf.css';
 
 /**
  *  Sex HealthPage Heading Shelf displays a page header with optional background image,

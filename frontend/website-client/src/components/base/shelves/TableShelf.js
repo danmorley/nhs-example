@@ -70,6 +70,6 @@ TableShelf.propTypes = {
   id: PropTypes.object
 };
 
-CmsComponentRegistry.register('table', TableShelf, 'table-shelf', 'standard');
+CmsComponentRegistry.register('table_shelf', TableShelf, 'table-shelf', 'standard');
 
 export default TableShelf;

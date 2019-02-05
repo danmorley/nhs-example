@@ -7,6 +7,8 @@ import CmsComponentRegistry from '../CmsComponentRegistry';
 import PlaceholderShelf from '../shelves/PlaceholderShelf';
 
 /*eslint-disable */
+import ActionPlanDisplayShelf from '../../oneyou/shelves/ActionPlanDisplayShelf';
+import ActionPlanShelf from '../../oneyou/shelves/ActionPlanShelf';
 import BannerShelf from '../shelves/BannerShelf';
 import CarouselShelf from '../shelves/CarouselShelf';
 import DividerShelf from '../shelves/DividerShelf';
@@ -21,23 +23,7 @@ import SimplePageHeadingShelf from '../shelves/SimplePageHeadingShelf/SimplePage
 import SimpleRichTextShelf from '../shelves/SimpleRichTextShelf/SimpleRichTextShelf';
 import SvgShelf from '../shelves/SvgShelf';
 import TwoColumnShelf from '../shelves/TwoColumnShelf';
-
-import ActionPlanDisplayShelf from '../../oneyou/shelves/ActionPlanDisplayShelf';
-import ActionPlanShelf from '../../oneyou/shelves/ActionPlanShelf';
 /*eslint-enable */
-
-// import GeneralTextShelf from '../../shelves/GeneralTextShelf';
-// import BasicCtaShelf from '../shelves/BasicCtaShelf';
-// import GuidanceShelf from '../../shelves/GuidanceShelf';
-// import MainCarouselShelf from '../../shelves/MainCarouselShelf';
-// import NoticeShelf from '../../shelves/NoticeShelf';
-
-// import SiteMapShelf from '../../shelves/SiteMapShelf';
-// import RecipeGridShelf from '../../shelves/RecipeGridShelf';
-// import ShareButtonShelf from '../../shelves/ShareButtonShelf';
-// import TableShelf from '../../shelves/TableShelf';
-//import TriageToolShelf from '../../shelves/TriageToolShelf';
-// import AccordionGroup from '../../shelves/AccordionGroup';
 
 
 class MultiShelfBlock extends Component {

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Text from '../../base/Text';
 import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './icon-card-panel.css';
-import Panel from './Panel';
+import Panel from '../../base/panels/Panel';
 import ImageUtils from '../../base/panels/ImageUtils';
 import Image from '../../base/Image';
 import CtaLinks from '../../base/shared/CtaLinks';

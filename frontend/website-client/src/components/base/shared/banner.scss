@@ -145,8 +145,16 @@
         width: 75%;
       }
     }
-  
+
     h2 {
+      font-size: 1.95em;
+
+      @include media-breakpoint-down(sm) { 
+        font-size: 1.625em;
+      }
+    }
+  
+    .banner-heading {
       @include media-breakpoint-up(lg) {
         padding-bottom: 0.5rem !important;
       }

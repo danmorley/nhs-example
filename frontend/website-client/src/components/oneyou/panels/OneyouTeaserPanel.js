@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Text from '../../base/Text';
 import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './oneyou-teaser.css';
-import Panel from './Panel';
+import Panel from '../../base/panels/Panel';
 import CtaList from '../../base/shared/CtaList';
 import ImageUtils from '../../base/panels/ImageUtils';
 import CtaUtils from '../../base/shared/CtaUtils';

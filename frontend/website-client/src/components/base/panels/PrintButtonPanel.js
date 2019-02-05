@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './print-button.css';
-import Panel from '../panels/Panel';
+import Panel from '../../base/panels/Panel';
 
 
 class PrintButtonPanel extends Component {
@@ -22,7 +21,5 @@ class PrintButtonPanel extends Component {
 
 PrintButtonPanel.propTypes = {
 };
-
-CmsComponentRegistry.register('share_button_panel', PrintButtonPanel, 'share-button-panel');
 
 export default PrintButtonPanel;

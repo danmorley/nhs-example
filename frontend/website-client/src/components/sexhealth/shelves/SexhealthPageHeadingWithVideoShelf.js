@@ -13,7 +13,6 @@ import ShelfUtils from '../../base/shared/ShelfUtils';
 import VideoModal from '../../base/VideoModal';
 
 import './sexhealth-page-heading-with-video-shelf.css';
-// import '../../base/shelves/promo-shelf.css';
 
 /**
  *  Sex HealthPage Heading Shelf displays a page header with optional background image,

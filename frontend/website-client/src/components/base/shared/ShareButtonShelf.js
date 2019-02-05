@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import PropTypes from 'prop-types';
 import './share-button-shelf.css';
 import Shelf from '../../base/shelves/Shelf';
-import ShareButtonPanel from '../panels/ShareButtonPanel';
+import ShareButtonPanel from '../../base/panels/ShareButtonPanel';
 import EmailButtonPanel from '../panels/EmailButtonPanel';
 import PrintButtonPanel from '../panels/PrintButtonPanel';
 
@@ -38,7 +37,5 @@ ShareButtonShelf.propTypes = {
   showPrintButton: PropTypes.bool.isRequired,
   trackingGroup: PropTypes.string
 };
-
-CmsComponentRegistry.register('share_button_panel', ShareButtonShelf, 'share-button-panel');
 
 export default ShareButtonShelf;

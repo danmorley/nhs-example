@@ -5,7 +5,7 @@ import Text from '../../base/Text';
 import CtaLinks from '../../base/shared/CtaLinks';
 import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import './cta-panel.css';
-import Panel from './Panel';
+import Panel from '../../base/panels/Panel';
 
 /**
  *
