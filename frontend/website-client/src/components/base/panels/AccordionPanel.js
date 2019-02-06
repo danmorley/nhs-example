@@ -24,7 +24,7 @@ class AccordionPanel extends Component {
 
     return (
       <Panel id={id} classNamePrefix={classNamePrefix} trackingGroup={content.tracking_group}>
-        <div className={`shelf__container ${classNamePrefix}__container`}>
+        <ul className={`shelf__container ${classNamePrefix}__container`}>
           { content.accordions && content.accordions.map((accordion, i) =>
             <AccordionItem key={i}
               id={accordion.id}
@@ -35,7 +35,7 @@ class AccordionPanel extends Component {
               setExpandedGroup={this.setExpandedGroup}
               scrollToTopWhenSelected={scrollItemsToTopWhenSelected} />
           )}
-        </div>
+        </ul>
       </Panel>
     );
   }

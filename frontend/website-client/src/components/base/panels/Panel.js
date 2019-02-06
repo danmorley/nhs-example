@@ -12,9 +12,9 @@ class Panel extends Component {
 
   render() {
     return (
-      <div id={this.props.id} className={this.panelClasses()} style={this.props.style}>
+      <React.Fragment id={this.props.id} className={this.panelClasses()} style={this.props.style}>
         {this.props.children}
-      </div>
+       </React.Fragment>
     );
   }
 }
