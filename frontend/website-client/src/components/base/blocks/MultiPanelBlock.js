@@ -9,29 +9,26 @@ import CmsComponentRegistry from '../CmsComponentRegistry';
 // With the plugin import statement is as follows
 // import * as Panels from './panels'
 
-import PlaceholderPanel from '../../oneyou/panels/PlaceholderPanel';
-// import VideoTeaserPanel from '../../oneyou/panels/VideoTeaserPanel';
+import PlaceholderPanel from '../panels/PlaceholderPanel';
 import '../panels/ImageTeaserPanel';
-import '../panels/ImageTeaserPanel/ImageTeaserPanel';
 import '../panels/SimpleServiceFinder';
 import '../panels/SimpleServiceFinderForm';
 
 /*eslint-disable */
+import AccordionPanel from '../panels/AccordionPanel';
+import AppTeaserPanel from '../panels/AppTeaserPanel';
 import BannerPanel from '../panels/BannerPanel';
+import CtaPanel from '../panels/CtaPanel';
+import IconCardPanel from '../panels/IconCardPanel';
 import InformationPanel from '../panels/InformationPanel';
 import InlineScriptPanel from '../panels/InlineScriptPanel';
 import InlineSvgPanel from '../panels/InlineSvgPanel';
+import ListItemPanel from '../panels/ListItemPanel';
+import RichTextPanel from '../panels/RichTextPanel';
+import SimpleImagePanel from '../panels/SimpleImagePanel';
+import SimpleTextPanel from '../panels/SimpleTextPanel';
 import VideoTeaserPanel from '../panels/VideoTeaserPanel';
-
-import AccordionPanel from '../../oneyou/panels/AccordionPanel';
-import AppTeaserPanel from '../../oneyou/panels/AppTeaserPanel';
-import CtaPanel from '../../oneyou/panels/CtaPanel';
-import IconCardPanel from '../../oneyou/panels/IconCardPanel';
-import ListItemPanel from '../../oneyou/panels/ListItemPanel';
 import OneyouTeaserPanel from '../../oneyou/panels/OneyouTeaserPanel';
-import RichTextPanel from '../../oneyou/panels/RichTextPanel';
-import SimpleImagePanel from '../../oneyou/panels/SimpleImagePanel';
-import SimpleTextPanel from '../../oneyou/panels/SimpleTextPanel';
 /*eslint-enable */
 
 class MultiPanelBlock extends Component {

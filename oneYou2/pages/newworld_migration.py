@@ -23,6 +23,7 @@ from dctcmsbase.shelves import (PageHeadingShelf, DividerShelf, InlineScriptShel
     FindOutMoreDropDownShelf, InlineSvgShelf, SimplePageHeadingShelf, CarouselShelf)
 from dctcmsbase.stream_block import ExpandedStreamBlock
 from pages.models import AccordionItem
+from pages.models import Theme as OldTheme
 
 from images.models import PHEImage
 from images.renditions import ONEYOU_RENDITIONS
@@ -864,9 +865,17 @@ def copy_oneyou_newworld(request, page_id):
         twitter_image_fk = PHEImage.objects.get(id=data['twitter_image_fk'])
         data['twitter_image_fk'] = twitter_image_fk
 
-    # update Theme
-    theme = Theme.objects.get(id=data['theme'])
-    data['page_theme'] = theme
+    # update Theme   
+    theme = None
+    old_theme = OldTheme.objects.get(id=data['theme'])
+    try:
+        theme = Theme.objects.get(label=old_theme.label)
+        data['page_theme'] = theme
+    except Theme.DoesNotExist:
+        theme = Theme(label=old_theme.label, class_name=old_theme.class_name)
+        theme.save()
+        data['page_theme'] = theme
+    del(data['theme'])
 
     # Update owner
     owner = User.objects.get(id=9)

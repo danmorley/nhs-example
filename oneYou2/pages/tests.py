@@ -22,7 +22,7 @@ from pages.factories import create_test_page, create_test_theme, create_test_men
     create_test_header, create_test_recipe_page, create_test_child_page, PageFactory
 from pages.models import OneYou2Page, Theme, RecipePage
 from pages.utils import get_serializable_data_for_fields, process_inlines
-from pages.wagtail_hooks import MenuAdmin, MenuButtonHelper
+# from pages.wagtail_hooks import MenuAdmin, MenuButtonHelper
 
 from release.factories import create_test_release
 
@@ -362,43 +362,43 @@ class PagesUtilsTests(OneYouTests):
         self.assertIsTrue('href="' in processed_content)
 
 
-class PagesMenuAdminWagtailHooksTests(OneYouTests):
-    def test_menu_admin_button_helper_class_is_correct(self):
-        menu_admin = MenuAdmin()
+# class PagesMenuAdminWagtailHooksTests(OneYouTests):
+#     def test_menu_admin_button_helper_class_is_correct(self):
+#         menu_admin = MenuAdmin()
 
-        menu_button_helper = menu_admin.get_button_helper_class()
+#         menu_button_helper = menu_admin.get_button_helper_class()
 
-        self.assertEqual(type(menu_button_helper), type(MenuButtonHelper))
+#         self.assertEqual(type(menu_button_helper), type(MenuButtonHelper))
 
 
-class PagesButtonHelperWagTailHooksTests(OneYouTests):
-    def test_copy_button_returns_a_link_to_copy_the_menu(self):
-        menu = create_test_menu()
-        menu_admin = MenuAdmin()
-        view = IndexView(menu_admin)
-        request = HttpRequest()
+# class PagesButtonHelperWagTailHooksTests(OneYouTests):
+#     def test_copy_button_returns_a_link_to_copy_the_menu(self):
+#         menu = create_test_menu()
+#         menu_admin = MenuAdmin()
+#         view = IndexView(menu_admin)
+#         request = HttpRequest()
 
-        menu_button_helper = MenuButtonHelper(view, request)
-        copy_button = menu_button_helper.copy_button(menu.id)
+#         menu_button_helper = MenuButtonHelper(view, request)
+#         copy_button = menu_button_helper.copy_button(menu.id)
 
-        self.assertEqual(copy_button['label'], 'copy')
+#         self.assertEqual(copy_button['label'], 'copy')
 
-    def test_get_btns_for_obj_returns_a_list_containing_a_copy_button(self):
-        menu = create_test_menu()
-        menu_admin = MenuAdmin()
-        view = IndexView(menu_admin)
-        request = WSGIRequest({'REQUEST_METHOD': "GET", 'wsgi.input': ''})
-        request.user = create_test_user()
+#     def test_get_btns_for_obj_returns_a_list_containing_a_copy_button(self):
+#         menu = create_test_menu()
+#         menu_admin = MenuAdmin()
+#         view = IndexView(menu_admin)
+#         request = WSGIRequest({'REQUEST_METHOD': "GET", 'wsgi.input': ''})
+#         request.user = create_test_user()
 
-        menu_button_helper = MenuButtonHelper(view, request)
-        buttons = menu_button_helper.get_buttons_for_obj(menu)
+#         menu_button_helper = MenuButtonHelper(view, request)
+#         buttons = menu_button_helper.get_buttons_for_obj(menu)
 
-        copy_in_buttons = False
-        for btn in buttons:
-            if btn['label'] == 'copy':
-                copy_in_buttons = True
+#         copy_in_buttons = False
+#         for btn in buttons:
+#             if btn['label'] == 'copy':
+#                 copy_in_buttons = True
 
-        self.assertIsTrue(copy_in_buttons)
+#         self.assertIsTrue(copy_in_buttons)
 
 
 class ImageBlockTest(OneYouTests):

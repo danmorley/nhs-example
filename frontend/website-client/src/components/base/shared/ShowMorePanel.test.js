@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ShowMorePanel from './ShowMorePanel';
-import ImageTeaserPanel from '../panels/ImageTeaserPanel/ImageTeaserPanel';
+import ImageTeaserPanel from '../panels/ImageTeaserPanel';
 import { shallow } from 'enzyme';
 
 describe('ShowMorePanel', () => {

@@ -3,7 +3,7 @@ from rest_framework.fields import ReadOnlyField
 
 from django.apps import apps
 
-from snippets.serializers import MenuSerializer, FooterSerializer, HeaderSerializer
+from dctcmsbase.serializers import MenuSerializer, FooterSerializer, HeaderSerializer
 
 
 class RedirectSerializer(serializers.ModelSerializer):

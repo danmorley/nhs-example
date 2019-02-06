@@ -790,9 +790,9 @@ class GeneralShelvePage(Page):
         SnippetChooserPanel('theme'),
     ]
 
-    info_content_panels = [
-        InlinePanel('change_history', label='Change history'),
-    ]
+    # info_content_panels = [
+    #     InlinePanel('change_history', label='Change history'),
+    # ]
 
     meta_content_panels = [
         MultiFieldPanel(
@@ -855,7 +855,7 @@ class GeneralShelvePage(Page):
 
     edit_handler = TabbedInterface([
         ObjectList(content_panels, heading='Content'),
-        ObjectList(info_content_panels, heading='Notes'),
+        # ObjectList(info_content_panels, heading='Notes'),
         ObjectList(meta_content_panels, heading='Meta'),
         ObjectList(promote_panels, heading='Settings'),
     ])
@@ -1108,7 +1108,7 @@ class RecipePage(OneYou2Page):
 
     edit_handler = TabbedInterface([
         ObjectList(content_panels, heading='Content'),
-        ObjectList(OneYou2Page.info_content_panels, heading='Notes'),
+        # ObjectList(OneYou2Page.info_content_panels, heading='Notes'),
         ObjectList(OneYou2Page.meta_content_panels, heading='Meta'),
         ObjectList(Page.promote_panels, heading='Settings'),
     ])
@@ -1146,15 +1146,15 @@ class RecipePage(OneYou2Page):
 
 # Orderables
 
-class ChangeHistory(Orderable):
-    page = ParentalKey(Page, related_name='change_history')
-    date_of_change = DateField(blank=False, verbose_name='Date')
-    comment = TextField(blank=False)
+# class ChangeHistory(Orderable):
+#     page = ParentalKey(Page, related_name='change_history')
+#     date_of_change = DateField(blank=False, verbose_name='Date')
+#     comment = TextField(blank=False)
 
-    panels = [
-        FieldPanel('date_of_change', classname='col4'),
-        FieldPanel('comment', classname='col8'),
-    ]
+#     panels = [
+#         FieldPanel('date_of_change', classname='col4'),
+#         FieldPanel('comment', classname='col8'),
+#     ]
 
 
 # Snippets
@@ -1270,4 +1270,4 @@ class Theme(models.Model):
 
 
 # Disable variant from page creation
-Page.subpage_types = [OneYou2Page, RecipePage]
+# Page.subpage_types = [OneYou2Page, RecipePage]

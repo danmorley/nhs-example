@@ -4,19 +4,15 @@ import PropTypes from 'prop-types';
 import '../../../assets/styles/page.css';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 // import DocumentMeta from 'react-document-meta';
-import BackToTopButton from '../../oneyou/BackToTopButton';
-import NoticeShelf from '../../oneyou/shelves/NoticeShelf';
-import ShareButtonShelf from '../../oneyou/shelves/ShareButtonShelf';
-import StandardPageLayout from '../../oneyou/pages/layouts/StandardPageLayout';
+import BackToTopButton from '../BackToTopButton';
+import NoticeShelf from '../shelves/NoticeShelf';
+import ShareButtonShelf from '../shared/ShareButtonShelf';
+import StandardPageLayout from '../pages/layouts/StandardPageLayout';
 
 /*eslint-disable */
 import GeneralPageContent from './GeneralPageContent';
 import OneYouRecipePageContent from '../../oneyou/pages/RecipePageContent';
 /*eslint-enable */
-
-// import OneYouGeneralPageContent from '../../oneyou/pages/GeneralPageContent';
-// import SexhealthGeneralPageContent from '../../sexhealth/pages/SexhealthGeneralPageContent';
-// import UrlUtils from '../shared/UrlUtils';
 
 /**
  *  Component responsible for rendering the header, footer and content of all

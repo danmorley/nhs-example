@@ -1,7 +1,6 @@
 import factory
-from factory import fuzzy
 
-from pages.factories import SiteFactory
+from oneyou.factories import SiteFactory
 from .models import Release, ReleaseContent, ReleasePage
 
 
@@ -27,5 +26,5 @@ class ReleaseFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Release
 
-    release_name = fuzzy.FuzzyText()
+    release_name = factory.fuzzy.FuzzyText()
     site = factory.SubFactory(SiteFactory)

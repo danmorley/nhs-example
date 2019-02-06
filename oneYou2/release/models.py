@@ -20,7 +20,7 @@ from oneYou2.panels import ReadOnlyPanel
 
 from frontendHandler.models import FrontendVersion
 
-from pages.models import RecipePage
+from oneyou.models import RecipePage
 
 
 CONTENT_STATUS = (

@@ -14,7 +14,6 @@ from wagtail.snippets.blocks import SnippetChooserBlock
 from home.models import SiteSettings
 from images.renditions import MOBILE_RENDITION_CHOICES, DESKTOP_RENDITION_CHOICES
 from images.serializers import ImageSerializer
-from shelves.blocks import BlobImageChooserBlock
 
 
 IMAGE_POSITION = (

@@ -52,7 +52,7 @@ TWO_COLUMNS_VARIANT_CHOICES = (
 
 STANDARD_GRID_PANELS = [
     ('rich_text_panel', StandardRichTextPanel(icon='title')),
-    ('information_panel', StandardInformationPanel(target_model='shelves.AppTeaser', icon='image')),
+    ('information_panel', StandardInformationPanel(target_model='dctcmsbase.AppTeaser', icon='image')),
     ('cta_panel', CtaPanel(icon='plus')),
     ('icon_card_panel', IconCardPanel(icon='snippet')),
     ('simple_image_panel', StandardSimpleImagePanel(icon='image')),
@@ -63,7 +63,7 @@ STANDARD_GRID_PANELS = [
     ('video_teaser_panel', StandardVideoTeaserPanel(icon='pick')),
     ('inline_script_panel', InlineScriptPanel(icon='code')),
     ('inline_svg_panel', InlineSvgPanel(icon='snippet')),
-    ('app_teaser_panel', AppTeaserPanel(target_model='shelves.AppTeaser', icon='image')),
+    ('app_teaser_panel', AppTeaserPanel(target_model='dctcmsbase.AppTeaser', icon='image')),
     ('list_item_panel', ListItemPanel(icon='list-ul')),
 ]
 

@@ -14,7 +14,7 @@ ONEYOU_GRID_SHELF_PANELS = STANDARD_GRID_PANELS + [
 ONEYOU_TWO_COLUMNSHELF_PANELS = STANDARD_GRID_PANELS
 ARTICLE_ONEYOU_GRID_PANELS = [
     ('rich_text_panel', StandardRichTextPanel(icon='title')),
-    ('information_panel', StandardInformationPanel(target_model='shelves.AppTeaser', icon='image')),
+    ('information_panel', StandardInformationPanel(target_model='dctcmsbase.AppTeaser', icon='image')),
     ('image_teaser_panel', StandardImageTeaserPanel(icon='pick')),
     ('video_teaser_panel', StandardVideoTeaserPanel(icon='pick')),
 ]
