@@ -57,7 +57,7 @@ class AccordionItem extends Component {
 
     return (
       <Panel id={content.shelf_id} classNamePrefix={classNamePrefix}>
-        <li ref={ (ul) => { this.Accordion = ul; } }>
+        <div ref={ (div) => { this.Accordion = div; } }>
           <div className={`${classNamePrefix}__header ${classNamePrefix}__header--${expansionClassName}`}>
             { container == 'accordion-panel' &&
               <h3 onClick={this.handleClick} className={`container ${classNamePrefix}__sub-container`}>
@@ -73,7 +73,7 @@ class AccordionItem extends Component {
           <div className={`${classNamePrefix}__body ${classNamePrefix}__body--${expansionClassName} container ${classNamePrefix}__sub-container`}>
             { MultiPanelBlock.renderItems(content.items, '', 'div') }
           </div>
-        </li>
+        </div>
       </Panel>
     );
   }
