@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.urls import reverse
 
 from wagtail.admin.rich_text.converters.html_to_contentstate import BlockElementHandler
@@ -6,9 +7,8 @@ from wagtail.contrib.modeladmin.helpers import ButtonHelper
 from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, modeladmin_register
 from wagtail.core import hooks
 
-from dctcmsbase.sharedcontent import AppTeaser, Banner
-from dctcmsbase.pagecomponents import Footer, Header, Menu, Theme
-from oneyou.sharedcontent import Action
+from .sharedcontent import AppTeaser, Banner
+from .pagecomponents import Footer, Header, Menu, Theme
 
 
 try:
@@ -79,18 +79,6 @@ class MenuButtonHelper(ButtonHelper):
         return btns
 
 
-class ActionAdmin(ModelAdmin):
-    model = Action
-    menu_label = 'Actions'
-    menu_icon = 'form'
-    menu_order = 100
-    add_to_settings_menu = False  # or True to add your model to the Settings sub-menu
-    exclude_from_explorer = False  # or True to exclude pages of this type from Wagtail's explorer view
-    list_display = ('paragon_id', 'title', 'category', 'position', 'active')
-    list_filter = ('cta_type',)
-    search_fields = ('title',)
-
-
 class AppTeaserAdmin(ModelAdmin):
     model = AppTeaser
     menu_label = 'App teasers'
@@ -119,10 +107,7 @@ class SharedAdminGroup(ModelAdminGroup):
     menu_label = 'Shared'
     menu_icon = 'folder-open-inverse'  # change as required
     menu_order = 200  # will put in 3rd place (000 being 1st, 100 2nd)
-    items = (ActionAdmin, AppTeaserAdmin, BannerAdmin)
-
-
-modeladmin_register(SharedAdminGroup)
+    items = (AppTeaserAdmin, BannerAdmin)
 
 
 class FooterAdmin(ModelAdmin):
@@ -180,10 +165,13 @@ class PageComponentAdminGroup(ModelAdminGroup):
     items = (FooterAdmin, HeaderAdmin, MenuAdmin, ThemeAdmin)
 
 
-modeladmin_register(PageComponentAdminGroup)
-
-
-
 @hooks.register('construct_main_menu')
 def hide_snippets_menu_item(request, menu_items):
-  menu_items[:] = [item for item in menu_items if item.name not in ['snippets']]
+    menu_items[:] = [item for item in menu_items if item.name not in ['snippets']]
+
+
+if not hasattr(settings, 'OVERRIDE_PAGECOMPONENTADMINGROUP_MENU') or not settings.OVERRIDE_PAGECOMPONENTADMINGROUP_MENU:
+    modeladmin_register(PageComponentAdminGroup)
+
+if not hasattr(settings, 'OVERRIDE_SHAREDADMINGROUP_MENU') or not settings.OVERRIDE_SHAREDADMINGROUP_MENU:
+    modeladmin_register(SharedAdminGroup)
