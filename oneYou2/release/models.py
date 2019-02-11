@@ -60,7 +60,7 @@ class Release(ClusterableModel):
         null=True,
         on_delete=models.SET_NULL)
     release_name = models.CharField(max_length=255, unique=True)
-    release_time = models.DateTimeField(blank=True, null=True, validators=[validate_in_future])
+    release_time = models.DateTimeField(blank=True, null=True)
     uuid = models.CharField(max_length=255, unique=True)
     frontend_id = models.CharField(max_length=255, choices=FrontendVersion.get_available_versions(),
                                    default=FrontendVersion.get_current_version())
@@ -71,6 +71,7 @@ class Release(ClusterableModel):
         blank=False,
         null=False,
         on_delete=models.CASCADE)
+    archived = models.BooleanField(default=False)
 
     panels = [
         FieldPanel('site', classname='site', ),
@@ -80,6 +81,7 @@ class Release(ClusterableModel):
         ReadOnlyPanel('content_status', classname='release_status'),
         FieldPanel('frontend_id', classname='frontend_id'),
         FieldPanel('release_time', classname='release_time', ),
+        FieldPanel('archived'),
     ]
 
     def __init__(self, *args, **kwargs):
@@ -88,6 +90,11 @@ class Release(ClusterableModel):
         if not self.id:
             self.frontend_id = self.get_current_frontend_id()
             self.content_status = 0
+
+    def clean(self):
+        super(Release, self).clean()
+        if self.content_status == 0:
+            validate_in_future(self.release_time)
 
     def save(self, *args, **kwargs):
         is_new_entry = self.id is None

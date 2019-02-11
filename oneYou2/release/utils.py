@@ -15,8 +15,13 @@ def get_latest_release(site_id):
 def get_latest_live_release(site_id):
     """Helper function to return the latest live release by date"""
     # TODO: test this
-    released = Release.objects.order_by('-release_time').filter(release_time__lte=timezone.now(),
-                                                                site__id=site_id).exclude(release_time__exact=None)
+    released = Release.objects.order_by('-release_time').filter(
+            release_time__lte=timezone.now(),
+            site__id=site_id,
+            archived=False,
+        ).exclude(
+            release_time__exact=None,
+        )
     latest_release = released.first()
     return latest_release
 
