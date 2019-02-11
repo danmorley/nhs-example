@@ -252,6 +252,22 @@ $shelf-padding-extra: 2em;
   }
 }
 
+.stoptober {
+  .page-heading-shelf, .banner-shelf {
+    h2 {
+      color: $white;
+      text-transform: uppercase;
+      font-family: $primary-brand-font;
+      font-weight: normal;
+  
+      .text-light {
+        font-family: $secondary-brand-font;
+        font-weight: normal;
+      }
+    }
+  }
+}
+
 
 .sexhealth {
   

@@ -84,7 +84,7 @@ class RecipePage(GeneralShelvePage, Tracking, Social):
                                       default='none',
                                       max_length=10)
     header_image_desktop_rendition = models.CharField(choices=DESKTOP_RENDITION_CHOICES,
-                                      verbose_name='Mobile Rendition',
+                                      verbose_name='Desktop Rendition',
                                       default='none',
                                       max_length=10)
     recipe_name = models.CharField(max_length=255, null=True, blank=True)
