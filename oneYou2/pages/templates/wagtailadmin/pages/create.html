@@ -1,7 +1,7 @@
 {% extends "wagtailadmin/pages/create.html" %}
 {% load wagtailadmin_tags %}
 {% load i18n %}
-
+{% load renditions %}
 
 
 {% block extra_css %}
@@ -75,8 +75,44 @@
                 $('button[name="action-publish"]').clone().appendTo(releasePopUp);
             }
 
+            function filterRendtionSelect() {
+                const rendition = "{{ parent_page.id|get_rendtion }}";
+                const renditionFormatted = " [[{{ parent_page.id|get_rendtion }}]]";
+                $(document).on("click", ".dct-image-block .sequence-controls button.icon-cogs", function(){
+                    const parentElt = $(this).parents(".dct-image-block");
+                    parentElt.find(".fieldname-meta_mobile_rendition select > option, .fieldname-meta_desktop_rendition select > option").each(function() {
+                        const optionRenditionRegExp = /.* (\[\[(.+)\]\])/;
+                        const optionText = $(this).text();
+                        const match = optionRenditionRegExp.exec(optionText);
+                        switch(rendition) {
+                            case "base":
+                                if (match) {
+                                    $(this).remove();
+                                }
+                                break;
+                            case "all":
+                                if (match) {
+                                    const newText = optionText.replace(match[1], '- ' + match[2]);
+                                    $(this).text(newText);
+                                }
+                                break;
+                            default:
+                                if (match) {
+                                    if (optionText.indexOf(renditionFormatted) !== -1) {
+                                        const newText = optionText.replace(renditionFormatted,'');
+                                        $(this).text(newText);
+                                    }else{
+                                        $(this).remove();
+                                    }
+                                }
+                        }
+                    })
+                })
+            }
+
             function init() {
                 setUpReleaseSelectorPopUp();
+                filterRendtionSelect();
                 var canPublish = false;
                 $('button[name="action-publish"]').click(function (e) {
                     if (!canPublish) {

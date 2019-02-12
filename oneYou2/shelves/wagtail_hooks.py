@@ -71,4 +71,4 @@ class ShelfAdminGroup(ModelAdminGroup):
     items = (PromoshelfAdmin, BannershelfAdmin, AppshelfAdmin, RecipeshelfAdmin, ActionshelfAdmin)
 
 
-modeladmin_register(ShelfAdminGroup)
+# modeladmin_register(ShelfAdminGroup)

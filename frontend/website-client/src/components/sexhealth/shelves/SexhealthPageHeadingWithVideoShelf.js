@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+// import PropTypes from 'prop-types';
 
 import Shelf from '../../base/shelves/Shelf';
 import PageHeadingShelf from '../../base/shelves/PageHeadingShelf';
@@ -13,7 +13,6 @@ import ShelfUtils from '../../base/shared/ShelfUtils';
 import VideoModal from '../../base/VideoModal';
 
 import './sexhealth-page-heading-with-video-shelf.css';
-// import '../../base/shelves/promo-shelf.css';
 
 /**
  *  Sex HealthPage Heading Shelf displays a page header with optional background image,
@@ -36,11 +35,11 @@ class SexhealthPageHeadingWithVideoShelf extends PageHeadingShelf {
 
   constructor(props) {
     super(props);
-    this.video = React.createRef();
+    this.videoRef = React.createRef();
   }
 
   triggerModal = () => {
-    this.video.current.openModal();
+    this.videoRef.current.openModal();
   }
 
   renderHeadingBody(content, headingTagName) {
@@ -66,10 +65,10 @@ class SexhealthPageHeadingWithVideoShelf extends PageHeadingShelf {
     // Calculate styling to position the left and right images 
     const leftImageStyle = (content.image_left && content.image_left.meta_position === 'bottom')? 'left-image--bottom' : 'left-image--top';
     const rightImageStyle = (content.image_right && content.image_right.meta_position === 'bottom')? 'right-image--bottom' : 'right-image--top';
-    
+
     return (
       <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} trackingGroup={content.tracking_group} classExtra="sexhealth-page-heading-with-video-shelf">
-        {content.video_id && <VideoModal video={content.video_id} host={content.host} classNamePrefix={classNamePrefix} ref={this.video} classExtra="sexhealth-video-modal">
+        {content.video_id && <VideoModal video={content.video_id} host={content.host} classNamePrefix={classNamePrefix} ref={this.videoRef} classExtra="sexhealth-video-modal">
         </VideoModal>}
         <ResponsiveBackgroundImage image={content.background_image} className={`shelf__container ${ShelfUtils.shelfContainerClass(content)} shelf-${leftImageStyle} shelf-${rightImageStyle} shelf__container-gradient--${gradient}`}
         >

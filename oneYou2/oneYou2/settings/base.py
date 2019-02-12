@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'dctcmsbase',
     'dctsharedcontent',
     'pages',
+    'oneyou',
     'sexhealth',
     'release',
     'shelves',
@@ -241,3 +242,5 @@ else:
 
 
 FAVICON_MAX_SIZE = 50000 # in bytes
+
+OVERRIDE_SHAREDADMINGROUP_MENU = True

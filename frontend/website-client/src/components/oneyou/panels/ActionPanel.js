@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './action-panel.css';
 import PropTypes from 'prop-types';
-import Panel from './Panel';
+import Panel from '../../base/panels/Panel';
 import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 
 const BASKET_KEY = 'basket';

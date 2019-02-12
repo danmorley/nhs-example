@@ -49,25 +49,25 @@ TEST_POST_CONTENT = QueryDict('csrfmiddlewaretoken=Rr2jKQfBjWRU85VE2JSabVjhYNuyr
 REQUEST_META = {'SERVER_NAME': 'localhost', 'SERVER_PORT': 8000}
 
 
-class VarientAdminURLHelperViewsTests(OneYouTests):
+# class VarientAdminURLHelperViewsTests(OneYouTests):
 
-    def test_get_action_url_returns_the_add_url_for_an_add_action(self):
-        url_helper = VarientAdminURLHelper(model=OneYouVariant)
-        action = 'add'
-        module = 'experiments'
-        model = 'oneyouvariant'
-        id = 1
-        actual = url_helper.get_action_url(action, module, model, id)
-        expected = '/admin/experiments/oneyouvariant/' + action + '/' + module + '/' + model + '/' + str(id) + '/'
-        self.assertIsTrue(expected in actual)
+#     def test_get_action_url_returns_the_add_url_for_an_add_action(self):
+#         url_helper = VarientAdminURLHelper(model=OneYouVariant)
+#         action = 'add'
+#         module = 'experiments'
+#         model = 'oneyouvariant'
+#         id = 1
+#         actual = url_helper.get_action_url(action, module, model, id)
+#         expected = '/admin/experiments/oneyouvariant/' + action + '/' + module + '/' + model + '/' + str(id) + '/'
+#         self.assertIsTrue(expected in actual)
 
-    def test_get_action_url_returns_the_edit_url_for_an_edit_action(self):
-        url_helper = VarientAdminURLHelper(model=OneYouVariant)
-        action = 'edit'
-        id = 1
-        actual = url_helper.get_action_url(action, id)
-        expected = '/admin/experiments/oneyouvariant/' + str(id) + '/' + action + '/'
-        self.assertIsTrue(expected in actual)
+#     def test_get_action_url_returns_the_edit_url_for_an_edit_action(self):
+#         url_helper = VarientAdminURLHelper(model=OneYouVariant)
+#         action = 'edit'
+#         id = 1
+#         actual = url_helper.get_action_url(action, id)
+#         expected = '/admin/experiments/oneyouvariant/' + str(id) + '/' + action + '/'
+#         self.assertIsTrue(expected in actual)
 
 
 class CreateExperimentsViewsTests(OneYouTests):

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import Panel from './Panel';
 import Text from '../../base/Text';
-import PureModal from 'react-pure-modal';
+// import PureModal from 'react-pure-modal';
 import PropTypes from 'prop-types';
 import IframeModal from '../IframeModal';
 import './simple-service-finder.css';

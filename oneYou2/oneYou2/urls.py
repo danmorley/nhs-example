@@ -19,10 +19,11 @@ from experiments import urls as experiment_urls
 from release import views
 from search import views as search_views
 from api import urls as api_urls
-from pages import urls as pages_urls
+# from pages import urls as pages_urls
+from release import urls as pages_urls
 from api.wagtail import api_router
 from api import views as api_views
-from shelves.views import upload_actions
+# from shelves.views import upload_actions
 
 
 urlpatterns = [
@@ -31,7 +32,8 @@ urlpatterns = [
     url(r'^admin/custom/pages/', include(pages_urls, namespace='oneyou_pages')),
     url(r'^admin/experiments/', include(experiment_urls)),
     url(r'^admin/pages/', include(pages_urls)),
-    url(r'^admin/actions/upload/', upload_actions, name='upload_actions'),
+    # url(r'^admin/pages/', include(new_pages_urls)),
+    # url(r'^admin/actions/upload/', upload_actions, name='upload_actions'),
     url(r'^admin/release/release/view/(?P<release_id>\d+)/$', views.release_view, name='release_view'),
 
     url(r'^admin/', include(wagtailadmin_urls)),

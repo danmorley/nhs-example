@@ -9,7 +9,7 @@ class CmsComponentRegistry  {
     if(site) {
       // if (site == global.contentStore.site) {
       if (site == UrlUtils.siteSlugFromPath()) {
-          CmsComponentRegistry.components[type] = {
+        CmsComponentRegistry.components[type] = {
           class:component,
           classNamePrefix:classNamePrefix,
           variant: variant,

@@ -1,0 +1,134 @@
+@import '../../../assets/styles/variables/variables';
+@import "../../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+.page-header {
+  text-align: center;
+  padding-top: 0.5em;
+  padding-bottom: 1em;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: $white;
+  box-shadow: -1px 2px 0px -1px rgba(0,0,0,0.08);
+  
+  @include media-breakpoint-up(lg) {
+    padding-bottom: 0;
+    padding-top: 0;
+    text-align: left;
+    margin-bottom: 0;
+    box-shadow: 0px 0px 0px 0px;
+  }
+  
+  .header-nav--open & {
+    position: relative;
+    
+    @include media-breakpoint-up(lg) {
+      left: auto;
+      position: fixed;
+    }
+  }
+  
+  > .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.page-header__nav-container {
+  display: flex;
+  margin-left: auto;
+}
+
+.page-header__row {
+  align-items: center;
+
+  @include media-breakpoint-up(lg) {
+    display: flex;
+    justify-content: left;
+  }
+  
+  @include media-breakpoint-up(lg) {
+    border-bottom: 0;
+    box-shadow: -1px 2px 0px -1px rgba(0,0,0,0.08);
+  }
+}
+
+.page-header__info {
+  
+  display: flex;
+  align-items: center;
+
+  @include media-breakpoint-up(lg) {
+    padding-right: 1em;
+  }
+}
+
+.page-header__logo {
+  
+  font-family: $primary-brand-font;
+  color: $text-primary;
+  text-decoration: none;
+  white-space: nowrap;
+  display: inline-block;
+
+  @include heading-h1(oneyou);
+  margin: 0 auto;
+
+  span {
+    display: inline-block;
+    font-family: $tertiary-brand-font;
+    color: $text-secondary;
+    line-height: 0.9em;    
+    border-bottom: 0.15em solid  $text-primary;
+  }
+  
+  &:visited {
+    color: $text-primary;
+  }
+  
+  &:hover, &:focus {
+    background-color: inherit;
+    color: inherit;
+  }
+}
+
+.page-header__burger {
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  top: 0;
+  height: 30px;
+  width: 30px;
+  
+  @include media-breakpoint-up(md) {
+    height: 40px;
+    width: 40px;
+  }
+    
+  @include media-breakpoint-up(lg) {
+    display: none;
+  }
+  
+  i {
+    &:after {
+      @extend %icon-hamburger;
+      position: absolute;
+      right: 0;
+      top: 3px;
+      color: $text-primary;
+      font-size: 20px;
+      
+      @include media-breakpoint-up(md) {
+        font-size:30px;
+      }  
+    }
+    
+    span {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+  }      
+}

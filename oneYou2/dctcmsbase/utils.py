@@ -12,7 +12,6 @@ from wagtail.documents.models import Document
 
 from wagtailmedia.models import Media
 
-from dctsharedcontent.models import SharedContent
 from home.models import SiteSettings
 
 
@@ -57,27 +56,6 @@ def process_inline_hyperlinks(field):
 def parse_shelf(shelf, parent=None):
     if type(shelf['value']) is dict or type(shelf['value']) is OrderedDict:
         shelf_type = shelf['type']
-
-        # To be removed in favour of ImageBlocks when all images have been converted to
-        # ImageBlocks.
-        if not parent:
-            shelf['value']['image_meta'] = '{}/{}/{}'.format(shelf_type, None, None)
-        elif parent.get('type') == 'grid_shelf':
-            shelf['value']['image_meta'] = '{}/{}/{}'.format(shelf_type, parent['type'], parent['value']['meta_layout'])
-        else:
-            shelf['value']['image_meta'] = '{}/{}/{}'.format(shelf_type, parent['type'], None)
-
-        # Process ImageBlocks by setting the meta_rendition (formerly image_meta) field
-        # By convention, images must end in '_image' to be processed.
-        for key in shelf['value']:
-            if key.endswith('_image'):
-                value = shelf['value'][key]
-                if type(value) is dict or type(value) is OrderedDict:
-                    if parent:
-                        shelf['value'][key]['meta_rendition_key'] = \
-                            '{}/{}/{}'.format(shelf_type, parent['type'], parent['value']['meta_layout'])
-                    else:
-                        shelf['value'][key]['meta_rendition_key'] = '{}/{}/{}'.format(shelf_type, None, None)
 
         # Process inline tags, updating shelf values as necessary.
         for key in shelf['value']:

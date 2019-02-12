@@ -19,7 +19,7 @@ import CtaLinks from './CtaLinks';
  */
 class Buttons extends Component {
   render() {
-    const { ctas, layout, variant,  className } = this.props;
+    const { ctas, layout,  className } = this.props;
 
     // Direction: vertical, horizontal
     // Alignment: left, center, right
@@ -29,7 +29,7 @@ class Buttons extends Component {
     return (
       <div className={buttonsClass}>
         <div className="buttons-ctas">
-          {<CtaLinks cta={ctas} variant="button" />}
+          {<CtaLinks ctas={ctas} variant="button" />}
         </div>
       </div>
     );
@@ -43,7 +43,7 @@ Buttons.defaultProps = {
 }
 
 Buttons.propTypes = {
-  ctas: PropTypes.string,
+  ctas: PropTypes.array,
   layout: PropTypes.string,
   variant: PropTypes.string,
   className: PropTypes.string.isRequired,

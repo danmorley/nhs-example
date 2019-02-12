@@ -1,9 +1,10 @@
 from wagtail.core import blocks
 
-from .blocks import PositionedImageBlock, IDBlock, BackgroundImageBlock, BannerChooserBlock
+from .blocks import (PositionedImageBlock, IDBlock, BackgroundImageBlock, BannerChooserBlock, InlineScriptBlock,
+    InlineSvgBlock, SimpleCtaLinkBlock, AppTeaserChooserBlock)
 from .panels import (StandardRichTextPanel, StandardInformationPanel, CtaPanel, StandardSimpleImagePanel,
     PlainTextPanel, AccordionPanel, StandardImageTeaserPanel, AudioTeaserPanel, StandardVideoTeaserPanel,
-    SimpleServiceFinder)
+    SimpleServiceFinderPanel, InlineScriptPanel, InlineSvgPanel, AppTeaserPanel, IconCardPanel, ListItemPanel)
 from .sharedcontent import BANNER_LAYOUT_CHOICES
 
 
@@ -49,18 +50,31 @@ TWO_COLUMNS_VARIANT_CHOICES = (
     ('with_padding', 'Padded'),
 )
 
-GRID_PANELS = [
+STANDARD_GRID_PANELS = [
     ('rich_text_panel', StandardRichTextPanel(icon='title')),
-    ('information_panel', StandardInformationPanel(target_model='shelves.AppTeaser', icon='image')),
+    ('information_panel', StandardInformationPanel(target_model='dctcmsbase.AppTeaser', icon='image')),
     ('cta_panel', CtaPanel(icon='plus')),
+    ('icon_card_panel', IconCardPanel(icon='snippet')),
     ('simple_image_panel', StandardSimpleImagePanel(icon='image')),
     ('plain_text_panel', PlainTextPanel(required=False)),
     ('accordion_panel', AccordionPanel(required=False, icon='form')),
-    ('image_teaser', StandardImageTeaserPanel(icon='pick')),
-    ('audio_teaser', AudioTeaserPanel(icon='pick')),
-    ('video_teaser', StandardVideoTeaserPanel(icon='pick')),
-    ('simple_service_finder', SimpleServiceFinder(icon='form')),
+    ('image_teaser_panel', StandardImageTeaserPanel(icon='pick')),
+    ('audio_teaser_panel', AudioTeaserPanel(icon='pick')),
+    ('video_teaser_panel', StandardVideoTeaserPanel(icon='pick')),
+    ('inline_script_panel', InlineScriptPanel(icon='code')),
+    ('inline_svg_panel', InlineSvgPanel(icon='snippet')),
+    ('app_teaser_panel', AppTeaserPanel(target_model='dctcmsbase.AppTeaser', icon='image')),
+    ('list_item_panel', ListItemPanel(icon='list-ul')),
 ]
+
+CAROUSEL_LAYOUT_CHOICES = (
+    ('full_width', 'Full width'),
+    ('panel', 'Panel'),
+)
+
+TABLE_VARIANTS = (
+    ('standard', 'Standard'),
+)
 
 
 class Shelf(blocks.StructBlock):
@@ -101,7 +115,6 @@ class GridShelf(Shelf):
 
 
 class StandardGridShelf(GridShelf, WithTracking):
-    items = blocks.StreamBlock(GRID_PANELS, icon='arrow-left', label='Items')
     meta_variant = blocks.ChoiceBlock(choices=GRID_VARIANT_CHOICES,
                                     default='standard',
                                     label='Variant',
@@ -139,13 +152,19 @@ class BannerShelf(Shelf, WithTracking):
         form_classname = 'dct-banner-shelf dct-meta-panel'
 
 
-class PanelCarouselShelf(Shelf, WithTracking):
+class CarouselShelf(Shelf, WithTracking):
     heading = blocks.CharBlock(required=False)
     items = blocks.StreamBlock([
-        ('video_teaser', StandardVideoTeaserPanel(icon='media')),
-        ('image_teaser', StandardImageTeaserPanel(icon='pick')),
+        ('video_teaser_panel', StandardVideoTeaserPanel(icon='media')),
+        ('image_teaser_panel', StandardImageTeaserPanel(icon='pick')),
         ('cta_panel', CtaPanel(icon='plus')),
+        ('banner_panel', BannerChooserBlock(target_model='dctcmsbase.Banner', icon='image')),
+        ('app_teaser_panel', AppTeaserChooserBlock(target_model='dctcmsbase.AppTeaser', icon='image')),
     ], icon='arrow-left', label='Items', required=False)
+    meta_layout = blocks.ChoiceBlock(choices=CAROUSEL_LAYOUT_CHOICES,
+                                     default='full_width',
+                                     label='Layout',
+                                     classname='dct-meta-field')
 
     class Meta:
         verbose_name = 'panel carousel'
@@ -154,9 +173,7 @@ class PanelCarouselShelf(Shelf, WithTracking):
 
 class TwoColumnShelf(Shelf, WithTracking):
     column_1_heading = blocks.CharBlock(required=False)
-    column_1_items = blocks.StreamBlock(GRID_PANELS, icon='arrow-left', label='Column 1 Content')
     column_2_heading = blocks.CharBlock(required=False)
-    column_2_items = blocks.StreamBlock(GRID_PANELS, icon='arrow-left', label='Column 2 Content')
     background_image = BackgroundImageBlock(required=False)
 
     class Meta:
@@ -175,7 +192,7 @@ class StandardTwoColumnShelf(TwoColumnShelf):
         verbose_name = 'two column'
 
 
-class SimplePageHeadingShelf(Shelf):
+class SimplePageHeadingShelf(Shelf, WithTracking):
     heading = blocks.CharBlock(required=False)
     display_back_button = blocks.BooleanBlock(label='Display a back button', required=False, default=True)
     back_button_label = blocks.CharBlock(required=False)
@@ -184,28 +201,75 @@ class SimplePageHeadingShelf(Shelf):
         form_classname = 'dct-simple-page-heading-shelf dct-meta-panel'
 
 
-class SimpleSectionHeadingShelf(Shelf):
+class SimpleSectionHeadingShelf(Shelf, WithTracking):
     heading = blocks.CharBlock(required=True)
 
     class Meta:
         form_classname = 'dct-simple-section-heading-shelf dct-meta-panel'
 
 
-class SimpleRichTextShelf(Shelf):
+class SimpleRichTextShelf(Shelf, WithTracking):
     body = blocks.RichTextBlock(required=False)
 
     class Meta:
         form_classname = 'dct-simple-rich-text-shelf dct-meta-panel'
 
 
-class InlineScriptShelf(Shelf):
-    script = blocks.TextBlock(required=False, help_text='The javascript to be inserted')
-    src = blocks.CharBlock(required=False, help_text='URL of the javascript file')
-    field_id = IDBlock(required=False, label='ID', retain_case=True, classname='dct-meta-field')
-    script_id = IDBlock(required=False, label='Script tag ID', retain_case=True,
-                        help_text='Optional ID of the script tag')
-    placeholder_id = IDBlock(required=False, label='Placeholder ID', retain_case=True,
-                             help_text='If given, an empty placeholder div will be added before the script tag')
+class InlineScriptShelf(Shelf, InlineScriptBlock, WithTracking):
+    class Meta:
+        form_classname = 'dct-inline-script-shelf dct-meta-panel'
+
+
+class InlineSvgShelf(Shelf, InlineSvgBlock, WithTracking):
+    class Meta:
+        form_classname = 'dct-inline-svg-shelf dct-meta-panel'
+
+
+class DividerShelf(Shelf, WithTracking):
+    class Meta:
+        form_classname = 'dct-divider-shelf dct-meta-panel'
+
+
+class IFrameShelf(Shelf, WithTracking):
+    heading = blocks.CharBlock(required=False, label='Shelf heading')
+    title = blocks.CharBlock(required=False, help_text='Title for accessibility')
+    src = blocks.CharBlock(required=True, label='Source URL')
+    frame_border = blocks.IntegerBlock(default=0, required=False)
+    scrolling = blocks.CharBlock(required=False)
+    width = blocks.CharBlock(default='100%', required=False, help_text='eg. 100%, 300px')
+    height = blocks.CharBlock(defaut='400px', required=False, help_text='eg. 300px, 20em')
+    sandbox = blocks.CharBlock(required=False)
+    meta_iframe_id = blocks.CharBlock(required=False, label='Iframe ID', classname='dct-meta-field')
+    meta_wrapper_div_id = blocks.CharBlock(required=False, label='Wrapper div ID', classname='dct-meta-field')
+    meta_wrapper_div_class = blocks.CharBlock(required=False, label='Wrapper div class', classname='dct-meta-field')
 
     class Meta:
-        form_classname = 'dct-inline-script-shelf dct-meta-shelf'
+        form_classname = 'dct-iframe-shelf dct-meta-panel'
+
+
+class FindOutMoreDropDownShelf(Shelf, WithTracking):
+    heading = blocks.CharBlock(required=False)
+    ctas = blocks.StreamBlock([
+        ('simple_cta_link', SimpleCtaLinkBlock()),
+    ], icon='arrow-left', label='Items')
+
+    class Meta:
+        form_classname = 'dct-find-out-more-shelf dct-meta-panel'
+
+
+class TableShelf(Shelf, WithTracking):
+    header = blocks.ListBlock(blocks.CharBlock(required=False), default=[], label='Column headings')
+    display_header = blocks.BooleanBlock(label='Display the table header?',
+                                         required=False)
+    body_rows = blocks.ListBlock(blocks.StreamBlock([
+        ('simple_text_panel', PlainTextPanel(required=False)),
+        ('rich_text_panel', StandardRichTextPanel(required=False)),
+        ('icon_card_panel', IconCardPanel(required=False, icon='snippet'))
+    ]))
+    meta_variant = blocks.ChoiceBlock(choices=TABLE_VARIANTS,
+                                      default='standard',
+                                      label='Variant',
+                                      classname='dct-meta-field')
+
+    class Meta:
+        form_classname = 'dct-table-shelf dct-meta-panel'

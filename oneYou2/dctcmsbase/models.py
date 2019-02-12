@@ -1,10 +1,14 @@
+import json
+from modelcluster.fields import ParentalKey
+
 from django.db import models
+from django.db.models import DateField, TextField
 from django.http import JsonResponse
 from django.template.response import TemplateResponse, SimpleTemplateResponse
 
 from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel, StreamFieldPanel, ObjectList, TabbedInterface,
     MultiFieldPanel)
-from wagtail.core.models import Page
+from wagtail.core.models import Page, Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
@@ -12,6 +16,7 @@ from modelcluster.models import get_all_child_relations, get_all_child_m2m_relat
 
 from home.models import SiteSettings
 
+from .pagecomponents import Theme
 from .utils import get_serializable_data_for_fields
 
 
@@ -76,12 +81,13 @@ class GeneralShelvePage(Page):
         on_delete=models.SET_NULL,
         limit_choices_to={'content_status': CONTENT_STATUS_PENDING})
 
-    theme = models.ForeignKey(
-        'pages.Theme',
+    page_theme = models.ForeignKey(
+        Theme,
         related_name='%(class)s_pages',
         null=True,
-        on_delete=models.SET_NULL)
-    
+        on_delete=models.SET_NULL,
+        verbose_name='theme')
+
     hide_from_breadcrumb = models.BooleanField(default=False)
 
     @property
@@ -105,8 +111,8 @@ class GeneralShelvePage(Page):
         return ''
 
     @property
-    def page_theme(self):
-        return self.theme.to_dict()
+    def theme(self):
+        return self.page_theme.to_dict()
 
     @property
     def link_url(self):
@@ -146,7 +152,7 @@ class GeneralShelvePage(Page):
     content_panels = Page.content_panels + [
         StreamFieldPanel('body'),
         FieldPanel('release'),
-        SnippetChooserPanel('theme'),
+        SnippetChooserPanel('page_theme'),
     ]
 
     info_content_panels = [
@@ -211,7 +217,7 @@ class GeneralShelvePage(Page):
         ObjectList(promote_panels, heading='Settings'),
     ])
 
-    api_fields = ['body', 'path', 'depth', 'numchild', 'live', 'page_theme']
+    api_fields = ['body', 'path', 'depth', 'numchild', 'live', 'theme']
     exclude_fields_in_copy = ['release']
 
     class Meta:
@@ -227,6 +233,53 @@ class GeneralShelvePage(Page):
         serializer = getattr(serializers_module, serializer_name)
         return serializer
 
+    @classmethod
+    def create_from_dict(cls, obj_dict):
+        return cls(title=obj_dict['title'],
+                   path=obj_dict['path'],
+                   depth=obj_dict['depth'],
+                   numchild=obj_dict['numchild'],
+                   slug=obj_dict['meta']['slug'],
+                   seo_title=obj_dict['meta']['seo_title'],
+                   show_in_menus=obj_dict['meta']['show_in_menus'],
+                   search_description=obj_dict['meta']['search_description'],
+                   first_published_at=obj_dict['meta']['first_published_at'],
+                   body=json.dumps(obj_dict['body']),
+                   live=obj_dict['live'],
+                   page_theme_id=obj_dict['theme']['id'])
+
+    def update_from_dict(self, obj_dict, default_excludes=None, excludes=None):
+        if not default_excludes:
+            class_ptr_id = '{}_ptr_id'.format(t.__class__.__name__.lower())
+            default_excludes = ['id', 'path', 'depth', 'numchild', 'content_type_id', 'live_revision_id',
+                                'page_ptr_id', class_ptr_id, 'release_id', 'live', 'locked', 'url_path']
+        if not excludes:
+            excludes = []
+
+        excludes = default_excludes + excludes
+        for key, value in obj_dict.items():
+            if key not in excludes and not key.startswith('_'):
+                setattr(self, key, value)
+        return self
+
+    def serializable_data(self):
+        obj = get_serializable_data_for_fields(self)
+
+        for rel in get_all_child_relations(self):
+            rel_name = rel.get_accessor_name()
+            children = getattr(self, rel_name).all()
+
+            if hasattr(rel.related_model, 'serializable_data'):
+                obj[rel_name] = [child.serializable_data() for child in children]
+            else:
+                obj[rel_name] = [get_serializable_data_for_fields(child) for child in children]
+
+        for field in get_all_child_m2m_relations(self):
+            children = getattr(self, field.name).all()
+            obj[field.name] = [child.pk for child in children]
+
+        return obj
+
     def save_revision(self, user=None, submitted_for_moderation=False, approved_go_live_at=None, changed=True):
         assigned_release = self.release
         self.release = None
@@ -240,6 +293,17 @@ class GeneralShelvePage(Page):
                 assigned_release.add_revision(revision)
 
         return revision
+
+    def unpublish(self, release_id=None):
+        if not release_id:
+            pass
+        else:
+            from release.models import Release
+            try:
+                release = Release.objects.get(id=release_id)
+                release.remove_page(self.id)
+            except Release.DoesNotExist:
+                pass
 
     def serve_preview(self, request, mode_name, site_name, revision_id='latest'):
         request.is_preview = True
@@ -306,3 +370,17 @@ class GeneralShelvePage(Page):
     @property
     def default_preview_mode(self):
         return self.preview_modes[0][0]
+
+
+class ChangeHistory(Orderable):
+    page = ParentalKey(Page, related_name='change_history')
+    date_of_change = DateField(blank=False, verbose_name='Date')
+    comment = TextField(blank=False)
+
+    panels = [
+        FieldPanel('date_of_change', classname='col4'),
+        FieldPanel('comment', classname='col8'),
+    ]
+
+
+Page.subpage_types = []

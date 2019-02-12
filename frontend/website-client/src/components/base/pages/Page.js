@@ -3,17 +3,16 @@ import PropTypes from 'prop-types';
 
 import '../../../assets/styles/page.css';
 import CmsComponentRegistry from '../CmsComponentRegistry';
-import DocumentMeta from 'react-document-meta';
-import StandardPageLayout from '../../oneyou/pages/layouts/StandardPageLayout';
-import ShareButtonShelf from '../../oneyou/shelves/ShareButtonShelf';
-import NoticeShelf from '../../oneyou/shelves/NoticeShelf';
+// import DocumentMeta from 'react-document-meta';
+import BackToTopButton from '../BackToTopButton';
+import NoticeShelf from '../shelves/NoticeShelf';
+import ShareButtonShelf from '../shared/ShareButtonShelf';
+import StandardPageLayout from '../pages/layouts/StandardPageLayout';
 
+/*eslint-disable */
 import GeneralPageContent from './GeneralPageContent';
-import OneYouGeneralPageContent from '../../oneyou/pages/GeneralPageContent';
 import OneYouRecipePageContent from '../../oneyou/pages/RecipePageContent';
-import SexhealthGeneralPageContent from '../../sexhealth/pages/SexhealthGeneralPageContent';
-import BackToTopButton from '../../oneyou/BackToTopButton';
-import UrlUtils from '../shared/UrlUtils';
+/*eslint-enable */
 
 /**
  *  Component responsible for rendering the header, footer and content of all
@@ -27,7 +26,7 @@ class Page extends Component {
     let { site, page } = this.props;
 
     if (page) {
-      const { page_theme, page_styles } = page;
+      const { theme, page_styles } = page;
       page.type = page.meta.type || 'general_page';
 
       const pageInfo = CmsComponentRegistry.components[page.type];
@@ -35,11 +34,11 @@ class Page extends Component {
       // TODO: Handle no page for type
       const content = <PageClass page={page} site={site} />;
 
-      const pageTypeClass = (pageInfo)? `${pageInfo.classNamePrefix}-page` : 'general';
-      const meta = (page && page.meta.hasOwnProperty('use_share_button')) ? page.meta : page;
-      const useShareButton = page && (meta.use_share_button || meta.use_email_button || meta.use_print_button);
+      // const pageTypeClass = (pageInfo)? `${pageInfo.classNamePrefix}-page` : 'general';
+      // const meta = (page && page.meta.hasOwnProperty('use_share_button')) ? page.meta : page;
+      // const useShareButton = page && (meta.use_share_button || meta.use_email_button || meta.use_print_button);
 
-      return this.renderPage(content, page_theme, page_styles, site, page, pageInfo);
+      return this.renderPage(content, theme, page_styles, site, page, pageInfo);
     } else {
       // Page object is null so it must still be loading.
       var content = this.renderPageLoader();

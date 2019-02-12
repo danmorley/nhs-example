@@ -790,9 +790,9 @@ class GeneralShelvePage(Page):
         SnippetChooserPanel('theme'),
     ]
 
-    info_content_panels = [
-        InlinePanel('change_history', label='Change history'),
-    ]
+    # info_content_panels = [
+    #     InlinePanel('change_history', label='Change history'),
+    # ]
 
     meta_content_panels = [
         MultiFieldPanel(
@@ -855,7 +855,7 @@ class GeneralShelvePage(Page):
 
     edit_handler = TabbedInterface([
         ObjectList(content_panels, heading='Content'),
-        ObjectList(info_content_panels, heading='Notes'),
+        # ObjectList(info_content_panels, heading='Notes'),
         ObjectList(meta_content_panels, heading='Meta'),
         ObjectList(promote_panels, heading='Settings'),
     ])
@@ -895,17 +895,6 @@ class GeneralShelvePage(Page):
                 assigned_release.add_revision(revision)
 
         return revision
-
-    def unpublish(self, release_id=None):
-        if not release_id:
-            pass
-        else:
-            from release.models import Release
-            try:
-                release = Release.objects.get(id=release_id)
-                release.remove_page(self.id)
-            except Release.DoesNotExist:
-                pass
 
     def unpublish(self, release_id=None):
         if not release_id:
@@ -1119,7 +1108,7 @@ class RecipePage(OneYou2Page):
 
     edit_handler = TabbedInterface([
         ObjectList(content_panels, heading='Content'),
-        ObjectList(OneYou2Page.info_content_panels, heading='Notes'),
+        # ObjectList(OneYou2Page.info_content_panels, heading='Notes'),
         ObjectList(OneYou2Page.meta_content_panels, heading='Meta'),
         ObjectList(Page.promote_panels, heading='Settings'),
     ])
@@ -1157,15 +1146,15 @@ class RecipePage(OneYou2Page):
 
 # Orderables
 
-class ChangeHistory(Orderable):
-    page = ParentalKey(Page, related_name='change_history')
-    date_of_change = DateField(blank=False, verbose_name='Date')
-    comment = TextField(blank=False)
+# class ChangeHistory(Orderable):
+#     page = ParentalKey(Page, related_name='change_history')
+#     date_of_change = DateField(blank=False, verbose_name='Date')
+#     comment = TextField(blank=False)
 
-    panels = [
-        FieldPanel('date_of_change', classname='col4'),
-        FieldPanel('comment', classname='col8'),
-    ]
+#     panels = [
+#         FieldPanel('date_of_change', classname='col4'),
+#         FieldPanel('comment', classname='col8'),
+#     ]
 
 
 # Snippets
@@ -1185,6 +1174,10 @@ class Menu(SnippetCopyMixin, models.Model):
 
     def __str__(self):
         return self.label
+
+    class Meta:
+        verbose_name = 'Menu (OneYou)'
+        verbose_name_plural = 'Menus (OneYou)'
 
 
 snippet_copy_registry.register(Menu, 'label')
@@ -1226,6 +1219,10 @@ class Footer(models.Model):
     def __str__(self):
         return self.label
 
+    class Meta:
+        verbose_name = 'Footer (OneYou)'
+        verbose_name_plural = 'Footers (OneYou)'
+
 
 @register_snippet
 class Header(models.Model):
@@ -1246,6 +1243,10 @@ class Header(models.Model):
     def __str__(self):
         return self.label
 
+    class Meta:
+        verbose_name = 'Header (OneYou)'
+        verbose_name_plural = 'Headers (OneYou)'
+
 
 @register_snippet
 class Theme(models.Model):
@@ -1263,6 +1264,10 @@ class Theme(models.Model):
     def to_dict(self):
         return model_to_dict(self)
 
+    class Meta:
+        verbose_name = 'Theme (OneYou)'
+        verbose_name_plural = 'Themes (OneYou)'
+
 
 # Disable variant from page creation
-Page.subpage_types = [OneYou2Page, RecipePage]
+# Page.subpage_types = [OneYou2Page, RecipePage]

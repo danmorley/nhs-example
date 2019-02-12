@@ -1,0 +1,185 @@
+@import '../../../assets/styles/variables/variables';
+@import "../../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+.information-panel {
+  display: flex;
+  position: relative;
+  
+  div {
+    max-width: 100%
+  }
+}
+
+.information-panel__image {
+  width: 40%;
+  min-height: 176px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  
+  @include media-breakpoint-up(md) {
+    min-height: 230px;
+  }
+  
+  @include media-breakpoint-up(lg) {
+    min-height: 336px;
+  }
+  
+  &.image--contain {
+    background-size: contain;
+    background-position: top left;
+  }
+}
+
+.information-panel__info {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 60%;
+  padding-right: 1em;
+  
+  @include media-breakpoint-up(sm) { 
+    padding-right: 2em;
+  }
+  
+  @include media-breakpoint-up(lg) { 
+    padding-right: 3em;
+  }
+}
+
+.information-panel__text {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2em;
+
+  p {
+    margin-bottom: 1em;
+  }
+}
+
+.information-panel--desktop-image-left-mobile-image-top {
+  padding-top: 1em;
+  padding-bottom: 1em;
+
+  @include media-breakpoint-down(md) {
+    flex-direction: column-reverse;
+  }
+
+  .information-panel__info {
+    @include media-breakpoint-down(md) {
+      width: 100%;
+    }
+  }
+
+  .information-panel__image {
+    margin-top: -1.5em;
+    margin-bottom: -1em;
+    position: relative;
+    left: 1.5em;
+    min-width: 600px;
+
+    @include media-breakpoint-down(md) {
+      position: static;
+      margin-left: -1.5em;
+      margin-right: -1.5em;
+      margin-bottom: 1em;
+    }
+
+    @include media-breakpoint-up(md) {
+      min-width: 780px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      min-width: 300px;
+    }
+  }
+}
+
+.information-panel--light_background {
+  .information-panel__heading {
+    color: $teal-blue;
+  }
+}
+
+.information-panel--dark_background {
+
+  .information-panel__heading {
+    color: $grey-brown-dark;
+  }
+
+  .information-panel__image {
+    @include media-breakpoint-down(md) {
+      position: static;
+      margin-bottom: 1em;
+    }
+
+    // @include media-breakpoint-up(md) {
+    //   min-width: 780px;
+    // }
+
+    @include media-breakpoint-up(lg) {
+      min-width: 300px;
+    }
+  }
+}
+
+
+//theming
+
+//default theme (oneyou)
+.information-panel__info {
+    background: none;
+}
+
+.information-panel__heading {
+  font-weight: normal;
+  margin-bottom: 0.5em;
+  font-family: $secondary-brand-font;
+  
+  em {
+    font-style: normal;
+    color: $black;
+  }
+  
+  .marker {
+    display: inline-block;
+    line-height: 0.9em;
+    border-bottom: 0.15em solid $black;
+    font-family: $tertiary-brand-font;
+    color: $teal-blue;
+  }
+}
+
+.information-panel__text {
+  color: $grey-brown-dark;
+}
+
+//stoptober
+.stoptober {
+  .shelf .information-panel__heading {
+    color: $black;
+  }
+}
+
+//campaign
+.campaign {
+  
+  .information-panel__heading {
+    font-family: $primary-brand-font;
+  }
+  
+  .shelf .information-panel__heading {
+    color: $teal-blue;
+  }
+  
+  .information-panel__image {
+
+    &.image--contain {
+      width: 50%;
+      
+      @include media-breakpoint-down(sm) { 
+        width: auto;
+      }
+    }
+  }
+}

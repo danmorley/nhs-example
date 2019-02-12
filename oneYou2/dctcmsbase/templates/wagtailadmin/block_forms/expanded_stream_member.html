@@ -1,0 +1,11 @@
+<li id="{{ prefix }}-container" class="sequence-member" style="background-color: #f2fcfc; border-color: #c9f1f1; border: 1px solid #c9f1f1; margin-left: 4px;">
+    <input type="hidden" id="{{ prefix }}-deleted" name="{{ prefix }}-deleted" value="">
+    <input type="hidden" id="{{ prefix }}-order" name="{{ prefix }}-order" value="{{ index }}">
+    <input type="hidden" id="{{ prefix }}-type" name="{{ prefix }}-type" value="{{ child.block.name }}">
+    <input type="hidden" id="{{ prefix }}-id" name="{{ prefix }}-id" value="{{ block_id|default:"" }}">
+    <div class="sequence-controls" style="border: 1px solid #c9f1f1; top: -1px; right: -1px; visibility: visible; opacity: 1;">
+        <h3><label{% if child.id_for_label %} for="{{ child.id_for_label }}"{% endif %}>{{ child.block.label }}</label></h3>
+        <div class="button-group button-group-square"></div>
+    </div>
+    <div class="sequence-member-inner {% block sequence_member_inner_classes %}{% endblock %}">{{ child.render_form }}</div>
+</li>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './action-group-panel.css';
 import PropTypes from 'prop-types';
-import Panel from './Panel';
+import Panel from '../../base/panels/Panel';
 import CmsComponentRegistry from '../../base/CmsComponentRegistry';
 import ActionPanel from './ActionPanel';
 
@@ -55,7 +55,7 @@ class ActionGroupPanel extends Component {
 
         <div className={`${classNamePrefix}--action-list ${expanded ? '' : 'hidden'}`}>
           { content.actions.map((action, i) =>
-            <div key={i} className='col-md-6'>
+            <div key={i} className="col-md-6">
               <ActionPanel id={action.panel_id} classNamePrefix={panelClassNamePrefix}
                 variant={panelVariant} layout={panelLayout} content={action.value}
                 updateBasketLength={this.props.updateBasketLength} />

@@ -57,6 +57,8 @@ class App extends Component {
         console.log('Loading cms page', path);
         let key = this.pageKey(path);
         this.loadPageForKey(key);
+        var event = new Event('pageChanged');
+        global.rootElem.dispatchEvent(event);
       } else {
         path = path.replace(global.rootUrl, '');
         console.log('Loading app page', path);
@@ -95,6 +97,9 @@ class App extends Component {
               'WT.cg_n', 'OneYou Core',
               'WT.cg_s', page.response.title,
               'DCSext.RealUrl', window.location.pathname);
+          }
+          if (global.setDigitalData) {
+            global.setDigitalData();
           }
         } else {
           console.error(page.error, page.info.statusCode, page.info.message);

@@ -1,21 +1,22 @@
 from rest_framework import serializers
+from rest_framework.fields import ReadOnlyField
+from rest_framework.serializers import HyperlinkedModelSerializer
 
 from django.apps import apps
 from django.utils.text import slugify
 
 from wagtail.api.v2.serializers import StreamField
 
-from rest_framework.serializers import HyperlinkedModelSerializer
-
 from home.models import SiteSettings
+from images.serializers import ImageSerializer
 
-from .sharedcontent import Banner
+from .sharedcontent import Banner, AppTeaser
 
 
 class GeneralShelvePageSerializer(serializers.ModelSerializer):
     body = StreamField()
 
-    def to_representation(self, data):
+    def to_representation(self, data, has_body=True):
         meta_fields = getattr(self.Meta, 'meta_fields')
         serialized_data = super(GeneralShelvePageSerializer, self).to_representation(data)
         serialized_data['meta'] = {}
@@ -26,10 +27,12 @@ class GeneralShelvePageSerializer(serializers.ModelSerializer):
             except KeyError:
                 pass
         serialized_data['meta']['type'] = 'general_page'
-        for shelf in serialized_data['body']:
-            shelf_id = shelf.get('id', None)
-            if shelf_id:
-                shelf['id'] = 'p%s-%s' % (data.id, shelf_id)
+
+        if has_body:
+            for shelf in serialized_data['body']:
+                shelf_id = shelf.get('id', None)
+                if shelf_id:
+                    shelf['id'] = 'p%s-%s' % (data.id, shelf_id)
 
         serialized_data['meta']['breadcrumbs'] = data.breadcrumbs
 
@@ -42,7 +45,7 @@ class GeneralShelvePageSerializer(serializers.ModelSerializer):
                 'id',
                 'title',
                 'body',
-                'page_theme',
+                'theme',
             )
 
         def get_meta_fields():
@@ -102,43 +105,81 @@ class CTAPageSerializer(serializers.Serializer):
 
 
 class BannerSerializer(HyperlinkedModelSerializer):
-    from images.serializers import ImageSerializer
 
-    cta_page = CTAPageSerializer()
-    background_image = ImageSerializer()
+    attributes = StreamField()
+    ctas = StreamField()
 
     def to_representation(self, obj):
         """Move fields from profile to user representation."""
         representation = super().to_representation(obj)
-        cta_text = representation.pop('cta_text')
-        cta_link = representation.pop('cta_link')
-        cta_page = representation.pop('cta_page')
-        representation['cta'] = {
-            'link_text': cta_text,
-            'link_external': cta_link,
-        }
-        if cta_page:
-            representation['cta']['link_page'] = {
-                'id': cta_page.get('id'),
-                'slug': cta_page.get('slug'),
-                'relative_path': cta_page.get('relative_path'),
-            }
-        
-        """Remove unnecessary renditions"""
-        if representation['background_image']:
-            mobile_rendition = obj.background_image_mobile_rendition
-            desktop_rendition = obj.background_image_desktop_rendition
-            meta_variant = representation.pop('meta_variant')
-            representation['background_image']['renditions'] = {
-                'mobile': representation['background_image']['renditions'][mobile_rendition],
-                'desktop': representation['background_image']['renditions'][desktop_rendition],
-                'meta_variant': meta_variant,
-            }
-
         representation['shelf_id'] = slugify(representation['shelf_id'])
         return representation
 
+
     class Meta:
         model = Banner
-        fields = ['heading', 'body', 'background_image', 'meta_variant', 'cta_text', 'cta_link', 'cta_page',
-                  'shelf_id', 'meta_layout', 'meta_variant']
+        fields = ['shelf_id', 'heading', 'body', 'attributes', 'ctas']
+
+
+class AppTeaserSerializer(HyperlinkedModelSerializer):
+
+    attributes = StreamField()
+    ctas = StreamField()
+
+    def to_representation(self, obj):
+        representation = super().to_representation(obj)
+        cta_appstore = representation.pop('cta_appstore')
+        cta_googleplay = representation.pop('cta_googleplay')
+        if cta_appstore:
+            representation['cta_appstore'] = {
+                'link_text': '',
+                'link_external': cta_appstore,
+            }
+        if cta_googleplay:
+            representation['cta_googleplay'] = {
+                'link_text': '',
+                'link_external': cta_googleplay,
+            }
+        return representation
+
+    class Meta:
+        model = AppTeaser
+        fields = ['shelf_id', 'heading', 'body', 'attributes', 'ctas', 'cta_googleplay', 'cta_appstore']
+
+
+class MenuSerializer(serializers.ModelSerializer):
+    items = StreamField(source='menu_items')
+
+    class Meta:
+        model = apps.get_model('dctcmsbase', 'Menu')
+        fields = (
+            'items',
+        )
+
+
+class FooterSerializer(serializers.ModelSerializer):
+    items = StreamField(source='menu_items')
+    social_media = StreamField(source='follow_us')
+    image = ImageSerializer()
+
+    class Meta:
+        model = apps.get_model('dctcmsbase', 'Footer')
+        fields = (
+            'items',
+            'social_media',
+            'image',
+            'show_sitemap',
+            'heading',
+            'number_per_column',
+        )
+
+
+class HeaderSerializer(serializers.ModelSerializer):
+    title = ReadOnlyField(source='label')
+
+    class Meta:
+        model = apps.get_model('dctcmsbase', 'Header')
+        fields = (
+            'title',
+            'image'
+        )

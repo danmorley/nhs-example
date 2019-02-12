@@ -17,20 +17,20 @@ class ActionPlanContactForm extends Component {
       postcode: '',
       optActionPlan: false,
       optOneYou: false
-		};
+    };
     
     this.showConfirmation = this.showConfirmation.bind(this);
     this.handleChange = this.handleChange.bind(this);
-	}
+  }
   
   handleChange = (event) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-     this.setState({
-       [name]: value
-     });
+    this.setState({
+      [name]: value
+    });
   }
   
   showConfirmation(e) {  
@@ -52,11 +52,11 @@ class ActionPlanContactForm extends Component {
       let that = this;
 
       signUpForActionPlan()
-        .then((response) => {
+        .then(
           that.setState(prevState => ({
             showSection: !prevState.showSection
           }))
-        })
+        )
         .catch((error) => {
           console.error(error);
         });
@@ -135,7 +135,7 @@ class ActionPlanContactForm extends Component {
           <section className="actionplan-form__thankyou-content">   
             <h2>THANK YOU FOR YOUR DETAILS</h2>
             <h3>PLEASE CHECK YOUR INBOX FOR YOUR ACTION PLAN</h3>
-            <p>Help us improve Every Mind Matters, <a target='_blank' href='https://ts.ktrmr.com/secv.aspx?i.project=UK40303454A01&s=GEN24&id=1&chk=na&pid=auto'>give feedback</a></p>
+            <p>Help us improve Every Mind Matters, <a target="_blank" href="https://ts.ktrmr.com/secv.aspx?i.project=UK40303454A01&s=GEN24&id=1&chk=na&pid=auto">give feedback</a></p>
           </section>
           <section className="actionplan-form__thankyou-footer">
           </section>

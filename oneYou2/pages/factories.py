@@ -38,6 +38,15 @@ def create_test_theme(label='Test theme', class_name='test-class'):
     return theme
 
 
+class ThemeFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Theme
+
+    label = fuzzy.FuzzyText()
+    class_name = fuzzy.FuzzyText()
+
+
+### TO REMOVE AFTER CMS NEW WORLD UPDATE
 def create_test_page(title='Test page', path='1111', depth=0, theme=None):
     if not theme:
         theme = create_test_theme()
@@ -64,6 +73,7 @@ def create_test_page(title='Test page', path='1111', depth=0, theme=None):
     return page
 
 
+### TO REMOVE AFTER CMS NEW WORLD UPDATE
 def create_test_recipe_page(title='Test Recipe page', path='1111', depth=0, theme=None):
     if not theme:
         theme = create_test_theme()
@@ -91,6 +101,7 @@ def create_test_recipe_page(title='Test Recipe page', path='1111', depth=0, them
     return page
 
 
+### TO REMOVE AFTER CMS NEW WORLD UPDATE
 def create_test_child_page(parent, title='Test child page', path='11111111', depth=1, theme=None):
     if not theme:
         theme = create_test_theme()
@@ -116,14 +127,7 @@ def create_test_child_page(parent, title='Test child page', path='11111111', dep
     return page
 
 
-class ThemeFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = Theme
-
-    label = fuzzy.FuzzyText()
-    class_name = fuzzy.FuzzyText()
-
-
+### TO REMOVE AFTER CMS NEW WORLD UPDATE
 class PageFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = OneYou2Page
@@ -150,6 +154,7 @@ class PageFactory(factory.django.DjangoModelFactory):
         return page
 
 
+### TO REMOVE AFTER CMS NEW WORLD UPDATE
 class SiteFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Site

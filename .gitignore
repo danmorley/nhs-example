@@ -116,6 +116,9 @@ db.sqlite3
 media/
 web/
 
+# sonarqube
+oneYou2/.scannerwork
+
 *.ipynb
 
 docker-compose-postgres.yml

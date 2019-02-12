@@ -16,6 +16,8 @@ from wagtail.documents.models import Document
 from wagtail.search import index
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
+from images.renditions import RENTIDTION_SITES
+
 
 class HomePage(Page):
     pass
@@ -26,24 +28,26 @@ class SiteSettings(BaseSetting):
     title = models.CharField(max_length=255)
     uid = models.SlugField(unique=True, verbose_name='Site name', help_text='An id which can be used to lookup the site'
                                                                             ' in the API')
+    rendition = models.CharField(max_length=50, choices=RENTIDTION_SITES, default='base')
 
-    menu = models.ForeignKey(
-        'pages.Menu',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-    footer = models.ForeignKey(
-        'pages.footer',
+    site_menu = models.ForeignKey(
+        'dctcmsbase.Menu',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+'
     )
 
-    header = models.ForeignKey(
-        'pages.header',
+    site_footer = models.ForeignKey(
+        'dctcmsbase.footer',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    site_header = models.ForeignKey(
+        'dctcmsbase.header',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -55,7 +59,6 @@ class SiteSettings(BaseSetting):
     google_tag_manager_id = models.CharField(max_length=50, null=True, blank=True,)
     cookiebot_id = models.CharField(max_length=80, null=True, blank=True,)
     adobe_tracking_url = models.URLField(max_length=255, null=True, blank=True,)
-    adobe_datalayer_url = models.URLField(max_length=255, null=True, blank=True,)
 
     favicon = models.ForeignKey(
         'wagtaildocs.Document',
@@ -68,7 +71,7 @@ class SiteSettings(BaseSetting):
     general_panels = [
         FieldPanel('title'),
         FieldPanel('uid'),
-        # FieldPanel('page_types', widget=forms.CheckboxSelectMultiple),
+        FieldPanel('rendition'),
     ]
 
     theme_panels = [
@@ -81,13 +84,12 @@ class SiteSettings(BaseSetting):
         FieldPanel('google_tag_manager_id'),
         FieldPanel('cookiebot_id'),
         FieldPanel('adobe_tracking_url'),
-        FieldPanel('adobe_datalayer_url'),
     ]
 
     structure_panels = [
-        SnippetChooserPanel('menu'),
-        SnippetChooserPanel('footer'),
-        SnippetChooserPanel('header'),
+        SnippetChooserPanel('site_menu'),
+        SnippetChooserPanel('site_footer'),
+        SnippetChooserPanel('site_header'),
     ]
 
     panels = [
@@ -142,26 +144,11 @@ def get_subclasses(cls):
         yield subclass
 
 
-def get_page_types():
-    from itertools import chain
-    from dctcmsbase.models import GeneralShelvePage
-    from pages.models import GeneralShelvePage as GeneralShelvePageLegacy
-
-    type_page_iterator = chain(get_subclasses(GeneralShelvePage), get_subclasses(GeneralShelvePageLegacy))
-    for cls_item in type_page_iterator:
-        yield (cls_item.__module__.rsplit('.', 1)[0], cls_item.__name__)
-
-
-# @receiver(pre_save, sender=Site)
-# def store_type_page(sender, instance, *args, **kwargs):
+# def get_page_types():
 #     from itertools import chain
 #     from dctcmsbase.models import GeneralShelvePage
 #     from pages.models import GeneralShelvePage as GeneralShelvePageLegacy
 
 #     type_page_iterator = chain(get_subclasses(GeneralShelvePage), get_subclasses(GeneralShelvePageLegacy))
 #     for cls_item in type_page_iterator:
-#         PageType.objects.get_or_create(
-#             label=cls_item.__name__,
-#             app=cls_item.__module__.rsplit('.', 1)[0]
-#         )
-
+#         yield (cls_item.__module__.rsplit('.', 1)[0], cls_item.__name__)

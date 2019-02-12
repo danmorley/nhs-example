@@ -1,0 +1,144 @@
+@import '../../../assets/styles/variables/variables';
+@import "../../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
+
+.oneyou-teaser {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
+}
+
+.oneyou-teaser__heading {
+  text-transform: uppercase;
+  font-weight: normal;
+  font-family: $secondary-brand-font;
+  margin-bottom: 0.5em;
+}
+
+.oneyou-teaser__image {
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 160px;
+
+  @include media-breakpoint-up(sm) {
+    min-height: 220px;
+  }
+}
+
+.oneyou-teaser__text {
+  padding: 1em 0 0;
+}
+
+.oneyou-teaser .cta-list { 
+  padding: 0.5em 1em;
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+.oneyou-teaser__cta-list {
+  
+  @include media-breakpoint-up(sm) {
+    margin-top: 1em;
+  }
+}
+
+.oneyou-teaser__cta-list a {
+  color: $white;
+  text-decoration: none;
+  
+  &:visited {
+    color: $white   
+  }
+  
+  &:hover {
+    text-decoration: underline;
+  }  
+}
+
+.oneyou-teaser .cta-list__item {
+  padding: 0.5em 0;
+  border-bottom: 1px solid $white;
+  
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.oneyou-teaser__cta-list .Collapsible__trigger {
+  border: 1px solid $text-primary;
+  display: block;
+  padding: 0.8em;
+  position: relative;
+  margin-top: 0.6rem;  
+  cursor: pointer;
+  
+  &.is-closed {
+    
+    &:before {
+      @extend %icon-chevron-down;
+      position: absolute;
+      right: 0.3em;
+      top: 6px;    
+      font-size: 2.2em;  
+    }
+  }
+  
+  &.is-open {
+    
+    &:before {
+      @extend %icon-chevron-up;
+      position: absolute;
+      right: 0.3em;
+      top: 6px;
+      font-size: 2.2em;
+    }
+  }
+  
+  h4 {
+    font-weight: normal;
+  }
+}
+
+// theming
+
+// default theme (oneyou)
+.oneyou-teaser {
+  .cta-list {
+    background-color: $teal-blue;
+  }
+}
+
+.oneyou-teaser__cta-item {
+  a {
+    color: $teal-blue;
+  }
+}
+
+.oneyou-teaser__cta-list {
+  a {
+    color: $white;
+  }
+}
+
+.oneyou-teaser__heading {
+  color: $grey-brown-dark;
+}
+
+.oneyou-teaser__text {
+  color: $grey-brown-dark;
+}
+
+//stoptober
+.stoptober {
+
+  .oneyou-teaser__heading {
+    color: $black;
+  }
+
+  .oneyou-teaser__text {
+    color: $black;
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "website-client",
-  "version": "2.0.49",
+  "version": "2.1.5",
   "private": true,
   "dependencies": {
     "bootstrap-4-grid": "^2.3.0",
