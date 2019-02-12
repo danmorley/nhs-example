@@ -30,7 +30,7 @@ CONTENT_STATUS = (
 
 
 def validate_in_future(date_time):
-    if date_time < timezone.localtime(timezone.now(), timezone.get_current_timezone()):
+    if date_time and date_time < timezone.localtime(timezone.now(), timezone.get_current_timezone()):
         raise ValidationError(_('Release date has already passed. Please choose one in the future.'))
 
 

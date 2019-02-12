@@ -82,7 +82,10 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug_
             # This somewhat defeats the point of freezing content
             # TODO: Fix this, you can do this by freezing content with slug keys
             # You would then only need to get the page object for variants
-            homepage = SiteSettings.objects.get(uid=site_identifier).site.root_page
+            from release.models import Release
+            site = Release.objects.get(uuid=release_uuid).site
+            homepage = site.root_page
+            # homepage = SiteSettings.objects.get(uid=site_identifier).site.root_page
             if page_slug_path == 'home' or page_slug_path == 'oneyou':
                 page = homepage
                 page_pk = homepage.pk
