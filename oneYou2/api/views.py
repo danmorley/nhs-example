@@ -83,11 +83,13 @@ def page_detail(request, site_identifier, release_uuid, page_pk=None, page_slug_
             # TODO: Fix this, you can do this by freezing content with slug keys
             # You would then only need to get the page object for variants
             homepage = SiteSettings.objects.get(uid=site_identifier).site.root_page
-            if page_slug_path == 'home':
+            if page_slug_path == 'home' or page_slug_path == 'oneyou':
                 page = homepage
                 page_pk = homepage.pk
             else:
                 if homepage.url_path != page_slug_path:
+                    if page_slug_path.startswith('oneyou|'):
+                        page_slug_path = page_slug_path[7:]
                     path = '/{}/{}/'.format(homepage.slug, unquote(page_slug_path).replace('|', '/'))
                     page = Page.objects.get(url_path=path)
                     page_pk = page.pk
