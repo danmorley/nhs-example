@@ -139,7 +139,6 @@ class App extends Component {
   // Take path from window location and ensure it has a trailing slash.
   pagePathToRender(pathname) {
     let path = pathname.replace(global.rootUrl, '');
-    path = path.replace(global.rootUrl.replace('old', ''), '');
     return path.slice(-1) === '/' ? path : path + '/';
   }
 

@@ -22,6 +22,7 @@ def get_latest_live_release(site_id):
         ).exclude(
             release_time__exact=None,
         )
+
     latest_release = released.first()
     return latest_release
 
