@@ -34,11 +34,11 @@ def release_html(request, site_name):
     try:
         site_setting = SiteSettings.objects.get(uid=site_name)
         current_release = get_latest_live_release(site_setting.site.pk)
-        if not current_release:
-            site_name = '{}old'.format(site_name)
-            site_setting = SiteSettings.objects.get(uid=site_name)
-            current_release = get_latest_live_release(site_setting.site.pk)
         site_id = site_setting.site.id
+        if not current_release:
+            old_site_setting = SiteSettings.objects.get(uid='{}old'.format(site_name))
+            current_release = get_latest_live_release(old_site_setting.site.pk)
+            site_id = old_site_setting.site.id
     except ObjectDoesNotExist:
         return HttpResponse('Page Not Found', status=404)
 
