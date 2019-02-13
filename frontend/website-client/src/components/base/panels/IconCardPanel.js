@@ -120,11 +120,11 @@ class IconCardPanel extends Component {
     const flexRowReverse = (alignment === 'right') ? 'flex-row-reverse' : '';
 
     return (
-      <div className={`${classNamePrefix}__wrapper row justify-content-start no-gutters ${flexRowReverse}`}>
-        {this.state.iconImage && <div className={`col ${classNamePrefix}__image`}>
+      <div className={`${classNamePrefix}__wrapper ${classNamePrefix}__icon-${alignment} row justify-content-start no-gutters ${flexRowReverse}`}>
+        {this.state.iconImage && <div className={` col-md-3 ${classNamePrefix}__image`}>
           {this.renderImage(content, classNamePrefix)}
         </div>}
-        <div className={`col-auto ${classNamePrefix}__body`}>
+        <div className={`${classNamePrefix}__body col-md-9`}>
           {this.renderHeading(content, classNamePrefix)}
           {this.renderBodyText(content, classNamePrefix)}
         </div>
@@ -156,7 +156,7 @@ class IconCardPanel extends Component {
     const flexRowReverse = (alignment === 'right') ? 'flex-row-reverse' : '';
 
     return [
-      <div key="1" className={`${classNamePrefix}__wrapper row justify-content-start no-gutters ${flexRowReverse}`}>
+      <div key="1" className={`${classNamePrefix}__wrapper ${classNamePrefix}__header ${classNamePrefix}__icon-${alignment} row justify-content-start no-gutters ${flexRowReverse}`}>
         {this.state.iconImage && <div className={`col-md-3 ${classNamePrefix}__image`}>
           {this.renderImage(content, classNamePrefix)}
         </div>}
@@ -164,9 +164,8 @@ class IconCardPanel extends Component {
           {this.renderHeading(content, classNamePrefix)}
         </div>
       </div>,
-      <div key="2" className={`${classNamePrefix}__wrapper row justify-content-start no-gutters ${flexRowReverse}`}>
-        {this.state.iconImage && <div className={`col-md-3 ${classNamePrefix}__image`}></div>}
-        <div className={`col-md-9 ${classNamePrefix}__body`}>
+      <div key="2" className={`${classNamePrefix}__wrapper ${classNamePrefix}__icon-${alignment} row justify-content-start no-gutters ${flexRowReverse}`}>
+        <div className={`col ${classNamePrefix}__body`}>
           {this.renderBodyText(content, classNamePrefix)}
         </div>
       </div>
@@ -177,13 +176,12 @@ class IconCardPanel extends Component {
     const flexRowReverse = (alignment === 'right') ? 'flex-row-reverse' : '';
 
     return [
-      <div key="1" className={`${classNamePrefix}__wrapper row justify-content-start no-gutters ${flexRowReverse}`}>
-        {this.state.iconImage && <div className={`col-md-3 ${classNamePrefix}__image`}>{this.transparentImage()}</div>}
-        <div className={`col-md-9 ${classNamePrefix}__body`}>
+      <div key="1" className={`${classNamePrefix}__wrapper ${classNamePrefix}__icon-${alignment} row justify-content-start no-gutters ${flexRowReverse}`}>
+        <div className={`col ${classNamePrefix}__body`}>
           {this.renderHeading(content, classNamePrefix)}
         </div>
       </div>,
-      <div key="2" className={`${classNamePrefix}__wrapper row justify-content-start no-gutters ${flexRowReverse}`}>
+      <div key="2" className={`${classNamePrefix}__wrapper ${classNamePrefix}__icon-${alignment} row justify-content-start no-gutters ${flexRowReverse}`}>
         {this.state.iconImage && <div className={`col-md-3 ${classNamePrefix}__image`}>
           {this.renderImage(content, classNamePrefix)}
         </div>}

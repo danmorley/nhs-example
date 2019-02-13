@@ -58,11 +58,15 @@ ICON_CARD_LAYOUTS = (
 )
 
 ICON_CARD_VARIANTS = (
-    ('standard_grey_bg', 'Standard on Grey Background'),
-    ('standard_heading_standard_body_grey_bg', 'Standard Heading, Standard Body Text, Grey Background'),
-    ('large_green_heading_standard_body_grey_bg', 'Large Green Heading, Standard Body Text, Grey Background'),
-    ('x_small_heading_large_body_no_bg', 'X Small Heading, Large Body Text, No Background'),
-    ('large_yellow_heading_standard_body_no_bg', 'Large yellow heading, standard body, no background (Active 10)'),
+    ('standard', 'no background color, standard heading'),
+    ('light_bg', 'light background color, standard heading'),
+    ('light_bg_color_heading', 'light background color, color heading'),
+    ('light_bg_large_heading', 'light background color, larger body heading'),
+    ('light_bg_large_color_heading', 'light background color, larger color body heading'),
+    ('dark_bg', 'darker background color, standard heading'),
+    ('dark_bg_color_heading', 'darker background color, color heading'),
+    ('dark_bg_large_heading', 'darker background color, larger body heading'),
+    ('dark_bg_large_color_heading', 'darker background color, larger color body heading'),
 )
 
 BRIGHTCOVE_OPTION = ('brightcove', 'Brightcove')
@@ -308,7 +312,7 @@ class IconCardPanel(Panel):
         ('simple_cta_link', SimpleCtaLinkBlock())
     ], icon='arrow-left', label='CTA links', required=False)
     meta_variant = blocks.ChoiceBlock(choices=ICON_CARD_VARIANTS,
-                                      default='standard_grey_bg',
+                                      default='standard',
                                       label='Variant',
                                       classname='dct-meta-field')
     meta_layout = blocks.ChoiceBlock(choices=ICON_CARD_LAYOUTS,
