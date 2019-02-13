@@ -36,6 +36,11 @@ RICH_TEXT_PANEL_VARIANTS = (
     ('crisis-card-no-header', 'Formatting for Route to Crisis cards - no header H3'),
 )
 
+PLAIN_TEXT_PANEL_VARIANTS = (
+    ('vertical_align_top', 'Vertical align top'),
+    ('vertical_align_middle', 'Vertical align middle'),
+)
+
 INFO_PANEL_VARIANTS = (
     ('light_background', 'Light background'),
     ('dark_background', 'Dark background')
@@ -254,6 +259,10 @@ class StandardSimpleImagePanel(SimpleImagePanel):
 
 class PlainTextPanel(Panel):
     text = blocks.CharBlock(required=False)
+    meta_variant = blocks.ChoiceBlock(choices=PLAIN_TEXT_PANEL_VARIANTS,
+                                      default='vertical_align_top',
+                                      label='Variant',
+                                      classname='dct-meta-field')
 
     class Meta:
         form_classname = 'dct-panel-plain-text dct-meta-panel'

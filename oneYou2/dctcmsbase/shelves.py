@@ -46,8 +46,11 @@ TWO_COLUMNS_LAYOUT_CHOICES = (
 )
 
 TWO_COLUMNS_VARIANT_CHOICES = (
-    ('none', 'None'),
-    ('with_padding', 'Padded'),
+    ('standard', 'Standard'),
+    ('no_padding', 'No padding'),
+    ('col1_np', 'Column 1 no padding'),
+    ('col2_np', 'Column 2 no padding'),
+    ('dark_bg', 'Dark background'),
 )
 
 STANDARD_GRID_PANELS = [
@@ -185,7 +188,7 @@ class TwoColumnShelf(Shelf, WithTracking):
 class StandardTwoColumnShelf(TwoColumnShelf):
     meta_layout = blocks.ChoiceBlock(choices=TWO_COLUMNS_LAYOUT_CHOICES, label='Layout')
     meta_variant = blocks.ChoiceBlock(choices=TWO_COLUMNS_VARIANT_CHOICES,
-                                        default='none',
+                                        default='standard',
                                         label='Variant',
                                         classname='dct-meta-field')
     

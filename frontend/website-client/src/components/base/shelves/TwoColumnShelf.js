@@ -34,7 +34,6 @@ class TwoColumnShelf extends Component {
   }
 
   render() {
-    
     let { id, content, classNamePrefix, variant, layout } = this.props;
     let metaVariant = content.meta_variant || variant;
     let metaLayout = content.meta_layout || layout;
@@ -42,29 +41,29 @@ class TwoColumnShelf extends Component {
     const [col1Percent, col2Percent] = metaLayout.split("_");
 
     return (
-      <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant} classExtra="with-padding">
+      <Shelf id={id} classNamePrefix={classNamePrefix} variant={metaVariant}>
         <div className={`shelf__container container image--${metaImageDisplay}`}>
-          <div className="row no-gutters\">
-            {content.column_1_heading &&
-              <div className={`column column1-heading col-12 col-md-${this.colWidthForPercent(col1Percent)} order-1 no-gutters`}>
-                <div className="row align-items-end">
-                  <h2 className="col shelf__header">{content.column_1_heading}</h2>
+          <div className="row">
+              <div className={`shelf__col col ${classNamePrefix}-column column1 col-12 col-md-${this.colWidthForPercent(col1Percent)}`}>
+                  {content.column_1_heading &&
+                    <div className={`${classNamePrefix}-heading`}>
+                      <h2 className="shelf__header">{content.column_1_heading}</h2>
+                    </div>  
+                  }
+                  <div className={`${classNamePrefix}-content`}>
+                    <MultiPanelBlock items={content.column_1_items}/>
+                  </div>
+              </div>
+              <div className={`shelf__col col ${classNamePrefix}-column column2 col-12 col-md-${this.colWidthForPercent(col2Percent)}`}>    
+                {content.column_2_heading &&
+                  <div className={`${classNamePrefix}-heading`}>
+                    <h2 className="shelf__header">{content.column_2_heading}</h2>
+                  </div>
+                }      
+                <div className={`${classNamePrefix}-content`}>
+                  <MultiPanelBlock items={content.column_2_items}/>
                 </div>
               </div>
-            }
-            <div className={`column column1 col-12 col-md-${this.colWidthForPercent(col1Percent)} order-2 order-md-3`}>
-              <MultiPanelBlock items={content.column_1_items}/>
-            </div>
-            {content.column_2_heading &&
-              <div className={`column column2-heading col-12 col-md-${this.colWidthForPercent(col2Percent)} order-3 order-md-2`}>
-                <div className="row align-items-end h-100">
-                  <h2 className="col shelf__header">{content.column_2_heading}</h2>
-                </div>
-              </div>
-            }
-            <div className={`column column2 col-12 col-md-${this.colWidthForPercent(col2Percent)} order-4`}>
-              <MultiPanelBlock items={content.column_2_items}/>
-            </div>
           </div>
         </div>
       </Shelf>

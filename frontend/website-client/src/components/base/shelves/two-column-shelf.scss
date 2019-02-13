@@ -2,49 +2,72 @@
 @import "../../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
 
 .two-column-shelf {
-  .shelf__container {
-    padding: 0;
-    // padding-left: 0px;
-    // padding-right: 0px;
-  }
 
-  .rich-text-panel {
-    padding-left: 1em;
-    padding-right: 1em;
-  }
-
-  &.two-column-shelf--with_padding {
-    .shelf__container {
-      padding: 0 0 0.5em 0;
-
-      @include media-breakpoint-up(md) {
-        padding: 2em;
-      }  
+  &.two-column-shelf--col2_np {
+    
+    .column2 {
+      padding: 0;
     }
   }
-
-  .column {
-    padding: 0;
-
-    @include media-breakpoint-up(md) {
-      padding: 1em;
+  
+  &.two-column-shelf--col1_np {
+    
+    .column1 {
+      padding: 0;
     }
   }
-
-  .column1 {
-    padding-bottom: 1em;
-
-    @include media-breakpoint-up(md) {
-      padding-bottom: 0;
+  
+  &.two-column-shelf--no_padding {
+    
+    .column1, .column2 {
+      padding: 0;
     }
   }
 }
 
+.two-column-shelf-content, 
+.two-column-shelf-content > div {
+  height: 100%;
+  display: flex;
+  flex: 1 1 0;
+}
 
-// //sexhealth
-// .sexhealth {
-//   .shelf__container{
-//     background-color: $white;
-//     padding: 1em;
-//   }
-// }
+.two-column-shelf--dark_bg {
+  
+  .shelf__container {
+    background-color: $teal-blue;
+    color: $white;
+    
+    h2 {
+      color: $white;
+    }
+  }
+  
+  .container {  
+    padding-top: 1em;
+    padding-bottom: 1em;
+    
+    @include media-breakpoint-up(sm) {
+      padding: 1em;  
+    }
+  }
+}
+
+//sexhealth
+.sexhealth {
+  
+  .two-column-shelf {
+    
+    .shelf__container {
+      padding: 0;
+    }
+    
+    &.two-column-shelf--col2_np {
+      .simple-service-finder  {
+        @include media-breakpoint-up(md) {
+          margin: 1em
+        }
+      }
+    }
+  }
+}
