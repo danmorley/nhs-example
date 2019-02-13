@@ -32,13 +32,23 @@ from .models import Release, ReleasePage
 
 def release_html(request, site_name):
     try:
+        major_frontend_version = None
         site_setting = SiteSettings.objects.get(uid=site_name)
         current_release = get_latest_live_release(site_setting.site.pk)
         site_id = site_setting.site.id
-        if not current_release:
-            old_site_setting = SiteSettings.objects.get(uid='{}old'.format(site_name))
-            current_release = get_latest_live_release(old_site_setting.site.pk)
-            site_id = old_site_setting.site.id
+        release_id = request.GET.get('id')
+        if release_id:
+            release = Release.objects.get(uuid=release_id)
+        else:
+            if 'is_preview' in request.GET:
+                release = get_latest_release(site_id)
+            else:
+                if current_release:
+                    release = current_release
+                else:
+                    old_site_setting = SiteSettings.objects.get(uid='{}old'.format(site_name))
+                    release = get_latest_live_release(old_site_setting.site.pk)
+                    site_id = old_site_setting.site.id
     except ObjectDoesNotExist:
         return HttpResponse('Page Not Found', status=404)
 
@@ -57,16 +67,6 @@ def release_html(request, site_name):
                 # Re-direct is to a link
                 redirect_path = wagtail_redirect.redirect_link
             return redirect(redirect_path, permanent=wagtail_redirect.is_permanent)
-
-    major_frontend_version = None
-    release_id = request.GET.get('id')
-    if release_id:
-        release = Release.objects.get(uuid=release_id)
-    else:
-        if 'is_preview' in request.GET:
-            release = get_latest_release(site_id)
-        else:
-            release = get_latest_live_release(site_id)
 
     frontend_name = release.get_frontend_id_display()
     matchObj = re.match( r'V([0-9]+)\..* - .*', frontend_name.replace('\n', ''), re.I | re.M)
