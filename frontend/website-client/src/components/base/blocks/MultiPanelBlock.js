@@ -28,6 +28,7 @@ import RichTextPanel from '../panels/RichTextPanel';
 import SimpleImagePanel from '../panels/SimpleImagePanel';
 import SimpleTextPanel from '../panels/SimpleTextPanel';
 import VideoTeaserPanel from '../panels/VideoTeaserPanel';
+import SimpleListPanel from '../panels/SimpleListPanel';
 import OneyouTeaserPanel from '../../oneyou/panels/OneyouTeaserPanel';
 /*eslint-enable */
 

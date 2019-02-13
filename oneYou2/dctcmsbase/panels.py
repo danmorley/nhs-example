@@ -57,6 +57,18 @@ ICON_CARD_LAYOUTS = (
     ('icon_on_bottom', 'Icon on Bottom'),
 )
 
+SIMPLE_LIST_LAYOUTS = (
+    ('full_width', 'Full Width'),
+    ('2_col_1_on_mobile', 'Responsive (2 columns on desktop)'),
+)
+
+SIMPLE_LIST_VARIANTS = (
+    ('bullet_standard', 'bullet'),
+    ('bullet_alt', 'bullet alternative style'),
+    ('numeric_standard', 'numeric'),
+    ('numeric_alt', 'numeric alternative style'),
+)
+
 ICON_CARD_VARIANTS = (
     ('standard', 'no background color, standard heading'),
     ('light_bg', 'light background color, standard heading'),
@@ -274,7 +286,6 @@ class AccordionPanel(Panel):
     class Meta:
         form_classname = 'dct-panel-panel-accordion dct-meta-panel'
 
-
 class SimpleServiceFinderPanel(Panel):
     text = blocks.RichTextBlock(required=False)
     heading = blocks.CharBlock(required=False)
@@ -296,6 +307,30 @@ class InlineSvgPanel(Panel, InlineSvgBlock):
     class Meta:
         form_classname = 'dct-inline-svg-panel dct-meta-panel'
 
+
+LIST_ITEMS = [
+    ('rich_text_panel', StandardRichTextPanel(icon='title')),
+    ('plain_text_panel', PlainTextPanel(required=False)),
+    ('simple_image_panel', StandardSimpleImagePanel(icon='image')),
+    ('inline_svg_panel', InlineSvgPanel(icon='snippet')),
+]
+
+class SimpleListPanel(Panel):
+    items = blocks.StreamBlock(LIST_ITEMS, icon='arrow-left', label='Items')
+    
+    meta_layout = blocks.ChoiceBlock(
+        choices=SIMPLE_LIST_LAYOUTS,
+        default='full_width',
+        label='Layout',
+        classname='dct-meta-field',
+    )
+    
+    meta_variant = blocks.ChoiceBlock(choices=SIMPLE_LIST_VARIANTS,
+                                      default='bullett_standard',
+                                      label='Variant',
+                                      classname='dct-meta-field')
+    class Meta:
+        form_classname = 'dct-panel-simple-list dct-meta-panel'
 
 class AppTeaserPanel(Panel):
     panel = AppTeaserChooserBlock(target_model='dctcmsbase.AppTeaser', icon='image')

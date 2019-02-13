@@ -4,7 +4,7 @@ from .blocks import (PositionedImageBlock, IDBlock, BackgroundImageBlock, Banner
     InlineSvgBlock, SimpleCtaLinkBlock, AppTeaserChooserBlock)
 from .panels import (StandardRichTextPanel, StandardInformationPanel, CtaPanel, StandardSimpleImagePanel,
     PlainTextPanel, AccordionPanel, StandardImageTeaserPanel, AudioTeaserPanel, StandardVideoTeaserPanel,
-    SimpleServiceFinderPanel, InlineScriptPanel, InlineSvgPanel, AppTeaserPanel, IconCardPanel, ListItemPanel)
+    SimpleServiceFinderPanel, InlineScriptPanel, InlineSvgPanel, AppTeaserPanel, IconCardPanel, ListItemPanel, SimpleListPanel)
 from .sharedcontent import BANNER_LAYOUT_CHOICES
 
 
@@ -65,6 +65,7 @@ STANDARD_GRID_PANELS = [
     ('inline_svg_panel', InlineSvgPanel(icon='snippet')),
     ('app_teaser_panel', AppTeaserPanel(target_model='dctcmsbase.AppTeaser', icon='image')),
     ('list_item_panel', ListItemPanel(icon='list-ul')),
+    ('simple_list_panel', SimpleListPanel(icon='list-ul')),
 ]
 
 CAROUSEL_LAYOUT_CHOICES = (

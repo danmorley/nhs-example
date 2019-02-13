@@ -14,7 +14,7 @@ class Panel extends Component {
     return (
       <div id={this.props.id} className={this.panelClasses()} style={this.props.style}>
         {this.props.children}
-      </div>
+       </div>
     );
   }
 }
