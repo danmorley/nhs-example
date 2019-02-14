@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Text from '../Text';
-import CtaLinks from '../shared/CtaLinks';
+// import Text from '../Text';
+// import CtaLinks from '../shared/CtaLinks';
 import CmsComponentRegistry from '../CmsComponentRegistry';
 import './simple-list-panel.css';
 import Panel from './Panel';
