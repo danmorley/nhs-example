@@ -68,6 +68,7 @@ ul.simple-list, ol.simple-list {
   
   > div {
     align-self: center;
+    flex: 1;
   }
 }
 
@@ -82,6 +83,8 @@ ol.simple-list {
 ol.simple-list li:before {
   counter-increment: listitem;
   content: counters(listitem, '.') '.';
+  width: 2em;
+  text-align: right;
 }
 
 //theming
@@ -112,5 +115,11 @@ ol.simple-list li:before {
     position: relative;
     color: $teal-blue;
     top: 3px;
+  }
+}
+
+ol.simple-list {
+  .simple-list__item {
+    padding-left: 0;
   }
 }
