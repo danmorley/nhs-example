@@ -116,21 +116,25 @@
     }
   }
   
-  .icon-card-panel--dark_bg_color_heading {
+  .icon-card-panel--dark_bg_color_heading,
+  .icon-card-panel--dark_bg_large_color_heading {
     
     .icon-card-panel__heading {
       color: $sunflower-yellow;
     }
   }
   
-  .icon-card-panel--light_bg_color_heading {
+  .icon-card-panel--light_bg_color_heading,
+  .icon-card-panel--light_bg_large_color_heading {
     
     .icon-card-panel__heading {
       color: $teal-blue;
     }
   }
   
+  .icon-card-panel--light_bg_large_heading,
   .icon-card-panel--dark_bg_large_heading,
+  .icon-card-panel--light_bg_large_color_heading,
   .icon-card-panel--dark_bg_large_color_heading { 
     
     .icon-card-panel__heading {
