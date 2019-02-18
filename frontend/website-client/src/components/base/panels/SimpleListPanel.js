@@ -41,12 +41,12 @@ class SimpleListPanel extends Component {
   
     return (
       <Panel id={content.panel_id || this.props.id} classNamePrefix={classNamePrefix} variant={content.meta_variant} layout={metaLayout}>
-        { ListStyle.includes('bullet') &&
+        { ListStyle.indexOf('bullet') >=0 &&
           <ul className={`row ${classNamePrefix} ${classNamePrefix}--${ListStyle}`}>
             { MultiPanelBlock.renderItems(content.items, `${classNamePrefix}__item ${classNamePrefix}__item--${ListStyle} ${ListClass}`, 'li') }
           </ul>
         }
-        { ListStyle.includes('numeric') &&
+        { ListStyle.indexOf('numeric') >=0 &&
           <ol className={`row ${classNamePrefix} ${classNamePrefix}--${ListStyle}`}>
             { MultiPanelBlock.renderItems(content.items, `${classNamePrefix}__item ${classNamePrefix}__item--${ListStyle} ${ListClass}`, 'li') }
           </ol>
