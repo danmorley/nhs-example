@@ -32,6 +32,10 @@ body {
   overflow-x: hidden;
 }
 
+main {
+  display: block;
+}
+
 .h1 {
   font-size: $h1 !important;
 }
