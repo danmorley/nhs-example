@@ -3,42 +3,48 @@
 @import "../../../../../node_modules/bootstrap-4-grid/scss/grid/mixins/breakpoints";
 
 .recipe__banner {
-  min-height: 256px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 50%;
-  margin-bottom: 1em;
-  position: relative;
+  
+  padding-left: 0;
+  padding-right: 0;
 
   &.clickable {
     cursor: pointer;
   }
 
-  .gradient {
-    width:100%;
-    content:'';
-    display:block;
-    position:absolute;
-    top:0;
-    left:0;
-    background: linear-gradient(90deg, #000000 0%, rgba(0,164,166,0) 100%);
-    opacity: 0.4;
-    height:100%;
-  }
-  
-  @include media-breakpoint-up(sm) {
-      min-height: 300px;
-      margin-bottom: 1.5em;
-  }
+  .background-image {
+    min-height: 256px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+    margin-bottom: 1em;
+    position: relative;
 
-  .video_play_button {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 110px;
-    width: 110px;
+    .gradient {
+      width:100%;
+      content:'';
+      display:block;
+      position:absolute;
+      top:0;
+      left:0;
+      background: linear-gradient(90deg, #000000 0%, rgba(0,164,166,0) 100%);
+      opacity: 0.4;
+      height:100%;
+    }
+    
+    @include media-breakpoint-up(sm) {
+        min-height: 300px;
+        margin-bottom: 1.5em;
+    }
+
+    .video_play_button {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 110px;
+      width: 110px;
+    }
   }
 }
 

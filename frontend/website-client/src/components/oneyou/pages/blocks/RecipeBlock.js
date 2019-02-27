@@ -48,10 +48,12 @@ class RecipeBlock extends Component {
     return (
       <div className="recipe">
         {recipe.video_id && <VideoModal video={recipe.video_id} host={recipe.host} ref={this.videoRef}></VideoModal>}
-        <ResponsiveBackgroundImage image={reformattedImage} className={bannerClassNames}  {...bannerAttr} >
-          {recipe.header_gradient == true && <div className="gradient"></div>}
-          {recipe.video_id && <span className="video_play_button" dangerouslySetInnerHTML={{__html: playButtonSvg}} />}
-        </ResponsiveBackgroundImage>
+        <div className={bannerClassNames} {...bannerAttr} >
+          <ResponsiveBackgroundImage image={reformattedImage}>
+            {recipe.header_gradient == true && <div className="gradient"></div>}
+            {recipe.video_id && <span className="video_play_button" dangerouslySetInnerHTML={{__html: playButtonSvg}} />}
+          </ResponsiveBackgroundImage>
+        </div>
         <div className ="recipe__block container">
           <section className="recipe__intro">
             <div className="recipe__intro__col-1">
