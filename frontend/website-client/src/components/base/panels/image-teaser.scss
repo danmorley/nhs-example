@@ -140,6 +140,10 @@
     .cta-list__item a.button-cta {
       color: $grey-brown;
     }
+
+    .cta-list__item a.button-cta:hover {
+      color: $white;
+    }
   }  
 }
 
