@@ -1,7 +1,7 @@
 Django==2.1.4
 django-pyodbc
 django-pyodbc-azure==2.1.0.0
-wagtail==2.3
+wagtail==2.7.4
 python-crontab
 wagtailmedia
 django-cors-headers==2.4.0
