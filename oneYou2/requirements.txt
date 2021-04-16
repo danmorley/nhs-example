@@ -10,7 +10,7 @@ azure==4.0.0
 coverage==4.5.1
 gunicorn==19.9.0
 flake8==3.6.0
-django-debug-toolbar==1.10.1
+django-debug-toolbar==1.11.1
 beautifulsoup4==4.6.3
 django-axes==4.4.1
 factory-boy==2.11.1
